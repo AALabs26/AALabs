@@ -1,0 +1,1060 @@
+// ==UserScript==
+// @name         AALabs TCMB Döviz Bold
+// @namespace    aalabs
+// @version      2.2.0
+// @description  turkiye.gov.tr döviz kurları sayfasında seçili para birimlerinin satırlarını renkli vurgular.
+// @author       AALabs
+// @match        https://www.turkiye.gov.tr/doviz-kurlari*
+// @match        https://turkiye.gov.tr/doviz-kurlari*
+// @icon         data:image/png;base64,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
+// @grant        GM_getValue
+// @grant        GM_setValue
+// @grant        GM_registerMenuCommand
+// @grant        GM_unregisterMenuCommand
+// @grant        GM_setClipboard
+// @grant        GM_info
+// @run-at       document-start
+// @noframes
+// @aalabs-ikon  DVZ
+// ==/UserScript==
+
+/*
+ * AALabs TCMB Döviz Bold 2.2.0 · ikon DVZ · tasarım dili 1.4.1 · oturum d6kvz
+ *
+ * Ne yapar:
+ *  - Ana kur tablosunda (başlığında "Döviz Alış" olan tablo) seçili para birimlerinin satırlarını vurgular.
+ *    Çapraz kurlar tablosuna dokunmaz.
+ *  - Ortak Ayarlar penceresi (Alt+D, Tampermonkey menüsü, sağ alttaki DVZ düğmesi): Vurgu, Para birimleri,
+ *    Kopyalama ve ORTAK bölümler (Genel, Klavye kısayolları, Tanı, Hakkında).
+ *  - Türkçe ve İngilizce arayüz; dil ve tema sayfa yenilenmeden değişir.
+ * Tasarım: PROJE.md "Tasarım kapısı" (2026-10-18, maket A onaylı).
+ */
+(() => {
+    'use strict';
+
+    const AD = 'AALabs TCMB Döviz Bold';
+    const SURUM = '2.2.0';
+    const ONEK = 'aalabs-dvz';
+    const DOSYA_ADI = 'AALabs.TCMBDovizBold-ayar.json';
+
+    // ---- Tasarım tokenları ---------------------------------------------------------------
+    // TOKEN-BASLA (aalabs-tema.css 1.4.1; kategori tonları color-mix ile bu değerlerden türetilir)
+    const TOKEN = {
+        acik: {
+            ana: '#2456D6', 'ana-acik': '#E5EBFA', 'ana-hover': '#F2F5FD', 'ana-uzeri': '#FFFFFF', vurgu: '#2456D6',
+            zemin: '#F6F9FC', yuzey: '#FFFFFF', metin: '#17252E', 'metin-ikincil': '#4E6269', kenar: '#7A9199',
+            ayirici: '#D3DEE6', basari: '#18763F', hata: '#C4313B', uyari: '#9A5B00', 'uyari-bg': '#FDF6D8',
+            'kat-belge': '#6237C8', 'kat-gorsel': '#B0256C', 'kat-video': '#A8500F', 'kat-arsiv': '#7A5A00',
+            'kat-onemli': '#B4232B', 'kat-oyun': '#0B6E78',
+            'yesil-zemin': '#E4F5E8', 'yesil-cizgi': '#18763F', 'mavi-zemin': '#E5EBFA', 'mavi-cizgi': '#2456D6',
+            'ton-oran': '14%', 'cizgi-acik': '0%', karisim: '#FFFFFF',
+        },
+        koyu: {
+            ana: '#2456D6', 'ana-acik': '#1D2C4F', 'ana-hover': '#1B2434', 'ana-uzeri': '#FFFFFF', vurgu: '#86A8FF',
+            zemin: '#0F1520', yuzey: '#161E2B', metin: '#E6ECF5', 'metin-ikincil': '#9AA8BC', kenar: '#6A7B93',
+            ayirici: '#263142', basari: '#4CC38A', hata: '#FF8189', uyari: '#E8AC45', 'uyari-bg': '#33270F',
+            'kat-belge': '#6237C8', 'kat-gorsel': '#B0256C', 'kat-video': '#A8500F', 'kat-arsiv': '#7A5A00',
+            'kat-onemli': '#B4232B', 'kat-oyun': '#0B6E78',
+            'yesil-zemin': '#13301F', 'yesil-cizgi': '#4CC38A', 'mavi-zemin': '#1D2C4F', 'mavi-cizgi': '#86A8FF',
+            'ton-oran': '28%', 'cizgi-acik': '45%', karisim: '#FFFFFF',
+        },
+    };
+    // TOKEN-BITIR
+
+    // Satır renkleri: yeşil ve mavi kendi tokenından; öteki altısı kategori renginden türetilir.
+    const RENKLER = [
+        { kod: 'yesil', tr: 'Yeşil', en: 'Green' },
+        { kod: 'mavi', tr: 'Mavi', en: 'Blue' },
+        { kod: 'mor', tr: 'Mor', en: 'Purple', kat: 'kat-belge' },
+        { kod: 'pembe', tr: 'Pembe', en: 'Pink', kat: 'kat-gorsel' },
+        { kod: 'turuncu', tr: 'Turuncu', en: 'Orange', kat: 'kat-video' },
+        { kod: 'hardal', tr: 'Hardal', en: 'Mustard', kat: 'kat-arsiv' },
+        { kod: 'kirmizi', tr: 'Kırmızı', en: 'Red', kat: 'kat-onemli' },
+        { kod: 'turkuaz', tr: 'Turkuaz', en: 'Teal', kat: 'kat-oyun' },
+    ];
+    const RENK_KODLARI = RENKLER.map(r => r.kod);
+
+    // ---- Metinler (Türkçe kaynak, İngilizce karşılık) ---------------------------------------
+    const METIN = {
+        tr: {
+            ayarlar: 'Ayarlar', sorunVar: 'sorun var', tema: 'Tema', dil: 'Dil',
+            panelAdi: 'Ayarlar · AALabs TCMB Döviz Bold', ara: 'Ayarlarda ara (Ctrl+F)', ortak: 'ORTAK',
+            kapat: 'Kapat', sifirla: 'Varsayılana dön', aramaYok: 'Sonuç yok. Başka bir sözcük dene.',
+            koseDugme: 'AALabs TCMB Döviz Bold ayarları', temaDugme: 'Temayı değiştir', dilDugme: 'Dili değiştir',
+            bVurgu: 'Vurgu', bPara: 'Para birimleri', bKopya: 'Kopyalama', bGenel: 'Genel',
+            bKisayol: 'Klavye kısayolları', bTani: 'Tanı', bHakkinda: 'Hakkında',
+            bicim: 'Vurgu biçimi', bicimZemin: 'Kalın + renkli zemin', bicimCizgi: 'Kalın + sol kenarda renkli çizgi',
+            bicimKalin: 'Yalnız kalın (renksiz)', basa: 'Vurgulu satırları tablonun başına al',
+            basaNot: 'Satırlar sitenin sırasından çıkıp en üste gelir. Kapatınca eski yerlerine döner.',
+            paraNot: 'Ana kur tablosunda vurgulanacak satırlar. Sıra, tablonun başındaki sıradır.',
+            paraBos: 'Liste boş. Aşağıdan para birimi ekle.', renk: 'Renk', yukari: 'Yukarı', cikar: 'Çıkar',
+            ekleEtiket: 'Para birimi ekle', ekle: 'Ekle', ekleTabloYok: 'Kur tablosu bulunamadı. Tanı bölümüne bak.',
+            ekleHepsi: 'Tablodaki bütün para birimleri listede.',
+            kopyaAc: 'Vurgulu satıra tıklayınca kuru kopyala', kopyaSutun: 'Kopyalanan değer',
+            ondalik: 'Ondalık ayırıcı', ondalikVirgul: 'Virgül (49,3681)', ondalikNokta: 'Nokta (49.3681)',
+            kopyaNot: 'Metin seçerken kopyalama yapılmaz. Kopyalanınca satırın yanında kısa bir yazı çıkar.',
+            kopyalandi: '{0} kopyalandı', degerYok: '{0} değeri yok; kopyalanmadı.', kaydedilemedi: 'Ayarlar bu sayfada geri yüklendi ama kaydedilemedi. Tanı bölümüne bak.', kUygunsuz: 'Bu tuş tarayıcının ya da yazmanın tuşu; başka bir tuş seç.', kopyalanamadi: 'Kopyalanamadı. Tarayıcı panoya yazmaya izin vermedi.',
+            satirIpucu: 'Tıkla: {0} kurunu kopyala',
+            dilTr: 'Türkçe', dilEn: 'English', dilTarayici: 'Tarayıcı dili ({0})',
+            temaSayfa: 'Sayfaya uy (şu an {0})', temaAcik: 'Açık', temaKoyu: 'Koyu', acikKucuk: 'açık', koyuKucuk: 'koyu',
+            olcekNot: 'Ölçek: tarayıcının yakınlaştırması kullanılır (Ctrl+artı).',
+            kAyar: 'Ayarları aç', kTema: 'Temayı değiştir', kDil: 'Dili değiştir',
+            kNot: 'Bir tuşa tıkla, yeni tuşa bas. Esc vazgeçer. Alt+D tarayıcıda çalışmazsa buradan değiştir.',
+            kBekle: 'Tuşa bas…', kModYok: 'Tuş Ctrl ya da Alt ile birlikte basılmalı.',
+            kCakisma: 'Bu tuş zaten "{0}" için kullanılıyor.', kKaydedildi: '"{0}" için yeni tuş: {1}',
+            tTablo: 'Kur tablosu bulundu', tTabloYok: 'Kur tablosu bulunamadı', tSatir: '{0} satırı bulundu',
+            tSatirYok: '{0} satırı bulunamadı', tDepo: 'Ayar deposu çalışıyor', tDepoYok: 'Ayar deposu yok; ayarlar sayfa kapanınca unutulur',
+            tPano: 'Panoya yazma var', tPanoYok: 'Panoya yazma yok', tSayfa: 'Sayfa teması: {0}',
+            raporKopyala: 'Raporu kopyala', raporKopyalandi: 'Rapor kopyalandı. Sohbete yapıştır.',
+            taniNot: 'Sorun olursa raporu kopyalayıp sohbete yapıştır.',
+            surumSatiri: 'Sürüm {0} · ikon DVZ · tasarım dili 1.4.1', magaza: 'AALabs App Store bu betiği kendiliğinden günceller.',
+            yedekle: 'Yedekle (JSON)', geriYukle: 'Geri yükle', yedekHazir: 'Yedek dosyası indirildi: {0}',
+            geriYuklendi: 'Ayarlar geri yüklendi.', geriYuklenemedi: 'Dosya okunamadı: geçerli bir DVZ ayar yedeği değil.',
+            raporBaslik: 'tanı raporu', raporTarih: 'Tarih', raporAdres: 'Adres', raporTarayici: 'Tarayıcı',
+            raporYonetici: 'Yönetici', raporAyar: 'Ayar', bilinmiyor: 'bilinmiyor',
+        },
+        en: {
+            ayarlar: 'Settings', sorunVar: 'issue found', tema: 'Theme', dil: 'Language',
+            panelAdi: 'Settings · AALabs TCMB Döviz Bold', ara: 'Search settings (Ctrl+F)', ortak: 'COMMON',
+            kapat: 'Close', sifirla: 'Reset to default', aramaYok: 'No results. Try another word.',
+            koseDugme: 'AALabs TCMB Döviz Bold settings', temaDugme: 'Switch theme', dilDugme: 'Switch language',
+            bVurgu: 'Highlight', bPara: 'Currencies', bKopya: 'Copying', bGenel: 'General',
+            bKisayol: 'Keyboard shortcuts', bTani: 'Diagnostics', bHakkinda: 'About',
+            bicim: 'Highlight style', bicimZemin: 'Bold + coloured background', bicimCizgi: 'Bold + coloured left line',
+            bicimKalin: 'Bold only (no colour)', basa: 'Move highlighted rows to the top',
+            basaNot: 'Rows leave the site\'s order and go to the top. Turning this off puts them back.',
+            paraNot: 'Rows to highlight in the main rate table. The order is the order at the top of the table.',
+            paraBos: 'The list is empty. Add a currency below.', renk: 'Colour', yukari: 'Up', cikar: 'Remove',
+            ekleEtiket: 'Add currency', ekle: 'Add', ekleTabloYok: 'Rate table not found. See Diagnostics.',
+            ekleHepsi: 'Every currency in the table is already listed.',
+            kopyaAc: 'Click a highlighted row to copy its rate', kopyaSutun: 'Value to copy',
+            ondalik: 'Decimal separator', ondalikVirgul: 'Comma (49,3681)', ondalikNokta: 'Point (49.3681)',
+            kopyaNot: 'Nothing is copied while you select text. A short note appears next to the row after copying.',
+            kopyalandi: '{0} copied', degerYok: 'No {0} value; nothing copied.', kaydedilemedi: 'Settings restored on this page but could not be saved. See Diagnostics.', kUygunsuz: 'This key belongs to the browser or to typing; choose another key.', kopyalanamadi: 'Could not copy. The browser did not allow clipboard access.',
+            satirIpucu: 'Click: copy the {0} rate',
+            dilTr: 'Türkçe', dilEn: 'English', dilTarayici: 'Browser language ({0})',
+            temaSayfa: 'Follow page (now {0})', temaAcik: 'Light', temaKoyu: 'Dark', acikKucuk: 'light', koyuKucuk: 'dark',
+            olcekNot: 'Scale: use the browser zoom (Ctrl+plus).',
+            kAyar: 'Open settings', kTema: 'Switch theme', kDil: 'Switch language',
+            kNot: 'Click a key, then press the new one. Esc cancels. If Alt+D does not work in your browser, change it here.',
+            kBekle: 'Press a key…', kModYok: 'Press the key together with Ctrl or Alt.',
+            kCakisma: 'This key is already used for "{0}".', kKaydedildi: 'New key for "{0}": {1}',
+            tTablo: 'Rate table found', tTabloYok: 'Rate table not found', tSatir: '{0} row found',
+            tSatirYok: '{0} row not found', tDepo: 'Settings storage works', tDepoYok: 'No settings storage; settings are lost when the page closes',
+            tPano: 'Clipboard write available', tPanoYok: 'No clipboard write', tSayfa: 'Page theme: {0}',
+            raporKopyala: 'Copy report', raporKopyalandi: 'Report copied. Paste it in the chat.',
+            taniNot: 'If something breaks, copy the report and paste it in the chat.',
+            surumSatiri: 'Version {0} · icon DVZ · design language 1.4.1', magaza: 'AALabs App Store updates this script automatically.',
+            yedekle: 'Back up (JSON)', geriYukle: 'Restore', yedekHazir: 'Backup file downloaded: {0}',
+            geriYuklendi: 'Settings restored.', geriYuklenemedi: 'Could not read the file: it is not a valid DVZ settings backup.',
+            raporBaslik: 'diagnostics report', raporTarih: 'Date', raporAdres: 'Address', raporTarayici: 'Browser',
+            raporYonetici: 'Manager', raporAyar: 'Settings', bilinmiyor: 'unknown',
+        },
+    };
+
+    // ---- Ayarlar -------------------------------------------------------------------------
+    const VARSAYILAN = () => ({
+        surum: 1,
+        bicim: 'zemin',
+        basa: true,
+        para: [{ ad: 'ABD DOLARI', renk: 'yesil' }, { ad: 'EURO', renk: 'mavi' }],
+        kopya: { acik: true, sutun: 2, ondalik: 'virgul' },
+        dil: 'tr',
+        tema: 'sayfa',
+        kisayol: { ayar: 'Alt+D', tema: 'Alt+Shift+T', dil: 'Alt+Shift+L' },
+    });
+    const BICIMLER = ['zemin', 'cizgi', 'kalin'];
+
+    const normal = s => String(s == null ? '' : s).replace(/\s+/g, ' ').trim().toLocaleUpperCase('tr-TR');
+    // "1 ABD DOLARI" → "ABD DOLARI", "100 JAPON YENİ" → "JAPON YENİ"
+    const paraAdi = hucre => normal(hucre && hucre.textContent).replace(/^\d+\s+/, '');
+
+    // Gelen ham değeri (depo ya da yedek dosyası) temiz bir ayar nesnesine çevirir; bozuk alanlar varsayılana döner.
+    function ayarDogrula(ham) {
+        const v = VARSAYILAN();
+        if (!ham || typeof ham !== 'object' || Array.isArray(ham)) return v;
+        const a = v;
+        if (BICIMLER.includes(ham.bicim)) a.bicim = ham.bicim;
+        if (typeof ham.basa === 'boolean') a.basa = ham.basa;
+        if (Array.isArray(ham.para)) {
+            const goruldu = new Set();
+            a.para = ham.para.slice(0, 200).filter(p => p && typeof p.ad === 'string' && normal(p.ad) && p.ad.length <= 60)
+                .map(p => ({ ad: normal(p.ad), renk: RENK_KODLARI.includes(p.renk) ? p.renk : 'mavi' }))
+                .filter(p => !goruldu.has(p.ad) && goruldu.add(p.ad))
+                .slice(0, 30);
+        }
+        if (ham.kopya && typeof ham.kopya === 'object') {
+            if (typeof ham.kopya.acik === 'boolean') a.kopya.acik = ham.kopya.acik;
+            if ([1, 2, 3, 4].includes(ham.kopya.sutun)) a.kopya.sutun = ham.kopya.sutun;
+            if (['virgul', 'nokta'].includes(ham.kopya.ondalik)) a.kopya.ondalik = ham.kopya.ondalik;
+        }
+        if (['tr', 'en', 'tarayici'].includes(ham.dil)) a.dil = ham.dil;
+        if (['sayfa', 'acik', 'koyu'].includes(ham.tema)) a.tema = ham.tema;
+        if (ham.kisayol && typeof ham.kisayol === 'object') {
+            for (const k of Object.keys(a.kisayol)) {
+                if (typeof ham.kisayol[k] === 'string' && kisayolUygunMu(ham.kisayol[k])) a.kisayol[k] = ham.kisayol[k];
+            }
+            const degerler = Object.values(a.kisayol);
+            if (new Set(degerler).size !== degerler.length) a.kisayol = VARSAYILAN().kisayol;
+        }
+        return a;
+    }
+
+    // Kısayol biçimi tusAdi() ile aynı sıradadır: [Ctrl+][Alt+][Shift+]TUŞ. Ctrl ya da Alt şart.
+    // Tarayıcının ve düzenlemenin tuşları (Ctrl+C/V/X/Z/F…, Ctrl+Shift+T/N…, Alt+F4) atanamaz.
+    const KISAYOL_BICIMI = /^(Ctrl\+)?(Alt\+)?(Shift\+)?([A-Z0-9,.]|F\d{1,2})$/;
+    function kisayolUygunMu(ad) {
+        if (typeof ad !== 'string' || !KISAYOL_BICIMI.test(ad) || !/^(Ctrl|Alt)\+/.test(ad)) return false;
+        if (/^Ctrl\+(Shift\+)?[A-Z0-9]$/.test(ad) && !/^Ctrl\+Shift\+[DEGKLMUXY]$/.test(ad)) return false;
+        if (/^Ctrl\+Alt\+/.test(ad)) return false;            // Windows'ta AltGr = Ctrl+Alt; @ { [ yazılamaz olur
+        if (/^Alt\+(Shift\+)?F4$/.test(ad)) return false;
+        return true;
+    }
+
+    const gmVar = typeof GM_getValue === 'function' && typeof GM_setValue === 'function';
+    let bellek = null;    // GM deposu yoksa ayar yalnız bu sayfada yaşar
+
+    function ayarOku() {
+        if (!gmVar) return bellek ? ayarDogrula(bellek) : VARSAYILAN();
+        try {
+            let ham = GM_getValue('ayar', null);
+            if (typeof ham === 'string') ham = JSON.parse(ham);
+            if (ham) return ayarDogrula(ham);
+            // 2.1.0'dan geçiş: yalnız vurgu biçimi saklanıyordu
+            const eski = GM_getValue('vurguBicimi', null);
+            const a = VARSAYILAN();
+            if (BICIMLER.includes(eski)) a.bicim = eski;
+            return a;
+        } catch (_hata) {
+            return VARSAYILAN();
+        }
+    }
+
+    let depoHatasi = false;     // son yazım başarısızsa tanı ve geri yükleme bunu söyler
+    function ayarYaz() {
+        if (!gmVar) { bellek = JSON.parse(JSON.stringify(ayar)); return false; }
+        try { GM_setValue('ayar', JSON.stringify(ayar)); depoHatasi = false; return true; } catch (_hata) { depoHatasi = true; return false; }
+    }
+
+    let ayar = ayarOku();
+
+    // ---- Dil ------------------------------------------------------------------------------
+    const tarayiciDili = () => (String(navigator.language || '').toLowerCase().startsWith('tr') ? 'tr' : 'en');
+    const etkinDil = () => (ayar.dil === 'tarayici' ? tarayiciDili() : ayar.dil);
+    function _(anahtar, ...degerler) {
+        const d = etkinDil();
+        let s = (METIN[d] && METIN[d][anahtar]) || METIN.tr[anahtar] || anahtar;
+        degerler.forEach((v, i) => { s = s.replace(`{${i}}`, String(v)); });
+        return s;
+    }
+    const renkAdi = kod => (RENKLER.find(r => r.kod === kod) || RENKLER[1])[etkinDil()];
+
+    // ---- Sayfadaki tablo -----------------------------------------------------------------
+    // Ana kur tablosu: başlığında "Döviz Alış" olan tablo. Çapraz kurlarda bu başlık yok.
+    function anaTablolar() {
+        return [...document.querySelectorAll('table')].filter(t =>
+            [...t.querySelectorAll('th')].some(th => normal(th.textContent) === 'DÖVİZ ALIŞ'));
+    }
+    const govdeSatirlari = tablo => [...tablo.querySelectorAll('tbody tr')];
+    const sutunAdi = (sira) => {
+        const t = anaTablolar()[0];
+        const th = t && t.querySelectorAll('thead th, tr th')[sira];
+        return th ? th.textContent.trim() : ['', 'Döviz Alış', 'Döviz Satış', 'Efektif Alış', 'Efektif Satış'][sira];
+    };
+
+    // Sayfa zemini koyuysa (ör. karanlık mod eklentisi) satırlar koyu tokenlarla çizilir.
+    function sayfaTemasi() {
+        const t = anaTablolar()[0];
+        // Betiğin boyadığı satır ölçülmez; yoksa kendi rengimizi sayfa sanarız.
+        let o = (t && (t.querySelector(`tbody tr:not(.${ONEK}-satir) td`) || t)) || document.body;
+        for (; o && o.nodeType === 1; o = o.parentElement) {
+            const renk = zeminRengi(getComputedStyle(o).backgroundColor);
+            if (!renk || renk[3] < 0.5) continue;
+            const [r, g, b] = renk;
+            return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255 < 0.45 ? 'koyu' : 'acik';
+        }
+        // Bütün atalar saydam: tarayıcının zorla koyu kipi ya da color-scheme
+        const sema = getComputedStyle(document.documentElement).colorScheme || '';
+        if (/dark/.test(sema) && !/light/.test(sema)) return 'koyu';
+        return 'acik';
+    }
+    // "rgb(…)", "rgba(…)" ve "color(srgb r g b / a)" → [r, g, b, a] (0–255); çözülemezse null
+    function zeminRengi(deger) {
+        let m = String(deger).match(/^rgba?\(([^)]+)\)/);
+        if (m) {
+            const [r, g, b, a = 1] = m[1].split(/[ ,/]+/).filter(Boolean).map(Number);
+            return [r, g, b, a];
+        }
+        m = String(deger).match(/^color\(srgb ([^)]+)\)/);
+        if (m) {
+            const [r, g, b, a = 1] = m[1].split(/[ /]+/).filter(Boolean).map(Number);
+            return [r * 255, g * 255, b * 255, a];
+        }
+        return null;
+    }
+    let sonSayfaTemasi = null;
+    const panelTemasi = () => (ayar.tema === 'sayfa' ? (sonSayfaTemasi || sayfaTemasi()) : ayar.tema);
+
+    // ---- Stil -----------------------------------------------------------------------------
+    const degiskenler = (tema, onek) => Object.entries(TOKEN[tema]).map(([k, v]) => `--${onek}${k}: ${v};`).join(' ');
+    // Her renk için zemin ve çizgi; onek sayfada "aalabs-dvz-", gölge kökte "".
+    function renkDegerleri(r, onek) {
+        if (!r.kat) return { z: `var(--${onek}${r.kod}-zemin)`, c: `var(--${onek}${r.kod}-cizgi)` };
+        return {
+            z: `color-mix(in srgb, var(--${onek}${r.kat}) var(--${onek}ton-oran), var(--${onek}yuzey))`,
+            c: `color-mix(in srgb, var(--${onek}${r.kat}), var(--${onek}karisim) var(--${onek}cizgi-acik))`,
+        };
+    }
+
+    function sayfaStiliEkle() {
+        const yer = document.head || document.documentElement;
+        if (!yer || document.getElementById(`${ONEK}-stil`)) return;    // belge henüz yoksa domHazir yeniden dener
+        const o = `${ONEK}-`;
+        const renkKurallari = RENKLER.map(r => {
+            const d = renkDegerleri(r, o);
+            return `tr.${ONEK}-satir[data-${ONEK}-renk="${r.kod}"] { --${o}z: ${d.z}; --${o}c: ${d.c}; }`;
+        }).join('\n');
+        const stil = document.createElement('style');
+        stil.id = `${ONEK}-stil`;
+        stil.textContent = `
+html[data-${ONEK}-tema="acik"] { ${degiskenler('acik', o)} }
+html[data-${ONEK}-tema="koyu"] { ${degiskenler('koyu', o)} }
+${renkKurallari}
+tr.${ONEK}-satir > td, tr.${ONEK}-satir > th { font-weight: 700 !important; }
+html[data-${ONEK}-bicim="zemin"] tr.${ONEK}-satir > td {
+    background: var(--${o}z) !important;
+    color: var(--${o}metin) !important;
+}
+html[data-${ONEK}-bicim="cizgi"] tr.${ONEK}-satir > td:first-child {
+    border-left: 4px solid var(--${o}c) !important;
+}
+html[data-${ONEK}-kopya="acik"] tr.${ONEK}-satir { cursor: copy; }`;
+        yer.appendChild(stil);
+    }
+
+    // ---- Satırları işaretle, sırala, tanı topla ------------------------------------------
+    let tani = { tablo: false, bulunan: new Set() };
+    const sorunVar = () => !tani.tablo || ayar.para.some(p => !tani.bulunan.has(p.ad));
+
+    const oznitelik = (e, ad, deger) => { if (e.getAttribute(ad) !== deger) e.setAttribute(ad, deger); };
+    // Sitenin ilk sırası ada göre tutulur: site satırı yeniden üretse de sıra bozulmaz.
+    const ilkSira = new WeakMap();
+    function siraKaydi(tablo) {
+        let kayit = ilkSira.get(tablo);
+        if (!kayit) { kayit = new Map(); ilkSira.set(tablo, kayit); }
+        for (const tr of govdeSatirlari(tablo)) {
+            const ad = paraAdi(tr.cells[0]);
+            if (ad && !kayit.has(ad)) kayit.set(ad, kayit.size);
+        }
+        return kayit;
+    }
+
+    function satirlariIsle() {
+        const kok = document.documentElement;
+        oznitelik(kok, `data-${ONEK}-bicim`, ayar.bicim);
+        oznitelik(kok, `data-${ONEK}-kopya`, ayar.kopya.acik ? 'acik' : 'kapali');
+        const tablolar = anaTablolar();
+        const yeni = { tablo: tablolar.length > 0, bulunan: new Set() };
+        if (yeni.tablo) {
+            sonSayfaTemasi = sayfaTemasi();
+            oznitelik(kok, `data-${ONEK}-tema`, sonSayfaTemasi);
+        }
+        const renkler = new Map(ayar.para.map(p => [p.ad, p.renk]));
+        const ipucu = _('satirIpucu', sutunAdi(ayar.kopya.sutun));
+
+        for (const tablo of tablolar) {
+            siraKaydi(tablo);
+            govdeSatirlari(tablo).forEach(tr => {
+                const ad = paraAdi(tr.cells[0]);
+                const renk = renkler.get(ad);
+                if (renk) yeni.bulunan.add(ad);
+                if (tr.classList.contains(`${ONEK}-satir`) !== Boolean(renk)) tr.classList.toggle(`${ONEK}-satir`, Boolean(renk));
+                if (renk) {
+                    if (tr.getAttribute(`data-${ONEK}-renk`) !== renk) tr.setAttribute(`data-${ONEK}-renk`, renk);
+                } else if (tr.hasAttribute(`data-${ONEK}-renk`)) {
+                    tr.removeAttribute(`data-${ONEK}-renk`);
+                }
+                // İpucu: sitenin kendi title'ı data-…-ipucu içinde saklanır, vurgu kalkınca geri konur.
+                const saklanan = `data-${ONEK}-ipucu`;
+                if (renk && ayar.kopya.acik) {
+                    if (!tr.hasAttribute(saklanan)) tr.setAttribute(saklanan, tr.getAttribute('title') || '');
+                    if (tr.title !== ipucu) tr.title = ipucu;
+                } else if (tr.hasAttribute(saklanan)) {
+                    const eski = tr.getAttribute(saklanan);
+                    if (eski) tr.setAttribute('title', eski); else tr.removeAttribute('title');
+                    tr.removeAttribute(saklanan);
+                }
+            });
+            sirala(tablo);
+        }
+        tani = yeni;
+    }
+
+    // Başa al açıksa vurgulu satırlar liste sırasıyla en üste; kapalıysa sitenin ilk sırası. Sıra doğruysa DOM'a dokunmaz.
+    function sirala(tablo) {
+        const govde = tablo.tBodies[0];
+        if (!govde) return;
+        const satirlar = [...govde.rows];
+        const kayit = siraKaydi(tablo);
+        const sira = tr => { const n = kayit.get(paraAdi(tr.cells[0])); return n === undefined ? Infinity : n; };
+        let hedef = satirlar.map((tr, i) => [tr, i]).sort((a, b) => (sira(a[0]) - sira(b[0])) || (a[1] - b[1])).map(x => x[0]);
+        if (ayar.basa) {
+            const ust = [];
+            for (const p of ayar.para) {
+                const tr = hedef.find(x => paraAdi(x.cells[0]) === p.ad);
+                if (tr && !ust.includes(tr)) ust.push(tr);
+            }
+            hedef = [...ust, ...hedef.filter(x => !ust.includes(x))];
+        }
+        if (hedef.every((tr, i) => tr === satirlar[i])) return;
+        hedef.forEach(tr => govde.appendChild(tr));
+    }
+
+    // ---- Pano ve kopyalama ---------------------------------------------------------------
+    const panoVar = () => typeof GM_setClipboard === 'function' || Boolean(navigator.clipboard && navigator.clipboard.writeText);
+    async function panoyaYaz(metin) {
+        if (typeof GM_setClipboard === 'function') {
+            try { GM_setClipboard(metin, 'text'); return true; } catch (_hata) { /* tarayıcı yoluna düş */ }
+        }
+        try { await navigator.clipboard.writeText(metin); return true; } catch (_hata) { return false; }
+    }
+    function kurBicimle(ham) {
+        const s = String(ham).trim();
+        return ayar.kopya.ondalik === 'virgul' ? s.replace('.', ',') : s;
+    }
+
+    // Çift tık seçim içindir: kopyalama 250 ms bekler, ikinci tık gelirse iptal olur.
+    let kopyaZamani = 0;
+    function satirTiklandi(e) {
+        if (!ayar.kopya.acik) return;
+        const hedef = e.target;
+        if (!hedef || !hedef.closest) return;
+        const tr = hedef.closest(`tr.${ONEK}-satir`);
+        if (!tr || hedef.closest('a, button, input, select, textarea, label')) return;
+        clearTimeout(kopyaZamani);
+        if (e.detail > 1) return;
+        kopyaZamani = setTimeout(() => {
+            if (String(window.getSelection ? window.getSelection() : '').trim()) return;
+            const hucre = tr.cells[ayar.kopya.sutun];
+            if (!hucre) return;
+            if (!(parseFloat(hucre.textContent) > 0)) { tostGoster(_('degerYok', sutunAdi(ayar.kopya.sutun)), tr); return; }
+            const deger = kurBicimle(hucre.textContent);
+            panoyaYaz(deger).then(tamam => tostGoster(tamam ? _('kopyalandi', deger) : _('kopyalanamadi'), tr));
+        }, 250);
+    }
+
+    // ---- Kısayollar -----------------------------------------------------------------------
+    function tusAdi(e) {
+        if (['Control', 'Alt', 'Shift', 'Meta', 'AltGraph'].includes(e.key)) return null;
+        if (e.metaKey || (e.getModifierState && e.getModifierState('AltGraph'))) return null;   // Win/Cmd ve AltGr kısayol değil
+        let tus = null;
+        if (/^Key[A-Z]$/.test(e.code)) tus = e.code.slice(3);
+        else if (/^Digit\d$/.test(e.code)) tus = e.code.slice(5);
+        else if (e.code === 'Comma') tus = ',';
+        else if (e.code === 'Period') tus = '.';
+        else if (/^F\d{1,2}$/.test(e.code)) tus = e.code;
+        if (!tus) return null;
+        return [e.ctrlKey && 'Ctrl', e.altKey && 'Alt', e.shiftKey && 'Shift', tus].filter(Boolean).join('+');
+    }
+    const KISAYOL_ADLARI = { ayar: 'kAyar', tema: 'kTema', dil: 'kDil' };
+    let duzenlenenKisayol = null;
+    let kisayolMesaji = null;   // {k, a} — çizimde o anki dile çevrilir
+
+    function genelTus(e) {
+        if (duzenlenenKisayol) {
+            if (e.target === konak) return;                 // panel içinde: kisayolYakala alır
+            duzenlenenKisayol = null; kisayolMesaji = null; panelCiz();
+        }
+        const ad = tusAdi(e);
+        if (!ad) return;
+        const is = Object.keys(ayar.kisayol).find(k => ayar.kisayol[k] === ad);
+        if (!is) return;
+        e.preventDefault();
+        e.stopPropagation();
+        if (is === 'ayar') panelAcKapa();
+        else if (is === 'tema') temaDegistir();
+        else dilDegistir();
+    }
+
+    function temaDegistir() {
+        ayar.tema = panelTemasi() === 'koyu' ? 'acik' : 'koyu';
+        ayarYaz();
+        arayuzuYenile();
+    }
+    function dilDegistir() {
+        ayar.dil = etkinDil() === 'tr' ? 'en' : 'tr';
+        ayarYaz();
+        arayuzuYenile();
+    }
+
+    // ---- Tampermonkey menüsü (C1: yalnız Ayarlar, Tema, Dil) -----------------------------
+    let menuKimlikleri = [];
+    let menuImza = '';
+    function menuKur() {
+        if (typeof GM_registerMenuCommand !== 'function') return;
+        const ayarAdi = _('ayarlar') + (sorunVar() ? ` · ${_('sorunVar')}` : '');
+        const ogeler = [
+            [`${ayarAdi} · ${ayar.kisayol.ayar} (A)`, () => panelAc(), 'a'],
+            [`${_('tema')} · ${ayar.kisayol.tema} (T)`, () => temaDegistir(), 't'],
+            [`${_('dil')} · ${ayar.kisayol.dil} (L)`, () => dilDegistir(), 'l'],
+        ];
+        const imza = ogeler.map(o => o[0]).join('|');
+        if (imza === menuImza) return;
+        if (typeof GM_unregisterMenuCommand !== 'function' && menuKimlikleri.length) return;   // eskisi silinemiyor: çoğaltma
+        menuImza = imza;
+        if (typeof GM_unregisterMenuCommand === 'function') {
+            menuKimlikleri.forEach(k => { try { GM_unregisterMenuCommand(k); } catch (_hata) { /* yok say */ } });
+        }
+        menuKimlikleri = ogeler.map(([ad, fn, harf]) => GM_registerMenuCommand(ad, fn, harf));
+    }
+
+    // ---- Gölge kök: köşe düğmesi, Ayarlar penceresi, kısa yazı ---------------------------
+    let konak = null;
+    let kok = null;
+    let panel = null;
+    let kose = null;
+    let tost = null;
+    let tostZaman = 0;
+    let acikBolum = 'vurgu';
+    let arama = '';
+    let oncekiOdak = null;
+    let bolumDurum = { hakkinda: null, tani: null };   // {k, a, hata}
+    let canli = null;          // ekran okuyucu için kalıcı durum bölgesi
+    const mesaj = (k, ...a) => ({ k, a });
+    const mesajMetni = m => (m ? _(m.k, ...(m.a || [])) : '');
+    function duyur(m) { if (canli) { canli.textContent = ''; canli.textContent = mesajMetni(m); } }
+
+    const SVG_NS = 'http://www.w3.org/2000/svg';
+    // Lucide 1.55.0 (ISC): moon, sun, x
+    const IKONLAR = {
+        moon: [['path', { d: 'M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401' }]],
+        sun: [['circle', { cx: 12, cy: 12, r: 4 }], ['path', { d: 'M12 2v2' }], ['path', { d: 'M12 20v2' }],
+            ['path', { d: 'm4.93 4.93 1.41 1.41' }], ['path', { d: 'm17.66 17.66 1.41 1.41' }], ['path', { d: 'M2 12h2' }],
+            ['path', { d: 'M20 12h2' }], ['path', { d: 'm6.34 17.66-1.41 1.41' }], ['path', { d: 'm19.07 4.93-1.41 1.41' }]],
+        x: [['path', { d: 'M18 6 6 18' }], ['path', { d: 'm6 6 12 12' }]],
+    };
+    function ikon(ad) {
+        const s = document.createElementNS(SVG_NS, 'svg');
+        for (const [k, v] of Object.entries({ viewBox: '0 0 24 24', width: 16, height: 16, fill: 'none', stroke: 'currentColor',
+            'stroke-width': 2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'aria-hidden': 'true' })) s.setAttribute(k, String(v));
+        for (const [etiket, nit] of IKONLAR[ad]) {
+            const p = document.createElementNS(SVG_NS, etiket);
+            for (const [k, v] of Object.entries(nit)) p.setAttribute(k, String(v));
+            s.appendChild(p);
+        }
+        return s;
+    }
+
+    // Küçük öğe kurucu: innerHTML yok (Trusted Types / güvenlik); yazı textContent ile girer.
+    function el(etiket, nit = {}, ...cocuklar) {
+        const e = document.createElement(etiket);
+        for (const [k, v] of Object.entries(nit)) {
+            if (v === null || v === undefined || v === false) continue;
+            if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
+            else if (k === 'metin') e.textContent = v;
+            else if (k === 'sinif') e.className = v;
+            else e.setAttribute(k, v === true ? '' : String(v));
+        }
+        for (const c of cocuklar) if (c !== null && c !== undefined && c !== false) e.append(c);
+        return e;
+    }
+
+    function golgeStili() {
+        const renkKurallari = RENKLER.map(r => {
+            const d = renkDegerleri(r, '');
+            return `.ornek[data-renk="${r.kod}"] { background: ${d.z}; border-left: 4px solid ${d.c}; }`;
+        }).join('\n');
+        return `
+:host { all: initial; }
+.kap { ${degiskenler('acik', '')} font: 13px/1.5 "Open Sans", "Segoe UI", Roboto, sans-serif; color: var(--metin); }
+.kap[data-tema="koyu"] { ${degiskenler('koyu', '')} color-scheme: dark; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }    /* .panel { display: flex } hidden'ı ezmesin */
+button, select, input { font: inherit; color: inherit; }
+button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 1px; }
+.dugme { height: 24px; padding: 0 8px; border: 1px solid var(--kenar); background: var(--yuzey); color: var(--metin); border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; font-size: 12px; }
+.dugme:hover { background: var(--ana-hover); }
+.dugme.ana { background: var(--ana); color: var(--ana-uzeri); border-color: var(--ana); }
+.dugme[disabled] { opacity: .55; cursor: default; }
+.ikon-dugme { width: 28px; height: 28px; padding: 0; justify-content: center; }
+.kose { position: fixed; right: 16px; bottom: 16px; z-index: 2147483000; height: 32px; padding: 0 12px; font-size: 12px; font-weight: 700; border: 1px solid var(--kenar); background: var(--yuzey); color: var(--metin); border-radius: 4px; cursor: pointer; }
+.kose:hover { background: var(--ana-hover); }
+.kirmizi { position: absolute; top: -4px; right: -4px; width: 10px; height: 10px; border-radius: 50%; background: var(--hata); border: 2px solid var(--yuzey); }
+.panel { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2147483001;
+  width: min(720px, calc(100vw - 32px)); height: min(440px, calc(100vh - 32px)); background: var(--yuzey); color: var(--metin);
+  border: 1px solid var(--kenar); border-radius: 6px; display: flex; flex-direction: column; }
+.p-ust { display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 8px 0 12px; border-bottom: 1px solid var(--ayirici); flex-shrink: 0; }
+.p-ust .ad { font-weight: 600; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.p-govde { flex: 1; display: flex; min-height: 0; }
+.gezinti { width: 196px; flex-shrink: 0; border-right: 1px solid var(--ayirici); padding: 8px; display: flex; flex-direction: column; gap: 2px; overflow: auto; }
+.gezinti input { height: 28px; border: 1px solid var(--kenar); border-radius: 4px; padding: 0 8px; background: var(--yuzey); margin-bottom: 6px; width: 100%; flex-shrink: 0; }
+.g-baslik { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--metin-ikincil); padding: 8px 8px 2px; flex-shrink: 0; }
+.g-oge { height: 28px; flex-shrink: 0; padding: 0 8px; border: 0; border-radius: 4px; background: transparent; color: var(--metin); text-align: left; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.g-oge .yazi { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.g-oge:hover { background: var(--ana-hover); }
+.g-oge[aria-current="true"] { background: var(--ana-acik); font-weight: 600; }
+.g-oge .nokta { width: 8px; height: 8px; border-radius: 50%; background: var(--hata); flex-shrink: 0; }
+.icerik { flex: 1; min-width: 0; padding: 12px 16px; overflow: auto; display: flex; flex-direction: column; gap: 10px; }
+.bolum h3 { font-size: 13px; font-weight: 600; margin: 0 0 4px; }
+.bolum { display: flex; flex-direction: column; gap: 8px; }
+.satir { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 28px; }
+.satir.sola { justify-content: flex-start; flex-wrap: wrap; }
+select { height: 28px; border: 1px solid var(--kenar); border-radius: 4px; background: var(--yuzey); color: var(--metin); padding: 0 6px; }
+select:disabled { opacity: .55; }
+.secim { display: flex; align-items: center; gap: 8px; min-height: 28px; cursor: pointer; }
+.secim input { accent-color: var(--ana); margin: 0; }
+.ikincil { color: var(--metin-ikincil); }
+.not { font-size: 12px; color: var(--metin-ikincil); }
+.liste { border: 1px solid var(--ayirici); border-radius: 4px; }
+.liste .satir { padding: 2px 8px; border-bottom: 1px solid var(--ayirici); }
+.liste .satir:last-child { border-bottom: 0; }
+.liste .ad { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.sag { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.ornek { width: 18px; height: 16px; border-radius: 2px; display: inline-block; border: 1px solid var(--ayirici); }
+.tani { display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
+.tani div { display: flex; gap: 8px; }
+.tamam { color: var(--basari); font-weight: 700; width: 14px; flex-shrink: 0; }
+.yok { color: var(--hata); font-weight: 700; width: 14px; flex-shrink: 0; }
+code { font-family: Consolas, "Courier New", monospace; font-size: 11px; color: var(--metin-ikincil); }
+.durum { font-size: 12px; color: var(--metin); min-height: 18px; }
+.durum.hata { color: var(--hata); }
+.p-alt { display: flex; justify-content: space-between; gap: 8px; padding: 8px 12px; border-top: 1px solid var(--ayirici); flex-shrink: 0; }
+.bos { color: var(--metin-ikincil); padding: 8px 0; font-size: 12px; }
+.tost { position: fixed; z-index: 2147483002; background: var(--yuzey); color: var(--metin); border: 1px solid var(--kenar); border-radius: 4px; padding: 4px 10px; font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; pointer-events: none; }
+${renkKurallari}
+.gizli { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 560px) {
+  .gezinti { width: 140px; }
+  .liste .satir { flex-wrap: wrap; }
+  .sag { flex-shrink: 1; flex-wrap: wrap; }
+  .liste .ad { min-width: 100%; }
+}`;
+    }
+
+    function kokKur() {
+        if (konak || !document.body) return;
+        konak = el('div', { id: `${ONEK}-kok` });
+        kok = konak.attachShadow({ mode: 'closed' });
+        kok.append(el('style', { metin: golgeStili() }));
+        const kap = el('div', { sinif: 'kap' });
+        kose = el('button', { sinif: 'kose', type: 'button', onclick: () => panelAcKapa() }, 'DVZ');
+        tost = el('div', { sinif: 'tost', 'aria-hidden': 'true', hidden: true });
+        canli = el('div', { sinif: 'gizli', role: 'status', 'aria-live': 'polite' });
+        panel = el('div', { sinif: 'panel', role: 'dialog', hidden: true });
+        kap.append(kose, panel, tost, canli);
+        kok.append(kap);
+        panel.addEventListener('keydown', panelTusu);
+        document.body.appendChild(konak);
+        // Yalnız Playwright testleri için (sayfa nesnesi verilmişse): kapalı kökü teste açar.
+        const deneme = window.__AALABS_TEST__;
+        let testMi = false;
+        try { testMi = typeof GM_info === 'object' && GM_info && GM_info.scriptHandler === 'Test'; } catch (_hata) { testMi = false; }
+        if (testMi && deneme && typeof deneme === 'object') deneme.dvz = { kok, ayar: () => ayar, tani: () => tani };
+        koseYenile();
+    }
+    const kapsayici = () => kok && kok.querySelector('.kap');
+
+    function koseYenile() {
+        if (!kose) return;
+        kapsayici().setAttribute('data-tema', panelTemasi());
+        const baslik = `${_('koseDugme')} (${ayar.kisayol.ayar})` + (sorunVar() ? ` · ${_('sorunVar')}` : '');
+        kose.setAttribute('title', baslik);
+        kose.setAttribute('aria-label', baslik);
+        const nokta = kose.querySelector('.kirmizi');
+        if (sorunVar() && !nokta) kose.append(el('span', { sinif: 'kirmizi', 'aria-hidden': 'true' }));
+        if (!sorunVar() && nokta) nokta.remove();
+    }
+
+    function tostGoster(metin, tr) {
+        if (!tost) return;
+        tost.textContent = metin;
+        tost.hidden = false;
+        if (canli) { canli.textContent = ''; canli.textContent = metin; }
+        const r = tr.getBoundingClientRect();
+        const hucre = tr.cells[ayar.kopya.sutun];
+        const hr = hucre ? hucre.getBoundingClientRect() : r;
+        const gen = tost.offsetWidth;
+        tost.style.left = `${Math.max(8, Math.min(hr.right + 8, window.innerWidth - gen - 8))}px`;
+        tost.style.top = `${Math.max(8, r.top + (r.height - tost.offsetHeight) / 2)}px`;
+        const zaman = ++tostZaman;
+        setTimeout(() => { if (zaman === tostZaman) tost.hidden = true; }, 1600);
+    }
+
+    // ---- Ayarlar penceresi -----------------------------------------------------------------
+    const panelAcik = () => panel && !panel.hidden;
+    function panelAc(bolum) {
+        kokKur();
+        if (!panel) return;
+        if (bolum) acikBolum = bolum;
+        if (!panelAcik()) oncekiOdak = konak && document.activeElement === konak ? kok.activeElement : document.activeElement;
+        panel.hidden = false;
+        satirlariIsle();
+        panelCiz();
+        const odak = panel.querySelector('.g-oge[aria-current="true"]') || panel.querySelector('input');
+        if (odak) odak.focus();
+    }
+    function panelKapat() {
+        if (!panel) return;
+        panel.hidden = true;
+        duzenlenenKisayol = null;
+        kisayolMesaji = null;
+        bolumDurum = { hakkinda: null, tani: null };
+        if (oncekiOdak && oncekiOdak.isConnected && typeof oncekiOdak.focus === 'function') oncekiOdak.focus();
+        oncekiOdak = null;
+    }
+    const panelAcKapa = () => (panelAcik() ? panelKapat() : panelAc());
+
+    function panelTusu(e) {
+        if (duzenlenenKisayol) { kisayolYakala(e); return; }
+        if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); panelKapat(); return; }
+        if ((e.ctrlKey || e.metaKey) && !e.altKey && e.code === 'KeyF') {
+            e.preventDefault(); e.stopPropagation();
+            const a = panel.querySelector('input[type="search"]');
+            if (a) { a.focus(); a.select(); }
+        }
+    }
+
+    function kisayolYakala(e) {
+        if (e.key === 'Tab') { duzenlenenKisayol = null; kisayolMesaji = null; panelCiz(); return; }   // Tab engellenmez: odak gezinebilsin
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.key === 'Escape') { duzenlenenKisayol = null; kisayolMesaji = null; panelCiz(); return; }
+        const ad = tusAdi(e);
+        if (!ad) return;
+        if (!/^(Ctrl|Alt)\+/.test(ad)) { kisayolMesaji = mesaj('kModYok'); duyur(kisayolMesaji); panelCiz(); return; }
+        if (!kisayolUygunMu(ad)) { kisayolMesaji = mesaj('kUygunsuz'); duyur(kisayolMesaji); panelCiz(); return; }
+        const cakisan = Object.keys(ayar.kisayol).find(k => k !== duzenlenenKisayol && ayar.kisayol[k] === ad);
+        if (cakisan) { kisayolMesaji = { k: 'kCakisma', a: [], cakisan }; duyur(kisayolMesaji); panelCiz(); return; }
+        ayar.kisayol[duzenlenenKisayol] = ad;
+        kisayolMesaji = { k: 'kKaydedildi', a: [ad], is: duzenlenenKisayol };
+        duzenlenenKisayol = null;
+        ayarYaz();
+        arayuzuYenile();
+    }
+
+    function degistir(fn) { fn(); ayarYaz(); arayuzuYenile(); }
+
+    function secimKutusu(tip, ad, secili, metin, fn, odakKey) {
+        const i = el('input', { type: tip, name: ad, 'data-odak': odakKey });
+        i.checked = secili;
+        i.addEventListener('change', () => fn(i.checked));
+        return el('label', { sinif: 'secim' }, i, metin);
+    }
+    function acilir(secenekler, secili, fn, etiket, odakKey, kapali) {
+        const s = el('select', { 'aria-label': etiket, 'data-odak': odakKey, disabled: kapali });
+        for (const [deger, metin] of secenekler) {
+            const o = el('option', { value: deger, metin });
+            if (String(deger) === String(secili)) o.selected = true;
+            s.append(o);
+        }
+        s.addEventListener('change', () => fn(s.value));
+        return s;
+    }
+
+    // Bölümler: k, grup, başlık, kurucu, varsayılana dön (yoksa null)
+    function bolumler() {
+        return [
+            { k: 'vurgu', grup: 'DVZ', baslik: _('bVurgu'), kur: bolumVurgu,
+                sifirla: () => { const v = VARSAYILAN(); ayar.bicim = v.bicim; ayar.basa = v.basa; } },
+            { k: 'para', grup: 'DVZ', baslik: _('bPara'), kur: bolumPara, sifirla: () => { ayar.para = VARSAYILAN().para; } },
+            { k: 'kopya', grup: 'DVZ', baslik: _('bKopya'), kur: bolumKopya, sifirla: () => { ayar.kopya = VARSAYILAN().kopya; } },
+            { k: 'genel', grup: 'ORTAK', baslik: _('bGenel'), kur: bolumGenel,
+                sifirla: () => { const v = VARSAYILAN(); ayar.dil = v.dil; ayar.tema = v.tema; } },
+            { k: 'kisayol', grup: 'ORTAK', baslik: _('bKisayol'), kur: bolumKisayol,
+                sifirla: () => { ayar.kisayol = VARSAYILAN().kisayol; duzenlenenKisayol = null; kisayolMesaji = null; } },
+            { k: 'tani', grup: 'ORTAK', baslik: _('bTani'), kur: bolumTani, sifirla: null },
+            { k: 'hakkinda', grup: 'ORTAK', baslik: _('bHakkinda'), kur: bolumHakkinda, sifirla: null },
+        ];
+    }
+
+    function bolumVurgu(b) {
+        b.append(el('span', { sinif: 'ikincil', metin: _('bicim') }));
+        for (const [deger, anahtar] of [['zemin', 'bicimZemin'], ['cizgi', 'bicimCizgi'], ['kalin', 'bicimKalin']]) {
+            b.append(secimKutusu('radio', `${ONEK}-bicim`, ayar.bicim === deger, _(anahtar),
+                v => { if (v) degistir(() => { ayar.bicim = deger; }); }, `bicim-${deger}`));
+        }
+        b.append(secimKutusu('checkbox', `${ONEK}-basa`, ayar.basa, _('basa'), v => degistir(() => { ayar.basa = v; }), 'basa'));
+        b.append(el('span', { sinif: 'not', metin: _('basaNot') }));
+    }
+
+    function bolumPara(b) {
+        b.append(el('span', { sinif: 'ikincil', metin: _('paraNot') }));
+        if (!ayar.para.length) b.append(el('div', { sinif: 'bos', metin: _('paraBos') }));
+        else {
+            const liste = el('div', { sinif: 'liste' });
+            ayar.para.forEach((p, i) => {
+                const renkSecenek = RENKLER.map(r => [r.kod, r[etkinDil()]]);
+                const sag = el('span', { sinif: 'sag' },
+                    el('span', { sinif: 'ornek', 'data-renk': p.renk, 'aria-hidden': 'true' }),
+                    acilir(renkSecenek, p.renk, v => degistir(() => { p.renk = v; }), `${p.ad} · ${_('renk')}`, `renk-${p.ad}`),
+                    el('button', { sinif: 'dugme', type: 'button', disabled: i === 0, 'data-odak': `yukari-${p.ad}`,
+                        'aria-label': `${p.ad} · ${_('yukari')}`,
+                        onclick: () => degistir(() => { [ayar.para[i - 1], ayar.para[i]] = [ayar.para[i], ayar.para[i - 1]]; }) }, `↑ ${_('yukari')}`),
+                    el('button', { sinif: 'dugme', type: 'button', 'data-odak': `cikar-${p.ad}`, 'aria-label': `${p.ad} · ${_('cikar')}`,
+                        onclick: () => degistir(() => { ayar.para.splice(i, 1); }) }, _('cikar')));
+                liste.append(el('div', { sinif: 'satir' }, el('span', { sinif: 'ad', title: p.ad, metin: p.ad }), sag));
+            });
+            b.append(liste);
+        }
+        const tablo = anaTablolar()[0];
+        const kalan = tablo ? govdeSatirlari(tablo).map(tr => paraAdi(tr.cells[0])).filter(ad => ad && !ayar.para.some(p => p.ad === ad)) : [];
+        const satir = el('div', { sinif: 'satir sola' }, el('span', { metin: _('ekleEtiket') }));
+        if (!tablo) satir.append(el('span', { sinif: 'not', metin: _('ekleTabloYok') }));
+        else if (!kalan.length) satir.append(el('span', { sinif: 'not', metin: _('ekleHepsi') }));
+        else {
+            const s = acilir([...new Set(kalan)].map(a => [a, a]), kalan[0], () => {}, _('ekleEtiket'), 'ekle-sec');
+            satir.append(s, el('button', { sinif: 'dugme ana', type: 'button', 'data-odak': 'ekle',
+                onclick: () => degistir(() => {
+                    const bos = RENK_KODLARI.find(r => !ayar.para.some(p => p.renk === r)) || 'mavi';
+                    ayar.para.push({ ad: s.value, renk: bos });
+                }) }, `+ ${_('ekle')}`));
+        }
+        b.append(satir);
+    }
+
+    function bolumKopya(b) {
+        b.append(secimKutusu('checkbox', `${ONEK}-kopya`, ayar.kopya.acik, _('kopyaAc'), v => degistir(() => { ayar.kopya.acik = v; }), 'kopya-ac'));
+        const kapali = !ayar.kopya.acik;
+        b.append(el('div', { sinif: 'satir' }, el('span', { metin: _('kopyaSutun') }),
+            acilir([1, 2, 3, 4].map(n => [n, sutunAdi(n)]), ayar.kopya.sutun, v => degistir(() => { ayar.kopya.sutun = Number(v); }), _('kopyaSutun'), 'kopya-sutun', kapali)));
+        b.append(el('div', { sinif: 'satir' }, el('span', { metin: _('ondalik') }),
+            acilir([['virgul', _('ondalikVirgul')], ['nokta', _('ondalikNokta')]], ayar.kopya.ondalik,
+                v => degistir(() => { ayar.kopya.ondalik = v; }), _('ondalik'), 'kopya-ondalik', kapali)));
+        b.append(el('span', { sinif: 'not', metin: _('kopyaNot') }));
+    }
+
+    function bolumGenel(b) {
+        const tarayici = tarayiciDili() === 'tr' ? 'Türkçe' : 'English';
+        b.append(el('div', { sinif: 'satir' }, el('span', { metin: _('dil') }),
+            acilir([['tr', _('dilTr')], ['en', _('dilEn')], ['tarayici', _('dilTarayici', tarayici)]], ayar.dil,
+                v => degistir(() => { ayar.dil = v; }), _('dil'), 'genel-dil')));
+        const sayfa = sayfaTemasi() === 'koyu' ? _('koyuKucuk') : _('acikKucuk');
+        b.append(el('div', { sinif: 'satir' }, el('span', { metin: _('tema') }),
+            acilir([['sayfa', _('temaSayfa', sayfa)], ['acik', _('temaAcik')], ['koyu', _('temaKoyu')]], ayar.tema,
+                v => degistir(() => { ayar.tema = v; }), _('tema'), 'genel-tema')));
+        b.append(el('span', { sinif: 'not', metin: _('olcekNot') }));
+    }
+
+    function bolumKisayol(b) {
+        const liste = el('div', { sinif: 'liste' });
+        for (const k of Object.keys(ayar.kisayol)) {
+            const bekliyor = duzenlenenKisayol === k;
+            liste.append(el('div', { sinif: 'satir' }, el('span', { metin: _(KISAYOL_ADLARI[k]) }),
+                el('button', { sinif: bekliyor ? 'dugme ana' : 'dugme', type: 'button', 'data-odak': `kisayol-${k}`,
+                    'aria-label': `${_(KISAYOL_ADLARI[k])}: ${ayar.kisayol[k]}`,
+                    onclick: () => { duzenlenenKisayol = bekliyor ? null : k; kisayolMesaji = null; panelCiz(); } },
+                bekliyor ? _('kBekle') : ayar.kisayol[k])));
+        }
+        b.append(liste);
+        if (kisayolMesaji) {
+            const m = kisayolMesaji;
+            const metin = m.k === 'kCakisma' ? _('kCakisma', _(KISAYOL_ADLARI[m.cakisan]))
+                : m.k === 'kKaydedildi' ? _('kKaydedildi', _(KISAYOL_ADLARI[m.is]), m.a[0]) : mesajMetni(m);
+            b.append(el('div', { sinif: 'durum', metin }));
+        }
+        b.append(el('span', { sinif: 'not', metin: _('kNot') }));
+    }
+
+    function taniSatirlari() {
+        const s = [];
+        s.push([tani.tablo, tani.tablo ? _('tTablo') : _('tTabloYok'), 'table th = "Döviz Alış"']);
+        for (const p of ayar.para) {
+            const var_ = tani.bulunan.has(p.ad);
+            s.push([var_, var_ ? _('tSatir', p.ad) : _('tSatirYok', p.ad), 'tbody tr > td:first-child']);
+        }
+        const depo = gmVar && !depoHatasi;
+        s.push([depo, depo ? _('tDepo') : _('tDepoYok'), 'GM_setValue']);
+        s.push([panoVar(), panoVar() ? _('tPano') : _('tPanoYok'), 'GM_setClipboard']);
+        s.push([true, _('tSayfa', sayfaTemasi() === 'koyu' ? _('koyuKucuk') : _('acikKucuk')), '']);
+        return s;
+    }
+
+    function taniRaporu() {
+        const ikiHane = n => String(n).padStart(2, '0');
+        const z = new Date();
+        const tarih = `${z.getFullYear()}-${ikiHane(z.getMonth() + 1)}-${ikiHane(z.getDate())} ${ikiHane(z.getHours())}:${ikiHane(z.getMinutes())}`;
+        let yonetici = _('bilinmiyor');
+        try { if (typeof GM_info === 'object' && GM_info) yonetici = `${GM_info.scriptHandler || '?'} ${GM_info.version || ''}`.trim(); } catch (_hata) { /* yok */ }
+        const satirlar = [
+            `${AD} ${SURUM} · ${_('raporBaslik')}`,
+            `${_('raporTarih')}: ${tarih}`,
+            `${_('raporAdres')}: ${location.href}`,
+            `${_('raporTarayici')}: ${navigator.userAgent}`,
+            `${_('raporYonetici')}: ${yonetici}`,
+            ...taniSatirlari().map(([tamam, metin, secici]) => `${tamam ? '✓' : '✗'} ${metin}${secici ? ` · ${secici}` : ''}`),
+            `${_('raporAyar')}: ${JSON.stringify(ayar)}`,
+        ];
+        return satirlar.join('\n');
+    }
+
+    function bolumTani(b) {
+        const kutu = el('div', { sinif: 'tani' });
+        for (const [tamam, metin, secici] of taniSatirlari()) {
+            kutu.append(el('div', {}, el('span', { sinif: tamam ? 'tamam' : 'yok', 'aria-hidden': 'true', metin: tamam ? '✓' : '✗' }),
+                el('span', {}, metin, secici ? ' ' : '', secici ? el('code', { metin: secici }) : '')));
+        }
+        b.append(kutu);
+        b.append(el('div', {}, el('button', { sinif: 'dugme', type: 'button', 'data-odak': 'rapor',
+            onclick: () => panoyaYaz(taniRaporu()).then(tamam => { bolumDurum.tani = mesaj(tamam ? 'raporKopyalandi' : 'kopyalanamadi'); duyur(bolumDurum.tani); panelCiz(); }) },
+        _('raporKopyala'))));
+        if (bolumDurum.tani) b.append(el('div', { sinif: 'durum', metin: mesajMetni(bolumDurum.tani) }));
+        b.append(el('span', { sinif: 'not', metin: _('taniNot') }));
+    }
+
+    function bolumHakkinda(b) {
+        b.append(el('span', { metin: AD, style: 'font-weight:600' }));
+        b.append(el('span', { sinif: 'ikincil', metin: _('surumSatiri', SURUM) }));
+        b.append(el('span', { sinif: 'ikincil', metin: _('magaza') }));
+        const dosya = el('input', { type: 'file', accept: '.json,application/json', hidden: true });
+        dosya.addEventListener('change', () => {
+            const f = dosya.files && dosya.files[0];
+            if (!f) return;
+            if (f.size > 64 * 1024) { bolumDurum.hakkinda = { k: 'geriYuklenemedi', hata: true }; duyur(bolumDurum.hakkinda); dosya.value = ''; panelCiz(); return; }
+            const okuyucu = new FileReader();
+            okuyucu.onload = () => {
+                let ham = null;
+                try { ham = JSON.parse(String(okuyucu.result)); } catch (_hata) { ham = null; }
+                const gecerli = ham && typeof ham === 'object' && !Array.isArray(ham) && ham.surum === 1 && Array.isArray(ham.para);
+                if (!gecerli) { bolumDurum.hakkinda = { k: 'geriYuklenemedi', hata: true }; duyur(bolumDurum.hakkinda); panelCiz(); return; }
+                ayar = ayarDogrula(ham);
+                bolumDurum.hakkinda = ayarYaz() || !gmVar ? { k: 'geriYuklendi' } : { k: 'kaydedilemedi', hata: true };
+                duyur(bolumDurum.hakkinda);
+                arayuzuYenile();
+            };
+            okuyucu.readAsText(f);
+        });
+        b.append(el('div', { sinif: 'satir sola' },
+            el('button', { sinif: 'dugme', type: 'button', 'data-odak': 'yedekle', onclick: () => {
+                const blob = new Blob([JSON.stringify(ayar, null, 2)], { type: 'application/json' });
+                const a = el('a', { href: URL.createObjectURL(blob), download: DOSYA_ADI });
+                document.body.appendChild(a); a.click(); a.remove();
+                setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+                bolumDurum.hakkinda = mesaj('yedekHazir', DOSYA_ADI); duyur(bolumDurum.hakkinda); panelCiz();
+            } }, _('yedekle')),
+            el('button', { sinif: 'dugme', type: 'button', 'data-odak': 'geri-yukle', onclick: () => dosya.click() }, _('geriYukle')),
+            dosya));
+        if (bolumDurum.hakkinda) {
+            b.append(el('div', { sinif: bolumDurum.hakkinda.hata ? 'durum hata' : 'durum', metin: mesajMetni(bolumDurum.hakkinda) }));
+        }
+    }
+
+    function bolumOlustur(bol) {
+        const b = el('div', { sinif: 'bolum', 'data-bolum': bol.k });
+        b.append(el('h3', { metin: bol.baslik }));
+        bol.kur(b);
+        return b;
+    }
+
+    // Arama: bölüm başlığında ya da içindeki yazılarda geçen bölümler kalır (masaüstü Ayarlar ile aynı).
+    function eslesenler(liste) {
+        const yerel = etkinDil() === 'tr' ? 'tr-TR' : 'en';
+        const q = arama.trim().toLocaleLowerCase(yerel);
+        if (!q) return liste;
+        return liste.filter(b => `${b.baslik} ${bolumOlustur(b).textContent}`.toLocaleLowerCase(yerel).includes(q));
+    }
+
+    function panelCiz() {
+        if (!panel || panel.hidden) return;
+        const aktif = kok.activeElement;
+        const odakAnahtar = aktif && (aktif.getAttribute('data-odak') || (aktif.classList.contains('g-oge') && 'gez-' + aktif.getAttribute('data-bolum')));
+        const aramaSecim = aktif && aktif.type === 'search' ? [aktif.selectionStart, aktif.selectionEnd] : null;
+
+        panel.textContent = '';
+        panel.setAttribute('aria-label', _('panelAdi'));
+        const koyu = panelTemasi() === 'koyu';
+        panel.append(el('div', { sinif: 'p-ust' },
+            el('span', { sinif: 'ad', title: _('panelAdi'), metin: _('panelAdi') }),
+            el('button', { sinif: 'dugme', type: 'button', 'data-odak': 'dil-dugme', title: `${_('dilDugme')} (${ayar.kisayol.dil})`,
+                'aria-label': `${_('dilDugme')} (${ayar.kisayol.dil})`, onclick: dilDegistir }, etkinDil() === 'tr' ? 'EN' : 'TR'),
+            el('button', { sinif: 'dugme ikon-dugme', type: 'button', 'data-odak': 'tema-dugme', title: `${_('temaDugme')} (${ayar.kisayol.tema})`,
+                'aria-label': `${_('temaDugme')} (${ayar.kisayol.tema})`, onclick: temaDegistir }, ikon(koyu ? 'sun' : 'moon')),
+            el('button', { sinif: 'dugme ikon-dugme', type: 'button', 'data-odak': 'kapat-x', title: `${_('kapat')} (Esc)`,
+                'aria-label': _('kapat'), onclick: panelKapat }, ikon('x'))));
+
+        const tum = bolumler();
+        const gorunen = eslesenler(tum);
+        // Arama açık bölümü kalıcı değiştirmez; eşleşmezse ilk eşleşen gösterilir.
+        const gosterilen = gorunen.some(b => b.k === acikBolum) ? acikBolum : (gorunen[0] && gorunen[0].k);
+
+        const gezinti = el('nav', { sinif: 'gezinti', 'aria-label': _('ayarlar') });
+        const ara = el('input', { type: 'search', placeholder: _('ara'), 'aria-label': _('ara'), 'data-odak': 'ara' });
+        ara.value = arama;
+        ara.addEventListener('input', e => { if (e.isComposing) return; arama = ara.value; panelCiz(); });
+        ara.addEventListener('compositionend', () => { arama = ara.value; panelCiz(); });
+        gezinti.append(ara);
+        for (const grup of ['DVZ', 'ORTAK']) {
+            const ogeler = gorunen.filter(b => b.grup === grup);
+            if (!ogeler.length) continue;
+            gezinti.append(el('div', { sinif: 'g-baslik', metin: grup === 'DVZ' ? 'DVZ' : _('ortak') }));
+            for (const b of ogeler) {
+                const uyari = b.k === 'tani' && sorunVar();
+                gezinti.append(el('button', { sinif: 'g-oge', type: 'button', title: b.baslik, 'data-bolum': b.k,
+                    'aria-label': uyari ? `${b.baslik} · ${_('sorunVar')}` : null,
+                    'aria-current': String(b.k === gosterilen), onclick: () => {
+                        acikBolum = b.k; panelCiz();
+                        const g = panel.querySelector(`.g-oge[data-bolum="${b.k}"]`); if (g) g.focus();
+                    } },
+                el('span', { sinif: 'yazi', metin: b.baslik }), uyari ? el('span', { sinif: 'nokta', 'aria-hidden': 'true' }) : null));
+            }
+        }
+
+        const icerik = el('div', { sinif: 'icerik' });
+        const secili = gorunen.find(b => b.k === gosterilen);
+        icerik.append(secili ? bolumOlustur(secili) : el('div', { sinif: 'bos', metin: _('aramaYok') }));
+        panel.append(el('div', { sinif: 'p-govde' }, gezinti, icerik));
+
+        const sifirla = secili && secili.sifirla
+            ? el('button', { sinif: 'dugme', type: 'button', 'data-odak': 'sifirla', onclick: () => degistir(secili.sifirla) }, _('sifirla'))
+            : el('span');
+        panel.append(el('div', { sinif: 'p-alt' }, sifirla,
+            el('button', { sinif: 'dugme ana', type: 'button', 'data-odak': 'kapat', onclick: panelKapat }, _('kapat'))));
+
+        if (odakAnahtar) {
+            const yeni = odakAnahtar.startsWith('gez-')
+                ? panel.querySelector(`.g-oge[data-bolum="${odakAnahtar.slice(4)}"]`)
+                : panel.querySelector(`[data-odak="${CSS.escape(odakAnahtar)}"]`);
+            if (yeni && !yeni.disabled) {
+                yeni.focus();
+                if (aramaSecim && yeni.setSelectionRange) yeni.setSelectionRange(aramaSecim[0], aramaSecim[1]);
+            } else {
+                const g = panel.querySelector('.g-oge[aria-current="true"]');
+                if (g) g.focus();
+            }
+        }
+    }
+
+    // Dil, tema ya da ayar değişince: satırlar, menü, köşe düğmesi ve açık pencere hemen yenilenir.
+    function arayuzuYenile() {
+        satirlariIsle();
+        menuKur();
+        koseYenile();
+        panelCiz();
+    }
+
+    // ---- Başlat ----------------------------------------------------------------------------
+    sayfaStiliEkle();
+    menuKur();
+    window.addEventListener('keydown', genelTus, true);
+
+    let bekliyor = false;
+    function izle() {
+        if (bekliyor) return;
+        bekliyor = true;
+        requestAnimationFrame(() => {
+            bekliyor = false;
+            satirlariIsle();
+            menuKur();      // imza değişmediyse menüye dokunmaz
+            koseYenile();   // sorun noktası ve sayfa teması
+        });
+    }
+
+    function domHazir() {
+        sayfaStiliEkle();
+        kokKur();
+        arayuzuYenile();
+        document.addEventListener('click', satirTiklandi, true);
+        new MutationObserver(izle).observe(document.body, { childList: true, subtree: true });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', domHazir, { once: true });
+    else domHazir();
+})();
