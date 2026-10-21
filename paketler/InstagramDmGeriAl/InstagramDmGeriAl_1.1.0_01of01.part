@@ -1,0 +1,1883 @@
+// ==UserScript==
+// @name         AALabs DM Geri Al
+// @namespace    aalabs
+// @version      1.1.0
+// @description  Instagram DM'de açık sohbetteki kendi mesajlarını sırayla geri alır (unsend). Önce deneme kipinde sayar; süzgeç, otomatik devam, engel algılama ve birden çok sohbet.
+// @author       AALabs
+// @match        https://www.instagram.com/*
+// @icon         data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAJfUlEQVR42u2ba4xV1RXHf2ufc+5z5g4MDINFQF6KYmNRQBpDrW191wexA7RJbW1sUpo0Vr+1gqkmbb/0izW1tjZNatNUGBtsqzRaq8UmrS9AI0IqjyICAjLMMDP3zr33nL1XP5w7984wgzPoKAwzO7kf7jn77HPWf6+9/mv9z9lCv6ZCS6uhdYUFmLfqvzcCt6nTJag9DyEDIpzRTRWlgHh7xcgrwJ92Pn7B0wC0rPdobXEg2ttb+hlfOTFn1Y6bReVeEX+JGB91EaohqDIqmggiAbVnj15Rpz/e3XrhX060Vfoc4MorX/D2N0/9uRdkV6MOF+YVUAQ582d+UE9QQEyQFcRgo56Hz51/8K5N919liU+p9Lr9ZRNnm+PHs+u8xMTlttRmK9h4nB3NguIlJ3m21L5h2oXzV2za3qq0tjivpWWBt711hc3M+t4v/PSkr0fFtlBEfMBw9jQDYlxUCP1U44KO995pam+96qmWlgWeAMxb8dYNEtQ/bcN8KGjAWdwUIi+o8zXsunHn+gUb5bLLXguOz06/ZILsQhflHYjHWd3UGj9rXJjf2rCnZ6nfOTtzjXjBpS4qjAHjAcRzUcGJl7i0cw5XGxVWigkq3jFmmooJUGGlUWWxughUzdgxX426CHUsMaDTVUOQ0cbzHylRkorN5xoRMqMmwxvhPEnQrBl9Gd7IuoJhjLdxAMYBGAdgHIBxAD4x0onFGs4k3vVPjTXBVNIGRXFuaIONiS12Lu6v2nu8NpZTHZCLeaYG02DnB8ykIRauhtn/lAEQgVJZKZZtfKEnZNPmpDfyjBBZpStvsU5JJQyZpMEYcA56So6eskWAVNKQ8Pv7xfG8xbl48EzKEPjygUZ1FRzWxh1SSUMykGGBMCwAjAj5ouW6pTluXdaAAtv29PDIhjaSiYE3MiY2IJf1uOGzOZZdkmXeuUkmNfgkAiGMlPbOiL2HQ17bUeClbXkOt0cI4DQG94FvT6V5oo8Av/pzG2/sKpJJCk4HTkw5VO5e2cT8mUkEYd0/2nlhSzfZlIcbAgV/uLNfDpWLZqX48hU5AJon+jzUepRUsgaAEMurnXnHLcsauHtlExfMSJ5k1CRLL4ZVX5xAZ96y/Ad72X2gROALRuDWZQ00TYgf76l/d/Lajh4kZQZVpp2DaxbXc8m8NABb3y7wzMtd1KWHLvJPeQnYyhR0F9zAKkKg0OO4745mVi+f3O9Ue5fl3cNlespKOimcMymoGrjrQJk9B0skA8G62hJozMX6TBjpkBVLV8FVn60U6rArnFMOgr3ByZiBa76jO+KeVVNYvXwyYaQEvnDg/ZAH17/PP7d2c6zTEjnFN0Iuazh/eorlV+Z4fnM3PSVHKuFXjfCMVO81HGOM4ZT6fygAPujm+aJl4fkZ7lnVRFQxfuvbPXzrp/vYfySkLm3wPSFRCWYd3ZYXX+9m0+vdpBNCLutVg9gZS4Mnp7s4sN15UyO+JzgHbZ0R3/3Zfo4ci2ia4BPZmJp6l7DvCbmsAFKlrdORH5iRML4cOaY1Jbjq0npUY4947G/t7NxfoqHOI4wG8rIqWBfnB6dTjfRHwv2LZeWCGclq0Iqs8szLnWSSMqRbn24takSWgLXK9OZE9f+R9oj9R0IC3/QzUHupchAuH9UAADRka6vpWKelFGqVKXrziJ985xw+PSeNtfE5EcE5JfCE3/y1jcef66AuY0YnAH1pUXuDmvRf85+Zm+aiWalBr29uDIicfuKBcMQA6MrXKqNc1iMRCOU+CYkI7NhbIhEIkYvXw7Qmn3TSYCRmERmtS8AY4VBb2G82J0/w2XeoTMLEvB/4wg9//R6mUlF25C2/WzOdLy2qHzIODPXKQj7C1wsfecGpQjIQdh0oUyw7VCGVEBbPz9BTcv3KWmuVMFIiq0TR4CWriBA6pViqeVRd2lS+dRicRnxfqEvXXmuWyvrJAeBUSQbC/w6WeWNnTzXa3379RJKJuCT2vFqc6P15J3kjYQwUio7D7VEVoItnp7C2v0YQp8sQWmVyg8esT9VY6ODRsNJXP34AAMTEydAfnu1ABKJIuWRumvvumEpn3tJdiD2DSiboNC5YrB3cncNQeemtAiJx31uWNTBnWpIj7WG/vuUoZpzbr2ukLm1wCkc7It7cUyQ1SOn8sQFgrZLLejz5rw5efL2bwBdKZeXOmybx2NqZLLowU/UG6xQjMHWST65CndonN3AOsmnDhk0ddOZjhJom+Pz23ul8YVE9gV8zrDFnuP/OqaxePplyGI/7+HMdHGoLSfhm5ASR/umrVh90gAokwl0PHuD3a2dy8ewUzsG1l9dz7eX17DsccqQ9RASyKcOUiQG5rKEcOhJBXCjVYoph3+GQtY8e4sHvTwPgovNSrHtgJvsOlznaYQl8YUZzQEOdh1NIBMKrOwo89MT71Ge8qpo0YgCoQjJRK1HrMv0RVoVEQjh23PK1H73Dmm82c9vnG+gtcWY0B8xoDgZDDeuUjm5L7xK3TsllDa3Pd6DAmm80M2WiXxknwYzmExUrePLF46x59D3KkZLwh+f+ADJ3xfYhu/ZKYtcvzXHr5xoAeHN3kYc3HCV1giRmTCxg9JSUheenuXpxPQvnpZnS6JNKGKxVimXlWGfEgaMh23YX2fJ2D3sOlgaV1jq7HdOmBNx0RY6lC7KcM8knk/KwTjnaEbF9b5FnXu7iP9vyJBNC4A3f+GED0F8UdUOKor28XCg6SmGc6mYreoBqXCz1lBzlSvKTCAzJhAyaCHlGKIWOQjGm1L4CaaHkKJYdCb/2LKf6pn/YAHwYWdxIzBCqiu0jiYtQrQViZtAPnLW4fzxOr7Reo9Xa8Y89E1QFewoQOwUq5bCB2nep1SCqw79vn7K6N1acePy01gJDGnGGjjX+bnAcgHEAxgEYB2CMAzAWv5KsZRhGlcKY/FZSBEXyBuRdkSDOR8fOxGvF5v1GhFfF+CDixtDsOzE+YnjFiLJOXdgnUx8bEKgLEWWdye0pPKu2vMX4GQG1Y8D/rfEzora8Jbe75+9m8+ZFoQhrESPaZ0flWWs+oogREdZu3rwoNC0t672d6xdstKXjj/ipRl9Vw7M49oV+stG35c5f7ly/YGNLy3pvzG+cHHtbZw8dvGvTpn5bZ6sX1DZPt+y4WYzcK+ItERP0bkAGHSVMKQYRv7J5OkTVDrV5ug8IfbfPf3XXDaj9iiqLVe15gmZHw/Z5RfIi3l4RXkW8J3b+ce5GYNDt8/8HeIKnwHCz9cQAAAAASUVORK5CYII=
+// @run-at       document-start
+// @noframes
+// @grant        GM_getValue
+// @grant        GM_setValue
+// @grant        GM_registerMenuCommand
+// @grant        GM_unregisterMenuCommand
+// @grant        GM_setClipboard
+// @grant        GM.setClipboard
+// @grant        GM_info
+// @aalabs-ikon  IGU
+// ==/UserScript==
+
+/*
+ * Ne yapar
+ *   instagram.com/direct sohbetinde senin gönderdiğin mesajları en yeniden eskiye doğru tek tek geri alır.
+ *   Her mesajda Instagram'ın kendi "Daha fazla > Gönderimi geri al > Onayla" yolunu kullanır; sunucuya
+ *   kendisi istek atmaz. Karşı tarafın mesajına dokunmaz (menüsünde geri al seçeneği yoktur).
+ *
+ * Güvenlik
+ *   - İlk açılışta deneme kipi açıktır: yalnız sayar, hiçbir şey silmez.
+ *   - Canlı kipte ilk Başlat ikinci kez onay ister.
+ *   - İki işlem arası en az 1,5 sn. Instagram "Daha sonra tekrar dene" derse durur (E4).
+ *
+ * 1.1.0 (app-lab v02.02 geçişi, q5hnw): konsol scripti (q5hnw_ig_dm_unsend_00.js) userscript oldu.
+ * Tasarım kapısı: Platform P2 · Yerleşim A · E1–E5 · Ç1–Ç5 · K1–K5.
+ */
+(function () {
+  'use strict';
+
+  const SURUM = '1.1.0';
+  const ID = 'InstagramDmGeriAl';
+  const KOD = 'IGU';
+  const AD = 'AALabs DM Geri Al';
+  const TUR_BEKLE_MS = 1200;          // Ç2: eski mesaj yüklenirken bekleme (sabit)
+  const DENEME_BEKLE_MS = 250;        // deneme kipinde iki mesaj arası
+  const ART_ARDA_HATA = 3;            // art arda bu kadar menü hatası → dur
+  const CALISMA_OMRU_MS = 6 * 3600 * 1000;   // E5: yarım kalan çoklu sohbet işi 6 saat sonra unutulur
+
+  let TEST = false;
+  try { TEST = typeof GM_info === 'object' && !!GM_info && GM_info.scriptHandler === 'Test'; } catch (_) { TEST = false; }
+  const testKanca = TEST && typeof window !== 'undefined' && window.__AALABS_TEST__ && typeof window.__AALABS_TEST__ === 'object'
+    ? window.__AALABS_TEST__ : null;
+  const hiz = testKanca && testKanca.hiz ? Number(testKanca.hiz) : 1;   // testte bekleme çarpanı (ör. 0.05)
+
+  // ---------------------------------------------------------------- tema (tokenlardan üretildi)
+  // TOKEN-BASLA
+  const TEMA_CSS = ":host { --tv-olcek: 1; --yazi: \"Open Sans\", \"Segoe UI\", Roboto, sans-serif; --yazi-govde: calc(14px * var(--tv-olcek)); --kontrol: calc(32px * var(--tv-olcek)); --kose-s: calc(2px * var(--tv-olcek)); --kose-m: calc(4px * var(--tv-olcek)); --kose-l: calc(6px * var(--tv-olcek)); --bosluk-1: calc(4px * var(--tv-olcek)); --bosluk-2: calc(8px * var(--tv-olcek)); --bosluk-3: calc(12px * var(--tv-olcek)); --bosluk-4: calc(16px * var(--tv-olcek)); --bosluk-5: calc(24px * var(--tv-olcek)); --bosluk-6: calc(32px * var(--tv-olcek)); --ana: #2456D6; --ana-acik: #E5EBFA; --ana-hover: #F2F5FD; --ana-uzeri: #FFFFFF; --vurgu: #2456D6; --zemin: #F6F9FC; --yuzey: #FFFFFF; --metin: #17252E; --metin-ikincil: #4E6269; --kenar: #7A9199; --ayirici: #D3DEE6; --basari: #18763F; --basari-bg: #E4F5E8; --uyari: #9A5B00; --uyari-bg: #FDF6D8; --hata: #C4313B; --hata-bg: #FDE8E8; --kat-belge: #6237C8; --kat-tablo: #1D7A3A; --kat-gorsel: #B0256C; --kat-kod: #2453C7; --kat-video: #A8500F; --kat-arsiv: #7A5A00; --kat-onemli: #B4232B; --kat-oyun: #0B6E78; color-scheme: light; }\n:host([data-theme=\"dark\"]) { --ana: #2456D6; --ana-acik: #1D2C4F; --ana-hover: #1B2434; --ana-uzeri: #FFFFFF; --vurgu: #86A8FF; --zemin: #0F1520; --yuzey: #161E2B; --metin: #E6ECF5; --metin-ikincil: #9AA8BC; --kenar: #6A7B93; --ayirici: #263142; --basari: #4CC38A; --basari-bg: #13301F; --uyari: #E8AC45; --uyari-bg: #33270F; --hata: #FF8189; --hata-bg: #3A161A; color-scheme: dark; }\n";
+  // TOKEN-BITIR
+
+  // ---------------------------------------------------------------- dil (TR kaynak, EN çeviri)
+  const METIN = {
+    tr: {
+      panelAd: 'DM Geri Al', sohbet: 'Sohbet', sohbetler: 'Sohbetler', buSohbet: 'Bu sohbet', secili: '{n} seçili · {i}/{n}',
+      deneme: 'Deneme kipi', denemeCip: 'Deneme: siler yok', canliCip: 'Canlı: geri alır',
+      baslat: 'Başlat', durdur: 'Durdur', onayla: 'Onayla: geri al',
+      onayUyari: 'Mesajlar karşı taraftan da silinir. Geri dönüşü yok. Onaylamak için yeniden bas.',
+      sayac: '{a} bulundu · {b} geri alındı · {c} kalan', ilerleme: 'Geri alma ilerlemesi',
+      siraEkle: 'Bu sohbeti sıraya ekle', siradan: 'Bu sohbeti sıradan çıkar', siraTemizle: 'Sırayı temizle',
+      siraIpucu: 'Sol listedeki sohbetlerin yanındaki kutuya tıklayarak da seçebilirsin.',
+      listeSec: '{ad}: sıraya ekle', listeCikar: '{ad}: sıradan çıkar',
+      suzgecCip: 'Süzgeç: “{k}” {kip}', kip_atla: 'atlanır', kip_yalniz: 'yalnız bunlar',
+      turCip: 'Tür: {t}', tur_hepsi: 'hepsi', tur_yazi: 'yalnız yazı', tur_medya: 'yalnız medya',
+      otoCip: 'Otomatik devam: sonraki tur {saat}', engelCip: 'Engel algılandı', gecisCip: 'Sıradaki sohbet: {saat}',
+      s_bos: 'Sohbet açık değil. Soldan bir sohbet aç.',
+      s_hazir: 'Sohbet açık. Deneme kipinde Başlat yalnız sayar.',
+      s_hazirCanli: 'Sohbet açık. Canlı kipte Başlat mesajlarını geri alır.',
+      s_tara: 'Sayılıyor… {n} mesajın bulundu',
+      s_calis: 'Geri alınıyor: {b} / {h} · ~{sure} kaldı',
+      s_bittiDeneme: 'Deneme bitti: {a} mesajın bulundu, hiçbiri silinmedi.',
+      s_bitti: 'Bitti: {b} mesaj geri alındı. Sohbetin başına ulaşıldı.',
+      s_bittiSinir: 'Sınıra ulaşıldı: {b} geri alındı. Devam için yeniden Başlat.',
+      s_bekle: 'Sınıra ulaşıldı: {b} geri alındı. Sonraki tur {saat}’de.',
+      s_gecis: '{ad} bitti. {saat}’de sıradaki sohbete geçilecek ({i}/{n}).',
+      s_hepsiBitti: 'Sıradaki bütün sohbetler bitti ({n} sohbet).',
+      s_engel: 'Instagram “Daha sonra tekrar dene” dedi. Durdum; otomatik devam iptal. Bekleme {sn} sn oldu. En az 15 dk sonra Başlat.',
+      s_hataMenu: 'Mesaj menüsü bulunamadı. Instagram arayüzü değişmiş olabilir. Ayarlar › Tanı › Raporu kopyala.',
+      s_hataAlan: 'Mesaj alanı bulunamadı. Sayfayı yenile; olmazsa Ayarlar › Tanı › Raporu kopyala.',
+      s_hataOnay: 'Onay penceresi bulunamadı. Ayarlar › Tanı › Raporu kopyala.',
+      s_durdu: 'Durduruldu: {b} geri alındı.',
+      s_durduDeneme: 'Durduruldu: {a} mesajın sayıldı.',
+      sn: '{n} sn', dk: '{n} dk', dkKapali: 'Kapalı', sureSn: '{n} sn', sureDk: '{n} dk',
+      ayarlar: 'Ayarlar', ayarlarAc: 'Ayarlar ({tus})', ara: 'Ayarlarda ara (Ctrl+F)', sonucYok: 'Sonuç yok. Başka bir kelime dene.',
+      ortak: 'ORTAK', kapat: 'Kapat (Esc)', paneliKapat: 'Paneli kapat', bildirimKapat: 'Bildirimi kapat',
+      tetikIpucu: 'IGU paneli', tetikSorun: 'Tanı bir sorun buldu',
+      varsayilan: 'Varsayılana dön', sifirlandi: 'Bu bölüm varsayılana döndü', kaydedildi: 'Ayarlar kaydedildi',
+      b_geri: 'Geri alma', b_genel: 'Genel', b_kisayol: 'Klavye kısayolları', b_tani: 'Tanı', b_hakkinda: 'Hakkında',
+      geriAlt: 'Mesajlar en yeniden eskiye doğru geri alınır. Eski mesajlar sohbetin başına ulaşana dek kendiliğinden yüklenir.',
+      o_deneme: 'Deneme kipi', o_denemeA: 'Açıkken yalnız sayar, hiçbir mesajı geri almaz. İlk açılışta açık.',
+      o_enCok: 'Bir çalıştırmada en çok', o_enCokA: 'Bu sayıya ulaşınca durur. 1–150.',
+      o_bekle: 'İki işlem arası bekleme', o_bekleA: 'En az 1,5 sn. Hızlı silme hesabı geçici olarak engelletebilir.',
+      o_suzgec: 'Metin süzgeci', o_suzgecA: 'Boşsa her mesaj. Örnek: http → bağlantılı mesajlar atlanır.', o_suzgecYer: 'kelime ya da parça',
+      o_suzgecKip: 'Süzgeç eşleşince', kip_atlaSec: 'Atla', kip_yalnizSec: 'Yalnız bunları geri al',
+      o_tur: 'Mesaj türü', o_turA: 'Yazı: metin taşıyan mesaj. Medya: fotoğraf, video, ses.', turSec_hepsi: 'Hepsi', turSec_yazi: 'Yalnız yazı', turSec_medya: 'Yalnız medya',
+      o_oto: 'Otomatik devam', o_otoA: 'Sınıra ulaşınca bu kadar bekler, sonra kendiliğinden yeni tura başlar. Kapalıysa durur.',
+      o_engel: 'Engel algılanınca dur', o_engelA: 'Instagram uyarısı görülünce durur, bekleme süresi ×2 olur (en çok 10 sn).',
+      o_cok: 'Sohbetler arası bekleme', o_cokA: 'Sırada birden çok sohbet varsa biri bitince bu kadar beklenir.',
+      gecersiz: 'Geçersiz değer. İzin verilen aralık: {a}.',
+      dil: 'Dil', dil_tr: 'Türkçe', dil_en: 'English', dil_tarayici: 'Tarayıcı dili', algilanan: 'Algılanan: {dil}',
+      tema: 'Tema', tema_sayfa: 'Sayfayı izle', tema_acik: 'Açık', tema_koyu: 'Koyu',
+      olcek: 'Ölçek', olcekA: 'Panelin ve Ayarlar penceresinin boyu.',
+      kisayolNot: 'Tuş kutusuna tıkla, yeni tuşu bas. Vazgeçmek için Esc. Tarayıcı kısayoluyla çakışan tuş kabul edilmez.',
+      k_ayarlar: 'Ayarları aç', k_durdur: 'Durdur (çalışırken)', degismez: 'Değiştirilemez', tusaBas: 'Tuşa bas…',
+      tusDegisti: 'Kısayol {tus} oldu', tusRed: '{tus} kullanılamaz: {neden} Başka tuş seç.',
+      neden_degistirici: 'Ctrl ya da Alt ile birlikte basılmalı.', neden_tarayici: 'tarayıcı bu tuşu kullanıyor.',
+      neden_altgr: 'Ctrl+Alt Türkçe klavyede AltGr ile karışır.',
+      taniIyi: 'Her şey yerinde. Sorun bildirirken raporu kopyalayıp sohbete yapıştır.',
+      taniKotu: '{n} sorun var. Raporu kopyalayıp sohbete yapıştır.',
+      t_sayfa: 'Sohbet sayfası', t_sayfaVar: 'Sohbet açık', t_sayfaYok: 'Sohbet açık değil; bir sohbet açınca denetlenir',
+      t_alan: 'Mesaj alanı', t_alanVar: 'Mesaj alanı bulundu', t_alanYok: 'Mesaj alanı bulunamadı',
+      t_satir: 'Mesaj satırları', t_satirSay: '{n} satır görünür · {b} senin',
+      t_menu: 'Mesaj menüsü düğmesi', t_secenek: 'Geri al seçeneği', t_onay: 'Onay penceresi',
+      t_denenmedi: 'Henüz denenmedi; Başlat ile denenir', t_bulundu: 'Bulundu', t_bulunamadi: 'Bulunamadı',
+      t_kaydir: 'Kaydırma alanı', t_liste: 'Sohbet listesi (çoklu sohbet)', t_listeSay: '{n} sohbet bağlantısı',
+      t_listeYok: 'Bağlantı bulunamadı; sohbeti panelden sıraya ekle',
+      t_depo: 'Ayar deposu', t_depoVar: 'GM_getValue ✓', t_depoYok: 'GM_getValue yok: ayarlar sayfa kapanınca kaybolur',
+      t_son: 'Son çalıştırma', t_sonYok: 'Henüz çalıştırma yok', t_sonOzet: '{zaman} · {kip} · {b} geri alındı · {a} bulundu · {h} hata',
+      t_kipDeneme: 'deneme', t_kipCanli: 'canlı',
+      t_gunluk: 'Son işlemler', sonuc_tepe: 'sohbetin başı', sonuc_sinir: 'sınır', sonuc_durdu: 'durduruldu', sonuc_engel: 'engel', sonuc_hataMenu: 'menü hatası', sonuc_hataOnay: 'onay hatası',
+      g_alindi: 'Geri alındı · “{m}”', g_sayildi: 'Sayıldı · “{m}”', g_atlandi: 'Atlandı · {neden}', g_hata: 'Hata · {neden}',
+      n_suzgec: 'süzgeç', n_tur: 'mesaj türü', n_degil: 'karşı tarafın mesajı', n_menu: 'menü açılmadı', n_secenek: 'geri al seçeneği yok',
+      n_onay: 'onay yok', n_kalmadi: 'mesaj silinmedi', medyaMesaj: 'medya',
+      kabulBaslik: 'Kabul maddeleri', kabulAlt: 'Her maddeyi dene, sonucu işaretle. Cevaplar Tanı raporuna eklenir.',
+      gecti: 'Geçti', sorun: 'Sorun', atla: 'Atla', notYer: 'Kısa not (isteğe bağlı)', nasil: 'Nasıl denenir?',
+      k1: 'Deneme kipinde Başlat’a bastığında hiçbir mesaj silinmedi mi?', k1i: 'Az mesajlı bir sohbette deneme açıkken Başlat; sayaç değişir, mesajlar yerinde kalır.',
+      k2: 'Canlı kipte yalnız senin mesajların geri alındı mı?', k2i: 'Karşı tarafın da mesajı olan test sohbetinde en çok 3 ile çalıştır.',
+      k3: 'Durdur’a basınca 2 sn içinde durdu mu?', k3i: 'Canlı kipte başlat, ikinci mesajdan sonra Durdur (ya da Esc).',
+      k4: 'Geri alınan sayısı sohbette kaybolan mesaj sayısına eşit mi?', k4i: 'Bitince paneldeki sayıyı sohbette elle say.',
+      k5: 'Sayfa yenilenince ayarların korundu mu?', k5i: 'En çok değerini 5 yap, F5’e bas, Ayarlar’ı aç.',
+      raporKopyala: 'Raporu kopyala', raporKopyalandi: 'Tanı raporu kopyalandı', raporBaslik: 'Tanı raporu', kopyaHata: 'Kopyalanamadı. Metin kutusundan elle kopyala.',
+      r_zaman: 'Zaman', r_tarayici: 'Tarayıcı', r_yonetici: 'Eklenti', r_ayarlar: 'Ayarlar', r_dil: 'Dil', r_tema: 'Tema', r_sira: 'Sıra',
+      r_ok: '[OK]', r_hata: '[HATA]', r_bilgi: '[BİLGİ]', r_elle: 'ELLE SONUÇ', r_elleYok: 'Henüz işaretlenmedi',
+      surum: 'Sürüm {s}', store: 'AALabs App Store ile güncellenir. Elle kurulum: KURULUM.md.',
+      calisma: 'Nerede çalışır', calismaA: 'Betik instagram.com sayfalarında yüklenir; panel yalnız instagram.com/direct sayfalarında görünür.',
+      yedek: 'Ayar yedeği', yedekle: 'Yedekle (dosya)', geriYukle: 'Geri yükle (dosya)',
+      sonYedek: 'Son yedek: {t}', sonYedekYok: 'Son yedek: henüz yok',
+      yedekAc: 'Yedek, bu betiğin ayarlarını tek bir JSON dosyasına yazar. Sıra ve kabul cevapları yedeğe girmez.',
+      yedeklendi: 'Ayarlar dosyaya yazıldı', geriYuklendi: 'Ayarlar geri yüklendi', yedekHata: 'Dosya okunamadı. AALabs DM Geri Al yedeği (.json) seç.',
+      menuPanel: 'Paneli aç (P)', menuAyarlar: 'Ayarlar (A)', menuRapor: 'Tanı raporunu kopyala (T)',
+    },
+    en: {
+      panelAd: 'DM Unsend', sohbet: 'Chat', sohbetler: 'Chats', buSohbet: 'This chat', secili: '{n} selected · {i}/{n}',
+      deneme: 'Dry run', denemeCip: 'Dry run: nothing deleted', canliCip: 'Live: unsends',
+      baslat: 'Start', durdur: 'Stop', onayla: 'Confirm: unsend',
+      onayUyari: 'Messages are removed for the other person too. This cannot be undone. Press again to confirm.',
+      sayac: '{a} found · {b} unsent · {c} left', ilerleme: 'Unsend progress',
+      siraEkle: 'Add this chat to the queue', siradan: 'Remove this chat from the queue', siraTemizle: 'Clear the queue',
+      siraIpucu: 'You can also pick chats with the box next to them in the list on the left.',
+      listeSec: '{ad}: add to queue', listeCikar: '{ad}: remove from queue',
+      suzgecCip: 'Filter: “{k}” {kip}', kip_atla: 'skipped', kip_yalniz: 'only these',
+      turCip: 'Type: {t}', tur_hepsi: 'all', tur_yazi: 'text only', tur_medya: 'media only',
+      otoCip: 'Auto continue: next round at {saat}', engelCip: 'Block detected', gecisCip: 'Next chat: {saat}',
+      s_bos: 'No chat is open. Open a chat on the left.',
+      s_hazir: 'Chat is open. In dry run, Start only counts.',
+      s_hazirCanli: 'Chat is open. In live mode, Start unsends your messages.',
+      s_tara: 'Counting… {n} of your messages found',
+      s_calis: 'Unsending: {b} / {h} · ~{sure} left',
+      s_bittiDeneme: 'Dry run done: {a} of your messages found, none deleted.',
+      s_bitti: 'Done: {b} messages unsent. Reached the start of the chat.',
+      s_bittiSinir: 'Limit reached: {b} unsent. Press Start again to continue.',
+      s_bekle: 'Limit reached: {b} unsent. Next round at {saat}.',
+      s_gecis: '{ad} done. Moving to the next chat at {saat} ({i}/{n}).',
+      s_hepsiBitti: 'All queued chats are done ({n} chats).',
+      s_engel: 'Instagram said “Try again later”. Stopped; auto continue cancelled. Wait is now {sn} s. Press Start again after at least 15 min.',
+      s_hataMenu: 'Message menu not found. Instagram may have changed. Settings › Diagnostics › Copy report.',
+      s_hataAlan: 'Message area not found. Reload the page; if that fails, Settings › Diagnostics › Copy report.',
+      s_hataOnay: 'Confirm dialog not found. Settings › Diagnostics › Copy report.',
+      s_durdu: 'Stopped: {b} unsent.',
+      s_durduDeneme: 'Stopped: {a} of your messages counted.',
+      sn: '{n} s', dk: '{n} min', dkKapali: 'Off', sureSn: '{n} s', sureDk: '{n} min',
+      ayarlar: 'Settings', ayarlarAc: 'Settings ({tus})', ara: 'Search settings (Ctrl+F)', sonucYok: 'No results. Try another word.',
+      ortak: 'SHARED', kapat: 'Close (Esc)', paneliKapat: 'Close panel', bildirimKapat: 'Close notification',
+      tetikIpucu: 'IGU panel', tetikSorun: 'Diagnostics found a problem',
+      varsayilan: 'Restore defaults', sifirlandi: 'This section was reset', kaydedildi: 'Settings saved',
+      b_geri: 'Unsend', b_genel: 'General', b_kisayol: 'Keyboard shortcuts', b_tani: 'Diagnostics', b_hakkinda: 'About',
+      geriAlt: 'Messages are unsent from newest to oldest. Older messages load by themselves until the start of the chat.',
+      o_deneme: 'Dry run', o_denemeA: 'When on, only counts and unsends nothing. On at first start.',
+      o_enCok: 'Maximum per run', o_enCokA: 'Stops when it reaches this number. 1–150.',
+      o_bekle: 'Wait between actions', o_bekleA: 'At least 1.5 s. Deleting fast can get the account temporarily blocked.',
+      o_suzgec: 'Text filter', o_suzgecA: 'Empty means every message. Example: http → messages with links are skipped.', o_suzgecYer: 'word or part',
+      o_suzgecKip: 'When the filter matches', kip_atlaSec: 'Skip', kip_yalnizSec: 'Unsend only these',
+      o_tur: 'Message type', o_turA: 'Text: a message with text. Media: photo, video, voice.', turSec_hepsi: 'All', turSec_yazi: 'Text only', turSec_medya: 'Media only',
+      o_oto: 'Auto continue', o_otoA: 'At the limit it waits this long, then starts a new round by itself. When off, it stops.',
+      o_engel: 'Stop when blocked', o_engelA: 'Stops when Instagram warns; the wait doubles (at most 10 s).',
+      o_cok: 'Wait between chats', o_cokA: 'With several chats in the queue, wait this long after one is done.',
+      gecersiz: 'Invalid value. Allowed range: {a}.',
+      dil: 'Language', dil_tr: 'Türkçe', dil_en: 'English', dil_tarayici: 'Browser language', algilanan: 'Detected: {dil}',
+      tema: 'Theme', tema_sayfa: 'Follow page', tema_acik: 'Light', tema_koyu: 'Dark',
+      olcek: 'Scale', olcekA: 'Size of the panel and the Settings window.',
+      kisayolNot: 'Click a key box, then press the new keys. Esc cancels. Keys used by the browser are refused.',
+      k_ayarlar: 'Open settings', k_durdur: 'Stop (while running)', degismez: 'Fixed', tusaBas: 'Press keys…',
+      tusDegisti: 'Shortcut is now {tus}', tusRed: "{tus} can't be used: {neden} Pick another key.",
+      neden_degistirici: 'press it together with Ctrl or Alt.', neden_tarayici: 'the browser uses this key.',
+      neden_altgr: 'Ctrl+Alt mixes with AltGr on Turkish keyboards.',
+      taniIyi: 'Everything is in place. When reporting a problem, copy the report and paste it into the chat.',
+      taniKotu: '{n} problem(s) found. Copy the report and paste it into the chat.',
+      t_sayfa: 'Chat page', t_sayfaVar: 'A chat is open', t_sayfaYok: 'No chat open; checked when a chat opens',
+      t_alan: 'Message area', t_alanVar: 'Message area found', t_alanYok: 'Message area not found',
+      t_satir: 'Message rows', t_satirSay: '{n} rows visible · {b} yours',
+      t_menu: 'Message menu button', t_secenek: 'Unsend option', t_onay: 'Confirm dialog',
+      t_denenmedi: 'Not tried yet; Start tries it', t_bulundu: 'Found', t_bulunamadi: 'Not found',
+      t_kaydir: 'Scroll area', t_liste: 'Chat list (several chats)', t_listeSay: '{n} chat links',
+      t_listeYok: 'No links found; add the chat to the queue from the panel',
+      t_depo: 'Settings storage', t_depoVar: 'GM_getValue ✓', t_depoYok: 'No GM_getValue: settings are lost when the page closes',
+      t_son: 'Last run', t_sonYok: 'No run yet', t_sonOzet: '{zaman} · {kip} · {b} unsent · {a} found · {h} errors',
+      t_kipDeneme: 'dry run', t_kipCanli: 'live',
+      t_gunluk: 'Recent actions', sonuc_tepe: 'start of chat', sonuc_sinir: 'limit', sonuc_durdu: 'stopped', sonuc_engel: 'blocked', sonuc_hataMenu: 'menu error', sonuc_hataOnay: 'confirm error',
+      g_alindi: 'Unsent · “{m}”', g_sayildi: 'Counted · “{m}”', g_atlandi: 'Skipped · {neden}', g_hata: 'Error · {neden}',
+      n_suzgec: 'filter', n_tur: 'message type', n_degil: 'other person’s message', n_menu: 'menu did not open', n_secenek: 'no unsend option',
+      n_onay: 'no confirm', n_kalmadi: 'message not removed', medyaMesaj: 'media',
+      kabulBaslik: 'Acceptance items', kabulAlt: 'Try each item and mark the result. Answers are added to the diagnostic report.',
+      gecti: 'Passed', sorun: 'Problem', atla: 'Skip', notYer: 'Short note (optional)', nasil: 'How to try?',
+      k1: 'In dry run, did pressing Start delete no messages?', k1i: 'In a short chat, press Start with dry run on; the counter changes, messages stay.',
+      k2: 'In live mode, were only your messages unsent?', k2i: 'Run with a limit of 3 in a test chat that also has the other person’s messages.',
+      k3: 'Did it stop within 2 s after pressing Stop?', k3i: 'Start in live mode, press Stop (or Esc) after the second message.',
+      k4: 'Does the unsent count equal the messages that disappeared?', k4i: 'When done, count the chat by hand against the panel.',
+      k5: 'Were your settings kept after reloading the page?', k5i: 'Set the limit to 5, press F5, open Settings.',
+      raporKopyala: 'Copy report', raporKopyalandi: 'Diagnostic report copied', raporBaslik: 'Diagnostic report', kopyaHata: "Couldn't copy. Copy it by hand from the text box.",
+      r_zaman: 'Time', r_tarayici: 'Browser', r_yonetici: 'Extension', r_ayarlar: 'Settings', r_dil: 'Language', r_tema: 'Theme', r_sira: 'Queue',
+      r_ok: '[OK]', r_hata: '[ERROR]', r_bilgi: '[INFO]', r_elle: 'MANUAL RESULT', r_elleYok: 'Not marked yet',
+      surum: 'Version {s}', store: 'Updated by AALabs App Store. Manual install: KURULUM.md.',
+      calisma: 'Where it runs', calismaA: 'The script loads on instagram.com pages; the panel shows only on instagram.com/direct pages.',
+      yedek: 'Settings backup', yedekle: 'Back up (file)', geriYukle: 'Restore (file)',
+      sonYedek: 'Last backup: {t}', sonYedekYok: 'Last backup: none yet',
+      yedekAc: 'The backup writes this script\'s settings to one JSON file. The queue and acceptance answers are not included.',
+      yedeklendi: 'Settings written to a file', geriYuklendi: 'Settings restored', yedekHata: "Couldn't read the file. Pick an AALabs DM Unsend backup (.json).",
+      menuPanel: 'Open panel (P)', menuAyarlar: 'Settings (A)', menuRapor: 'Copy diagnostic report (T)',
+    },
+  };
+
+  // ---------------------------------------------------------------- ayar deposu
+  const VARSAYILAN = Object.freeze({
+    deneme: true, enCok: 30, bekleme: 1500,
+    suzgec: '', suzgecKip: 'atla', tur: 'hepsi',
+    otoDk: 10, engel: true, sohbetArasiDk: 2,
+    dil: 'tarayici', tema: 'sayfa', olcek: 100,
+    kisayolAyarlar: 'Ctrl+,', sonYedek: '',
+  });
+  const SECENEK = {
+    suzgecKip: ['atla', 'yalniz'], tur: ['hepsi', 'yazi', 'medya'],
+    otoDk: [0, 5, 10, 15, 30], sohbetArasiDk: [1, 2, 5],
+    dil: ['tr', 'en', 'tarayici'], tema: ['sayfa', 'acik', 'koyu'], olcek: [90, 100, 115, 130],
+  };
+  const ARALIK = { enCok: [1, 150, 1], bekleme: [1500, 10000, 500] };   // [en az, en çok, adım]
+  const BOLUM_ANAHTAR = {
+    geri: ['deneme', 'enCok', 'bekleme', 'suzgec', 'suzgecKip', 'tur', 'otoDk', 'engel', 'sohbetArasiDk'],
+    genel: ['dil', 'tema', 'olcek'], kisayol: ['kisayolAyarlar'],
+  };
+  const gmDepo = (() => { try { return typeof GM_getValue === 'function' && typeof GM_setValue === 'function'; } catch (_) { return false; } })();
+  const bellekDepo = {};
+
+  function depoOku(anahtar, yedek) {
+    if (!gmDepo) return anahtar in bellekDepo ? bellekDepo[anahtar] : yedek;
+    try {
+      const ham = GM_getValue(anahtar, null);
+      if (ham === null || ham === undefined) return yedek;
+      return typeof ham === 'string' ? JSON.parse(ham) : ham;
+    } catch (_) { return yedek; }
+  }
+  function depoYaz(anahtar, deger) {
+    if (!gmDepo) { bellekDepo[anahtar] = deger; return; }
+    try { GM_setValue(anahtar, JSON.stringify(deger)); } catch (_) { /* yazılamadı; bellekte sürer */ }
+  }
+
+  function aralikDogrula(k, v) {
+    const [a, b, adim] = ARALIK[k];
+    if (typeof v !== 'number' || !Number.isFinite(v) || v < a || v > b) return null;
+    return Math.round(v / adim) * adim;
+  }
+
+  function ayarDogrula(ham) {
+    const s = Object.assign({}, VARSAYILAN);
+    if (!ham || typeof ham !== 'object' || Array.isArray(ham)) return s;
+    for (const k of Object.keys(VARSAYILAN)) {
+      if (!(k in ham)) continue;
+      const v = ham[k];
+      if (typeof VARSAYILAN[k] === 'boolean') { if (typeof v === 'boolean') s[k] = v; continue; }
+      if (SECENEK[k]) { if (SECENEK[k].includes(v)) s[k] = v; continue; }
+      if (ARALIK[k]) { const d = aralikDogrula(k, v); if (d !== null) s[k] = d; continue; }
+      if (k === 'kisayolAyarlar') { if (komboKanonikMi(v) && tusGecerliMi(v) === null) s[k] = v; continue; }
+      if (typeof v === 'string') s[k] = v.slice(0, k === 'suzgec' ? 60 : 40);
+    }
+    return s;
+  }
+
+  // ---------------------------------------------------------------- kısayol kuralları
+  const DEGISTIRICI = ['Ctrl', 'Alt', 'Shift', 'Meta'];
+  const TARAYICI_YASAK = new Set(['Ctrl+T', 'Ctrl+W', 'Ctrl+N', 'Ctrl+L', 'Ctrl+R', 'Ctrl+F', 'Ctrl+P', 'Ctrl+S', 'Ctrl+D',
+    'Ctrl+H', 'Ctrl+J', 'Ctrl+K', 'Ctrl+U', 'Ctrl+O', 'Ctrl+G', 'Ctrl+E', 'Ctrl+A', 'Ctrl+C', 'Ctrl+V', 'Ctrl+X', 'Ctrl+Z', 'Ctrl+Y',
+    'Ctrl+Shift+T', 'Ctrl+Shift+N', 'Ctrl+Shift+W', 'Ctrl+Shift+I', 'Ctrl+Shift+J', 'Ctrl+Shift+C', 'Ctrl+Shift+Delete',
+    'Ctrl+Shift+B', 'Ctrl+Shift+O', 'Ctrl+Shift+P', 'Ctrl+Shift+R', 'Ctrl+Tab', 'Ctrl+Shift+Tab', 'Ctrl+F4', 'Alt+F4',
+    'Alt+D', 'Alt+E', 'Alt+F', 'Alt+Home', 'Alt+Left', 'Alt+Right', 'Ctrl+Plus', 'Ctrl+-', 'Ctrl+0', 'Ctrl+=',
+    'Ctrl+1', 'Ctrl+2', 'Ctrl+3', 'Ctrl+4', 'Ctrl+5', 'Ctrl+6', 'Ctrl+7', 'Ctrl+8', 'Ctrl+9', 'Ctrl+Enter']);
+
+  function tusAdi(e) {
+    let k = e.key || '';
+    if (k === ' ') k = 'Space';
+    else if (k === '+') k = 'Plus';
+    else if (k.startsWith('Arrow')) k = k.slice(5);
+    else if (k.length === 1) {
+      // harf/rakam e.code ile (Türkçe klavyede I tuşu "ı" yazar), noktalama e.key ile ("," Türkçe Q'da da ",")
+      if (/^Key[A-Z]$/.test(e.code || '')) k = e.code.slice(3);
+      else if (/^Digit\d$/.test(e.code || '')) k = e.code.slice(5);
+      else k = k.toLocaleUpperCase('en-US');
+    }
+    return k;
+  }
+
+  function tusKombo(e) {
+    if (e.getModifierState && e.getModifierState('AltGraph')) return null;   // AltGr yazı içindir
+    const p = [];
+    if (e.ctrlKey) p.push('Ctrl');
+    if (e.altKey) p.push('Alt');
+    if (e.shiftKey) p.push('Shift');
+    if (e.metaKey) p.push('Meta');
+    const k = tusAdi(e);
+    if (!k || DEGISTIRICI.includes(k) || k === 'Control' || k === 'AltGraph' || k === 'Dead') return null;
+    p.push(k);
+    return p.join('+');
+  }
+
+  function komboKanonikMi(v) {
+    if (typeof v !== 'string' || v.length > 40) return false;
+    const m = /^(Ctrl\+)?(Alt\+)?(Shift\+)?(Meta\+)?([^+]+|Plus)$/.exec(v);
+    if (!m || !(m[1] || m[2] || m[4])) return false;
+    const tus = m[5];
+    if ([...tus].length === 1) return tus === tus.toLocaleUpperCase('en-US');
+    return /^[A-Z][A-Za-z0-9]{1,15}$/.test(tus);
+  }
+
+  /** null = geçerli; değilse neden anahtarı. */
+  function tusGecerliMi(kombo) {
+    const p = kombo.split('+');
+    if (!p.some((x) => x === 'Ctrl' || x === 'Alt' || x === 'Meta')) return 'neden_degistirici';
+    if (p.includes('Ctrl') && p.includes('Alt')) return 'neden_altgr';
+    const esdeger = p.includes('Meta') ? ['Ctrl', ...p.filter((x) => x !== 'Meta' && x !== 'Ctrl')].join('+') : kombo;
+    if (TARAYICI_YASAK.has(kombo) || TARAYICI_YASAK.has(esdeger)) return 'neden_tarayici';
+    return null;
+  }
+
+  let ayar = ayarDogrula(depoOku('ayarlar', null));
+  function ayarYaz() { depoYaz('ayarlar', ayar); }
+
+  // ---------------------------------------------------------------- dil yardımcıları
+  function tarayiciDili() {
+    const d = ((navigator.languages && navigator.languages[0]) || navigator.language || 'tr').toLowerCase();
+    return d.startsWith('tr') ? 'tr' : 'en';
+  }
+  function dilKodu() {
+    if (ayar.dil === 'tarayici') return tarayiciDili();
+    return ayar.dil === 'en' ? 'en' : 'tr';
+  }
+  function _(k, deger) {
+    const s = (METIN[dilKodu()] || METIN.tr)[k] ?? METIN.tr[k] ?? k;
+    return deger ? s.replace(/\{(\w+)\}/g, (m, a) => (a in deger ? String(deger[a]) : m)) : s;
+  }
+  function sayi(n) { return Number(n).toLocaleString(dilKodu() === 'tr' ? 'tr-TR' : 'en-US'); }
+  function saniye(ms) {
+    const v = ms / 1000;
+    return _('sn', { n: dilKodu() === 'tr' ? String(v).replace('.', ',') : String(v) });
+  }
+  function saat(t) {
+    return new Date(t).toLocaleTimeString(dilKodu() === 'tr' ? 'tr-TR' : 'en-GB', { hour: '2-digit', minute: '2-digit' });
+  }
+  function sureYazi(ms) {
+    const sn = Math.max(1, Math.round(ms / 1000));
+    return sn < 90 ? _('sureSn', { n: sn }) : _('sureDk', { n: Math.round(sn / 60) });
+  }
+  function katla(s) { return String(s || '').toLocaleLowerCase('tr-TR').replace(/ı/g, 'i'); }
+
+  // ---------------------------------------------------------------- Instagram seçicileri (tek yer)
+  // Sitenin üretilmiş sınıf adlarına bağlanılmaz; rol, aria-label ve yapı kullanılır.
+  // Canlı sitede doğrulanmadı (1.1.0): sorun çıkarsa Tanı raporu hangi satırın tutmadığını gösterir.
+  const SEC = {
+    sohbetYolu: /^\/direct\/t\/([^/?#]+)/,
+    alan: ['[role="main"] [role="grid"]', '[aria-label^="Messages in conversation"]', '[aria-label*="ile sohbet"]', '[role="main"]'],
+    satir: '[role="row"]',
+    metin: '[dir="auto"]',
+    medya: 'img, video, audio, [aria-label*="Voice"], [aria-label*="Sesli"]',
+    menuEtiket: /(see more options|more options|^more$|daha fazla|diğer seçenek|seçenekler|seçenekleri)/i,
+    menuOgesi: '[role="menuitem"], [role="menu"] [role="button"], [role="dialog"] [role="button"], [role="dialog"] button, div[role="button"], button',
+    geriAlYazi: /^(unsend|gönderimi geri al|geri al)$/i,
+    onayKap: '[role="dialog"], [role="alertdialog"]',
+    engelYazi: /(try again later|daha sonra tekrar dene|we restrict certain activity|belirli etkinlikleri kısıtl|action blocked|işlem engellendi)/i,
+    listeBag: 'a[href*="/direct/t/"]',
+  };
+
+  const gorunur = (e) => !!(e && e.isConnected && e.getClientRects().length && getComputedStyle(e).visibility !== 'hidden');
+
+  function sohbetKimligi() {
+    const m = SEC.sohbetYolu.exec(location.pathname);
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  function dmSayfasi() { return location.pathname.startsWith('/direct'); }
+
+  function sohbetAlani() {
+    if (!sohbetKimligi()) return null;
+    for (const s of SEC.alan) {
+      const e = document.querySelector(s);
+      if (e && gorunur(e) && e.querySelector(SEC.satir)) return { e, secici: s };
+    }
+    return null;
+  }
+
+  function satirlar(alan) {
+    if (!alan) return [];
+    return Array.from(alan.e.querySelectorAll(SEC.satir)).filter((r) => gorunur(r) && (r.querySelector(SEC.metin) || r.querySelector(SEC.medya)));
+  }
+
+  /** Mesaj satırlarını kaydıran üst öğe. Taşan yoksa kaydırılabilir olan ilk üst öğe (az mesajlı sohbet). */
+  function kaydirmaAlani(alan) {
+    let e = alan && (alan.e.querySelector(SEC.satir) || alan.e);
+    let yedek = null;
+    while (e && e !== document.body) {
+      const st = getComputedStyle(e);
+      if (/(auto|scroll)/.test(st.overflowY)) {
+        if (e.scrollHeight > e.clientHeight + 4) return e;
+        if (!yedek) yedek = e;
+      }
+      e = e.parentElement;
+    }
+    return yedek;
+  }
+
+  /** Mesaj balonunun kapladığı alan: metin ve medya öğelerinin birleşimi. */
+  function balonAlani(satir) {
+    const genislik = satir.getBoundingClientRect().width || 1;
+    // yalnız yaprak metin öğeleri; satır boyu sarmalayıcılar ortayı bozmasın
+    const parca = Array.from(satir.querySelectorAll(SEC.metin + ', ' + SEC.medya)).filter((p) => gorunur(p)
+      && !(p.matches(SEC.metin) && p.querySelector(SEC.metin)) && p.getBoundingClientRect().width < genislik * 0.9);
+    if (!parca.length) return null;
+    let sol = Infinity, sag = -Infinity, ust = Infinity, alt = -Infinity;
+    for (const p of parca) {
+      const r = p.getBoundingClientRect();
+      if (r.width < 2 || r.height < 2) continue;
+      sol = Math.min(sol, r.left); sag = Math.max(sag, r.right); ust = Math.min(ust, r.top); alt = Math.max(alt, r.bottom);
+    }
+    return Number.isFinite(sol) ? { sol, sag, ust, alt } : null;
+  }
+
+  /** Sağa yaslı balon = senin mesajın (ön eleme; kesin karar menüdeki "Geri al" seçeneğidir). */
+  function benimMi(satir) {
+    const b = balonAlani(satir);
+    if (!b) return false;
+    const r = satir.getBoundingClientRect();   // satırlar sohbet genişliğinde
+    if (r.width < 50) return false;
+    const orta = ((b.sol + b.sag) / 2 - r.left) / r.width;
+    const sol = (b.sol - r.left) / r.width;
+    const rtl = getComputedStyle(satir).direction === 'rtl';
+    return rtl ? (orta < 0.45 && (b.sag - r.left) / r.width < 0.75) : (orta > 0.55 && sol > 0.25);   // ölü bant: ortalı satır değil
+  }
+
+  function mesajMetni(satir) {
+    return Array.from(satir.querySelectorAll(SEC.metin)).map((x) => x.textContent.trim()).filter(Boolean).join(' ').slice(0, 400);
+  }
+  function medyaMi(satir) {
+    const m = satir.querySelector('video, audio, [aria-label*="Voice"], [aria-label*="Sesli"]');
+    if (m) return true;
+    return Array.from(satir.querySelectorAll('img')).some((i) => { const r = i.getBoundingClientRect(); return r.width > 80 && r.height > 60; });
+  }
+
+  /** E1 + E2: null = geri alınabilir; değilse atlama nedeni. */
+  function suzgectenGecer(satir) {
+    const metin = mesajMetni(satir);
+    const medya = medyaMi(satir);
+    if (ayar.tur === 'yazi' && (medya || !metin)) return 'n_tur';
+    if (ayar.tur === 'medya' && !medya) return 'n_tur';
+    const k = katla(ayar.suzgec.trim());
+    if (k) {
+      const var_ = katla(metin).includes(k);
+      if (ayar.suzgecKip === 'atla' && var_) return 'n_suzgec';
+      if (ayar.suzgecKip === 'yalniz' && !var_) return 'n_suzgec';
+    }
+    return null;
+  }
+
+  function etiketi(e) { return (e.getAttribute('aria-label') || e.getAttribute('title') || '').trim(); }
+
+  function menuDugmesi(satir) {
+    const ust = satir.parentElement;
+    const kapsam = [satir];
+    if (ust && ust.querySelectorAll(SEC.satir).length <= 1) kapsam.push(ust);   // üst öğe başka satır taşımıyorsa
+    for (const k of kapsam) {
+      for (const c of k.querySelectorAll('[aria-label], [title]')) {
+        if (!SEC.menuEtiket.test(etiketi(c))) continue;
+        const d = c.closest('[role="button"], button') || c;
+        if (k.contains(d) && gorunur(d)) return d;   // satırı saran üst düğme değil
+      }
+    }
+    return null;
+  }
+
+  /** Açık menü kapları: sohbet alanının dışındaki görünür menü ve pencereler (Instagram menüyü sayfa sonunda çizer). */
+  function menuKaplari() {
+    const alan = document.querySelector('[role="main"]');
+    return Array.from(document.querySelectorAll('[role="menu"], [role="dialog"]')).filter((k) => gorunur(k) && !(alan && alan.contains(k) && !k.closest('[role="dialog"]')));
+  }
+  function geriAlSecenegi() {
+    for (const k of menuKaplari()) {
+      for (const c of k.querySelectorAll(SEC.menuOgesi)) {
+        const y = (c.textContent || '').trim();
+        if (y.length < 40 && SEC.geriAlYazi.test(y) && gorunur(c)) return c;
+      }
+    }
+    return null;
+  }
+  function menuAcikMi() {
+    return Array.from(document.querySelectorAll('[role="menuitem"]')).some(gorunur) || menuKaplari().length > 0;
+  }
+  function onayDugmesi(haric) {
+    for (const k of document.querySelectorAll(SEC.onayKap)) {
+      if (!gorunur(k) || k.querySelector('[role="menu"], [role="menuitem"]') || (haric && k.contains(haric))) continue;   // menünün penceresi değil
+      for (const b of k.querySelectorAll('button, [role="button"]')) {
+        if (b === haric || b.closest('[role="menu"]') || (haric && haric.contains(b))) continue;   // menünün kendi öğesi değil
+        if (SEC.geriAlYazi.test((b.textContent || '').trim()) && gorunur(b)) return b;
+      }
+    }
+    return null;
+  }
+  function engelVarMi() {
+    for (const k of document.querySelectorAll('[role="dialog"], [role="alertdialog"], [role="alert"]')) {
+      if (gorunur(k) && SEC.engelYazi.test(k.textContent || '')) return true;
+    }
+    return false;
+  }
+
+  function sohbetBaglantilari() {
+    const alan = document.querySelector('[role="main"]');
+    return Array.from(document.querySelectorAll(SEC.listeBag)).filter((a) => gorunur(a) && !(alan && alan.contains(a)) && SEC.sohbetYolu.test(new URL(a.href, location.href).pathname));
+  }
+  function baglantiKimligi(a) {
+    const m = SEC.sohbetYolu.exec(new URL(a.href, location.href).pathname);
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  function baglantiAdi(a) {
+    const s = Array.from(a.querySelectorAll('span, div')).map((x) => x.childElementCount ? '' : x.textContent.trim()).find(Boolean);
+    return (s || a.textContent || '').trim().slice(0, 40);
+  }
+  function sohbetAdi() {
+    const id = sohbetKimligi();
+    const a = sohbetBaglantilari().find((x) => baglantiKimligi(x) === id);
+    return (a && baglantiAdi(a)) || _('buSohbet');
+  }
+
+  // ---------------------------------------------------------------- sahte fare ve tuş (Instagram'ın kendi yolu)
+  function fareSecenek(hedef) {
+    const r = hedef.getBoundingClientRect();
+    return { bubbles: true, cancelable: true, composed: true, view: window, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2,
+      pointerType: 'mouse', isPrimary: true, pointerId: 1, button: 0, buttons: 0 };
+  }
+  function fareUstunde(hedef, satir) {
+    const o = fareSecenek(hedef);
+    const nokta = document.elementFromPoint(o.clientX, o.clientY);
+    const asil = nokta && satir && satir.contains(nokta) ? nokta : hedef;   // balonun ortasındaki gerçek öğe
+    for (const t of ['pointerover', 'pointerenter', 'mouseover', 'mouseenter', 'pointermove', 'mousemove']) {
+      try { asil.dispatchEvent(t.startsWith('pointer') ? new PointerEvent(t, o) : new MouseEvent(t, o)); } catch (_) { /* yok */ }
+    }
+  }
+  /** Meta'nın "press" bileşenleri için basma + bırakma + tıklama. */
+  function basTikla(e) {
+    const o = Object.assign(fareSecenek(e), { buttons: 1 });
+    for (const t of ['pointerdown', 'mousedown']) { try { e.dispatchEvent(t.startsWith('pointer') ? new PointerEvent(t, o) : new MouseEvent(t, o)); } catch (_) { /* yok */ } }
+    o.buttons = 0;
+    for (const t of ['pointerup', 'mouseup']) { try { e.dispatchEvent(t.startsWith('pointer') ? new PointerEvent(t, o) : new MouseEvent(t, o)); } catch (_) { /* yok */ } }
+    e.click();
+  }
+  function fareCikti(hedef) {
+    for (const t of ['pointerout', 'pointerleave', 'mouseout', 'mouseleave']) {
+      try { hedef.dispatchEvent(new MouseEvent(t, { bubbles: true, view: window })); } catch (_) { /* yok */ }
+    }
+  }
+  let sentetik = false;   // kendi gönderdiğimiz Esc, Durdur kısayolu sayılmasın
+  function escBas() {
+    const o = { key: 'Escape', code: 'Escape', keyCode: 27, bubbles: true, cancelable: true };
+    sentetik = true;
+    try {
+      (document.activeElement || document.body).dispatchEvent(new KeyboardEvent('keydown', o));
+      document.dispatchEvent(new KeyboardEvent('keydown', o));
+    } finally { sentetik = false; }
+  }
+
+  // ---------------------------------------------------------------- motor
+  const motor = {
+    kip: 'bos',            // bos | hazir | tara | calis | bitti | bekle | gecis | engel | hata
+    calisiyor: false, deneme: true, bulunan: 0, alinan: 0, hata: 0, hedef: 0,
+    sonMesaj: '', hataTur: '', sonKip: '', zamanlayici: 0, hedefZaman: 0, onayBekliyor: 0, durSinyali: false,
+    bulgu: { menu: null, secenek: null, onay: null },
+    son: null, gunluk: [],
+  };
+  let islenen = new WeakSet();
+
+  function gunlukYaz(anahtar, deger) {
+    motor.gunluk.unshift({ t: Date.now(), anahtar, deger });
+    if (motor.gunluk.length > 30) motor.gunluk.length = 30;
+  }
+
+  function bekle(ms) {
+    return new Promise((coz) => {
+      const bitis = Date.now() + ms * hiz;
+      const dongu = () => {
+        if (motor.durSinyali || Date.now() >= bitis) { coz(); return; }
+        setTimeout(dongu, Math.min(100, Math.max(5, bitis - Date.now())));
+      };
+      dongu();
+    });
+  }
+  async function bulana(fn, ms) {
+    const bitis = Date.now() + ms;   // sayfanın cevap süresi; test hızlandırması uygulanmaz
+    for (;;) {
+      const v = fn();
+      if (v) return v;
+      if (motor.durSinyali || Date.now() >= bitis) return null;
+      await new Promise((c) => setTimeout(c, 50));
+    }
+  }
+
+  function kisalt(s) { s = String(s || ''); return s.length > 40 ? s.slice(0, 39) + '…' : s; }
+
+  /** Tek mesaj: 'alindi' | 'sayildi' | 'degil' | 'menu' | 'secenek' | 'onay' | 'kalmadi' */
+  async function mesajIsle(satir, deneme) {
+    // önceki mesajdan açık menü ya da pencere kalmasın: eski "Unsend" düğmesi bu mesaja ait sanılmasın
+    if (menuAcikMi() || onayDugmesi()) {
+      escBas();
+      if (!await bulana(() => !menuAcikMi() && !onayDugmesi(), 800)) return 'menu';
+    }
+    satir.scrollIntoView({ block: 'center' });
+    await bekle(120);
+    const hedef = satir.querySelector(SEC.metin) || satir.querySelector(SEC.medya) || satir;
+    const vazgec = () => { escBas(); fareCikti(hedef); return 'durdu'; };
+    if (motor.durSinyali) return vazgec();
+    fareUstunde(hedef, satir);
+    const dugme = await bulana(() => menuDugmesi(satir), 900);
+    if (motor.durSinyali) return vazgec();
+    if (!dugme) { fareCikti(hedef); motor.bulgu.menu = false; return 'menu'; }
+    motor.bulgu.menu = true;
+    basTikla(dugme);
+    const secenek = await bulana(geriAlSecenegi, 1200);
+    if (motor.durSinyali) return vazgec();
+    if (!secenek) {
+      const acik = menuAcikMi();
+      escBas();
+      fareCikti(hedef);
+      if (acik) return 'degil';          // menü açıldı ama geri al yok: karşı tarafın mesajı
+      motor.bulgu.secenek = false;
+      return 'secenek';
+    }
+    motor.bulgu.secenek = true;
+    if (deneme) { escBas(); fareCikti(hedef); return 'sayildi'; }
+    basTikla(secenek);
+    await bulana(() => !secenek.isConnected || !gorunur(secenek), 800);   // menü kapansın; menünün öğesi onay sanılmasın
+    const onay = await bulana(() => onayDugmesi(secenek), 1500);
+    if (onay && motor.durSinyali) return vazgec();          // onaylanmadan durdu: mesaj yerinde kalır
+    if (onay) { motor.bulgu.onay = true; basTikla(onay); }
+    const gitti = await bulana(() => !satir.isConnected || !gorunur(satir), 4000);
+    if (gitti) return 'alindi';
+    escBas();                                                // açık kalan pencere bir sonraki mesaja karışmasın
+    if (!onay) { motor.bulgu.onay = false; return 'onay'; }
+    return 'kalmadi';
+  }
+
+  async function yukariKaydir(alan) {
+    const sc = kaydirmaAlani(alan);
+    if (!sc) return false;
+    // tepedeyken eski mesajlar geç gelebilir: 4 tur (≈ 5 sn) yükseklik ve satır değişimi beklenir
+    for (let deneme = 0; deneme < 4; deneme++) {
+      const once = sc.scrollTop;
+      const yukseklik = sc.scrollHeight;
+      const ilk = satirlar(alan)[0];
+      const sayi0 = satirlar(alan).length;
+      sc.scrollBy(0, -Math.max(200, sc.clientHeight * 0.85));
+      await bekle(TUR_BEKLE_MS);
+      if (motor.durSinyali) return true;
+      if (sc.scrollTop !== once || sc.scrollHeight !== yukseklik || satirlar(alan)[0] !== ilk || satirlar(alan).length !== sayi0) return true;
+    }
+    return false;
+  }
+
+  function sonrakiAday(alan) {
+    const liste = satirlar(alan);
+    for (let i = liste.length - 1; i >= 0; i--) {
+      const r = liste[i];
+      if (islenen.has(r)) continue;
+      if (!benimMi(r)) { islenen.add(r); continue; }
+      const neden = suzgectenGecer(r);
+      if (neden) { islenen.add(r); gunlukYaz('g_atlandi', { neden }); continue; }
+      return r;
+    }
+    return null;
+  }
+
+  function engelle() {
+    ayar.bekleme = Math.min(10000, ayar.bekleme * 2);
+    ayarYaz();
+    calismaYaz(null);
+    motor.kip = 'engel';
+    gunlukYaz('g_hata', { neden: 'engelCip' });
+  }
+
+  async function calistir(denemeZorla) {
+    if (motor.calisiyor) return;
+    let alan = sohbetAlani();
+    clearTimeout(motor.zamanlayici);
+    motor.zamanlayici = 0;
+    if (!alan) { motor.kip = sohbetKimligi() ? 'hata' : 'bos'; motor.hataTur = 's_hataAlan'; ciz(); return; }
+    Object.assign(motor, { calisiyor: true, deneme: typeof denemeZorla === 'boolean' ? denemeZorla : ayar.deneme, bulunan: 0, alinan: 0, hata: 0, durSinyali: false, hataTur: '', onayBekliyor: 0 });
+    motor.hedef = motor.deneme ? Infinity : ayar.enCok;
+    motor.kip = motor.deneme ? 'tara' : 'calis';
+    motor.baslangic = Date.now();
+    islenen = new WeakSet();
+    const id = sohbetKimligi();
+    let sonuc = 'tepe';
+    let artArda = 0;
+    ciz();
+    try {
+      for (;;) {
+        if (motor.durSinyali) { sonuc = 'durdu'; break; }
+        if (sohbetKimligi() !== id) { sonuc = 'durdu'; break; }
+        if (ayar.engel && engelVarMi()) { sonuc = 'engel'; break; }
+        if (!motor.deneme && motor.alinan >= motor.hedef) { sonuc = 'sinir'; break; }
+        if (!alan.e.isConnected) alan = sohbetAlani() || alan;   // Instagram listeyi yeniden kurduysa
+        const aday = sonrakiAday(alan);
+        if (!aday) {
+          if (await yukariKaydir(alan)) continue;
+          sonuc = 'tepe';
+          break;
+        }
+        islenen.add(aday);
+        const metin = kisalt(mesajMetni(aday) || _('medyaMesaj'));
+        const s = await mesajIsle(aday, motor.deneme);
+        if (s === 'durdu') { sonuc = 'durdu'; break; }
+        if (s === 'alindi') { motor.alinan++; motor.bulunan++; artArda = 0; gunlukYaz('g_alindi', { m: metin }); }
+        else if (s === 'sayildi') { motor.bulunan++; artArda = 0; gunlukYaz('g_sayildi', { m: metin }); }
+        else if (s === 'degil') { artArda = 0; gunlukYaz('g_atlandi', { neden: 'n_degil' }); }
+        else {
+          motor.hata++; artArda++;
+          gunlukYaz('g_hata', { neden: { menu: 'n_menu', secenek: 'n_secenek', onay: 'n_onay', kalmadi: 'n_kalmadi' }[s] });
+          if (artArda >= ART_ARDA_HATA) { sonuc = s === 'onay' ? 'hataOnay' : 'hataMenu'; break; }
+        }
+        ciz();
+        if (ayar.engel && engelVarMi()) { sonuc = 'engel'; break; }
+        await bekle(motor.deneme ? DENEME_BEKLE_MS : ayar.bekleme);
+      }
+    } catch (hata) {
+      sonuc = 'hataMenu';
+      gunlukYaz('g_hata', { neden: String(hata && hata.message || hata).slice(0, 60) });
+    } finally {
+      motor.calisiyor = false;
+    }
+    bitir(sonuc, id);
+  }
+
+  /** Bilinen mesaj sayısı: deneme yalnız tam sayımda (tepe) yazar; canlı her sonda geri alınanı düşer. */
+  function sayimYaz(id, sonuc) {
+    const s = depoOku('sayimlar', {}) || {};
+    if (motor.deneme) { if (sonuc === 'tepe') s[id] = motor.bulunan; }
+    else if (sonuc === 'tepe') s[id] = motor.hata;            // başa ulaşıldı: yalnız hata veren mesajlar kaldı
+    else if (typeof s[id] === 'number') s[id] = Math.max(0, s[id] - motor.alinan);
+    depoYaz('sayimlar', s);
+  }
+  function kalanSayi() {
+    const s = depoOku('sayimlar', {}) || {};
+    const v = s[sohbetKimligi()];
+    if (typeof v !== 'number') return null;
+    return motor.calisiyor && !motor.deneme ? Math.max(0, v - motor.alinan) : v;
+  }
+
+  function bitir(sonuc, id) {
+    motor.son = { zaman: Date.now(), deneme: motor.deneme, alinan: motor.alinan, bulunan: motor.bulunan, hata: motor.hata, sonuc };
+    sayimYaz(id, sonuc);
+    const sira = siraOku();
+    const calisma = calismaOku();
+    if (sonuc === 'engel') engelle();
+    else if (sonuc === 'durdu') { motor.kip = 'bitti'; motor.sonKip = motor.deneme ? 's_durduDeneme' : 's_durdu'; calismaYaz(null); }
+    else if (sonuc === 'hataMenu' || sonuc === 'hataOnay') { motor.kip = 'hata'; motor.hataTur = sonuc === 'hataOnay' ? 's_hataOnay' : 's_hataMenu'; calismaYaz(null); }
+    else if (sonuc === 'sinir') {
+      if (ayar.otoDk > 0) {
+        motor.kip = 'bekle';
+        if (calisma) calismaYaz(Object.assign({}, calisma, { zaman: Date.now() }));
+        const denemeKip = motor.deneme;
+        zamanla(ayar.otoDk * 60000, () => {
+          if (sohbetKimligi() === id) { calistir(denemeKip); return; }
+          motor.kip = 'bitti'; motor.sonKip = 's_durdu'; calismaYaz(null); ciz();   // kullanıcı başka sohbete geçti
+        });
+      } else { motor.kip = 'bitti'; motor.sonKip = 's_bittiSinir'; calismaYaz(null); }
+    } else {   // tepe: bu sohbet bitti
+      motor.kip = 'bitti';
+      motor.sonKip = motor.deneme ? 's_bittiDeneme' : 's_bitti';
+      if (calisma && calisma.sekme === SEKME && sira.length) {
+        const i = sira.findIndex((x) => x.id === id);
+        const sonraki = sira[i + 1];
+        if (i >= 0 && sonraki) {
+          calismaYaz({ aktif: true, i: i + 1, id: sonraki.id, deneme: motor.deneme, zaman: Date.now() });
+          motor.kip = 'gecis';
+          motor.gecisHedef = sonraki.id;
+          motor.gecisAd = (sira[i] && sira[i].ad) || _('buSohbet');
+          zamanla(ayar.sohbetArasiDk * 60000, () => { location.assign('/direct/t/' + encodeURIComponent(sonraki.id) + '/'); });
+        } else {
+          if (i >= 0) motor.sonKip = 's_hepsiBitti';
+          calismaYaz(null);
+        }
+      }
+    }
+    taniYenile();
+    ciz();
+  }
+
+  function zamanla(ms, fn) {
+    clearTimeout(motor.zamanlayici);
+    motor.hedefZaman = Date.now() + ms * hiz;
+    motor.zamanlayici = setTimeout(() => { motor.zamanlayici = 0; fn(); }, ms * hiz);
+  }
+
+  function durdur() {
+    motor.onayBekliyor = 0;
+    if (motor.calisiyor) { motor.durSinyali = true; return; }
+    if (motor.zamanlayici) {
+      clearTimeout(motor.zamanlayici);
+      motor.zamanlayici = 0;
+      motor.kip = 'bitti';
+      motor.sonKip = motor.deneme ? 's_durduDeneme' : 's_durdu';
+      calismaYaz(null);
+      ciz();
+    }
+  }
+
+  /** Canlı kipte ilk Başlat onay ister (geri alınamayan iş). */
+  function baslatTiklandi() {
+    if (motor.calisiyor) return;
+    if (!ayar.deneme && !(motor.onayBekliyor && Date.now() < motor.onayBekliyor)) {
+      motor.onayBekliyor = Date.now() + 6000;
+      ciz();
+      setTimeout(() => { if (motor.onayBekliyor && Date.now() >= motor.onayBekliyor) { motor.onayBekliyor = 0; ciz(); } }, 6100);
+      return;
+    }
+    motor.onayBekliyor = 0;
+    const sira = siraOku();
+    const id = sohbetKimligi();
+    if (sira.length) {
+      const i = sira.findIndex((x) => x.id === id);
+      if (i < 0) {   // açık sohbet sırada değil: sıradaki ilk sohbete git
+        calismaYaz({ aktif: true, i: 0, id: sira[0].id, deneme: ayar.deneme, zaman: Date.now() });
+        location.assign('/direct/t/' + encodeURIComponent(sira[0].id) + '/');
+        return;
+      }
+      calismaYaz({ aktif: true, i, id, deneme: ayar.deneme, zaman: Date.now() });
+    }
+    calistir();
+  }
+
+  // ---------------------------------------------------------------- sıra (E5)
+  function siraOku() {
+    const v = depoOku('kuyruk', []);
+    return Array.isArray(v) ? v.filter((x) => x && typeof x.id === 'string' && x.id.length < 80).slice(0, 50) : [];
+  }
+  function siraYaz(s) { depoYaz('kuyruk', s); }
+  // Çoklu sohbet işi yalnız başladığı sekmede sürer (sekme kimliği sessionStorage'da; sayfa yenilense de kalır)
+  const SEKME = (() => {
+    try {
+      let k = sessionStorage.getItem('aalabs-igu-sekme');
+      if (!k) { k = Math.random().toString(36).slice(2) + Date.now().toString(36); sessionStorage.setItem('aalabs-igu-sekme', k); }
+      return k;
+    } catch (_) { return 'sekme-' + Math.random().toString(36).slice(2); }
+  })();
+  function calismaOku() {
+    const c = depoOku('calisma', null);
+    if (!c || !c.aktif || typeof c.i !== 'number' || typeof c.id !== 'string' || Date.now() - (c.zaman || 0) > CALISMA_OMRU_MS) return null;
+    return c;
+  }
+  function calismaYaz(c) { depoYaz('calisma', c ? Object.assign({ sekme: SEKME }, c) : null); }
+  function siradaMi(id) { return siraOku().some((x) => x.id === id); }
+  function siraDegistir(id, ad) {
+    if (!id) return;
+    const s = siraOku();
+    const i = s.findIndex((x) => x.id === id);
+    if (i >= 0) s.splice(i, 1); else s.push({ id, ad: String(ad || '').slice(0, 40) });
+    siraYaz(s);
+    ciz();
+  }
+
+  // ---------------------------------------------------------------- tema
+  function parlaklik(renk) {
+    const m = /rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,\s/]+([\d.]+))?/.exec(renk || '');
+    if (!m) return null;
+    if (m[4] !== undefined && Number(m[4]) === 0) return null;
+    const kanal = (v) => { v = Number(v) / 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+    return 0.2126 * kanal(m[1]) + 0.7152 * kanal(m[2]) + 0.0722 * kanal(m[3]);
+  }
+  function temaOku() {
+    if (ayar.tema === 'acik') return { koyu: false, kaynak: 'ayar' };
+    if (ayar.tema === 'koyu') return { koyu: true, kaynak: 'ayar' };
+    for (const o of [document.body, document.documentElement]) {
+      if (!o) continue;
+      const l = parlaklik(getComputedStyle(o).backgroundColor);
+      if (l !== null) return { koyu: l < 0.18, kaynak: 'zemin' };
+    }
+    return { koyu: !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches), kaynak: 'sistem' };
+  }
+  function temaUygula() {
+    if (!ev) return;
+    ev.setAttribute('data-theme', temaOku().koyu ? 'dark' : 'light');
+    ev.style.setProperty('--o', String(ayar.olcek / 100));
+  }
+
+  // ---------------------------------------------------------------- arayüz kökü (Shadow DOM)
+  const SVG = 'http://www.w3.org/2000/svg';
+  const IKON = {   // Lucide 1.55.0 (ISC)
+    ayar: [['path', { d: 'M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915' }], ['circle', { cx: 12, cy: 12, r: 3 }]],
+    oynat: [['path', { d: 'M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z' }]],
+    kare: [['rect', { width: 18, height: 18, x: 3, y: 3, rx: 2 }]],
+    kapat: [['path', { d: 'M18 6 6 18' }], ['path', { d: 'm6 6 12 12' }]],
+    tamam: [['path', { d: 'M20 6 9 17l-5-5' }]],
+    hata: [['circle', { cx: 12, cy: 12, r: 10 }], ['line', { x1: 12, x2: 12, y1: 8, y2: 12 }], ['line', { x1: 12, x2: 12.01, y1: 16, y2: 16 }]],
+    kopyala: [['rect', { width: 14, height: 14, x: 8, y: 8, rx: 2, ry: 2 }], ['path', { d: 'M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2' }]],
+    arti: [['path', { d: 'M5 12h14' }], ['path', { d: 'M12 5v14' }]],
+  };
+  function ikon(ad, boy = 16) {
+    const s = document.createElementNS(SVG, 'svg');
+    const oz = { viewBox: '0 0 24 24', width: boy, height: boy, fill: 'none', stroke: 'currentColor', 'stroke-width': 2,
+      'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'aria-hidden': 'true', focusable: 'false' };
+    for (const [k, v] of Object.entries(oz)) s.setAttribute(k, String(v));
+    for (const [etiket, o] of IKON[ad]) {
+      const p = document.createElementNS(SVG, etiket);
+      for (const [k, v] of Object.entries(o)) p.setAttribute(k, String(v));
+      s.appendChild(p);
+    }
+    return s;
+  }
+  /** Öğe kurucu: innerHTML yok (Trusted Types). Çocuklar düzleştirilir. */
+  function el(etiket, oz, ...cocuk) {
+    const e = document.createElement(etiket);
+    if (oz) {
+      for (const [k, v] of Object.entries(oz)) {
+        if (v === undefined || v === null || v === false) continue;
+        if (k === 'class') e.className = v;
+        else if (k === 'text') e.textContent = v;
+        else if (k.startsWith('on') && typeof v === 'function') e.addEventListener(k.slice(2), v);
+        else e.setAttribute(k, v === true ? '' : String(v));
+      }
+    }
+    for (const c of cocuk.flat(Infinity)) {
+      if (c === null || c === undefined || c === false) continue;
+      e.append(c instanceof Node ? c : document.createTextNode(String(c)));
+    }
+    return e;
+  }
+
+  const carp = (s) => s.replace(/(^|[^\w.#-])(\d+(?:\.\d+)?)px/g, (m, on, n) => (Number(n) <= 2 ? m : `${on}calc(${n}px*var(--o))`));
+  const ARAYUZ_CSS = carp(`
+:host { all: initial; --o: 1; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+.yazi { font: 400 13px/1.45 var(--yazi); color: var(--metin); }
+button, input, select { font: inherit; color: inherit; }
+button:focus-visible, input:focus-visible, select:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 1px; }
+.nokta { width: 8px; height: 8px; border-radius: 50%; background: var(--hata); flex: none; display: inline-block; }
+
+.tetik { position: fixed; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(96px + env(safe-area-inset-bottom, 0px)); z-index: 2147483645;
+  height: 32px; padding: 0 10px; border: 1px solid var(--ana); border-radius: var(--kose-l); background: var(--ana); color: var(--ana-uzeri);
+  font: 600 12px/1 var(--yazi); letter-spacing: .03em; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.tetik:hover { filter: brightness(1.08); }
+.tetik .nokta { outline: 2px solid var(--ana-uzeri); }
+
+.kart { position: fixed; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(136px + env(safe-area-inset-bottom, 0px)); z-index: 2147483645;
+  width: 300px; max-height: calc(100vh - 160px); overflow: auto; background: var(--yuzey); color: var(--metin);
+  border: 1px solid var(--kenar); border-radius: var(--kose-l); font: 400 13px/1.45 var(--yazi); }
+.kart-bas { display: flex; align-items: center; gap: 8px; padding: 8px 6px 8px 10px; border-bottom: 1px solid var(--ayirici); }
+.kart-bas b { flex: 1; min-width: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kart-govde { padding: 10px; display: grid; gap: 10px; }
+.satir { display: flex; align-items: center; gap: 8px; justify-content: space-between; flex-wrap: wrap; }
+.etiket { font-size: 12px; color: var(--metin-ikincil); }
+.etiket b { color: var(--metin); font-weight: 600; }
+.cipler { display: flex; flex-wrap: wrap; gap: 6px; }
+.cip { display: inline-flex; align-items: center; gap: 4px; min-height: 22px; padding: 0 8px; border-radius: var(--kose-s); font-size: 12px; font-weight: 600; }
+.cip.uyari { color: var(--uyari); background: var(--uyari-bg); }
+.cip.basari { color: var(--basari); background: var(--basari-bg); }
+.cip.hata { color: var(--hata); background: var(--hata-bg); }
+.cip.notr { color: var(--metin-ikincil); background: var(--zemin); font-weight: 400; }
+.sayac { font-variant-numeric: tabular-nums; }
+.cubuk { height: 6px; background: var(--ayirici); border-radius: var(--kose-s); overflow: hidden; }
+.cubuk i { display: block; height: 100%; background: var(--ana); }
+.durum { font-size: 12px; color: var(--metin-ikincil); }
+.durum.hata { color: var(--hata); }
+.durum.basari { color: var(--basari); }
+.durum.uyari { color: var(--uyari); }
+.dugmeler { display: flex; gap: 6px; flex-wrap: wrap; }
+.btn { height: 32px; padding: 0 12px; border: 1px solid var(--kenar); border-radius: var(--kose-s); background: var(--yuzey);
+  cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.btn:hover { background: var(--ana-hover); }
+.btn.ana { background: var(--ana); border-color: var(--ana); color: var(--ana-uzeri); }
+.btn.ana:hover { filter: brightness(1.08); background: var(--ana); }
+.btn.tehlike { background: var(--hata); border-color: var(--hata); color: var(--ana-uzeri); }
+.btn.kucuk { height: 24px; padding: 0 8px; font-size: 12px; }
+.btn:disabled { opacity: .55; cursor: default; filter: none; }
+.btn:disabled:hover { background: var(--yuzey); }
+.btn.ana:disabled:hover { background: var(--ana); }
+.ikonbtn { width: 28px; height: 28px; border: 1px solid transparent; border-radius: var(--kose-s); background: transparent;
+  cursor: pointer; display: inline-grid; place-items: center; padding: 0; }
+.ikonbtn:hover { background: var(--ana-hover); }
+.rozet { width: 22px; height: 22px; border-radius: var(--kose-m); background: var(--ana); color: var(--ana-uzeri);
+  font: 600 8px/22px var(--yazi); text-align: center; letter-spacing: .02em; flex: none; }
+.anahtar { width: 36px; height: 20px; border-radius: 10px; border: 1px solid var(--kenar); background: var(--yuzey); position: relative; cursor: pointer; padding: 0; flex: none; }
+.anahtar::after { content: ""; position: absolute; top: 3px; left: 3px; width: 12px; height: 12px; border-radius: 50%; background: var(--kenar); transition: left 120ms linear; }
+.anahtar[aria-checked="true"] { background: var(--ana); border-color: var(--ana); }
+.anahtar[aria-checked="true"]::after { left: 19px; background: var(--ana-uzeri); }
+.anahtar-satir { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+.uyari-kutu { border: 1px solid var(--hata); background: var(--hata-bg); color: var(--hata); border-radius: var(--kose-m); padding: 6px 8px; font-size: 12px; }
+
+.isaret { position: fixed; z-index: 2147483644; width: 22px; height: 22px; padding: 0; border: 1px solid var(--kenar); border-radius: var(--kose-s);
+  background: var(--yuzey); color: var(--basari); cursor: pointer; display: inline-grid; place-items: center; }
+.isaret[aria-pressed="true"] { background: var(--basari-bg); border-color: var(--basari); }
+
+.yer { position: fixed; left: 0; right: 0; bottom: 24px; display: flex; justify-content: center; pointer-events: none; z-index: 2147483647; }
+.kutu { display: flex; align-items: center; gap: var(--bosluk-2); max-width: min(480px, calc(100vw - 32px)); min-height: var(--kontrol);
+  padding: 0 4px 0 12px; border-radius: var(--kose-m); font: 400 13px/1.4 var(--yazi); opacity: 0; transition: opacity 120ms linear; }
+.kutu.acik { opacity: 1; }
+.kutu.basari { background: var(--basari-bg); color: var(--basari); border-left: 3px solid var(--basari); }
+.kutu.hata { background: var(--hata-bg); color: var(--hata); border-left: 3px solid var(--hata); pointer-events: auto; }
+.kutu .metin { padding: 4px 12px 4px 0; }
+.kutu .kapat { display: none; width: 24px; height: 24px; padding: 0; border: 0; border-radius: var(--kose-s); background: transparent; cursor: pointer; align-items: center; justify-content: center; }
+.kutu.hata .kapat { display: inline-flex; }
+
+.perde { position: fixed; inset: 0; background: color-mix(in srgb, var(--metin) 35%, transparent); z-index: 2147483646; }
+:host([data-theme="dark"]) .perde { background: color-mix(in srgb, var(--zemin) 60%, transparent); }
+.panel { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2147483647;
+  width: min(760px, calc(100vw - 32px)); height: min(540px, calc(100vh - 32px));
+  display: grid; grid-template-rows: 44px minmax(0, 1fr); background: var(--yuzey); color: var(--metin);
+  border: 1px solid var(--ayirici); border-radius: var(--kose-l); font: 400 13px/1.45 var(--yazi); }
+.ust { display: flex; align-items: center; gap: 10px; padding: 0 6px 0 14px; border-bottom: 1px solid var(--ayirici); min-width: 0; }
+.ust h2 { flex: 1; min-width: 0; margin: 0; font: 600 14px/1.3 var(--yazi); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.govde { display: grid; grid-template-columns: 196px minmax(0, 1fr); min-height: 0; }
+.nav { border-right: 1px solid var(--ayirici); padding: 8px; display: flex; flex-direction: column; gap: 2px; overflow: auto; min-height: 0; }
+.nav input { height: 28px; padding: 0 8px; border: 1px solid var(--kenar); border-radius: var(--kose-s); background: var(--yuzey); color: var(--metin); margin-bottom: 6px; width: 100%; }
+.nav input::placeholder, .icerik input::placeholder { color: var(--metin-ikincil); }
+.grup { font: 600 11px/1.3 var(--yazi); letter-spacing: .06em; color: var(--metin-ikincil); padding: 8px 8px 2px; }
+.nav .oge { text-align: left; height: 28px; padding: 0 8px; border: 0; border-radius: var(--kose-s); background: transparent; cursor: pointer; display: flex; align-items: center; gap: 6px; min-width: 0; }
+.nav .oge span:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.nav .oge[aria-current="true"] { background: var(--ana-acik); font-weight: 600; }
+.nav .oge:hover { background: var(--ana-hover); }
+.nav .yok { color: var(--metin-ikincil); padding: 6px 8px; }
+.icerik { padding: 14px 18px; overflow: auto; display: flex; flex-direction: column; gap: 12px; min-width: 0; min-height: 0; }
+.icerik h3 { margin: 0; font: 600 15px/1.3 var(--yazi); }
+.icerik h4 { margin: 4px 0 0; font: 600 13px/1.3 var(--yazi); }
+.alt { color: var(--metin-ikincil); margin: -6px 0 0; }
+.ayar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--ayirici); }
+.ayar small { grid-column: 1 / -1; color: var(--metin-ikincil); font-size: 12px; }
+.ayar .hata-yazi { grid-column: 1 / -1; color: var(--hata); font-size: 12px; }
+.seg { display: inline-flex; flex-wrap: wrap; justify-content: flex-end; }
+.seg button { height: 28px; padding: 0 10px; border: 1px solid var(--kenar); background: var(--yuzey); margin-left: -1px; cursor: pointer; white-space: nowrap; }
+.seg button:first-child { margin-left: 0; border-radius: var(--kose-s) 0 0 var(--kose-s); }
+.seg button:last-child { border-radius: 0 var(--kose-s) var(--kose-s) 0; }
+.seg button[aria-checked="true"] { background: var(--ana); border-color: var(--ana); color: var(--ana-uzeri); position: relative; z-index: 1; }
+.seg button:hover:not([aria-checked="true"]) { background: var(--ana-hover); }
+.giris { height: 28px; padding: 0 8px; border: 1px solid var(--kenar); border-radius: var(--kose-s); background: var(--yuzey); color: var(--metin); width: 150px; }
+.giris.sayi { width: 84px; text-align: right; font-variant-numeric: tabular-nums; }
+.giris[aria-invalid="true"] { border-color: var(--hata); }
+.tus { min-width: 104px; height: 28px; padding: 0 8px; border: 1px solid var(--kenar); border-radius: var(--kose-s); background: var(--zemin); font-weight: 600; cursor: pointer; }
+.tus[aria-disabled="true"] { cursor: default; opacity: .55; }
+.tus.kayit { border-color: var(--vurgu); color: var(--vurgu); }
+.uyari-satir { color: var(--hata); font-size: 12px; }
+.satir-btn { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; padding-top: 8px; }
+.satir-btn.sol { justify-content: flex-start; padding-top: 0; }
+.bilgi { padding: 8px 10px; border-radius: var(--kose-m); background: var(--ana-acik); }
+.bilgi.kotu { background: var(--hata-bg); color: var(--hata); }
+.tani { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 6px; align-items: start; }
+.tani .iyi { color: var(--basari); font-weight: 700; }
+.tani .kotu { color: var(--hata); font-weight: 700; }
+.tani .notr { color: var(--metin-ikincil); font-weight: 700; }
+.tani small { display: block; color: var(--metin-ikincil); font: 11px/1.4 Consolas, "Cascadia Mono", monospace; overflow-wrap: anywhere; }
+.gunluk { display: grid; gap: 2px; font-size: 12px; }
+.gunluk div { display: flex; gap: 8px; min-width: 0; }
+.gunluk time { color: var(--metin-ikincil); font-variant-numeric: tabular-nums; flex: none; }
+.kabul { display: grid; gap: 6px; border: 1px solid var(--ayirici); border-radius: var(--kose-m); padding: 8px 10px; }
+.kabul .ipucu { font-size: 12px; color: var(--metin-ikincil); font-style: italic; }
+.kabul .seg { justify-content: flex-start; }
+.kabul input { height: 28px; padding: 0 8px; border: 1px solid var(--kenar); border-radius: var(--kose-s); background: var(--yuzey); color: var(--metin); width: 100%; }
+.rapor-kutu { width: 100%; min-height: 120px; font: 11px/1.4 Consolas, monospace; border: 1px solid var(--kenar); border-radius: var(--kose-s); background: var(--zemin); color: var(--metin); padding: 6px; }
+.gizli { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .kutu, .anahtar::after { transition: none; } }
+`);
+
+  let ev = null;
+  let kok = null;
+  const bil = { yer: null, kutu: null, ikonYeri: null, metin: null, kapat: null, sayac: 0, tetik: null, kart: null, perde: null, panel: null, ara: null, isaretler: [] };
+  let kartAcik = false;
+
+  function kokKur() {
+    if (ev) { if (!ev.isConnected && document.body) document.body.appendChild(ev); return; }
+    if (!document.body) return;
+    ev = document.createElement('aalabs-igu');
+    ev.setAttribute('data-aalabs', ID);
+    kok = ev.attachShadow({ mode: TEST ? 'open' : 'closed' });
+    const css = TEMA_CSS + ARAYUZ_CSS;
+    let eklendi = false;
+    try { const s = new CSSStyleSheet(); s.replaceSync(css); kok.adoptedStyleSheets = [s]; eklendi = true; } catch (_) { /* eski tarayıcı */ }
+    if (!eklendi) kok.appendChild(el('style', { text: css }));
+    bil.yer = el('div', { class: 'yer' });
+    bil.kutu = el('div', { class: 'kutu', role: 'status', 'aria-live': 'polite' });
+    bil.ikonYeri = el('span', { style: 'display:inline-flex' });
+    bil.metin = el('span', { class: 'metin' });
+    bil.kapat = el('button', { class: 'kapat', type: 'button', onclick: () => bildirimGizle() }, ikon('kapat'));
+    bil.kutu.append(bil.ikonYeri, bil.metin, bil.kapat);
+    bil.yer.appendChild(bil.kutu);
+    kok.appendChild(bil.yer);
+    temaUygula();
+    document.body.appendChild(ev);
+  }
+
+  function bildirimGizle() { if (bil.kutu) { clearTimeout(bil.sayac); bil.kutu.classList.remove('acik'); } }
+  function bildir(tur, yazi) {
+    kokKur();
+    if (!bil.kutu) return;
+    clearTimeout(bil.sayac);
+    kok.appendChild(bil.yer);   // en sona taşı: açık Ayarlar penceresinin önünde kalsın
+    bil.kutu.className = 'kutu ' + tur;
+    bil.kutu.setAttribute('role', tur === 'hata' ? 'alert' : 'status');
+    bil.kapat.title = _('bildirimKapat');
+    bil.kapat.setAttribute('aria-label', _('bildirimKapat'));
+    bil.ikonYeri.replaceChildren(ikon(tur === 'hata' ? 'hata' : 'tamam'));
+    bil.metin.textContent = yazi;
+    requestAnimationFrame(() => bil.kutu.classList.add('acik'));
+    if (tur !== 'hata') bil.sayac = setTimeout(bildirimGizle, 2500);
+  }
+
+  // ---------------------------------------------------------------- panel (yerleşim A: yüzen kart)
+  function durumBilgisi() {
+    const k = motor.kip;
+    const deger = { a: sayi(motor.bulunan), b: sayi(motor.alinan), h: motor.hedef === Infinity ? '—' : sayi(motor.hedef) };
+    if (k === 'bos') return { yazi: _('s_bos'), tur: '' };
+    if (k === 'hazir') return { yazi: _(ayar.deneme ? 's_hazir' : 's_hazirCanli'), tur: '' };
+    if (k === 'tara') return { yazi: _('s_tara', { n: deger.a }), tur: '' };
+    if (k === 'calis') {
+      const kalan = Math.max(0, motor.hedef - motor.alinan) * (ayar.bekleme + 1500);
+      return { yazi: _('s_calis', Object.assign({ sure: sureYazi(kalan) }, deger)), tur: '' };
+    }
+    if (k === 'bekle') return { yazi: _('s_bekle', Object.assign({ saat: saat(motor.hedefZaman) }, deger)), tur: 'uyari' };
+    if (k === 'gecis') {
+      const c = calismaOku();
+      const n = siraOku().length;
+      return { yazi: _('s_gecis', { ad: motor.gecisAd || _('buSohbet'), saat: saat(motor.hedefZaman), i: c ? c.i + 1 : 1, n }), tur: 'basari' };
+    }
+    if (k === 'engel') return { yazi: _('s_engel', { sn: saniye(ayar.bekleme).replace(/\s.*$/, '') }), tur: 'hata' };
+    if (k === 'hata') return { yazi: _(motor.hataTur || 's_hataMenu'), tur: 'hata' };
+    if (k === 'bitti') return { yazi: _(motor.sonKip || 's_bitti', Object.assign({ n: siraOku().length }, deger)), tur: motor.sonKip === 's_bittiSinir' ? 'uyari' : 'basari' };
+    return { yazi: '', tur: '' };
+  }
+
+  function kartCiz() {
+    if (!bil.kart) return;
+    const k = bil.kart;
+    k.setAttribute('lang', dilKodu());
+    const odakSecici = odakSeciciBul(kok.activeElement);
+    k.replaceChildren();
+    const id = sohbetKimligi();
+    const sira = siraOku();
+    const calisma = calismaOku();
+    k.append(el('div', { class: 'kart-bas' }, el('span', { class: 'rozet', 'aria-hidden': 'true' }, KOD), el('b', { id: 'igu-baslik' }, _('panelAd')),
+      el('button', { class: 'ikonbtn', type: 'button', 'data-is': 'ayarlar', title: _('ayarlarAc', { tus: ayar.kisayolAyarlar }), 'aria-label': _('ayarlarAc', { tus: ayar.kisayolAyarlar }), onclick: () => panelAc() }, ikon('ayar')),
+      el('button', { class: 'ikonbtn', type: 'button', 'data-is': 'kapat', title: _('paneliKapat'), 'aria-label': _('paneliKapat'), onclick: () => kartKapat() }, ikon('kapat'))));
+    const g = el('div', { class: 'kart-govde' });
+    // sohbet satırı + kip çipi
+    const kipCip = ayar.deneme ? el('span', { class: 'cip uyari', 'data-kip': 'deneme' }, _('denemeCip')) : el('span', { class: 'cip basari', 'data-kip': 'canli' }, _('canliCip'));
+    if (sira.length) {
+      const i = Math.max(0, sira.findIndex((x) => x.id === id));
+      g.append(el('div', { class: 'satir' }, el('span', { class: 'etiket' }, _('sohbetler') + ': ', el('b', {}, _('secili', { n: sira.length, i: (calisma ? calisma.i : i) + 1 }))), kipCip));
+    } else {
+      g.append(el('div', { class: 'satir' }, el('span', { class: 'etiket' }, _('sohbet') + ': ', el('b', {}, id ? sohbetAdi() : '—')), kipCip));
+    }
+    // çipler
+    const cipler = [];
+    if (ayar.suzgec.trim()) cipler.push(el('span', { class: 'cip notr', 'data-cip': 'suzgec' }, _('suzgecCip', { k: kisalt(ayar.suzgec.trim()), kip: _(ayar.suzgecKip === 'atla' ? 'kip_atla' : 'kip_yalniz') })));
+    if (ayar.tur !== 'hepsi') cipler.push(el('span', { class: 'cip notr', 'data-cip': 'tur' }, _('turCip', { t: _('tur_' + ayar.tur) })));
+    if (motor.kip === 'bekle') cipler.push(el('span', { class: 'cip notr', 'data-cip': 'oto' }, _('otoCip', { saat: saat(motor.hedefZaman) })));
+    if (motor.kip === 'gecis') cipler.push(el('span', { class: 'cip notr', 'data-cip': 'gecis' }, _('gecisCip', { saat: saat(motor.hedefZaman) })));
+    if (motor.kip === 'engel') cipler.push(el('span', { class: 'cip hata', 'data-cip': 'engel' }, _('engelCip')));
+    if (cipler.length) g.append(el('div', { class: 'cipler' }, cipler));
+    // Ç1: tek satır sayaç
+    const kalan = kalanSayi();
+    g.append(el('div', { class: 'sayac', 'data-sayac': '' }, _('sayac', { a: sayi(motor.bulunan), b: sayi(motor.alinan), c: kalan === null ? '—' : sayi(kalan) })));
+    if (motor.kip === 'calis' || motor.kip === 'bekle' || (motor.kip === 'bitti' && motor.son && !motor.son.deneme)) {
+      const oran = motor.hedef && motor.hedef !== Infinity ? Math.min(100, Math.round(motor.alinan / motor.hedef * 100)) : 0;
+      g.append(el('div', { class: 'cubuk', role: 'progressbar', 'aria-label': _('ilerleme'), 'aria-valuemin': '0', 'aria-valuemax': '100', 'aria-valuenow': String(oran) }, el('i', { style: `width:${oran}%` })));
+    }
+    const d = durumBilgisi();
+    g.append(el('div', { class: 'durum' + (d.tur ? ' ' + d.tur : ''), role: 'status', 'data-durum': motor.kip }, d.yazi));
+    if (motor.onayBekliyor) g.append(el('div', { class: 'uyari-kutu', role: 'alert', 'data-onay-uyari': '' }, _('onayUyari')));
+    // deneme anahtarı
+    const anahtarId = 'igu-deneme';
+    g.append(el('label', { class: 'anahtar-satir' },
+      el('button', { class: 'anahtar', type: 'button', role: 'switch', id: anahtarId, 'aria-checked': String(ayar.deneme), 'data-ayar': 'deneme',
+        disabled: motor.calisiyor ? true : null, onclick: () => { ayarDegis('deneme', !ayar.deneme); } }),
+      el('span', {}, _('deneme'))));
+    // E5: sıra
+    if (id) {
+      const sirada = siradaMi(id);
+      const sl = el('div', { class: 'dugmeler' },
+        el('button', { class: 'btn kucuk', type: 'button', 'data-is': 'sira', onclick: () => siraDegistir(id, sohbetAdi()) }, sirada ? _('siradan') : [ikon('arti', 14), _('siraEkle')]));
+      if (sira.length) sl.append(el('button', { class: 'btn kucuk', type: 'button', 'data-is': 'sira-temizle', onclick: () => { siraYaz([]); calismaYaz(null); ciz(); } }, _('siraTemizle')));
+      g.append(sl);
+    }
+    // Başlat / Durdur (Ç4: ayrı Tara yok)
+    const bekliyor = motor.kip === 'bekle' || motor.kip === 'gecis';
+    const baslatYazi = motor.onayBekliyor ? _('onayla') : _('baslat');
+    g.append(el('div', { class: 'dugmeler' },
+      el('button', { class: 'btn ' + (motor.onayBekliyor ? 'tehlike' : 'ana'), type: 'button', 'data-is': 'baslat',
+        disabled: (motor.calisiyor || bekliyor || !id) ? true : null, onclick: () => baslatTiklandi() }, ikon('oynat'), baslatYazi),
+      el('button', { class: 'btn', type: 'button', 'data-is': 'durdur', disabled: (motor.calisiyor || bekliyor) ? null : true, onclick: () => durdur() }, ikon('kare'), _('durdur'))));
+    k.append(g);
+    if (odakSecici) { const h = k.querySelector(odakSecici); if (h) h.focus({ preventScroll: true }); }
+  }
+
+  function kartAc() {
+    kokKur();
+    if (!kok) return;
+    kartAcik = true;
+    if (!bil.kart || !bil.kart.isConnected) {
+      bil.kart = el('section', { class: 'kart', 'aria-labelledby': 'igu-baslik', 'data-kart': '' });
+      kok.appendChild(bil.kart);
+    }
+    durumTazele();
+    kartCiz();
+    isaretleriCiz();
+  }
+  function kartKapat() {
+    kartAcik = false;
+    if (bil.kart) bil.kart.remove();
+    bil.kart = null;
+    isaretleriCiz();
+    if (bil.tetik) bil.tetik.focus({ preventScroll: true });
+  }
+
+  function tetikGuncelle() {
+    if (!dmSayfasi()) { if (bil.tetik) { bil.tetik.remove(); bil.tetik = null; } if (bil.kart) { bil.kart.remove(); bil.kart = null; } return; }
+    kokKur();
+    if (!kok) return;
+    if (!bil.tetik || !bil.tetik.isConnected) {
+      bil.tetik = el('button', { class: 'tetik', type: 'button', 'data-tetik': '', 'aria-expanded': 'false', onclick: () => (kartAcik ? kartKapat() : kartAc()) });
+      kok.appendChild(bil.tetik);
+    }
+    bil.tetik.setAttribute('aria-expanded', String(kartAcik));
+    const ipucu = _('tetikIpucu') + (tani.sorunlu ? ' · ' + _('tetikSorun') : '');
+    bil.tetik.title = ipucu;
+    bil.tetik.setAttribute('aria-label', ipucu);
+    bil.tetik.replaceChildren(tani.sorunlu ? el('span', { class: 'nokta', 'aria-hidden': 'true' }) : '', KOD);
+  }
+
+  /** E5: sol listedeki sohbetlerin yanına sıra kutusu (sayfanın kendi öğelerine dokunmadan, üst katmanda). */
+  function isaretleriCiz() {
+    for (const b of bil.isaretler) b.remove();
+    bil.isaretler = [];
+    if (!kok || !kartAcik || !dmSayfasi()) return;
+    const sira = new Set(siraOku().map((x) => x.id));
+    const gor = new Set();
+    for (const a of sohbetBaglantilari().slice(0, 40)) {
+      const id = baglantiKimligi(a);
+      if (!id || gor.has(id)) continue;
+      gor.add(id);
+      const r = a.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight || r.width < 40) continue;
+      const nokta = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+      if (!nokta || !(a === nokta || a.contains(nokta))) continue;   // kaydırma kabının dışında kalmış satır
+      const ad = baglantiAdi(a);
+      const secili = sira.has(id);
+      const b = el('button', { class: 'isaret', type: 'button', 'data-isaret': id, 'aria-pressed': String(secili),
+        title: _(secili ? 'listeCikar' : 'listeSec', { ad }), 'aria-label': _(secili ? 'listeCikar' : 'listeSec', { ad }),
+        style: `left:${Math.round(r.right - 30)}px;top:${Math.round(r.top + r.height / 2 - 11)}px`,
+        onclick: (e) => { e.preventDefault(); e.stopPropagation(); siraDegistir(id, ad); } }, secili ? ikon('tamam', 14) : '');
+      kok.appendChild(b);
+      bil.isaretler.push(b);
+    }
+  }
+
+  function durumTazele() {
+    if (motor.calisiyor || ['bekle', 'gecis', 'engel', 'hata', 'bitti'].includes(motor.kip)) {
+      if (!sohbetKimligi() && motor.kip !== 'gecis') { motor.kip = 'bos'; }
+      return;
+    }
+    motor.kip = sohbetKimligi() ? 'hazir' : 'bos';
+  }
+
+  function ciz() {
+    durumTazele();
+    tetikGuncelle();
+    if (kartAcik) { if (!bil.kart || !bil.kart.isConnected) kartAc(); else kartCiz(); }
+    // Tanı açıksa yenile; ama paneldeki bir kutuya yazılıyorsa yazıyı silme
+    const odak = kok && kok.activeElement;
+    if (panelAcik() && panelBolum === 'tani' && !(odak && /^(INPUT|TEXTAREA)$/.test(odak.tagName))) panelCiz();
+  }
+
+  // ---------------------------------------------------------------- tanı
+  const tani = { sorunlu: false };
+  function taniSatirlari() {
+    const s = [];
+    const id = sohbetKimligi();
+    if (!id) {
+      s.push({ durum: 'notr', ad: _('t_sayfa'), ayrinti: _('t_sayfaYok') });
+    } else {
+      s.push({ durum: 'iyi', ad: _('t_sayfaVar'), ayrinti: '/direct/t/…' });
+      const alan = sohbetAlani();
+      if (!alan) s.push({ durum: 'kotu', ad: _('t_alanYok'), ayrinti: SEC.alan.join(' | ') });
+      else {
+        s.push({ durum: 'iyi', ad: _('t_alanVar'), ayrinti: alan.secici });
+        const sat = satirlar(alan);
+        const benim = sat.filter((r) => benimMi(r)).length;
+        s.push({ durum: sat.length ? 'iyi' : 'kotu', ad: _('t_satir'), ayrinti: SEC.satir + ' · ' + _('t_satirSay', { n: sayi(sat.length), b: sayi(benim) }) });
+        const sc = kaydirmaAlani(alan);
+        s.push({ durum: sc ? 'iyi' : 'notr', ad: _('t_kaydir'), ayrinti: sc ? 'overflow-y ✓' : '—' });
+      }
+    }
+    const bulgu = (v, ad, sec) => ({ durum: v === null ? 'notr' : v ? 'iyi' : 'kotu', ad, ayrinti: (v === null ? _('t_denenmedi') : v ? _('t_bulundu') : _('t_bulunamadi')) + ' · ' + sec });
+    s.push(bulgu(motor.bulgu.menu, _('t_menu'), 'aria-label: More / Daha fazla'));
+    s.push(bulgu(motor.bulgu.secenek, _('t_secenek'), 'Unsend / Gönderimi geri al'));
+    s.push(bulgu(motor.bulgu.onay, _('t_onay'), '[role=dialog] button'));
+    if (dmSayfasi()) {
+      const n = sohbetBaglantilari().length;
+      s.push({ durum: n ? 'iyi' : 'notr', ad: _('t_liste'), ayrinti: n ? _('t_listeSay', { n: sayi(n) }) + ' · ' + SEC.listeBag : _('t_listeYok') });
+    }
+    s.push({ durum: gmDepo ? 'iyi' : 'kotu', ad: _('t_depo'), ayrinti: gmDepo ? _('t_depoVar') : _('t_depoYok') });
+    const son = motor.son;
+    s.push(son ? { durum: son.hata ? 'notr' : 'iyi', ad: _('t_son'), ayrinti: _('t_sonOzet', { zaman: saat(son.zaman), kip: _(son.deneme ? 't_kipDeneme' : 't_kipCanli'), b: son.alinan, a: son.bulunan, h: son.hata }) + ' · ' + _('sonuc_' + son.sonuc) }
+      : { durum: 'notr', ad: _('t_son'), ayrinti: _('t_sonYok') });
+    return s;
+  }
+  function taniYenile() {
+    const onceki = tani.sorunlu;
+    tani.sorunlu = taniSatirlari().some((x) => x.durum === 'kotu');
+    if (onceki !== tani.sorunlu) { tetikGuncelle(); menuKaydet(); }
+  }
+
+  const KABUL = ['k1', 'k2', 'k3', 'k4', 'k5'];
+  function kabulOku() { const v = depoOku('kabul', {}); return v && typeof v === 'object' && !Array.isArray(v) ? v : {}; }
+  function kabulYaz(k, deger) { const v = kabulOku(); v[k] = Object.assign({}, v[k] || {}, deger); depoYaz('kabul', v); }
+
+  function taniRaporu() {
+    const satirlar = taniSatirlari();
+    const t = temaOku();
+    let yonetici = '—';
+    try { if (typeof GM_info !== 'undefined' && GM_info) yonetici = (GM_info.scriptHandler || '?') + ' ' + (GM_info.version || ''); } catch (_) { /* yok */ }
+    const ayarKopya = Object.assign({}, ayar);
+    delete ayarKopya.sonYedek;
+    ayarKopya.suzgec = ayar.suzgec ? `…(${ayar.suzgec.length})` : '';   // süzgeç kelimesi rapora girmez
+    const isaret = { iyi: _('r_ok'), kotu: _('r_hata'), notr: _('r_bilgi') };
+    const kabul = kabulOku();
+    const elle = KABUL.map((k) => {
+      const c = kabul[k];
+      const isa = !c || !c.s ? '?' : c.s === 'gecti' ? '✓' : c.s === 'sorun' ? '✗' : '–';
+      return `${isa} ${k.toUpperCase()} ${_(k)}${c && c.not ? ' · ' + c.not : ''}`;
+    });
+    const r = [
+      `${AD} ${SURUM} — ${_('raporBaslik')}`,
+      `${_('r_zaman')}: ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC`,
+      `${_('r_tarayici')}: ${navigator.userAgent}`,
+      `${_('r_yonetici')}: ${yonetici.trim()}`,
+      `${_('r_dil')}: ${ayar.dil} → ${dilKodu()} · ${_('r_tema')}: ${ayar.tema} → ${t.koyu ? 'dark' : 'light'} (${t.kaynak})`,
+      `${_('r_ayarlar')}: ${JSON.stringify(ayarKopya)}`,
+      `${_('r_sira')}: ${siraOku().length}`,
+      '',
+      ...satirlar.map((x) => `${isaret[x.durum]} ${x.ad} · ${x.ayrinti}`),
+      '',
+      `${_('t_gunluk')}:`,
+      ...motor.gunluk.slice(0, 10).map((g) => `  ${saat(g.t)} ${gunlukMetni(g, true)}`),   // raporda mesaj metni yok
+      '',
+      _('r_elle'),
+      ...elle,
+    ];
+    return r.join('\n');
+  }
+  function gunlukMetni(g, gizle) {
+    const d = Object.assign({}, g.deger);
+    if (gizle && 'm' in d) d.m = '…';
+    if (d.neden && (d.neden in METIN.tr)) d.neden = _(d.neden);
+    return _(g.anahtar, d);
+  }
+
+  function gmPano() {
+    try { if (typeof GM_setClipboard === 'function') return (x) => GM_setClipboard(x, 'text'); } catch (_) { /* yok */ }
+    try { if (typeof GM !== 'undefined' && GM && typeof GM.setClipboard === 'function') return (x) => GM.setClipboard(x, 'text'); } catch (_) { /* yok */ }
+    return null;
+  }
+  async function panoyaYaz(metin) {
+    const gm = gmPano();
+    if (gm) { try { await gm(metin); return true; } catch (_) { /* sıradaki */ } }
+    if (navigator.clipboard && window.isSecureContext) { try { await navigator.clipboard.writeText(metin); return true; } catch (_) { /* sıradaki */ } }
+    return false;
+  }
+  let raporYedek = '';
+  let raporOdakla = false;
+  async function raporuKopyala() {
+    const metin = taniRaporu();
+    if (await panoyaYaz(metin)) { raporYedek = ''; bildir('basari', _('raporKopyalandi')); }
+    else { raporYedek = metin; raporOdakla = true; bildir('hata', _('kopyaHata')); if (!panelAcik()) panelAc('tani'); else { panelBolum = 'tani'; panelCiz(); } }
+  }
+
+  // ---------------------------------------------------------------- eklenti menüsü
+  let menuIdleri = [];
+  let menuKayitli = false;
+  let idsizMenu = false;
+  function menuKaydet() {
+    if (typeof GM_registerMenuCommand !== 'function') return;
+    const silinebilir = typeof GM_unregisterMenuCommand === 'function' && !idsizMenu;
+    if (menuKayitli && !silinebilir) return;
+    try {
+      if (silinebilir) for (const m of menuIdleri) { try { GM_unregisterMenuCommand(m); } catch (_) { /* yok */ } }
+      menuIdleri = [];
+      menuKayitli = true;
+      const ekle = (ad, fn, tus) => { const m = GM_registerMenuCommand(ad, fn, tus); if (m === undefined || m === null) idsizMenu = true; else menuIdleri.push(m); };
+      // eski menü silinemiyorsa bir kez, iki dilde ve işaretsiz yazılır (sonradan güncellenemez)
+      const ad = (k) => (silinebilir ? _(k) : `${METIN.tr[k]} / ${METIN.en[k]}`);
+      ekle(ad('menuPanel'), () => kartAc(), 'p');
+      ekle(ad('menuAyarlar') + (silinebilir && tani.sorunlu ? ' ●' : ''), () => panelAc(), 'a');
+      ekle(ad('menuRapor'), () => raporuKopyala(), 't');
+    } catch (_) { /* yönetici menüyü desteklemiyor */ }
+  }
+
+  // ---------------------------------------------------------------- Ayarlar penceresi
+  let panelBolum = 'geri';
+  let aramaMetni = '';
+  let oncekiOdak = null;
+  let kayit = null;
+  let tusHatasi = '';
+  const alanHatasi = {};
+
+  function panelAcik() { return !!(bil.panel && bil.panel.isConnected); }
+  function odakDongusu(e) {
+    const ogeler = Array.from(bil.panel.querySelectorAll('button, input:not([type="file"]), textarea, [tabindex]:not([tabindex="-1"])'))
+      .filter((o) => !o.disabled && o.getClientRects().length);
+    if (!ogeler.length) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const i = ogeler.indexOf(kok.activeElement);
+    const j = i < 0 ? 0 : (i + (e.shiftKey ? -1 : 1) + ogeler.length) % ogeler.length;
+    ogeler[j].focus();
+  }
+  function panelAc(bolum) {
+    kokKur();
+    if (!kok) return;
+    temaUygula();
+    if (bolum) panelBolum = bolum;
+    taniYenile();
+    if (!panelAcik()) {
+      oncekiOdak = (kok.activeElement) || document.activeElement;
+      bil.perde = el('div', { class: 'perde', onclick: () => panelKapat() });
+      bil.panel = el('div', { class: 'panel yazi', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'igu-ayar-baslik', 'data-panel': '' });
+      kok.append(bil.perde, bil.panel);
+    }
+    panelCiz();
+    if (bil.ara) bil.ara.focus({ preventScroll: true });
+  }
+  function panelKapat() {
+    kayitBitir();
+    if (bil.panel) bil.panel.remove();
+    if (bil.perde) bil.perde.remove();
+    bil.panel = bil.perde = bil.ara = null;
+    aramaMetni = '';
+    tusHatasi = '';
+    raporYedek = '';
+    for (const k of Object.keys(alanHatasi)) delete alanHatasi[k];
+    if (oncekiOdak && oncekiOdak.isConnected && typeof oncekiOdak.focus === 'function') { try { oncekiOdak.focus({ preventScroll: true }); } catch (_) { /* yok */ } }
+    oncekiOdak = null;
+  }
+
+  function ayarDegis(k, v, panelCizme) {
+    ayar[k] = v;
+    ayarYaz();
+    if (k === 'deneme') motor.onayBekliyor = 0;
+    if (k === 'dil') { menuKaydet(); }
+    if (k === 'tema' || k === 'olcek') temaUygula();
+    ciz();
+    if (panelAcik() && !panelCizme) panelCiz();   // giriş kutusundan gelen değerde panel yeniden kurulmaz (tıklama kaybolmasın)
+  }
+  function bolumSifirla(b) {
+    for (const k of BOLUM_ANAHTAR[b] || []) ayar[k] = VARSAYILAN[k];
+    for (const k of Object.keys(alanHatasi)) delete alanHatasi[k];
+    ayarYaz();
+    menuKaydet();
+    temaUygula();
+    tusHatasi = '';
+    ciz();
+    panelCiz();
+    bildir('basari', _('sifirlandi'));
+  }
+
+  let etiketSayac = 0;
+  function ayarSatiri(ad, aciklama, denetimKur, hataAnahtar) {
+    const id = 'e' + (++etiketSayac);
+    const s = el('div', { class: 'ayar' }, el('span', { id }, ad), denetimKur(id));
+    if (aciklama) s.append(el('small', {}, aciklama));
+    if (hataAnahtar && alanHatasi[hataAnahtar]) {
+      const h = alanHatasi[hataAnahtar];
+      const yaz = (v) => String(v / h.carpan).replace('.', dilKodu() === 'tr' ? ',' : '.');
+      s.append(el('span', { class: 'hata-yazi', role: 'alert' }, _('gecersiz', { a: `${yaz(h.a)}–${yaz(h.b)}${h.birim ? ' ' + _('sn', { n: '' }).trim() : ''}` })));   // o anki dilde
+    }
+    return s;
+  }
+  function anahtar(k, etiketId) {
+    return el('button', { class: 'anahtar', type: 'button', role: 'switch', 'aria-checked': String(!!ayar[k]), 'aria-labelledby': etiketId,
+      'data-ayar': k, disabled: (k === 'deneme' && motor.calisiyor) ? true : null, onclick: () => ayarDegis(k, !ayar[k]) });
+  }
+  function segment(k, secenekler, etiketId) {
+    const g = el('div', { class: 'seg', role: 'radiogroup', 'aria-labelledby': etiketId, 'data-ayar': k });
+    for (const [deger, yazi] of secenekler) {
+      g.append(el('button', { type: 'button', role: 'radio', 'aria-checked': String(ayar[k] === deger), 'data-deger': String(deger), onclick: () => ayarDegis(k, deger) }, yazi));
+    }
+    return g;
+  }
+  /** Sayı girişi: kutudan çıkınca ya da Enter'da doğrulanır; geçersizde eski değer kalır, nedeni yazılır. */
+  function sayiGirisi(k, etiketId, carpan, birimYazi) {
+    const [a, b] = ARALIK[k];
+    const g = el('input', { class: 'giris sayi', type: 'text', inputmode: 'decimal', 'aria-labelledby': etiketId, 'data-ayar': k,
+      value: String(ayar[k] / carpan).replace('.', dilKodu() === 'tr' ? ',' : '.'), 'aria-invalid': alanHatasi[k] ? 'true' : null });
+    const uygula = () => {
+      const v = Number(String(g.value).replace(',', '.').trim()) * carpan;
+      const d = aralikDogrula(k, v);
+      if (d === null) {
+        alanHatasi[k] = { a, b, carpan, birim: !!birimYazi };
+        panelCiz();
+        return;
+      }
+      const hataVardi = !!alanHatasi[k];
+      delete alanHatasi[k];
+      if (d !== ayar[k]) { ayarDegis(k, d, !hataVardi); bildir('basari', _('kaydedildi')); } else if (hataVardi) panelCiz();
+      g.removeAttribute('aria-invalid');
+    };
+    g.addEventListener('change', uygula);
+    g.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); uygula(); } });
+    return g;
+  }
+  function sifirlaDugmesi(b) {
+    return el('div', { class: 'satir-btn' }, el('button', { class: 'btn', type: 'button', 'data-sifirla': b, onclick: () => bolumSifirla(b) }, _('varsayilan')));
+  }
+  function bolumMetni(b) {
+    const an = {
+      geri: ['b_geri', 'o_deneme', 'o_enCok', 'o_bekle', 'o_suzgec', 'o_suzgecKip', 'o_tur', 'o_oto', 'o_engel', 'o_cok'],
+      genel: ['b_genel', 'dil', 'tema', 'olcek', 'dil_tarayici', 'tema_sayfa'],
+      kisayol: ['b_kisayol', 'k_ayarlar', 'k_durdur'],
+      tani: ['b_tani', 'raporKopyala', 'kabulBaslik', 't_menu', 't_secenek', 't_onay', 't_liste', 't_depo', 't_son'],
+      hakkinda: ['b_hakkinda', 'yedek', 'yedekle', 'geriYukle', 'store', 'calisma'],
+    }[b];
+    return katla(an.map((k) => _(k)).join(' '));
+  }
+  function odakSeciciBul(o) {
+    if (!o || o === bil.ara || !o.getAttribute) return '';
+    const q = (ad) => `[${ad}="${CSS.escape(o.getAttribute(ad))}"]`;
+    if (o.hasAttribute('data-deger') && o.parentElement && o.parentElement.hasAttribute('data-ayar')) {
+      const kap = o.closest('[data-kabul]');
+      return (kap ? `[data-kabul="${CSS.escape(kap.getAttribute('data-kabul'))}"] ` : '') + `[data-ayar="${CSS.escape(o.parentElement.getAttribute('data-ayar'))}"] ${q('data-deger')}`;
+    }
+    for (const ad of ['data-ayar', 'data-bolum', 'data-sifirla', 'data-kisayol', 'data-rapor', 'data-yedekle', 'data-geri-yukle', 'data-is', 'data-kabul-not']) {
+      if (o.hasAttribute(ad)) return q(ad);
+    }
+    return '';
+  }
+
+  // Yeniden çizim sırasında kaldırılan giriş kutusu 'change' yayar (blur); iç içe çizim olmasın
+  let panelCiziliyor = false;
+  let panelTekrar = false;
+  function panelCiz() {
+    if (panelCiziliyor) { panelTekrar = true; return; }
+    panelCiziliyor = true;
+    try { panelCizIc(); } finally { panelCiziliyor = false; }
+    if (panelTekrar) { panelTekrar = false; queueMicrotask(panelCiz); }
+  }
+  function panelCizIc() {
+    kayitBitir();
+    if (!panelAcik()) return;
+    etiketSayac = 0;
+    const p = bil.panel;
+    const aramaOdakta = kok.activeElement === bil.ara;
+    const imlec = bil.ara ? bil.ara.selectionStart : null;
+    const odakSecici = odakSeciciBul(kok.activeElement);
+    p.replaceChildren();
+    p.setAttribute('lang', dilKodu());
+    p.append(el('div', { class: 'ust' }, el('span', { class: 'rozet', 'aria-hidden': 'true' }, KOD),
+      el('h2', { id: 'igu-ayar-baslik' }, AD + ' · ' + _('ayarlar')),
+      el('button', { class: 'ikonbtn', type: 'button', title: _('kapat'), 'aria-label': _('kapat'), 'data-is': 'panel-kapat', onclick: () => panelKapat() }, ikon('kapat'))));
+    const arama = el('input', { type: 'search', placeholder: _('ara'), 'aria-label': _('ara') });
+    arama.value = aramaMetni;
+    arama.addEventListener('input', (e) => { if (e.isComposing) return; aramaMetni = arama.value; panelCiz(); });
+    arama.addEventListener('compositionend', () => { aramaMetni = arama.value; panelCiz(); });
+    bil.ara = arama;
+    const nav = el('nav', { class: 'nav', 'aria-label': _('ayarlar') }, arama);
+    const sorgu = katla(aramaMetni.trim());
+    const uyan = (b) => !sorgu || bolumMetni(b).includes(sorgu);
+    const tum = ['geri', 'genel', 'kisayol', 'tani', 'hakkinda'];
+    const gorunen = tum.filter(uyan);
+    if (gorunen.length && !gorunen.includes(panelBolum)) panelBolum = gorunen[0];
+    const oge = (b) => {
+      const ad = _('b_' + b);
+      const d = el('button', { class: 'oge', type: 'button', title: ad, 'aria-current': String(panelBolum === b), 'data-bolum': b,
+        onclick: () => { panelBolum = b; tusHatasi = ''; panelCiz(); } }, el('span', {}, ad));
+      if (b === 'tani' && tani.sorunlu) d.append(el('span', { class: 'nokta', 'aria-hidden': 'true' }), el('span', { class: 'gizli' }, ' · ' + _('tetikSorun')));
+      return d;
+    };
+    const kendi = ['geri'].filter(uyan);
+    const ort = ['genel', 'kisayol', 'tani', 'hakkinda'].filter(uyan);
+    if (kendi.length) nav.append(el('div', { class: 'grup' }, KOD), ...kendi.map(oge));
+    if (ort.length) nav.append(el('div', { class: 'grup' }, _('ortak')), ...ort.map(oge));
+    if (!gorunen.length) nav.append(el('div', { class: 'yok', role: 'status' }, _('sonucYok')));
+    const ic = el('div', { class: 'icerik', 'data-icerik': panelBolum });
+    if (gorunen.length) {
+      ic.append(el('h3', {}, (panelBolum === 'geri' ? KOD + ' › ' : '') + _('b_' + panelBolum)));
+      ({ geri: bolumGeri, genel: bolumGenel, kisayol: bolumKisayol, tani: bolumTani, hakkinda: bolumHakkinda })[panelBolum](ic);
+    }
+    p.append(el('div', { class: 'govde' }, nav, ic));
+    if (aramaOdakta) {
+      arama.focus({ preventScroll: true });
+      if (imlec !== null) try { arama.setSelectionRange(imlec, imlec); } catch (_) { /* yok */ }
+    } else if (odakSecici) {
+      let h = null;
+      try { h = p.querySelector(odakSecici); } catch (_) { h = null; }
+      if (h) h.focus({ preventScroll: true });
+    }
+  }
+
+  function bolumGeri(ic) {
+    ic.append(el('p', { class: 'alt' }, _('geriAlt')));
+    ic.append(ayarSatiri(_('o_deneme'), _('o_denemeA'), (id) => anahtar('deneme', id)));
+    ic.append(ayarSatiri(_('o_enCok'), _('o_enCokA'), (id) => sayiGirisi('enCok', id, 1, ''), 'enCok'));
+    ic.append(ayarSatiri(_('o_bekle'), _('o_bekleA'), (id) => sayiGirisi('bekleme', id, 1000, ' ' + _('sn', { n: '' }).trim()), 'bekleme'));
+    ic.append(ayarSatiri(_('o_suzgec'), _('o_suzgecA'), (id) => {
+      const g = el('input', { class: 'giris', type: 'text', maxlength: '60', placeholder: _('o_suzgecYer'), 'aria-labelledby': id, 'data-ayar': 'suzgec' });
+      g.value = ayar.suzgec;
+      g.addEventListener('change', () => { ayarDegis('suzgec', g.value.slice(0, 60), true); bildir('basari', _('kaydedildi')); });
+      g.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); g.dispatchEvent(new Event('change')); } });
+      return g;
+    }));
+    ic.append(ayarSatiri(_('o_suzgecKip'), '', (id) => segment('suzgecKip', [['atla', _('kip_atlaSec')], ['yalniz', _('kip_yalnizSec')]], id)));
+    ic.append(ayarSatiri(_('o_tur'), _('o_turA'), (id) => segment('tur', [['hepsi', _('turSec_hepsi')], ['yazi', _('turSec_yazi')], ['medya', _('turSec_medya')]], id)));
+    ic.append(ayarSatiri(_('o_oto'), _('o_otoA'), (id) => segment('otoDk', SECENEK.otoDk.map((n) => [n, n ? _('dk', { n }) : _('dkKapali')]), id)));
+    ic.append(ayarSatiri(_('o_engel'), _('o_engelA'), (id) => anahtar('engel', id)));
+    ic.append(ayarSatiri(_('o_cok'), _('o_cokA'), (id) => segment('sohbetArasiDk', SECENEK.sohbetArasiDk.map((n) => [n, _('dk', { n })]), id)));
+    ic.append(sifirlaDugmesi('geri'));
+  }
+  function bolumGenel(ic) {
+    const algi = _('algilanan', { dil: tarayiciDili() === 'tr' ? 'Türkçe' : 'English' });
+    ic.append(ayarSatiri(_('dil'), algi, (id) => segment('dil', [['tr', _('dil_tr')], ['en', _('dil_en')], ['tarayici', _('dil_tarayici')]], id)));
+    ic.append(ayarSatiri(_('tema'), '', (id) => segment('tema', [['sayfa', _('tema_sayfa')], ['acik', _('tema_acik')], ['koyu', _('tema_koyu')]], id)));
+    ic.append(ayarSatiri(_('olcek'), _('olcekA'), (id) => segment('olcek', SECENEK.olcek.map((n) => [n, dilKodu() === 'tr' ? '%' + n : n + '%']), id)));
+    ic.append(sifirlaDugmesi('genel'));
+  }
+  function bolumKisayol(ic) {
+    ic.append(el('p', { class: 'alt' }, _('kisayolNot')));
+    const hataYeri = el('div', { class: 'uyari-satir', role: 'alert' }, tusHatasi ? _('tusRed', { tus: tusHatasi.tus, neden: _(tusHatasi.neden) }) : '');
+    const tus = el('button', { class: 'tus', type: 'button', 'data-kisayol': 'kisayolAyarlar' }, ayar.kisayolAyarlar);
+    tus.addEventListener('click', () => kayitBasla(tus));
+    tus.setAttribute('aria-label', _('k_ayarlar') + ': ' + ayar.kisayolAyarlar);   // görünen tuş adı erişilebilir adda da
+    ic.append(ayarSatiri(_('k_ayarlar'), '', () => tus));
+    if (tusHatasi) ic.append(hataYeri);
+    ic.append(ayarSatiri(_('k_durdur'), _('degismez'), () => el('span', { class: 'tus', 'aria-disabled': 'true', style: 'display:inline-flex;align-items:center;justify-content:center' }, 'Esc')));
+    ic.append(sifirlaDugmesi('kisayol'));
+  }
+  function kayitBasla(tus) {
+    kayitBitir();
+    tus.classList.add('kayit');
+    tus.textContent = _('tusaBas');
+    const dinle = (e) => {
+      if (!e.isTrusted || sentetik) return;
+      if (e.key === 'Tab') { kayitBitir(); tus.classList.remove('kayit'); tus.textContent = ayar.kisayolAyarlar; return; }   // Tab engellenmez
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if (e.repeat) return;
+      if (e.key === 'Escape') { kayitBitir(); panelCiz(); return; }
+      const kombo = tusKombo(e);
+      if (!kombo) return;
+      const neden = tusGecerliMi(kombo);
+      kayitBitir();
+      if (neden) { tusHatasi = { tus: kombo, neden }; panelCiz(); return; }
+      tusHatasi = '';
+      ayarDegis('kisayolAyarlar', kombo);
+      bildir('basari', _('tusDegisti', { tus: kombo }));
+    };
+    kayit = { dinle };
+    window.addEventListener('keydown', dinle, true);
+    tus.addEventListener('blur', () => { if (kayit && kayit.dinle === dinle) { kayitBitir(); tus.classList.remove('kayit'); tus.textContent = ayar.kisayolAyarlar; } }, { once: true });
+  }
+  function kayitBitir() {
+    if (!kayit) return;
+    window.removeEventListener('keydown', kayit.dinle, true);
+    kayit = null;
+  }
+  function bolumTani(ic) {
+    const satirlar = taniSatirlari();
+    const kotu = satirlar.filter((x) => x.durum === 'kotu').length;
+    ic.append(el('div', { class: 'bilgi' + (kotu ? ' kotu' : ''), role: 'status' }, kotu ? _('taniKotu', { n: kotu }) : _('taniIyi')));
+    const t = el('div', { class: 'tani', 'data-tani': '' });
+    for (const x of satirlar) {
+      t.append(el('span', { class: x.durum, 'aria-hidden': 'true' }, x.durum === 'iyi' ? '✓' : x.durum === 'kotu' ? '✗' : '–'), el('div', {}, x.ad, el('small', {}, x.ayrinti)));
+    }
+    ic.append(t);
+    if (motor.gunluk.length) {
+      ic.append(el('h4', {}, _('t_gunluk')), el('div', { class: 'gunluk', 'data-gunluk': '' },
+        motor.gunluk.slice(0, 8).map((g) => el('div', {}, el('time', {}, saat(g.t)), el('span', {}, gunlukMetni(g))))));
+    }
+    // kabul maddeleri (K1–K5)
+    ic.append(el('h4', {}, _('kabulBaslik')), el('p', { class: 'alt', style: 'margin:0' }, _('kabulAlt')));
+    const kabul = kabulOku();
+    for (const k of KABUL) {
+      const c = kabul[k] || {};
+      const kutu = el('div', { class: 'kabul', 'data-kabul': k });
+      const etiketId = 'kabul-' + k;
+      kutu.append(el('span', { id: etiketId }, k.toUpperCase() + ' · ' + _(k)), el('span', { class: 'ipucu' }, _('nasil') + ' ' + _(k + 'i')));
+      const g = el('div', { class: 'seg', role: 'radiogroup', 'aria-labelledby': etiketId, 'data-ayar': 'kabul-' + k });
+      for (const [deger, yazi] of [['gecti', _('gecti')], ['sorun', _('sorun')], ['atla', _('atla')]]) {
+        g.append(el('button', { type: 'button', role: 'radio', 'aria-checked': String(c.s === deger), 'data-deger': deger, onclick: () => { kabulYaz(k, { s: deger }); panelCiz(); } }, yazi));
+      }
+      kutu.append(g);
+      if (c.s === 'sorun') {
+        const not = el('input', { type: 'text', maxlength: '120', placeholder: _('notYer'), 'aria-label': _('notYer'), 'data-kabul-not': k });
+        not.value = c.not || '';
+        not.addEventListener('change', () => kabulYaz(k, { not: not.value.slice(0, 120) }));
+        kutu.append(not);
+      }
+      ic.append(kutu);
+    }
+    if (raporYedek) {
+      const ta = el('textarea', { class: 'rapor-kutu', readonly: true, 'aria-label': _('raporBaslik'), 'data-rapor-kutu': '' });
+      ta.value = raporYedek;
+      ic.append(ta);
+      if (raporOdakla) { raporOdakla = false; requestAnimationFrame(() => { ta.focus(); ta.select(); }); }   // yalnız bir kez
+    }
+    ic.append(el('div', { class: 'satir-btn' }, el('button', { class: 'btn ana', type: 'button', 'data-rapor': '', onclick: () => raporuKopyala() }, ikon('kopyala'), _('raporKopyala'))));
+  }
+  function bolumHakkinda(ic) {
+    ic.append(el('p', { style: 'margin:0' }, _('surum', { s: SURUM })), el('p', { class: 'alt', style: 'margin:0' }, _('store')));
+    ic.append(el('h4', {}, _('calisma')), el('p', { class: 'alt', style: 'margin:0' }, _('calismaA')));
+    ic.append(el('h4', {}, _('yedek')), el('p', { class: 'alt', style: 'margin:0' }, _('yedekAc')));
+    ic.append(el('p', { class: 'etiket', style: 'margin:0', 'data-son-yedek': '' }, ayar.sonYedek ? _('sonYedek', { t: ayar.sonYedek }) : _('sonYedekYok')));
+    const dosya = el('input', { type: 'file', accept: '.json,application/json', class: 'gizli', 'aria-hidden': 'true', tabindex: '-1', 'data-geri-yukle-dosya': '' });
+    dosya.addEventListener('change', () => { if (dosya.files && dosya.files[0]) geriYukle(dosya.files[0]); });
+    ic.append(dosya, el('div', { class: 'satir-btn sol' },
+      el('button', { class: 'btn', type: 'button', 'data-yedekle': '', onclick: () => yedekle() }, _('yedekle')),
+      el('button', { class: 'btn', type: 'button', 'data-geri-yukle': '', onclick: () => dosya.click() }, _('geriYukle'))));
+  }
+  function zamanDamgasi() {
+    const d = new Date();
+    const p = (n) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}`;
+  }
+  function yedekle() {
+    const damga = zamanDamgasi();
+    const ayarKopya = Object.assign({}, ayar);
+    delete ayarKopya.sonYedek;
+    const veri = JSON.stringify({ uygulama: ID, surum: SURUM, tarih: damga, ayarlar: ayarKopya }, null, 2);
+    const a = el('a', { href: 'data:application/json;charset=utf-8,' + encodeURIComponent(veri), download: `AALabs.${ID}-ayarlar-${damga}.json` });
+    (bil.panel || kok).appendChild(a);
+    a.click();
+    a.remove();
+    ayar.sonYedek = damga;
+    ayarYaz();
+    panelCiz();
+    bildir('basari', _('yedeklendi'));
+  }
+  function geriYukle(dosya) {
+    if (dosya.size > 64 * 1024) { bildir('hata', _('yedekHata')); return; }
+    const o = new FileReader();
+    o.onload = () => {
+      try {
+        const v = JSON.parse(String(o.result));
+        if (!v || v.uygulama !== ID || !v.ayarlar || typeof v.ayarlar !== 'object' || Array.isArray(v.ayarlar)) throw new Error('biçim');
+        const sonYedek = ayar.sonYedek;
+        ayar = ayarDogrula(v.ayarlar);
+        ayar.sonYedek = sonYedek;
+        ayarYaz();
+        menuKaydet();
+        temaUygula();
+        ciz();
+        panelCiz();
+        bildir('basari', _('geriYuklendi'));
+      } catch (_e) { bildir('hata', _('yedekHata')); }
+    };
+    o.onerror = () => bildir('hata', _('yedekHata'));
+    o.readAsText(dosya);
+  }
+
+  // ---------------------------------------------------------------- klavye
+  function duzenlenebilirMi(d) {
+    return !!(d && d.closest && d.closest('input, textarea, [contenteditable=""], [contenteditable="true"], [contenteditable="plaintext-only"]'));
+  }
+  function tusBasildi(e) {
+    if (!e.isTrusted || sentetik) return;
+    // Esc çalışan işi her durumda durdurur (panel açık ya da kısayol kaydı sürerken de)
+    if (e.key === 'Escape' && motor.calisiyor) { e.preventDefault(); e.stopImmediatePropagation(); durdur(); if (kayit) { kayitBitir(); panelCiz(); } return; }
+    if (e.key === 'Escape' && motor.zamanlayici && !panelAcik()) { durdur(); return; }   // bekleyen işi iptal et, Instagram'ın Esc'ini yutma
+    if (kayit) return;
+    if (panelAcik()) {
+      if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); panelKapat(); return; }
+      if ((e.ctrlKey || e.metaKey) && !e.altKey && !e.shiftKey && tusAdi(e) === 'F') { e.preventDefault(); e.stopImmediatePropagation(); if (bil.ara) bil.ara.focus(); return; }
+      if (e.key === 'Tab' && !e.ctrlKey && !e.altKey && !e.metaKey) { odakDongusu(e); return; }
+    }
+    const kombo = tusKombo(e);
+    if (kombo && kombo === ayar.kisayolAyarlar && !e.repeat && (e.ctrlKey || e.metaKey || !duzenlenebilirMi(document.activeElement))) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      if (panelAcik()) panelKapat(); else panelAc();
+    }
+  }
+
+  // ---------------------------------------------------------------- açılış ve sayfa izleme
+  let sonYol = '';
+  let isaretPlan = 0;
+  function isaretPlanla() {
+    if (isaretPlan) return;
+    isaretPlan = requestAnimationFrame(() => { isaretPlan = 0; if (kartAcik) isaretleriCiz(); });
+  }
+  function yolDegisti() {
+    if (location.pathname === sonYol) return;
+    sonYol = location.pathname;
+    if (motor.calisiyor) motor.durSinyali = true;
+    if (motor.kip === 'bekle' && motor.zamanlayici) {   // otomatik devam yalnız başladığı sohbette
+      clearTimeout(motor.zamanlayici); motor.zamanlayici = 0; calismaYaz(null);
+    }
+    if (motor.kip === 'gecis' && motor.zamanlayici && motor.gecisHedef && sohbetKimligi() !== motor.gecisHedef) durdur();   // kullanıcı başka yere gitti
+    if (motor.kip !== 'gecis') { motor.kip = sohbetKimligi() ? 'hazir' : 'bos'; motor.bulunan = 0; motor.alinan = 0; }
+    ciz();
+    devamKontrol();
+  }
+  /** E5: sayfa yenilenince yarım kalan çoklu sohbet işine devam. */
+  function devamKontrol() {
+    const c = calismaOku();
+    if (!c) return;
+    if (c.sekme !== SEKME) return;                       // başka sekmenin işi
+    const sira = siraOku();
+    const beklenen = sira.find((x) => x.id === c.id);
+    const yasMs = Date.now() - (c.zaman || 0);
+    if (!beklenen || yasMs > (ayar.sohbetArasiDk + 3) * 60000) { calismaYaz(null); return; }   // eski ya da sırada yok
+    if (sohbetKimligi() !== beklenen.id) return;
+    // Durdur/Esc bu beklemeyi de iptal eder (zamanlayıcı motor.zamanlayici'de)
+    motor.kip = 'gecis';
+    motor.gecisHedef = beklenen.id;
+    motor.gecisAd = beklenen.ad || _('buSohbet');
+    kartAcik = true;
+    kartAc();
+    const dene = (kalan) => zamanla(kalan === 5 ? 3000 : 2000, () => {
+      const c2 = calismaOku();
+      if (motor.calisiyor || !c2 || c2.id !== c.id || c2.sekme !== SEKME || sohbetKimligi() !== beklenen.id) { if (!motor.calisiyor) { motor.kip = 'hazir'; ciz(); } return; }
+      if (!sohbetAlani() && kalan > 0) { dene(kalan - 1); return; }   // Instagram mesajları yükleyene dek (≈ 13 sn)
+      motor.kip = 'hazir';
+      calistir(c2.deneme);                                // kip yalnız bu iş için; ayar değişmez
+    });
+    dene(5);
+  }
+
+  function basla() {
+    window.addEventListener('keydown', tusBasildi, true);
+    sonYol = location.pathname;
+    durumTazele();
+    tetikGuncelle();
+    taniYenile();
+    devamKontrol();
+    let ara = 0;
+    const gozcu = new MutationObserver(() => {
+      if (ara) return;
+      ara = requestAnimationFrame(() => {
+        ara = 0;
+        if (ev && !ev.isConnected && document.body) document.body.appendChild(ev);
+        yolDegisti();
+        isaretPlanla();
+      });
+    });
+    gozcu.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener('popstate', yolDegisti);
+    window.addEventListener('scroll', isaretPlanla, true);
+    window.addEventListener('resize', isaretPlanla);
+    setInterval(() => {
+      yolDegisti();
+      temaUygula();
+      taniYenile();
+      if (kartAcik && !motor.calisiyor) kartCiz();
+    }, 2000);
+  }
+
+  if (testKanca) {
+    testKanca.igu = { kok: () => kok, ayar: () => ayar, motor, metin: METIN, rapor: taniRaporu, sec: SEC, durdur, calistir };
+  }
+  menuKaydet();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla, { once: true });
+  else basla();
+})();
