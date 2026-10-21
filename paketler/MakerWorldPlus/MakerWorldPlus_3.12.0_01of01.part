@@ -1,0 +1,1636 @@
+// ==UserScript==
+// @name         AALabs MakerWorld Plus
+// @namespace    aalabs
+// @version      3.12.0
+// @description  MakerWorld baskı profillerinde filament, renk, gramaj ve yazıcı uyumunu satırda gösterir; tercih edilen yazıcıyı seçer, profilleri süzer ve sıralar.
+// @author       AALabs
+// @match        https://makerworld.com/*
+// @match        https://*.makerworld.com/*
+// @icon         data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAMPklEQVR42u2ba2wc13XHf+fO7M4Ol29RD8p6i9SLelpqJTlOHbtwEyVx2iSl3KKu26JAEbVpCwdoA6RGi6Io+qEfijYIbAQIYNdOUpExjNSNYtVNE9hxa6V2ZMl6i3pS1Isil0tyl7vzuKcfZrkiLcmmpASIJF6AH3hn5uw9/3PuOf9zZq4waajQ2W3o3h7D35i23/6dT2Ht51HdjNr5CDUgwi/0UEUpIqYXkT0Y81LPt7/5PfhbS2eXQ3enBdHxu2WS8smULu088Bkxma+IsFlMCrUhqhGo5Y4YYhBxubp29qDh3/d0rXxlop4TAKhMdnabdlnzVUnV7kBjbFhQRCyo+cW3/HU8AbGoNSZVK4hBw8Izx/W9P028IAHBGXf7zo4OCcTpdrym37VBPtI4ABED3IHKQ2XNBhHROLBqw9jxmjc3xfVrfnVVy3cOdXQLh7oQOtWhW+Kl2w8843otX4jKg4FAmrtwKASu15yOyv3Pnuhas4NOdQRgyfaDn3RT9d+z4UgEuNzdIzKpOjcKhz91sqtjl2z8o7dTQ7nMHidVu95GRQs4dzkAsXFrTByOvtvYVNrs5obqHnUcZ0Ml4N3tygM4NiyocTIbckPyqDEaPS5OqhLt75EhWHFSapTHDbBF40CSVHfPDJPozBZXkfvQmDsz1d16ilSNUbjPiGjNHcPwfqY50SJCjbm3LH+tJxju8TENwDQA0wBMAzANwDQA9/CYcu0vwETWYO0H0YsJ9ErB6tU51eTvGktUZF/velWeTlhMRe41ciS5fqPfuWUAYgul0lWtfc9cl0OKQBgpQajV/33PUAqUOFZSrpBOyaTFWYViMZGdTgkp9+p1AaJYKQda/T1VcBwhk54sRwRKgRLFijHJ734YCB8KgAiMlZV1bRme/v3ZqAqlwPIXXzvPQD6atFhjhNFizCMba/mTz7egClfyEV/6l/P89R/MZvWSDN3/nefbr+WozzpYVcJImdOc4h92tJJJC//4rX72HCyQ9Q0oFEuW9ctq+MqTswhCxSpk0sK//3iY53YN0pB1iK3iGCFfiPncQw088fEmhkYsX37mPIWxGMcIeqsxQASiSGmqc9nSkWXr6hoevr+WDe0+pbJiJrjBuPUfe7Chcm+WhzbUUgosDVmHLR1ZHv2l2qrrmgq4qxZn+NiGWrZ0ZPmVdVnKYSJXjFAOlY3LfbauztLS6NJ7KWTr6ixf+q2ZzGx0CaPEM2KrZH3DU4/PZOvqLAPDEZdyISnXoLcbBEUgskpsSaxgYevqLLHVSdsgAcph04oatBInRiuuvedQkdjCwjlp6mpM5VkhtsqaJRlim8hdvcQn5QpWr26hZfM9Ygv7esb4u+cuMjAcM7PRZfsjjYwUY9KuMFyI+fQD9bTN8xjIx/xzdz+ZtKnKuf0soOAYuDAQYlX5yNostb4hirUaxEqBpX2+x+LWNOf7Q6JYcR0h5RqO9ZZxDCxqTTO72SWsxIiUK6xt86tuumqRR1OdQxyDWsX3DMsWeDgGzlwIOHMx4N/+KwfAk9uamdnkUgqUrO/wh59uBmDnD3KcvhBQM4UYMGUAxgWduRhwrLfMsvkei1q9iruCiBCEypbVWUTgzfcKWFUUSLvJcwP5CN8zLG71CGIltkpjrcPatgz9QxHHzpZobUmxYHaaILREMcxocFgy1wPgwKkSjbUOz+8a5Eo+YsHsFL/5cCPn+gO2baljzVKf3EjM898fpNZPvOxnyAMSYeVQ2XOoiAjcv9ynHFjECKpJhH94Q7LHf3p0DC9tKpHfMJCPOd4bALB8QeLSYajMn5WipcHl8OkSPzlUBGDlIo8wTqL/gtlpmusdRsdiTvQF1GcdTl8MeOH7iRf83rZm5jSneHJbYv1v7s5x8nxAJm2mlAZvAgCpuuyegwUAPrI2sbaQxIbWlhSbVtRw7GyJU+fLSCUOjG+PQ6dLAKxY6OGaBMyVizIAHDlT5p1jYwCsa/MRkoDaPi+x/om+gEu5EMdArW94YfcgA/mYJXPTfPWpeWxc7pMfjfnXV6du/VtigtmMYX9PiShWtq7O0lzvElulFCjr2ny8tPD6uwVGKsFvInc5eKpU8YAMWd8Q2eSZBIAShyrX17X5+JlEiXGADp8uUxyziAheynDucshzuwYBeOzBelxHeHF3jlMXArwpWv+WAPA9Q+/lgIOnSsxpdlm+wKMcKKrKR9dlAXhj32iV2Y0TnXRKOHo2UXDJ3DQz6l1cR1jfngDQ0xdw7nLA6JhlxUKPWY0uRmDFwgSAgyfHEqUmpLxvvZYjX4iJrZIfjXmusvftFK1/SwAYA8WS8ub+AqqweVWWYtnSUOvw0PpawkjZe2yMjGcmBFAlnRLOXgq4NBiS9Q1zW1I01jqsWOgxXLT09QcMFywHT5XIpA0LW1NkfYdl85PXlIfPlCukK+EIpUBZ3+6TzRiMCH7GsGxeEpTlJtqcNw1AQkPhfw8UEIGPrs+iCkvmeiyem+bd42P0XQnxUjIpfrqOkBuJOXq2DMDCOSnmz0rhe4bDp0sMDsfECu8eT+LA8vkZZjW7zGhwyRdiTl8MqhTaVgD98+0zcR1hYDgi7QpPPT4zSaeqP18A/LTh4KkSIwXLxuU+zfUO69t9VOGHe0cpB0lqfH+REgRajQOLWr3q/t53fIxSoLgG9vdUAFjo0XZfEgCP9wZcGUpotzEJ6fnE5jrWLs1wcSDkz/6pj2LJsmllDb/2y7UMFxP6+3MDIO0KlwYj/u9IkUzasL7dZ/OqGkTgrQMF0im5plJTQIxUAWibl2bt0gSA/SfGqoXQkTOV6/d51QB56PQYxbLFMYKNlUza8IXfaAHg5dfzfOeHQ7y6ZwSAP/5cC5774QzwNvoBWuX8//Nekg47H2lkS0eW/lzE0bPla6q0KnAp4VhvuQKAx/r2GgCOnimTcpIq8NzlkAsDIYvnplnXPh4AS9X4ky9atm2pY8OyJO29uDtHc73LN14ZIAiVjctr2La1juGCnZIX3FJDJInqhrePFFGFX3+wgTkzXF7fN0puOJ5UIb7fc/r6Qy4OhCxuTbNiocf5KyHn+pP9bYyQL1j29YzR0uiycVlSUxw9WybtCnEMNZ6w47MtFco7xLHeMi0NDu8cLbJ73As+24LvyZSygbkZHhjbhNhopSQ9erZM7+UA10kUfmNf4br3j//vOsLQSMzhM2UcR/A9w4GTJYZGLa4jFeKUZBG10FjnMDAUceZiiO8ZciMRn9hcz5qlPiPFmBdeHaTGM8Q2kf2N/xggjJU1S30+ubWeodEY15HbB0AB1wiOgaxvUBTXFQaHI/YeG8OYZOFvHymS8SRZUOX+2hozqaoMIuXo2XKlfkjIURRrpYuTFE8HTpYwlZd2vZdDruQjRKCpzuUvn5iFCLz0ozxHz5apySQFWa3vsOdQkR/9dBQR+PITs5jRUCmXb6chopooMzQa8dbBAif7gmp7ynWE776RZ3azy7HeMn39IemUIYxs9f7LuThpiU2IA2/sG2V9ZX//eH8BL5WkLlXwKp71g7dHyPqG//zJKKpKOYCNKzJczkVVFuh7VymvVqrVr710hWzG4DrC2qUZ3nwvaa7c6P2vtG0/NKVwaW3C541JWlFVi4ZabUr4FfIj4y20wE6av17LzEtJsoXeB/pYOVmx60gC0PvmvbRUt971ZCtQc4O23S31BM24O09oRo5b1EvL5Pkb3D/+zHhf8IOaoONbZ+L1G83fSLadwlv/m/oi7HoCP6j7eqMFTKVje6NnP0ypqXaDp98LTAMwDcA0ANMATAMwDcA0AObmaMPdNlSNqhS5Fz8XFIMqRSPYvuQr+XvJE1RFHAT6DMhb4qSTA0b3zrCJzrxlrLg7NQ4FvYc+l1eMxqFYYadpahx5zcalvSaVBYjvAfVjk8pi49Lepsax18w7X98UqsjTiDPxM6S72/7iiIo8/c7XN4WGTnVOdnXsisP8s47X7CoEd6/mBI7X7Mbh0LMnuzp20amOoRtLZ5dzv3Z8MS7nXna95jQQoXfRKYpEl8j1mtNxOffyCV39xeQcMfYGR2ezO1CLDUcVMXf10dnrHp5u2374MST1V3fP4Wndg0bXPTw9IfVVjpR3djk9XStf6dn5wgMq9jM2HntebXAEGxfuDLKkio0LaoMjNh57Xo081rPzxQd6ula+QmeXM0lX4P8BzXkwZGD2jy8AAAAASUVORK5CYII=
+// @grant        GM_getValue
+// @grant        GM_setValue
+// @grant        GM_registerMenuCommand
+// @grant        GM_unregisterMenuCommand
+// @grant        GM_setClipboard
+// @grant        GM_info
+// @grant        unsafeWindow
+// @run-at       document-start
+// @noframes
+// @aalabs-ikon  MWX
+// ==/UserScript==
+
+/* AALabs MakerWorld Plus (MWX) — eski adı MakerWorld MWFX. app-lab v02.02, userscript. */
+(function () {
+  'use strict';
+
+  const SURUM = '3.12.0';
+  const KOD = 'MWX';
+  const AD = 'AALabs MakerWorld Plus';
+  const ONEK = 'aalabs-mwx';
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // METİNLER — iki dil zorunlu; anahtarlar iki dilde aynı (denetle.py ölçer)
+  // ═══════════════════════════════════════════════════════════════════════
+  const METIN = {
+    tr: {
+      ayarlar: 'Ayarlar', ayarlarAc: 'Ayarları aç', kapat: 'Kapat', ara: 'Ayarlarda ara', sonucYok: 'Sonuç yok. Başka bir kelime dene.',
+      ortak: 'ORTAK', altSol: 'Değişiklikler hemen uygulanır.', altSag: 'Esc kapatır',
+      b_sekme: 'Yazıcı sekmeleri', b_rozet: 'Rozetler', b_uyumsuz: 'Uyumsuz profiller', b_filtre: 'Filtre ve sıralama',
+      b_kart: 'Model kartları', b_gelismis: 'Gelişmiş', b_genel: 'Genel', b_kisayol: 'Klavye kısayolları', b_tani: 'Tanı', b_hakkinda: 'Hakkında',
+      a_sekme: 'Hangi yazıcı sekmesi başa alınır ve sayfa açılınca seçilir.',
+      a_rozet: 'Profil satırının altında hangi bilgiler görünür.',
+      a_uyumsuz: 'Tercih edilen ilk yazıcıyla uyumsuz profil nasıl görünür.',
+      a_filtre: 'Print Profile başlığının altındaki çubuk. Filtre profil başlığında arar.',
+      a_kart: 'Arama, kategori ve profil sayfalarındaki model kartları.',
+      a_gelismis: 'Sekme seçimi zamanlaması ve önbellek.',
+      a_genel: 'Tema, dil ve ölçek.',
+      a_kisayol: 'Kutuya tıkla ve yeni tuşa bas. Tarayıcının ve sitenin tuşları seçilemez.',
+      a_tani: 'Her özellik aradığı parçayı buldu mu. Sorun olursa raporu sohbete yapıştır.',
+      o_sira: 'Tercih sırası', o_siraI: 'İlk bulunan seçilir. Okla taşı.', o_ekle: 'Yazıcı ekle', o_cikar: 'Listeden çıkar',
+      o_oto: 'Sayfa açılınca seç', o_url: 'Paylaşılan profil bağlantısında seçme', o_urlI: 'Adreste #profileId varsa dokunmaz.',
+      o_ilk: 'Seçimden sonra ilk profili aç', o_ilkI: 'Geri tuşu geçmişine kayıt ekler.',
+      o_bilgi: 'Tercih edilen yazıcı yoksa bilgi satırı', o_bilgiI: 'Listenin üstünde tek satır.',
+      o_alan: 'Gösterilen alanlar', o_hazne: 'Kapalı hazne uyarısı', o_hazneI: 'ABS, ASA, PC, PA için.',
+      o_noz: 'Olağan nozzle çapı', o_nozI: 'Profil başka çap kullanıyorsa sarı.',
+      f_filaments: 'Filament', f_colors: 'Renk', f_weight: 'Gramaj', f_nozzle: 'Nozzle', f_ams: 'AMS', f_released: 'Yayın tarihi',
+      f_compat: 'Uyum', f_settings: 'Katman · duvar · dolgu', f_plates: 'Plaka sayısı', f_printers: 'Uyumlu yazıcılar',
+      o_stil: 'Görünüm', s_blur: 'Bulanık', s_dim: 'Soluk', s_hide: 'Gizle', s_none: 'Dokunma',
+      o_net: 'Üstüne gelince netleş', o_sona: 'Listenin sonuna it', o_sonaI: 'Sıralama ne olursa olsun.',
+      o_kutu: 'Filtre kutusu', o_hatirla: 'Filtreyi modeller arasında hatırla', o_cip: 'Malzeme çipleri',
+      o_gizli: 'Her zaman gizlenen malzemeler', o_gizliI: 'Bu malzemeli profiller hiç görünmez.',
+      o_srt: 'Sıralama menüsü', o_vsrt: 'Varsayılan sıralama',
+      o_kartAc: 'Kartta malzeme rozeti', o_kartAcI: 'Her kart için bir istek.', o_kartUyum: 'Kartta yazıcı uyumu',
+      o_kartGor: 'Yalnız ekrandaki kartları yükle', o_kartGorI: 'Kaydırdıkça yüklenir; istek sayısı düşer.',
+      o_bekle: 'Liste oturma süresi (ms)', o_aralik: 'Deneme aralığı (ms)', o_deneme: 'En çok deneme', o_sure: 'Toplam süre (sn)',
+      o_onbellek: 'Veri önbelleği (dk)', o_gunluk: 'Ayrıntılı günlük (konsol)', o_kapali: 'Betiği bu sitede kapat',
+      o_kapaliI: 'Ayarlar açık kalır; sayfayı yenileyince betik iş yapmaz.',
+      o_tema: 'Tema', t_sayfa: 'Sayfayı izle', t_acik: 'Açık', t_koyu: 'Koyu',
+      o_dil: 'Dil', d_tarayici: 'Tarayıcı dili', d_algi: 'Algılanan: {d}', o_olcek: 'Ölçek',
+      o_vars: 'Bütün ayarları varsayılana döndür', vars: 'Varsayılana dön', varsOnay: 'Onayla', varsYapildi: 'Ayarlar varsayılana döndü.',
+      k_ayarlar: 'Ayarları aç / kapat', k_bas: 'Tuşa bas…', k_varsayilan: 'Varsayılan', k_gecersiz: 'Bu tuş seçilemez: {k}',
+      k_degisti: 'Kısayol: {k}',
+      tn_kopya: 'Raporu kopyala', tn_kopyalandi: 'Rapor panoya kopyalandı.', tn_kopyaYok: 'Pano kullanılamadı. Metin seçildi; Ctrl+C ile kopyala.',
+      tn_tarih: 'Tarih alanları', tn_bilinmiyor: 'bilinmiyor', tn_kabul: 'Kabul testi', tn_kabulA: 'Her soruyu sayfada dene, sonra cevapla. Sonuç rapora eklenir.',
+      tn_gecti: 'Geçti', tn_sorun: 'Sorun', tn_atla: 'Atla', tn_not: 'Kısa not', tn_kabulBitti: 'Kabul cevapları kaydedildi.',
+      tn_betik: 'Betik', tn_veri: 'Profil verisi', tn_satir: 'Profil satırları', tn_sekme: 'Yazıcı sekmeleri', tn_secim: 'Sekme seçimi',
+      tn_sirala: 'Sıralama kabı', tn_cubuk: 'Filtre çubuğu', tn_kart: 'Model kartları', tn_istek: 'Son istek',
+      tn_bekliyor: 'bekliyor', tn_modelDegil: 'model sayfası değil', tn_kartYok: 'bu sayfada kart yok',
+      tn_eslesti: '{n} / {m} eşlendi', tn_profilSay: '{n} profil', tn_sekmeSay: '{n} sekme', tn_bulunamadi: 'bulunamadı',
+      tn_dogrulandi: 'doğrulandı', tn_atlandi: 'atlandı (kap doğrulanamadı)', tn_gerekmez: 'gerekmiyor',
+      tn_kartDurum: '{n} kart · {y} yüklendi · {h} okunamadı',
+      dt_create: 'Model createTime', dt_update: 'Model updateTime', dt_site: 'Sitenin "Released" yazısı',
+      dt_eski: 'Profil publishTime (en eski)', dt_yeni: 'Profil publishTime (en yeni)', dt_yok: 'sayfada yok',
+      h_surum: '{ad} {s} · userscript', h_kaynak: 'AALabs App Store ile güncellenir.', h_yedek: 'Ayar yedeği',
+      h_disa: 'Dışa aktar (JSON)', h_ice: 'İçe aktar', h_iceTamam: 'Ayarlar içe aktarıldı.', h_iceHata: 'Dosya okunamadı: geçerli bir MWX ayar yedeği değil.',
+      h_eskiBetik: 'Eski "MakerWorld MWFX" betiği hâlâ kuruluysa Tampermonkey panelinden sil; ikisi birlikte çalışmasın.',
+      sr_varsayilan: 'Sıra: varsayılan', sr_newest: 'Sıra: en yeni', sr_oldest: 'Sıra: en eski', sr_downloads: 'Sıra: en çok indirilen', sr_rating: 'Sıra: en yüksek puan',
+      v_varsayilan: 'Varsayılan', v_newest: 'En yeni', v_oldest: 'En eski', v_downloads: 'En çok indirilen', v_rating: 'En yüksek puan',
+      fl_yer: 'profil filtrele — 0.2  -0.6  /reinf/i', fl_temizle: 'Filtreyi temizle', fl_sira: 'Profil sıralaması',
+      fl_cip: '{m} — tıkla: yalnız bunu göster', fl_cipGizli: '{m} her zaman gizli (Ayarlar)',
+      r_kapali: 'kapalı hazne', r_nozzle: 'nozzle', r_yayin: 'yayın', r_uyumlu: 'uyumlu', r_plaka: '{n} plaka', r_duvar: '{n} duvar',
+      r_yayinI: 'Bu profilin yayın tarihi: {d}',
+      bl_yedek: 'Bu modelde {a} profili yok. {b} seçildi.', bl_yok: 'Bu modelde {a} profili yok.',
+      bl_hicbiri: 'Bu modelde tercih ettiğin yazıcıların ({l}) profili yok.',
+      kr_yukleniyor: 'yükleniyor…', kr_okunamadi: 'okunamadı',
+      m_ayarlar: 'Ayarlar', zatenKapali: 'MWX bu sitede kapalı. Ayarlar › Gelişmiş.',
+      sn_bekliyor: 'bekliyor', sn_adres: 'adreste profil var; dokunulmadı', sn_yukleniyor: 'sayfa yükleniyor', sn_oturuyor: 'sekme listesi oturuyor',
+      sn_sekmeYok: 'tercih edilen sekme yok', sn_tamam: 'seçildi', sn_vazgecti: 'seçim tutmadı', sn_deneniyor: 'deneniyor', sn_deneme: '{n} deneme',
+      cp_baslik: 'Print Profile başlığının altında', cp_sekme: 'sekme çubuğunun üstünde', cp_liste: 'profil listesinin üstünde', kn_onbellek: 'önbellek',
+      kb1: 'Model sayfası açılınca P2S sekmesi seçili geliyor mu?', kb1i: 'P2S profili olan bir model aç.',
+      kb2: 'Profil satırlarında filament ve gramaj rozetleri görünüyor mu?', kb2i: 'Print Profile listesine bak.',
+      kb3: 'Bir malzeme çipine basınca yalnız o malzemeli profiller kalıyor mu?', kb3i: 'Silica Dryer Spool sayfasında ABS\'ye bas.',
+      kb4: 'Sıralama "en yeni" iken "Open in Bambu Studio" açılır menüsü düzgün açılıyor mu?', kb4i: 'Sıralamayı değiştir, düğmenin okuna bas.',
+      kb5: 'Arama sayfasında model kartlarında malzeme rozeti görünüyor mu?', kb5i: 'makerworld.com\'da bir kelime ara, kartlara bak.',
+    },
+    en: {
+      ayarlar: 'Settings', ayarlarAc: 'Open settings', kapat: 'Close', ara: 'Search settings', sonucYok: 'No results. Try another word.',
+      ortak: 'SHARED', altSol: 'Changes apply at once.', altSag: 'Esc closes',
+      b_sekme: 'Printer tabs', b_rozet: 'Badges', b_uyumsuz: 'Incompatible profiles', b_filtre: 'Filter and sort',
+      b_kart: 'Model cards', b_gelismis: 'Advanced', b_genel: 'General', b_kisayol: 'Keyboard shortcuts', b_tani: 'Diagnostics', b_hakkinda: 'About',
+      a_sekme: 'Which printer tab moves to the front and is selected when the page opens.',
+      a_rozet: 'Which details show under each profile row.',
+      a_uyumsuz: 'How a profile that does not fit your first printer looks.',
+      a_filtre: 'The bar under the Print Profile heading. The filter searches profile titles.',
+      a_kart: 'Model cards on search, category and profile pages.',
+      a_gelismis: 'Tab selection timing and cache.',
+      a_genel: 'Theme, language and scale.',
+      a_kisayol: 'Click the box and press the new key. Browser and site keys cannot be chosen.',
+      a_tani: 'Did each feature find what it looks for. If something breaks, paste the report into the chat.',
+      o_sira: 'Preference order', o_siraI: 'The first one found is selected. Move with the arrows.', o_ekle: 'Add printer', o_cikar: 'Remove from list',
+      o_oto: 'Select when the page opens', o_url: 'Leave shared profile links alone', o_urlI: 'Does nothing if the address has #profileId.',
+      o_ilk: 'Open the first profile after selecting', o_ilkI: 'Adds an entry to the back history.',
+      o_bilgi: 'Info line when your printer is missing', o_bilgiI: 'One line above the list.',
+      o_alan: 'Shown fields', o_hazne: 'Enclosure warning', o_hazneI: 'For ABS, ASA, PC, PA.',
+      o_noz: 'Usual nozzle size', o_nozI: 'Yellow when the profile uses another size.',
+      f_filaments: 'Filament', f_colors: 'Colour', f_weight: 'Weight', f_nozzle: 'Nozzle', f_ams: 'AMS', f_released: 'Release date',
+      f_compat: 'Fit', f_settings: 'Layer · walls · infill', f_plates: 'Plate count', f_printers: 'Compatible printers',
+      o_stil: 'Look', s_blur: 'Blurred', s_dim: 'Faded', s_hide: 'Hidden', s_none: 'Untouched',
+      o_net: 'Sharpen on hover', o_sona: 'Move to the end', o_sonaI: 'Whatever the sort.',
+      o_kutu: 'Filter box', o_hatirla: 'Keep the filter across models', o_cip: 'Material chips',
+      o_gizli: 'Always hidden materials', o_gizliI: 'Profiles with these never show.',
+      o_srt: 'Sort menu', o_vsrt: 'Default sort',
+      o_kartAc: 'Material badge on cards', o_kartAcI: 'One request per card.', o_kartUyum: 'Printer fit on cards',
+      o_kartGor: 'Load visible cards only', o_kartGorI: 'Loads as you scroll; fewer requests.',
+      o_bekle: 'List settle time (ms)', o_aralik: 'Retry interval (ms)', o_deneme: 'Max tries', o_sure: 'Total time (s)',
+      o_onbellek: 'Data cache (min)', o_gunluk: 'Verbose log (console)', o_kapali: 'Turn the script off on this site',
+      o_kapaliI: 'Settings stay available; after a reload the script does nothing.',
+      o_tema: 'Theme', t_sayfa: 'Follow page', t_acik: 'Light', t_koyu: 'Dark',
+      o_dil: 'Language', d_tarayici: 'Browser language', d_algi: 'Detected: {d}', o_olcek: 'Scale',
+      o_vars: 'Reset all settings', vars: 'Reset', varsOnay: 'Confirm', varsYapildi: 'Settings were reset.',
+      k_ayarlar: 'Open / close settings', k_bas: 'Press a key…', k_varsayilan: 'Default', k_gecersiz: 'This key cannot be used: {k}',
+      k_degisti: 'Shortcut: {k}',
+      tn_kopya: 'Copy report', tn_kopyalandi: 'Report copied to the clipboard.', tn_kopyaYok: 'Clipboard unavailable. The text is selected; press Ctrl+C.',
+      tn_tarih: 'Date fields', tn_bilinmiyor: 'unknown', tn_kabul: 'Acceptance test', tn_kabulA: 'Try each question on the page, then answer. The result goes into the report.',
+      tn_gecti: 'Passed', tn_sorun: 'Problem', tn_atla: 'Skip', tn_not: 'Short note', tn_kabulBitti: 'Acceptance answers saved.',
+      tn_betik: 'Script', tn_veri: 'Profile data', tn_satir: 'Profile rows', tn_sekme: 'Printer tabs', tn_secim: 'Tab selection',
+      tn_sirala: 'Sort container', tn_cubuk: 'Filter bar', tn_kart: 'Model cards', tn_istek: 'Last request',
+      tn_bekliyor: 'waiting', tn_modelDegil: 'not a model page', tn_kartYok: 'no cards on this page',
+      tn_eslesti: '{n} / {m} matched', tn_profilSay: '{n} profiles', tn_sekmeSay: '{n} tabs', tn_bulunamadi: 'not found',
+      tn_dogrulandi: 'verified', tn_atlandi: 'skipped (container not verified)', tn_gerekmez: 'not needed',
+      tn_kartDurum: '{n} cards · {y} loaded · {h} unreadable',
+      dt_create: 'Model createTime', dt_update: 'Model updateTime', dt_site: 'Site\'s "Released" text',
+      dt_eski: 'Profile publishTime (oldest)', dt_yeni: 'Profile publishTime (newest)', dt_yok: 'not in the page',
+      h_surum: '{ad} {s} · userscript', h_kaynak: 'Updated by the AALabs App Store.', h_yedek: 'Settings backup',
+      h_disa: 'Export (JSON)', h_ice: 'Import', h_iceTamam: 'Settings imported.', h_iceHata: 'File could not be read: not a valid MWX settings backup.',
+      h_eskiBetik: 'If the old "MakerWorld MWFX" script is still installed, delete it in the Tampermonkey dashboard so both do not run.',
+      sr_varsayilan: 'Sort: default', sr_newest: 'Sort: newest', sr_oldest: 'Sort: oldest', sr_downloads: 'Sort: most downloaded', sr_rating: 'Sort: top rated',
+      v_varsayilan: 'Default', v_newest: 'Newest', v_oldest: 'Oldest', v_downloads: 'Most downloaded', v_rating: 'Top rated',
+      fl_yer: 'filter profiles — 0.2  -0.6  /reinf/i', fl_temizle: 'Clear filter', fl_sira: 'Profile sort',
+      fl_cip: '{m} — click: show only this', fl_cipGizli: '{m} always hidden (Settings)',
+      r_kapali: 'enclosure', r_nozzle: 'nozzle', r_yayin: 'released', r_uyumlu: 'fits', r_plaka: '{n} plates', r_duvar: '{n} walls',
+      r_yayinI: 'This profile was released on {d}',
+      bl_yedek: 'This model has no {a} profile. {b} was selected.', bl_yok: 'This model has no {a} profile.',
+      bl_hicbiri: 'This model has no profile for your printers ({l}).',
+      kr_yukleniyor: 'loading…', kr_okunamadi: 'unreadable',
+      m_ayarlar: 'Settings', zatenKapali: 'MWX is off on this site. Settings › Advanced.',
+      sn_bekliyor: 'waiting', sn_adres: 'address has a profile; left alone', sn_yukleniyor: 'page loading', sn_oturuyor: 'tab list settling',
+      sn_sekmeYok: 'preferred tab missing', sn_tamam: 'selected', sn_vazgecti: 'selection did not hold', sn_deneniyor: 'trying', sn_deneme: '{n} tries',
+      cp_baslik: 'under the Print Profile heading', cp_sekme: 'above the tab bar', cp_liste: 'above the profile list', kn_onbellek: 'cache',
+      kb1: 'Is the P2S tab selected when a model page opens?', kb1i: 'Open a model that has a P2S profile.',
+      kb2: 'Do filament and weight badges show on profile rows?', kb2i: 'Look at the Print Profile list.',
+      kb3: 'After pressing a material chip, do only profiles with that material remain?', kb3i: 'On Silica Dryer Spool press ABS.',
+      kb4: 'With sort set to "newest", does the "Open in Bambu Studio" drop-down open correctly?', kb4i: 'Change the sort, press the button\'s arrow.',
+      kb5: 'Do model cards on the search page show a material badge?', kb5i: 'Search makerworld.com for a word, look at the cards.',
+    },
+  };
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // SABİTLER
+  // ═══════════════════════════════════════════════════════════════════════
+  const YAZICI = /^(all|t[uü]m[uü]|全部|x1\s?carbon|x1e|x1|x2d|p1p|p1s|p2s|a1\s?mini|a1|a2l|h2d\s?pro|h2d|h2s|h2c|h2)$/i;
+  const HEPSI = /^(all|t[uü]m[uü]|全部)$/i;
+  const YAZICI_LISTE = ['P2S', 'A1', 'A1 mini', 'P1S', 'P1P', 'X1 Carbon', 'X1', 'X1E', 'X2D', 'H2D', 'H2D Pro', 'H2S', 'H2C', 'A2L'];
+  const HAZNE = /^(abs|asa|pc|pa|paht|ppa|pp|pet-?cf|pa-?cf|pps)/i;
+  const MODEL_YOLU = /\/models\/([^/?#]+)/;
+  const KAPAK_PROFIL = /\/model\/[^/]+\/(\d+)\/instance\//;
+  const RE_RELEASED = /^(released|yayınlandı|yayın)/i;
+  const ALANLAR = ['filaments', 'colors', 'weight', 'nozzle', 'ams', 'released', 'compat', 'settings', 'plates', 'printers'];
+  const SIRALAR = ['default', 'newest', 'oldest', 'downloads', 'rating'];
+  const MALZEMELER = ['PLA', 'PETG', 'ABS', 'ASA', 'TPU', 'PC', 'PA'];
+  const KABUL = ['kb1', 'kb2', 'kb3', 'kb4', 'kb5'];
+
+  const VARSAYILAN = {
+    sira: ['P2S', 'A1'], oto: true, url: true, ilk: false, bilgi: true,
+    alan: ['filaments', 'colors', 'weight', 'nozzle', 'ams', 'released', 'compat'], hazne: true, noz: 0.4,
+    stil: 'blur', net: true, sona: true,
+    kutu: true, hatirla: false, cip: true, gizli: [], srt: true, vsrt: 'default',
+    kartAc: true, kartUyum: true, kartGor: true,
+    bekle: 600, aralik: 350, deneme: 40, sure: 30, onbellek: 10, gunluk: false, kapali: false,
+    tema: 'sayfa', dil: 'tarayici', olcek: 100,
+    kisayol: { ayarlar: 'Ctrl+,' },
+  };
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // DEPO (GM) ve ayar doğrulama
+  // ═══════════════════════════════════════════════════════════════════════
+  const GM_VAR = typeof GM_getValue === 'function' && typeof GM_setValue === 'function';
+  const bellek = {};
+  function depoOku(k, v) {
+    try { if (GM_VAR) { const x = GM_getValue(k); return x === undefined ? v : x; } } catch (e) { /* bellek */ }
+    return k in bellek ? bellek[k] : v;
+  }
+  function depoYaz(k, v) {
+    try { if (GM_VAR) { GM_setValue(k, v); return; } } catch (e) { /* bellek */ }
+    bellek[k] = v;
+  }
+
+  const kopya = (o) => JSON.parse(JSON.stringify(o));
+  const sayiAraligi = (v, en, ek, vars) => (typeof v === 'number' && isFinite(v) ? Math.min(ek, Math.max(en, v)) : vars);
+
+  function dogrula(ham) {
+    const a = kopya(VARSAYILAN);
+    if (!ham || typeof ham !== 'object' || Array.isArray(ham)) return a;
+    const bool = (k) => { if (typeof ham[k] === 'boolean') a[k] = ham[k]; };
+    ['oto', 'url', 'ilk', 'bilgi', 'hazne', 'net', 'sona', 'kutu', 'hatirla', 'cip', 'srt', 'kartAc', 'kartUyum', 'kartGor', 'gunluk', 'kapali'].forEach(bool);
+    if (Array.isArray(ham.sira)) {
+      const s = [];
+      ham.sira.forEach((p) => {
+        if (typeof p !== 'string' || !YAZICI.test(p.trim()) || HEPSI.test(p.trim()) || s.some((x) => esYazici(x, p))) return;
+        s.push(YAZICI_LISTE.find((y) => esYazici(y, p)) || p.trim().toUpperCase());
+      });
+      if (s.length) a.sira = s.slice(0, 6);
+    }
+    if (Array.isArray(ham.alan)) a.alan = ALANLAR.filter((x) => ham.alan.indexOf(x) >= 0);
+    if (Array.isArray(ham.gizli)) a.gizli = MALZEMELER.filter((x) => ham.gizli.some((g) => String(g).toUpperCase() === x));
+    if ([0.2, 0.4, 0.6, 0.8].indexOf(Number(ham.noz)) >= 0) a.noz = Number(ham.noz);
+    if (['blur', 'dim', 'hide', 'none'].indexOf(ham.stil) >= 0) a.stil = ham.stil;
+    if (SIRALAR.indexOf(ham.vsrt) >= 0) a.vsrt = ham.vsrt;
+    if (['sayfa', 'acik', 'koyu'].indexOf(ham.tema) >= 0) a.tema = ham.tema;
+    if (['tarayici', 'tr', 'en'].indexOf(ham.dil) >= 0) a.dil = ham.dil;
+    if ([90, 100, 115, 130].indexOf(ham.olcek) >= 0) a.olcek = ham.olcek;
+    a.bekle = sayiAraligi(ham.bekle, 0, 5000, a.bekle);
+    a.aralik = sayiAraligi(ham.aralik, 100, 5000, a.aralik);
+    a.deneme = Math.round(sayiAraligi(ham.deneme, 1, 200, a.deneme));
+    a.sure = sayiAraligi(ham.sure, 3, 300, a.sure);
+    a.onbellek = sayiAraligi(ham.onbellek, 0, 1440, a.onbellek);
+    if (ham.kisayol && typeof ham.kisayol.ayarlar === 'string' && komboKanonikMi(ham.kisayol.ayarlar) && !yasakMi(ham.kisayol.ayarlar)) {
+      a.kisayol.ayarlar = ham.kisayol.ayarlar;
+    }
+    return a;
+  }
+
+  // MWFX 3.x ayarları sayfanın localStorage'ındaydı; bir kez okunup taşınır.
+  function eskiAyarlariTasi() {
+    if (depoOku('tasindi', false)) return null;
+    let eski = null;
+    try { eski = JSON.parse(localStorage.getItem('mwfx.cfg.v31') || localStorage.getItem('mwfx.cfg.v3') || 'null'); } catch (e) { return null; }
+    // İşaret yalnız eski kayıt gerçekten okununca yazılır (depolama kapalı ya da başka alt alan adı → sonra yine denenir)
+    if (!eski || typeof eski !== 'object') return null;
+    depoYaz('tasindi', true);
+    const y = {
+      sira: eski.preferredPrinters, oto: eski.autoSelectPrinter, ilk: eski.autoSelectFirstProfile, url: eski.respectUrlProfile,
+      alan: eski.showBadges === false ? [] : eski.badgeFields, hazne: eski.warnEnclosure, noz: eski.warnNozzle,
+      stil: eski.incompatibleStyle, net: eski.revealOnHover, srt: eski.showSort,
+      vsrt: eski.sortMode, kutu: eski.showFilter, cip: eski.showMaterialChips, gizli: eski.hideMaterials,
+      hatirla: eski.persistFilter, gunluk: eski.debug, kapali: eski.enabled === false,
+      bekle: eski.selectStableMs, aralik: eski.selectRetryMs, deneme: eski.selectMaxTries,
+      sure: typeof eski.selectTimeoutMs === 'number' ? eski.selectTimeoutMs / 1000 : undefined,
+      onbellek: typeof eski.cacheTtlMs === 'number' ? eski.cacheTtlMs / 60000 : undefined,
+    };
+    try { const f = localStorage.getItem('mwfx.filter'); if (f && eski.persistFilter) depoYaz('filtre', f); } catch (e) { /* yok */ }
+    return dogrula(y);
+  }
+
+  // Yükleme dosyanın sonunda (ayarYukle): yardımcı sabitler (sade, YASAK) o noktada tanımlı olur.
+  let AYAR = null;
+  function ayarYukle() {
+    const tasinan = eskiAyarlariTasi();
+    if (tasinan) { depoYaz('ayar', tasinan); return tasinan; }
+    return dogrula(depoOku('ayar', null));
+  }
+  function ayarKaydet() { depoYaz('ayar', AYAR); }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // DİL, GÜNLÜK
+  // ═══════════════════════════════════════════════════════════════════════
+  function tarayiciDili() { return /^tr\b/i.test((navigator.languages && navigator.languages[0]) || navigator.language || '') ? 'tr' : 'en'; }
+  function dil() { return AYAR.dil === 'tarayici' ? tarayiciDili() : AYAR.dil; }
+  function t(k, d) {
+    let s = (METIN[dil()] && METIN[dil()][k]) || METIN.tr[k] || k;
+    if (d) s = s.replace(/\{(\w+)\}/g, (m, x) => (x in d ? d[x] : m));
+    return s;
+  }
+  function gunluk(...a) { if (AYAR.gunluk) console.log('[MWX]', ...a); }
+  function hata(yer, e) { console.error('[MWX] ' + yer + ' hatası:', e); }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // YARDIMCILAR
+  // ═══════════════════════════════════════════════════════════════════════
+  const yazi = (el) => ((el && el.textContent) || '').replace(/\s+/g, ' ').trim();
+  const sade = (s) => String(s || '').toLowerCase().replace(/[\s\-_]/g, '');
+  function esYazici(a, b) { return sade(a) === sade(b); }
+  const katla = (s) => String(s).toLocaleLowerCase('tr-TR').replace(/ı/g, 'i');
+  const tarih = (iso) => {
+    const d = new Date(iso); if (!iso || isNaN(d)) return null;
+    const p = (n) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+  };
+
+  function ekle(el, cocuklar) {
+    for (const c of [cocuklar].flat(Infinity)) {
+      if (c == null || c === false) continue;
+      el.append(c instanceof Node ? c : document.createTextNode(String(c)));
+    }
+    return el;
+  }
+  function ogeKur(etiket, ozellik, ...cocuk) {
+    const el = document.createElement(etiket);
+    for (const k in (ozellik || {})) {
+      const v = ozellik[k];
+      if (v == null || v === false) continue;
+      if (k === 'class') el.className = v;
+      else if (k === 'text') el.textContent = v;
+      else if (k.slice(0, 2) === 'on' && typeof v === 'function') el.addEventListener(k.slice(2), v);
+      else el.setAttribute(k, v === true ? '' : String(v));
+    }
+    return ekle(el, cocuk);
+  }
+  const O = ogeKur;
+
+  function css(el, obj) {
+    if (!el) return;
+    for (const k in obj) {
+      const p = k.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
+      if (el.style.getPropertyValue(p) !== obj[k] || el.style.getPropertyPriority(p) !== 'important') el.style.setProperty(p, obj[k], 'important');
+    }
+  }
+  function cssSil(el, liste) { if (el) liste.forEach((k) => el.style.removeProperty(k.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase()))); }
+
+  // Sayfa bağlamı: Firefox'ta Tampermonkey'in fetch'i moz-extension kökenli gider (platform-userscript §2.11)
+  const SAYFA = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window;
+  function sayfayaKopya(o) { try { if (typeof cloneInto === 'function') return cloneInto(o, SAYFA); } catch (e) { /* düz */ } return o; }
+  const FETCH_YOLLARI = [];
+  try { if (SAYFA !== window && typeof SAYFA.fetch === 'function') FETCH_YOLLARI.push(['sayfa', (u, i) => SAYFA.fetch(u, sayfayaKopya(i))]); } catch (e) { /* yok */ }
+  try { if (typeof content !== 'undefined' && content && typeof content.fetch === 'function') FETCH_YOLLARI.push(['content', (u, i) => content.fetch(u, sayfayaKopya(i))]); } catch (e) { /* yok */ }
+  FETCH_YOLLARI.push(['betik', (u, i) => fetch(u, i)]);
+
+  const istek = { son: null };
+  async function jsonAl(url) {
+    let sonHata = null;
+    for (const [ad, fn] of FETCH_YOLLARI) {
+      try {
+        const r = await fn(url, { credentials: 'include', headers: { Accept: 'application/json' } });
+        istek.son = { yol: ad, durum: r.status, adres: url.replace(location.origin, '').split('?')[0] };
+        // Sunucu cevap verdiyse (404/429 …) başka yoldan aynı istek yinelenmez
+        if (!r.ok) throw Object.assign(new Error(String(r.status)), { sunucu: true });
+        return JSON.parse(await r.text());
+      } catch (e) {
+        if (e && e.sunucu) throw e;
+        sonHata = e; istek.son = { yol: ad, durum: 'hata', adres: url.replace(location.origin, '').split('?')[0] };
+      }
+    }
+    throw sonHata || new Error('istek');
+  }
+  function onbellekAl(k) {
+    try {
+      const o = JSON.parse(sessionStorage.getItem(ONEK + ':' + k) || 'null');
+      return o && Date.now() - o.t < AYAR.onbellek * 60000 ? o.v : null;
+    } catch (e) { return null; }
+  }
+  function onbellekYaz(k, v) {
+    const ham = JSON.stringify({ t: Date.now(), v });
+    try { sessionStorage.setItem(ONEK + ':' + k, ham); return; } catch (e) { /* kota: eskileri sil, bir kez daha dene */ }
+    try {
+      const bizim = [];
+      for (let i = 0; i < sessionStorage.length; i++) {
+        const a = sessionStorage.key(i);
+        if (a && a.indexOf(ONEK + ':') === 0) { let z = 0; try { z = JSON.parse(sessionStorage.getItem(a)).t || 0; } catch (e) { /* bozuk */ } bizim.push([z, a]); }
+      }
+      bizim.sort((x, y) => x[0] - y[0]).slice(0, Math.max(1, Math.ceil(bizim.length / 2))).forEach((x) => sessionStorage.removeItem(x[1]));
+      sessionStorage.setItem(ONEK + ':' + k, ham);
+    } catch (e) { /* yine sığmadı: önbelleksiz devam */ }
+  }
+  function nextVeri() {
+    const el = document.getElementById('__NEXT_DATA__');
+    if (!el) return null;
+    try { return JSON.parse(el.textContent); } catch (e) { return null; }
+  }
+
+  // React'in kendi onClick'i: Firefox'ta sayfa nesnesi wrappedJSObject arkasında (Xray)
+  function reactTikla(el) {
+    let n = el;
+    for (let d = 0; d < 4 && n; d++, n = n.parentElement) {
+      const s = n.wrappedJSObject || n;
+      let anahtarlar = [];
+      try { anahtarlar = Object.keys(s); } catch (e) { anahtarlar = []; }
+      for (const k of anahtarlar) {
+        if (k.indexOf('__reactProps$') !== 0) continue;
+        const p = s[k];
+        if (p && typeof p.onClick === 'function') {
+          try {
+            let sahte = { type: 'click', bubbles: true, isTrusted: false, defaultPrevented: false, nativeEvent: {},
+              preventDefault() {}, stopPropagation() {}, persist() {} };
+            try { if (typeof cloneInto === 'function') sahte = cloneInto(sahte, SAYFA, { cloneFunctions: true }); } catch (e) { /* düz nesne */ }
+            const yaz = sahte.wrappedJSObject || sahte;
+            yaz.currentTarget = s; yaz.target = s;
+            p.onClick(sahte); return true;
+          } catch (e) { gunluk('react onClick', e); return false; }
+        }
+      }
+    }
+    return false;
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // TEMA ve SAYFA STİLİ
+  // ═══════════════════════════════════════════════════════════════════════
+  function sayfaKoyuMu() {
+    const renk = (el) => { try { return el ? getComputedStyle(el).backgroundColor : ''; } catch (e) { return ''; } };
+    let r = renk(document.body);
+    if (!r || /rgba\(0, 0, 0, 0\)|transparent/.test(r)) r = renk(document.documentElement);
+    const m = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(r || '');
+    if (!m) return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const [R, G, B] = [m[1], m[2], m[3]].map(Number);
+    return (0.2126 * R + 0.7152 * G + 0.0722 * B) / 255 < 0.45;
+  }
+  function etkinTema() { return AYAR.tema === 'sayfa' ? (sayfaKoyuMu() ? 'koyu' : 'acik') : AYAR.tema; }
+  function temaUygula() {
+    const tm = etkinTema();
+    const kok = document.documentElement;
+    if (kok && kok.getAttribute('data-' + ONEK + '-tema') !== tm) kok.setAttribute('data-' + ONEK + '-tema', tm);
+    if (UI.host && UI.host.getAttribute('data-tema') !== tm) UI.host.setAttribute('data-tema', tm);
+  }
+
+  function sayfaStiliEkle() {
+    const yer = document.head || document.documentElement;
+    if (!yer || document.getElementById(ONEK + '-stil')) return;
+    const s = document.createElement('style');
+    s.id = ONEK + '-stil';
+    s.textContent = `
+/* TOKEN-BASLA — AALabs tasarım dili 1.4.1 (aalabs-tema.css'ten) */
+html[data-${ONEK}-tema="acik"]{--${ONEK}-roz:#EEF2F5;--${ONEK}-roz-kenar:#C2D0DA;--${ONEK}-metin:#17252E;--${ONEK}-ikincil:#4E6269;
+  --${ONEK}-basari:#18763F;--${ONEK}-basari-bg:#E4F5E8;--${ONEK}-uyari:#9A5B00;--${ONEK}-uyari-bg:#FDF6D8;--${ONEK}-hata:#C4313B;--${ONEK}-hata-bg:#FDE8E8;
+  --${ONEK}-ana:#2456D6;--${ONEK}-ana-acik:#E5EBFA;--${ONEK}-vurgu:#2456D6;--${ONEK}-kenar:#7A9199;--${ONEK}-ayirici:#D3DEE6;--${ONEK}-golge:rgba(23,37,46,.18)}
+html[data-${ONEK}-tema="koyu"]{--${ONEK}-roz:#1F2937;--${ONEK}-roz-kenar:#3A475A;--${ONEK}-metin:#E6ECF5;--${ONEK}-ikincil:#9AA8BC;
+  --${ONEK}-basari:#4CC38A;--${ONEK}-basari-bg:#13301F;--${ONEK}-uyari:#E8AC45;--${ONEK}-uyari-bg:#33270F;--${ONEK}-hata:#FF8189;--${ONEK}-hata-bg:#3A161A;
+  --${ONEK}-ana:#2456D6;--${ONEK}-ana-acik:#1D2C4F;--${ONEK}-vurgu:#86A8FF;--${ONEK}-kenar:#6A7B93;--${ONEK}-ayirici:#263142;--${ONEK}-golge:rgba(0,0,0,.4)}
+html[data-${ONEK}-tema]{--${ONEK}-maske:linear-gradient(90deg,#000 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.18) 100%)}
+/* TOKEN-BITIR */
+.${ONEK}-rozetler{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:5px 0 0;font-size:11px;line-height:18px;width:100%;color:var(--${ONEK}-metin)}
+.${ONEK}-roz{display:inline-flex;align-items:center;gap:4px;padding:0 7px;height:18px;border:1px solid var(--${ONEK}-roz-kenar);border-radius:9px;
+  background:var(--${ONEK}-roz);white-space:nowrap;font-weight:500;color:var(--${ONEK}-metin)}
+.${ONEK}-roz b{font-weight:600;color:var(--${ONEK}-ikincil);font-size:9.5px;letter-spacing:.4px;text-transform:uppercase}
+.${ONEK}-ok{border-color:var(--${ONEK}-basari);color:var(--${ONEK}-basari);background:var(--${ONEK}-basari-bg)}
+.${ONEK}-no{border-color:var(--${ONEK}-hata);color:var(--${ONEK}-hata);background:var(--${ONEK}-hata-bg)}
+.${ONEK}-uyari{border-color:var(--${ONEK}-uyari);color:var(--${ONEK}-uyari);background:var(--${ONEK}-uyari-bg)}
+.${ONEK}-yukleniyor{font-style:italic;color:var(--${ONEK}-ikincil)}
+.${ONEK}-nokta{width:10px;height:10px;border-radius:50%;display:inline-block;border:1px solid var(--${ONEK}-kenar);flex:0 0 auto}
+.${ONEK}-bulanik{filter:blur(1.6px) saturate(.45);opacity:.55;
+  -webkit-mask-image:var(--${ONEK}-maske);mask-image:var(--${ONEK}-maske);transition:filter .15s,opacity .15s}
+.${ONEK}-bulanik.${ONEK}-netles:hover,.${ONEK}-bulanik.${ONEK}-netles:focus-within{filter:none;opacity:1;-webkit-mask-image:none;mask-image:none}
+.${ONEK}-soluk{opacity:.4}
+.${ONEK}-gizli,.${ONEK}-suzuldu{display:none !important}
+.${ONEK}-fav > div{box-shadow:inset 0 -2px 0 0 var(--${ONEK}-basari)}
+.${ONEK}-cubuk{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0 2px;width:100%;color:var(--${ONEK}-metin)}
+.${ONEK}-cubuk input{flex:1 1 180px;min-width:150px;height:28px;padding:0 9px;font:inherit;font-size:12px;color:inherit;
+  background:var(--${ONEK}-roz);border:1px solid var(--${ONEK}-roz-kenar);border-radius:6px;outline:none}
+.${ONEK}-cubuk input:focus,.${ONEK}-cubuk select:focus,.${ONEK}-cubuk button:focus-visible{outline:2px solid var(--${ONEK}-vurgu);outline-offset:1px}
+.${ONEK}-cubuk input::placeholder{color:var(--${ONEK}-ikincil)}
+.${ONEK}-cubuk select{flex:0 0 auto;height:28px;padding:0 6px;font:inherit;font-size:12px;color:inherit;background:var(--${ONEK}-roz);
+  border:1px solid var(--${ONEK}-roz-kenar);border-radius:6px;cursor:pointer;max-width:190px}
+.${ONEK}-dug{flex:0 0 auto;min-width:28px;height:28px;border:1px solid var(--${ONEK}-roz-kenar);border-radius:6px;background:var(--${ONEK}-roz);
+  color:inherit;cursor:pointer;font:inherit;font-size:14px;line-height:1;display:inline-grid;place-items:center;position:relative;padding:0 6px}
+.${ONEK}-dug svg{width:16px;height:16px}
+.${ONEK}-dug[data-sorun="1"]::after{content:"";position:absolute;top:3px;right:3px;width:7px;height:7px;border-radius:50%;background:var(--${ONEK}-hata)}
+.${ONEK}-sayac{flex:0 0 auto;font-size:11px;color:var(--${ONEK}-ikincil);font-variant-numeric:tabular-nums;white-space:nowrap}
+.${ONEK}-cipler{flex:1 0 100%;width:100%;display:flex;flex-wrap:wrap;gap:5px;align-items:center;font-size:11px}
+.${ONEK}-cipler:empty{display:none}
+.${ONEK}-cip{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 9px;border-radius:11px;cursor:pointer;font:inherit;font-size:11px;
+  font-weight:600;color:inherit;background:var(--${ONEK}-roz);border:1px solid var(--${ONEK}-roz-kenar)}
+.${ONEK}-cip[aria-pressed="true"]{color:var(--${ONEK}-basari);border-color:var(--${ONEK}-basari);background:var(--${ONEK}-basari-bg)}
+.${ONEK}-cip i{font-style:normal;color:var(--${ONEK}-ikincil);font-weight:500;font-size:10px}
+.${ONEK}-cip[data-kapali="1"]{text-decoration:line-through;color:var(--${ONEK}-ikincil)}
+.${ONEK}-bilgi{flex:1 0 100%;border:1px solid var(--${ONEK}-uyari);background:var(--${ONEK}-uyari-bg);color:var(--${ONEK}-metin);border-radius:4px;padding:5px 9px;font-size:12px}
+.${ONEK}-bilgi[hidden]{display:none}
+.${ONEK}-sirali > *{border-bottom:1px solid var(--${ONEK}-ayirici)}
+.${ONEK}-kart{margin:6px 0 2px}
+`;
+    yer.appendChild(s);
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // DURUM
+  // ═══════════════════════════════════════════════════════════════════════
+  function yeniSecim() { return { bitti: false, deneme: 0, son: 0, imza: null, oturma: 0, bitis: 0, neden: 'bekliyor', secilen: null, yol: null }; }
+  const D = {
+    slug: null, modelId: null, tasarim: null, kaynak: null, veriHata: [],
+    profil: new Map(), baslik: new Map(), sec: yeniSecim(), ilkAcildi: false, yukleniyor: false,
+    siralama: 'gerekmez', siraliKap: null, cubukCapa: null, bilgi: null,
+    filtre: '',
+    secMat: new Set(), adres: location.href, vsrt: 'default',
+  };
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // VERİ
+  // ═══════════════════════════════════════════════════════════════════════
+  async function tasarimAl(slug, id) {
+    const ck = 'tasarim:' + id;
+    const ob = onbellekAl(ck);
+    if (ob) { D.kaynak = 'onbellek'; return ob; }
+    D.veriHata = [];
+    const nd = nextVeri();
+    const gomulu = nd && nd.props && nd.props.pageProps && nd.props.pageProps.design;
+    if (gomulu && String(gomulu.id) === String(id)) { D.kaynak = '__NEXT_DATA__'; onbellekYaz(ck, gomulu); return gomulu; }
+    D.veriHata.push('__NEXT_DATA__ —');
+    if (nd && nd.buildId) {
+      try {
+        const j = await jsonAl(`${location.origin}/_next/data/${nd.buildId}/${nd.locale || 'en'}/models/${slug}.json?designId=${encodeURIComponent(slug)}`);
+        const d = j && j.pageProps && j.pageProps.design;
+        if (d && String(d.id) === String(id)) { D.kaynak = '_next/data'; onbellekYaz(ck, d); return d; }
+      } catch (e) { D.veriHata.push('_next/data ' + e.message); }
+    }
+    try {
+      const j = await jsonAl(`${location.origin}/api/v1/design-service/design/${id}`);
+      const d = (j && j.design) || j;
+      if (d && Array.isArray(d.instances)) { D.kaynak = 'API'; onbellekYaz(ck, d); return d; }
+    } catch (e) { D.veriHata.push('API ' + e.message); }
+    return null;
+  }
+
+  function profilOzeti(inst) {
+    const mi = (inst.extention && inst.extention.modelInfo) || {};
+    const fl = (Array.isArray(inst.instanceFilaments) ? inst.instanceFilaments : []).filter((f) => f && typeof f === 'object');
+    const mats = [], renkler = [];
+    fl.forEach((f) => {
+      const m = String(f.type || '').trim();
+      if (m && mats.indexOf(m) < 0) mats.push(m);
+      String(f.color || '').split(/[,;\s]+/).forEach((c) => {
+        if (/^#?[0-9a-f]{6}$/i.test(c)) { const h = '#' + c.replace('#', '').toUpperCase(); if (renkler.indexOf(h) < 0) renkler.push(h); }
+      });
+    });
+    const yaz = [];
+    if (mi.compatibility && mi.compatibility.devProductName) yaz.push(mi.compatibility.devProductName);
+    (Array.isArray(mi.otherCompatibility) ? mi.otherCompatibility : []).forEach((c) => { if (c && c.devProductName && yaz.indexOf(c.devProductName) < 0) yaz.push(c.devProductName); });
+    const ps = mi.projectSettings || {};
+    return {
+      profileId: inst.profileId, baslik: inst.title, mats, renkler, yazicilar: yaz,
+      gram: typeof inst.weight === 'number' ? inst.weight : null, ams: !!inst.needAms,
+      nozzle: (mi.compatibility && mi.compatibility.nozzleDiameter) || null,
+      plaka: Array.isArray(mi.plates) ? mi.plates.length : null,
+      katman: ps.layerHeight || null, duvar: ps.wallLoops || null, dolgu: ps.sparseInfillDensity || null,
+      yayin: inst.publishTime || inst.createTime || null,
+      indirme: inst.downloadCount || 0, puanSay: inst.ratingCount || 0,
+      puan: inst.ratingCount ? (inst.ratingScoreTotal || 0) / inst.ratingCount : 0,
+      parca: fl.map((f) => ({ tur: f.type, g: f.usedG })),
+    };
+  }
+
+  function tasarimIsle(t0) {
+    D.tasarim = t0; D.profil.clear(); D.baslik.clear();
+    (Array.isArray(t0.instances) ? t0.instances : []).filter((i) => i && typeof i === 'object').forEach((i) => {
+      const o = profilOzeti(i);
+      if (i.profileId) D.profil.set(String(i.profileId), o);
+      if (i.title) D.baslik.set(String(i.title).trim(), o);
+    });
+    gunluk('profil:', D.profil.size, 'kaynak:', D.kaynak);
+  }
+  const uyumluMu = (o, y) => !!o && o.yazicilar.some((p) => esYazici(p, y));
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // PROFİL SATIRLARI + ROZETLER
+  // ═══════════════════════════════════════════════════════════════════════
+  function profilSatirlari() {
+    const out = [];
+    document.querySelectorAll('span.config_title').forEach((s) => {
+      const satir = s.closest('[aria-haspopup="true"]');
+      if (!satir) return;
+      let pid = null;
+      const img = satir.querySelector('img[src*="/instance/"]');
+      if (img) { const m = (img.getAttribute('src') || '').match(KAPAK_PROFIL); if (m) pid = m[1]; }
+      out.push({ satir, baslikEl: s, baslik: yazi(s), pid });
+    });
+    return out;
+  }
+  const satirVerisi = (r) => (r.pid && D.profil.get(r.pid)) || D.baslik.get(r.baslik) || null;
+  function bilgiSutunu(b) {
+    let el = b.parentElement;
+    for (let i = 0; i < 5 && el; i++) { if (el.querySelector('span.time')) return el; el = el.parentElement; }
+    return b.parentElement && b.parentElement.parentElement;
+  }
+  function roz(etiket, deger, ek) {
+    const s = O('span', { class: `${ONEK}-roz` + (ek ? ` ${ONEK}-${ek}` : '') });
+    if (etiket) s.append(O('b', { text: etiket }));
+    ekle(s, deger);
+    return s;
+  }
+  function rozetKutusu(o) {
+    const k = O('div', { class: `${ONEK}-rozetler` });
+    const hedef = AYAR.sira[0];
+    const uyum = uyumluMu(o, hedef);
+    for (const a of AYAR.alan) {
+      if (a === 'filaments' && o.mats.length) {
+        k.append(roz('', o.parca.length > 1 ? o.parca.map((x) => `${x.tur} ${x.g}g`).join(' + ') : o.mats.join(' · ')));
+        if (AYAR.hazne && o.mats.some((m) => HAZNE.test(m))) k.append(roz('', t('r_kapali'), 'uyari'));
+      }
+      if (a === 'colors' && o.renkler.length) {
+        const w = O('span', { style: 'display:inline-flex;gap:3px' });
+        o.renkler.slice(0, 10).forEach((c) => { const n = O('i', { class: `${ONEK}-nokta`, title: c }); n.style.background = c; w.append(n); });
+        k.append(roz(o.renkler.length > 1 ? o.renkler.length + '×' : '', w));
+      }
+      if (a === 'weight' && o.gram != null && o.parca.length <= 1) k.append(roz('', Math.round(o.gram) + ' g'));
+      if (a === 'nozzle' && o.nozzle) k.append(roz(t('r_nozzle'), o.nozzle + ' mm', Math.abs(o.nozzle - AYAR.noz) > 0.001 ? 'uyari' : ''));
+      if (a === 'ams' && o.ams) k.append(roz('', 'AMS'));
+      if (a === 'released' && o.yayin) { const d = tarih(o.yayin); if (d) { const r = roz(t('r_yayin'), d); r.title = t('r_yayinI', { d }); k.append(r); } }
+      if (a === 'settings' && (o.katman || o.duvar || o.dolgu)) {
+        const p = [];
+        if (o.katman) p.push(o.katman + ' mm');
+        if (o.duvar) p.push(t('r_duvar', { n: o.duvar }));
+        if (o.dolgu) p.push(o.dolgu);
+        k.append(roz('', p.join(' · ')));
+      }
+      if (a === 'plates' && o.plaka) k.append(roz('', t('r_plaka', { n: o.plaka })));
+      if (a === 'printers' && o.yazicilar.length) k.append(roz(t('r_uyumlu'), o.yazicilar.slice(0, 8).join(' · ')));
+      if (a === 'compat' && o.yazicilar.length) k.append(roz('', (uyum ? '✓ ' : '✗ ') + hedef, uyum ? 'ok' : 'no'));
+    }
+    return k;
+  }
+  function uyumsuzUygula(satir, uyum) {
+    const s = AYAR.stil;
+    satir.classList.toggle(`${ONEK}-bulanik`, s === 'blur' && !uyum);
+    satir.classList.toggle(`${ONEK}-netles`, s === 'blur' && !uyum && AYAR.net);
+    satir.classList.toggle(`${ONEK}-soluk`, s === 'dim' && !uyum);
+    satir.classList.toggle(`${ONEK}-gizli`, s === 'hide' && !uyum);
+  }
+  function satirlariSusle() {
+    if (!D.tasarim) return;
+    profilSatirlari().forEach((r) => {
+      const o = satirVerisi(r);
+      if (!o) return;
+      if (o.yazicilar.length) uyumsuzUygula(r.satir, uyumluMu(o, AYAR.sira[0]));
+      const sut = bilgiSutunu(r.baslikEl);
+      if (!sut) return;
+      const imza = JSON.stringify([o.profileId, AYAR.alan, AYAR.sira[0], dil(), AYAR.hazne, AYAR.noz]);
+      const eski = sut.querySelector(`:scope > .${ONEK}-rozetler`);
+      if (eski && eski.dataset.imza === imza) return;
+      if (eski) eski.remove();
+      if (!AYAR.alan.length) return;
+      const k = rozetKutusu(o);
+      if (!k.childElementCount) return;
+      k.dataset.imza = imza;
+      sut.append(k);
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // YAZICI SEKMELERİ
+  // ═══════════════════════════════════════════════════════════════════════
+  function sekmeCubugu() {
+    for (const w of document.querySelectorAll('.swiper-wrapper')) {
+      const s = Array.from(w.children).filter((c) => c.classList.contains('swiper-slide'));
+      // Bütün slide'lar yazıcı adı (ya da All) olmalı; en az bir gerçek yazıcı (1–2 sekmeli modeller de)
+      if (s.length && s.every((x) => YAZICI.test(yazi(x))) && s.some((x) => !HEPSI.test(yazi(x)))) return { sarici: w, sekmeler: s };
+    }
+    return null;
+  }
+  function sekmeleriSirala(c) {
+    const n = AYAR.sira.length;
+    let degisti = false;
+    c.sekmeler.forEach((s, i) => {
+      const y = yazi(s);
+      const pi = AYAR.sira.findIndex((p) => esYazici(y, p));
+      const sira = String(pi >= 0 ? pi : (HEPSI.test(y) ? n : n + 1 + i));
+      if (s.style.order !== sira) { s.style.order = sira; degisti = true; }
+      s.classList.toggle(`${ONEK}-fav`, pi >= 0);
+    });
+    if (degisti) { try { const sw = c.sarici.parentElement && (c.sarici.parentElement.wrappedJSObject || c.sarici.parentElement).swiper; if (sw) sw.update(); } catch (e) { /* yok */ } }
+  }
+  function tikla(sekme, deneme) {
+    const zincir = [sekme.querySelector(':scope > div > div'), sekme.querySelector(':scope > div'), sekme].filter(Boolean);
+    if (deneme < 3) {
+      const el = zincir[deneme % zincir.length];
+      const o = { bubbles: true, cancelable: true, view: window, button: 0, composed: true };
+      ['pointerdown', 'mousedown', 'pointerup', 'mouseup', 'click'].forEach((tp) => { try { el.dispatchEvent(new MouseEvent(tp, o)); } catch (e) { /* yok */ } });
+      return 'event';
+    }
+    for (const el of zincir) if (reactTikla(el)) return 'react';
+    return '—';
+  }
+  function bilgiHesapla(c) {
+    const ilk = AYAR.sira[0];
+    if (c.sekmeler.some((s) => esYazici(yazi(s), ilk))) { D.bilgi = null; return; }
+    const diger = AYAR.sira.slice(1).find((p) => c.sekmeler.some((s) => esYazici(yazi(s), p)));
+    if (diger && AYAR.oto && D.sec.secilen === diger) D.bilgi = t('bl_yedek', { a: ilk, b: diger });
+    else if (diger) D.bilgi = t('bl_yok', { a: ilk });
+    else D.bilgi = AYAR.sira.length > 1 ? t('bl_hicbiri', { l: AYAR.sira.join(', ') }) : t('bl_yok', { a: ilk });
+  }
+  function otoSec(c) {
+    const s = D.sec;
+    if (!AYAR.oto || s.bitti) return;
+    if (AYAR.url && /profileId[-=]\d+/.test(location.hash + location.search)) { s.bitti = true; s.neden = 'adres'; return; }
+    if (document.readyState !== 'complete') { s.neden = 'yukleniyor'; return; }
+    const imza = c.sekmeler.map(yazi).join('|');
+    if (imza !== s.imza) { s.imza = imza; s.oturma = Date.now(); s.neden = 'oturuyor'; return; }
+    if (Date.now() - s.oturma < AYAR.bekle) { s.neden = 'oturuyor'; return; }
+    let sekme = null, istenen = null;
+    for (const p of AYAR.sira) { const x = c.sekmeler.find((y) => esYazici(yazi(y), p)); if (x) { sekme = x; istenen = p; break; } }
+    if (!s.bitis) s.bitis = Date.now() + AYAR.sure * 1000;
+    if (!sekme) { if (Date.now() > s.bitis) { s.bitti = true; s.neden = 'sekmeYok'; } return; }
+    if (sekme.querySelector('.selected')) {
+      s.bitti = true; s.neden = 'tamam'; s.secilen = istenen;
+      if (AYAR.ilk) { const mid = D.modelId; setTimeout(() => { if (D.modelId === mid) ilkProfiliAc(); }, 600); }
+      return;
+    }
+    if (Date.now() > s.bitis || s.deneme >= AYAR.deneme) { s.bitti = true; s.neden = 'vazgecti'; return; }
+    if (Date.now() - s.son < AYAR.aralik) return;
+    s.son = Date.now();
+    s.neden = 'deneniyor'; s.yol = tikla(sekme, s.deneme++);
+  }
+  function ilkProfiliAc() {
+    if (D.ilkAcildi) return;
+    const gizli = ['gizli', 'suzuldu', 'bulanik', 'soluk'].map((x) => `${ONEK}-${x}`);
+    const hepsi = profilSatirlari();
+    const kap = listeKabi(hepsi);
+    const sira = (x) => { const o = kap && ogesi(x.satir, kap); const n = o ? parseInt(getComputedStyle(o).order, 10) : 0; return isNaN(n) ? 0 : n; };
+    // Ekranda en üstte görünen (CSS order) uyumlu profil açılır
+    const r = hepsi.filter((x) => !gizli.some((g) => x.satir.classList.contains(g))).map((x, i) => ({ x, i, o: sira(x) }))
+      .sort((a, b) => a.o - b.o || a.i - b.i);
+    if (!r.length) return;
+    D.ilkAcildi = true;
+    r[0].x.satir.click();
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // SIRALAMA (CSS order; DOM taşınmaz) — E2: uyumsuzlar sona
+  // ═══════════════════════════════════════════════════════════════════════
+  function listeKabi(r) {
+    if (!r.length) return null;
+    const zincir = (el) => { const o = []; let c = el; while (c) { o.push(c); c = c.parentElement; } return o; };
+    const ilk = zincir(r[0].satir);
+    if (r.length === 1) return ilk[1] ? ilk[1].parentElement : null;
+    const kumeler = r.slice(1).map((x) => new Set(zincir(x.satir)));
+    return ilk.find((n) => kumeler.every((k) => k.has(n))) || null;
+  }
+  function ogesi(satir, kap) { let c = satir; while (c && c.parentElement !== kap) c = c.parentElement; return c; }
+  // Kap doğrulaması (3.11.1): aksiyon paneli, başlık ya da swiper içeren kap reddedilir; "see more" düğmesi sorun değil
+  function profilListesiMi(kap, r) {
+    if (!kap || r.length < 2) return false;
+    if (kap.querySelector('span.primaryButton') || kap.querySelector('h1,h2,h3,h4,h5') || kap.querySelector('.swiper-wrapper')) return false;
+    return Array.from(kap.children).filter((c) => c.querySelector('span.config_title')).length >= r.length;
+  }
+  function siraTemizle(kap) {
+    if (!kap || !kap.dataset.mwxSirali) return;
+    cssSil(kap, ['display', 'flexDirection']);
+    kap.classList.remove(`${ONEK}-sirali`);
+    Array.from(kap.children).forEach((c) => cssSil(c, ['order', 'display']));
+    delete kap.dataset.mwxSirali;
+  }
+  function sirala() {
+    const r = profilSatirlari();
+    const kap = listeKabi(r);
+    if (D.siraliKap && D.siraliKap !== kap) { siraTemizle(D.siraliKap); D.siraliKap = null; }
+    if (!kap) { D.siralama = 'gerekmez'; return; }
+    const uyumsuzVar = AYAR.sona && AYAR.stil !== 'hide' && r.some((x) => { const o = satirVerisi(x); return o && o.yazicilar.length && !uyumluMu(o, AYAR.sira[0]); });
+    const gerek = D.vsrt !== 'default' || uyumsuzVar;
+    if (!gerek) { siraTemizle(kap); D.siraliKap = null; D.siralama = 'gerekmez'; return; }
+    if (!profilListesiMi(kap, r)) { siraTemizle(kap); D.siralama = 'atlandi'; return; }
+    D.siralama = 'dogrulandi';
+    D.siraliKap = kap;
+    kap.dataset.mwxSirali = '1';
+    kap.classList.add(`${ONEK}-sirali`);
+    css(kap, { display: 'flex', flexDirection: 'column' });
+    Array.from(kap.children).forEach((c) => {
+      if (c.tagName === 'HR') { css(c, { display: 'none' }); return; }
+      if (!c.querySelector('span.config_title')) css(c, { order: '9999' });
+    });
+    const anahtar = {
+      default: () => 0,
+      newest: (o) => (o && o.yayin ? -new Date(o.yayin).getTime() : null),
+      oldest: (o) => (o && o.yayin ? new Date(o.yayin).getTime() : null),
+      downloads: (o) => (o ? -o.indirme : null),
+      rating: (o) => (o ? -(o.puan * 1000 + Math.min(o.puanSay, 999) / 1000) : null),
+    }[D.vsrt] || (() => 0);
+    const liste = r.map((x, i) => {
+      const o = satirVerisi(x);
+      const uy = !o || !o.yazicilar.length || uyumluMu(o, AYAR.sira[0]);
+      return { oge: ogesi(x.satir, kap), k: anahtar(o), i, son: uyumsuzVar && !uy ? 1 : 0 };
+    }).filter((x) => x.oge);
+    liste.sort((a, b) => (a.son - b.son) || (a.k == null) - (b.k == null) || ((a.k || 0) - (b.k || 0)) || (a.i - b.i));
+    liste.forEach((x, i) => css(x.oge, { order: String(i) }));
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // FİLTRE ÇUBUĞU (filtre, sıralama, dişli, çipler, bilgi satırı)
+  // ═══════════════════════════════════════════════════════════════════════
+  const IKON = {
+    disli: 'M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z|C12 12 3',
+    x: 'M18 6 6 18|M6 6l12 12',
+    yukari: 'm18 15-6-6-6 6',
+    asagi: 'm6 9 6 6 6-6',
+  };
+  function svg(ad) {
+    const NS = 'http://www.w3.org/2000/svg';
+    const s = document.createElementNS(NS, 'svg');
+    ['viewBox:0 0 24 24', 'width:16', 'height:16', 'fill:none', 'stroke:currentColor', 'stroke-width:2', 'stroke-linecap:round', 'stroke-linejoin:round', 'aria-hidden:true']
+      .forEach((x) => { const i = x.indexOf(':'); s.setAttribute(x.slice(0, i), x.slice(i + 1)); });
+    IKON[ad].split('|').forEach((p) => {
+      if (p[0] === 'C') { const [cx, cy, r] = p.slice(1).trim().split(' '); const c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', r); s.append(c); }
+      else { const e = document.createElementNS(NS, 'path'); e.setAttribute('d', p); s.append(e); }
+    });
+    return s;
+  }
+
+  let cubuk = null;
+  function filtreUyar(m) {
+    const q = D.filtre.trim();
+    if (!q) return true;
+    const rx = q.match(/^\/(.*)\/([a-z]*)$/);
+    if (rx) { try { return new RegExp(rx[1], rx[2] || 'i').test(m); } catch (e) { return true; } }
+    const k = katla(m);
+    for (const w of katla(q).split(/\s+/).filter(Boolean)) {
+      if (w[0] === '-') { if (w.length > 1 && k.indexOf(w.slice(1)) >= 0) return false; }
+      else if (k.indexOf(w) < 0) return false;
+    }
+    return true;
+  }
+  function malzemeUyar(o) {
+    if (!o || !o.mats.length) return true;
+    const m = o.mats.map((x) => x.toUpperCase());
+    if (AYAR.gizli.length && m.every((x) => AYAR.gizli.indexOf(x) >= 0)) return false;
+    return !D.secMat.size || m.some((x) => D.secMat.has(x));
+  }
+  function cubukKur() {
+    const w = O('div', { class: `${ONEK}-cubuk`, id: `${ONEK}-cubuk`, 'data-dil': dil() });
+    if (AYAR.kutu) {
+      const g = O('input', { type: 'text', spellcheck: 'false', placeholder: t('fl_yer'), 'aria-label': t('fl_yer') });
+      g.value = D.filtre;
+      g.addEventListener('input', () => { D.filtre = g.value; if (AYAR.hatirla) depoYaz('filtre', D.filtre); suz(); });
+      g.addEventListener('keydown', (e) => { e.stopPropagation(); if (e.key === 'Escape') { g.value = ''; D.filtre = ''; if (AYAR.hatirla) depoYaz('filtre', ''); suz(); } });
+      const x = O('button', { type: 'button', class: `${ONEK}-dug`, title: t('fl_temizle'), 'aria-label': t('fl_temizle') }, svg('x'));
+      x.addEventListener('click', () => { g.value = ''; D.filtre = ''; if (AYAR.hatirla) depoYaz('filtre', ''); suz(); g.focus(); });
+      w.append(g, x, O('span', { class: `${ONEK}-sayac`, 'aria-live': 'polite' }));
+    }
+    if (AYAR.srt) {
+      const s = O('select', { title: t('fl_sira'), 'aria-label': t('fl_sira') });
+      SIRALAR.forEach((v) => s.append(O('option', { value: v, text: t('sr_' + (v === 'default' ? 'varsayilan' : v)) })));
+      s.value = D.vsrt;
+      s.addEventListener('change', () => { D.vsrt = s.value; sirala(); });
+      w.append(s);
+    }
+    const disli = O('button', { type: 'button', class: `${ONEK}-dug ${ONEK}-disli`, title: t('ayarlarAc') + ' (' + AYAR.kisayol.ayarlar + ')', 'aria-label': t('ayarlarAc') }, svg('disli'));
+    disli.addEventListener('click', () => ayarlariAc());
+    w.append(disli);
+    w.append(O('div', { class: `${ONEK}-cipler` }));
+    w.append(O('div', { class: `${ONEK}-bilgi`, role: 'status', hidden: true }));
+    return w;
+  }
+  function cubukCapasi() {
+    const h = Array.from(document.querySelectorAll('h1,h2,h3,h4,h5')).find((x) => /print\s*profile|baskı\s*profil/i.test(yazi(x)));
+    if (h) return { dugum: h, yer: 'sonra', ad: 'baslik' };
+    const c = sekmeCubugu();
+    if (c) {
+      let n = c.sarici;
+      for (let i = 0; i < 3 && n.parentElement; i++) { if (/swiper/i.test(n.className || '')) n = n.parentElement; else break; }
+      return { dugum: n, yer: 'once', ad: 'sekme' };
+    }
+    const kap = listeKabi(profilSatirlari());
+    return kap ? { dugum: kap, yer: 'once', ad: 'liste' } : null;
+  }
+  function cubukBagla() {
+    const c = cubukCapasi();
+    if (!c) { D.cubukCapa = null; return; }
+    D.cubukCapa = c.ad;
+    if (cubuk && cubuk.getAttribute('data-dil') !== dil()) { cubuk.remove(); cubuk = null; }
+    if (!cubuk) cubuk = cubukKur();
+    const yerinde = c.yer === 'sonra' ? cubuk.previousElementSibling === c.dugum : cubuk.nextElementSibling === c.dugum;
+    if (!cubuk.isConnected || !yerinde) {
+      if (c.yer === 'sonra') c.dugum.after(cubuk); else c.dugum.parentElement.insertBefore(cubuk, c.dugum);
+    }
+  }
+  function cipleriKur() {
+    if (!cubuk) return;
+    const kap = cubuk.querySelector(`.${ONEK}-cipler`);
+    if (!AYAR.cip) { kap.textContent = ''; kap.dataset.imza = ''; return; }
+    const say = new Map();
+    for (const o of D.profil.values()) new Set(o.mats.map((m) => m.toUpperCase())).forEach((m) => say.set(m, (say.get(m) || 0) + 1));
+    const imza = Array.from(say.entries()).sort().map((e) => e.join(':')).join(',') + '|' + AYAR.gizli.join(',') + '|' + dil();
+    if (kap.dataset.imza === imza) {
+      kap.querySelectorAll(`.${ONEK}-cip`).forEach((c) => c.setAttribute('aria-pressed', D.secMat.has(c.dataset.mat) ? 'true' : 'false'));
+      return;
+    }
+    kap.dataset.imza = imza; kap.textContent = '';
+    Array.from(say.entries()).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).forEach(([m, n]) => {
+      const kapali = AYAR.gizli.indexOf(m) >= 0;
+      const c = O('button', { type: 'button', class: `${ONEK}-cip`, 'data-mat': m, 'aria-pressed': D.secMat.has(m) ? 'true' : 'false', title: kapali ? t('fl_cipGizli', { m }) : t('fl_cip', { m }) }, m, O('i', { text: String(n) }));
+      if (kapali) c.dataset.kapali = '1';
+      c.addEventListener('click', () => { if (D.secMat.has(m)) D.secMat.delete(m); else D.secMat.add(m); cipleriKur(); suz(); });
+      kap.append(c);
+    });
+  }
+  function suz() {
+    const r = profilSatirlari();
+    let gor = 0;
+    r.forEach((x) => {
+      const ok = filtreUyar(x.baslik) && malzemeUyar(satirVerisi(x));
+      x.satir.classList.toggle(`${ONEK}-suzuldu`, !ok);
+      if (ok) gor++;
+    });
+    if (cubuk) {
+      const s = cubuk.querySelector(`.${ONEK}-sayac`);
+      const v = (D.filtre.trim() || D.secMat.size || AYAR.gizli.length) ? `${gor} / ${r.length}` : '';
+      if (s && s.textContent !== v) s.textContent = v;
+      const b = cubuk.querySelector(`.${ONEK}-bilgi`);
+      if (b) { const m = AYAR.bilgi ? D.bilgi : null; b.hidden = !m; if (m && b.textContent !== m) b.textContent = m; }
+      const d = cubuk.querySelector(`.${ONEK}-disli`);
+      if (d) d.setAttribute('data-sorun', taniSatirlari().some((x) => x[0] === 'x') ? '1' : '0');
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // E4 — MODEL KARTLARI (arama, kategori, profil sayfaları)
+  // Kart: /models/<id> bağlantısı ve görseli olan en geniş ortak kap.
+  // ═══════════════════════════════════════════════════════════════════════
+  const KART = { veri: new Map(), kuyruk: [], calisan: 0, gozcu: null, durum: { n: 0, y: 0, h: 0 } };
+  const kartModelId = (a) => { const m = (a.getAttribute('href') || '').match(/\/models\/(\d+)(?:-([^/?#]*))?/); return m ? { id: m[1], slug: m[1] + (m[2] ? '-' + m[2] : '') } : null; };
+  function kartKabi(a, id) {
+    let k = a;
+    for (let i = 0; i < 6 && k.parentElement && k.parentElement !== document.body; i++) {
+      const ust = k.parentElement;
+      const baglar = Array.from(ust.querySelectorAll('a[href*="/models/"]'));
+      if (baglar.some((b) => { const m = kartModelId(b); return m && m.id !== id; })) break;
+      // Sayfada tek model bağlantısı kalınca ızgaraya ya da ana bölüme çıkılmaz
+      if (k.querySelector('img') && ust.offsetWidth > k.offsetWidth * 1.5) break;
+      k = ust;
+    }
+    return k.querySelector('img') ? k : null;
+  }
+  function kartlariBul() {
+    const sonuc = new Map();
+    const buModel = D.modelId;
+    document.querySelectorAll('a[href*="/models/"]').forEach((a) => {
+      if (a.closest(`#${ONEK}-kok`)) return;
+      const m = kartModelId(a);
+      if (!m || m.id === buModel) return;
+      const k = kartKabi(a, m.id);
+      if (!k || k.closest('[aria-haspopup="true"]')) return;
+      for (const [onceki, om] of sonuc) {
+        if (om.id !== m.id) continue;
+        if (onceki === k || onceki.contains(k)) return;
+        if (k.contains(onceki)) sonuc.delete(onceki);
+      }
+      sonuc.set(k, m);
+    });
+    return sonuc;
+  }
+  function kartOzeti(t0) {
+    const mats = [];
+    let uyum = {};
+    (Array.isArray(t0.instances) ? t0.instances : []).filter((i) => i && typeof i === 'object').forEach((i) => {
+      const o = profilOzeti(i);
+      o.mats.forEach((m) => { const u = m.toUpperCase(); if (mats.indexOf(u) < 0) mats.push(u); });
+      AYAR.sira.forEach((y) => { if (uyumluMu(o, y)) uyum[y] = true; });
+    });
+    return { mats, uyum };
+  }
+  function kartRozeti(k, m) {
+    let kutu = k.querySelector(`:scope > .${ONEK}-kart`);
+    const v = KART.veri.get(m.id);
+    const imza = JSON.stringify([m.id, v ? (v.hata ? 'h' : v.ozet ? 'o' : 'y') : 'b', AYAR.kartUyum, AYAR.sira, AYAR.hazne, dil()]);
+    if (kutu && kutu.dataset.imza === imza) return;
+    if (!kutu) { kutu = O('div', { class: `${ONEK}-rozetler ${ONEK}-kart` }); k.append(kutu); }
+    kutu.dataset.imza = imza; kutu.textContent = '';
+    if (!v || v.yukleniyor) { kutu.append(roz('', t('kr_yukleniyor'), 'yukleniyor')); return; }
+    if (v.hata) { const r = roz('', '—'); r.title = t('kr_okunamadi'); kutu.append(r); return; }
+    if (v.ozet.mats.length) kutu.append(roz('', v.ozet.mats.join(' · ')));
+    if (AYAR.hazne && v.ozet.mats.some((x) => HAZNE.test(x))) kutu.append(roz('', t('r_kapali'), 'uyari'));
+    if (AYAR.kartUyum) {
+      const y = AYAR.sira.find((p) => v.ozet.uyum[p]);
+      kutu.append(y ? roz('', '✓ ' + y, 'ok') : roz('', '✗ ' + AYAR.sira[0], 'no'));
+    }
+  }
+  const KART_SURUM = 'kart2:';
+  const gecerliTasarim = (t0, id) => !!t0 && Array.isArray(t0.instances) && (t0.id == null || String(t0.id) === String(id));
+  async function kartYukle(m) {
+    const v = KART.veri.get(m.id);
+    if (v && !v.bekliyor) return;
+    const n0 = (v && v.n) || 0;
+    KART.veri.set(m.id, { yukleniyor: true, n: n0 });
+    const hataYaz = () => KART.veri.set(m.id, { hata: true, t: Date.now(), n: n0 + 1 });
+    let t0 = onbellekAl(KART_SURUM + m.id);
+    if (t0 && !Array.isArray(t0.instances)) t0 = null;
+    if (!t0) { const tam = onbellekAl('tasarim:' + m.id); if (gecerliTasarim(tam, m.id)) t0 = tam; }
+    let yeni = false;
+    if (!t0) {
+      try {
+        const j = await jsonAl(`${location.origin}/api/v1/design-service/design/${m.id}`);
+        t0 = (j && j.design) || j;
+        if (!gecerliTasarim(t0, m.id)) throw new Error('biçim');
+      } catch (e) {
+        const nd = nextVeri();
+        try {
+          if (!nd || !nd.buildId) throw e;
+          const j = await jsonAl(`${location.origin}/_next/data/${nd.buildId}/${nd.locale || 'en'}/models/${m.slug}.json?designId=${encodeURIComponent(m.slug)}`);
+          t0 = j && j.pageProps && j.pageProps.design;
+          if (!gecerliTasarim(t0, m.id)) throw new Error('biçim');
+        } catch (e2) { hataYaz(); return; }
+      }
+      yeni = true;
+    }
+    let ozet;
+    try {
+      // yalnız gereken alanlar tutulur
+      t0 = { instances: t0.instances.filter((i) => i && typeof i === 'object').map((i) => {
+        const mi = (i.extention && i.extention.modelInfo) || {};
+        return { instanceFilaments: i.instanceFilaments, extention: { modelInfo: { compatibility: mi.compatibility, otherCompatibility: mi.otherCompatibility } } };
+      }) };
+      ozet = kartOzeti(t0);
+    } catch (e) { hata('kart özeti', e); hataYaz(); return; }
+    if (yeni) onbellekYaz(KART_SURUM + m.id, t0);
+    KART.veri.set(m.id, { ozet });
+  }
+  function kuyrukIsle() {
+    while (KART.calisan < 3 && KART.kuyruk.length) {
+      const m = KART.kuyruk.shift();
+      KART.calisan++;
+      kartYukle(m).catch((e) => hata('kart', e)).finally(() => { KART.calisan--; planla(); kuyrukIsle(); });
+    }
+  }
+  function kuyruga(m) {
+    const v = KART.veri.get(m.id);
+    // Geçici hata (ağ, 429): 60 sn sonra en çok 2 kez yeniden denenir
+    const yenidenDene = v && v.hata && (v.n || 1) <= 2 && Date.now() - (v.t || 0) > 60000;
+    if (v && !yenidenDene && (v.ozet || v.hata || v.yukleniyor || v.sirada)) return;
+    KART.veri.set(m.id, { sirada: true, bekliyor: true, yukleniyor: true, n: (v && v.n) || 0 });
+    KART.kuyruk.push(m); kuyrukIsle();
+  }
+  function kartlariIsle() {
+    const kartlar = AYAR.kartAc ? kartlariBul() : new Map();
+    document.querySelectorAll(`.${ONEK}-kart`).forEach((k) => { if (!kartlar.has(k.parentElement)) k.remove(); });
+    let y = 0, h = 0;
+    kartlar.forEach((m, k) => {
+      const v = KART.veri.get(m.id);
+      if (v && v.ozet) y++;
+      if (v && v.hata) { h++; kuyruga(m); }
+      if (!AYAR.kartGor) kuyruga(m);
+      else if (typeof IntersectionObserver === 'function') {
+        if (!KART.gozcu) {
+          KART.gozcu = new IntersectionObserver((girdiler) => girdiler.forEach((g) => {
+            if (!g.isIntersecting) return;
+            const mm = g.target.__mwxModel; if (mm) kuyruga(mm);
+            KART.gozcu.unobserve(g.target);
+          }), { rootMargin: '200px' });
+        }
+        // React aynı öğeyi başka model için yeniden kullanabilir: model değişince yeniden gözlenir
+        if (!k.__mwxModel || k.__mwxModel.id !== m.id) { k.__mwxModel = m; KART.gozcu.observe(k); }
+      } else kuyruga(m);
+      kartRozeti(k, m);
+    });
+    KART.durum = { n: kartlar.size, y, h };
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // ORTAK AYARLAR (kapalı Shadow DOM, kipli <dialog>)
+  // ═══════════════════════════════════════════════════════════════════════
+  const UI = { host: null, kok: null, pencere: null, bolum: 'sekme', ara: '', onceki: null, kabul: depoOku('kabul', {}) || {} };
+  const BOLUMLER = [['sekme', 'mwx'], ['rozet', 'mwx'], ['uyumsuz', 'mwx'], ['filtre', 'mwx'], ['kart', 'mwx'], ['gelismis', 'mwx'],
+    ['genel', 'ortak'], ['kisayol', 'ortak'], ['tani', 'ortak'], ['hakkinda', 'ortak']];
+  // Ölçek: ≥ 3 px değerler calc(Npx*var(--o)) (platform-userscript §3.8)
+  const carp = (s) => s.replace(/(^|[^\w.#-])(\d+(?:\.\d+)?)px/g, (m, on, n) => (Number(n) <= 2 ? m : `${on}calc(${n}px*var(--o))`));
+  const UI_CSS = carp(`
+/* TOKEN-BASLA */
+:host{--ana:#2456D6;--ana-acik:#E5EBFA;--ana-hover:#F2F5FD;--ana-uzeri:#FFFFFF;--vurgu:#2456D6;--zemin:#F6F9FC;--yuzey:#FFFFFF;
+ --metin:#17252E;--metin-ikincil:#4E6269;--kenar:#7A9199;--ayirici:#D3DEE6;--basari:#18763F;--basari-bg:#E4F5E8;--uyari:#9A5B00;
+ --uyari-bg:#FDF6D8;--hata:#C4313B;--hata-bg:#FDE8E8;--perde:rgba(15,21,32,.42);--o:1;color-scheme:light}
+:host([data-tema="koyu"]){--ana-acik:#1D2C4F;--ana-hover:#1B2434;--vurgu:#86A8FF;--zemin:#0F1520;--yuzey:#161E2B;--metin:#E6ECF5;
+ --metin-ikincil:#9AA8BC;--kenar:#6A7B93;--ayirici:#263142;--basari:#4CC38A;--basari-bg:#13301F;--uyari:#E8AC45;--uyari-bg:#33270F;
+ --hata:#FF8189;--hata-bg:#3A161A;--perde:rgba(0,0,0,.55);color-scheme:dark}
+/* TOKEN-BITIR */
+[hidden]{display:none !important}
+*{box-sizing:border-box}
+dialog{padding:0;border:1px solid var(--kenar);border-radius:6px;background:var(--yuzey);color:var(--metin);width:min(780px,calc(100vw - 32px));
+ height:min(560px,calc(100vh - 32px));font:400 13px/1.45 "Open Sans","Segoe UI",Roboto,sans-serif;overflow:hidden}
+dialog[open]{display:flex;flex-direction:column}
+dialog::backdrop{background:var(--perde)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--vurgu);outline-offset:2px}
+.ust{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:1px solid var(--ayirici)}
+.kod{width:24px;height:24px;border-radius:4px;background:var(--ana);color:var(--ana-uzeri);display:grid;place-items:center;font-size:9px;font-weight:700;flex:0 0 auto}
+.bas{font-weight:600;flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ara{height:28px;border:1px solid var(--kenar);border-radius:4px;background:var(--zemin);padding:0 8px;width:190px;min-width:0}
+.kucuk{height:28px;min-width:28px;padding:0 6px;border:1px solid var(--kenar);border-radius:4px;background:var(--yuzey);cursor:pointer;display:inline-grid;place-items:center}
+.kucuk:hover,.dug:hover{background:var(--ana-hover)}
+.kucuk[disabled]{opacity:.55;cursor:default}
+.govde{display:grid;grid-template-columns:184px minmax(0,1fr);flex:1 1 auto;min-height:0}
+nav{border-right:1px solid var(--ayirici);padding:8px 0;overflow:auto;background:var(--zemin)}
+nav .grup{font-size:11px;font-weight:700;color:var(--metin-ikincil);letter-spacing:.06em;padding:8px 12px 4px}
+nav button{display:block;width:100%;text-align:left;border:0;background:transparent;padding:0 12px;height:28px;cursor:pointer;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+nav button:hover{background:var(--ana-hover)}
+nav button[aria-current="true"]{background:var(--ana-acik);font-weight:600;box-shadow:inset 3px 0 var(--ana)}
+.icerik{overflow:auto;padding:12px 16px 24px}
+.bolum + .bolum{border-top:1px solid var(--ayirici);padding-top:12px;margin-top:12px}
+h4{margin:0 0 2px;font-size:14px;font-weight:600}
+.acik{margin:0 0 8px;color:var(--metin-ikincil);font-size:12px}
+.oge{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:6px 0;border-bottom:1px solid var(--ayirici)}
+.oge:last-child{border-bottom:0}
+.oge small{display:block;color:var(--metin-ikincil)}
+.anahtar{width:36px;height:20px;border-radius:10px;border:1px solid var(--kenar);background:var(--zemin);position:relative;cursor:pointer;padding:0}
+.anahtar::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--kenar);transition:left .12s}
+.anahtar[aria-checked="true"]{background:var(--ana);border-color:var(--ana)}
+.anahtar[aria-checked="true"]::after{left:18px;background:var(--ana-uzeri)}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--kenar);border-radius:4px;overflow:hidden}
+.seg button{border:0;background:var(--yuzey);padding:4px 10px;cursor:pointer;border-right:1px solid var(--ayirici)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ana);color:var(--ana-uzeri)}
+.kutular{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px 12px;padding:4px 0 8px}
+.kutular label{display:flex;gap:6px;align-items:center;cursor:pointer}
+input[type=checkbox]{accent-color:var(--ana);width:15px;height:15px;margin:0}
+.sayi{width:84px;height:28px;border:1px solid var(--kenar);border-radius:4px;background:var(--zemin);padding:0 6px}
+.sira{display:flex;flex-direction:column;gap:4px}
+.sira div{display:flex;align-items:center;gap:6px;border:1px solid var(--ayirici);border-radius:4px;padding:2px 4px 2px 8px;min-width:150px}
+.sira span{flex:1 1 auto;font-weight:600}
+.sira select{height:28px;border:1px solid var(--kenar);border-radius:4px;background:var(--yuzey)}
+.dug{height:28px;padding:0 12px;border:1px solid var(--kenar);background:var(--yuzey);border-radius:4px;cursor:pointer}
+.dug.onay{border-color:var(--hata);color:var(--hata)}
+.dugmeler{display:flex;gap:8px;flex-wrap:wrap}
+.kisayol{width:140px;height:28px;border:1px solid var(--kenar);border-radius:4px;background:var(--zemin);padding:0 8px;font-weight:700;cursor:pointer}
+table{width:100%;border-collapse:collapse;font-size:12px}
+td{padding:5px 4px;border-bottom:1px solid var(--ayirici);vertical-align:top}
+td:first-child{width:22px;font-weight:700}
+.v{color:var(--basari)} .x{color:var(--hata)} .b{color:var(--metin-ikincil)}
+code{font-family:Consolas,"Cascadia Mono",monospace;font-size:11px;color:var(--metin-ikincil);overflow-wrap:anywhere}
+.madde{border:1px solid var(--ayirici);border-radius:4px;padding:8px;margin-top:6px}
+.madde p{margin:0 0 6px}
+.madde small{display:block;color:var(--metin-ikincil);margin-bottom:6px}
+.madde input[type=text]{width:100%;height:28px;border:1px solid var(--kenar);border-radius:4px;background:var(--zemin);padding:0 8px;margin-top:6px}
+.alt{display:flex;justify-content:space-between;gap:8px;padding:8px 10px;border-top:1px solid var(--ayirici);color:var(--metin-ikincil);font-size:12px}
+.alt b{font-weight:700}
+.bildirim{position:absolute;left:50%;bottom:48px;transform:translateX(-50%);background:var(--metin);color:var(--yuzey);border-radius:4px;padding:6px 12px;font-size:12px;max-width:90%}
+textarea{width:100%;height:120px;font-family:Consolas,monospace;font-size:11px;background:var(--zemin);color:var(--metin);border:1px solid var(--kenar);border-radius:4px}
+@media (max-width:560px){.govde{grid-template-columns:1fr}nav{display:none}.ara{width:120px}}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+`);
+
+  function uiKur() {
+    if (UI.host && UI.host.isConnected) return;
+    const yer = document.body || document.documentElement;
+    if (!yer) return;
+    UI.host = O('div', { id: `${ONEK}-kok` });
+    UI.kok = UI.host.attachShadow({ mode: 'closed' });
+    UI.kok.append(O('style', { text: UI_CSS }));
+    UI.pencere = O('dialog', { 'aria-label': AD + ' · ' + t('ayarlar') });
+    UI.pencere.addEventListener('close', () => { if (UI.onceki && UI.onceki.focus) { try { UI.onceki.focus(); } catch (e) { /* yok */ } } UI.onceki = null; });
+    UI.pencere.addEventListener('pointerdown', (e) => { UI.basHedef = e.target; });
+    UI.pencere.addEventListener('click', (e) => { if (e.target === UI.pencere && UI.basHedef === UI.pencere) { const r = UI.pencere.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) UI.pencere.close(); } });
+    UI.kok.append(UI.pencere);
+    yer.append(UI.host);
+    temaUygula();
+  }
+  function acikMi() { return !!(UI.pencere && UI.pencere.open); }
+  function ayarlariAc() {
+    uiKur();
+    if (!UI.pencere) return;
+    if (acikMi()) { UI.pencere.close(); return; }
+    UI.onceki = document.activeElement;
+    UI.host.style.setProperty('--o', String(AYAR.olcek / 100));
+    pencereCiz();
+    UI.pencere.showModal();
+    const ilk = UI.kok.querySelector('nav button[aria-current="true"]') || UI.kok.querySelector('.ara');
+    if (ilk) ilk.focus();
+  }
+  function bildir(m) {
+    if (!UI.kok) return;
+    const b = O('div', { class: 'bildirim', role: 'status', text: m });
+    (acikMi() ? UI.pencere : UI.kok).append(b);
+    setTimeout(() => b.remove(), 2600);
+  }
+  function degisti(yeniden, cizme) {
+    ayarKaydet();
+    if (cubuk) { cubuk.remove(); cubuk = null; }
+    D.secMat.clear();
+    temaUygula();
+    if (UI.host) UI.host.style.setProperty('--o', String(AYAR.olcek / 100));
+    if (yeniden) menuKaydet();
+    planla(true);
+    if (acikMi() && !cizme) pencereCiz();
+  }
+  function anahtarK(k) {
+    return O('button', { class: 'anahtar', role: 'switch', type: 'button', 'data-k': k, 'aria-checked': AYAR[k] ? 'true' : 'false', 'aria-label': t('o_' + k),
+      onclick: () => { AYAR[k] = !AYAR[k]; if (k === 'hatirla') depoYaz('filtre', AYAR.hatirla ? D.filtre : ''); degisti(); } });
+  }
+  function segK(k, secenekler, donustur) {
+    const s = O('div', { class: 'seg', role: 'group', 'aria-label': t('o_' + k) });
+    secenekler.forEach(([v, ad]) => s.append(O('button', { type: 'button', 'data-k': k + ':' + v, 'aria-pressed': String(AYAR[k]) === String(v) ? 'true' : 'false', text: ad,
+      onclick: () => { AYAR[k] = donustur ? donustur(v) : v; if (k === 'vsrt') D.vsrt = AYAR.vsrt; degisti(k === 'dil'); } })));
+    return s;
+  }
+  function sayiK(k) {
+    const i = O('input', { type: 'number', class: 'sayi', 'data-k': k, 'aria-label': t('o_' + k) });
+    i.value = String(AYAR[k]);
+    // Yeniden çizim yok: blur anındaki change, tıklanan sonraki denetimi DOM'dan silmesin
+    i.addEventListener('change', () => { const y = dogrula(Object.assign({}, AYAR, { [k]: Number(i.value) })); AYAR[k] = y[k]; i.value = String(AYAR[k]); degisti(false, true); });
+    return i;
+  }
+  function oge(ad, ipucu, kontrol, aramaEk) {
+    const o = O('div', { class: 'oge' }, O('div', {}, ad, ipucu ? O('small', { text: ipucu }) : null), kontrol || O('span'));
+    o.dataset.ara = katla([ad, ipucu || '', aramaEk || ''].join(' '));
+    return o;
+  }
+
+  // Başka sekmenin cevaplarını ezmemek için her yazmadan önce depodan yeniden okunur
+  function kabulYaz(k, c) {
+    const d = depoOku('kabul', {});
+    UI.kabul = d && typeof d === 'object' && !Array.isArray(d) ? d : {};
+    UI.kabul[k] = c;
+    depoYaz('kabul', UI.kabul);
+  }
+  function bolumCiz(id) {
+    const b = O('section', { class: 'bolum', 'data-bolum': id }, O('h4', { text: t('b_' + id) }));
+    const ac = t('a_' + id);
+    if (ac !== 'a_' + id && METIN.tr['a_' + id]) b.append(O('p', { class: 'acik', text: ac }));
+    if (id === 'sekme') {
+      const s = O('div', { class: 'sira' });
+      AYAR.sira.forEach((p, i) => s.append(O('div', {}, O('span', { text: p }),
+        O('button', { type: 'button', class: 'kucuk', 'data-k': 'sira:' + i + ':y', 'aria-label': p + ' ↑', disabled: i === 0, onclick: () => { [AYAR.sira[i - 1], AYAR.sira[i]] = [AYAR.sira[i], AYAR.sira[i - 1]]; degisti(); } }, svg('yukari')),
+        O('button', { type: 'button', class: 'kucuk', 'data-k': 'sira:' + i + ':a', 'aria-label': p + ' ↓', disabled: i === AYAR.sira.length - 1, onclick: () => { [AYAR.sira[i + 1], AYAR.sira[i]] = [AYAR.sira[i], AYAR.sira[i + 1]]; degisti(); } }, svg('asagi')),
+        O('button', { type: 'button', class: 'kucuk', 'aria-label': t('o_cikar') + ': ' + p, title: t('o_cikar'), disabled: AYAR.sira.length < 2, onclick: () => { AYAR.sira.splice(i, 1); degisti(); } }, svg('x')))));
+      const kalan = YAZICI_LISTE.filter((y) => !AYAR.sira.some((s0) => esYazici(s0, y)));
+      if (kalan.length && AYAR.sira.length < 6) {
+        const sec = O('select', { 'data-k': 'sira-ekle', 'aria-label': t('o_ekle') }, O('option', { value: '', text: t('o_ekle') + '…' }), kalan.map((y) => O('option', { value: y, text: y })));
+        sec.addEventListener('change', () => { if (sec.value) { AYAR.sira.push(sec.value); degisti(); } });
+        s.append(sec);
+      }
+      b.append(oge(t('o_sira'), t('o_siraI'), s, AYAR.sira.join(' ')), oge(t('o_oto'), '', anahtarK('oto')), oge(t('o_url'), t('o_urlI'), anahtarK('url')),
+        oge(t('o_ilk'), t('o_ilkI'), anahtarK('ilk')), oge(t('o_bilgi'), t('o_bilgiI'), anahtarK('bilgi')));
+    }
+    if (id === 'rozet') {
+      const k = O('div', { class: 'kutular' });
+      ALANLAR.forEach((a) => {
+        const c = O('input', { type: 'checkbox', 'data-k': 'alan:' + a }); c.checked = AYAR.alan.indexOf(a) >= 0;
+        c.addEventListener('change', () => { AYAR.alan = ALANLAR.filter((x) => (x === a ? c.checked : AYAR.alan.indexOf(x) >= 0)); degisti(); });
+        k.append(O('label', {}, c, t('f_' + a)));
+      });
+      b.append(oge(t('o_alan'), '', null, ALANLAR.map((a) => t('f_' + a)).join(' ')), k, oge(t('o_hazne'), t('o_hazneI'), anahtarK('hazne')),
+        oge(t('o_noz'), t('o_nozI'), segK('noz', [[0.2, '0.2'], [0.4, '0.4'], [0.6, '0.6'], [0.8, '0.8']], Number)));
+    }
+    if (id === 'uyumsuz') {
+      b.append(oge(t('o_stil'), '', segK('stil', ['blur', 'dim', 'hide', 'none'].map((s) => [s, t('s_' + s)]))),
+        oge(t('o_net'), '', anahtarK('net')), oge(t('o_sona'), t('o_sonaI'), anahtarK('sona')));
+    }
+    if (id === 'filtre') {
+      const g = O('div', { class: 'kutular' });
+      MALZEMELER.forEach((m) => {
+        const c = O('input', { type: 'checkbox', 'data-k': 'gizli:' + m }); c.checked = AYAR.gizli.indexOf(m) >= 0;
+        c.addEventListener('change', () => { AYAR.gizli = MALZEMELER.filter((x) => (x === m ? c.checked : AYAR.gizli.indexOf(x) >= 0)); degisti(); });
+        g.append(O('label', {}, c, m));
+      });
+      b.append(oge(t('o_kutu'), '', anahtarK('kutu')), oge(t('o_hatirla'), '', anahtarK('hatirla')), oge(t('o_cip'), '', anahtarK('cip')),
+        oge(t('o_gizli'), t('o_gizliI'), null, MALZEMELER.join(' ')), g, oge(t('o_srt'), '', anahtarK('srt')),
+        oge(t('o_vsrt'), '', segK('vsrt', SIRALAR.map((s) => [s, t('v_' + (s === 'default' ? 'varsayilan' : s))]))));
+    }
+    if (id === 'kart') b.append(oge(t('o_kartAc'), t('o_kartAcI'), anahtarK('kartAc')), oge(t('o_kartUyum'), '', anahtarK('kartUyum')), oge(t('o_kartGor'), t('o_kartGorI'), anahtarK('kartGor')));
+    if (id === 'gelismis') {
+      b.append(oge(t('o_bekle'), '', sayiK('bekle')), oge(t('o_aralik'), '', sayiK('aralik')), oge(t('o_deneme'), '', sayiK('deneme')),
+        oge(t('o_sure'), '', sayiK('sure')), oge(t('o_onbellek'), '', sayiK('onbellek')), oge(t('o_gunluk'), '', anahtarK('gunluk')),
+        oge(t('o_kapali'), t('o_kapaliI'), anahtarK('kapali')));
+    }
+    if (id === 'genel') {
+      const vars = O('button', { type: 'button', class: 'dug', 'data-k': 'vars', text: t('vars') });
+      let zaman = 0;
+      vars.addEventListener('click', () => {
+        if (Date.now() - zaman < 500) return; // çift tıklama iki adımı birden geçmesin
+        if (Date.now() - zaman > 4000) { zaman = Date.now(); vars.textContent = t('varsOnay'); vars.classList.add('onay'); setTimeout(() => { vars.textContent = t('vars'); vars.classList.remove('onay'); }, 4000); return; }
+        AYAR = kopya(VARSAYILAN); D.vsrt = AYAR.vsrt; degisti(true); bildir(t('varsYapildi'));
+      });
+      b.append(oge(t('o_tema'), '', segK('tema', [['sayfa', t('t_sayfa')], ['acik', t('t_acik')], ['koyu', t('t_koyu')]])),
+        oge(t('o_dil'), AYAR.dil === 'tarayici' ? t('d_algi', { d: tarayiciDili() === 'tr' ? 'Türkçe' : 'English' }) : '', segK('dil', [['tarayici', t('d_tarayici')], ['tr', 'Türkçe'], ['en', 'English']])),
+        oge(t('o_olcek'), '', segK('olcek', [90, 100, 115, 130].map((v) => [v, dil() === 'tr' ? '%' + v : v + '%']), Number)),
+        oge(t('o_vars'), '', vars));
+    }
+    if (id === 'kisayol') {
+      const kutu = O('input', { class: 'kisayol', type: 'text', readonly: true, 'aria-label': t('k_ayarlar') });
+      kutu.value = AYAR.kisayol.ayarlar;
+      kutu.addEventListener('focus', () => { kutu.value = t('k_bas'); });
+      kutu.addEventListener('blur', () => { kutu.value = AYAR.kisayol.ayarlar; });
+      kutu.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') return;
+        e.preventDefault(); e.stopPropagation();
+        if (e.key === 'Escape') { kutu.blur(); return; }
+        if (['Control', 'Shift', 'Alt', 'Meta', 'AltGraph'].indexOf(e.key) >= 0) return;
+        const k = tusKombo(e);
+        if (!k || yasakMi(k)) { bildir(t('k_gecersiz', { k: k || e.key })); return; }
+        AYAR.kisayol.ayarlar = k; degisti(); bildir(t('k_degisti', { k }));
+      });
+      const v = O('button', { type: 'button', class: 'dug', text: t('k_varsayilan'), onclick: () => { AYAR.kisayol.ayarlar = VARSAYILAN.kisayol.ayarlar; degisti(); } });
+      b.append(oge(t('k_ayarlar'), '', O('div', { class: 'dugmeler' }, kutu, v), AYAR.kisayol.ayarlar));
+    }
+    if (id === 'tani') {
+      const tb = O('table');
+      taniSatirlari().forEach(([d, ad, deger]) => tb.append(O('tr', {}, O('td', { class: d, text: d === 'v' ? '✓' : d === 'x' ? '✗' : '–' }), O('td', {}, ad, O('br'), O('code', { text: deger })))));
+      const tt = O('table');
+      tarihAlanlari().forEach(([ad, deger]) => tt.append(O('tr', {}, O('td', { class: 'b', text: '·' }), O('td', {}, ad, O('br'), O('code', { text: deger })))));
+      const kopyaD = O('button', { type: 'button', class: 'dug', text: t('tn_kopya'), onclick: () => raporKopyala(b) });
+      b.append(tb, O('h4', { text: t('tn_tarih'), style: 'margin-top:12px' }), tt, O('div', { class: 'dugmeler', style: 'margin-top:8px' }, kopyaD));
+      b.append(O('h4', { text: t('tn_kabul'), style: 'margin-top:14px' }), O('p', { class: 'acik', text: t('tn_kabulA') }));
+      KABUL.forEach((k) => {
+        const c = (UI.kabul[k] && UI.kabul[k].v === SURUM) ? UI.kabul[k] : {};
+        const not = O('input', { type: 'text', maxlength: 200, 'data-k': 'not:' + k, placeholder: t('tn_not'), 'aria-label': t('tn_not'), hidden: c.s !== 'sorun' });
+        not.value = c.n || '';
+        let notZaman = null;
+        const notYaz = () => { clearTimeout(notZaman); kabulYaz(k, { s: 'sorun', n: not.value.slice(0, 200), v: SURUM }); };
+        not.addEventListener('input', () => { clearTimeout(notZaman); notZaman = setTimeout(notYaz, 400); });
+        not.addEventListener('change', notYaz);
+        const seg = O('div', { class: 'seg', role: 'group', 'aria-label': t(k) });
+        [['gecti', t('tn_gecti')], ['sorun', t('tn_sorun')], ['atla', t('tn_atla')]].forEach(([s, ad]) => seg.append(O('button', { type: 'button', text: ad, 'data-k': 'kabul:' + k + ':' + s,
+          'aria-pressed': c.s === s ? 'true' : 'false',
+          onclick: () => { kabulYaz(k, { s, n: s === 'sorun' ? not.value.slice(0, 200) : '', v: SURUM }); pencereCiz(); bildir(t('tn_kabulBitti')); } })));
+        b.append(O('div', { class: 'madde' }, O('p', { text: t(k) }), O('small', { text: t(k + 'i') }), seg, not));
+      });
+    }
+    if (id === 'hakkinda') {
+      const disa = O('button', { type: 'button', class: 'dug', text: t('h_disa'), onclick: () => {
+        const a = O('a', { href: 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify({ uygulama: 'MWX', surum: SURUM, ayar: AYAR }, null, 2)), download: 'AALabs.MakerWorldPlus.ayar.json' });
+        UI.pencere.append(a); a.click(); a.remove();
+      } });
+      const dosya = O('input', { type: 'file', accept: 'application/json,.json', hidden: true });
+      dosya.addEventListener('change', () => {
+        const f = dosya.files && dosya.files[0]; if (!f) return;
+        const r = new FileReader();
+        r.onload = () => {
+          try {
+            const j = JSON.parse(String(r.result));
+            if (!j || j.uygulama !== 'MWX' || !j.ayar || typeof j.ayar !== 'object' || Array.isArray(j.ayar) || !Object.keys(j.ayar).some((x) => x in VARSAYILAN)) throw new Error('biçim'); AYAR = dogrula(j.ayar); D.vsrt = AYAR.vsrt; degisti(true); bildir(t('h_iceTamam')); }
+          catch (e) { bildir(t('h_iceHata')); }
+          dosya.value = ''; // aynı dosya yeniden seçilebilsin
+        };
+        r.readAsText(f);
+      });
+      const ice = O('button', { type: 'button', class: 'dug', text: t('h_ice'), onclick: () => dosya.click() });
+      b.append(O('p', { text: t('h_surum', { ad: AD, s: SURUM }) }), O('p', { class: 'acik', text: t('h_kaynak') }), O('p', { class: 'acik', text: t('h_eskiBetik') }),
+        oge(t('h_yedek'), '', O('div', { class: 'dugmeler' }, disa, ice, dosya)));
+    }
+    return b;
+  }
+
+  function pencereCiz() {
+    if (!UI.pencere) return;
+    const kayit = UI.kok.querySelector('.icerik');
+    const kaydirma = kayit ? kayit.scrollTop : 0;
+    const etkin = UI.kok.activeElement;
+    const odakAra = etkin && etkin.classList && etkin.classList.contains('ara');
+    const imlec = odakAra ? [etkin.selectionStart, etkin.selectionEnd] : null;
+    const odakK = etkin && etkin.dataset ? etkin.dataset.k : null;
+    const oncekiAra = UI.cizilenAra;
+    UI.cizilenAra = UI.ara;
+    UI.pencere.setAttribute('aria-label', AD + ' · ' + t('ayarlar'));
+    UI.pencere.textContent = '';
+    const ara = O('input', { class: 'ara', type: 'search', placeholder: t('ara'), 'aria-label': t('ara') });
+    ara.value = UI.ara;
+    ara.addEventListener('input', (e) => { if (e.isComposing) return; UI.ara = ara.value; pencereCiz(); });
+    ara.addEventListener('compositionend', () => { UI.ara = ara.value; pencereCiz(); });
+    const kapat = O('button', { type: 'button', class: 'kucuk', 'aria-label': t('kapat'), title: t('kapat') + ' (Esc)', onclick: () => UI.pencere.close() }, svg('x'));
+    const ust = O('div', { class: 'ust' }, O('span', { class: 'kod', 'aria-hidden': 'true', text: KOD }), O('span', { class: 'bas', text: AD + ' · ' + t('ayarlar') }), ara, kapat);
+    const nav = O('nav', { 'aria-label': t('ayarlar') });
+    let grup = null;
+    BOLUMLER.forEach(([id, g]) => {
+      if (g !== grup) { grup = g; nav.append(O('div', { class: 'grup', text: g === 'mwx' ? KOD : t('ortak') })); }
+      nav.append(O('button', { type: 'button', title: t('b_' + id), text: t('b_' + id), 'aria-current': id === UI.bolum && !UI.ara ? 'true' : 'false',
+        onclick: () => { UI.bolum = id; UI.ara = ''; pencereCiz(); const s = UI.kok.querySelector('.icerik'); if (s) s.scrollTop = 0; } }));
+    });
+    const icerik = O('div', { class: 'icerik' });
+    const q = katla(UI.ara.trim());
+    if (q) {
+      let bulundu = false;
+      BOLUMLER.forEach(([id]) => {
+        const b = bolumCiz(id);
+        const bas = katla(t('b_' + id)).indexOf(q) >= 0;
+        const ogeler = Array.from(b.querySelectorAll('.oge'));
+        const eslesen = ogeler.filter((o) => (o.dataset.ara || '').indexOf(q) >= 0);
+        if (!bas && !eslesen.length) return;
+        if (!bas) ogeler.forEach((o) => { if (eslesen.indexOf(o) < 0) o.hidden = true; });
+        bulundu = true; icerik.append(b);
+      });
+      if (!bulundu) icerik.append(O('p', { class: 'acik', text: t('sonucYok') }));
+    } else icerik.append(bolumCiz(UI.bolum));
+    const alt = O('div', { class: 'alt' }, O('span', { text: t('altSol') }), O('span', {}, O('b', { text: AYAR.kisayol.ayarlar }), ' · ' + t('altSag')));
+    UI.pencere.append(ust, O('div', { class: 'govde' }, nav, icerik), alt);
+    if (kayit && (!q || oncekiAra === UI.ara)) icerik.scrollTop = kaydirma;
+    if (odakAra) {
+      ara.focus();
+      const n = ara.value.length;
+      try { ara.setSelectionRange(Math.min(imlec[0] == null ? n : imlec[0], n), Math.min(imlec[1] == null ? n : imlec[1], n)); } catch (e) { /* search türü */ }
+    } else if (odakK) {
+      // Klavyeyle değiştirilen denetim yeniden çizimden sonra odakta kalır
+      const e = Array.from(UI.pencere.querySelectorAll('[data-k]')).find((x) => x.dataset.k === odakK);
+      if (e && !e.disabled) e.focus();
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // TANI (+ E5 tarih alanları) ve rapor
+  // ═══════════════════════════════════════════════════════════════════════
+  function taniSatirlari() {
+    const s = [];
+    const model = !!D.modelId;
+    let yon = t('tn_bilinmiyor');
+    try { yon = (GM_info && GM_info.scriptHandler ? GM_info.scriptHandler + ' ' + (GM_info.version || '') : t('tn_bilinmiyor')); } catch (e) { /* yok */ }
+    s.push(['v', t('tn_betik'), `${SURUM} · ${yon.trim()} · ${dil()} · ${t('t_' + etkinTema())}${AYAR.kapali ? ' · ' + t('o_kapali') : ''}`]);
+    if (!model) {
+      s.push(['b', t('tn_veri'), t('tn_modelDegil')]);
+    } else if (D.tasarim) s.push(['v', t('tn_veri'), `${D.kaynak === 'onbellek' ? t('kn_onbellek') : D.kaynak} · ${t('tn_profilSay', { n: D.profil.size })}`]);
+    else if (D.yukleniyor || !D.veriHata.length) s.push(['b', t('tn_veri'), t('tn_bekliyor')]);
+    else s.push(['x', t('tn_veri'), D.veriHata.join(' · ')]);
+    if (model) {
+      const r = profilSatirlari();
+      const es = r.filter((x) => satirVerisi(x)).length;
+      if (!r.length) s.push(['b', t('tn_satir'), t('tn_bekliyor') + ' · span.config_title']);
+      else s.push([D.tasarim && es < r.length ? 'x' : 'v', t('tn_satir'), t('tn_eslesti', { n: es, m: r.length }) + ' · span.config_title']);
+      const c = sekmeCubugu();
+      s.push(c ? ['v', t('tn_sekme'), t('tn_sekmeSay', { n: c.sekmeler.length }) + ' · .swiper-wrapper'] : ['b', t('tn_sekme'), t('tn_bekliyor') + ' · .swiper-wrapper']);
+      s.push([D.sec.neden === 'vazgecti' ? 'x' : D.sec.neden === 'tamam' ? 'v' : 'b', t('tn_secim'), `${t('sn_' + D.sec.neden)}${D.sec.secilen ? ' · ' + D.sec.secilen : ''} · ${t('sn_deneme', { n: D.sec.deneme })}${D.sec.yol ? ' · ' + D.sec.yol : ''}`]);
+      s.push([D.siralama === 'atlandi' ? 'x' : D.siralama === 'dogrulandi' ? 'v' : 'b', t('tn_sirala'), t('tn_' + (D.siralama === 'atlandi' ? 'atlandi' : D.siralama === 'dogrulandi' ? 'dogrulandi' : 'gerekmez'))]);
+      s.push(D.cubukCapa ? ['v', t('tn_cubuk'), t('cp_' + D.cubukCapa)] : ['b', t('tn_cubuk'), t('tn_bekliyor')]);
+    }
+    if (AYAR.kartAc) {
+      const k = KART.durum;
+      s.push(k.n ? [k.h && !k.y ? 'x' : 'v', t('tn_kart'), t('tn_kartDurum', { n: k.n, y: k.y, h: k.h })] : ['b', t('tn_kart'), t('tn_kartYok')]);
+    }
+    if (istek.son) s.push(['b', t('tn_istek'), `${istek.son.yol} · ${istek.son.durum} · ${istek.son.adres.replace(/\/models\/[^/]+/, '/models/…')}`]);
+    return s;
+  }
+  function tarihAlanlari() {
+    const d = D.tasarim;
+    const yok = t('dt_yok');
+    if (!d) return [[t('dt_create'), yok]];
+    const pt = (d.instances || []).map((i) => i.publishTime).filter(Boolean).sort();
+    let site = yok;
+    document.querySelectorAll('span').forEach((sp) => {
+      if (site !== yok || sp.childElementCount || !RE_RELEASED.test(yazi(sp)) || sp.closest(`#${ONEK}-kok`)) return;
+      const m = /(\d{4}-\d{2}-\d{2})/.exec(yazi(sp.parentElement && sp.parentElement.parentElement));
+      if (m) site = m[1];
+    });
+    return [[t('dt_create'), tarih(d.createTime) || yok], [t('dt_update'), tarih(d.updateTime) || yok], [t('dt_site'), site],
+      [t('dt_eski'), tarih(pt[0]) || yok], [t('dt_yeni'), tarih(pt[pt.length - 1]) || yok]];
+  }
+  function raporMetni() {
+    const sat = [`${AD} ${SURUM} · ${t('b_tani')}`, new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC', ''];
+    taniSatirlari().forEach(([d, a, v]) => sat.push(`${d === 'v' ? '✓' : d === 'x' ? '✗' : '–'} ${a}: ${v}`));
+    sat.push('', t('tn_tarih') + ':');
+    tarihAlanlari().forEach(([a, v]) => sat.push(`  ${a}: ${v}`));
+    const cevap = KABUL.filter((k) => UI.kabul[k] && UI.kabul[k].v === SURUM);
+    if (cevap.length) {
+      sat.push('', 'ELLE SONUÇ');
+      KABUL.forEach((k) => { const c = UI.kabul[k]; if (!c || c.v !== SURUM) return; sat.push(`${c.s === 'gecti' ? '✓' : c.s === 'sorun' ? '✗' : '–'} ${k.toUpperCase()} ${t(k)}${c.n ? ' · ' + c.n : ''}`); });
+    }
+    return sat.join('\n');
+  }
+  async function raporKopyala(bolum) {
+    const m = raporMetni();
+    try { if (typeof GM_setClipboard === 'function') { GM_setClipboard(m, 'text'); bildir(t('tn_kopyalandi')); return; } } catch (e) { /* sonraki */ }
+    try { await navigator.clipboard.writeText(m); bildir(t('tn_kopyalandi')); return; } catch (e) { /* sonraki */ }
+    const a = O('textarea', { readonly: true, 'aria-label': t('tn_kopya') }); a.value = m;
+    bolum.append(a); a.focus(); a.select(); bildir(t('tn_kopyaYok'));
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // KISAYOL (platform-userscript §2.8)
+  // ═══════════════════════════════════════════════════════════════════════
+  function tusKombo(e) {
+    if (e.getModifierState && e.getModifierState('AltGraph')) return null;
+    if (e.ctrlKey && e.altKey) return null;
+    let ad = null;
+    const k = e.key || '';
+    if (/^Key[A-Z]$/.test(e.code || '')) ad = e.code.slice(3);
+    else if (/^Digit\d$/.test(e.code || '')) ad = e.code.slice(5);
+    else if (k.length === 1 && k.trim()) {
+      const u = k === '+' ? 'Plus' : k.toLocaleUpperCase('en-US');
+      // Türkçe Q'da noktalı i (Quote) 'I' üretir; KeyI ile karışmasın diye fiziksel kod kullanılır
+      ad = /^[A-Z]$/.test(u) && e.code ? e.code : u;
+    } else if (/^F\d{1,2}$/.test(k)) ad = k;
+    if (!ad) return null;
+    // Cmd (Meta) Ctrl sayılır; değiştirici sırası her zaman Ctrl, Alt, Shift
+    return (e.ctrlKey || e.metaKey ? 'Ctrl+' : '') + (e.altKey ? 'Alt+' : '') + (e.shiftKey ? 'Shift+' : '') + ad;
+  }
+  function komboKanonikMi(v) {
+    const m = /^(Ctrl\+)?(Alt\+)?(Shift\+)?([^+]+|Plus)$/.exec(String(v));
+    if (!m || !(m[1] || m[2])) return false;
+    if (m[1] && m[2]) return false;
+    const tus = m[4];
+    if (/\s|[\x00-\x1f]/.test(tus)) return false;
+    if ([...tus].length === 1) return tus === tus.toLocaleUpperCase('en-US');
+    return /^(F\d{1,2}|Plus)$/.test(tus);
+  }
+  const YASAK = new Set(['Ctrl+T', 'Ctrl+W', 'Ctrl+N', 'Ctrl+L', 'Ctrl+R', 'Ctrl+F', 'Ctrl+P', 'Ctrl+D', 'Ctrl+S', 'Ctrl+O', 'Ctrl+H', 'Ctrl+J',
+    'Ctrl+U', 'Ctrl+K', 'Ctrl+E', 'Ctrl+G', 'Ctrl+Q', 'Ctrl+A', 'Ctrl+C', 'Ctrl+V', 'Ctrl+X', 'Ctrl+Z', 'Ctrl+Y', 'Ctrl+Plus', 'Ctrl+-', 'Ctrl+0',
+    'Ctrl+Shift+T', 'Ctrl+Shift+N', 'Ctrl+Shift+W', 'Ctrl+Shift+I', 'Ctrl+Shift+J', 'Ctrl+Shift+C', 'Ctrl+Shift+B', 'Ctrl+Shift+O',
+    'Ctrl+Shift+Q', 'Ctrl+Shift+R', 'Ctrl+Shift+Delete', 'Alt+D', 'Alt+F4', 'Alt+Home', 'Ctrl+F4', 'Ctrl+F5',
+    // düzenleme ve Firefox tuşları (3.12.0 inceleme)
+    'Ctrl+B', 'Ctrl+I', 'Ctrl+M', 'Ctrl+=', 'Ctrl+Shift+P', 'Ctrl+Shift+A', 'Ctrl+Shift+E', 'Ctrl+Shift+K', 'Ctrl+Shift+M',
+    'Ctrl+Shift+S', 'Ctrl+Shift+Y', 'Ctrl+Shift+H', 'Ctrl+Shift+D', 'Ctrl+Shift+Z', 'Ctrl+Shift+V',
+    'Alt+F', 'Alt+E', 'Alt+V', 'Alt+S', 'Alt+B', 'Alt+T', 'Alt+H']);
+  function yasakMi(k) {
+    const n = String(k);
+    if (YASAK.has(n)) return true;
+    if (/^Ctrl\+\d$/.test(n)) return true;
+    return !komboKanonikMi(k);
+  }
+  function tusDinle(e) {
+    if (e.repeat || e.isComposing) return;
+    const k = tusKombo(e);
+    if (!k) return;
+    if (k !== AYAR.kisayol.ayarlar) return;
+    e.preventDefault(); e.stopPropagation();
+    ayarlariAc();
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // TAMPERMONKEY MENÜSÜ (dil değişince yeniden kayıt)
+  // ═══════════════════════════════════════════════════════════════════════
+  let menuKimlikleri = [], menuKayitli = false;
+  function menuKaydet() {
+    if (typeof GM_registerMenuCommand !== 'function') return;
+    // Silinemeyen kayıt (kimlik yok ya da unregister yok) bir kez yapılır; dil değişince çift komut çıkmaz
+    if (menuKayitli && (typeof GM_unregisterMenuCommand !== 'function' || !menuKimlikleri.length)) return;
+    if (typeof GM_unregisterMenuCommand === 'function') menuKimlikleri.forEach((k) => { try { GM_unregisterMenuCommand(k); } catch (e) { /* yok */ } });
+    try {
+      const harf = dil() === 'tr' ? 'a' : 's';
+      const id = GM_registerMenuCommand(t('m_ayarlar') + ' (' + harf.toUpperCase() + ')', () => ayarlariAc(), harf);
+      menuKimlikleri = id != null ? [id] : [];
+      menuKayitli = true;
+    } catch (e) { hata('menü', e); }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // DÖNGÜ — gecikmeli toplama + kendi değişikliklerini yok sayma (3.12.0: zaman penceresi yerine düğüm süzgeci)
+  // ═══════════════════════════════════════════════════════════════════════
+  const BEKLEME = 200;
+  let zamanlayici = null, susturUntil = 0;
+  const turGecmisi = [];
+  const BIZIM = `[id^="${ONEK}"], [class*="${ONEK}"]`;
+  function bizimOge(n) {
+    if (!n) return false;
+    const el = n.nodeType === 1 ? n : n.parentElement;
+    if (!el) return false;
+    return !!(el.closest && el.closest(BIZIM));
+  }
+  // Kayıt ya bizim öğemizin içinde olmuş ya da yalnız bizim düğümlerimizi eklemiş/silmiş olmalı
+  function bizimKayit(k) {
+    if (bizimOge(k.target)) return true;
+    const d = [...k.addedNodes, ...k.removedNodes];
+    return d.length > 0 && d.every((n) => (n.nodeType === 1 ? (n.id || '').indexOf(ONEK) === 0 || String(n.className || '').indexOf(ONEK) >= 0 : false));
+  }
+  function planla(hemen) {
+    if (hemen) { clearTimeout(zamanlayici); zamanlayici = null; }
+    if (zamanlayici) return;
+    zamanlayici = setTimeout(() => { zamanlayici = null; tur(); }, hemen ? 0 : BEKLEME);
+  }
+  async function tur() {
+    // Döngü bekçisi: 5 sn'de 25'ten çok tur → 2 sn sus (süzgeçten kaçan bir kendi değişikliğimize karşı)
+    const simdi = Date.now();
+    turGecmisi.push(simdi);
+    while (turGecmisi.length && simdi - turGecmisi[0] > 5000) turGecmisi.shift();
+    if (turGecmisi.length > 25) { susturUntil = simdi + 2000; turGecmisi.length = 0; gunluk('döngü bekçisi devrede'); }
+    try { await turIc(); } catch (e) { hata('tur', e); }
+  }
+  async function turIc() {
+    D.turSay = (D.turSay || 0) + 1;
+    if (!document.body) return;
+    sayfaStiliEkle();
+    temaUygula();
+    if (AYAR.kapali) return;
+    if (location.href !== D.adres) { D.adres = location.href; }
+    const m = location.pathname.match(MODEL_YOLU);
+    const slug = m ? m[1] : null;
+    const id = slug ? (slug.match(/^\d+/) || [null])[0] : null;
+    if (id !== D.modelId) {
+      D.slug = slug; D.modelId = id; D.tasarim = null; D.kaynak = null; D.veriHata = [];
+      D.sec = yeniSecim(); D.ilkAcildi = false; D.bilgi = null; D.siralama = 'gerekmez'; D.cubukCapa = null;
+      D.profil.clear(); D.baslik.clear(); D.secMat.clear();
+      if (!AYAR.hatirla) D.filtre = '';
+      D.vsrt = AYAR.vsrt;
+      if (cubuk) { cubuk.remove(); cubuk = null; }
+      if (id && !D.yukleniyor) {
+        D.yukleniyor = true;
+        try { const t0 = await tasarimAl(slug, id); if (t0 && D.modelId === id) tasarimIsle(t0); }
+        finally {
+          D.yukleniyor = false;
+          // Yükleme sürerken başka modele geçildiyse o model yüklenmemiş kaldı: sonraki tur baştan kursun
+          if (D.modelId !== id) D.modelId = null;
+          planla();
+        }
+        if (D.modelId !== id) return;
+      }
+    }
+    if (id) {
+      const c = sekmeCubugu();
+      if (c) {
+        try { sekmeleriSirala(c); } catch (e) { hata('sekme', e); }
+        try { otoSec(c); } catch (e) { hata('seçim', e); }
+        try { bilgiHesapla(c); } catch (e) { hata('bilgi', e); }
+        if (!D.sec.bitti && AYAR.oto) planla();
+      }
+      try { satirlariSusle(); } catch (e) { hata('rozet', e); }
+      try { if (AYAR.kutu || AYAR.srt || AYAR.cip) { cubukBagla(); cipleriKur(); } else if (cubuk) { cubuk.remove(); cubuk = null; } } catch (e) { hata('çubuk', e); }
+      try { sirala(); } catch (e) { hata('sıralama', e); }
+      try { suz(); } catch (e) { hata('filtre', e); }
+    }
+    try { kartlariIsle(); } catch (e) { hata('kart', e); }
+  }
+
+  function basla() {
+    sayfaStiliEkle();
+    uiKur();
+    temaUygula();
+    menuKaydet();
+    D.vsrt = AYAR.vsrt;
+    document.addEventListener('keydown', tusDinle, true);
+    new MutationObserver((kayitlar) => { if (Date.now() < susturUntil) return; if (kayitlar.every(bizimKayit)) return; planla(); }).observe(document.documentElement, { childList: true, subtree: true });
+    window.addEventListener('popstate', () => planla());
+    window.addEventListener('load', () => planla());
+    setInterval(() => { if (location.href !== D.adres || (!D.sec.bitti && AYAR.oto && D.modelId && !AYAR.kapali)) planla(); }, 2000);
+    planla(true);
+    // Test kancası: yalnız test düzeneğinde (platform-userscript §4.3)
+    let testMi = false;
+    try { testMi = typeof GM_info === 'object' && GM_info && GM_info.scriptHandler === 'Test'; } catch (e) { testMi = false; }
+    const kanca = window.__AALABS_TEST__;
+    if (testMi && kanca && typeof kanca === 'object') {
+      kanca.mwx = { kok: () => UI.kok, ayar: () => AYAR, durum: () => D, tani: taniSatirlari, rapor: raporMetni, ac: ayarlariAc, tur: () => tur(), kart: () => KART, metin: METIN, kombo: tusKombo, yasak: yasakMi, dogrula };
+    }
+  }
+
+  AYAR = ayarYukle();
+  D.vsrt = AYAR.vsrt;
+  D.filtre = AYAR.hatirla ? String(depoOku('filtre', '') || '') : '';
+  sayfaStiliEkle();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla, { once: true });
+  else basla();
+}());
