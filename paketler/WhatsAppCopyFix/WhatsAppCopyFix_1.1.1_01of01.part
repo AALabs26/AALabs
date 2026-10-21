@@ -1,0 +1,1213 @@
+// ==UserScript==
+// @name         AALabs WhatsApp Copy Fix
+// @namespace    aalabs
+// @version      1.1.1
+// @description  web.whatsapp.com'da seçili metni Ctrl+C ile her zaman kopyalar. Emoji ve çoklu mesaj biçimi korunur.
+// @author       AALabs
+// @match        https://web.whatsapp.com/*
+// @icon         data:image/png;base64,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
+// @run-at       document-start
+// @noframes
+// @grant        GM_getValue
+// @grant        GM_setValue
+// @grant        GM_registerMenuCommand
+// @grant        GM_unregisterMenuCommand
+// @grant        GM_setClipboard
+// @grant        GM.setClipboard
+// @grant        GM_info
+// @aalabs-ikon  WAC
+// ==/UserScript==
+
+/*
+ * Ne düzeltir
+ *   WhatsApp Web bazen Ctrl+C'yi kendisi yakalar. Özellikle yazma kutusu odaktayken
+ *   mesajdan seçilen metin kopyalanmaz. Bu betik Ctrl+C'yi WhatsApp'tan önce alır,
+ *   seçili metni panoya kendisi yazar ve küçük bir bildirim gösterir.
+ *
+ * Neye dokunmaz
+ *   - Yazma kutusu, arama kutusu gibi düzenlenebilir alanlardaki seçim (WhatsApp'ın kendi kopyası çalışır).
+ *   - WhatsApp'ın sağ tık menüsü ve kendi "Kopyala" komutu.
+ *   - Klavye dışı kopyalama olayları.
+ *
+ * 1.1.0 (app-lab v02.01): ortak Ayarlar paneli (Ctrl+,), sayfada WAC düğmesi, Türkçe + İngilizce,
+ * Tanı raporu, çoklu mesaj biçimi seçimi. Tasarım kapısı: Panel A · K1 · T2 · E1 E2 · Ç1 Ç4.
+ */
+(function () {
+  'use strict';
+
+  const SURUM = '1.1.1';
+  const ID = 'WhatsAppCopyFix';
+  const KOD = 'WAC';
+  const AD = 'AALabs WhatsApp Copy Fix';
+  const YEDEK_BEKLE_MS = 120;      // Ctrl+C'den sonra copy olayı gelmezse yedek yazma
+  const TANI_ARALIK_MS = 15000;    // tanı denetimi aralığı (#main içinde iki seçici + üç renk okuma; hafif)
+  const TEST = !!(typeof window !== 'undefined' && window.__AALABS_WAC_TEST__);
+
+  // ---------------------------------------------------------------- tema (tokenlardan üretildi)
+  // Bu blok tema-guncelle.py ile aalabs-tema.css'ten yazılır. Elle değiştirme.
+  // TOKEN-BASLA
+  // Kaynak: /* AALabs tasarım dili 1.4.1 — aalabs.tokens.json'dan üretildi. Elle değiştirme. */
+  const TEMA_CSS = ":host { --tv-olcek: 1; --yazi: \"Open Sans\", \"Segoe UI\", Roboto, sans-serif; --yazi-govde: calc(14px * var(--tv-olcek)); --kontrol: calc(32px * var(--tv-olcek)); --kose-s: calc(2px * var(--tv-olcek)); --kose-m: calc(4px * var(--tv-olcek)); --kose-l: calc(6px * var(--tv-olcek)); --bosluk-1: calc(4px * var(--tv-olcek)); --bosluk-2: calc(8px * var(--tv-olcek)); --bosluk-3: calc(12px * var(--tv-olcek)); --bosluk-4: calc(16px * var(--tv-olcek)); --bosluk-5: calc(24px * var(--tv-olcek)); --bosluk-6: calc(32px * var(--tv-olcek)); --ana: #2456D6; --ana-acik: #E5EBFA; --ana-hover: #F2F5FD; --ana-uzeri: #FFFFFF; --vurgu: #2456D6; --zemin: #F6F9FC; --yuzey: #FFFFFF; --metin: #17252E; --metin-ikincil: #4E6269; --kenar: #7A9199; --ayirici: #D3DEE6; --basari: #18763F; --basari-bg: #E4F5E8; --uyari: #9A5B00; --uyari-bg: #FDF6D8; --hata: #C4313B; --hata-bg: #FDE8E8; --kat-belge: #6237C8; --kat-tablo: #1D7A3A; --kat-gorsel: #B0256C; --kat-kod: #2453C7; --kat-video: #A8500F; --kat-arsiv: #7A5A00; --kat-onemli: #B4232B; --kat-oyun: #0B6E78; color-scheme: light; }\n:host([data-theme=\"dark\"]) { --ana: #2456D6; --ana-acik: #1D2C4F; --ana-hover: #1B2434; --ana-uzeri: #FFFFFF; --vurgu: #86A8FF; --zemin: #0F1520; --yuzey: #161E2B; --metin: #E6ECF5; --metin-ikincil: #9AA8BC; --kenar: #6A7B93; --ayirici: #263142; --basari: #4CC38A; --basari-bg: #13301F; --uyari: #E8AC45; --uyari-bg: #33270F; --hata: #FF8189; --hata-bg: #3A161A; color-scheme: dark; }\n";
+  // TOKEN-BITIR
+
+  // ---------------------------------------------------------------- dil (TR kaynak, EN çeviri)
+  const METIN = {
+    tr: {
+      ayarlar: 'Ayarlar', ara: 'Ayarlarda ara (Ctrl+F)', sonucYok: 'Sonuç yok. Başka bir kelime dene.', ortak: 'ORTAK',
+      kapat: 'Kapat (Esc)', bildirimKapat: 'Bildirimi kapat', dugmeIpucu: 'WAC ayarlarını aç ({tus})',
+      varsayilan: 'Varsayılana dön', sifirlandi: 'Bu bölüm varsayılana döndü',
+      b_kopya: 'Kopyalama', b_bildirim: 'Bildirim ve düğme', b_genel: 'Genel', b_kisayol: 'Klavye kısayolları', b_tani: 'Tanı', b_hakkinda: 'Hakkında',
+      kopyaAlt: 'Emojiler her zaman metin olarak kopyalanır. Yazma ve arama kutusundaki seçime dokunulmaz.',
+      ctrlc: 'Ctrl+C ile kopyala', ctrlcAc: 'Kapalıysa Ctrl+C WhatsApp\'a bırakılır.',
+      ctrlIns: 'Ctrl+Insert de kopyalasın',
+      bicim: 'Çoklu mesaj biçimi', bicimAc: 'İki ya da daha çok mesaj seçince her satır böyle başlar.',
+      bicim_whatsapp: 'WhatsApp biçimi', bicim_metin: 'Yalnız metin', bicim_ad: 'Ad: metin', ornekCikti: 'Örnek çıktı',
+      ornekM1: "Yarın 09:00'da teslimat var 😀", ornekM2: "Tamam, kapıyı 08:45'te açarım.", ornekTarih: '18.10.2026',
+      bildirim: 'Kopyalayınca bildirim göster', bildirimAc: 'Hata bildirimi bu ayardan bağımsız her zaman görünür.',
+      sure: 'Bildirim süresi', sn: '{n} sn',
+      dugme: 'Sayfada WAC düğmesi', dugmeAc: 'Sağ altta, yazma çubuğunun üstünde durur. Tıklayınca Ayarlar açılır. Tanı sorunu varsa kırmızı nokta taşır.',
+      dil: 'Dil', dil_tr: 'Türkçe', dil_en: 'English', dil_tarayici: 'Tarayıcı dili', algilanan: 'Algılanan: {dil}',
+      tema: 'Tema', tema_whatsapp: 'WhatsApp\'ı izle', tema_acik: 'Açık', tema_koyu: 'Koyu',
+      kisayolNot: 'Tuş kutusuna tıkla, yeni tuşu bas. Vazgeçmek için Esc. WhatsApp ve tarayıcı kısayoluyla çakışan tuş kabul edilmez.',
+      k_ayarlar: 'Ayarları aç', k_kopyala: 'Kopyala', degismez: 'Değiştirilemez', tusaBas: 'Tuşa bas…',
+      tusDegisti: 'Kısayol {tus} oldu', tusRed: '{tus} kullanılamaz: {neden} Başka tuş seç.',
+      neden_degistirici: 'Ctrl ya da Alt ile birlikte basılmalı.', neden_whatsapp: 'WhatsApp bu tuşu kullanıyor.',
+      neden_tarayici: 'tarayıcı bu tuşu kullanıyor.', neden_sabit: 'kopyalama tuşu.',
+      taniIyi: 'Her şey yerinde. Sorun bildirirken raporu kopyalayıp sohbete yapıştır.',
+      taniKotu: '{n} sorun var. Raporu kopyalayıp sohbete yapıştır.',
+      t_bicim: 'Mesaj biçimi', t_bicimVar: 'Mesaj biçimi bulundu', t_bicimYok: 'Mesaj biçimi bulunamadı',
+      t_bicimBekle: 'Sohbet açık değil; mesaj açılınca denetlenir', t_mesaj: '{n} mesaj',
+      t_bicimNeden: 'WhatsApp sayfayı değiştirmiş olabilir; düz metin yine kopyalanır',
+      t_tema: 'WhatsApp teması okundu', t_kaynak_sinif: 'body.dark', t_kaynak_zemin: 'zemin parlaklığı', t_kaynak_sistem: 'sistem teması', t_kaynak_ayar: 'ayardan',
+      t_koyu: 'koyu', t_acik: 'açık',
+      t_pano: 'Pano yazma yolu', t_depo: 'Ayar deposu', t_depoVar: 'GM_getValue ✓', t_depoYok: 'GM_getValue yok: ayarlar sayfa kapanınca kaybolur',
+      t_son: 'Son kopya', t_sonYok: 'Henüz kopyalama yok', t_sonHata: 'Son kopya başarısız',
+      t_yol_olay: 'copy olayı', t_yol_gm: 'GM_setClipboard', t_yol_pano: 'navigator.clipboard', t_yol_exec: 'execCommand',
+      karakter: '{n} karakter',
+      raporKopyala: 'Raporu kopyala', raporKopyalandi: 'Tanı raporu kopyalandı', raporBaslik: 'Tanı raporu',
+      r_zaman: 'Zaman', r_tarayici: 'Tarayıcı', r_yonetici: 'Eklenti', r_ayarlar: 'Ayarlar', r_dil: 'Dil', r_tema: 'Tema',
+      r_ok: '[OK]', r_hata: '[HATA]', r_bilgi: '[BİLGİ]',
+      surum: 'Sürüm {s}', store: 'AALabs App Store ile güncellenir. Elle kurulum: KURULUM.md.',
+      yedek: 'Ayar yedeği', yedekle: 'Yedekle (dosya)', geriYukle: 'Geri yükle (dosya)',
+      sonYedek: 'Son yedek: {t}', sonYedekYok: 'Son yedek: henüz yok',
+      yedekAc: 'Yedek, bu betiğin ayarlarını tek bir JSON dosyasına yazar. Geri yükleyince ayarlar hemen uygulanır.',
+      yedeklendi: 'Ayarlar dosyaya yazıldı', geriYuklendi: 'Ayarlar geri yüklendi',
+      yedekHata: 'Dosya okunamadı. AALabs WhatsApp Copy Fix yedeği (.json) seç.',
+      kopyalandi: 'Kopyalandı ({n} karakter)', kopyaHata: 'Kopyalanamadı. Sayfayı yenileyip yeniden dene.',
+      menuAyarlar: 'Ayarlar (A)', menuRapor: 'Tanı raporunu kopyala (T)',
+    },
+    en: {
+      ayarlar: 'Settings', ara: 'Search settings (Ctrl+F)', sonucYok: 'No results. Try another word.', ortak: 'COMMON',
+      kapat: 'Close (Esc)', bildirimKapat: 'Close notification', dugmeIpucu: 'Open WAC settings ({tus})',
+      varsayilan: 'Reset to default', sifirlandi: 'This section was reset',
+      b_kopya: 'Copying', b_bildirim: 'Notification & button', b_genel: 'General', b_kisayol: 'Keyboard shortcuts', b_tani: 'Diagnostics', b_hakkinda: 'About',
+      kopyaAlt: 'Emojis are always copied as text. Selections in the message and search boxes are left alone.',
+      ctrlc: 'Copy with Ctrl+C', ctrlcAc: 'When off, Ctrl+C is left to WhatsApp.',
+      ctrlIns: 'Ctrl+Insert copies too',
+      bicim: 'Multi-message format', bicimAc: 'When you select two or more messages, each line starts like this.',
+      bicim_whatsapp: 'WhatsApp format', bicim_metin: 'Text only', bicim_ad: 'Name: text', ornekCikti: 'Sample output',
+      ornekM1: 'Delivery tomorrow at 09:00 😀', ornekM2: "OK, I'll open the door at 08:45.", ornekTarih: '18/10/2026',
+      bildirim: 'Show a notification after copying', bildirimAc: 'Error notifications always appear, whatever this setting is.',
+      sure: 'Notification duration', sn: '{n} s',
+      dugme: 'WAC button on the page', dugmeAc: 'Sits at bottom right, above the message bar. Opens Settings. Shows a red dot if diagnostics find a problem.',
+      dil: 'Language', dil_tr: 'Türkçe', dil_en: 'English', dil_tarayici: 'Browser language', algilanan: 'Detected: {dil}',
+      tema: 'Theme', tema_whatsapp: 'Follow WhatsApp', tema_acik: 'Light', tema_koyu: 'Dark',
+      kisayolNot: 'Click a key box, then press the new keys. Esc cancels. Keys used by WhatsApp or the browser are refused.',
+      k_ayarlar: 'Open settings', k_kopyala: 'Copy', degismez: 'Fixed', tusaBas: 'Press keys…',
+      tusDegisti: 'Shortcut is now {tus}', tusRed: "{tus} can't be used: {neden} Pick another key.",
+      neden_degistirici: 'press it together with Ctrl or Alt.', neden_whatsapp: 'WhatsApp uses this key.',
+      neden_tarayici: 'the browser uses this key.', neden_sabit: 'it is the copy key.',
+      taniIyi: 'Everything is in place. When reporting a problem, copy the report and paste it into the chat.',
+      taniKotu: '{n} problem{s} found. Copy the report and paste it into the chat.',
+      t_bicim: 'Message format', t_bicimVar: 'Message format found', t_bicimYok: 'Message format not found',
+      t_bicimBekle: 'No chat open; checked when a chat opens', t_mesaj: '{n} messages',
+      t_bicimNeden: 'WhatsApp may have changed the page; plain text is still copied',
+      t_tema: 'WhatsApp theme read', t_kaynak_sinif: 'body.dark', t_kaynak_zemin: 'background brightness', t_kaynak_sistem: 'system theme', t_kaynak_ayar: 'from settings',
+      t_koyu: 'dark', t_acik: 'light',
+      t_pano: 'Clipboard write path', t_depo: 'Settings storage', t_depoVar: 'GM_getValue ✓', t_depoYok: 'No GM_getValue: settings are lost when the page closes',
+      t_son: 'Last copy', t_sonYok: 'Nothing copied yet', t_sonHata: 'Last copy failed',
+      t_yol_olay: 'copy event', t_yol_gm: 'GM_setClipboard', t_yol_pano: 'navigator.clipboard', t_yol_exec: 'execCommand',
+      karakter: '{n} characters',
+      raporKopyala: 'Copy report', raporKopyalandi: 'Diagnostic report copied', raporBaslik: 'Diagnostic report',
+      r_zaman: 'Time', r_tarayici: 'Browser', r_yonetici: 'Extension', r_ayarlar: 'Settings', r_dil: 'Language', r_tema: 'Theme',
+      r_ok: '[OK]', r_hata: '[ERROR]', r_bilgi: '[INFO]',
+      surum: 'Version {s}', store: 'Updated by AALabs App Store. Manual install: KURULUM.md.',
+      yedek: 'Settings backup', yedekle: 'Back up (file)', geriYukle: 'Restore (file)',
+      sonYedek: 'Last backup: {t}', sonYedekYok: 'Last backup: none yet',
+      yedekAc: 'The backup writes this script\'s settings to one JSON file. Restoring applies them at once.',
+      yedeklendi: 'Settings written to a file', geriYuklendi: 'Settings restored',
+      yedekHata: "Couldn't read the file. Pick an AALabs WhatsApp Copy Fix backup (.json).",
+      kopyalandi: 'Copied ({n} characters)', kopyaHata: "Couldn't copy. Reload the page and try again.",
+      menuAyarlar: 'Settings (A)', menuRapor: 'Copy diagnostic report (T)',
+    },
+  };
+
+  if (TEST) window.__AALABS_WAC_METIN__ = METIN;   // yalnız testte: TR/EN anahtar eşitliği denetimi
+
+  // ---------------------------------------------------------------- ayar deposu
+  const VARSAYILAN = Object.freeze({
+    ctrlc: true, ctrlIns: true, bicim: 'whatsapp',
+    bildirim: true, sure: 2000, dugme: true,
+    dil: 'tr', tema: 'whatsapp',
+    kisayolAyarlar: 'Ctrl+,', sonYedek: '',
+  });
+  const SECENEK = { bicim: ['whatsapp', 'metin', 'ad'], sure: [1000, 2000, 3000], dil: ['tr', 'en', 'tarayici'], tema: ['whatsapp', 'acik', 'koyu'] };
+  const BOLUM_ANAHTAR = {
+    kopya: ['ctrlc', 'ctrlIns', 'bicim'], bildirim: ['bildirim', 'sure', 'dugme'],
+    genel: ['dil', 'tema'], kisayol: ['kisayolAyarlar'],
+  };
+  const gmDepo = (() => { try { return typeof GM_getValue === 'function' && typeof GM_setValue === 'function'; } catch (_) { return false; } })();
+
+  function ayarDogrula(ham) {
+    const a = Object.assign({}, VARSAYILAN);
+    if (!ham || typeof ham !== 'object') return a;
+    for (const k of Object.keys(VARSAYILAN)) {
+      if (!(k in ham)) continue;
+      const v = ham[k];
+      if (typeof VARSAYILAN[k] === 'boolean') { if (typeof v === 'boolean') a[k] = v; continue; }
+      if (SECENEK[k]) { if (SECENEK[k].includes(v)) a[k] = v; continue; }
+      if (k === 'kisayolAyarlar') { if (komboKanonikMi(v) && tusGecerliMi(v) === null) a[k] = v; continue; }
+      if (typeof v === 'string') a[k] = v.slice(0, 40);
+    }
+    return a;
+  }
+
+  function ayarOku() {
+    if (!gmDepo) return ayarDogrula(null);
+    try {
+      const ham = GM_getValue('ayarlar', null);
+      return ayarDogrula(typeof ham === 'string' ? JSON.parse(ham) : ham);
+    } catch (_) { return ayarDogrula(null); }
+  }
+
+  function ayarYaz() {
+    if (!gmDepo) return;
+    try { GM_setValue('ayarlar', JSON.stringify(ayar)); } catch (_) { /* depo yazılamadı; bellekte sürer */ }
+  }
+
+  // ---------------------------------------------------------------- kısayol kuralları (K1)
+  const DEGISTIRICI = ['Ctrl', 'Alt', 'Shift', 'Meta'];
+  const TARAYICI_YASAK = new Set(['Ctrl+T', 'Ctrl+W', 'Ctrl+N', 'Ctrl+L', 'Ctrl+R', 'Ctrl+F', 'Ctrl+P', 'Ctrl+S', 'Ctrl+D',
+    'Ctrl+H', 'Ctrl+J', 'Ctrl+K', 'Ctrl+U', 'Ctrl+O', 'Ctrl+G', 'Ctrl+E', 'Ctrl+A', 'Ctrl+V', 'Ctrl+X', 'Ctrl+Z', 'Ctrl+Y',
+    'Ctrl+Shift+T', 'Ctrl+Shift+N', 'Ctrl+Shift+W', 'Ctrl+Shift+I', 'Ctrl+Shift+J', 'Ctrl+Shift+C', 'Ctrl+Shift+Delete',
+    'Ctrl+Shift+B', 'Ctrl+Shift+O', 'Ctrl+Shift+P', 'Ctrl+Shift+R', 'Ctrl+Tab', 'Ctrl+Shift+Tab', 'Ctrl+F4', 'Alt+F4',
+    'Alt+D', 'Alt+E', 'Alt+F', 'Alt+Home', 'Alt+Left', 'Alt+Right', 'Ctrl+Plus', 'Ctrl+-', 'Ctrl+0', 'Ctrl+=',
+    'Ctrl+1', 'Ctrl+2', 'Ctrl+3', 'Ctrl+4', 'Ctrl+5', 'Ctrl+6', 'Ctrl+7', 'Ctrl+8', 'Ctrl+9', 'Ctrl+Enter']);
+  const SABIT = new Set(['Ctrl+C', 'Ctrl+Insert', 'Meta+C']);
+  // WhatsApp yazı biçimi kısayolları (kalın, italik, üstü çizili, eş aralıklı); Ctrl+Alt+… ayrıca reddedilir
+  const WHATSAPP_YASAK = new Set(['Ctrl+B', 'Ctrl+I', 'Ctrl+Shift+X', 'Ctrl+Shift+M']);
+
+  function tusAdi(e) {
+    let k = e.key || '';
+    if (k === ' ') k = 'Space';
+    else if (k === '+') k = 'Plus';
+    else if (k.startsWith('Arrow')) k = k.slice(5);
+    else if (k.length === 1) k = k.toLocaleUpperCase('en-US');
+    return k;
+  }
+
+  function tusKombo(e) {
+    const p = [];
+    if (e.ctrlKey) p.push('Ctrl');
+    if (e.altKey) p.push('Alt');
+    if (e.shiftKey) p.push('Shift');
+    if (e.metaKey) p.push('Meta');
+    const k = tusAdi(e);
+    if (!k || DEGISTIRICI.includes(k) || k === 'Control' || k === 'AltGraph' || k === 'Dead') return null;
+    p.push(k);
+    return p.join('+');
+  }
+
+  /** tusKombo'nun üretebileceği biçim mi (dosyadan gelen değer için): "Ctrl+Shift+Y", "Alt+F2", "Ctrl+,". */
+  function komboKanonikMi(v) {
+    if (typeof v !== 'string' || v.length > 40) return false;
+    const m = /^(Ctrl\+)?(Alt\+)?(Shift\+)?(Meta\+)?([^+]+|Plus)$/.exec(v);
+    if (!m || !(m[1] || m[2] || m[4])) return false;
+    const tus = m[5];
+    if ([...tus].length === 1) return tus === tus.toLocaleUpperCase('en-US');
+    return /^[A-Z][A-Za-z0-9]{1,15}$/.test(tus);
+  }
+
+  /** null = geçerli; değilse neden anahtarı. */
+  function tusGecerliMi(kombo) {
+    const p = kombo.split('+');
+    if (!p.some((x) => x === 'Ctrl' || x === 'Alt' || x === 'Meta')) return 'neden_degistirici';
+    if (SABIT.has(kombo)) return 'neden_sabit';
+    if (p.includes('Ctrl') && p.includes('Alt')) return 'neden_whatsapp';   // WhatsApp Web Ctrl+Alt+… kullanır; Türkçe klavyede AltGr
+    // macOS Cmd (Meta) = Ctrl sayılır: Meta+F de tarayıcının Bul'udur
+    const esdeger = p.includes('Meta') ? ['Ctrl', ...p.filter((x) => x !== 'Meta' && x !== 'Ctrl')].join('+') : kombo;
+    if (SABIT.has(esdeger)) return 'neden_sabit';
+    if (WHATSAPP_YASAK.has(kombo) || WHATSAPP_YASAK.has(esdeger)) return 'neden_whatsapp';
+    if (TARAYICI_YASAK.has(kombo) || TARAYICI_YASAK.has(esdeger)) return 'neden_tarayici';
+    return null;
+  }
+
+  let ayar = ayarOku();
+
+  // ---------------------------------------------------------------- dil yardımcıları
+  function dilKodu() {
+    if (ayar.dil === 'tarayici') return tarayiciDili();
+    return ayar.dil === 'en' ? 'en' : 'tr';
+  }
+  function tarayiciDili() {
+    const d = ((navigator.languages && navigator.languages[0]) || navigator.language || 'tr').toLowerCase();
+    return d.startsWith('tr') ? 'tr' : 'en';
+  }
+  function _(k, deger) {
+    const s = (METIN[dilKodu()] || METIN.tr)[k] ?? METIN.tr[k] ?? k;
+    return deger ? s.replace(/\{(\w+)\}/g, (m, a) => (a in deger ? String(deger[a]) : m)) : s;
+  }
+  function sayi(n) { return Number(n).toLocaleString(dilKodu() === 'tr' ? 'tr-TR' : 'en-US'); }
+
+  // ---------------------------------------------------------------- yardımcılar
+  const DUZENLENEBILIR = 'input, textarea, [contenteditable=""], [contenteditable="true"], [contenteditable="plaintext-only"]';
+
+  function ogeOf(dugum) {
+    if (!dugum) return null;
+    return dugum.nodeType === 1 ? dugum : dugum.parentElement;
+  }
+
+  function duzenlenebilirMi(dugum) {
+    const o = ogeOf(dugum);
+    if (!o) return false;
+    return o.isContentEditable || !!o.closest(DUZENLENEBILIR);
+  }
+
+  /** Kopyalamayı biz mi yapalım? Seçim boş değil ve düzenlenebilir alanın dışında olmalı. */
+  function secimAl() {
+    const aktif = document.activeElement;
+    if (aktif && aktif === ev) return null;                      // kendi panelimiz
+    if (aktif && (aktif.tagName === 'INPUT' || aktif.tagName === 'TEXTAREA')) {
+      try {
+        if (aktif.selectionStart !== aktif.selectionEnd) return null;   // kutudaki seçim: dokunma
+      } catch (_) { /* seçim desteklemeyen input türü */ }
+    }
+    const sec = window.getSelection();
+    if (!sec || sec.isCollapsed || sec.rangeCount === 0) return null;
+    if (duzenlenebilirMi(sec.anchorNode) && duzenlenebilirMi(sec.focusNode)) return null;
+    return sec;
+  }
+
+  // ---------------------------------------------------------------- seçimden metin
+  const stilOnbellek = new WeakMap();
+  function stil(o) {
+    let s = stilOnbellek.get(o);
+    if (!s) { s = getComputedStyle(o); stilOnbellek.set(o, s); }
+    return s;
+  }
+
+  const DUGUM_SINIRI = 5000;   // keydown içinde gezilecek en çok düğüm (uzun sohbette takılma olmasın)
+  const BLOK = /^(block|flex|grid|list-item|table|table-row|table-caption|flow-root)$/;
+
+  /**
+   * Aralıktaki görünür metni sırayla toplar.
+   * Emoji resimleri alt yazısıyla gelir (selection.toString() bunları atar).
+   * user-select:none, display:none ve visibility:hidden olan kısımlar atlanır (tarayıcının kendi kopyası gibi).
+   */
+  function aralikMetni(aralik) {
+    const kok = aralik.commonAncestorContainer;
+    const parcalar = [];
+    const satirAc = () => {
+      if (parcalar.length && !/\n$/.test(parcalar[parcalar.length - 1])) parcalar.push('\n');
+    };
+
+    const metinEkle = (dugum) => {
+      const ust = dugum.parentElement;
+      if (ust && stil(ust).visibility === 'hidden') return;
+      let t = dugum.nodeValue;
+      const bas = dugum === aralik.startContainer ? aralik.startOffset : 0;
+      const son = dugum === aralik.endContainer ? aralik.endOffset : t.length;
+      t = t.slice(bas, son);
+      if (t) parcalar.push(t);
+    };
+
+    if (kok.nodeType === 3) {
+      metinEkle(kok);
+    } else {
+      const atla = (o) => {
+        const s = stil(o);
+        return s.display === 'none' || s.userSelect === 'none' || s.webkitUserSelect === 'none';
+      };
+      const gezgin = document.createTreeWalker(kok, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
+        acceptNode(d) {
+          if (!aralik.intersectsNode(d)) return NodeFilter.FILTER_REJECT;
+          if (d.nodeType === 1 && atla(d)) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        },
+      });
+      let d;
+      let sayac = 0;
+      while ((d = gezgin.nextNode())) {
+        if (++sayac > DUGUM_SINIRI) return null;    // çok büyük seçim (ör. Ctrl+A): tarayıcının düz metnine düş
+        if (d.nodeType === 3) { metinEkle(d); continue; }
+        const etiket = d.tagName;
+        if (etiket === 'BR') { parcalar.push('\n'); continue; }
+        if (etiket === 'IMG') {
+          const alt = d.getAttribute('alt');
+          if (alt && stil(d).visibility !== 'hidden') parcalar.push(alt);
+          continue;
+        }
+        if (BLOK.test(stil(d).display)) satirAc();
+      }
+    }
+    return parcalar.join('')
+      .replace(/ /g, ' ')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  }
+
+  /** Aralığı bir öğenin içiyle kesiştirir. */
+  function kesisim(aralik, oge) {
+    const ic = document.createRange();
+    ic.selectNodeContents(oge);
+    if (aralik.compareBoundaryPoints(Range.START_TO_START, ic) > 0) ic.setStart(aralik.startContainer, aralik.startOffset);
+    if (aralik.compareBoundaryPoints(Range.END_TO_END, ic) < 0) ic.setEnd(aralik.endContainer, aralik.endOffset);
+    return ic;
+  }
+
+  /** WhatsApp ön eki "[12:34, 18.10.2026] Ad: " → seçilen biçim (E2). */
+  function onEk(ham) {
+    if (ayar.bicim === 'metin') return '';
+    if (ayar.bicim === 'ad') return ham.replace(/^[\s\u200e\u200f\u202a-\u202e\u2066-\u2069]*\[[^\]]*\]\s*/, '');
+    return ham;
+  }
+
+  /**
+   * Birden fazla mesaj seçiliyse her satır mesajın data-pre-plain-text ön ekiyle başlar
+   * (WhatsApp'ın kendi biçimi; Ayarlar › Kopyalama'dan değişir).
+   */
+  function secimMetni(sec) {
+    const satirlar = [];
+    for (let i = 0; i < sec.rangeCount; i++) {
+      const aralik = sec.getRangeAt(i);
+      const kok = ogeOf(aralik.commonAncestorContainer) || document.body;
+      const ust = kok.closest('[data-pre-plain-text]');
+      const mesajlar = Array.from(ust ? [ust] : kok.querySelectorAll('[data-pre-plain-text]'))
+        .filter((m) => aralik.intersectsNode(m));
+      if (mesajlar.length >= 2) {
+        for (const m of mesajlar) {
+          const t = aralikMetni(kesisim(aralik, m));
+          if (t === null) return sec.toString().trim();
+          if (t) satirlar.push(onEk(m.getAttribute('data-pre-plain-text') || '') + t);
+        }
+      } else {
+        const t = aralikMetni(aralik);
+        if (t === null) return sec.toString().trim();
+        if (t) satirlar.push(t);
+      }
+    }
+    let metin = satirlar.join('\n');
+    if (!metin) metin = sec.toString().trim();   // son çare: tarayıcının düz metni
+    return metin;
+  }
+
+  // ---------------------------------------------------------------- panoya yazma (yedek yol)
+  function gmPano() {
+    try { if (typeof GM_setClipboard === 'function') return (t) => GM_setClipboard(t, 'text'); } catch (_) { /* yok */ }
+    try { if (typeof GM !== 'undefined' && GM && typeof GM.setClipboard === 'function') return (t) => GM.setClipboard(t, 'text'); } catch (_) { /* yok */ }
+    return null;
+  }
+
+  function execKopyala(metin) {
+    const sec = window.getSelection();
+    const eski = [];
+    for (let i = 0; sec && i < sec.rangeCount; i++) eski.push(sec.getRangeAt(i).cloneRange());
+    const odak = document.activeElement;
+    const kutu = document.createElement('textarea');
+    kutu.value = metin;
+    kutu.setAttribute('readonly', '');
+    kutu.setAttribute('aria-hidden', 'true');
+    kutu.style.position = 'fixed';
+    kutu.style.left = '-9999px';
+    kutu.style.top = '0';
+    kutu.style.opacity = '0';
+    (document.body || document.documentElement).appendChild(kutu);
+    kutu.select();
+    let tamam = false;
+    try { tamam = document.execCommand('copy'); } catch (_) { tamam = false; }
+    kutu.remove();
+    if (sec) { sec.removeAllRanges(); eski.forEach((r) => sec.addRange(r)); }
+    if (odak && typeof odak.focus === 'function') { try { odak.focus({ preventScroll: true }); } catch (_) { /* yok */ } }
+    return tamam;
+  }
+
+  /** Panoya yazar; kullanılan yolu döndürür ('gm' | 'pano' | 'exec') ya da başarısızsa null. */
+  async function yedekYaz(metin) {
+    const gm = gmPano();
+    if (gm) {
+      try { await gm(metin); return 'gm'; } catch (_) { /* sıradakini dene */ }
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      try { await navigator.clipboard.writeText(metin); return 'pano'; } catch (_) { /* sıradakini dene */ }
+    }
+    return execKopyala(metin) ? 'exec' : null;
+  }
+
+  // ---------------------------------------------------------------- tanı durumu
+  const tani = { son: null, sorunlu: false };   // son: { zaman, uzunluk, yol, tamam }
+
+  function kopyaKaydet(metin, yol) {
+    tani.son = { zaman: new Date(), uzunluk: Array.from(metin).length, yol: yol || '', tamam: !!yol };
+    taniYenile();
+  }
+
+  // ---------------------------------------------------------------- Ctrl+C akışı
+  let bekleyen = null;   // { metin, zaman, sayac }
+
+  function kopyaTusuMu(e) {
+    if (e.altKey) return false;
+    const k = (e.key || '').toLowerCase();
+    const ctrl = e.ctrlKey || e.metaKey;
+    if (ayar.ctrlc && ctrl && !e.shiftKey && (k === 'c' || (e.code === 'KeyC' && !/^\p{L}$/u.test(k)))) return true;
+    if (ayar.ctrlIns && e.ctrlKey && !e.shiftKey && k === 'insert') return true;   // Ctrl+Insert
+    return false;
+  }
+
+  function tusBasildi(e) {
+    if (!e.isTrusted) return;
+    if (kayit) return;                                   // kısayol kaydı sürüyor: tuşu o alır
+    // Panel açıkken: Esc kapatır, Ctrl+F aramaya gider
+    if (panelAcik()) {
+      if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); panelKapat(); return; }
+      if ((e.ctrlKey || e.metaKey) && !e.altKey && !e.shiftKey && (e.key || '').toLowerCase() === 'f') {
+        e.preventDefault(); e.stopImmediatePropagation(); if (bil.ara) bil.ara.focus(); return;
+      }
+      if (e.key === 'Tab' && !e.ctrlKey && !e.altKey && !e.metaKey) { odakDongusu(e); return; }
+    }
+    const kombo = tusKombo(e);
+    if (kombo && kombo === ayar.kisayolAyarlar && !e.repeat &&
+        (e.ctrlKey || e.metaKey || !duzenlenebilirMi(document.activeElement))) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      if (panelAcik()) panelKapat(); else panelAc();
+      return;
+    }
+    if (!kopyaTusuMu(e)) return;
+    const sec = secimAl();
+    if (!sec) return;                       // düzenlenebilir alan ya da boş seçim: WhatsApp'a bırak
+    const metin = secimMetni(sec);
+    if (!metin) return;
+    // WhatsApp'ın kısayol dinleyicileri Ctrl+C'yi görmesin. Varsayılan davranış (tarayıcının kopyası) sürer.
+    e.stopImmediatePropagation();
+    if (bekleyen) clearTimeout(bekleyen.sayac);
+    bekleyen = {
+      metin,
+      zaman: performance.now(),
+      sayac: setTimeout(async () => {
+        // copy olayı hiç gelmedi: panoya biz yazalım
+        const b = bekleyen;
+        bekleyen = null;
+        if (!b) return;
+        try {
+          const yol = await yedekYaz(b.metin);
+          kopyaKaydet(b.metin, yol);
+          if (yol) basariBildir(b.metin); else bildir('hata', _('kopyaHata'));
+        } catch (_e) {
+          try { bildir('hata', _('kopyaHata')); } catch (_2) { /* arayüz kurulamadı */ }
+        }
+      }, YEDEK_BEKLE_MS),
+    };
+  }
+
+  function kopyalandi(e) {
+    if (!bekleyen || performance.now() - bekleyen.zaman > 1000) return;   // yalnız bizim Ctrl+C'mizden gelen olay
+    const b = bekleyen;
+    clearTimeout(b.sayac);
+    bekleyen = null;
+    if (!e.clipboardData) {   // çok eski tarayıcı: yedek yolu kullan
+      yedekYaz(b.metin).then((yol) => {
+        kopyaKaydet(b.metin, yol);
+        if (yol) basariBildir(b.metin); else bildir('hata', _('kopyaHata'));
+      }).catch(() => bildir('hata', _('kopyaHata')));
+      return;
+    }
+    e.clipboardData.setData('text/plain', b.metin);
+    e.preventDefault();
+    e.stopImmediatePropagation();   // WhatsApp panoya başka bir şey yazmasın
+    kopyaKaydet(b.metin, 'olay');
+    basariBildir(b.metin);
+  }
+
+  function basariBildir(metin) {
+    if (!ayar.bildirim) return;
+    bildir('basari', _('kopyalandi', { n: sayi(Array.from(metin).length) }));
+  }
+
+  window.addEventListener('keydown', tusBasildi, true);
+  window.addEventListener('copy', kopyalandi, true);
+
+  // ---------------------------------------------------------------- WhatsApp temasını izle
+  function parlaklik(renk) {
+    const m = /rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,\s/]+([\d.]+))?/.exec(renk || '');
+    if (!m) return null;
+    if (m[4] !== undefined && Number(m[4]) === 0) return null;   // saydam
+    const kanal = (v) => { v = Number(v) / 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+    return 0.2126 * kanal(m[1]) + 0.7152 * kanal(m[2]) + 0.0722 * kanal(m[3]);
+  }
+
+  /** { koyu, kaynak } — kaynak: 'ayar' | 'sinif' | 'zemin' | 'sistem' */
+  function temaOku() {
+    if (ayar.tema === 'acik') return { koyu: false, kaynak: 'ayar' };
+    if (ayar.tema === 'koyu') return { koyu: true, kaynak: 'ayar' };
+    const html = document.documentElement;
+    const body = document.body;
+    if ((body && body.classList.contains('dark')) || html.classList.contains('dark')) return { koyu: true, kaynak: 'sinif' };
+    for (const o of [document.getElementById('app'), body, html]) {
+      if (!o) continue;
+      const l = parlaklik(getComputedStyle(o).backgroundColor);
+      if (l !== null) return { koyu: l < 0.18, kaynak: 'zemin' };
+    }
+    const sistem = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    return { koyu: sistem, kaynak: 'sistem' };
+  }
+
+  function temaUygula() {
+    if (ev) ev.setAttribute('data-theme', temaOku().koyu ? 'dark' : 'light');
+  }
+
+  // ---------------------------------------------------------------- arayüz kökü (Shadow DOM)
+  const SVG = 'http://www.w3.org/2000/svg';
+  const IKON = {   // Lucide 1.55.0 (ISC): check, circle-alert, x, copy
+    tamam: [['path', { d: 'M20 6 9 17l-5-5' }]],
+    hata: [['circle', { cx: 12, cy: 12, r: 10 }], ['line', { x1: 12, x2: 12, y1: 8, y2: 12 }], ['line', { x1: 12, x2: 12.01, y1: 16, y2: 16 }]],
+    kapat: [['path', { d: 'M18 6 6 18' }], ['path', { d: 'm6 6 12 12' }]],
+    kopyala: [['rect', { width: 14, height: 14, x: 8, y: 8, rx: 2, ry: 2 }], ['path', { d: 'M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2' }]],
+  };
+
+  function ikon(ad, boy = 16) {
+    const s = document.createElementNS(SVG, 'svg');
+    const ozellik = { viewBox: '0 0 24 24', width: boy, height: boy, fill: 'none', stroke: 'currentColor',
+      'stroke-width': 2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'aria-hidden': 'true', focusable: 'false' };
+    for (const [k, v] of Object.entries(ozellik)) s.setAttribute(k, String(v));
+    for (const [etiket, oz] of IKON[ad]) {
+      const p = document.createElementNS(SVG, etiket);
+      for (const [k, v] of Object.entries(oz)) p.setAttribute(k, String(v));
+      s.appendChild(p);
+    }
+    return s;
+  }
+
+  /** Öğe kurucu: innerHTML yok (Trusted Types). */
+  function el(etiket, oz, ...cocuk) {
+    const e = document.createElement(etiket);
+    if (oz) {
+      for (const [k, v] of Object.entries(oz)) {
+        if (v === undefined || v === null || v === false) continue;
+        if (k === 'class') e.className = v;
+        else if (k === 'text') e.textContent = v;
+        else if (k.startsWith('on') && typeof v === 'function') e.addEventListener(k.slice(2), v);
+        else e.setAttribute(k, v === true ? '' : String(v));
+      }
+    }
+    for (const c of cocuk) if (c !== null && c !== undefined && c !== false) e.append(c);
+    return e;
+  }
+
+  const ARAYUZ_CSS = `
+:host { all: initial; }
+* { box-sizing: border-box; }
+.yazi { font: 400 13px/1.45 var(--yazi); color: var(--metin); }
+button { font: inherit; color: inherit; }
+button:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 1px; }
+.nokta { width: 8px; height: 8px; border-radius: 50%; background: var(--hata); flex: none; display: inline-block; }
+
+/* Bildirim (AALabs C3, alt orta) */
+.yer { position: fixed; left: 0; right: 0; bottom: 88px; display: flex; justify-content: center; pointer-events: none; z-index: 2147483647; }
+.kutu { display: flex; align-items: center; gap: var(--bosluk-2); max-width: min(480px, calc(100vw - 32px));
+  min-height: var(--kontrol); padding: 0 var(--bosluk-1) 0 var(--bosluk-3); border-radius: var(--kose-m);
+  font: 400 13px/1.4 var(--yazi); opacity: 0; transition: opacity 120ms linear; }
+.kutu.acik { opacity: 1; }
+.kutu.basari { background: var(--basari-bg); color: var(--basari); border-left: 3px solid var(--basari); }
+.kutu.hata { background: var(--hata-bg); color: var(--hata); border-left: 3px solid var(--hata); pointer-events: auto; }
+.kutu svg { flex: none; }
+.kutu .metin { padding: var(--bosluk-1) var(--bosluk-3) var(--bosluk-1) 0; }
+.kutu.basari .metin { padding-right: var(--bosluk-3); }
+.kutu .kapat { display: none; flex: none; width: 24px; height: 24px; padding: 0; border: 0; border-radius: var(--kose-s);
+  background: transparent; cursor: pointer; align-items: center; justify-content: center; }
+.kutu.hata .kapat { display: inline-flex; }
+.kutu .kapat:hover { background: var(--yuzey); }
+
+/* Sayfadaki WAC düğmesi (E1; 1.1.1: sağ alt, WhatsApp yazma çubuğunun ve gönder düğmesinin üstünde) */
+.wac { position: fixed; right: 16px; bottom: 84px; z-index: 2147483646; height: 28px; padding: 0 8px;
+  border: 1px solid var(--ana); border-radius: var(--kose-m); background: var(--ana); color: var(--ana-uzeri);
+  font: 600 11px/1 var(--yazi); letter-spacing: .03em; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.wac:hover { filter: brightness(1.08); }
+.wac .nokta { outline: 2px solid var(--ana-uzeri); }
+
+/* Ayarlar paneli (Panel A: ortada pencere) */
+.perde { position: fixed; inset: 0; background: color-mix(in srgb, var(--metin) 35%, transparent); z-index: 2147483646; }
+:host([data-theme="dark"]) .perde { background: color-mix(in srgb, var(--zemin) 60%, transparent); }
+.panel { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2147483647;
+  width: min(760px, calc(100vw - 32px)); height: min(500px, calc(100vh - 32px));
+  display: grid; grid-template-rows: 44px 1fr; background: var(--yuzey); color: var(--metin);
+  border: 1px solid var(--ayirici); border-radius: var(--kose-l); font: 400 13px/1.45 var(--yazi); }
+.ust { display: flex; align-items: center; gap: 10px; padding: 0 6px 0 14px; border-bottom: 1px solid var(--ayirici); min-width: 0; }
+.rozet { width: 22px; height: 22px; border-radius: var(--kose-m); background: var(--ana); color: var(--ana-uzeri);
+  font: 600 8px/22px var(--yazi); text-align: center; letter-spacing: .02em; flex: none; }
+.ust h2 { flex: 1; min-width: 0; margin: 0; font: 600 14px/1.3 var(--yazi); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ikonbtn { width: 32px; height: 32px; border: 1px solid transparent; border-radius: var(--kose-s); background: transparent;
+  cursor: pointer; display: inline-grid; place-items: center; }
+.ikonbtn:hover { background: var(--ana-hover); }
+.govde { display: grid; grid-template-columns: 196px minmax(0, 1fr); min-height: 0; }
+.nav { border-right: 1px solid var(--ayirici); padding: 8px; display: flex; flex-direction: column; gap: 2px; overflow: auto; min-height: 0; }
+.nav input { font: inherit; height: 28px; padding: 0 8px; border: 1px solid var(--kenar); border-radius: var(--kose-s);
+  background: var(--yuzey); color: var(--metin); margin-bottom: 6px; width: 100%; }
+.nav input::placeholder { color: var(--metin-ikincil); }
+.grup { font: 600 11px/1.3 var(--yazi); letter-spacing: .06em; color: var(--metin-ikincil); padding: 8px 8px 2px; }
+.nav .oge { text-align: left; height: 28px; padding: 0 8px; border: 0; border-radius: var(--kose-s); background: transparent;
+  cursor: pointer; display: flex; align-items: center; gap: 6px; min-width: 0; }
+.nav .oge span:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.nav .oge[aria-current="true"] { background: var(--ana-acik); font-weight: 600; }
+.nav .oge:hover { background: var(--ana-hover); }
+.nav .yok { color: var(--metin-ikincil); padding: 6px 8px; }
+.icerik { padding: 14px 18px; overflow: auto; display: flex; flex-direction: column; gap: 12px; min-width: 0; min-height: 0; }
+.icerik h3 { margin: 0; font: 600 15px/1.3 var(--yazi); }
+.icerik h4 { margin: 4px 0 0; font: 600 13px/1.3 var(--yazi); }
+.alt { color: var(--metin-ikincil); margin: -6px 0 0; }
+.ayar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--ayirici); }
+.ayar small { grid-column: 1 / -1; color: var(--metin-ikincil); font-size: 12px; }
+.anahtar { width: 36px; height: 20px; border-radius: 10px; border: 1px solid var(--kenar); background: var(--yuzey); position: relative; cursor: pointer; padding: 0; }
+.anahtar::after { content: ""; position: absolute; top: 3px; left: 3px; width: 12px; height: 12px; border-radius: 50%; background: var(--kenar); transition: left 120ms linear; }
+.anahtar[aria-checked="true"] { background: var(--ana); border-color: var(--ana); }
+.anahtar[aria-checked="true"]::after { left: 19px; background: var(--ana-uzeri); }
+.seg { display: inline-flex; flex-wrap: wrap; justify-content: flex-end; }
+.seg button { height: 28px; padding: 0 10px; border: 1px solid var(--kenar); background: var(--yuzey); margin-left: -1px; cursor: pointer; white-space: nowrap; }
+.seg button:first-child { margin-left: 0; border-radius: var(--kose-s) 0 0 var(--kose-s); }
+.seg button:last-child { border-radius: 0 var(--kose-s) var(--kose-s) 0; }
+.seg button[aria-checked="true"] { background: var(--ana); border-color: var(--ana); color: var(--ana-uzeri); position: relative; z-index: 1; }
+.seg button:hover:not([aria-checked="true"]) { background: var(--ana-hover); }
+.tus { min-width: 104px; height: 28px; padding: 0 8px; border: 1px solid var(--kenar); border-radius: var(--kose-s); background: var(--zemin);
+  font-weight: 600; cursor: pointer; }
+.tus[aria-disabled="true"] { cursor: default; opacity: .55; }
+.tus.kayit { border-color: var(--vurgu); color: var(--vurgu); }
+.uyari-satir { color: var(--hata); font-size: 12px; }
+.ornek { font: 12px/1.5 Consolas, "Cascadia Mono", monospace; background: var(--zemin); border: 1px solid var(--ayirici);
+  border-radius: var(--kose-m); padding: 8px 10px; white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; }
+.etiket { font-size: 12px; color: var(--metin-ikincil); }
+.btn { height: 32px; padding: 0 12px; border: 1px solid var(--kenar); border-radius: var(--kose-s); background: var(--yuzey);
+  cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.btn:hover { background: var(--ana-hover); }
+.btn.ana { background: var(--ana); border-color: var(--ana); color: var(--ana-uzeri); }
+.btn.ana:hover { filter: brightness(1.08); background: var(--ana); }
+.satir-btn { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; margin-top: auto; padding-top: 8px; }
+.satir-btn.sol { justify-content: flex-start; margin-top: 0; padding-top: 0; }
+.bilgi { padding: 8px 10px; border-radius: var(--kose-m); background: var(--ana-acik); }
+.bilgi.kotu { background: var(--hata-bg); color: var(--hata); }
+.tani { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 6px; align-items: start; }
+.tani .iyi { color: var(--basari); font-weight: 700; }
+.tani .kotu { color: var(--hata); font-weight: 700; }
+.tani .notr { color: var(--metin-ikincil); font-weight: 700; }
+.tani small { display: block; color: var(--metin-ikincil); font: 11px/1.4 Consolas, "Cascadia Mono", monospace; overflow-wrap: anywhere; }
+.gizli { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .kutu, .anahtar::after { transition: none; } }
+`;
+
+  let ev = null;      // <aalabs-wac> barındırıcı
+  let kok = null;     // shadow kökü
+  const bil = { yer: null, kutu: null, ikonYeri: null, metin: null, sayac: 0, dugme: null, perde: null, panel: null, ara: null };
+
+  function kokKur() {
+    if (ev) { if (!ev.isConnected) (document.body || document.documentElement).appendChild(ev); return; }
+    ev = document.createElement('aalabs-wac');
+    ev.setAttribute('data-aalabs', ID);
+    kok = ev.attachShadow({ mode: TEST ? 'open' : 'closed' });
+    const css = TEMA_CSS + ARAYUZ_CSS;
+    let eklendi = false;
+    try {
+      const sayfa = new CSSStyleSheet();
+      sayfa.replaceSync(css);
+      kok.adoptedStyleSheets = [sayfa];
+      eklendi = true;
+    } catch (_) { /* eski tarayıcı */ }
+    if (!eklendi) kok.appendChild(el('style', { text: css }));
+
+    // bildirim
+    bil.yer = el('div', { class: 'yer' });
+    bil.kutu = el('div', { class: 'kutu', role: 'status', 'aria-live': 'polite' });
+    bil.ikonYeri = el('span', { style: 'display:inline-flex' });
+    bil.metin = el('span', { class: 'metin' });
+    bil.kapat = el('button', { class: 'kapat', type: 'button', onclick: () => bildirimGizle() }, ikon('kapat'));
+    bil.kutu.append(bil.ikonYeri, bil.metin, bil.kapat);
+    bil.yer.appendChild(bil.kutu);
+    kok.appendChild(bil.yer);
+    temaUygula();
+    (document.body || document.documentElement).appendChild(ev);
+  }
+
+  // ---------------------------------------------------------------- bildirim
+  function bildirimGizle() {
+    if (!bil.kutu) return;
+    clearTimeout(bil.sayac);
+    bil.kutu.classList.remove('acik');
+  }
+
+  function bildir(tur, yazi) {
+    kokKur();
+    temaUygula();
+    clearTimeout(bil.sayac);
+    bil.kutu.className = 'kutu ' + tur;
+    bil.kutu.setAttribute('role', tur === 'hata' ? 'alert' : 'status');
+    bil.kapat.title = _('bildirimKapat');
+    bil.kapat.setAttribute('aria-label', _('bildirimKapat'));
+    bil.ikonYeri.replaceChildren(ikon(tur === 'hata' ? 'hata' : 'tamam'));
+    bil.metin.textContent = yazi;
+    requestAnimationFrame(() => bil.kutu.classList.add('acik'));
+    if (tur !== 'hata') bil.sayac = setTimeout(bildirimGizle, ayar.sure);
+  }
+
+  // ---------------------------------------------------------------- sayfa düğmesi (E1)
+  function dugmeGuncelle() {
+    if (!document.body) return;
+    if (!ayar.dugme) { if (bil.dugme) { bil.dugme.remove(); bil.dugme = null; } return; }
+    kokKur();
+    if (!bil.dugme) {
+      bil.dugme = el('button', { class: 'wac', type: 'button', onclick: () => (panelAcik() ? panelKapat() : panelAc()) });
+      kok.appendChild(bil.dugme);
+    }
+    const ipucu = _('dugmeIpucu', { tus: ayar.kisayolAyarlar });
+    bil.dugme.title = ipucu;
+    bil.dugme.setAttribute('aria-label', ipucu + (tani.sorunlu ? ' · ' + _('taniKotu', { n: 1, s: '' }) : ''));
+    bil.dugme.replaceChildren(KOD);
+    if (tani.sorunlu) bil.dugme.append(el('span', { class: 'nokta', 'aria-hidden': 'true' }));
+  }
+
+  // ---------------------------------------------------------------- tanı denetimi
+  function taniSatirlari() {
+    const satirlar = [];
+    // 1) mesaj biçimi
+    const ana = document.getElementById('main');
+    if (!ana) {
+      satirlar.push({ durum: 'notr', ad: _('t_bicim'), ayrinti: _('t_bicimBekle') });
+    } else {
+      const say = ana.querySelectorAll('[data-pre-plain-text]').length;
+      // Payda: metin taşıyan mesaj satırları (medya, sistem notu, tarih ayracı sayılmaz)
+      const satir = Array.from(ana.querySelectorAll('[role="row"], .message-in, .message-out'))
+        .filter((r) => r.querySelector('.selectable-text:not([contenteditable])')).length;
+      if (say > 0) satirlar.push({ durum: 'iyi', ad: _('t_bicimVar'), ayrinti: '[data-pre-plain-text] · ' + _('t_mesaj', { n: sayi(say) }) });
+      else if (satir > 0) satirlar.push({ durum: 'kotu', ad: _('t_bicimYok'), ayrinti: '[data-pre-plain-text] · ' + _('t_mesaj', { n: 0 }) + ' — ' + _('t_bicimNeden') });
+      else satirlar.push({ durum: 'notr', ad: _('t_bicim'), ayrinti: _('t_bicimBekle') });
+    }
+    // 2) tema
+    const t = temaOku();
+    satirlar.push({ durum: 'iyi', ad: _('t_tema'), ayrinti: _('t_kaynak_' + t.kaynak) + ' → ' + _(t.koyu ? 't_koyu' : 't_acik') });
+    // 3) pano yolu
+    const yollar = ['copy ✓'];
+    yollar.push('GM_setClipboard ' + (gmPano() ? '✓' : '✗'));
+    yollar.push('navigator.clipboard ' + (navigator.clipboard && window.isSecureContext ? '✓' : '✗'));
+    satirlar.push({ durum: 'iyi', ad: _('t_pano'), ayrinti: yollar.join(' · ') });
+    // 4) ayar deposu
+    satirlar.push({ durum: gmDepo ? 'iyi' : 'kotu', ad: _('t_depo'), ayrinti: gmDepo ? _('t_depoVar') : _('t_depoYok') });
+    // 5) son kopya
+    const s = tani.son;
+    if (!s) satirlar.push({ durum: 'notr', ad: _('t_son'), ayrinti: _('t_sonYok') });
+    else {
+      const saat = s.zaman.toLocaleTimeString(dilKodu() === 'tr' ? 'tr-TR' : 'en-GB', { hour: '2-digit', minute: '2-digit' });
+      const yol = s.yol ? _('t_yol_' + (s.yol === 'olay' ? 'olay' : s.yol)) : '—';
+      satirlar.push({ durum: s.tamam ? 'iyi' : 'kotu', ad: s.tamam ? _('t_son') : _('t_sonHata'),
+        ayrinti: saat + ' · ' + _('karakter', { n: sayi(s.uzunluk) }) + ' · ' + yol });
+    }
+    return satirlar;
+  }
+
+  /** Durum değiştiyse noktaları ve menüyü yeniler (T2: bildirim yok). */
+  function taniYenile() {
+    const onceki = tani.sorunlu;
+    tani.sorunlu = taniSatirlari().some((x) => x.durum === 'kotu');
+    if (onceki !== tani.sorunlu) {
+      dugmeGuncelle();
+      menuKaydet();
+      if (panelAcik()) panelCiz();
+    }
+  }
+
+  function taniRaporu() {
+    const satirlar = taniSatirlari();
+    const t = temaOku();
+    let yonetici = '—';
+    try { if (typeof GM_info !== 'undefined' && GM_info) yonetici = (GM_info.scriptHandler || '?') + ' ' + (GM_info.version || ''); } catch (_) { /* yok */ }
+    const ayarKopya = Object.assign({}, ayar);
+    delete ayarKopya.sonYedek;
+    const isaret = { iyi: _('r_ok'), kotu: _('r_hata'), notr: _('r_bilgi') };
+    const now = new Date();
+    const r = [
+      `${AD} ${SURUM} — ${_('raporBaslik')}`,
+      `${_('r_zaman')}: ${now.toISOString().slice(0, 16).replace('T', ' ')} UTC`,
+      `${_('r_tarayici')}: ${navigator.userAgent}`,
+      `${_('r_yonetici')}: ${yonetici.trim()}`,
+      `${_('r_dil')}: ${ayar.dil} → ${dilKodu()} · ${_('r_tema')}: ${ayar.tema} → ${t.koyu ? 'dark' : 'light'} (${t.kaynak})`,
+      `${_('r_ayarlar')}: ${JSON.stringify(ayarKopya)}`,
+      '',
+      ...satirlar.map((x) => `${isaret[x.durum]} ${x.ad} · ${x.ayrinti}`),
+    ];
+    return r.join('\n');
+  }
+
+  async function raporuKopyala() {
+    const yol = await yedekYaz(taniRaporu());
+    if (yol) bildir('basari', _('raporKopyalandi')); else bildir('hata', _('kopyaHata'));
+  }
+
+  // ---------------------------------------------------------------- eklenti menüsü
+  let menuIdleri = [];
+  let menuKayitli = false;
+  let idsizMenu = false;
+  function menuKaydet() {
+    if (typeof GM_registerMenuCommand !== 'function') return;
+    const silinebilir = typeof GM_unregisterMenuCommand === 'function' && !idsizMenu;
+    if (menuKayitli && !silinebilir) return;   // silinemiyorsa ikinci kez eklenmez (çift satır olmasın)
+    try {
+      if (silinebilir) for (const id of menuIdleri) { try { GM_unregisterMenuCommand(id); } catch (_) { /* yok */ } }
+      menuIdleri = [];
+      menuKayitli = true;
+      const ekle = (ad, fn, tus) => {
+        const id = GM_registerMenuCommand(ad, fn, tus);
+        if (id === undefined || id === null) idsizMenu = true;   // kimlik vermeyen yönetici: bir daha yazılmaz
+        else menuIdleri.push(id);
+      };
+      ekle(_('menuAyarlar') + (tani.sorunlu ? ' ●' : ''), () => panelAc(), 'a');
+      ekle(_('menuRapor'), () => raporuKopyala(), 't');
+    } catch (_) { /* yönetici menüyü desteklemiyor */ }
+  }
+
+  // ---------------------------------------------------------------- Ayarlar paneli
+  let panelBolum = 'kopya';
+  let aramaMetni = '';
+  let oncekiOdak = null;
+  let kayit = null;          // { dugme, hataYeri } — kısayol kaydı sürerken
+  let tusHatasi = '';
+
+  function panelAcik() { return !!(bil.panel && bil.panel.isConnected); }
+
+  /** Kipli panel: Tab odağı panelin içinde döndürür (arkadaki WhatsApp'a kaçmaz). */
+  function odakDongusu(e) {
+    const ogeler = Array.from(bil.panel.querySelectorAll('button, input:not([type="file"]), [tabindex]:not([tabindex="-1"])'))
+      .filter((o) => !o.disabled && o.getClientRects().length);
+    if (!ogeler.length) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const simdiki = ogeler.indexOf(kok.activeElement);
+    const sonraki = simdiki < 0 ? 0 : (simdiki + (e.shiftKey ? -1 : 1) + ogeler.length) % ogeler.length;
+    ogeler[sonraki].focus({ preventScroll: false });
+  }
+
+  function panelAc(bolum) {
+    if (!document.body) return;
+    kokKur();
+    temaUygula();
+    if (bolum) panelBolum = bolum;
+    taniYenile();
+    if (!panelAcik() && document.activeElement !== ev) oncekiOdak = document.activeElement;
+    if (!panelAcik()) {
+      bil.perde = el('div', { class: 'perde', onclick: () => panelKapat() });
+      bil.panel = el('div', { class: 'panel yazi', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'wac-baslik' });
+      kok.append(bil.perde, bil.panel);
+    }
+    panelCiz();
+    if (bil.ara) bil.ara.focus({ preventScroll: true });
+  }
+
+  function panelKapat() {
+    kayitBitir();
+    if (bil.panel) bil.panel.remove();
+    if (bil.perde) bil.perde.remove();
+    bil.panel = bil.perde = bil.ara = null;
+    aramaMetni = '';
+    tusHatasi = '';
+    if (oncekiOdak && oncekiOdak.isConnected && typeof oncekiOdak.focus === 'function') {
+      try { oncekiOdak.focus({ preventScroll: true }); } catch (_) { /* yok */ }
+    }
+    oncekiOdak = null;
+  }
+
+  function ayarDegis(k, v) {
+    ayar[k] = v;
+    ayarYaz();
+    if (k === 'dil') { menuKaydet(); dugmeGuncelle(); }
+    if (k === 'dugme' || k === 'kisayolAyarlar') dugmeGuncelle();
+    if (k === 'tema') temaUygula();
+    panelCiz();
+  }
+
+  function bolumSifirla(bolum) {
+    for (const k of BOLUM_ANAHTAR[bolum] || []) ayar[k] = VARSAYILAN[k];
+    ayarYaz();
+    menuKaydet();
+    dugmeGuncelle();
+    temaUygula();
+    tusHatasi = '';
+    panelCiz();
+    bildir('basari', _('sifirlandi'));
+  }
+
+  function anahtar(k, etiketId) {
+    return el('button', {
+      class: 'anahtar', type: 'button', role: 'switch', 'aria-checked': String(!!ayar[k]), 'aria-labelledby': etiketId,
+      'data-ayar': k, onclick: () => ayarDegis(k, !ayar[k]),
+    });
+  }
+
+  function segment(k, secenekler, etiketId) {
+    const g = el('div', { class: 'seg', role: 'radiogroup', 'aria-labelledby': etiketId, 'data-ayar': k });
+    for (const [deger, yazi] of secenekler) {
+      g.append(el('button', { type: 'button', role: 'radio', 'aria-checked': String(ayar[k] === deger), 'data-deger': String(deger),
+        onclick: () => ayarDegis(k, deger) }, yazi));
+    }
+    return g;
+  }
+
+  let etiketSayac = 0;
+  function ayarSatiri(ad, aciklama, denetimKur) {
+    const id = 'e' + (++etiketSayac);
+    const s = el('div', { class: 'ayar' }, el('span', { id }, ad), denetimKur(id));
+    if (aciklama) s.append(el('small', {}, aciklama));
+    return s;
+  }
+
+  function sifirlaDugmesi(bolum) {
+    return el('div', { class: 'satir-btn' }, el('button', { class: 'btn', type: 'button', 'data-sifirla': bolum, onclick: () => bolumSifirla(bolum) }, _('varsayilan')));
+  }
+
+  /** Bölümlerin arama metni (başlık + ayar adları). */
+  function bolumMetni(b) {
+    const anahtarlar = {
+      kopya: ['b_kopya', 'ctrlc', 'ctrlIns', 'bicim', 'bicim_whatsapp', 'bicim_metin', 'bicim_ad', 'kopyaAlt'],
+      bildirim: ['b_bildirim', 'bildirim', 'sure', 'dugme'],
+      genel: ['b_genel', 'dil', 'tema', 'dil_tarayici', 'tema_whatsapp'],
+      kisayol: ['b_kisayol', 'k_ayarlar', 'k_kopyala'],
+      tani: ['b_tani', 'raporKopyala', 't_bicim', 't_tema', 't_pano', 't_depo', 't_son'],
+      hakkinda: ['b_hakkinda', 'yedek', 'yedekle', 'geriYukle', 'store'],
+    }[b];
+    return katla(anahtarlar.map((k) => _(k)).join(' '));
+  }
+
+  /** Arama için harf katlama: Türkçe I/ı ile İngilizce I/i aynı sayılır ("insert" = "Insert"). */
+  function katla(s) { return s.toLocaleLowerCase('tr-TR').replace(/ı/g, 'i'); }
+
+  function panelCiz() {
+    kayitBitir();
+    if (!panelAcik()) return;
+    etiketSayac = 0;
+    const p = bil.panel;
+    const aramaOdakta = kok.activeElement === bil.ara;
+    const imlec = bil.ara ? bil.ara.selectionStart : null;
+    // Yeniden çizimden sonra odağı aynı denetime geri vermek için (klavye kullanımı)
+    const odakSecici = odakSeciciBul(kok.activeElement);
+    p.replaceChildren();
+    p.setAttribute('lang', dilKodu());
+
+    const kapat = el('button', { class: 'ikonbtn', type: 'button', title: _('kapat'), 'aria-label': _('kapat'), onclick: () => panelKapat() }, ikon('kapat'));
+    p.append(el('div', { class: 'ust' }, el('span', { class: 'rozet', 'aria-hidden': 'true' }, KOD),
+      el('h2', { id: 'wac-baslik' }, AD + ' · ' + _('ayarlar')), kapat));
+
+    // gezinti
+    const arama = el('input', { type: 'search', placeholder: _('ara'), 'aria-label': _('ara'), value: aramaMetni });
+    arama.value = aramaMetni;
+    arama.addEventListener('input', (e) => { if (e.isComposing) return; aramaMetni = arama.value; panelCiz(); });
+    arama.addEventListener('compositionend', () => { aramaMetni = arama.value; panelCiz(); });
+    bil.ara = arama;
+    const nav = el('nav', { class: 'nav', 'aria-label': _('ayarlar') }, arama);
+    const sorgu = katla(aramaMetni.trim());
+    const uyan = (b) => !sorgu || bolumMetni(b).includes(sorgu);
+    const tum = ['kopya', 'bildirim', 'genel', 'kisayol', 'tani', 'hakkinda'];
+    const gorunen = tum.filter(uyan);
+    if (gorunen.length && !gorunen.includes(panelBolum)) panelBolum = gorunen[0];
+    const oge = (b) => {
+      const ad = _('b_' + b);
+      const d = el('button', { class: 'oge', type: 'button', title: ad, 'aria-current': String(panelBolum === b), 'data-bolum': b,
+        onclick: () => { panelBolum = b; tusHatasi = ''; panelCiz(); } }, el('span', {}, ad));
+      if (b === 'tani' && tani.sorunlu) d.append(el('span', { class: 'nokta', 'aria-hidden': 'true' }), el('span', { class: 'gizli' }, ' · ' + _('taniKotu', { n: 1, s: '' })));
+      return d;
+    };
+    const wac = ['kopya', 'bildirim'].filter(uyan);
+    const ort = ['genel', 'kisayol', 'tani', 'hakkinda'].filter(uyan);
+    if (wac.length) nav.append(el('div', { class: 'grup' }, KOD), ...wac.map(oge));
+    if (ort.length) nav.append(el('div', { class: 'grup' }, _('ortak')), ...ort.map(oge));
+    if (!gorunen.length) nav.append(el('div', { class: 'yok', role: 'status' }, _('sonucYok')));
+
+    const ic = el('div', { class: 'icerik', 'data-icerik': panelBolum });
+    if (gorunen.length) {
+      ic.append(el('h3', {}, _('b_' + panelBolum)));
+      ({ kopya: bolumKopya, bildirim: bolumBildirim, genel: bolumGenel, kisayol: bolumKisayol, tani: bolumTani, hakkinda: bolumHakkinda })[panelBolum](ic);
+    }
+    p.append(el('div', { class: 'govde' }, nav, ic));
+    if (aramaOdakta) {
+      arama.focus({ preventScroll: true });
+      if (imlec !== null) try { arama.setSelectionRange(imlec, imlec); } catch (_) { /* yok */ }
+    } else if (odakSecici) {
+      let hedef = null;
+      try { hedef = p.querySelector(odakSecici); } catch (_) { hedef = null; }
+      if (hedef) hedef.focus({ preventScroll: true });
+    }
+  }
+
+  function odakSeciciBul(o) {
+    if (!o || o === bil.ara || !o.getAttribute) return '';
+    const q = (ad) => `[${ad}="${CSS.escape(o.getAttribute(ad))}"]`;
+    if (o.hasAttribute('data-deger') && o.parentElement && o.parentElement.hasAttribute('data-ayar')) {
+      return `[data-ayar="${CSS.escape(o.parentElement.getAttribute('data-ayar'))}"] ${q('data-deger')}`;
+    }
+    for (const ad of ['data-ayar', 'data-bolum', 'data-sifirla', 'data-kisayol', 'data-rapor', 'data-yedekle', 'data-geri-yukle']) {
+      if (o.hasAttribute(ad)) return q(ad);
+    }
+    return '';
+  }
+
+  function ornekCikti() {
+    const pre = (s, ad) => {
+      const ham = `[${s}, ${_('ornekTarih')}] ${ad}: `;
+      return onEk(ham);
+    };
+    return pre('12:34', 'Ayşe') + _('ornekM1') + '\n' + pre('12:35', 'Alp') + _('ornekM2');
+  }
+
+  function bolumKopya(ic) {
+    ic.append(el('p', { class: 'alt' }, _('kopyaAlt')));
+    ic.append(ayarSatiri(_('ctrlc'), _('ctrlcAc'), (id) => anahtar('ctrlc', id)));
+    ic.append(ayarSatiri(_('ctrlIns'), '', (id) => anahtar('ctrlIns', id)));
+    ic.append(ayarSatiri(_('bicim'), _('bicimAc'), (id) => segment('bicim',
+      [['whatsapp', _('bicim_whatsapp')], ['metin', _('bicim_metin')], ['ad', _('bicim_ad')]], id)));
+    ic.append(el('span', { class: 'etiket' }, _('ornekCikti')), el('pre', { class: 'ornek', 'data-ornek': '' }, ornekCikti()));
+    ic.append(sifirlaDugmesi('kopya'));
+  }
+
+  function bolumBildirim(ic) {
+    ic.append(ayarSatiri(_('bildirim'), _('bildirimAc'), (id) => anahtar('bildirim', id)));
+    ic.append(ayarSatiri(_('sure'), '', (id) => segment('sure', SECENEK.sure.map((ms) => [ms, _('sn', { n: ms / 1000 })]), id)));
+    ic.append(ayarSatiri(_('dugme'), _('dugmeAc'), (id) => anahtar('dugme', id)));
+    ic.append(sifirlaDugmesi('bildirim'));
+  }
+
+  function bolumGenel(ic) {
+    const algi = _('algilanan', { dil: tarayiciDili() === 'tr' ? 'Türkçe' : 'English' });
+    ic.append(ayarSatiri(_('dil'), algi, (id) => segment('dil', [['tr', _('dil_tr')], ['en', _('dil_en')], ['tarayici', _('dil_tarayici')]], id)));
+    ic.append(ayarSatiri(_('tema'), '', (id) => segment('tema', [['whatsapp', _('tema_whatsapp')], ['acik', _('tema_acik')], ['koyu', _('tema_koyu')]], id)));
+    ic.append(sifirlaDugmesi('genel'));
+  }
+
+  function bolumKisayol(ic) {
+    ic.append(el('p', { class: 'alt' }, _('kisayolNot')));
+    const hataYeri = el('div', { class: 'uyari-satir', role: 'alert' }, tusHatasi);
+    const tus = el('button', { class: 'tus', type: 'button', 'data-kisayol': 'kisayolAyarlar' }, ayar.kisayolAyarlar);
+    tus.addEventListener('click', () => kayitBasla(tus, hataYeri));
+    ic.append(ayarSatiri(_('k_ayarlar'), '', (id) => { tus.setAttribute('aria-labelledby', id); return tus; }));
+    if (tusHatasi) ic.append(hataYeri);
+    const sabit = (ayar.ctrlc ? 'Ctrl+C' : '—') + (ayar.ctrlIns ? ' · Ctrl+Insert' : '');
+    ic.append(ayarSatiri(_('k_kopyala'), _('degismez'), () => el('span', { class: 'tus', 'aria-disabled': 'true', style: 'display:inline-flex;align-items:center;justify-content:center' }, sabit)));
+    ic.append(sifirlaDugmesi('kisayol'));
+  }
+
+  function kayitBasla(tus, hataYeri) {
+    kayitBitir();
+    tus.classList.add('kayit');
+    tus.textContent = _('tusaBas');
+    const dinle = (e) => {
+      if (!e.isTrusted) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if (e.key === 'Escape') { kayitBitir(); panelCiz(); return; }
+      const kombo = tusKombo(e);
+      if (!kombo) return;                       // yalnız değiştirici basıldı: beklemeye devam
+      const neden = tusGecerliMi(kombo);
+      kayitBitir();
+      if (neden) { tusHatasi = _('tusRed', { tus: kombo, neden: _(neden) }); panelCiz(); return; }
+      tusHatasi = '';
+      ayarDegis('kisayolAyarlar', kombo);
+      bildir('basari', _('tusDegisti', { tus: kombo }));
+    };
+    kayit = { dinle };
+    window.addEventListener('keydown', dinle, true);
+  }
+
+  function kayitBitir() {
+    if (!kayit) return;
+    window.removeEventListener('keydown', kayit.dinle, true);
+    kayit = null;
+  }
+
+  function bolumTani(ic) {
+    const satirlar = taniSatirlari();
+    const kotu = satirlar.filter((x) => x.durum === 'kotu').length;
+    ic.append(el('div', { class: 'bilgi' + (kotu ? ' kotu' : ''), role: 'status' }, kotu ? _('taniKotu', { n: kotu, s: kotu === 1 ? '' : 's' }) : _('taniIyi')));
+    const t = el('div', { class: 'tani', 'data-tani': '' });
+    for (const x of satirlar) {
+      t.append(el('span', { class: x.durum, 'aria-hidden': 'true' }, x.durum === 'iyi' ? '✓' : x.durum === 'kotu' ? '✗' : '–'),
+        el('div', {}, x.ad, el('small', {}, x.ayrinti)));
+    }
+    ic.append(t, el('div', { class: 'satir-btn' }, el('button', { class: 'btn ana', type: 'button', 'data-rapor': '', onclick: () => raporuKopyala() }, ikon('kopyala'), _('raporKopyala'))));
+  }
+
+  function bolumHakkinda(ic) {
+    ic.append(el('p', { style: 'margin:0' }, _('surum', { s: SURUM })), el('p', { class: 'alt', style: 'margin:0' }, _('store')));
+    ic.append(el('h4', {}, _('yedek')), el('p', { class: 'alt', style: 'margin:0' }, _('yedekAc')));
+    ic.append(el('p', { class: 'etiket', style: 'margin:0', 'data-son-yedek': '' }, ayar.sonYedek ? _('sonYedek', { t: ayar.sonYedek }) : _('sonYedekYok')));
+    const dosya = el('input', { type: 'file', accept: '.json,application/json', class: 'gizli', 'aria-hidden': 'true', tabindex: '-1', 'data-geri-yukle-dosya': '' });
+    dosya.addEventListener('change', () => { if (dosya.files && dosya.files[0]) geriYukle(dosya.files[0]); });
+    ic.append(dosya, el('div', { class: 'satir-btn sol' },
+      el('button', { class: 'btn', type: 'button', 'data-yedekle': '', onclick: () => yedekle() }, _('yedekle')),
+      el('button', { class: 'btn', type: 'button', 'data-geri-yukle': '', onclick: () => dosya.click() }, _('geriYukle'))));
+  }
+
+  function zamanDamgasi() {
+    const d = new Date();
+    const p = (n) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}`;
+  }
+
+  function yedekle() {
+    const damga = zamanDamgasi();
+    const ayarKopya = Object.assign({}, ayar);
+    delete ayarKopya.sonYedek;
+    const veri = JSON.stringify({ uygulama: ID, surum: SURUM, tarih: damga, ayarlar: ayarKopya }, null, 2);
+    // data: adresi (Blob değil): Firefox'ta betik ayrı bağlamda çalışınca Blob adresi sayfadan inmeyebilir
+    const url = 'data:application/json;charset=utf-8,' + encodeURIComponent(veri);
+    const a = el('a', { href: url, download: `AALabs.${ID}-ayarlar-${damga}.json` });
+    kok.appendChild(a);
+    a.click();
+    a.remove();
+    ayar.sonYedek = damga;
+    ayarYaz();
+    panelCiz();
+    bildir('basari', _('yedeklendi'));
+  }
+
+  function geriYukle(dosya) {
+    if (dosya.size > 64 * 1024) { bildir('hata', _('yedekHata')); return; }   // ayar yedeği birkaç yüz bayttır
+    const okuyucu = new FileReader();
+    okuyucu.onload = () => {
+      try {
+        const v = JSON.parse(String(okuyucu.result));
+        if (!v || v.uygulama !== ID || !v.ayarlar || typeof v.ayarlar !== 'object' || Array.isArray(v.ayarlar)) throw new Error('biçim');
+        const sonYedek = ayar.sonYedek;
+        ayar = ayarDogrula(v.ayarlar);
+        ayar.sonYedek = sonYedek;
+        ayarYaz();
+        menuKaydet();
+        dugmeGuncelle();
+        temaUygula();
+        panelCiz();
+        bildir('basari', _('geriYuklendi'));
+      } catch (_e) {
+        bildir('hata', _('yedekHata'));
+      }
+    };
+    okuyucu.onerror = () => bildir('hata', _('yedekHata'));
+    okuyucu.readAsText(dosya);
+  }
+
+  // ---------------------------------------------------------------- açılış
+  function basla() {
+    dugmeGuncelle();
+    taniYenile();
+    setInterval(() => {
+      if (ev && !ev.isConnected && document.body) { document.body.appendChild(ev); }   // sayfa gövdeyi yenilediyse geri tak
+      taniYenile();
+      temaUygula();
+    }, TANI_ARALIK_MS);
+  }
+
+  menuKaydet();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla, { once: true });
+  else basla();
+
+  try { console.info(`[${AD} ${SURUM}] etkin`); } catch (_) { /* yok */ }
+})();
