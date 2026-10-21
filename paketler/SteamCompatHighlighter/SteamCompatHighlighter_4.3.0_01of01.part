@@ -1,0 +1,1483 @@
+// ==UserScript==
+// @name         AALabs Steam Compatibility Highlighter
+// @namespace    aalabs
+// @version      4.3.0
+// @description  Steam mağazasında Steam Deck uyumunu ve Türkçe dil desteğini rozetle gösterir. Deck durumu Steam'in kendi uyumluluk bilgisinden okunur.
+// @author       AALabs
+// @match        https://store.steampowered.com/*
+// @icon         data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAGv0lEQVR4nO2bf2yTxxnHP/faTpzE+ekUElKSLKZjBdqOQtdmSGWltKht6MaCuj8WtA2qVlpBmrYJNm2dQKuqFY1JG2s11oquWjskltCtK4NBRWFUJSulHSyBsfWFNQkBgml+2HFiO35vf7zktYNjsEnio8EfydLr933u/L3ve+/d8/p0goRIUbP8+CJNiHqQtQhRI8ElQEtcRj0SDAF+pDwF8pAhRdOpxln7QMjR4sVoJz3LWx9CExsFzJlYuelBQguGXKs3zt51+bWRBsx73+Hx5G0WyCfTpi6NSOQWXR9Yw5H54eFzUQPmve/weHJfF/CIEnVpQkp26qcCy4ZNsJ5n885P7sYDCMEjHk/OZus7mM+80MRf1clKP9KQD+uNs3dpIAWa2KhaUNrRxEaQQtQsb71f08RbqvWowDDkYs2c529MNCHrNZC1qoWoQ7tHQ4ga1TJUIQUeTYJLtRCFuLTrPbefSARoN2zjh8kYoFqAajIGqBagmowBqgWoJmOAagGqsadaICdbUP+lIhbNc1FVlkWWQ9Drj/Df9iDvHOtnz3s+fAEjYfkv3JpL3YICbqtx4i60Y0i40DNE6+lB3v7Ax8Gj/RiXij9cm899d5qZ+vZ9PRw+MZCw3oVz86j7YgEAb7zTx8Gj/Um1JyUDqsocvPSDSqrLs0acLytxMLPSSd2CQn7yLYMHvqPT1T00IsZdYOO5b09j4dz4V4+Kmxx8/pYcvv5gMc0t/az4aRsAs6qdfOXeIgCaWwNXNOCWm7Ot2NbTwfE3wG6D366dbjXeMCSnz4YYDEnK3XZKCsyq2rtCcY2/qcjGtg3VVJVFjQsMGrR3hRAIKsscOLPMp/EfxwPJShoXkjZg8fx8aiqyAei4EGLVs+2c6gxZ1z0VWdQtKKDTOxRXdtPqCqvxff0RfvZqF28c7CUYNtcqsuyCRfNdNDxYTOP+njE1KFWSNuD2GTnW8fNN3hGNB9DPhPjldm9cucV3uai9LQ+AYMhg5bNtHP1ocERMaEiyu9nH7mZfSuLHg6RnAVdONPSTvkjSP7BiSYl1vPXNT+Iar5qkDbjQE+3awyPz1XDlaNw9KxeAiCF5dU93ivImnqQNOPCh3zr+2v3FrGuYQm72qEuLFnNqnNhsZszJtmDc4Hg9kPQYcEwfZMeBHr66sAgh4PGlbpbdW8hLf7nIa3/rZiAUv/h68xSHdfxRR3BMQp941Py9RJSXOhJeuxIp5QFPv3gOh12wdIEpxF1oZ13DVFYtdfPrRi/b9nZjxPhQkGuzjnv9yY8bo1FTkW3NQuNJSqlwKCz57q86eWpTx4g7WlpoZ/2qMn7340ryc2OqjHlC5Kir88kzEDTo648k/AyGEmefVyLlVBhgz3s+9h72seTufFbXlzKz0glA7Zw8fr56Gk9u7ADMZGeYEcZcAxu2nqNpf2/C648vLWFdw9SU671mVVLC7mYfX153mk3bujAu9f1F8/K5Y4ZpyFmvtQzPZ6aNf/cdD8b8Nhgx4Dd/usiOA9G7M/ez5tR3/H/ROX9WdfaYe8FEMG6KPjgZzeFznWa1F3oi/KfdHCuyHBrLFiYexVWRtAFXW0GoLo92cW9M0vT6gWhuv7q+lOlTrm26miiSNuD3T1fywxVTuGOGE9tlpe6700XDkmLAfEs81BJ9Ff3D3h7OXjTHguJ8O6+tr+KBu1zYbSPrqC5z8I2HivlcVXrHiqRngSKXjZV1blbWuekfMOjoChEIGkwrdTC1JHpX//h2D+1d0cEvMGjwvc1nePlHlWQ7NMrdDl74/nT8gQhnvGGkhDK3gyKX6cgTz7Xz74/HljSlQtIGDMXkMXk5GjOrnHExfz7Yy4at5+POHz4xwDefaeMXayqsjM2Va2NmpS0uNt3YSmY/tT6ZwJ3v9tF2PkwgaDAUgfCQxBcw+PhciH1H/Dzzynle2dVt/Z11OZ3eIba91U1HV5ihiDllhsKSbl8E/UyQ/R/6eX6Hl7//029lk0X5dkJhycm2IO/+K0BnzLR6OQV5GlKa7xyHWvppO584NhYx47HjY8zRPt1cfxNzmskYoFqAajIGqBagmowBqgWoJmOAagGq0SRc259pkwAJhibAf/XQyYkAv2burrpBkegaiEOqdajDaNYMKZtUy1CFIUWTACk8j504Nln2CCaLhBZ9+623ayAkhlyrWlDaMeRaEFID0Btn75LILao1pQuJ3DK8i9RKhHR9YI2EnepkpQcp2anrA2uGv0czwSPzw7oeWCYRk7YnSOSW2F2jkNk8PboBl4rFbJ/nHgSeT9f2eXQwmq+2ff7/Vg1zjgIasQIAAAAASUVORK5CYII=
+// @run-at       document-start
+// @noframes
+// @grant        GM_getValue
+// @grant        GM_setValue
+// @grant        GM_registerMenuCommand
+// @grant        GM_unregisterMenuCommand
+// @grant        GM_setClipboard
+// @grant        GM_info
+// @grant        unsafeWindow
+// @aalabs-ikon  SCH
+// ==/UserScript==
+
+/*
+ * Ne yapar
+ *   Oyun sayfasında başlığın altına tek şerit rozet koyar: Steam Deck durumu (Doğrulanmış / Oynanabilir /
+ *   Desteklenmiyor / bilinmiyor) ve nedeni, Secure Boot gereği, Türkçe dil desteği.
+ *   Arama ve liste sayfalarında her oyunun yanına Deck ve Türkçe rozeti koyar; istenirse Deck'te
+ *   desteklenmeyen oyunları gizler.
+ *
+ * Veri
+ *   Deck: store.steampowered.com/saleaction/ajaxgetdeckappcompatibilityreport (Steam'in kendi adresi).
+ *   Türkçe: oyun sayfasındaki dil tablosu; listede store.steampowered.com/api/appdetails.
+ *   İkisi de 24 saat önbellekte tutulur.
+ *
+ * 4.3.0 (app-lab v02.02, oturum s7chx): AALabs adı, ortak Ayarlar (Ctrl+,), Türkçe + İngilizce, Tanı raporu.
+ * Windows 10/11 ve Linux rozetleri kalktı (kullanıcı Windows 11 LTSC kullanıyor).
+ * Tasarım kapısı: Rozet Y-A · Liste L-1 · Ayarlar A · E1–E5 · Ç1–Ç5 · K1–K5.
+ */
+(function () {
+  'use strict';
+
+  const SURUM = '4.3.0';
+  const ID = 'SteamCompatHighlighter';
+  const KOD = 'SCH';
+  const AD = 'AALabs Steam Compatibility Highlighter';
+  const ONBELLEK_MS = 24 * 60 * 60 * 1000;     // Deck ve dil bilgisi 24 saat geçerli
+  const ONBELLEK_EN_COK = 3000;                // en çok bu kadar oyun saklanır (eskiler atılır)
+  const AYNI_ANDA = 3;                         // listede aynı anda en çok bu kadar istek
+  const ISTEK_ARA_MS = 150;                    // iki istek arası bekleme (Steam'i yormamak için)
+  const ISTEK_SURE_MS = 15000;                 // tek istek için en uzun bekleme
+  const KOPYA = Math.random().toString(36).slice(2, 8);   // bu betik örneği (iki kopya kuruluysa ayırt etmek için)
+
+  // ---------------------------------------------------------------- test kancası (yalnız Test yöneticisinde)
+  let TEST = false;
+  try { TEST = typeof GM_info === 'object' && !!GM_info && GM_info.scriptHandler === 'Test'; } catch (_e) { TEST = false; }
+
+  // ---------------------------------------------------------------- tema (tokenlardan üretildi)
+  // Bu blok aalabs-tema.css'ten yazılır. Elle değiştirme.
+  // TOKEN-BASLA
+  // Kaynak: /* AALabs tasarım dili 1.4.1 — aalabs.tokens.json'dan üretildi. Elle değiştirme. */
+  const TEMA_CSS = ":host { --tv-olcek: 1; --yazi: \"Open Sans\", \"Segoe UI\", Roboto, sans-serif; --yazi-govde: calc(14px * var(--tv-olcek)); --kontrol: calc(32px * var(--tv-olcek)); --kose-s: calc(2px * var(--tv-olcek)); --kose-m: calc(4px * var(--tv-olcek)); --kose-l: calc(6px * var(--tv-olcek)); --bosluk-1: calc(4px * var(--tv-olcek)); --bosluk-2: calc(8px * var(--tv-olcek)); --bosluk-3: calc(12px * var(--tv-olcek)); --bosluk-4: calc(16px * var(--tv-olcek)); --bosluk-5: calc(24px * var(--tv-olcek)); --bosluk-6: calc(32px * var(--tv-olcek)); --ana: #2456D6; --ana-acik: #E5EBFA; --ana-hover: #F2F5FD; --ana-uzeri: #FFFFFF; --vurgu: #2456D6; --zemin: #F6F9FC; --yuzey: #FFFFFF; --metin: #17252E; --metin-ikincil: #4E6269; --kenar: #7A9199; --ayirici: #D3DEE6; --basari: #18763F; --basari-bg: #E4F5E8; --uyari: #9A5B00; --uyari-bg: #FDF6D8; --hata: #C4313B; --hata-bg: #FDE8E8; --kat-belge: #6237C8; --kat-tablo: #1D7A3A; --kat-gorsel: #B0256C; --kat-kod: #2453C7; --kat-video: #A8500F; --kat-arsiv: #7A5A00; --kat-onemli: #B4232B; --kat-oyun: #0B6E78; color-scheme: light; }\n:host([data-theme=\"dark\"]) { --ana: #2456D6; --ana-acik: #1D2C4F; --ana-hover: #1B2434; --ana-uzeri: #FFFFFF; --vurgu: #86A8FF; --zemin: #0F1520; --yuzey: #161E2B; --metin: #E6ECF5; --metin-ikincil: #9AA8BC; --kenar: #6A7B93; --ayirici: #263142; --basari: #4CC38A; --basari-bg: #13301F; --uyari: #E8AC45; --uyari-bg: #33270F; --hata: #FF8189; --hata-bg: #3A161A; color-scheme: dark; }\n";
+  // Türkçe rozeti: kullanıcı kararı (2026-10-21) kırmızı zemin, beyaz yazı = kategori "Önemli" (6,5:1)
+  const ROZET_RENK_CSS = ":host { --trk-zemin: #B4232B; --trk-yazi: #FFFFFF; --perde: rgba(10, 14, 20, .55); --steam-zemin: #1B2838; }\n";
+  // TOKEN-BITIR
+
+  // ---------------------------------------------------------------- dil (TR kaynak, EN çeviri)
+  const METIN = {
+    tr: {
+      ayarlar: 'Ayarlar', ara: 'Ayarlarda ara (Ctrl+F)', sonucYok: 'Sonuç yok. Başka bir kelime dene.', ortak: 'ORTAK',
+      kapat: 'Kapat (Esc)', bildirimKapat: 'Bildirimi kapat',
+      varsayilan: 'Varsayılana dön', sifirlandi: 'Bu bölüm varsayılana döndü',
+      b_deck: 'Steam Deck', b_turkce: 'Türkçe', b_liste: 'Liste sayfaları', b_genel: 'Genel', b_kisayol: 'Klavye kısayolları', b_tani: 'Tanı', b_hakkinda: 'Hakkında',
+      deckAlt: "Durum Steam'in kendi uyumluluk bilgisinden okunur. Başka eklenti gerekmez.",
+      deckGoster: 'Deck rozetini göster', deckDogru: 'Doğrulanmış oyunda da göster', deckDogruAc: 'Kapalıysa yalnız Oynanabilir ve Desteklenmiyor görünür.',
+      deckNeden: "Nedeni yaz (Steam'in test notu)", deckNedenAc: 'Örnek: "Deck Oynanabilir · Bazı yazılar küçük".',
+      deckAyrinti: "Rozete tıklayınca bütün test notlarını aç", secureBoot: 'Secure Boot uyarısını göster',
+      secureBootAc: 'Sistem gereksinimlerinde Secure Boot geçiyorsa gösterilir.',
+      onbellekNot: 'Bilgi 24 saat önbellekte tutulur.', onbellekSil: 'Önbelleği temizle', onbellekSilindi: 'Önbellek temizlendi ({n} oyun)', 'onbellekSilindi#1': 'Önbellek temizlendi ({n} oyun)',
+      trAlt: 'Türkçe yoksa rozet çıkmaz.', trGoster: 'Türkçe varsa rozet göster', trAyrinti: 'Ayrıntı: arayüz · ses · altyazı',
+      listeAlt: 'Görünen her oyun için Steam\'e istek gider; sonuç önbelleğe alınır.',
+      listeDeck: 'Arama ve listelerde Deck rozeti', listeTr: 'Listelerde Türkçe rozeti', listeSuz: "Deck'te desteklenmeyen oyunları gizle",
+      listeSuzAc: 'Gizlenen oyun sayısı listenin üstünde yazar.',
+      dil: 'Dil', dil_tr: 'Türkçe', dil_en: 'English', dil_tarayici: 'Tarayıcı dili', algilanan: 'Algılanan: {dil}',
+      tema: 'Tema', tema_sayfa: 'Sayfayı izle', tema_acik: 'Açık', tema_koyu: 'Koyu', olcek: 'Ölçek',
+      kisayolNot: 'Tuş kutusuna tıkla, yeni tuşu bas. Vazgeçmek için Esc. Tarayıcı kısayoluyla çakışan tuş kabul edilmez.',
+      k_ayarlar: 'Ayarları aç', tusaBas: 'Tuşa bas…',
+      tusDegisti: 'Kısayol {tus} oldu', tusRed: '{tus} kullanılamaz: {neden} Başka tuş seç.',
+      neden_degistirici: 'Ctrl ya da Alt ile birlikte basılmalı.', neden_altgr: 'Ctrl+Alt Türkçe klavyede AltGr ile karışır.',
+      neden_tarayici: 'tarayıcı bu tuşu kullanıyor.',
+      // rozetler
+      d3: 'Deck Doğrulanmış', d2: 'Deck Oynanabilir', d1: 'Deck Desteklenmiyor', d0: 'Deck bilinmiyor', dYukleniyor: 'Deck…',
+      dHata: 'Deck bilgisi alınamadı', tr: 'Türkçe', arayuz: 'arayüz', ses: 'ses', altyazi: 'altyazı', sb: 'Secure Boot gerekli',
+      deckBaslik: "Steam Deck · Steam'in testi", deckIpucu: 'Tıkla: bütün test notları', nedenFazla: '+{n}',
+      gizlendi: "{n} oyun gizlendi (Deck'te desteklenmiyor)", 'gizlendi#1': "{n} oyun gizlendi (Deck'te desteklenmiyor)", gizlenenleriGoster: 'Göster', gosteriliyor: "Deck'te desteklenmeyen {n} oyun gösteriliyor", 'gosteriliyor#1': "Deck'te desteklenmeyen {n} oyun gösteriliyor", tekrarGizle: 'Gizle',
+      // Steam test notları (loc_token sonu → kısa metin)
+      n_gecti: 'Steam testinden geçti',
+      // tanı
+      taniIyi: 'Her şey yerinde. Sorun bildirirken raporu kopyalayıp sohbete yapıştır.',
+      taniKotu: '{n} sorun var. Raporu kopyalayıp sohbete yapıştır.', 'taniKotu#1': '{n} sorun var. Raporu kopyalayıp sohbete yapıştır.',
+      t_sayfa: 'Sayfa türü', t_sayfa_oyun: 'oyun sayfası', t_sayfa_liste: 'liste sayfası', t_sayfa_diger: 'öteki sayfa',
+      t_app: 'Uygulama numarası', t_appYok: 'Adreste uygulama numarası yok',
+      t_deck: 'Deck isteği', t_deckBekle: 'Henüz istek yok', t_deckOnbellek: 'önbellekten',
+      t_dil: 'Dil tablosu', t_dilVar: 'Türkçe satırı var', t_dilYok: 'Türkçe satırı yok', t_dilTabloYok: 'Dil tablosu bulunamadı',
+      t_yer: 'Rozet yeri', t_yerVar: 'bulundu', t_yerYok: 'Başlık bulunamadı; Steam sayfayı değiştirmiş olabilir',
+      t_liste: 'Liste satırları', t_listeOzet: '{n} satır · {r} rozetli · {g} gizli',
+      t_eski: 'Eski 4.2 betiği', t_eskiVar: 'Hâlâ açık: rozetler iki kez görünür. Tampermonkey\'de eski "Steam Compatibility Highlighter"ı sil.',
+      t_eskiYok: 'Yok',
+      t_depo: 'Ayar deposu', t_depoVar: 'GM_getValue ✓', t_depoYok: 'GM_getValue yok: ayarlar sayfa kapanınca kaybolur',
+      t_fetch: 'İstek yolu', t_onbellek: 'Önbellek', t_onbellekOzet: '{n} oyun', 't_onbellekOzet#1': '{n} oyun',
+      raporKopyala: 'Raporu kopyala', raporKopyalandi: 'Tanı raporu kopyalandı', raporBaslik: 'Tanı raporu', raporSec: 'Kopyalanamadı. Rapor seçildi: Ctrl+C ile kopyala.',
+      r_zaman: 'Zaman', r_tarayici: 'Tarayıcı', r_yonetici: 'Eklenti', r_ayarlar: 'Ayarlar', r_dil: 'Dil', r_tema: 'Tema', r_adres: 'Adres',
+      r_ok: '[OK]', r_hata: '[HATA]', r_bilgi: '[BİLGİ]',
+      surum: 'Sürüm {s}', store: 'AALabs App Store ile güncellenir. Elle kurulum: KURULUM.md.',
+      yedek: 'Ayar yedeği', yedekle: 'Yedekle (dosya)', geriYukle: 'Geri yükle (dosya)',
+      sonYedek: 'Son yedek: {t}', sonYedekYok: 'Son yedek: henüz yok',
+      yedekAc: 'Yedek, bu betiğin ayarlarını tek bir JSON dosyasına yazar. Geri yükleyince ayarlar hemen uygulanır.',
+      yedeklendi: 'Ayarlar dosyaya yazıldı', geriYuklendi: 'Ayarlar geri yüklendi',
+      yedekHata: 'Dosya okunamadı. AALabs Steam Compatibility Highlighter yedeği (.json) seç.',
+      menuAyarlar: 'Ayarlar (A)', menuRapor: 'Tanı raporunu kopyala (T)',
+    },
+    en: {
+      ayarlar: 'Settings', ara: 'Search settings (Ctrl+F)', sonucYok: 'No results. Try another word.', ortak: 'COMMON',
+      kapat: 'Close (Esc)', bildirimKapat: 'Close notification',
+      varsayilan: 'Reset to default', sifirlandi: 'This section was reset',
+      b_deck: 'Steam Deck', b_turkce: 'Turkish', b_liste: 'List pages', b_genel: 'General', b_kisayol: 'Keyboard shortcuts', b_tani: 'Diagnostics', b_hakkinda: 'About',
+      deckAlt: "Status comes from Steam's own compatibility data. No other extension is needed.",
+      deckGoster: 'Show Deck badge', deckDogru: 'Show it for Verified games too', deckDogruAc: 'When off, only Playable and Unsupported are shown.',
+      deckNeden: "Show the reason (Steam's test note)", deckNedenAc: 'Example: "Deck Playable · Some text is hard to read".',
+      deckAyrinti: 'Click the badge to open all test notes', secureBoot: 'Show Secure Boot warning',
+      secureBootAc: 'Shown when the system requirements mention Secure Boot.',
+      onbellekNot: 'Data is cached for 24 hours.', onbellekSil: 'Clear cache', onbellekSilindi: 'Cache cleared ({n} games)', 'onbellekSilindi#1': 'Cache cleared ({n} game)',
+      trAlt: 'No badge when Turkish is missing.', trGoster: 'Show badge when Turkish is supported', trAyrinti: 'Detail: interface · audio · subtitles',
+      listeAlt: 'One request goes to Steam for each visible game; results are cached.',
+      listeDeck: 'Deck badge in search and lists', listeTr: 'Turkish badge in lists', listeSuz: 'Hide games unsupported on Deck',
+      listeSuzAc: 'The number of hidden games is shown above the list.',
+      dil: 'Language', dil_tr: 'Türkçe', dil_en: 'English', dil_tarayici: 'Browser language', algilanan: 'Detected: {dil}',
+      tema: 'Theme', tema_sayfa: 'Follow page', tema_acik: 'Light', tema_koyu: 'Dark', olcek: 'Scale',
+      kisayolNot: 'Click a key box, then press the new keys. Esc cancels. Keys used by the browser are refused.',
+      k_ayarlar: 'Open settings', tusaBas: 'Press keys…',
+      tusDegisti: 'Shortcut is now {tus}', tusRed: "{tus} can't be used: {neden} Pick another key.",
+      neden_degistirici: 'press it together with Ctrl or Alt.', neden_altgr: 'Ctrl+Alt clashes with AltGr on Turkish keyboards.',
+      neden_tarayici: 'the browser uses this key.',
+      d3: 'Deck Verified', d2: 'Deck Playable', d1: 'Deck Unsupported', d0: 'Deck unknown', dYukleniyor: 'Deck…',
+      dHata: "Couldn't get Deck data", tr: 'Turkish', arayuz: 'interface', ses: 'audio', altyazi: 'subtitles', sb: 'Secure Boot required',
+      deckBaslik: "Steam Deck · Steam's testing", deckIpucu: 'Click: all test notes', nedenFazla: '+{n}',
+      gizlendi: '{n} games hidden (unsupported on Deck)', 'gizlendi#1': '{n} game hidden (unsupported on Deck)', gizlenenleriGoster: 'Show', gosteriliyor: 'Showing {n} games unsupported on Deck', 'gosteriliyor#1': 'Showing {n} game unsupported on Deck', tekrarGizle: 'Hide',
+      n_gecti: 'Passed Steam testing',
+      taniIyi: 'Everything is in place. When reporting a problem, copy the report and paste it into the chat.',
+      taniKotu: '{n} problems found. Copy the report and paste it into the chat.', 'taniKotu#1': '{n} problem found. Copy the report and paste it into the chat.',
+      t_sayfa: 'Page type', t_sayfa_oyun: 'game page', t_sayfa_liste: 'list page', t_sayfa_diger: 'other page',
+      t_app: 'App number', t_appYok: 'No app number in the address',
+      t_deck: 'Deck request', t_deckBekle: 'No request yet', t_deckOnbellek: 'from cache',
+      t_dil: 'Language table', t_dilVar: 'Turkish row found', t_dilYok: 'No Turkish row', t_dilTabloYok: 'Language table not found',
+      t_yer: 'Badge place', t_yerVar: 'found', t_yerYok: 'Title not found; Steam may have changed the page',
+      t_liste: 'List rows', t_listeOzet: '{n} rows · {r} with badges · {g} hidden',
+      t_eski: 'Old 4.2 script', t_eskiVar: 'Still running: badges appear twice. Delete the old "Steam Compatibility Highlighter" in Tampermonkey.',
+      t_eskiYok: 'None',
+      t_depo: 'Settings storage', t_depoVar: 'GM_getValue ✓', t_depoYok: 'No GM_getValue: settings are lost when the page closes',
+      t_fetch: 'Request path', t_onbellek: 'Cache', t_onbellekOzet: '{n} games', 't_onbellekOzet#1': '{n} game',
+      raporKopyala: 'Copy report', raporKopyalandi: 'Diagnostic report copied', raporBaslik: 'Diagnostic report', raporSec: "Couldn't copy. The report is selected: press Ctrl+C.",
+      r_zaman: 'Time', r_tarayici: 'Browser', r_yonetici: 'Extension', r_ayarlar: 'Settings', r_dil: 'Language', r_tema: 'Theme', r_adres: 'Address',
+      r_ok: '[OK]', r_hata: '[ERROR]', r_bilgi: '[INFO]',
+      surum: 'Version {s}', store: 'Updated by AALabs App Store. Manual install: KURULUM.md.',
+      yedek: 'Settings backup', yedekle: 'Back up (file)', geriYukle: 'Restore (file)',
+      sonYedek: 'Last backup: {t}', sonYedekYok: 'Last backup: none yet',
+      yedekAc: 'The backup writes this script\'s settings to one JSON file. Restoring applies them right away.',
+      yedeklendi: 'Settings written to a file', geriYuklendi: 'Settings restored',
+      yedekHata: "Couldn't read the file. Pick an AALabs Steam Compatibility Highlighter backup (.json).",
+      menuAyarlar: 'Settings (A)', menuRapor: 'Copy diagnostic report (T)',
+    },
+  };
+
+  // Steam'in test notları: loc_token "#SteamDeckVerified_TestResult_<ad>" → kısa metin
+  const NEDEN = {
+    InterfaceTextIsNotLegible: ['Bazı yazılar küçük', 'Some text is hard to read'],
+    DefaultControllerConfigNotFullyFunctional: ['Varsayılan kontroller eksik', 'Default controls are incomplete'],
+    ControllerGlyphsDoNotMatchDeckDevice: ["Tuş simgeleri Deck'e uymuyor", "Button icons don't match Deck"],
+    TextInputDoesNotAutomaticallyInvokesKeyboard: ['Ekran klavyesi elle açılır', 'On-screen keyboard must be opened manually'],
+    LauncherInteractionIssues: ['Başlatıcı dokunmatik ya da fare ister', 'Launcher needs touch or trackpad'],
+    FirstTimeSetupRequiresActiveInternetConnection: ['İlk açılışta internet gerekir', 'First launch needs internet'],
+    ExternalControllersNotSupportedPrimaryPlayer: ['Harici denetleyici desteklenmiyor', 'External controllers not supported'],
+    UnsupportedGraphicsPerformance: ['Grafik performansı yetersiz', 'Graphics performance too low'],
+    UnsupportedAntiCheatConfiguration: ["Hile koruması Deck'te çalışmıyor", 'Anti-cheat not supported'],
+    UnsupportedAntiCheat_Other: ["Hile koruması Deck'te çalışmıyor", 'Anti-cheat not supported'],
+    SteamOSDoesNotSupport: ['SteamOS bu oyunu desteklemiyor', 'Not supported on SteamOS'],
+    DefaultConfigurationIsNotPerformant: ['Varsayılan ayarlarda yavaş', 'Slow with default settings'],
+    SingleplayerGameplayRequiresDesktopMode: ['Masaüstü kipi gerekir', 'Needs Desktop Mode'],
+    DefaultControllerConfigFullyFunctional: ['Varsayılan kontroller tam', 'Default controls work fully'],
+    ControllerGlyphsMatchDeckDevice: ["Tuş simgeleri Deck'e uyuyor", 'Button icons match Deck'],
+    InterfaceTextIsLegible: ['Yazılar okunuyor', 'Text is legible'],
+    DefaultConfigurationIsPerformant: ['Varsayılan ayarlarda akıcı', 'Runs well with default settings'],
+  };
+
+  if (TEST) window.__AALABS_SCH_METIN__ = METIN;   // yalnız testte: TR/EN anahtar eşitliği denetimi
+
+  // ---------------------------------------------------------------- ayar deposu
+  const VARSAYILAN = Object.freeze({
+    deckGoster: true, deckDogru: true, deckNeden: true, deckAyrinti: true, secureBoot: true,
+    trGoster: true, trAyrinti: true,
+    listeDeck: true, listeTr: true, listeSuz: true,
+    dil: 'tr', tema: 'sayfa', olcek: 100,
+    kisayolAyarlar: 'Ctrl+,', sonYedek: '',
+  });
+  const SECENEK = { dil: ['tr', 'en', 'tarayici'], tema: ['sayfa', 'acik', 'koyu'], olcek: [90, 100, 115, 130] };
+  const BOLUM_ANAHTAR = {
+    deck: ['deckGoster', 'deckDogru', 'deckNeden', 'deckAyrinti', 'secureBoot'],
+    turkce: ['trGoster', 'trAyrinti'], liste: ['listeDeck', 'listeTr', 'listeSuz'],
+    genel: ['dil', 'tema', 'olcek'], kisayol: ['kisayolAyarlar'],
+  };
+  const gmDepo = (() => { try { return typeof GM_getValue === 'function' && typeof GM_setValue === 'function'; } catch (_e) { return false; } })();
+
+  /** Geçerli alanlar tabana yazılır; geçersiz alan tabanda kalır (geri yüklemede taban = şimdiki ayar). */
+  function ayarDogrula(ham, taban = VARSAYILAN) {
+    const a = Object.assign({}, VARSAYILAN, taban);
+    if (!ham || typeof ham !== 'object' || Array.isArray(ham)) return a;
+    for (const k of Object.keys(VARSAYILAN)) {
+      if (!(k in ham)) continue;
+      const v = ham[k];
+      if (typeof VARSAYILAN[k] === 'boolean') { if (typeof v === 'boolean') a[k] = v; continue; }
+      if (SECENEK[k]) { if (SECENEK[k].includes(v)) a[k] = v; continue; }
+      if (k === 'kisayolAyarlar') { if (komboKanonikMi(v) && tusGecerliMi(v) === null) a[k] = v; continue; }
+      if (typeof v === 'string') a[k] = v.slice(0, 40);
+    }
+    return a;
+  }
+
+  function depoOku(anahtar, varsayilan) {
+    if (!gmDepo) return varsayilan;
+    try {
+      const ham = GM_getValue(anahtar, null);
+      if (ham === null || ham === undefined) return varsayilan;
+      return typeof ham === 'string' ? JSON.parse(ham) : ham;
+    } catch (_e) { return varsayilan; }
+  }
+  function depoYaz(anahtar, deger) {
+    if (!gmDepo) return;
+    try { GM_setValue(anahtar, JSON.stringify(deger)); } catch (_e) { /* depo yazılamadı; bellekte sürer */ }
+  }
+  function ayarYaz() { depoYaz('ayarlar', ayar); }
+
+  // ---------------------------------------------------------------- kısayol kuralları (platform-userscript.md §2.7–2.8)
+  const TARAYICI_YASAK = new Set(['Ctrl+T', 'Ctrl+W', 'Ctrl+N', 'Ctrl+L', 'Ctrl+R', 'Ctrl+F', 'Ctrl+P', 'Ctrl+S', 'Ctrl+D',
+    'Ctrl+H', 'Ctrl+J', 'Ctrl+K', 'Ctrl+U', 'Ctrl+O', 'Ctrl+G', 'Ctrl+E', 'Ctrl+A', 'Ctrl+C', 'Ctrl+V', 'Ctrl+X', 'Ctrl+Z', 'Ctrl+Y',
+    'Ctrl+Shift+T', 'Ctrl+Shift+N', 'Ctrl+Shift+W', 'Ctrl+Shift+I', 'Ctrl+Shift+J', 'Ctrl+Shift+C', 'Ctrl+Shift+Delete',
+    'Ctrl+Shift+B', 'Ctrl+Shift+O', 'Ctrl+Shift+P', 'Ctrl+Shift+R', 'Ctrl+Shift+Q', 'Ctrl+Tab', 'Ctrl+Shift+Tab', 'Ctrl+F4', 'Alt+F4',
+    'Alt+D', 'Alt+E', 'Alt+F', 'Alt+Home', 'Alt+Left', 'Alt+Right', 'Ctrl+Plus', 'Ctrl+-', 'Ctrl+0', 'Ctrl+=',
+    'Ctrl+1', 'Ctrl+2', 'Ctrl+3', 'Ctrl+4', 'Ctrl+5', 'Ctrl+6', 'Ctrl+7', 'Ctrl+8', 'Ctrl+9', 'Ctrl+Enter', 'Ctrl+Insert', 'Ctrl+Shift+Z']);
+
+  const GEZINME_TUSU = new Set(['Left', 'Right', 'Up', 'Down', 'Home', 'End', 'Backspace', 'Delete', 'PageUp', 'PageDown',
+    'Tab', 'Enter', 'Escape', 'Space', 'Insert']);
+
+  /** Tuş adı: harf/rakam e.code ile (Türkçe I/ı), değiştiricisiz noktalama e.key ile; AltGr kısayol değildir. */
+  function tusAdi(e) {
+    if (e.getModifierState && e.getModifierState('AltGraph')) return null;
+    const k = e.key || '';
+    const degistirici = e.ctrlKey || e.metaKey || e.altKey;
+    if (!degistirici && k.length === 1 && !/[A-Za-z0-9]/.test(k)) return k === '+' ? 'Plus' : k.toLocaleUpperCase('en-US');
+    if (/^Key[A-Z]$/.test(e.code || '')) return e.code.slice(3);
+    if (/^Digit\d$/.test(e.code || '')) return e.code.slice(5);
+    if (k === ' ') return 'Space';
+    if (k === '+') return 'Plus';
+    if (k.startsWith('Arrow')) return k.slice(5);
+    if (k.length === 1) return k.toLocaleUpperCase('en-US');
+    return k;
+  }
+
+  function tusKombo(e) {
+    const k = tusAdi(e);
+    if (!k || ['Control', 'Alt', 'Shift', 'Meta', 'AltGraph', 'Dead', 'Unidentified'].includes(k)) return null;
+    const p = [];
+    if (e.ctrlKey) p.push('Ctrl');
+    if (e.altKey) p.push('Alt');
+    if (e.shiftKey) p.push('Shift');
+    if (e.metaKey) p.push('Meta');
+    p.push(k);
+    return p.join('+');
+  }
+
+  /** tusKombo'nun üretebileceği biçim mi (dosyadan gelen değer için): "Ctrl+Shift+Y", "Alt+F2", "Ctrl+,". */
+  function komboKanonikMi(v) {
+    if (typeof v !== 'string' || v.length > 40) return false;
+    const m = /^(Ctrl\+)?(Alt\+)?(Shift\+)?(Meta\+)?([^+]+|Plus)$/.exec(v);
+    if (!m || !(m[1] || m[2] || m[4])) return false;
+    const tus = m[5];
+    if (['Control', 'Alt', 'Shift', 'Meta', 'AltGraph', 'Dead', 'Unidentified'].includes(tus) || !tus.trim()) return false;
+    if ([...tus].length === 1) return tus === tus.toLocaleUpperCase('en-US');
+    return /^[A-Z][A-Za-z0-9]{1,15}$/.test(tus);
+  }
+
+  /** null = geçerli; değilse neden anahtarı. */
+  function tusGecerliMi(kombo) {
+    const p = kombo.split('+');
+    if (!p.some((x) => x === 'Ctrl' || x === 'Alt' || x === 'Meta')) return 'neden_degistirici';
+    if (p.includes('Ctrl') && p.includes('Alt')) return 'neden_altgr';
+    // Ctrl ile metin gezinme/düzenleme ve sekme tuşları: yazı alanını bozar ya da tarayıcıya gider
+    if ((p.includes('Ctrl') || p.includes('Meta')) && GEZINME_TUSU.has(p[p.length - 1])) return 'neden_tarayici';
+    const esdeger = p.includes('Meta') ? ['Ctrl', ...p.filter((x) => x !== 'Meta' && x !== 'Ctrl')].join('+') : kombo;
+    if (TARAYICI_YASAK.has(kombo) || TARAYICI_YASAK.has(esdeger)) return 'neden_tarayici';
+    return null;
+  }
+
+  let ayar = ayarDogrula(depoOku('ayarlar', null));
+
+  // ---------------------------------------------------------------- dil yardımcıları
+  function tarayiciDili() {
+    const d = ((navigator.languages && navigator.languages[0]) || navigator.language || 'tr').toLowerCase();
+    return d.startsWith('tr') ? 'tr' : 'en';
+  }
+  function dilKodu() {
+    if (ayar.dil === 'tarayici') return tarayiciDili();
+    return ayar.dil === 'en' ? 'en' : 'tr';
+  }
+  function _(k, deger) {
+    const s = (METIN[dilKodu()] || METIN.tr)[k] ?? METIN.tr[k] ?? k;
+    return deger ? s.replace(/\{(\w+)\}/g, (m, a) => (a in deger ? String(deger[a]) : m)) : s;
+  }
+  function sayi(n) { return Number(n).toLocaleString(dilKodu() === 'tr' ? 'tr-TR' : 'en-US'); }
+  /** Sayılı metin: n = 1 ise "<anahtar>#1" (İngilizce tekil). */
+  function sayili(k, n, deger) { return _(Number(n) === 1 ? k + '#1' : k, Object.assign({ n: sayi(n) }, deger || {})); }
+  function nedenMetni(ad) {
+    const n = NEDEN[ad];
+    if (n) return n[dilKodu() === 'en' ? 1 : 0];
+    return ad.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2');   // bilinmeyen not: okunur hale getir
+  }
+
+  // ---------------------------------------------------------------- istek (Firefox'ta sayfanın fetch'i önce)
+  const SAYFA = (() => { try { return typeof unsafeWindow !== 'undefined' ? unsafeWindow : window; } catch (_e) { return window; } })();
+  function sayfayaKopya(o) { try { if (typeof cloneInto === 'function') return cloneInto(o, SAYFA); } catch (_e) { /* yok */ } return o; }
+  const FETCH_YOLLARI = [];
+  try { if (SAYFA !== window && typeof SAYFA.fetch === 'function') FETCH_YOLLARI.push(['sayfa', (u, i) => SAYFA.fetch(u, sayfayaKopya(i))]); } catch (_e) { /* yok */ }
+  try { if (typeof content !== 'undefined' && content && typeof content.fetch === 'function') FETCH_YOLLARI.push(['content', (u, i) => content.fetch(u, sayfayaKopya(i))]); } catch (_e) { /* yok */ }
+  FETCH_YOLLARI.push(['betik', (u, i) => fetch(u, i)]);
+
+  const tani = { sonIstek: null, fetchYolu: '', sorunlu: false, deck: null, dil: null, liste: { n: 0, r: 0, g: 0 } };
+
+  /** JSON ister. Sonraki yol yalnız fetch'in kendisi hata atarsa denenir (sunucu cevap verdiyse ya da süre dolduysa
+   *  aynı istek ikinci kez gönderilmez). Döner: { veri, durum, yol, sure } ya da istisna. */
+  let beklemeSonu = 0;   // 429 gelince sıra bu ana dek bekler
+  async function jsonIste(url) {
+    let son = null;
+    for (const [ad, f] of FETCH_YOLLARI) {
+      const bas = performance.now();
+      let zamanlayici = 0;
+      const zaman = new Promise((_c, red) => { zamanlayici = setTimeout(() => red(new Error('zaman aşımı')), ISTEK_SURE_MS); });
+      let yanit;
+      try {
+        yanit = await Promise.race([f(url, { credentials: 'same-origin', headers: { Accept: 'application/json' } }), zaman]);
+      } catch (e) {
+        clearTimeout(zamanlayici);
+        son = e;
+        if (String(e && e.message) === 'zaman aşımı') break;
+        continue;                                 // bu yol bu bağlamda çalışmıyor: sıradakini dene
+      }
+      try {
+        const metin = await Promise.race([yanit.text(), zaman]);   // gövde takılırsa da süre işler
+        const sure = Math.round(performance.now() - bas);
+        tani.fetchYolu = ad;
+        tani.sonIstek = { url: url.replace(/^https:\/\/store\.steampowered\.com/, ''), durum: yanit.status, sure, yol: ad };
+        if (yanit.status === 429) beklemeSonu = Date.now() + 60000;
+        if (!yanit.ok) throw new Error('HTTP ' + yanit.status);
+        return { veri: JSON.parse(metin), durum: yanit.status, yol: ad, sure };
+      } finally { clearTimeout(zamanlayici); }
+    }
+    throw son || new Error('istek');
+  }
+
+  // ---------------------------------------------------------------- önbellek (24 saat)
+  function onbellekTemizle(o) {
+    if (!o || typeof o !== 'object' || Array.isArray(o)) return {};
+    for (const k of Object.keys(o)) if (!o[k] || typeof o[k] !== 'object' || Array.isArray(o[k])) delete o[k];
+    return o;
+  }
+  let onbellek = onbellekTemizle(depoOku('onbellek', {}));
+  const yeniKayit = new Set();   // bu sekmede eklenenler: yazarken depodakiyle birleştirilir (öteki sekmeninkiler silinmez)
+  let onbellekSayac = 0;
+  function onbellekYazSonra() {
+    clearTimeout(onbellekSayac);
+    onbellekSayac = setTimeout(() => {
+      const depo = onbellekTemizle(depoOku('onbellek', {}));
+      for (const k of yeniKayit) if (onbellek[k]) depo[k] = onbellek[k];
+      yeniKayit.clear();
+      const anahtarlar = Object.keys(depo);
+      if (anahtarlar.length > ONBELLEK_EN_COK) {
+        anahtarlar.sort((a, b) => ((depo[a] || {}).z || 0) - ((depo[b] || {}).z || 0));
+        for (const k of anahtarlar.slice(0, anahtarlar.length - ONBELLEK_EN_COK)) delete depo[k];
+      }
+      onbellek = depo;
+      depoYaz('onbellek', onbellek);
+    }, 2000);
+  }
+  function onbellekAl(appid, alan) {
+    const k = onbellek[appid];
+    if (!k || !k[alan] || typeof k[alan].z !== 'number' || Date.now() - k[alan].z > ONBELLEK_MS) return null;
+    return k[alan];
+  }
+  function onbellekKoy(appid, alan, deger) {
+    onbellek[appid] = onbellek[appid] || {};
+    onbellek[appid][alan] = Object.assign({ z: Date.now() }, deger);
+    onbellek[appid].z = Date.now();
+    yeniKayit.add(appid);
+    onbellekYazSonra();
+  }
+
+  /** Steam'in Deck raporu → { k: 0–3, notlar: [[tür, ad], …] } (tür 4 = geçti). */
+  const deckBekleyen = new Map();
+  function deckAl(appid) {
+    const o = onbellekAl(appid, 'deck');
+    if (o) return Promise.resolve({ k: o.k, notlar: o.notlar || [], onbellek: true });
+    if (deckBekleyen.has(appid)) return deckBekleyen.get(appid);
+    const url = `https://store.steampowered.com/saleaction/ajaxgetdeckappcompatibilityreport?nAppID=${encodeURIComponent(appid)}&l=english`;
+    const s = sirayaKoy(() => jsonIste(url)).then(({ veri }) => {
+      const r = veri && veri.results;
+      if (!veri || veri.success !== 1 || !r || typeof r !== 'object') throw new Error('veri');   // geçici hata önbelleğe girmez
+      let k = 0;
+      const notlar = [];
+      {
+        k = [0, 1, 2, 3].includes(r.resolved_category) ? r.resolved_category : 0;
+        for (const it of Array.isArray(r.resolved_items) ? r.resolved_items.slice(0, 20) : []) {
+          const ad = String((it && it.loc_token) || '').split('_TestResult_').pop().replace(/[^A-Za-z0-9_]/g, '').slice(0, 60);
+          if (ad) notlar.push([Number(it.display_type) || 0, ad]);
+        }
+      }
+      onbellekKoy(appid, 'deck', { k, notlar });
+      return { k, notlar, onbellek: false };
+    }).finally(() => deckBekleyen.delete(appid));
+    deckBekleyen.set(appid, s);
+    return s;
+  }
+
+  /** Listede Türkçe: appdetails "supported_languages" → { tr: true|false, ses: bool }. */
+  const dilBekleyen = new Map();
+  function dilAl(appid) {
+    const o = onbellekAl(appid, 'dil');
+    if (o) return Promise.resolve(o);
+    if (dilBekleyen.has(appid)) return dilBekleyen.get(appid);
+    const url = `https://store.steampowered.com/api/appdetails?appids=${encodeURIComponent(appid)}&filters=basic&l=english`;
+    const s = sirayaKoy(() => jsonIste(url)).then(({ veri }) => {
+      const d = veri && veri[appid];
+      if (!d || !d.success || !d.data) throw new Error('veri');
+      const diller = String((d && d.success && d.data && d.data.supported_languages) || '');
+      const m = /(^|[>,]\s*)Turkish(<strong>\*<\/strong>)?/i.exec(diller);
+      const sonuc = { tr: !!m, ses: !!(m && m[2]) };
+      onbellekKoy(appid, 'dil', sonuc);
+      return sonuc;
+    }).finally(() => dilBekleyen.delete(appid));
+    dilBekleyen.set(appid, s);
+    return s;
+  }
+
+  // Basit sıra: aynı anda en çok AYNI_ANDA istek, aralarında ISTEK_ARA_MS
+  const sira = [];
+  let calisan = 0;
+  function sirayaKoy(is) {
+    return new Promise((coz, red) => { sira.push({ is, coz, red }); siraIlerle(); });
+  }
+  let siraZamanlayici = 0;
+  function siraIlerle() {
+    const bekle = beklemeSonu - Date.now();
+    if (bekle > 0) { clearTimeout(siraZamanlayici); siraZamanlayici = setTimeout(siraIlerle, bekle); return; }
+    while (calisan < AYNI_ANDA && sira.length) {
+      const { is, coz, red } = sira.shift();
+      calisan++;
+      is().then(coz, red).finally(() => { setTimeout(() => { calisan--; siraIlerle(); }, ISTEK_ARA_MS); });
+    }
+  }
+
+  // ---------------------------------------------------------------- sayfa okuma
+  function appIdBul() {
+    const m = /^\/app\/(\d+)/.exec(location.pathname);
+    return m ? m[1] : '';
+  }
+  function sayfaTuru() {
+    if (/^\/app\/\d+/.test(location.pathname)) return 'oyun';
+    if (document.querySelector('.search_result_row[data-ds-appid], a.tab_item[data-ds-appid]')) return 'liste';
+    return 'diger';
+  }
+
+  const TURKCE_ADLARI = /^(turkish|türkçe|turkce|turco|türkisch|turc|turecki|турецкий)$/i;
+  /** Oyun sayfasındaki dil tablosu → null (tablo yok) | { var: bool, arayuz, ses, altyazi }. */
+  function turkceOku() {
+    const tablo = document.querySelector('#languageTable table, table.game_language_options');
+    if (!tablo) return null;
+    for (const tr of tablo.querySelectorAll('tr')) {
+      const hucreler = tr.querySelectorAll('td');
+      if (hucreler.length < 2) continue;
+      if (!TURKCE_ADLARI.test(hucreler[0].textContent.trim())) continue;
+      const isaret = Array.from(tr.querySelectorAll('td.checkcol')).map((td) => /✔|✓/.test(td.textContent));
+      return { var: isaret.some(Boolean), arayuz: !!isaret[0], ses: !!isaret[1], altyazi: !!isaret[2] };
+    }
+    return { var: false, arayuz: false, ses: false, altyazi: false };
+  }
+
+  function secureBootOku() {
+    const g = document.querySelector('.game_area_sys_req, .sysreq_contents');
+    return !!(g && /secure\s*boot/i.test(g.textContent));
+  }
+
+  function eskiBetikVarMi() {
+    return !!document.querySelector('.compat-header-badges, .compat-info-container, .compat-warning-banner');
+  }
+
+  // ---------------------------------------------------------------- tema
+  function parlaklik(renk) {
+    const m = /rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,\s/]+([\d.]+))?/.exec(renk || '');
+    if (!m) return null;
+    if (m[4] !== undefined && Number(m[4]) === 0) return null;
+    const kanal = (v) => { v = Number(v) / 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+    return 0.2126 * kanal(m[1]) + 0.7152 * kanal(m[2]) + 0.0722 * kanal(m[3]);
+  }
+  /** { koyu, kaynak } — kaynak: 'ayar' | 'zemin' | 'varsayilan' */
+  function temaOku() {
+    if (ayar.tema === 'acik') return { koyu: false, kaynak: 'ayar' };
+    if (ayar.tema === 'koyu') return { koyu: true, kaynak: 'ayar' };
+    for (const o of [document.querySelector('.page_content_ctn'), document.body, document.documentElement]) {
+      if (!o) continue;
+      const l = parlaklik(getComputedStyle(o).backgroundColor);
+      if (l !== null) return { koyu: l < 0.18, kaynak: 'zemin' };
+    }
+    return { koyu: true, kaynak: 'varsayilan' };   // Steam mağazası koyu
+  }
+  function temaUygula() {
+    const koyu = temaOku().koyu ? 'dark' : 'light';
+    for (const h of document.querySelectorAll('[data-aalabs="' + ID + '"]')) {
+      h.setAttribute('data-theme', koyu);
+      h.style.setProperty('--o', String(ayar.olcek / 100));
+    }
+  }
+
+  // ---------------------------------------------------------------- öğe kurucu (innerHTML yok)
+  const SVG = 'http://www.w3.org/2000/svg';
+  const IKON = {   // Lucide 1.55.0 (ISC): check, x, circle-alert, circle-help, info, copy, shield-alert
+    tamam: [['path', { d: 'M20 6 9 17l-5-5' }]],
+    carpi: [['path', { d: 'M18 6 6 18' }], ['path', { d: 'm6 6 12 12' }]],
+    uyari: [['circle', { cx: 12, cy: 12, r: 10 }], ['line', { x1: 12, x2: 12, y1: 8, y2: 12 }], ['line', { x1: 12, x2: 12.01, y1: 16, y2: 16 }]],
+    soru: [['circle', { cx: 12, cy: 12, r: 10 }], ['path', { d: 'M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3' }], ['path', { d: 'M12 17h.01' }]],
+    bilgi: [['circle', { cx: 12, cy: 12, r: 10 }], ['path', { d: 'M12 16v-4' }], ['path', { d: 'M12 8h.01' }]],
+    kopyala: [['rect', { width: 14, height: 14, x: 8, y: 8, rx: 2, ry: 2 }], ['path', { d: 'M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2' }]],
+    kalkan: [['path', { d: 'M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z' }], ['path', { d: 'M12 8v4' }], ['path', { d: 'M12 16h.01' }]],
+  };
+  function ikon(ad, boy = 16) {
+    const s = document.createElementNS(SVG, 'svg');
+    const oz = { viewBox: '0 0 24 24', width: boy, height: boy, fill: 'none', stroke: 'currentColor',
+      'stroke-width': 2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'aria-hidden': 'true', focusable: 'false' };
+    for (const [k, v] of Object.entries(oz)) s.setAttribute(k, String(v));
+    for (const [etiket, o] of IKON[ad]) {
+      const p = document.createElementNS(SVG, etiket);
+      for (const [k, v] of Object.entries(o)) p.setAttribute(k, String(v));
+      s.appendChild(p);
+    }
+    return s;
+  }
+  function el(etiket, oz, ...cocuk) {
+    const e = document.createElement(etiket);
+    if (oz) {
+      for (const [k, v] of Object.entries(oz)) {
+        if (v === undefined || v === null || v === false) continue;
+        if (k === 'class') e.className = v;
+        else if (k === 'text') e.textContent = v;
+        else if (k.startsWith('on') && typeof v === 'function') e.addEventListener(k.slice(2), v);
+        else e.setAttribute(k, v === true ? '' : String(v));
+      }
+    }
+    for (const c of cocuk.flat(Infinity)) {
+      if (c === null || c === undefined || c === false) continue;
+      e.append(c instanceof Node ? c : document.createTextNode(String(c)));
+    }
+    return e;
+  }
+
+  /** CSS'teki ≥ 3 px değerleri ölçekle çarpar (platform-userscript.md §3.8). */
+  const carp = (s) => s.replace(/(^|[^\w.#-])(\d+(?:\.\d+)?)px/g, (m, on, n) => (Number(n) <= 2 ? m : `${on}calc(${n}px*var(--o))`));
+
+  function golgeKur(etiket, css) {
+    const h = document.createElement(etiket);
+    h.setAttribute('data-aalabs', ID);
+    h.style.setProperty('--o', String(ayar.olcek / 100));
+    const k = h.attachShadow({ mode: TEST ? 'open' : 'closed' });
+    const tam = TEMA_CSS + ROZET_RENK_CSS + carp(css);
+    let eklendi = false;
+    try {
+      const sayfa = new CSSStyleSheet();
+      sayfa.replaceSync(tam);
+      k.adoptedStyleSheets = [sayfa];
+      eklendi = k.adoptedStyleSheets.length > 0;   // Firefox içerik betiğinde atama sessizce etkisiz kalabilir
+    } catch (_e) { /* eski tarayıcı */ }
+    if (!eklendi) k.appendChild(el('style', { text: tam }));
+    h.setAttribute('data-theme', temaOku().koyu ? 'dark' : 'light');
+    return { h, k };
+  }
+
+  // ---------------------------------------------------------------- rozet görünümü
+  const ROZET_CSS = `
+:host { all: initial; --o: 1; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+.serit { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 8px 0 4px; font: 600 12px/1 var(--yazi); }
+.serit.kucuk { margin: 4px 0 0; gap: 4px; font-size: 11px; }
+.rz { display: inline-flex; align-items: center; gap: 5px; height: 24px; padding: 0 8px; border-radius: var(--kose-s);
+  border: 1px solid currentColor; white-space: nowrap; font: inherit; max-width: 100%; }
+.serit.kucuk .rz { height: 20px; padding: 0 6px; gap: 4px; }
+.rz.ana { height: 28px; font-size: 13px; padding: 0 10px; }
+.rz svg { flex: none; }
+.rz span { overflow: hidden; text-overflow: ellipsis; }
+.rz.ok { color: var(--basari); background: var(--basari-bg); }
+.rz.uy { color: var(--uyari); background: var(--uyari-bg); }
+.rz.ht { color: var(--hata); background: var(--hata-bg); }
+.rz.bl { color: var(--metin-ikincil); background: var(--ayirici); }
+.rz.trk { color: var(--trk-yazi); background: var(--trk-zemin); border-color: var(--trk-zemin); }
+button.rz { cursor: pointer; }
+button.rz:hover { filter: brightness(1.12); }
+button.rz:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; }
+.ek { font-weight: 400; }
+.ayrinti { position: absolute; z-index: 2147483000; margin-top: 6px; width: min(360px, calc(100vw - 32px)); background: var(--yuzey);
+  color: var(--metin); border: 1px solid var(--kenar); border-radius: var(--kose-l); padding: 10px 12px;
+  font: 400 13px/1.45 var(--yazi); display: grid; gap: 6px; }
+.ayrinti h4 { margin: 0; font: 600 13px/1.3 var(--yazi); }
+.ayrinti ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.ayrinti li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 6px; align-items: start; }
+.ayrinti .i4 { color: var(--basari); } .ayrinti .i3 { color: var(--uyari); } .ayrinti .i2 { color: var(--hata); } .ayrinti .i1 { color: var(--metin-ikincil); }
+.sarici { position: relative; display: inline-block; }
+.gizli-bilgi { display: flex; gap: 8px; align-items: center; margin: 6px 0; padding: 6px 10px; border-radius: var(--kose-m);
+  background: var(--uyari-bg); color: var(--uyari); font: 400 12.5px/1.4 var(--yazi); }
+.gizli-bilgi button { font: 600 12px/1 var(--yazi); height: 24px; padding: 0 8px; border: 1px solid currentColor; border-radius: var(--kose-s);
+  background: transparent; color: inherit; cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+`;
+
+  const DECK_TUR = { 3: ['ok', 'tamam', 'd3'], 2: ['uy', 'uyari', 'd2'], 1: ['ht', 'carpi', 'd1'], 0: ['bl', 'soru', 'd0'] };
+
+  function rozet(tur, ikonAd, yazi, ek, ana) {
+    return el('span', { class: 'rz ' + tur + (ana ? ' ana' : '') }, ikon(ikonAd, ana ? 15 : 13), el('span', {}, yazi, ek ? el('span', { class: 'ek' }, ek) : null));
+  }
+
+  /** Deck rozetinin metni ve tam ipucu. Kısa: ilk neden + "+n". */
+  function deckMetni(d) {
+    // Steam not türü: 4 geçti · 3 sorun (Oynanabilir) · 2 engel (Desteklenmiyor) · 1 bilgi
+    const kotu = d.notlar.filter(([t]) => t === 2 || t === 3).sort((a, b) => a[0] - b[0]).map(([, ad]) => nedenMetni(ad));
+    const bilgi = d.notlar.filter(([t]) => t === 1).map(([, ad]) => nedenMetni(ad));
+    const nedenler = d.k === 3 ? [] : (kotu.length ? kotu : bilgi);
+    return { nedenler, ek: ayar.deckNeden && nedenler.length ? ' · ' + nedenler[0] + (nedenler.length > 1 ? ' ' + _('nedenFazla', { n: nedenler.length - 1 }) : '') : '' };
+  }
+
+  // ---------------------------------------------------------------- oyun sayfası şeridi
+  const oyun = { host: null, kok: null, appid: '', deck: null, deckHata: false, turkce: undefined, sb: false, ayrintiAcik: false };
+
+  function seritYeri() { return document.getElementById('appHubAppName') || document.querySelector('.apphub_AppName'); }
+
+  function oyunSeridiCiz() {
+    if (!oyun.kok) return;
+    const k = oyun.kok;
+    const odaktaDeck = k.activeElement && k.activeElement.matches && k.activeElement.matches('button.rz');
+    k.replaceChildren();
+    const serit = el('div', { class: 'serit', role: 'group', 'aria-label': AD, lang: dilKodu() });
+    // 1) Deck
+    if (ayar.deckGoster) {
+      if (oyun.deckHata) serit.append(rozet('bl', 'soru', _('d0'), ' · ' + _('dHata')));
+      else if (!oyun.deck) serit.append(rozet('bl', 'soru', _('dYukleniyor')));
+      else if (oyun.deck.k !== 3 || ayar.deckDogru) {
+        const [tur, ik, anahtar] = DECK_TUR[oyun.deck.k];
+        const { nedenler, ek } = deckMetni(oyun.deck);
+        const tamMetin = _(anahtar) + (nedenler.length ? ' · ' + nedenler.join(' · ') : '');
+        if (ayar.deckAyrinti && oyun.deck.notlar.length) {
+          const sarici = el('span', { class: 'sarici' });
+          const b = el('button', { class: 'rz ana ' + tur, type: 'button', title: tamMetin + '\n' + _('deckIpucu'), 'aria-expanded': String(oyun.ayrintiAcik),
+            'data-deck': String(oyun.deck.k), onclick: () => { oyun.ayrintiAcik = !oyun.ayrintiAcik; oyunSeridiCiz(); } },
+          ikon(ik, 15), el('span', {}, _(anahtar), ek ? el('span', { class: 'ek' }, ek) : null));
+          b.setAttribute('aria-label', tamMetin);
+          sarici.append(b);
+          if (oyun.ayrintiAcik) sarici.append(deckAyrintisi(oyun.deck));
+          serit.append(sarici);
+        } else {
+          const r = rozet(tur, ik, _(anahtar), ek, true);
+          r.setAttribute('data-deck', String(oyun.deck.k));
+          r.title = tamMetin;
+          serit.append(r);
+        }
+      }
+    }
+    // 2) Secure Boot
+    if (ayar.secureBoot && oyun.sb) serit.append(rozet('uy', 'kalkan', _('sb')));
+    // 3) Türkçe (yalnız varsa)
+    if (ayar.trGoster && oyun.turkce && oyun.turkce.var) {
+      const p = [];
+      if (oyun.turkce.arayuz) p.push(_('arayuz'));
+      if (oyun.turkce.ses) p.push(_('ses'));
+      if (oyun.turkce.altyazi) p.push(_('altyazi'));
+      const r = rozet('trk', 'tamam', ayar.trAyrinti && p.length ? _('tr') + ': ' + p.join(' · ') : _('tr'));
+      r.setAttribute('data-tr', '');
+      serit.append(r);
+    }
+    k.append(serit);
+    if (odaktaDeck) { const b = k.querySelector('button.rz'); if (b) b.focus({ preventScroll: true }); }
+  }
+
+  function deckAyrintisi(d) {
+    const liste = el('ul', {});
+    const SIRA = { 2: 0, 3: 1, 1: 2, 4: 3 };   // önce engel, sonra sorun, bilgi, geçenler
+    const sirali = d.notlar.slice().sort((a, b) => (SIRA[a[0]] ?? 2) - (SIRA[b[0]] ?? 2));
+    for (const [t, ad] of sirali) {
+      const ik = t === 4 ? 'tamam' : t === 3 ? 'uyari' : t === 2 ? 'carpi' : 'bilgi';
+      const tur = [1, 2, 3, 4].includes(t) ? t : 1;
+      liste.append(el('li', { 'data-not': String(tur) }, el('span', { class: 'i' + tur }, ikon(ik, 14)), el('span', {}, nedenMetni(ad))));
+    }
+    return el('div', { class: 'ayrinti', role: 'dialog', 'aria-label': _('deckBaslik'), 'data-ayrinti': '' }, el('h4', {}, _('deckBaslik')), liste);
+  }
+
+  function oyunSeridiYerlestir() {
+    const yer = seritYeri();
+    if (!yer) return false;
+    // Betiğin ikinci kopyası kuruluysa ona dokunulmaz (birbirini silme döngüsü olmasın); bu kopya şerit kurmaz
+    for (const baska of document.querySelectorAll('aalabs-sch-serit')) if (baska !== oyun.host && baska.getAttribute('data-kopya') !== KOPYA) return false;
+    if (!oyun.host) {
+      const { h, k } = golgeKur('aalabs-sch-serit', ROZET_CSS);
+      h.setAttribute('data-kopya', KOPYA);
+      oyun.host = h;
+      oyun.kok = k;
+      h.style.display = 'block';
+    }
+    if (oyun.host.previousElementSibling !== yer || !oyun.host.isConnected) yer.insertAdjacentElement('afterend', oyun.host);
+    oyunSeridiCiz();
+    return true;
+  }
+
+  function oyunSayfasiBasla() {
+    oyun.appid = appIdBul();
+    if (!oyun.appid) return;
+    oyun.turkce = turkceOku();
+    oyun.sb = secureBootOku();
+    oyunSeridiYerlestir();
+    if (ayar.deckGoster) deckYukle();
+  }
+
+  function deckYukle() {
+    oyun.deckHata = false;
+    deckAl(oyun.appid).then((d) => {
+      oyun.deck = d;
+      tani.deck = { k: d.k, onbellek: d.onbellek };
+      oyunSeridiCiz();
+      taniYenile();
+    }).catch(() => { oyun.deckHata = true; tani.deck = { hata: true }; oyunSeridiCiz(); taniYenile(); });
+  }
+
+  // ---------------------------------------------------------------- liste sayfaları
+  const LISTE_SECICI = '.search_result_row[data-ds-appid], a.tab_item[data-ds-appid]';
+  const listeDurum = new WeakMap();    // satır → { appid, host, kok, deck, dil }
+  let gozcu = null;
+  let gizliBilgi = null;
+  let gizlenenleriGoster = false;
+
+  function satirAppId(s) {
+    const v = s.getAttribute('data-ds-appid') || '';
+    return /^\d+$/.test(v) ? v : '';   // paket ("1,2,3") atlanır
+  }
+
+  function satirCiz(s) {
+    const d = listeDurum.get(s);
+    if (!d) return;
+    const rozetler = [];
+    // Listede "bilinmiyor" gösterilmez: aramada çoğu DLC ve film müziğidir, gri rozet gürültü yapar
+    if (ayar.listeDeck && d.deck && d.deck.k !== 0 && (d.deck.k !== 3 || ayar.deckDogru)) {
+      const [tur, ik, anahtar] = DECK_TUR[d.deck.k];
+      const r = rozet(tur, ik, _(anahtar));
+      r.setAttribute('data-deck', String(d.deck.k));
+      r.title = _(anahtar) + deckMetni(d.deck).nedenler.map((n) => ' · ' + n).join('');
+      rozetler.push(r);
+    }
+    if (ayar.listeTr && d.dil && d.dil.tr) { const r = rozet('trk', 'tamam', _('tr')); r.setAttribute('data-tr', ''); rozetler.push(r); }
+    if (rozetler.length) {
+      if (!d.host) {
+        const { h, k } = golgeKur('aalabs-sch-rozet', ROZET_CSS);
+        d.host = h; d.kok = k;
+        h.style.display = 'block';
+      }
+      const yer = s.querySelector('.search_platforms, .tab_item_details') || s.querySelector('.search_name, .tab_item_name') || s;
+      if (!d.host.isConnected || d.host.parentNode !== yer) yer.appendChild(d.host);
+      d.kok.replaceChildren(el('div', { class: 'serit kucuk', lang: dilKodu() }, rozetler));
+    } else if (d.host) d.host.remove();
+    const gizle = ayar.listeSuz && ayar.listeDeck && !gizlenenleriGoster && d.deck && d.deck.k === 1;
+    if (gizle) { s.setAttribute('data-aalabs-sch-gizli', ''); s.style.setProperty('display', 'none', 'important'); }
+    else if (s.hasAttribute('data-aalabs-sch-gizli')) { s.removeAttribute('data-aalabs-sch-gizli'); s.style.removeProperty('display'); }
+  }
+
+  function satirYukle(s) {
+    const d = listeDurum.get(s);
+    if (!d || d.yuklendi) return;
+    d.yuklendi = true;
+    if (ayar.listeDeck) deckAl(d.appid).then((x) => { d.deck = x; satirCiz(s); listeSay(); }).catch(() => { tani.deck = { hata: true }; listeSay(); });
+    if (ayar.listeTr) dilAl(d.appid).then((x) => { d.dil = x; satirCiz(s); listeSay(); }).catch(() => { tani.dil = { hata: true }; listeSay(); });
+  }
+
+  function listeTara() {
+    if (!ayar.listeDeck && !ayar.listeTr) return;
+    if (!gozcu && 'IntersectionObserver' in window) {
+      gozcu = new IntersectionObserver((girdiler) => {
+        for (const g of girdiler) if (g.isIntersecting) { gozcu.unobserve(g.target); satirYukle(g.target); }
+      }, { rootMargin: '300px 0px' });
+    }
+    for (const s of document.querySelectorAll(LISTE_SECICI)) {
+      if (listeDurum.has(s)) continue;
+      const appid = satirAppId(s);
+      if (!appid) continue;
+      listeDurum.set(s, { appid, host: null, kok: null, deck: null, dil: null, yuklendi: false });
+      if (gozcu) gozcu.observe(s); else satirYukle(s);
+    }
+    listeSay();
+  }
+
+  function listeYenidenCiz() {
+    for (const s of document.querySelectorAll(LISTE_SECICI)) {
+      const d = listeDurum.get(s);
+      if (!d) continue;
+      if (d.yuklendi && ((ayar.listeDeck && !d.deck) || (ayar.listeTr && !d.dil))) { d.yuklendi = false; satirYukle(s); }
+      satirCiz(s);
+    }
+    listeSay();
+  }
+
+  function listeSay() {
+    let n = 0, r = 0, g = 0, u = 0;
+    for (const s of document.querySelectorAll(LISTE_SECICI)) {
+      const d = listeDurum.get(s);
+      if (!d) continue;
+      n++;
+      if (d.host && d.host.isConnected) r++;
+      if (s.hasAttribute('data-aalabs-sch-gizli')) g++;
+      if (d.deck && d.deck.k === 1) u++;
+    }
+    tani.liste = { n, r, g };
+    gizliBilgiCiz(gizlenenleriGoster ? u : g);
+  }
+
+  /** Listenin üstünde: "N oyun gizlendi · Göster" ya da Göster'den sonra "N oyun gösteriliyor · Gizle". */
+  function gizliBilgiCiz(sayi_) {
+    const kap = document.getElementById('search_resultsRows') || document.querySelector('.search_results, #tab_content_NewReleases');
+    if (!kap || !sayi_ || !ayar.listeSuz || !ayar.listeDeck) { if (gizliBilgi) gizliBilgi.h.remove(); return; }
+    if (!gizliBilgi) gizliBilgi = golgeKur('aalabs-sch-bilgi', ROZET_CSS);
+    if (gizliBilgi.h.nextElementSibling !== kap) kap.insertAdjacentElement('beforebegin', gizliBilgi.h);
+    gizliBilgi.h.style.display = 'block';
+    const metin = gizlenenleriGoster ? sayili('gosteriliyor', sayi_) : sayili('gizlendi', sayi_);
+    const dugme = gizlenenleriGoster ? _('tekrarGizle') : _('gizlenenleriGoster');
+    gizliBilgi.k.replaceChildren(el('div', { class: 'gizli-bilgi', role: 'status', lang: dilKodu(), 'data-gizli-sayi': String(gizlenenleriGoster ? 0 : sayi_) },
+      ikon('bilgi', 14), el('span', {}, metin),
+      el('button', { type: 'button', 'aria-pressed': String(gizlenenleriGoster),
+        onclick: () => { gizlenenleriGoster = !gizlenenleriGoster; listeYenidenCiz(); } }, dugme)));
+  }
+
+  // ---------------------------------------------------------------- arayüz kökü (Ayarlar + bildirim)
+  const ARAYUZ_CSS = `
+:host { all: initial; --o: 1; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+.yazi { font: 400 13px/1.45 var(--yazi); color: var(--metin); }
+button { font: inherit; color: inherit; }
+button:focus-visible, input:focus-visible, [tabindex]:focus-visible, textarea:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 1px; }
+.nokta { width: 8px; height: 8px; border-radius: 50%; background: var(--hata); flex: none; display: inline-block; }
+.yer { position: fixed; left: 0; right: 0; bottom: 88px; display: flex; justify-content: center; pointer-events: none; z-index: 2147483647; }
+.kutu { display: flex; align-items: center; gap: var(--bosluk-2); max-width: min(480px, calc(100vw - 32px));
+  min-height: var(--kontrol); padding: 0 var(--bosluk-1) 0 var(--bosluk-3); border-radius: var(--kose-m);
+  font: 400 13px/1.4 var(--yazi); opacity: 0; transition: opacity 120ms linear; }
+.kutu.acik { opacity: 1; }
+.kutu.basari { background: var(--basari-bg); color: var(--basari); border-left: 3px solid var(--basari); }
+.kutu.hata { background: var(--hata-bg); color: var(--hata); border-left: 3px solid var(--hata); pointer-events: auto; }
+.kutu svg { flex: none; }
+.kutu .metin { padding: var(--bosluk-1) var(--bosluk-3) var(--bosluk-1) 0; }
+.kutu .kapat { display: none; flex: none; width: 24px; height: 24px; padding: 0; border: 0; border-radius: var(--kose-s);
+  background: transparent; cursor: pointer; align-items: center; justify-content: center; }
+.kutu.hata .kapat { display: inline-flex; }
+dialog.panel { padding: 0; margin: auto; width: min(780px, calc(100vw - 32px)); height: min(520px, calc(100vh - 32px)); max-width: none; max-height: none;
+  background: var(--yuzey); color: var(--metin); border: 1px solid var(--ayirici); border-radius: var(--kose-l); font: 400 13px/1.45 var(--yazi); }
+dialog.panel[open] { display: grid; grid-template-rows: 44px 1fr; }
+dialog.panel::backdrop { background: var(--perde); }
+.ust { display: flex; align-items: center; gap: 10px; padding: 0 6px 0 14px; border-bottom: 1px solid var(--ayirici); min-width: 0; }
+.rozet { width: 22px; height: 22px; border-radius: var(--kose-m); background: var(--ana); color: var(--ana-uzeri);
+  font: 600 8px/22px var(--yazi); text-align: center; letter-spacing: .02em; flex: none; }
+.ust h2 { flex: 1; min-width: 0; margin: 0; font: 600 14px/1.3 var(--yazi); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ikonbtn { width: 32px; height: 32px; border: 1px solid transparent; border-radius: var(--kose-s); background: transparent; cursor: pointer; display: inline-grid; place-items: center; }
+.ikonbtn:hover { background: var(--ana-hover); }
+.govde { display: grid; grid-template-columns: 196px minmax(0, 1fr); min-height: 0; }
+.nav { border-right: 1px solid var(--ayirici); padding: 8px; display: flex; flex-direction: column; gap: 2px; overflow: auto; min-height: 0; background: var(--zemin); }
+.nav input { font: inherit; height: 28px; padding: 0 8px; border: 1px solid var(--kenar); border-radius: var(--kose-s); background: var(--yuzey); color: var(--metin); margin-bottom: 6px; width: 100%; }
+.nav input::placeholder { color: var(--metin-ikincil); }
+.grup { font: 600 11px/1.3 var(--yazi); letter-spacing: .06em; color: var(--metin-ikincil); padding: 8px 8px 2px; }
+.nav .oge { text-align: left; height: 28px; padding: 0 8px; border: 0; border-radius: var(--kose-s); background: transparent; cursor: pointer; display: flex; align-items: center; gap: 6px; min-width: 0; flex: none; }
+.nav .oge span:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.nav .oge[aria-current="true"] { background: var(--ana-acik); font-weight: 600; }
+.nav .oge:hover { background: var(--ana-hover); }
+.nav .yok { color: var(--metin-ikincil); padding: 6px 8px; }
+.icerik { padding: 14px 18px; overflow: auto; display: flex; flex-direction: column; gap: 12px; min-width: 0; min-height: 0; }
+.icerik h3 { margin: 0; font: 600 15px/1.3 var(--yazi); }
+.icerik h4 { margin: 4px 0 0; font: 600 13px/1.3 var(--yazi); }
+.alt { color: var(--metin-ikincil); margin: -6px 0 0; }
+.ayar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--ayirici); }
+.ayar small { grid-column: 1 / -1; color: var(--metin-ikincil); font-size: 12px; }
+.anahtar { width: 36px; height: 20px; border-radius: 10px; border: 1px solid var(--kenar); background: var(--yuzey); position: relative; cursor: pointer; padding: 0; }
+.anahtar::after { content: ""; position: absolute; top: 3px; left: 3px; width: 12px; height: 12px; border-radius: 50%; background: var(--kenar); transition: left 120ms linear; }
+.anahtar[aria-checked="true"] { background: var(--ana); border-color: var(--ana); }
+.anahtar[aria-checked="true"]::after { left: 19px; background: var(--ana-uzeri); }
+.anahtar:disabled { opacity: .55; cursor: default; }
+.seg { display: inline-flex; flex-wrap: wrap; justify-content: flex-end; }
+.seg button { height: 28px; padding: 0 10px; border: 1px solid var(--kenar); background: var(--yuzey); margin-left: -1px; cursor: pointer; white-space: nowrap; }
+.seg button:first-child { margin-left: 0; border-radius: var(--kose-s) 0 0 var(--kose-s); }
+.seg button:last-child { border-radius: 0 var(--kose-s) var(--kose-s) 0; }
+.seg button[aria-checked="true"] { background: var(--ana); border-color: var(--ana); color: var(--ana-uzeri); position: relative; z-index: 1; }
+.seg button:hover:not([aria-checked="true"]) { background: var(--ana-hover); }
+.tus { min-width: 104px; height: 28px; padding: 0 8px; border: 1px solid var(--kenar); border-radius: var(--kose-s); background: var(--zemin); font-weight: 600; cursor: pointer; }
+.tus.kayit { border-color: var(--vurgu); color: var(--vurgu); }
+.uyari-satir { color: var(--hata); font-size: 12px; }
+.btn { height: 32px; padding: 0 12px; border: 1px solid var(--kenar); border-radius: var(--kose-s); background: var(--yuzey); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.btn:hover { background: var(--ana-hover); }
+.btn.ana { background: var(--ana); border-color: var(--ana); color: var(--ana-uzeri); }
+.btn.ana:hover { filter: brightness(1.08); background: var(--ana); }
+.satir-btn { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; margin-top: auto; padding-top: 8px; }
+.satir-btn.sol { justify-content: flex-start; margin-top: 0; padding-top: 0; }
+.bilgi { padding: 8px 10px; border-radius: var(--kose-m); background: var(--ana-acik); }
+.bilgi.kotu { background: var(--hata-bg); color: var(--hata); }
+.tani { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 6px; align-items: start; }
+.tani .iyi { color: var(--basari); font-weight: 700; }
+.tani .kotu { color: var(--hata); font-weight: 700; }
+.tani .notr { color: var(--metin-ikincil); font-weight: 700; }
+.tani small { display: block; color: var(--metin-ikincil); font: 11px/1.4 Consolas, "Cascadia Mono", monospace; overflow-wrap: anywhere; }
+.rapor { width: 100%; min-height: 120px; font: 11px/1.4 Consolas, "Cascadia Mono", monospace; background: var(--zemin); color: var(--metin);
+  border: 1px solid var(--kenar); border-radius: var(--kose-s); padding: 6px; }
+.ornek { display: flex; gap: 6px; flex-wrap: wrap; padding: 8px; border-radius: var(--kose-m); background: var(--steam-zemin); }
+.etiket { font-size: 12px; color: var(--metin-ikincil); }
+.gizli { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 560px) { .govde { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); } .nav { border-right: 0; border-bottom: 1px solid var(--ayirici); max-height: 140px; } }
+@media (prefers-reduced-motion: reduce) { .kutu, .anahtar::after { transition: none; } }
+`;
+
+  let ev = null;
+  let kok = null;
+  const bil = { yer: null, kutu: null, ikonYeri: null, metin: null, kapat: null, sayac: 0, panel: null, ara: null };
+
+  function kokKur() {
+    if (ev) { if (!ev.isConnected) (document.body || document.documentElement).appendChild(ev); return; }
+    const g = golgeKur('aalabs-sch', ARAYUZ_CSS + ROZET_CSS.replace(/:host \{[^}]*\}/, ''));
+    ev = g.h; kok = g.k;
+    bil.yer = el('div', { class: 'yer' });
+    bil.kutu = el('div', { class: 'kutu', role: 'status', 'aria-live': 'polite' });
+    bil.ikonYeri = el('span', { style: 'display:inline-flex' });
+    bil.metin = el('span', { class: 'metin' });
+    bil.kapat = el('button', { class: 'kapat', type: 'button', onclick: () => bildirimGizle() }, ikon('carpi'));
+    bil.kutu.append(bil.ikonYeri, bil.metin, bil.kapat);
+    bil.yer.appendChild(bil.kutu);
+    kok.appendChild(bil.yer);
+    (document.body || document.documentElement).appendChild(ev);
+  }
+
+  function bildirimGizle() { if (!bil.kutu) return; clearTimeout(bil.sayac); bil.kutu.classList.remove('acik'); }
+  function bildir(tur, yazi) {
+    kokKur();
+    temaUygula();
+    clearTimeout(bil.sayac);
+    // Açık kipli pencere top layer'dadır: bildirim onun içine girer (yoksa arkada kalır)
+    const hedef = panelAcik() ? bil.panel : kok;
+    if (bil.yer.parentNode !== hedef) hedef.appendChild(bil.yer);
+    bil.kutu.className = 'kutu ' + tur;
+    bil.kutu.setAttribute('role', tur === 'hata' ? 'alert' : 'status');
+    bil.kapat.title = _('bildirimKapat');
+    bil.kapat.setAttribute('aria-label', _('bildirimKapat'));
+    bil.ikonYeri.replaceChildren(ikon(tur === 'hata' ? 'uyari' : 'tamam'));
+    bil.metin.textContent = yazi;
+    requestAnimationFrame(() => bil.kutu.classList.add('acik'));
+    if (tur !== 'hata') bil.sayac = setTimeout(bildirimGizle, 2500);
+  }
+
+  // ---------------------------------------------------------------- tanı
+  /** Adresin ilk iki parçası: /app/1086940 · /wishlist/id (kullanıcı adı ya da SteamID yazılmaz). */
+  function kisaYol() { return location.pathname.split('/').slice(0, 3).join('/'); }
+
+  function taniSatirlari() {
+    const s = [];
+    const tur = sayfaTuru();
+    s.push({ durum: 'iyi', ad: _('t_sayfa'), ayrinti: _('t_sayfa_' + tur) + ' · ' + kisaYol() });
+    if (tur === 'oyun') {
+      s.push({ durum: oyun.appid ? 'iyi' : 'kotu', ad: _('t_app'), ayrinti: oyun.appid || _('t_appYok') });
+      s.push({ durum: seritYeri() ? 'iyi' : 'kotu', ad: _('t_yer'), ayrinti: seritYeri() ? '#appHubAppName · ' + _('t_yerVar') : _('t_yerYok') });
+      const t = turkceOku();
+      s.push({ durum: t ? 'iyi' : 'notr', ad: _('t_dil'), ayrinti: t ? '#languageTable · ' + _(t.var ? 't_dilVar' : 't_dilYok') : _('t_dilTabloYok') });
+    }
+    if (tur === 'liste') s.push({ durum: 'iyi', ad: _('t_liste'), ayrinti: _('t_listeOzet', { n: tani.liste.n, r: tani.liste.r, g: tani.liste.g }) });
+    const d = tani.deck;
+    if (tur !== 'diger') {
+      if (!d && !tani.sonIstek) s.push({ durum: 'notr', ad: _('t_deck'), ayrinti: _('t_deckBekle') });
+      else if (d && d.hata) s.push({ durum: 'kotu', ad: _('t_deck'), ayrinti: (tani.sonIstek ? tani.sonIstek.url.slice(0, 70) + ' · ' + tani.sonIstek.durum : '') + ' · ' + _('dHata') });
+      else if (d && d.onbellek) s.push({ durum: 'iyi', ad: _('t_deck'), ayrinti: _('t_deckOnbellek') + ' · k=' + d.k });
+      else if (tani.sonIstek) s.push({ durum: 'iyi', ad: _('t_deck'), ayrinti: `${tani.sonIstek.url.slice(0, 70)} · ${tani.sonIstek.durum} · ${tani.sonIstek.sure} ms` + (d ? ' · k=' + d.k : '') });
+    }
+    if (tani.dil && tani.dil.hata) s.push({ durum: 'kotu', ad: 'appdetails', ayrinti: _('dHata') });
+    s.push({ durum: 'iyi', ad: _('t_fetch'), ayrinti: (tani.fetchYolu || '—') + ' · ' + FETCH_YOLLARI.map((x) => x[0]).join(' → ') });
+    s.push({ durum: 'iyi', ad: _('t_onbellek'), ayrinti: sayili('t_onbellekOzet', Object.keys(onbellek).length) });
+    s.push({ durum: gmDepo ? 'iyi' : 'kotu', ad: _('t_depo'), ayrinti: gmDepo ? _('t_depoVar') : _('t_depoYok') });
+    const eski = eskiBetikVarMi();
+    s.push({ durum: eski ? 'kotu' : 'iyi', ad: _('t_eski'), ayrinti: eski ? _('t_eskiVar') : _('t_eskiYok') });
+    return s;
+  }
+
+  function taniYenile() {
+    const onceki = tani.sorunlu;
+    tani.sorunlu = taniSatirlari().some((x) => x.durum === 'kotu');
+    if (onceki !== tani.sorunlu) {
+      menuKaydet();
+      if (panelAcik()) panelCiz();
+    }
+  }
+
+  function taniRaporu() {
+    const t = temaOku();
+    let yonetici = '—';
+    try { if (typeof GM_info !== 'undefined' && GM_info) yonetici = (GM_info.scriptHandler || '?') + ' ' + (GM_info.version || ''); } catch (_e) { /* yok */ }
+    const ayarKopya = Object.assign({}, ayar);
+    delete ayarKopya.sonYedek;
+    const isaret = { iyi: _('r_ok'), kotu: _('r_hata'), notr: _('r_bilgi') };
+    return [
+      `${AD} ${SURUM} — ${_('raporBaslik')}`,
+      `${_('r_zaman')}: ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC`,
+      `${_('r_adres')}: ${location.host}${kisaYol()}`,   // kullanıcı adı/SteamID taşıyabilen kısım yazılmaz
+      `${_('r_tarayici')}: ${navigator.userAgent}`,
+      `${_('r_yonetici')}: ${yonetici.trim()}`,
+      `${_('r_dil')}: ${ayar.dil} → ${dilKodu()} · ${_('r_tema')}: ${ayar.tema} → ${t.koyu ? 'dark' : 'light'} (${t.kaynak})`,
+      `${_('r_ayarlar')}: ${JSON.stringify(ayarKopya)}`,
+      '',
+      ...taniSatirlari().map((x) => `${isaret[x.durum]} ${x.ad} · ${x.ayrinti}`),
+    ].join('\n');
+  }
+
+  function gmPano() {
+    try { if (typeof GM_setClipboard === 'function') return (t) => GM_setClipboard(t, 'text'); } catch (_e) { /* yok */ }
+    return null;
+  }
+  /** Sıra: GM_setClipboard → navigator.clipboard → seçili metin kutusu (platform-userscript.md §3.5). */
+  async function raporuKopyala() {
+    const metin = taniRaporu();
+    const gm = gmPano();
+    if (gm) { try { await gm(metin); bildir('basari', _('raporKopyalandi')); return true; } catch (_e) { /* sıradaki */ } }
+    if (navigator.clipboard && window.isSecureContext) {
+      try { await navigator.clipboard.writeText(metin); bildir('basari', _('raporKopyalandi')); return true; } catch (_e) { /* sıradaki */ }
+    }
+    raporKutusu = metin;
+    panelAc('tani');
+    const kutu = bil.panel && bil.panel.querySelector('[data-rapor-kutu]');
+    if (kutu) { kutu.focus(); kutu.select(); }
+    bildir('hata', _('raporSec'));
+    return false;
+  }
+
+  // ---------------------------------------------------------------- eklenti menüsü
+  let menuIdleri = [];
+  let menuKayitli = false;
+  let idsizMenu = false;
+  function menuKaydet() {
+    if (typeof GM_registerMenuCommand !== 'function') return;
+    const silinebilir = typeof GM_unregisterMenuCommand === 'function' && !idsizMenu;
+    if (menuKayitli && !silinebilir) return;   // silinemiyorsa ikinci kez eklenmez (çift satır olmasın)
+    try {
+      if (silinebilir) for (const id of menuIdleri) { try { GM_unregisterMenuCommand(id); } catch (_e) { /* yok */ } }
+      menuIdleri = [];
+      menuKayitli = true;
+      const ekle = (ad, fn, tus) => {
+        const id = GM_registerMenuCommand(ad, fn, tus);
+        if (id === undefined || id === null) idsizMenu = true;
+        else menuIdleri.push(id);
+      };
+      ekle(_('menuAyarlar') + (tani.sorunlu ? ' ●' : ''), () => panelAc(), 'a');
+      ekle(_('menuRapor'), () => raporuKopyala(), 't');
+    } catch (_e) { /* yönetici menüyü desteklemiyor */ }
+  }
+
+  // ---------------------------------------------------------------- Ayarlar paneli (kipli <dialog>)
+  let panelBolum = 'deck';
+  let aramaMetni = '';
+  let oncekiOdak = null;
+  let kayit = null;
+  let tusHatasi = '';
+  let perdedeBasildi = false;
+  let kapaniyor = false;
+  let raporKutusu = '';      // kopyalanamayan rapor: Tanı bölümünde seçili metin kutusunda kalır
+
+  function panelAcik() { return !!(bil.panel && bil.panel.open); }
+
+  function odakDongusu(e) {
+    const ogeler = Array.from(bil.panel.querySelectorAll('button, input:not([type="file"]), textarea, [tabindex]:not([tabindex="-1"])'))
+      .filter((o) => !o.disabled && o.getClientRects().length);
+    if (!ogeler.length) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const simdiki = ogeler.indexOf(kok.activeElement);
+    const sonraki = simdiki < 0 ? 0 : (simdiki + (e.shiftKey ? -1 : 1) + ogeler.length) % ogeler.length;
+    ogeler[sonraki].focus();
+  }
+
+  function panelAc(bolum) {
+    if (!document.body) return;
+    kokKur();
+    temaUygula();
+    if (bolum) panelBolum = bolum;
+    kapaniyor = false;
+    taniYenile();
+    let yeniAcildi = false;
+    if (bolum) aramaMetni = '';   // istenen bölüm aramayla gizlenmesin
+    if (!panelAcik()) {
+      if (document.activeElement !== ev) oncekiOdak = document.activeElement;
+      if (!bil.panel) {
+        bil.panel = el('dialog', { class: 'panel yazi', 'aria-labelledby': 'sch-baslik' });
+        bil.panel.addEventListener('cancel', (e) => { e.preventDefault(); panelKapat(); });
+        // Başka yoldan kapanırsa da temizlik. close olayı geç gelir: o arada yeniden açıldıysa dokunma
+        bil.panel.addEventListener('close', () => { if (!bil.panel.open) panelKapat(); });
+        // Perdeye tık: basma VE bırakma perdedeyse kapanır (içeride başlayan sürükleme kapatmaz)
+        bil.panel.addEventListener('pointerdown', (e) => { perdedeBasildi = e.target === bil.panel; });
+        bil.panel.addEventListener('click', (e) => { if (e.target === bil.panel && perdedeBasildi) panelKapat(); perdedeBasildi = false; });
+        kok.appendChild(bil.panel);
+      }
+      try { bil.panel.showModal(); } catch (_e) { bil.panel.setAttribute('open', ''); }
+      yeniAcildi = true;
+    }
+    if (bil.yer && bil.yer.parentNode !== bil.panel) bil.panel.appendChild(bil.yer);   // açık bildirim perdenin önüne
+    panelCiz();
+    if (yeniAcildi && bil.ara) bil.ara.focus({ preventScroll: true });
+  }
+
+  function panelKapat() {
+    if (kapaniyor) return;          // close olayı panelKapat'ı yeniden çağırır
+    kapaniyor = true;
+    kayitBitir();
+    raporKutusu = '';
+    if (bil.panel && bil.panel.open) { try { bil.panel.close(); } catch (_e) { bil.panel.removeAttribute('open'); } }
+    if (bil.yer && bil.yer.parentNode !== kok && kok) kok.appendChild(bil.yer);
+    bil.ara = null;
+    aramaMetni = '';
+    tusHatasi = '';
+    if (oncekiOdak && oncekiOdak.isConnected && typeof oncekiOdak.focus === 'function') {
+      try { oncekiOdak.focus({ preventScroll: true }); } catch (_e) { /* yok */ }
+    }
+    oncekiOdak = null;
+  }
+
+  function gorunumYenile(k) {
+    if (k === 'dil') menuKaydet();
+    temaUygula();
+    oyunSeridiCiz();
+    listeYenidenCiz();
+    if (oyun.appid && ayar.deckGoster && !oyun.deck && !oyun.deckHata && (k === 'deckGoster')) deckYukle();
+  }
+
+  function ayarDegis(k, v) {
+    ayar[k] = v;
+    ayarYaz();
+    if (['listeDeck', 'listeTr'].includes(k) && v) listeTara();
+    gorunumYenile(k);
+    panelCiz();
+  }
+
+  function bolumSifirla(bolum) {
+    for (const k of BOLUM_ANAHTAR[bolum] || []) ayar[k] = VARSAYILAN[k];
+    ayarYaz();
+    tusHatasi = '';
+    gorunumYenile('dil');
+    panelCiz();
+    bildir('basari', _('sifirlandi'));
+  }
+
+  function anahtar(k, etiketId, kapali) {
+    return el('button', { class: 'anahtar', type: 'button', role: 'switch', 'aria-checked': String(!!ayar[k]), 'aria-labelledby': etiketId,
+      'data-ayar': k, disabled: !!kapali, onclick: () => ayarDegis(k, !ayar[k]) });
+  }
+  function segment(k, secenekler, etiketId) {
+    const g = el('div', { class: 'seg', role: 'radiogroup', 'aria-labelledby': etiketId, 'data-ayar': k });
+    for (const [deger, yazi] of secenekler) {
+      g.append(el('button', { type: 'button', role: 'radio', 'aria-checked': String(ayar[k] === deger), 'data-deger': String(deger),
+        onclick: () => ayarDegis(k, deger) }, yazi));
+    }
+    return g;
+  }
+  let etiketSayac = 0;
+  function ayarSatiri(ad, aciklama, denetimKur) {
+    const id = 'e' + (++etiketSayac);
+    const s = el('div', { class: 'ayar' }, el('span', { id }, ad), denetimKur(id));
+    if (aciklama) s.append(el('small', {}, aciklama));
+    return s;
+  }
+  function sifirlaDugmesi(bolum) {
+    return el('div', { class: 'satir-btn' }, el('button', { class: 'btn', type: 'button', 'data-sifirla': bolum, onclick: () => bolumSifirla(bolum) }, _('varsayilan')));
+  }
+
+  function katla(s) { return s.toLocaleLowerCase('tr-TR').replace(/ı/g, 'i'); }
+  function bolumMetni(b) {
+    const anahtarlar = {
+      deck: ['b_deck', 'deckGoster', 'deckDogru', 'deckNeden', 'deckAyrinti', 'secureBoot', 'onbellekSil', 'd2', 'd1'],
+      turkce: ['b_turkce', 'trGoster', 'trAyrinti', 'arayuz', 'ses', 'altyazi'],
+      liste: ['b_liste', 'listeDeck', 'listeTr', 'listeSuz'],
+      genel: ['b_genel', 'dil', 'tema', 'olcek', 'dil_tarayici', 'tema_sayfa'],
+      kisayol: ['b_kisayol', 'k_ayarlar'],
+      tani: ['b_tani', 'raporKopyala', 't_deck', 't_dil', 't_yer', 't_eski', 't_onbellek'],
+      hakkinda: ['b_hakkinda', 'yedek', 'yedekle', 'geriYukle', 'store'],
+    }[b];
+    return katla(anahtarlar.map((k) => _(k)).join(' '));
+  }
+
+  function panelCiz() {
+    kayitBitir();
+    if (!panelAcik()) return;
+    etiketSayac = 0;
+    const p = bil.panel;
+    const aramaOdakta = kok.activeElement === bil.ara;
+    const imlec = bil.ara ? bil.ara.selectionStart : null;
+    const odakSecici = odakSeciciBul(kok.activeElement);
+    const yerBurada = bil.yer && bil.yer.parentNode === p;
+    p.replaceChildren();
+    p.setAttribute('lang', dilKodu());
+    const kapat = el('button', { class: 'ikonbtn', type: 'button', title: _('kapat'), 'aria-label': _('kapat'), onclick: () => panelKapat() }, ikon('carpi'));
+    p.append(el('div', { class: 'ust' }, el('span', { class: 'rozet', 'aria-hidden': 'true' }, KOD),
+      el('h2', { id: 'sch-baslik' }, AD + ' · ' + _('ayarlar')), kapat));
+
+    const arama = el('input', { type: 'search', placeholder: _('ara'), 'aria-label': _('ara') });
+    arama.value = aramaMetni;
+    arama.addEventListener('input', (e) => { if (e.isComposing) return; aramaMetni = arama.value; panelCiz(); });
+    arama.addEventListener('compositionend', () => { aramaMetni = arama.value; panelCiz(); });
+    bil.ara = arama;
+    const nav = el('nav', { class: 'nav', 'aria-label': _('ayarlar') }, arama);
+    const sorgu = katla(aramaMetni.trim());
+    const uyan = (b) => !sorgu || bolumMetni(b).includes(sorgu);
+    const sch = ['deck', 'turkce', 'liste'].filter(uyan);
+    const ort = ['genel', 'kisayol', 'tani', 'hakkinda'].filter(uyan);
+    const gorunen = sch.concat(ort);
+    if (gorunen.length && !gorunen.includes(panelBolum)) panelBolum = gorunen[0];
+    const oge = (b) => {
+      const ad = _('b_' + b);
+      const d = el('button', { class: 'oge', type: 'button', title: ad, 'aria-current': String(panelBolum === b), 'data-bolum': b,
+        onclick: () => { panelBolum = b; tusHatasi = ''; panelCiz(); } }, el('span', {}, ad));
+      if (b === 'tani' && tani.sorunlu) d.append(el('span', { class: 'nokta', 'aria-hidden': 'true' }), el('span', { class: 'gizli' }, ' · ' + sayili('taniKotu', 1)));
+      return d;
+    };
+    if (sch.length) nav.append(el('div', { class: 'grup' }, KOD), ...sch.map(oge));   // append(dizi) metne çevirir: açarak ver
+    if (ort.length) nav.append(el('div', { class: 'grup' }, _('ortak')), ...ort.map(oge));
+    if (!gorunen.length) nav.append(el('div', { class: 'yok', role: 'status' }, _('sonucYok')));
+
+    const ic = el('div', { class: 'icerik', 'data-icerik': panelBolum });
+    if (gorunen.length) {
+      ic.append(el('h3', {}, _('b_' + panelBolum)));
+      ({ deck: bolumDeck, turkce: bolumTurkce, liste: bolumListe, genel: bolumGenel, kisayol: bolumKisayol, tani: bolumTani, hakkinda: bolumHakkinda })[panelBolum](ic);
+    }
+    p.append(el('div', { class: 'govde' }, nav, ic));
+    if (yerBurada) p.appendChild(bil.yer);
+    if (aramaOdakta) {
+      arama.focus({ preventScroll: true });
+      if (imlec !== null) try { arama.setSelectionRange(imlec, imlec); } catch (_e) { /* yok */ }
+    } else if (odakSecici) {
+      let hedef = null;
+      try { hedef = p.querySelector(odakSecici); } catch (_e) { hedef = null; }
+      if (hedef) hedef.focus({ preventScroll: true });
+    }
+  }
+
+  function odakSeciciBul(o) {
+    if (!o || o === bil.ara || !o.getAttribute) return '';
+    const q = (ad) => `[${ad}="${CSS.escape(o.getAttribute(ad))}"]`;
+    if (o.hasAttribute('data-deger') && o.parentElement && o.parentElement.hasAttribute('data-ayar')) {
+      return `[data-ayar="${CSS.escape(o.parentElement.getAttribute('data-ayar'))}"] ${q('data-deger')}`;
+    }
+    for (const ad of ['data-ayar', 'data-bolum', 'data-sifirla', 'data-kisayol', 'data-rapor', 'data-yedekle', 'data-geri-yukle', 'data-onbellek-sil']) {
+      if (o.hasAttribute(ad)) return q(ad);
+    }
+    return '';
+  }
+
+  function ornekSerit(rozetler) {
+    return el('div', { class: 'ornek', 'aria-hidden': 'true' }, rozetler);
+  }
+
+  function bolumDeck(ic) {
+    ic.append(el('p', { class: 'alt' }, _('deckAlt')));
+    ic.append(ornekSerit([rozet('uy', 'uyari', _('d2'), ayar.deckNeden ? ' · ' + nedenMetni('InterfaceTextIsNotLegible') : '', true),
+      ayar.secureBoot ? rozet('uy', 'kalkan', _('sb')) : null]));
+    const kapali = !ayar.deckGoster;
+    ic.append(ayarSatiri(_('deckGoster'), '', (id) => anahtar('deckGoster', id)));
+    ic.append(ayarSatiri(_('deckDogru'), _('deckDogruAc'), (id) => anahtar('deckDogru', id, kapali)));
+    ic.append(ayarSatiri(_('deckNeden'), _('deckNedenAc'), (id) => anahtar('deckNeden', id, kapali)));
+    ic.append(ayarSatiri(_('deckAyrinti'), '', (id) => anahtar('deckAyrinti', id, kapali)));
+    ic.append(ayarSatiri(_('secureBoot'), _('secureBootAc'), (id) => anahtar('secureBoot', id)));
+    ic.append(ayarSatiri(_('onbellekNot'), '', () => el('button', { class: 'btn', type: 'button', 'data-onbellek-sil': '', onclick: () => {
+      const n = Object.keys(onbellek).length;
+      clearTimeout(onbellekSayac);
+      yeniKayit.clear();
+      onbellek = {};
+      depoYaz('onbellek', onbellek);
+      bildir('basari', sayili('onbellekSilindi', n));
+      panelCiz();
+    } }, _('onbellekSil'))));
+    ic.append(sifirlaDugmesi('deck'));
+  }
+
+  function bolumTurkce(ic) {
+    ic.append(el('p', { class: 'alt' }, _('trAlt')));
+    ic.append(ornekSerit([rozet('trk', 'tamam', ayar.trAyrinti ? _('tr') + ': ' + _('arayuz') + ' · ' + _('altyazi') : _('tr'))]));
+    ic.append(ayarSatiri(_('trGoster'), '', (id) => anahtar('trGoster', id)));
+    ic.append(ayarSatiri(_('trAyrinti'), '', (id) => anahtar('trAyrinti', id, !ayar.trGoster)));
+    ic.append(sifirlaDugmesi('turkce'));
+  }
+
+  function bolumListe(ic) {
+    ic.append(el('p', { class: 'alt' }, _('listeAlt')));
+    ic.append(ayarSatiri(_('listeDeck'), '', (id) => anahtar('listeDeck', id)));
+    ic.append(ayarSatiri(_('listeTr'), '', (id) => anahtar('listeTr', id)));
+    ic.append(ayarSatiri(_('listeSuz'), _('listeSuzAc'), (id) => anahtar('listeSuz', id, !ayar.listeDeck)));
+    ic.append(sifirlaDugmesi('liste'));
+  }
+
+  function bolumGenel(ic) {
+    const algi = _('algilanan', { dil: tarayiciDili() === 'tr' ? 'Türkçe' : 'English' });
+    ic.append(ayarSatiri(_('dil'), algi, (id) => segment('dil', [['tr', _('dil_tr')], ['en', _('dil_en')], ['tarayici', _('dil_tarayici')]], id)));
+    ic.append(ayarSatiri(_('tema'), '', (id) => segment('tema', [['sayfa', _('tema_sayfa')], ['acik', _('tema_acik')], ['koyu', _('tema_koyu')]], id)));
+    ic.append(ayarSatiri(_('olcek'), '', (id) => segment('olcek', SECENEK.olcek.map((n) => [n, dilKodu() === 'tr' ? '%' + n : n + '%']), id)));
+    ic.append(sifirlaDugmesi('genel'));
+  }
+
+  function bolumKisayol(ic) {
+    ic.append(el('p', { class: 'alt' }, _('kisayolNot')));
+    const hataYeri = el('div', { class: 'uyari-satir', role: 'alert' }, tusHatasi);
+    const tus = el('button', { class: 'tus', type: 'button', 'data-kisayol': 'kisayolAyarlar' }, ayar.kisayolAyarlar);
+    tus.addEventListener('click', () => kayitBasla(tus));
+    ic.append(ayarSatiri(_('k_ayarlar'), '', (id) => { tus.setAttribute('aria-labelledby', id); return tus; }));
+    if (tusHatasi) ic.append(hataYeri);
+    ic.append(sifirlaDugmesi('kisayol'));
+  }
+
+  function kayitBasla(tus) {
+    kayitBitir();
+    tus.classList.add('kayit');
+    tus.textContent = _('tusaBas');
+    const dinle = (e) => {
+      if (!e.isTrusted && !TEST) return;
+      if (e.key === 'Tab') { kayitBitir(); panelCiz(); return; }   // Tab engellenmez: odak gider, kayıt biter
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if (e.repeat) return;
+      if (e.key === 'Escape') { kayitBitir(); panelCiz(); return; }
+      const kombo = tusKombo(e);
+      if (!kombo) return;
+      const neden = tusGecerliMi(kombo);
+      kayitBitir();
+      if (neden) { tusHatasi = _('tusRed', { tus: kombo, neden: _(neden) }); panelCiz(); return; }
+      tusHatasi = '';
+      ayarDegis('kisayolAyarlar', kombo);
+      bildir('basari', _('tusDegisti', { tus: kombo }));
+    };
+    kayit = { dinle };
+    window.addEventListener('keydown', dinle, true);
+  }
+  function kayitBitir() {
+    if (!kayit) return;
+    window.removeEventListener('keydown', kayit.dinle, true);
+    kayit = null;
+  }
+
+  function bolumTani(ic) {
+    const satirlar = taniSatirlari();
+    const kotu = satirlar.filter((x) => x.durum === 'kotu').length;
+    ic.append(el('div', { class: 'bilgi' + (kotu ? ' kotu' : ''), role: 'status' }, kotu ? sayili('taniKotu', kotu) : _('taniIyi')));
+    const t = el('div', { class: 'tani', 'data-tani': '' });
+    for (const x of satirlar) {
+      t.append(el('span', { class: x.durum, 'aria-hidden': 'true' }, x.durum === 'iyi' ? '✓' : x.durum === 'kotu' ? '✗' : '–'),
+        el('div', {}, x.ad, el('small', {}, x.ayrinti)));
+    }
+    ic.append(t, el('div', { class: 'satir-btn' }, el('button', { class: 'btn ana', type: 'button', 'data-rapor': '', onclick: () => raporuKopyala() }, ikon('kopyala'), _('raporKopyala'))));
+    if (raporKutusu) {
+      const kutu = el('textarea', { class: 'rapor', readonly: true, 'aria-label': _('raporBaslik'), 'data-rapor-kutu': '' });
+      kutu.value = raporKutusu;
+      ic.append(kutu);
+    }
+  }
+
+  function bolumHakkinda(ic) {
+    ic.append(el('p', { style: 'margin:0' }, AD + ' · ' + _('surum', { s: SURUM })), el('p', { class: 'alt', style: 'margin:0' }, _('store')));
+    ic.append(el('h4', {}, _('yedek')), el('p', { class: 'alt', style: 'margin:0' }, _('yedekAc')));
+    ic.append(el('p', { class: 'etiket', style: 'margin:0', 'data-son-yedek': '' }, ayar.sonYedek ? _('sonYedek', { t: ayar.sonYedek }) : _('sonYedekYok')));
+    const dosya = el('input', { type: 'file', accept: '.json,application/json', class: 'gizli', 'aria-hidden': 'true', tabindex: '-1', 'data-geri-yukle-dosya': '' });
+    dosya.addEventListener('change', () => { if (dosya.files && dosya.files[0]) geriYukle(dosya.files[0]); });
+    ic.append(dosya, el('div', { class: 'satir-btn sol' },
+      el('button', { class: 'btn', type: 'button', 'data-yedekle': '', onclick: () => yedekle() }, _('yedekle')),
+      el('button', { class: 'btn', type: 'button', 'data-geri-yukle': '', onclick: () => dosya.click() }, _('geriYukle'))));
+  }
+
+  function zamanDamgasi() {
+    const d = new Date();
+    const p = (n) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}`;
+  }
+  function yedekle() {
+    const damga = zamanDamgasi();
+    const ayarKopya = Object.assign({}, ayar);
+    delete ayarKopya.sonYedek;
+    const veri = JSON.stringify({ uygulama: ID, surum: SURUM, tarih: damga, ayarlar: ayarKopya }, null, 2);
+    const url = 'data:application/json;charset=utf-8,' + encodeURIComponent(veri);   // Blob değil: Firefox betik bağlamı
+    const a = el('a', { href: url, download: `AALabs.${ID}-ayarlar-${damga}.json` });
+    (bil.panel || kok).appendChild(a);
+    a.click();
+    a.remove();
+    ayar.sonYedek = damga;
+    ayarYaz();
+    panelCiz();
+    bildir('basari', _('yedeklendi'));
+  }
+  function geriYukle(dosya) {
+    if (dosya.size > 64 * 1024) { bildir('hata', _('yedekHata')); return; }
+    const okuyucu = new FileReader();
+    okuyucu.onload = () => {
+      try {
+        const v = JSON.parse(String(okuyucu.result));
+        if (!v || v.uygulama !== ID || !v.ayarlar || typeof v.ayarlar !== 'object' || Array.isArray(v.ayarlar)) throw new Error('biçim');
+        const sonYedek = ayar.sonYedek;
+        ayar = ayarDogrula(v.ayarlar, ayar);   // taban: şimdiki ayarlar (eksik ya da geçersiz alan şimdiki değerinde kalır)
+        ayar.sonYedek = sonYedek;
+        ayarYaz();
+        gorunumYenile('dil');
+        panelCiz();
+        bildir('basari', _('geriYuklendi'));
+      } catch (_e) { bildir('hata', _('yedekHata')); }
+    };
+    okuyucu.onerror = () => bildir('hata', _('yedekHata'));
+    okuyucu.readAsText(dosya);
+  }
+
+  // ---------------------------------------------------------------- klavye
+  function duzenlenebilirMi(o) {
+    return !!(o && o.closest && o.closest('input, textarea, select, [contenteditable=""], [contenteditable="true"]'));
+  }
+  function tusBasildi(e) {
+    if (!e.isTrusted && !TEST) return;
+    if (kayit) return;
+    if (panelAcik()) {
+      if ((e.ctrlKey || e.metaKey) && !e.altKey && !e.shiftKey && e.code === 'KeyF') {
+        e.preventDefault(); e.stopImmediatePropagation(); if (bil.ara) bil.ara.focus(); return;
+      }
+      if (e.key === 'Tab' && !e.ctrlKey && !e.altKey && !e.metaKey) { odakDongusu(e); return; }
+    }
+    if (oyun.ayrintiAcik && e.key === 'Escape' && !panelAcik()) { oyun.ayrintiAcik = false; oyunSeridiCiz(); return; }
+    const kombo = tusKombo(e);
+    if (kombo && kombo === ayar.kisayolAyarlar && (e.ctrlKey || e.metaKey || !duzenlenebilirMi(document.activeElement))) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      if (e.repeat) return;
+      if (panelAcik()) panelKapat(); else panelAc();
+    }
+  }
+
+  // ---------------------------------------------------------------- açılış
+  let cizimBekliyor = false;
+  function sayfaDegisti() {
+    if (cizimBekliyor) return;
+    cizimBekliyor = true;
+    requestAnimationFrame(() => {
+      cizimBekliyor = false;
+      if (oyun.appid && (!oyun.host || !oyun.host.isConnected || oyun.host.previousElementSibling !== seritYeri())) oyunSeridiYerlestir();
+      if (oyun.appid && oyun.turkce === null) { const t = turkceOku(); if (t) { oyun.turkce = t; oyunSeridiCiz(); } }
+      if (ev && !ev.isConnected && document.body) document.body.appendChild(ev);
+      listeTara();
+    });
+  }
+
+  function disariTik(e) {
+    if (!oyun.ayrintiAcik || !oyun.host) return;
+    if (e.composedPath().includes(oyun.host)) return;
+    oyun.ayrintiAcik = false;
+    oyunSeridiCiz();
+  }
+
+  function basla() {
+    if (sayfaTuru() === 'oyun') oyunSayfasiBasla();
+    listeTara();
+    new MutationObserver(sayfaDegisti).observe(document.body || document.documentElement, { childList: true, subtree: true });
+    document.addEventListener('click', disariTik, true);
+    temaUygula();
+    taniYenile();
+    setTimeout(taniYenile, 3000);   // eski betik geç çizerse yakalansın
+  }
+
+  window.addEventListener('keydown', tusBasildi, true);
+  menuKaydet();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla, { once: true });
+  else basla();
+
+  if (TEST && window.__AALABS_TEST__ && typeof window.__AALABS_TEST__ === 'object') {
+    window.__AALABS_TEST__.sch = { panelAc, panelKapat, ayar: () => ayar, tani: () => tani, taniRaporu, oyun: () => oyun, ev: () => ev, onbellek: () => onbellek, turkceOku, sayili };
+  }
+  try { console.info(`[${AD} ${SURUM}] etkin`); } catch (_e) { /* yok */ }
+})();
