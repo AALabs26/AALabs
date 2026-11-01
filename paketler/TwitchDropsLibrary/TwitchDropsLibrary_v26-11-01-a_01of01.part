@@ -1,0 +1,1136 @@
+// ==UserScript==
+// @name         AALabs Twitch Drops Library
+// @name:tr      AALabs Twitch Drops Library
+// @name:en      AALabs Twitch Drops Library
+// @namespace    aalabs
+// @version      26.11.1.1
+// @description  Twitch Drops kampanyalarında Steam / Epic / GOG kütüphanendeki oyunları rozetler ve süzer.
+// @description:en  Badges and filters Twitch Drops campaigns for games in your Steam / Epic / GOG library.
+// @match        https://www.twitch.tv/*
+// @icon         data:image/png;base64,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
+// @updateURL    http://127.0.0.1:47815/u/AALabs.TwitchDropsLibrary.user.js
+// @downloadURL  http://127.0.0.1:47815/u/AALabs.TwitchDropsLibrary.user.js
+// @grant        GM_getValue
+// @grant        GM_setValue
+// @grant        GM_registerMenuCommand
+// @grant        GM_unregisterMenuCommand
+// @grant        GM_setClipboard
+// @grant        GM_xmlhttpRequest
+// @grant        GM_addStyle
+// @grant        GM_notification
+// @grant        unsafeWindow
+// @connect      store.steampowered.com
+// @connect      www.gog.com
+// @connect      www.epicgames.com
+// @run-at       document-start
+// @noframes
+// @aalabs-ikon  TWD
+// ==/UserScript==
+
+(function () {
+  'use strict';
+
+  const SURUM = 'v26-11-01-a';
+  const ONEK = 'aalabs-twd';
+  const SAAT = 3600 * 1000;
+  const GUN = 24 * SAAT;
+
+  // ---------- Metinler (TR/EN aynı anahtarlar) ----------
+  const METIN = {
+    tr: {
+      ad: 'AALabs Twitch Drops Library', hepsi: 'Hepsi', sahip: 'Sahip olduklarım', olmayan: 'Olmayanlar',
+      istek: 'İstek listem', favoriler: 'Favoriler', ara: 'Oyun ara', yenile: 'Kütüphaneyi yenile',
+      ayarlar: 'Ayarlar (A)', dil: 'Dili değiştir', tema: 'Temayı değiştir', gorunum: 'Görünüm',
+      sayilar: 'Steam {s} · Epic {e} · GOG {g} oyun', eslesen: '{n} kampanyanın {m}\'i sende',
+      tazelik: '{t} önce yenilendi', hic: 'henüz okunmadı', yukleniyor: 'Kütüphane okunuyor… {y}',
+      gizlendi: '{n} kampanya gizlendi · Hepsi\'ne basınca geri gelir',
+      saKaldi: '{n} sa kaldı', gunKaldi: '{n} gün kaldı', dkKaldi: '{n} dk kaldı', bitti: 'Bitti',
+      bagli: 'Hesap bağlı', bagla: 'Hesabı bağla', favoriEkle: 'Favorilere ekle', favoriCikar: 'Favoriden çıkar',
+      gizle: 'Bu oyunu gizle', yeniDrop: 'Yeni drop: {ad}', yeniDropMetin: 'Sahip olduğun bir oyuna yeni kampanya geldi.',
+      steamHata: 'Steam okunamadı, store.steampowered.com\'da giriş yap', gogHata: 'GOG okunamadı, gog.com\'da giriş yap',
+      epicHata: 'Epic okunamadı, epicgames.com\'da giriş yap', kapat: 'Kapat', kaydet: 'Kaydet',
+      bMagaza: 'Mağazalar', bOnbellek: 'Önbellek', bElle: 'Elle eşleştirme', bGizli: 'Gizlenen oyunlar',
+      bBildirim: 'Bildirim', bGenel: 'Genel', bKisayol: 'Klavye kısayolları', bTani: 'Tanı', bHakkinda: 'Hakkında',
+      onbellekSure: 'Kütüphane yenileme aralığı', saat: '{n} saat', elleAciklama: 'Her satır: Twitch\'teki ad | STEAM EPIC GOG. Mağaza yazmazsan ELLE rozeti çıkar. Örnek: Grand Theft Auto V | EPIC',
+      gizliYok: 'Gizlenen oyun yok.', goster: 'Göster', bildirimAc: 'Sahip olduğum oyuna yeni drop gelince haber ver',
+      bildirimNot: 'Yalnız bir Twitch sekmesi açıkken çalışır.', temaSec: 'Tema', temaOto: 'Twitch\'i izle',
+      temaAcik: 'Açık', temaKoyu: 'Koyu', dilSec: 'Dil', kisayolAyar: 'Ayarları aç', kisayolBas: 'Yeni kısayola bas…',
+      kisayolGecersiz: 'Bu kısayol kullanılamaz', raporKopyala: 'Raporu kopyala', kopyalandi: 'Kopyalandı',
+      kopyaYedek: 'Pano kullanılamadı. Metin seçildi: Ctrl+C ile kopyala.', taniBaslik: 'Bulunan parçalar',
+      tBaslik: 'Kampanya başlıkları', tSerit: 'Süzgeç şeridi', tSteam: 'Steam kütüphanesi', tGog: 'GOG kütüphanesi',
+      tEpic: 'Epic kütüphanesi', tGql: 'Twitch hesap bağlantı verisi', tEsles: 'Eşleşen kampanya', bekliyor: 'bekliyor',
+      kapali: 'kapalı', magazaAcik: '{m} kütüphanesini oku', simdiYenile: 'Şimdi yenile', surum: 'Sürüm',
+      hakkindaMetin: 'Twitch Drops sayfasında sahip olduğun oyunları rozetler. Kütüphaneler mağazalardaki kendi oturumunla okunur; hiçbir yere gönderilmez.',
+      ara2: 'Ayarlarda ara', elle: 'ELLE'
+    },
+    en: {
+      ad: 'AALabs Twitch Drops Library', hepsi: 'All', sahip: 'Owned', olmayan: 'Not owned',
+      istek: 'My wishlist', favoriler: 'Favourites', ara: 'Search games', yenile: 'Refresh library',
+      ayarlar: 'Settings (S)', dil: 'Change language', tema: 'Change theme', gorunum: 'View',
+      sayilar: 'Steam {s} · Epic {e} · GOG {g} games', eslesen: 'You own {m} of {n} campaigns',
+      tazelik: 'Refreshed {t} ago', hic: 'not read yet', yukleniyor: 'Reading library… {y}',
+      gizlendi: '{n} campaigns hidden · press All to show them',
+      saKaldi: '{n} h left', gunKaldi: '{n} days left', dkKaldi: '{n} min left', bitti: 'Ended',
+      bagli: 'Account linked', bagla: 'Link account', favoriEkle: 'Add to favourites', favoriCikar: 'Remove from favourites',
+      gizle: 'Hide this game', yeniDrop: 'New drop: {ad}', yeniDropMetin: 'A game you own has a new campaign.',
+      steamHata: 'Steam could not be read; sign in at store.steampowered.com', gogHata: 'GOG could not be read; sign in at gog.com',
+      epicHata: 'Epic could not be read; sign in at epicgames.com', kapat: 'Close', kaydet: 'Save',
+      bMagaza: 'Stores', bOnbellek: 'Cache', bElle: 'Manual matching', bGizli: 'Hidden games',
+      bBildirim: 'Notification', bGenel: 'General', bKisayol: 'Keyboard shortcuts', bTani: 'Diagnostics', bHakkinda: 'About',
+      onbellekSure: 'Library refresh interval', saat: '{n} hours', elleAciklama: 'One per line: name on Twitch | STEAM EPIC GOG. Without a store you get a MANUAL badge. Example: Grand Theft Auto V | EPIC',
+      gizliYok: 'No hidden games.', goster: 'Show', bildirimAc: 'Notify me when a game I own gets a new drop',
+      bildirimNot: 'Works only while a Twitch tab is open.', temaSec: 'Theme', temaOto: 'Follow Twitch',
+      temaAcik: 'Light', temaKoyu: 'Dark', dilSec: 'Language', kisayolAyar: 'Open settings', kisayolBas: 'Press the new shortcut…',
+      kisayolGecersiz: 'This shortcut cannot be used', raporKopyala: 'Copy report', kopyalandi: 'Copied',
+      kopyaYedek: 'Clipboard unavailable. Text selected: copy with Ctrl+C.', taniBaslik: 'Parts found',
+      tBaslik: 'Campaign headers', tSerit: 'Filter strip', tSteam: 'Steam library', tGog: 'GOG library',
+      tEpic: 'Epic library', tGql: 'Twitch account-link data', tEsles: 'Matched campaigns', bekliyor: 'waiting',
+      kapali: 'off', magazaAcik: 'Read the {m} library', simdiYenile: 'Refresh now', surum: 'Version',
+      hakkindaMetin: 'Badges the games you own on the Twitch Drops page. Libraries are read with your own store sessions and sent nowhere.',
+      ara2: 'Search settings', elle: 'MANUAL'
+    }
+  };
+
+  // ---------- Ayar (TDZ: yükleme dosyanın sonunda) ----------
+  let AYAR = null;
+  const VARSAYILAN = {
+    dil: 'tr', tema: 'oto', gorunum: 'sahip', steam: true, gog: true, epic: true, onbellekSaat: 24,
+    elle: '', gizli: [], favori: [], bildirim: true, kisayol: 'Ctrl+,'
+  };
+  const GOR_GECERLI = ['hepsi', 'sahip', 'olmayan', 'istek', 'favoriler'];
+  function gmOku(k, v) { try { return typeof GM_getValue === 'function' ? GM_getValue(k, v) : v; } catch (_h) { return v; } }
+  function gmYaz(k, v) { try { if (typeof GM_setValue === 'function') GM_setValue(k, v); } catch (_h) { /* bellekte kalır */ } }
+  function ayarYukle() {
+    const ham = gmOku('twd_ayar', null);
+    const a = Object.assign({}, VARSAYILAN, ham && typeof ham === 'object' ? ham : {});
+    if (!['tr', 'en'].includes(a.dil)) a.dil = 'tr';
+    if (!['oto', 'acik', 'koyu'].includes(a.tema)) a.tema = 'oto';
+    if (!GOR_GECERLI.includes(a.gorunum)) a.gorunum = 'sahip';
+    if (![6, 12, 24, 72].includes(Number(a.onbellekSaat))) a.onbellekSaat = 24;
+    if (!Array.isArray(a.gizli)) a.gizli = [];
+    if (!Array.isArray(a.favori)) a.favori = [];
+    if (!komboKanonikMi(a.kisayol) || yasakMi(a.kisayol)) a.kisayol = VARSAYILAN.kisayol;
+    return a;
+  }
+  function ayarKaydet() { gmYaz('twd_ayar', AYAR); }
+  function m(k, p) {
+    let s = (METIN[AYAR.dil] && METIN[AYAR.dil][k]) || METIN.tr[k] || k;
+    if (p) for (const [a, b] of Object.entries(p)) s = s.split('{' + a + '}').join(String(b));
+    return s;
+  }
+
+  // ---------- Yardımcılar ----------
+  function el(etiket, oz, ...cocuklar) {
+    const e = document.createElement(etiket);
+    if (oz) for (const [k, v] of Object.entries(oz)) {
+      if (v == null || v === false) continue;
+      if (k === 'sinif') e.className = v;
+      else if (k.startsWith('on') && typeof v === 'function') e.addEventListener(k.slice(2), v);
+      else if (k === 'metin') e.textContent = v;
+      else e.setAttribute(k, v === true ? '' : v);
+    }
+    for (const c of cocuklar.flat(Infinity)) {
+      if (c == null || c === false) continue;
+      e.append(c instanceof Node ? c : document.createTextNode(String(c)));
+    }
+    return e;
+  }
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+  const IKON = {
+    ara: ['M11 5a6 6 0 1 0 0 12a6 6 0 1 0 0-12z', 'M20 20l-4.5-4.5'],
+    yenile: ['M3 12a9 9 0 1 0 3-6.7L3 8', 'M3 3v5h5'],
+    ayar: ['M4 6h10', 'M18 6h2', 'M4 12h4', 'M12 12h8', 'M4 18h12', 'M16 4a2 2 0 1 0 0 4a2 2 0 1 0 0-4z', 'M10 10a2 2 0 1 0 0 4a2 2 0 1 0 0-4z', 'M18 16a2 2 0 1 0 0 4a2 2 0 1 0 0-4z'],
+    dil: ['M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18z', 'M3 12h18', 'M12 3a14 14 0 0 1 0 18', 'M12 3a14 14 0 0 0 0 18'],
+    ay: ['M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z'],
+    gunes: ['M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8z', 'M12 2v2', 'M12 20v2', 'M4.9 4.9l1.4 1.4', 'M17.7 17.7l1.4 1.4', 'M2 12h2', 'M20 12h2', 'M4.9 19.1l1.4-1.4', 'M17.7 6.3l1.4-1.4'],
+    yildiz: ['M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z'],
+    goz: ['M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z', 'M12 9a3 3 0 1 0 0 6a3 3 0 1 0 0-6z'],
+    kapat: ['M6 6l12 12', 'M18 6L6 18']
+  };
+  function ikon(ad, olcu) {
+    const s = document.createElementNS(SVG_NS, 'svg');
+    s.setAttribute('viewBox', '0 0 24 24');
+    s.setAttribute('width', String(olcu || 16)); s.setAttribute('height', String(olcu || 16));
+    s.setAttribute('aria-hidden', 'true'); s.setAttribute('fill', 'none'); s.setAttribute('stroke', 'currentColor');
+    s.setAttribute('stroke-width', '2'); s.setAttribute('stroke-linecap', 'round'); s.setAttribute('stroke-linejoin', 'round');
+    for (const d of IKON[ad] || []) { const p = document.createElementNS(SVG_NS, 'path'); p.setAttribute('d', d); s.append(p); }
+    return s;
+  }
+  function katla(s) { return String(s || '').toLocaleLowerCase('tr-TR').replace(/ı/g, 'i'); }
+
+  // Ad normalleştirme ve eşleştirme
+  function norm(s) {
+    return String(s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase()
+      .replace(/[™®©]/g, '').replace(/&/g, ' and ').replace(/['’`]/g, '')
+      .replace(/[^a-z0-9]+/g, ' ').trim().replace(/^(tom clancys|sid meiers) /, '').replace(/^the /, '')
+      .replace(/(^| )(ii|iii|iv|v|vi|vii|viii|ix|x)(?= |$)/g, (m, b, r) => b + ROMA[r]);
+  }
+  const ROMA = { ii: '2', iii: '3', iv: '4', v: '5', vi: '6', vii: '7', viii: '8', ix: '9', x: '10' };
+  // "classic" bilerek yok: World of Warcraft Classic ayrı üründür
+  const EKLER = /^((premium|gold|special|collectors|digital deluxe|deluxe|launch|standard|ultimate|complete|definitive|anniversary|goty|game of the year|enhanced)( edition)?|legacy( edition)?|remastered|directors cut|edition)$/;
+  const ON_EKLER = /^(marvels|disney|lego|warhammer 40000)$/;
+  function adEslesir(twitchAd, magazaAd) {
+    const a = norm(twitchAd), b = norm(magazaAd);
+    if (!a || !b) return false;
+    if (a === b) return true;
+    if (b.startsWith(a + ' ')) return EKLER.test(b.slice(a.length + 1));
+    if (b.endsWith(' ' + a) && a.indexOf(' ') > 0) return ON_EKLER.test(b.slice(0, b.length - a.length - 1));
+    return false;
+  }
+  // Mağazada adı değişmiş oyunlar (norm ad → Steam appid)
+  const STEAM_EK = { 'grand theft auto 5': [271590, 3240220], 'rainbow six siege': [359550], 'hunt showdown': [594650], 'hunt showdown 1896': [594650] };
+
+  // ---------- Ağ ----------
+  function istek(url) {
+    return new Promise((coz, red) => {
+      if (typeof GM_xmlhttpRequest !== 'function') { red(new Error('GM_xmlhttpRequest yok')); return; }
+      let bitti = false;
+      const son = (f, x) => { if (bitti) return; bitti = true; clearTimeout(yedek); f(x); };
+      let tutamak = null;
+      const yedek = setTimeout(() => { try { if (tutamak && tutamak.abort) tutamak.abort(); } catch (_h) { /* yok */ } son(red, new Error('zaman aşımı')); }, 25000);
+      try {
+        tutamak = GM_xmlhttpRequest({
+          method: 'GET', url, timeout: 20000, headers: { Accept: 'application/json' },
+          onload: (r) => son(coz, { durum: r.status, metin: r.responseText || '', son: r.finalUrl || url }),
+          onerror: () => son(red, new Error('ağ hatası')),
+          ontimeout: () => son(red, new Error('zaman aşımı')),
+          onabort: () => son(red, new Error('iptal'))
+        });
+      } catch (h) { son(red, h); }
+    });
+  }
+  async function jsonAl(url) {
+    const r = await istek(url);
+    TANI.son.push(`${r.durum} ${url.replace(/\?.*$/, '')}`);
+    if (TANI.son.length > 12) TANI.son.shift();
+    if (r.durum === 401 || r.durum === 403 || /\/(login|signin)\b|\/id\/login/i.test(r.son || '')) throw new Error('giriş gerekli');
+    if (r.durum === 429) throw new Error('çok istek (429)');
+    if (r.durum !== 200) throw new Error('HTTP ' + r.durum);
+    let j;
+    try { j = JSON.parse(r.metin); } catch (_h) { throw new Error('giriş gerekli'); }
+    if (!j || typeof j !== 'object') throw new Error('giriş gerekli');
+    return j;
+  }
+
+  // ---------- Kütüphane ----------
+  const KUT = { steamSahip: new Set(), steamIstek: new Set(), gog: [], epic: [], zaman: 0, hata: {}, yukleniyor: false, adim: '' };
+  const SS = { onbellek: {} }; // Steam arama önbelleği: norm ad → {t, idler: [[id, ad]]}
+
+  function kutuphaneOnbellekYukle() {
+    const k = gmOku('twd_kut', null);
+    if (k && typeof k === 'object') {
+      KUT.steamSahip = new Set(k.steamSahip || []); KUT.steamIstek = new Set(k.steamIstek || []);
+      KUT.gog = k.gog || []; KUT.epic = k.epic || []; KUT.zaman = k.zaman || 0; KUT.hata = k.hata || {};
+    }
+    const s = gmOku('twd_ss', null);
+    if (s && typeof s === 'object') SS.onbellek = s;
+  }
+  function kutuphaneKaydet() {
+    gmYaz('twd_kut', { steamSahip: [...KUT.steamSahip], steamIstek: [...KUT.steamIstek], gog: KUT.gog, epic: KUT.epic, zaman: KUT.zaman, hata: KUT.hata });
+  }
+
+  async function steamOku() {
+    const j = await jsonAl('https://store.steampowered.com/dynamicstore/userdata/?t=' + Date.now());
+    const sahip = j.rgOwnedApps || [];
+    if (!sahip.length) throw new Error('giriş gerekli');
+    KUT.steamSahip = new Set(sahip.map(Number));
+    KUT.steamIstek = new Set((j.rgWishlist || []).map(Number));
+  }
+  async function gogOku() {
+    const adlar = [];
+    let sayfa = 1, toplam = 1;
+    do {
+      const j = await jsonAl(`https://www.gog.com/account/getFilteredProducts?mediaType=1&page=${sayfa}`);
+      if (sayfa === 1 && !Array.isArray(j.products)) throw new Error('giriş gerekli');
+      toplam = Math.min(Number(j.totalPages) || 1, 100);
+      for (const p of j.products || []) if (p && p.title) adlar.push(p.title);
+      sayfa++;
+    } while (sayfa <= toplam);
+    KUT.gog = adlar;
+  }
+  async function epicOku() {
+    const adlar = new Set();
+    let jeton = '', tur = 0;
+    const gorulenJeton = new Set();
+    do {
+      const url = 'https://www.epicgames.com/account/v2/payment/ajaxGetOrderHistory?sortDir=DESC&sortBy=DATE&locale=en-US' + (jeton ? '&nextPageToken=' + encodeURIComponent(jeton) : '');
+      const j = await jsonAl(url);
+      if (!j || !Array.isArray(j.orders)) throw new Error('giriş gerekli');
+      for (const o of j.orders) {
+        if (/REFUND|CANCEL|CHARGEBACK/i.test(String(o.orderStatus || ''))) continue;
+        for (const it of o.items || []) if (it && it.description && !/REFUND|CANCEL|CHARGEBACK/i.test(String(it.status || ''))) adlar.add(it.description);
+      }
+      jeton = j.nextPageToken || '';
+      if (jeton && gorulenJeton.has(jeton)) break;
+      gorulenJeton.add(jeton);
+      tur++;
+    } while (jeton && tur < 300);
+    KUT.epic = [...adlar];
+    if (jeton && tur >= 300) throw new Error('kısmi okundu');
+  }
+  async function kutuphaneYenile(zorla) {
+    if (KUT.yukleniyor) return;
+    if (!zorla && KUT.zaman && Date.now() - KUT.zaman < AYAR.onbellekSaat * SAAT) return;
+    KUT.yukleniyor = true;
+    let basari = 0;
+    try {
+      seritCiz();
+      const isler = [['steam', steamOku], ['gog', gogOku], ['epic', epicOku]];
+      for (const [ad, fn] of isler) {
+        if (!AYAR[ad]) { delete KUT.hata[ad]; continue; }
+        KUT.adim = ad.toUpperCase(); seritCiz();
+        try { await fn(); delete KUT.hata[ad]; basari++; } catch (h) { KUT.hata[ad] = String(h && h.message || h); }
+      }
+    } finally {
+      // hiçbir mağaza okunamadıysa 5 dk sonra yeniden dene
+      KUT.zaman = basari ? Date.now() : Date.now() - AYAR.onbellekSaat * SAAT + 5 * 60000;
+      KUT.yukleniyor = false; KUT.adim = '';
+      kutuphaneKaydet();
+      ESLESME.clear();
+      planla();
+    }
+  }
+
+  // Steam: Twitch adından mağaza kimliği (storesearch, 30 gün önbellek)
+  const SS_BEKLEYEN = new Set();
+  let ssCalisan = 0;
+  function steamAdaylari(ad) {
+    const k = norm(ad);
+    if (!k) return [];
+    const kayit = SS.onbellek[k];
+    if (kayit && !kayit.hata && Date.now() - kayit.t < (kayit.idler.length ? 30 * GUN : SAAT)) return kayit.idler;
+    if (kayit && kayit.hata && Date.now() - kayit.t < Math.min(6 * SAAT, 10 * 60000 * Math.pow(2, (kayit.deneme || 1) - 1))) return kayit.idler || [];
+    if (Date.now() < ssDuraklat) return kayit ? (kayit.idler || []) : [];
+    if (!SS_BEKLEYEN.has(k)) { SS_BEKLEYEN.add(k); ssSirasi.push(ad); ssCalistir(); }
+    return null;
+  }
+  const ssSirasi = [];
+  let ssDuraklat = 0;
+  let ssKayitZamanlayici = 0;
+  function ssCalistir() {
+    while (ssCalisan < 4 && ssSirasi.length) {
+      const ad = ssSirasi.shift();
+      ssCalisan++;
+      jsonAl('https://store.steampowered.com/api/storesearch/?l=english&cc=US&term=' + encodeURIComponent(ad))
+        .then((j) => {
+          if (!Array.isArray(j.items)) throw new Error('yanıt yok');
+          const idler = j.items.slice(0, 6).filter((i) => adEslesir(ad, i.name)).map((i) => [Number(i.id), i.name]);
+          SS.onbellek[norm(ad)] = { t: Date.now(), idler };
+        })
+        .catch((h) => {
+          // Hata kaydı geri çekilmeyle tutulur; hemen yeniden sorulmaz
+          const onceki = SS.onbellek[norm(ad)];
+          SS.onbellek[norm(ad)] = { t: Date.now(), idler: (onceki && onceki.idler) || [], hata: true, deneme: ((onceki && onceki.deneme) || 0) + 1 };
+          if (/429/.test(String(h && h.message))) ssDuraklat = Date.now() + 5 * 60000;
+        })
+        .finally(() => {
+          ssCalisan--; SS_BEKLEYEN.delete(norm(ad)); ESLESME.delete(norm(ad));
+          clearTimeout(ssKayitZamanlayici);
+          ssKayitZamanlayici = setTimeout(() => { ssBuda(); gmYaz('twd_ss', SS.onbellek); }, 1500);
+          planla(); ssCalistir();
+        });
+    }
+  }
+
+  function ssBuda() {
+    const anahtarlar = Object.keys(SS.onbellek);
+    for (const k of anahtarlar) if (!SS.onbellek[k] || Date.now() - SS.onbellek[k].t > 30 * GUN) delete SS.onbellek[k];
+    const kalan = Object.keys(SS.onbellek);
+    if (kalan.length > 2000) kalan.sort((a, b) => SS.onbellek[a].t - SS.onbellek[b].t).slice(0, kalan.length - 2000).forEach((k) => delete SS.onbellek[k]);
+  }
+  function elleTablo() {
+    const t = new Map();
+    for (const satir of String(AYAR.elle || '').split(/\r?\n/)) {
+      const [ad, mag] = satir.split('|');
+      if (!ad || !ad.trim() || !norm(ad)) continue;
+      const magazalar = String(mag || '').toUpperCase().split(/[\s,]+/).filter((x) => ['STEAM', 'EPIC', 'GOG'].includes(x));
+      t.set(norm(ad), magazalar.length ? magazalar : ['ELLE']);
+    }
+    return t;
+  }
+  const ESLESME = new Map(); // norm ad → {magazalar:[], istek:bool, kesin:bool}
+  let ELLE = new Map();
+  function eslesme(ad) {
+    const k = norm(ad);
+    if (ESLESME.has(k)) return ESLESME.get(k);
+    const magazalar = [];
+    let istekte = false, kesin = true;
+    if (AYAR.steam) {
+      const adaylar = steamAdaylari(ad);
+      const ekler = STEAM_EK[k] || [];
+      const idler = (adaylar || []).map((x) => x[0]).concat(ekler);
+      if (adaylar === null) kesin = false;
+      if (idler.some((i) => KUT.steamSahip.has(i))) magazalar.push('STEAM');
+      if (idler.some((i) => KUT.steamIstek.has(i))) istekte = true;
+    }
+    if (AYAR.epic && KUT.epic.some((x) => adEslesir(ad, x))) magazalar.push('EPIC');
+    if (AYAR.gog && KUT.gog.some((x) => adEslesir(ad, x))) magazalar.push('GOG');
+    const e = ELLE.get(k);
+    if (e) for (const x of e) if (!magazalar.includes(x)) magazalar.push(x);
+    const sonuc = { magazalar, istek: istekte && !magazalar.length };
+    if (kesin) ESLESME.set(k, sonuc);
+    return sonuc;
+  }
+
+  // ---------- Twitch hesap bağlantısı ----------
+  // Ağ isteğine dokunulmaz (fetch sarmak Twitch'in bütünlük denetimini bozuyor).
+  // Kampanya listesi, sayfanın kendi React bileşeninin özelliklerinden yalnız okunur.
+  const BAG = new Map(); // norm oyun adı → {bagli, url}
+  const TANI = { gql: false, son: [], baslik: 0, serit: false, bagHata: '' };
+  function sayfaNesnesi(o) { try { return (o && o.wrappedJSObject) || o; } catch (_h) { return o; } }
+  // Chrome'da betik ayrı dünyada çalışabilir; öğe sayfa dünyasından (unsafeWindow) yeniden alınır
+  function sayfaOgesi(o, sira) {
+    try {
+      if (o && o.wrappedJSObject) return o.wrappedJSObject;
+      const W = typeof unsafeWindow !== 'undefined' ? unsafeWindow : null;
+      if (W && W.document && W.document !== document) {
+        const l = W.document.querySelectorAll('main .accordion-header[role="heading"]');
+        if (l[sira]) return l[sira];
+      }
+    } catch (_h) { /* yok */ }
+    return o;
+  }
+  function kampanyalariOku(baslik, sira, hedef) {
+    try {
+      const h = sayfaOgesi(baslik, sira);
+      const anahtar = Object.keys(h).find((k) => k.indexOf('__reactFiber') === 0);
+      if (!anahtar) { TANI.bagHata = 'fiber yok'; return; }
+      let f = h[anahtar];
+      for (let i = 0; f && i < 16; i++, f = f.return) {
+        const p = f.memoizedProps;
+        const k = p && p.campaigns;
+        if (!k || typeof k.length !== 'number' || !k.length || !k[0] || !('self' in k[0])) continue;
+        for (let j = 0; j < k.length; j++) {
+          const c = k[j];
+          const ad = c && c.game && c.game.displayName;
+          if (!ad) continue;
+          const n = norm(String(ad));
+          const onceki = hedef.get(n);
+          const bagli = !!(c.self && c.self.isAccountConnected);
+          hedef.set(n, { bagli: bagli || !!(onceki && onceki.bagli), url: (onceki && onceki.url) || String(c.accountLinkURL || '') });
+        }
+        return true;
+      }
+      TANI.bagHata = 'campaigns özelliği yok';
+    } catch (h) { TANI.bagHata = String(h && h.message || h); }
+    return false;
+  }
+
+  // ---------- Kalan süre (satırdaki tarih metninden) ----------
+  const AYLAR = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+  function bitisTarihi(metin) {
+    const parca = String(metin || '').split(/\s+[-–—]\s+/).pop();
+    const r = /([A-Za-z]{3})[a-z]*\s+(\d{1,2}),?\s+(?:(\d{4}),?\s+)?(\d{1,2}):(\d{2})\s*(AM|PM)?(?:\s*(GMT|UTC)([+-]\d{1,2})?(?::?(\d{2}))?)?/i.exec(parca);
+    if (!r) return null;
+    const ay = AYLAR[r[1].toLowerCase()];
+    if (ay == null) return null;
+    let saat = Number(r[4]) % 12;
+    if (r[6] && r[6].toUpperCase() === 'PM') saat += 12;
+    if (!r[6]) saat = Number(r[4]);
+    const simdi = new Date();
+    let yil = r[3] ? Number(r[3]) : simdi.getFullYear();
+    const isaret = r[8] && r[8][0] === '-' ? -1 : 1;
+    const ofsetDk = r[7] ? (r[8] ? isaret * (Math.abs(Number(r[8])) * 60 + Number(r[9] || 0)) : 0) : -simdi.getTimezoneOffset();
+    let t = Date.UTC(yil, ay, Number(r[2]), saat, Number(r[5])) - ofsetDk * 60000;
+    if (!r[3] && t < simdi.getTime() - 180 * GUN) t = Date.UTC(yil + 1, ay, Number(r[2]), saat, Number(r[5])) - ofsetDk * 60000;
+    return t;
+  }
+  function kalanMetin(t) {
+    const fark = t - Date.now();
+    if (fark <= 0) return { metin: m('bitti'), acil: false, bitti: true };
+    if (fark < SAAT) return { metin: m('dkKaldi', { n: Math.max(1, Math.round(fark / 60000)) }), acil: true };
+    if (fark < 48 * SAAT) return { metin: m('saKaldi', { n: Math.round(fark / SAAT) }), acil: true };
+    return { metin: m('gunKaldi', { n: Math.floor(fark / GUN) }), acil: false };
+  }
+
+  // ---------- Sayfa stili (yalnız önekli sınıflar) ----------
+  const SAYFA_STIL = `
+  .${ONEK}-sahip > .accordion-header { background: var(--${ONEK}-yesil-bg) !important; border-left: 4px solid var(--${ONEK}-yesil); }
+  .${ONEK}-gizli { display: none !important; }
+  .${ONEK}-rozetler { display: inline-flex; flex-wrap: wrap; gap: 4px; margin-left: 6px; vertical-align: 1px; }
+  .${ONEK}-rozet { display: inline-flex; align-items: center; min-height: 18px; padding: 0 6px; border-radius: 4px;
+    font: 700 11px/18px "Open Sans", "Segoe UI", Roboto, sans-serif; letter-spacing: .02em; color: var(--${ONEK}-beyaz); }
+  .${ONEK}-r-steam { background: var(--${ONEK}-steam); } .${ONEK}-r-epic { background: var(--${ONEK}-epic); } .${ONEK}-r-gog { background: var(--${ONEK}-gog); }
+  .${ONEK}-r-elle { background: var(--${ONEK}-elle); } .${ONEK}-r-istek { background: var(--${ONEK}-istek); }
+  .${ONEK}-sag { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 4px 6px; padding: 4px 8px 6px; }
+  .${ONEK}-etiket { display: inline-flex; align-items: center; min-height: 20px; padding: 0 6px; border-radius: 4px;
+    border: 1px solid currentColor; font: 400 12px/18px "Open Sans", "Segoe UI", Roboto, sans-serif; text-decoration: none; }
+  .${ONEK}-e-normal { color: var(--${ONEK}-ikincil); }
+  .${ONEK}-e-acil { color: var(--${ONEK}-hata); background: var(--${ONEK}-hata-bg); font-weight: 700; }
+  .${ONEK}-e-bagli { color: var(--${ONEK}-yesil); }
+  .${ONEK}-e-bagla { color: var(--${ONEK}-uyari); background: var(--${ONEK}-uyari-bg); cursor: pointer; }
+  .${ONEK}-mini { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; padding: 0;
+    border: 1px solid transparent; border-radius: 2px; background: transparent; color: var(--${ONEK}-ikincil); cursor: pointer; }
+  .${ONEK}-mini:hover { border-color: var(--${ONEK}-ikincil); }
+  .${ONEK}-mini[aria-pressed="true"] { color: var(--${ONEK}-uyari); }
+  .${ONEK}-mini[aria-pressed="true"] svg { fill: currentColor; }
+  .${ONEK}-mini:focus-visible, .${ONEK}-etiket:focus-visible { outline: 2px solid var(--${ONEK}-odak); outline-offset: 1px; }
+  /* TOKEN-BASLA */
+  html { --${ONEK}-yesil: #18763F; --${ONEK}-yesil-bg: #E4F5E8; --${ONEK}-hata: #C4313B; --${ONEK}-hata-bg: #FDE8E8;
+    --${ONEK}-uyari: #9A5B00; --${ONEK}-uyari-bg: #FDF6D8; --${ONEK}-ikincil: #4E6269;
+    --${ONEK}-beyaz: #FFFFFF; --${ONEK}-steam: #2453C7; --${ONEK}-epic: #5C4400; --${ONEK}-gog: #6237C8; --${ONEK}-elle: #0B6E78; --${ONEK}-istek: #A34400; --${ONEK}-odak: #2456D6; }
+  html.tw-root--theme-dark { --${ONEK}-yesil: #4CC38A; --${ONEK}-yesil-bg: #13301F; --${ONEK}-hata: #FF8189; --${ONEK}-hata-bg: #3A161A;
+    --${ONEK}-uyari: #E8AC45; --${ONEK}-uyari-bg: #33270F; --${ONEK}-ikincil: #9AA8BC; }
+  /* TOKEN-BITIR */
+  `;
+  function sayfaStiliEkle() {
+    const yer = document.head || document.documentElement;
+    if (!yer || document.getElementById(`${ONEK}-stil`)) return;
+    const s = el('style', { id: `${ONEK}-stil` });
+    s.textContent = SAYFA_STIL;
+    yer.append(s);
+  }
+
+  // ---------- Şerit ve Ayarlar (gölge kök) ----------
+  const KOK_STIL = `
+  :host { all: initial; }
+  [hidden] { display: none !important; }
+  * { box-sizing: border-box; }
+  .kok { --o: 1; font: 400 13px/1.4 "Open Sans", "Segoe UI", Roboto, sans-serif; color: var(--metin); }
+  /* TOKEN-BASLA */
+  .kok { --ana: #2456D6; --ana-acik: #E5EBFA; --ana-hover: #F2F5FD; --ana-uzeri: #FFFFFF; --zemin: #F6F9FC; --yuzey: #FFFFFF;
+    --metin: #17252E; --metin-ikincil: #4E6269; --kenar: #7A9199; --ayirici: #D3DEE6; --basari: #18763F; --hata: #C4313B;
+    --hata-bg: #FDE8E8; --uyari: #9A5B00; --uyari-bg: #FDF6D8; --steam: #2453C7; --epic: #5C4400; --gog: #6237C8; --odak: #2456D6; --perde: rgba(0, 0, 0, .4); --beyaz: #FFFFFF; --kod: #2456D6; color-scheme: light; }
+  .kok.koyu { --ana-acik: #1D2C4F; --ana-hover: #1B2434; --zemin: #0F1520; --yuzey: #161E2B; --metin: #E6ECF5;
+    --metin-ikincil: #9AA8BC; --kenar: #6A7B93; --ayirici: #263142; --basari: #4CC38A; --hata: #FF8189; --hata-bg: #3A161A;
+    --uyari: #E8AC45; --uyari-bg: #33270F; --odak: #86A8FF; --kod: #86A8FF; color-scheme: dark; }
+  /* TOKEN-BITIR */
+  .serit { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px 12px; margin: 8px 0;
+    background: var(--yuzey); border: 1px solid var(--ayirici); border-left: 4px solid var(--ana); }
+  .kod { font-weight: 700; color: var(--kod); }
+  .segment { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--kenar); border-radius: 2px; }
+  .segment button { min-height: 30px; padding: 0 10px; border: 0; border-right: 1px solid var(--kenar);
+    background: var(--yuzey); color: var(--metin); font: inherit; cursor: pointer; }
+  .segment button:last-child { border-right: 0; }
+  .segment button[aria-checked="true"] { background: var(--ana); color: var(--ana-uzeri); }
+  .kutu { display: inline-flex; align-items: center; gap: 4px; min-height: 32px; cursor: pointer; }
+  .rozet { display: inline-flex; align-items: center; min-height: 20px; padding: 0 6px; border-radius: 4px;
+    font-size: 11px; font-weight: 700; letter-spacing: .02em; color: var(--beyaz); }
+  .r-steam { background: var(--steam); } .r-epic { background: var(--epic); } .r-gog { background: var(--gog); }
+  .ara { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 8px; flex: 1 1 140px;
+    min-width: 0; max-width: 220px; color: var(--metin-ikincil); border: 1px solid var(--kenar); border-radius: 2px; background: var(--yuzey); }
+  .ara input { border: 0; outline: 0; background: transparent; color: var(--metin); font: inherit; width: 100%; min-width: 0; }
+  .dugmeler { display: inline-flex; gap: 4px; margin-left: auto; }
+  button.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 32px; min-width: 32px;
+    padding: 0 10px; border: 1px solid var(--kenar); border-radius: 2px; background: var(--yuzey); color: var(--metin);
+    font: inherit; cursor: pointer; position: relative; }
+  button.btn.ikon { padding: 0; width: 32px; }
+  button.btn:hover, .segment button:hover:not([aria-checked="true"]) { background: var(--ana-hover); }
+  button.btn.ana { background: var(--ana); border-color: var(--ana); color: var(--ana-uzeri); }
+  button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--odak); outline-offset: 1px; }
+  .nokta { position: absolute; top: 3px; right: 3px; width: 7px; height: 7px; border-radius: 4px; background: var(--hata); }
+  .durum { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--metin-ikincil); }
+  .durum .hata { color: var(--hata); font-weight: 600; }
+  .bilgi { margin: 0 0 8px; padding: 6px 10px; font-size: 12px; background: var(--ana-acik); border-radius: 4px; }
+  .bildirim { position: fixed; top: 64px; right: 16px; z-index: 2147483000; max-width: 300px; display: grid; gap: 2px;
+    padding: 8px 10px; background: var(--yuzey); border: 1px solid var(--kenar); border-left: 4px solid var(--ana); border-radius: 4px; }
+  .bildirim span { font-size: 12px; color: var(--metin-ikincil); }
+  dialog { width: min(720px, calc(100vw - 32px)); max-height: calc(100vh - 64px); padding: 0; border: 1px solid var(--kenar);
+    border-radius: 6px; background: var(--zemin); color: var(--metin); }
+  dialog::backdrop { background: var(--perde); }
+  .d-ust { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--yuzey); border-bottom: 1px solid var(--ayirici); }
+  .d-govde { display: grid; grid-template-columns: 180px minmax(0, 1fr); min-height: 360px; max-height: calc(100vh - 140px); }
+  nav { display: grid; align-content: start; gap: 2px; padding: 8px; border-right: 1px solid var(--ayirici); overflow: auto; }
+  nav .grup { padding: 6px 8px 2px; font-size: 11px; font-weight: 700; color: var(--metin-ikincil); letter-spacing: .04em; }
+  nav button { text-align: left; min-height: 28px; padding: 0 8px; border: 0; border-radius: 2px; background: transparent;
+    color: var(--metin); font: inherit; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  nav button[aria-current="true"] { background: var(--ana-acik); font-weight: 600; }
+  .bolumler { overflow: auto; padding: 12px 16px; display: grid; gap: 16px; align-content: start; }
+  section h3 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+  section p { margin: 0 0 8px; color: var(--metin-ikincil); }
+  .satir { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 32px; }
+  select, textarea, input[type=text] { font: inherit; color: var(--metin); background: var(--yuzey); border: 1px solid var(--kenar); border-radius: 2px; }
+  select { min-height: 32px; padding: 0 6px; }
+  textarea { width: 100%; min-height: 120px; padding: 6px 8px; resize: vertical; }
+  .tani { width: 100%; border-collapse: collapse; }
+  .tani td { padding: 4px 6px; border-bottom: 1px solid var(--ayirici); vertical-align: top; overflow-wrap: anywhere; }
+  .ok { color: var(--basari); font-weight: 700; } .yok { color: var(--hata); font-weight: 700; } .bek { color: var(--metin-ikincil); }
+  .gizli-liste { display: grid; gap: 4px; }
+  @media (max-width: 560px) { .d-govde { grid-template-columns: 1fr; } nav { grid-auto-flow: column; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--ayirici); } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+  `;
+  const UI = { host: null, kok: null, sar: null, serit: null, dialog: null, bolum: 'magaza', arama: '', yakala: false, yedekKutu: null, bildirimEl: null };
+
+  function koyuMu() {
+    if (AYAR.tema === 'koyu') return true;
+    if (AYAR.tema === 'acik') return false;
+    const h = document.documentElement;
+    if (h && h.classList.contains('tw-root--theme-dark')) return true;
+    if (h && h.classList.contains('tw-root--theme-light')) return false;
+    try { return matchMedia('(prefers-color-scheme: dark)').matches; } catch (_h) { return false; }
+  }
+  function kokKur() {
+    if (UI.host && UI.host.isConnected) return true;
+    const kap = document.querySelector('.drops-root__content');
+    if (!kap) return false;
+    if (!UI.host) {
+      UI.host = el('div', { id: `${ONEK}-kok`, sinif: `${ONEK}-kok` });
+      UI.host.style.cssText = 'position:sticky;top:0;z-index:5;display:block';
+      UI.kok = UI.host.attachShadow({ mode: 'closed' });
+      const st = document.createElement('style'); st.textContent = KOK_STIL;
+      UI.sar = el('div', { sinif: 'kok' });
+      UI.kok.append(st, UI.sar);
+      for (const t of ['keydown', 'keypress', 'keyup']) UI.sar.addEventListener(t, (e) => { e.stopPropagation(); }, false);
+      UI.sar.addEventListener('keydown', panelTusu);
+    }
+    kap.prepend(UI.host);
+    TANI.serit = true;
+    seritCiz();
+    return true;
+  }
+
+  function sayilariHesapla() {
+    const satirlar = SATIRLAR;
+    let sahipSay = 0;
+    for (const s of satirlar) if (s.e.magazalar.length) sahipSay++;
+    return { toplam: satirlar.length, sahip: sahipSay };
+  }
+  function sureMetni(ms) {
+    if (ms < SAAT) return Math.max(1, Math.round(ms / 60000)) + (AYAR.dil === 'tr' ? ' dk' : ' min');
+    if (ms < GUN) return Math.round(ms / SAAT) + (AYAR.dil === 'tr' ? ' sa' : ' h');
+    return Math.round(ms / GUN) + (AYAR.dil === 'tr' ? ' gün' : ' days');
+  }
+  function sorunVar() { return Object.keys(KUT.hata).some((k) => AYAR[k]) || TANI.baslik === 0; }
+
+  let seritImza = '';
+  function seritCiz() {
+    if (!UI.sar) return;
+    UI.sar.classList.toggle('koyu', koyuMu());
+    const gizliSay0 = SATIRLAR.filter((x) => x.gizli).length;
+    const say0 = sayilariHesapla();
+    const imza = [AYAR.dil, AYAR.gorunum, AYAR.steam, AYAR.epic, AYAR.gog, AYAR.kisayol, koyuMu(), UI.arama, say0.toplam, say0.sahip, gizliSay0,
+      KUT.yukleniyor, KUT.adim, KUT.zaman ? sureMetni(Date.now() - KUT.zaman) : '', JSON.stringify(KUT.hata), KUT.steamSahip.size, KUT.epic.length, KUT.gog.length, sorunVar()].join('|');
+    if (UI.serit && UI.serit.isConnected && imza === seritImza) return;
+    if (UI.besteleme) return; // IME yazımı sürerken kutu yeniden kurulmaz
+    seritImza = imza;
+    const aktif = document.activeElement === UI.host ? UI.kok.activeElement : null;
+    const odakAnahtar = aktif && aktif.getAttribute && aktif.getAttribute('data-k');
+    const imleç = aktif && aktif.tagName === 'INPUT' ? [aktif.selectionStart, aktif.selectionEnd] : null;
+    const say = sayilariHesapla();
+    const gor = (id, anahtar) => el('button', {
+      type: 'button', role: 'radio', 'aria-checked': AYAR.gorunum === id ? 'true' : 'false', 'data-k': 'g-' + id,
+      onclick: () => { AYAR.gorunum = id; ayarKaydet(); uygula(); seritCiz(); }
+    }, m(anahtar));
+    const kutu = (ad, sinif) => el('label', { sinif: 'kutu' },
+      el('input', { type: 'checkbox', checked: AYAR[ad] ? true : null, 'data-k': 'k-' + ad,
+        onchange: (e) => { AYAR[ad] = e.target.checked; ayarKaydet(); ESLESME.clear(); if (AYAR[ad]) kutuphaneYenile(true); else planla(); } }),
+      el('span', { sinif: 'rozet ' + sinif }, ad.toUpperCase()));
+    const hatalar = Object.entries(KUT.hata).filter(([k]) => AYAR[k]).map(([k]) => el('span', { sinif: 'hata' }, m(k + 'Hata')));
+    const durum = el('div', { sinif: 'durum', role: 'status' },
+      KUT.yukleniyor ? el('span', null, m('yukleniyor', { y: KUT.adim })) : null,
+      el('span', null, m('sayilar', { s: KUT.steamSahip.size, e: KUT.epic.length, g: KUT.gog.length })),
+      el('span', null, m('eslesen', { n: say.toplam, m: say.sahip })),
+      el('span', null, KUT.zaman ? m('tazelik', { t: sureMetni(Date.now() - KUT.zaman) }) : m('hic')),
+      hatalar);
+    const ayarDugme = el('button', { type: 'button', sinif: 'btn ikon', 'aria-label': m('ayarlar'), title: m('ayarlar') + ' · ' + AYAR.kisayol, 'data-k': 'ayar', onclick: () => ayarlarAc() },
+      ikon('ayar'), sorunVar() ? el('span', { sinif: 'nokta', 'aria-hidden': 'true' }) : null);
+    const serit = el('div', { sinif: 'serit', role: 'region', 'aria-label': 'TWD' },
+      el('span', { sinif: 'kod' }, 'TWD'),
+      el('div', { sinif: 'segment', role: 'radiogroup', 'aria-label': m('gorunum') },
+        gor('hepsi', 'hepsi'), gor('sahip', 'sahip'), gor('olmayan', 'olmayan'), gor('istek', 'istek'), gor('favoriler', 'favoriler')),
+      kutu('steam', 'r-steam'), kutu('epic', 'r-epic'), kutu('gog', 'r-gog'),
+      el('label', { sinif: 'ara' }, ikon('ara'),
+        el('input', { type: 'search', placeholder: m('ara'), 'aria-label': m('ara'), value: UI.arama, 'data-k': 'ara',
+          oninput: (e) => { if (e.isComposing) return; UI.arama = e.target.value; uygula(); },
+          oncompositionstart: () => { UI.besteleme = true; },
+          oncompositionend: (e) => { UI.besteleme = false; UI.arama = e.target.value; uygula(); } })),
+      el('span', { sinif: 'dugmeler' },
+        el('button', { type: 'button', sinif: 'btn ikon', 'aria-label': m('yenile'), title: m('yenile'), 'data-k': 'yenile', onclick: () => kutuphaneYenile(true) }, ikon('yenile')),
+        ayarDugme,
+        el('button', { type: 'button', sinif: 'btn ikon', 'aria-label': m('dil'), title: m('dil'), 'data-k': 'dil', onclick: dilDegistir }, ikon('dil')),
+        el('button', { type: 'button', sinif: 'btn ikon', 'aria-label': m('tema'), title: m('tema'), 'data-k': 'tema', onclick: temaDegistir }, ikon(koyuMu() ? 'gunes' : 'ay'))),
+      durum);
+    const gizliSay = SATIRLAR.filter((s) => s.gizli).length;
+    const bilgi = AYAR.gorunum !== 'hepsi' && gizliSay ? el('p', { sinif: 'bilgi' }, m('gizlendi', { n: gizliSay })) : null;
+    const yeni = el('div', null, serit, bilgi);
+    if (UI.serit) UI.serit.replaceWith(yeni); else UI.sar.prepend(yeni);
+    UI.serit = yeni;
+    if (odakAnahtar) {
+      const h = UI.kok.querySelector(`[data-k="${odakAnahtar}"]`);
+      if (h) { h.focus(); if (imleç && h.setSelectionRange) try { h.setSelectionRange(imleç[0], imleç[1]); } catch (_h) { /* yok */ } }
+    }
+  }
+  function dilDegistir() { AYAR.dil = AYAR.dil === 'tr' ? 'en' : 'tr'; ayarKaydet(); menuKur(); yazilanSil(); planla(); seritCiz(); if (UI.dialog && UI.dialog.open) ayarlarCiz(); }
+  function temaDegistir() { AYAR.tema = koyuMu() ? 'acik' : 'koyu'; ayarKaydet(); seritCiz(); if (UI.dialog) UI.dialog.parentElement.classList.toggle('koyu', koyuMu()); }
+
+  // ---------- Kampanya satırları ----------
+  let SATIRLAR = [];
+  let OGE = new WeakMap();
+  let YAZILAN = new WeakMap(); // başlık → imza
+  function yazilanSil() { YAZILAN = new WeakMap(); }
+  function satirlariTopla() {
+    const basliklar = [...document.querySelectorAll('main .accordion-header[role="heading"]')];
+    TANI.baslik = basliklar.length;
+    if (basliklar.length && Date.now() - (TANI.bagZaman || 0) > (BAG.size ? 30000 : 5000)) {
+      // Yeni tablo doldurulur; okuma başarılıysa eskisinin yerine geçer
+      const yeni = new Map();
+      const listeler = new Set();
+      let okundu = false;
+      basliklar.forEach((b, i) => {
+        const liste = b.parentElement && b.parentElement.parentElement;
+        if (!liste || listeler.has(liste)) return;
+        listeler.add(liste);
+        if (kampanyalariOku(b, i, yeni)) okundu = true;
+      });
+      if (okundu) { BAG.clear(); yeni.forEach((v, k) => BAG.set(k, v)); TANI.gql = true; TANI.bagHata = ''; }
+      else if (!BAG.size) TANI.gql = false;
+      TANI.bagZaman = Date.now();
+    }
+    ELLE = elleTablo();
+    const sonuc = [];
+    for (const h of basliklar) {
+      const dugme = h.querySelector('button');
+      if (!dugme) continue;
+      const pler = [...dugme.querySelectorAll('p')].filter((p) => !p.closest(`.${ONEK}-rozetler`));
+      if (!pler.length) continue;
+      const adP = pler[0];
+      const ad = (adP.firstChild && adP.firstChild.nodeType === 3 ? adP.firstChild.nodeValue : adP.textContent).trim();
+      let tarih = '';
+      for (const e of dugme.querySelectorAll('*')) {
+        if (e.childElementCount || e.closest(`.${ONEK}-rozetler`)) continue;
+        const t = e.textContent || '';
+        if (/\s[-–—]\s/.test(t) && /\d{1,2}:\d{2}/.test(t)) { tarih = t; break; }
+      }
+      const oge = h.parentElement;
+      sonuc.push({ h, dugme, adP, ad, tarih, oge, e: eslesme(ad), n: norm(ad) });
+    }
+    SATIRLAR = sonuc;
+    OGE = new WeakMap(); for (const x of sonuc) OGE.set(x.oge, x);
+  }
+  function gorunurMu(s) {
+    if (AYAR.gizli.includes(s.n) && AYAR.gorunum !== 'hepsi') return false;
+    if (UI.arama && !katla(s.ad).includes(katla(UI.arama))) return false;
+    switch (AYAR.gorunum) {
+      case 'sahip': return s.e.magazalar.length > 0;
+      case 'olmayan': return s.e.magazalar.length === 0;
+      case 'istek': return s.e.istek;
+      case 'favoriler': return AYAR.favori.includes(s.n);
+      default: return true;
+    }
+  }
+  function rozetlerKur(s) {
+    const r = el('span', { sinif: `${ONEK}-rozetler` });
+    for (const mg of s.e.magazalar) r.append(el('span', { sinif: `${ONEK}-rozet ${ONEK}-r-${mg.toLowerCase()}` }, mg === 'ELLE' ? m('elle') : mg));
+    if (s.e.istek) r.append(el('span', { sinif: `${ONEK}-rozet ${ONEK}-r-istek` }, m('istek').toUpperCase()));
+    return r;
+  }
+  function sagKur(s) {
+    const kap = el('div', { sinif: `${ONEK}-sag` });
+    const t = bitisTarihi(s.tarih);
+    if (t != null) {
+      const k = kalanMetin(t);
+      kap.append(el('span', { sinif: `${ONEK}-etiket ${k.acil ? ONEK + '-e-acil' : ONEK + '-e-normal'}` }, k.metin));
+    }
+    const b = BAG.get(s.n);
+    if (b) {
+      if (b.bagli) kap.append(el('span', { sinif: `${ONEK}-etiket ${ONEK}-e-bagli` }, m('bagli')));
+      else if (/^https:\/\//.test(b.url) && !/^https:\/\/www\.twitch\.tv\/?$/.test(b.url)) kap.append(el('a', { sinif: `${ONEK}-etiket ${ONEK}-e-bagla`, href: b.url, target: '_blank', rel: 'noopener noreferrer' }, m('bagla')));
+      else kap.append(el('span', { sinif: `${ONEK}-etiket ${ONEK}-e-bagla` }, m('bagla')));
+    }
+    const fav = AYAR.favori.includes(s.n);
+    kap.append(
+      el('button', { type: 'button', sinif: `${ONEK}-mini`, 'aria-pressed': fav ? 'true' : 'false', 'aria-label': m(fav ? 'favoriCikar' : 'favoriEkle'), title: m(fav ? 'favoriCikar' : 'favoriEkle'),
+        onclick: (e) => { e.stopPropagation(); e.preventDefault(); listeDegistir('favori', s.n); } }, ikon('yildiz')),
+      el('button', { type: 'button', sinif: `${ONEK}-mini`, 'aria-label': m('gizle'), title: m('gizle'),
+        onclick: (e) => { e.stopPropagation(); e.preventDefault(); listeDegistir('gizli', s.n); } }, ikon('goz')));
+    for (const t2 of ['click', 'mousedown', 'pointerdown', 'keydown']) kap.addEventListener(t2, (e) => e.stopPropagation());
+    return kap;
+  }
+  function listeDegistir(liste, n) {
+    const i = AYAR[liste].indexOf(n);
+    if (i >= 0) AYAR[liste].splice(i, 1); else AYAR[liste].push(n);
+    ayarKaydet(); yazilanSil(); planla();
+    if (UI.dialog && UI.dialog.open) ayarlarCiz();
+  }
+  function satirImzasi(s) {
+    const t = bitisTarihi(s.tarih);
+    const k = t != null ? kalanMetin(t).metin : '';
+    const b = BAG.get(s.n);
+    return [AYAR.dil, s.e.magazalar.join(','), s.e.istek, k, b ? (b.bagli ? 1 : 0) : '-', AYAR.favori.includes(s.n)].join('|');
+  }
+  function uygula() {
+    let gizliSay = 0;
+    for (const s of SATIRLAR) {
+      const sahip = s.e.magazalar.length > 0;
+      if (s.oge.classList.contains(`${ONEK}-sahip`) !== sahip) s.oge.classList.toggle(`${ONEK}-sahip`, sahip);
+      const gor = gorunurMu(s);
+      s.gizli = !gor;
+      if (!gor) gizliSay++;
+      if (s.oge.classList.contains(`${ONEK}-gizli`) !== !gor) s.oge.classList.toggle(`${ONEK}-gizli`, !gor);
+      const imza = satirImzasi(s);
+      const sonraki = s.adP.nextElementSibling;
+      const rozetYerinde = !!(sonraki && sonraki.classList && sonraki.classList.contains(`${ONEK}-rozetler`));
+      const saglar = s.h.querySelectorAll(`:scope > .${ONEK}-sag`);
+      if (YAZILAN.get(s.h) === imza && rozetYerinde && saglar.length === 1) continue;
+      s.dugme.querySelectorAll(`.${ONEK}-rozetler`).forEach((x) => x.remove());
+      saglar.forEach((x) => x.remove());
+      s.adP.after(rozetlerKur(s));
+      s.h.append(sagKur(s));
+      YAZILAN.set(s.h, imza);
+    }
+    void gizliSay;
+    seritCiz();
+  }
+
+  // ---------- Yeni drop bildirimi ----------
+  let ilkTarama = true;
+  let GORULEN = null;
+  function yeniDropBak() {
+    if (!SATIRLAR.length || KUT.yukleniyor || !KUT.zaman) return;
+    if (!GORULEN) GORULEN = new Set(gmOku('twd_gorulen', []));
+    const gorulen = GORULEN;
+    const ilkKez = gorulen.size === 0;
+    let eklendi = false;
+    const yeniler = [];
+    for (const s of SATIRLAR) {
+      const bt = bitisTarihi(s.tarih);
+      const anahtar = s.n + '|' + (bt != null ? Math.round(bt / 60000) : s.tarih);
+      if (gorulen.has(anahtar)) continue;
+      gorulen.add(anahtar); eklendi = true;
+      if (!ilkKez && s.e.magazalar.length && !(bt != null && bt < Date.now())) yeniler.push(s.ad);
+    }
+    if (eklendi) gmYaz('twd_gorulen', [...gorulen].slice(-2000));
+    if (AYAR.bildirim && yeniler.length && ilkTarama) bildirimGoster(yeniler);
+    ilkTarama = false;
+  }
+  function bildirimGoster(adlar) {
+    if (!UI.sar) return;
+    if (UI.bildirimEl) UI.bildirimEl.remove();
+    const ad = adlar.length > 1 ? adlar[0] + ' +' + (adlar.length - 1) : adlar[0];
+    const b = el('div', { sinif: 'bildirim', role: 'status' },
+      el('b', null, m('yeniDrop', { ad })), el('span', null, m('yeniDropMetin')));
+    UI.bildirimEl = b;
+    (acikModal() || UI.sar).append(b);
+    setTimeout(() => { b.remove(); if (UI.bildirimEl === b) UI.bildirimEl = null; }, 10000);
+    try { if (typeof GM_notification === 'function') GM_notification({ title: m('yeniDrop', { ad }), text: m('yeniDropMetin'), timeout: 10000 }); } catch (_h) { /* yok */ }
+  }
+
+  // ---------- Ayarlar penceresi ----------
+  function acikModal() { return UI.dialog && UI.dialog.open ? UI.dialog : null; }
+  const BOLUMLER = [
+    ['TWD', [['magaza', 'bMagaza'], ['onbellek', 'bOnbellek'], ['elle', 'bElle'], ['gizli', 'bGizli'], ['bildirim', 'bBildirim']]],
+    ['ORTAK', [['genel', 'bGenel'], ['kisayol', 'bKisayol'], ['tani', 'bTani'], ['hakkinda', 'bHakkinda']]]
+  ];
+  let oncekiOdak = null;
+  function ayarlarAc() {
+    if (!UI.sar && !kokKur()) return;
+    if (!UI.dialog) {
+      UI.dialog = el('dialog', { 'aria-label': m('ayarlar') });
+      const dkap = el('div', { sinif: 'kok' });
+      dkap.append(UI.dialog);
+      UI.kok.append(dkap);
+      UI.dialog.addEventListener('close', () => {
+        if (UI.dialog.open) return;
+        UI.yakala = false;
+        if (UI.yedekKutu) { UI.yedekKutu.remove(); UI.yedekKutu = null; }
+        let h = null;
+        if (oncekiOdak && oncekiOdak.k) h = UI.kok.querySelector(`[data-k="${oncekiOdak.k}"]`);
+        else if (oncekiOdak && oncekiOdak.el && oncekiOdak.el.isConnected) h = oncekiOdak.el;
+        if (!h) h = UI.kok.querySelector('[data-k="ayar"]');
+        try { if (h && h.focus) h.focus(); } catch (_h) { /* yok */ }
+      });
+      UI.dialog.addEventListener('cancel', () => { UI.yakala = false; });
+      UI.dialog.addEventListener('pointerdown', (e) => { UI.perde = e.target === UI.dialog; });
+      UI.dialog.addEventListener('click', (e) => { if (e.target === UI.dialog && UI.perde) UI.dialog.close(); });
+      for (const t of ['keydown', 'keypress', 'keyup']) dkap.addEventListener(t, (e) => e.stopPropagation());
+      dkap.addEventListener('keydown', panelTusu);
+      // Twitch Escape'i yakalayabiliyor; pencere burada kapatılır
+      dkap.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !e.defaultPrevented && !UI.yakala && UI.dialog.open) { e.preventDefault(); UI.dialog.close(); } });
+    }
+    UI.dialog.parentElement.classList.toggle('koyu', koyuMu());
+    if (UI.dialog.open) return;
+    const ae = document.activeElement === UI.host ? UI.kok.activeElement : document.activeElement;
+    oncekiOdak = { el: ae, k: ae && ae.getAttribute ? ae.getAttribute('data-k') : null };
+    ayarlarCiz();
+    try { UI.dialog.showModal(); } catch (_h) { UI.dialog.setAttribute('open', ''); }
+    const a = UI.dialog.querySelector('input[type=search]'); if (a) a.focus();
+  }
+  function ayarlarCiz() {
+    const d = UI.dialog;
+    const kaydirma = d.querySelector('.bolumler') ? d.querySelector('.bolumler').scrollTop : 0;
+    d.setAttribute('aria-label', m('ayarlar'));
+    const aramaK = katla(UI.ayarArama || '');
+    const nav = el('nav', { 'aria-label': m('ayarlar') });
+    const bolumler = el('div', { sinif: 'bolumler' });
+    for (const [grup, liste] of BOLUMLER) {
+      nav.append(el('div', { sinif: 'grup' }, grup));
+      for (const [id, anahtar] of liste) {
+        const icerik = bolumIcerik(id);
+        const metin = katla(m(anahtar) + ' ' + icerik.textContent);
+        if (aramaK && !metin.includes(aramaK)) continue;
+        nav.append(el('button', { type: 'button', 'aria-current': UI.bolum === id ? 'true' : 'false',
+          onclick: () => { UI.bolum = id; const hedef = d.querySelector(`#b-${id}`); if (hedef) hedef.scrollIntoView({ block: 'start' }); ayarlarNavGuncelle(); } }, m(anahtar)));
+        bolumler.append(el('section', { id: 'b-' + id, 'data-b': id }, el('h3', null, m(anahtar)), icerik));
+      }
+    }
+    bolumler.addEventListener('scroll', () => {
+      const ust = bolumler.getBoundingClientRect().top;
+      let akt = null;
+      for (const s of bolumler.querySelectorAll('section')) if (s.getBoundingClientRect().top - ust <= 24) akt = s.getAttribute('data-b');
+      if (akt && akt !== UI.bolum) { UI.bolum = akt; ayarlarNavGuncelle(); }
+    }, { passive: true });
+    const ara = el('input', { type: 'search', placeholder: m('ara2'), 'aria-label': m('ara2'), value: UI.ayarArama || '', style: 'flex:1;min-height:32px;padding:0 8px',
+      oninput: (e) => { if (e.isComposing) return; UI.ayarArama = e.target.value; ayarlarCiz(); const y = UI.dialog.querySelector('input[type=search]'); if (y) { y.focus(); y.setSelectionRange(y.value.length, y.value.length); } },
+      oncompositionend: (e) => { UI.ayarArama = e.target.value; ayarlarCiz(); } });
+    d.replaceChildren(
+      el('div', { sinif: 'd-ust' }, el('b', { sinif: 'kod' }, 'TWD'), el('span', null, m('ad') + ' ' + SURUM), ara,
+        el('button', { type: 'button', sinif: 'btn ikon', 'aria-label': m('kapat'), title: m('kapat'), onclick: () => d.close() }, ikon('kapat'))),
+      el('div', { sinif: 'd-govde' }, nav, bolumler));
+    const yb = d.querySelector('.bolumler'); if (yb && kaydirma) yb.scrollTop = kaydirma;
+    if (UI.bildirimEl && UI.bildirimEl.isConnected) d.append(UI.bildirimEl);
+    if (UI.yedekKutu) d.append(UI.yedekKutu);
+  }
+  function ayarlarNavGuncelle() {
+    if (!UI.dialog) return;
+    const sira = BOLUMLER.flatMap(([, l]) => l);
+    UI.dialog.querySelectorAll('nav button').forEach((b) => {
+      const kayit = sira.find(([, a]) => m(a) === b.textContent);
+      b.setAttribute('aria-current', kayit && kayit[0] === UI.bolum ? 'true' : 'false');
+    });
+  }
+  function secim(deger, secenekler, degis) {
+    const s = el('select', { onchange: (e) => degis(e.target.value) });
+    for (const [v, ad] of secenekler) s.append(el('option', { value: v, selected: String(v) === String(deger) ? true : null }, ad));
+    return s;
+  }
+  function bolumIcerik(id) {
+    const f = document.createDocumentFragment();
+    if (id === 'magaza') {
+      for (const ad of ['steam', 'epic', 'gog']) {
+        const hata = KUT.hata[ad] && AYAR[ad] ? el('span', { sinif: 'yok' }, m(ad + 'Hata')) : null;
+        const say = ad === 'steam' ? KUT.steamSahip.size : KUT[ad].length;
+        f.append(el('div', { sinif: 'satir' },
+          el('label', { sinif: 'kutu' }, el('input', { type: 'checkbox', checked: AYAR[ad] ? true : null,
+            onchange: (e) => { AYAR[ad] = e.target.checked; ayarKaydet(); ESLESME.clear(); planla(); } }),
+            m('magazaAcik', { m: ad.toUpperCase() })), el('span', { sinif: 'bek' }, String(say)), hata));
+      }
+      f.append(el('div', { sinif: 'satir' }, el('button', { type: 'button', sinif: 'btn ana', onclick: () => kutuphaneYenile(true).then(() => { if (acikModal()) ayarlarCiz(); }) }, m('simdiYenile'))));
+    } else if (id === 'onbellek') {
+      f.append(el('div', { sinif: 'satir' }, el('span', null, m('onbellekSure')),
+        secim(AYAR.onbellekSaat, [6, 12, 24, 72].map((n) => [n, m('saat', { n })]), (v) => { AYAR.onbellekSaat = Number(v); ayarKaydet(); })));
+    } else if (id === 'elle') {
+      f.append(el('p', null, m('elleAciklama')));
+      const t = el('textarea', { 'aria-label': m('bElle'), spellcheck: 'false' }); t.value = AYAR.elle || '';
+      f.append(t, el('div', { sinif: 'satir' }, el('button', { type: 'button', sinif: 'btn ana',
+        onclick: () => { AYAR.elle = t.value; ayarKaydet(); ESLESME.clear(); yazilanSil(); planla(); } }, m('kaydet'))));
+    } else if (id === 'gizli') {
+      if (!AYAR.gizli.length) f.append(el('p', null, m('gizliYok')));
+      const l = el('div', { sinif: 'gizli-liste' });
+      for (const n of AYAR.gizli) {
+        const s = SATIRLAR.find((x) => x.n === n);
+        l.append(el('div', { sinif: 'satir' }, el('span', null, s ? s.ad : n),
+          el('button', { type: 'button', sinif: 'btn', onclick: () => listeDegistir('gizli', n) }, m('goster'))));
+      }
+      f.append(l);
+    } else if (id === 'bildirim') {
+      f.append(el('label', { sinif: 'kutu' }, el('input', { type: 'checkbox', checked: AYAR.bildirim ? true : null,
+        onchange: (e) => { AYAR.bildirim = e.target.checked; ayarKaydet(); } }), m('bildirimAc')), el('p', null, m('bildirimNot')));
+    } else if (id === 'genel') {
+      f.append(el('div', { sinif: 'satir' }, el('span', null, m('dilSec')),
+        secim(AYAR.dil, [['tr', 'Türkçe'], ['en', 'English']], (v) => { AYAR.dil = v; ayarKaydet(); menuKur(); yazilanSil(); planla(); ayarlarCiz(); })));
+      f.append(el('div', { sinif: 'satir' }, el('span', null, m('temaSec')),
+        secim(AYAR.tema, [['oto', m('temaOto')], ['acik', m('temaAcik')], ['koyu', m('temaKoyu')]], (v) => { AYAR.tema = v; ayarKaydet(); seritCiz(); UI.dialog.parentElement.classList.toggle('koyu', koyuMu()); })));
+    } else if (id === 'kisayol') {
+      const etiket = el('span', { sinif: 'bek' }, UI.yakala ? m('kisayolBas') : AYAR.kisayol);
+      f.append(el('div', { sinif: 'satir' }, el('span', null, m('kisayolAyar')),
+        el('button', { type: 'button', sinif: 'btn', onclick: () => { UI.yakala = true; etiket.textContent = m('kisayolBas'); },
+          onblur: () => { UI.yakala = false; etiket.textContent = AYAR.kisayol; } }, AYAR.kisayol), etiket));
+    } else if (id === 'tani') {
+      f.append(taniTablosu(), el('div', { sinif: 'satir' }, el('button', { type: 'button', sinif: 'btn', onclick: raporKopyala }, m('raporKopyala'))));
+    } else if (id === 'hakkinda') {
+      f.append(el('p', null, m('hakkindaMetin')), el('p', null, m('surum') + ': ' + SURUM));
+    }
+    return el('div', null, f);
+  }
+  function taniSatirlari() {
+    const durum = (ok, ayrinti, kapali) => [kapali ? 'bek' : ok ? 'ok' : 'yok', kapali ? m('kapali') : ok ? '✓' : '✗', ayrinti];
+    const say = sayilariHesapla();
+    const kampSayfa = /^\/drops\/campaigns/.test(location.pathname);
+    return [
+      [m('tBaslik'), ...(kampSayfa ? durum(TANI.baslik > 0, `${TANI.baslik} · main .accordion-header[role=heading]`) : ['bek', m('bekliyor'), location.pathname])],
+      [m('tSerit'), ...(kampSayfa ? durum(TANI.serit, '.drops-root__content') : ['bek', m('bekliyor'), ''])],
+      [m('tSteam'), ...durum(!KUT.hata.steam && KUT.steamSahip.size > 0, `${KUT.steamSahip.size} · ${KUT.hata.steam || ''} · arama önbelleği ${Object.keys(SS.onbellek).length}`, !AYAR.steam)],
+      [m('tEpic'), ...durum(!KUT.hata.epic && KUT.epic.length > 0, `${KUT.epic.length} · ${KUT.hata.epic || ''}`, !AYAR.epic)],
+      [m('tGog'), ...durum(!KUT.hata.gog && KUT.gog.length > 0, `${KUT.gog.length} · ${KUT.hata.gog || ''}`, !AYAR.gog)],
+      [m('tGql'), ...(TANI.gql ? ['ok', '✓', `${BAG.size} oyun`] : ['bek', m('bekliyor'), TANI.bagHata || 'React campaigns'])],
+      [m('tEsles'), 'bek', '', `${say.sahip}/${say.toplam}`]
+    ];
+  }
+  function taniTablosu() {
+    const t = el('table', { sinif: 'tani' });
+    for (const [ad, sinif, isaret, ayrinti] of taniSatirlari()) t.append(el('tr', null, el('td', null, ad), el('td', { sinif }, isaret), el('td', null, ayrinti)));
+    return t;
+  }
+  function raporMetni() {
+    const ua = navigator.userAgent;
+    let yonetici = '';
+    try { yonetici = GM_info.scriptHandler + ' ' + GM_info.version; } catch (_h) { /* yok */ }
+    return [`TWD ${SURUM} · ${new Date().toISOString()} · ${yonetici} · ${ua}`]
+      .concat(taniSatirlari().map(([a, , i, d]) => `${i} ${a}: ${d}`))
+      .concat(['Son istekler:'], TANI.son).join('\n');
+  }
+  function raporKopyala() {
+    const metin = raporMetni();
+    const tamam = () => bildirimKisa(m('kopyalandi'));
+    try { if (typeof GM_setClipboard === 'function') { GM_setClipboard(metin, 'text'); tamam(); return; } } catch (_h) { /* sıradaki */ }
+    try {
+      navigator.clipboard.writeText(metin).then(tamam, yedek);
+    } catch (_h) { yedek(); }
+    function yedek() {
+      UI.yedekKutu = el('label', { sinif: 'satir' }, el('span', null, m('kopyaYedek')), el('textarea', { readonly: true, rows: '4' }, metin));
+      (acikModal() || UI.sar).append(UI.yedekKutu);
+      const ta = UI.yedekKutu.querySelector('textarea'); ta.focus(); ta.select();
+    }
+  }
+  function bildirimKisa(metin) {
+    const b = el('div', { sinif: 'bildirim', role: 'status' }, el('b', null, metin));
+    (acikModal() || UI.sar).append(b);
+    setTimeout(() => b.remove(), 2500);
+  }
+
+  // ---------- Kısayol ----------
+  const YASAK = new Set(['Ctrl+T', 'Ctrl+W', 'Ctrl+N', 'Ctrl+L', 'Ctrl+R', 'Ctrl+F', 'Ctrl+P', 'Ctrl+S', 'Ctrl+D', 'Ctrl+H', 'Ctrl+J', 'Ctrl+K', 'Ctrl+O', 'Ctrl+U', 'Ctrl+A', 'Ctrl+C', 'Ctrl+V', 'Ctrl+X', 'Ctrl+Z', 'Ctrl+Y',
+    'Ctrl+Shift+T', 'Ctrl+Shift+N', 'Ctrl+Shift+V', 'Ctrl+Shift+Z', 'Ctrl+Shift+Enter', 'Ctrl+Shift+I', 'Ctrl+Shift+J', 'Ctrl+Shift+C', 'Alt+D', 'Alt+F4', 'Alt+ArrowLeft', 'Alt+ArrowRight', 'Ctrl+Space', 'Ctrl+Plus', 'Ctrl+-', 'Ctrl+=', 'Ctrl+0',
+    'Ctrl+Tab', 'Ctrl+Shift+Tab', 'Ctrl+Insert', 'Shift+Insert', 'Ctrl+Enter']);
+  function yasakMi(k) {
+    if (YASAK.has(k)) return true;
+    return /^Ctrl\+(Shift\+)?(ArrowLeft|ArrowRight|ArrowUp|ArrowDown|Home|End|PageUp|PageDown|Insert|Delete|Backspace)$/.test(k) || /^Ctrl\+Alt\+/.test(k) || /^Ctrl\+(Shift\+)?\d$/.test(k);
+  }
+  function komboKanonikMi(v) {
+    const r = /^(Ctrl\+)?(Alt\+)?(Shift\+)?(Meta\+)?([^+]+|Plus)$/.exec(String(v || ''));
+    if (!r || !(r[1] || r[2] || r[4])) return false;
+    const tus = r[5];
+    if ([...tus].length === 1) return tus === tus.toLocaleUpperCase('en-US');
+    return /^[A-Z][A-Za-z0-9]{1,15}$/.test(tus);
+  }
+  function tusKombo(e) {
+    if (e.getModifierState && e.getModifierState('AltGraph')) return null;
+    const k = e.key || '';
+    if (!k || k === ' ' || k === 'Unidentified' || k === 'Process' || ['Control', 'Shift', 'Alt', 'Meta'].includes(k)) return null;
+    let ad;
+    if (k.length === 1 && !/[A-Za-z0-9\s]/.test(k)) ad = k === '+' ? 'Plus' : k.toUpperCase();
+    else if (/^Key[A-Z]$/.test(e.code || '')) ad = e.code.slice(3);
+    else if (/^Digit\d$/.test(e.code || '')) ad = e.code.slice(5);
+    else if (k.length > 1) ad = k[0].toUpperCase() + k.slice(1);
+    else ad = k.toUpperCase();
+    const ctrl = e.ctrlKey || e.metaKey;
+    return (ctrl ? 'Ctrl+' : '') + (e.altKey ? 'Alt+' : '') + (e.shiftKey ? 'Shift+' : '') + ad;
+  }
+  function panelTusu(e) {
+    if (!UI.yakala || e.repeat) return;
+    if (e.key === 'Tab') return;
+    if (e.key === 'Escape') { UI.yakala = false; e.preventDefault(); if (acikModal()) ayarlarCiz(); return; }
+    const k = tusKombo(e);
+    if (!k) return;
+    e.preventDefault();
+    if (!komboKanonikMi(k) || yasakMi(k)) { bildirimKisa(m('kisayolGecersiz') + ': ' + k); return; }
+    AYAR.kisayol = k; ayarKaydet(); UI.yakala = false; ayarlarCiz(); menuKur();
+  }
+  function belgeTusu(e) {
+    if (e.repeat || UI.yakala) return;
+    const k = tusKombo(e);
+    if (!k || k !== AYAR.kisayol) return;
+    let hedef = e.composedPath ? e.composedPath()[0] : e.target;
+    if (hedef === UI.host && UI.kok) hedef = UI.kok.activeElement || hedef;
+    const yazi = hedef && (hedef.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(hedef.tagName || ''));
+    if (yazi && !(e.ctrlKey || e.metaKey)) return;
+    if (!/^\/drops\/campaigns/.test(location.pathname)) return;
+    e.preventDefault(); e.stopPropagation();
+    if (acikModal()) UI.dialog.close(); else ayarlarAc();
+  }
+
+  // ---------- Menü ----------
+  let menuKimlikleri = [];
+  function menuKur() {
+    if (typeof GM_registerMenuCommand !== 'function') return;
+    if (typeof GM_unregisterMenuCommand !== 'function' && menuKimlikleri.length) return;
+    if (typeof GM_unregisterMenuCommand === 'function') menuKimlikleri.forEach((k) => { try { GM_unregisterMenuCommand(k); } catch (_h) { /* yok */ } });
+    const ogeler = [[m('ayarlar'), ayarlarAc, AYAR.dil === 'tr' ? 'a' : 's'], [m('yenile') + (AYAR.dil === 'tr' ? ' (Y)' : ' (R)'), () => kutuphaneYenile(true), AYAR.dil === 'tr' ? 'y' : 'r']];
+    menuKimlikleri = ogeler.map(([ad, fn, harf]) => { try { return GM_registerMenuCommand(ad, fn, harf); } catch (_h) { return null; } }).filter((x) => x != null);
+  }
+
+  // ---------- Döngü ----------
+  let kareBekliyor = false;
+  const bekci = { tur: 0, bas: Date.now() };
+  function planla() {
+    if (kareBekliyor) return;
+    kareBekliyor = true;
+    // rAF arka planda durabilir; 200 ms yedek zamanlayıcı ile hangisi önce gelirse o çalışır
+    const kare = (fn) => { let oldu = false; const bir = () => { if (oldu) return; oldu = true; fn(); }; try { requestAnimationFrame(bir); } catch (_h) { /* yok */ } setTimeout(bir, 200); };
+    kare(() => {
+      kareBekliyor = false;
+      const simdi = Date.now();
+      if (simdi - bekci.bas > 5000) { bekci.bas = simdi; bekci.tur = 0; }
+      if (bekci.tur >= 25) {
+        if (!bekci.zaman) bekci.zaman = setTimeout(() => { bekci.zaman = 0; planla(); }, Math.max(50, bekci.bas + 5000 - simdi));
+        return;
+      }
+      bekci.tur++;
+      calis();
+    });
+  }
+  function calis() {
+    if (!/^\/drops\/campaigns/.test(location.pathname)) {
+      if (acikModal()) UI.dialog.close();
+      if (UI.host && UI.host.isConnected) UI.host.remove();
+      TANI.serit = false;
+      return;
+    }
+    sayfaStiliEkle();
+    if (!kokKur()) return;
+    satirlariTopla();
+    uygula();
+    yeniDropBak();
+  }
+  function bizimMi(n) {
+    if (!n || n.nodeType !== 1) return n && n.parentElement ? bizimMi(n.parentElement) : false;
+    return n === UI.host || (n.className && typeof n.className === 'string' && n.className.split(/\s+/).some((c) => c.indexOf(ONEK + '-') === 0)) || (n.closest && !!n.closest(`.${ONEK}-rozetler, .${ONEK}-sag, #${ONEK}-kok`));
+  }
+  function gozlemci() {
+    const g = new MutationObserver((kayitlar) => {
+      for (const k of kayitlar) {
+        if (k.type === 'attributes') {
+          if (k.target === document.documentElement) { seritCiz(); continue; }
+          // React satırın sınıfını yeniden yazarsa bizim sınıflarımız gider: yalnız o durumda yeniden uygula
+          const t = k.target;
+          const s0 = t && OGE.get(t);
+          if (s0) {
+            if (t.classList.contains(`${ONEK}-sahip`) !== (s0.e.magazalar.length > 0) || t.classList.contains(`${ONEK}-gizli`) !== !!s0.gizli) { planla(); return; }
+          }
+          continue;
+        }
+        if (k.removedNodes.length) { planla(); return; }
+        const dugumler = [...k.addedNodes];
+        if (dugumler.length && dugumler.every(bizimMi)) continue;
+        if (!dugumler.length && bizimMi(k.target)) continue;
+        planla();
+        return;
+      }
+    });
+    g.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
+    g.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  }
+  function domHazir() {
+    sayfaStiliEkle();
+    gozlemci();
+    document.addEventListener('keydown', belgeTusu, true);
+    planla();
+    kutuphaneYenile(false);
+    setInterval(() => { yazilanSil(); planla(); }, 60000); // kalan süre dakikada bir güncellenir
+  }
+
+  // ---------- Başlat ----------
+  AYAR = ayarYukle();
+  kutuphaneOnbellekYukle();
+  menuKur();
+  sayfaStiliEkle();
+
+  let testMi = false;
+  try { testMi = typeof GM_info === 'object' && GM_info && GM_info.scriptHandler === 'Test'; } catch (_h) { testMi = false; }
+  if (testMi && window.__AALABS_TEST__ && typeof window.__AALABS_TEST__ === 'object') {
+    window.__AALABS_TEST__.twd = { ayar: () => AYAR, tani: taniSatirlari, adEslesir, bitisTarihi, kut: KUT, ss: SS, bag: BAG, calis, kok2: () => UI, satirlar: () => SATIRLAR, ayarlarAc, kok: () => UI.kok, metin: METIN };
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', domHazir, { once: true });
+  else domHazir();
+})();
