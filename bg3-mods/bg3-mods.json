@@ -1,7 +1,7 @@
 {
  "bicim": "aalabs-index/bg3-mods",
- "surum": 5,
- "guncellendi": "2026-11-02T22:00:31+03:00",
+ "surum": 6,
+ "guncellendi": "2026-11-02T22:00:36+03:00",
  "uygulamalar": [
   {
    "id": "AlchTooltipFix",
@@ -130,6 +130,33 @@
      "boyut": 965,
      "sha256": "089584d0531423edc4beaae51b6df8ced9c6a8858cab834261ce7120a3248260",
      "url": "https://raw.githubusercontent.com/AALabs26/AALabs/b53b63b40b4074a6e28f8983b861b5f7f923f137/bg3-mods/paks/TrashList__1.3.0.pak"
+    }
+   ],
+   "varyant_grubu": "",
+   "varyant": "",
+   "stub": true,
+   "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
+   "onceki": []
+  },
+  {
+   "id": "TrashMark",
+   "ad": "TrashMark",
+   "tur": "bg3-mod",
+   "surum": "1.2.2",
+   "version64": 36310276290641920,
+   "uuid": "68c7fc4b-7d52-4d41-ba18-7d8296c6bfe0",
+   "tarih": "2026-11-02",
+   "durum": "test",
+   "kanal": "beta",
+   "degisiklik": "Bos surum (ozelliksiz). Tum ozellikler HQToolTips 0.7.x icinde.",
+   "dosya": "TrashMark__1.2.2.pak",
+   "hedef": "TrashMark.pak",
+   "parcalar": [
+    {
+     "id": "TrashMark__1.2.2.pak",
+     "boyut": 965,
+     "sha256": "60c9e6197655d0df327f052b67fbdb4532ac5ead9fbfdb4b71bf569ae251cf95",
+     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/24c2e2d38a9d6071f05fb9f01677fe5b91b4b1d3/bg3-mods/paks/TrashMark__1.2.2.pak"
     }
    ],
    "varyant_grubu": "",
