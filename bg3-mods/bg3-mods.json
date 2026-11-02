@@ -1,8 +1,35 @@
 {
  "bicim": "aalabs-index/bg3-mods",
- "surum": 1,
- "guncellendi": "2026-11-02T22:00:02+03:00",
+ "surum": 2,
+ "guncellendi": "2026-11-02T22:00:15+03:00",
  "uygulamalar": [
+  {
+   "id": "GrabNear",
+   "ad": "GrabNear",
+   "tur": "bg3-mod",
+   "surum": "0.3.1",
+   "version64": 422214612549632,
+   "uuid": "bf8ee75c-602b-4cdc-bfac-2ad6de472788",
+   "tarih": "2026-11-02",
+   "durum": "test",
+   "kanal": "beta",
+   "degisiklik": "meta.lsx'ten TargetModes cikarildi: mod kayda yazilmaz, silinince kayit acilir. Davranis ayni.",
+   "dosya": "GrabNear__0.3.1.pak",
+   "hedef": "GrabNear.pak",
+   "parcalar": [
+    {
+     "id": "GrabNear__0.3.1.pak",
+     "boyut": 14315,
+     "sha256": "9e69c5452923fd7dd53f9eb8ee0421805846c199e163748a5e0a4f4c68ecd0f1",
+     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/c30069ed1a0427d5299aa6bdbbb4dfa02c7bd90e/bg3-mods/paks/GrabNear__0.3.1.pak"
+    }
+   ],
+   "varyant_grubu": "",
+   "varyant": "",
+   "stub": false,
+   "stub_not": "",
+   "onceki": []
+  },
   {
    "id": "HQToolTips",
    "ad": "HQToolTips",
