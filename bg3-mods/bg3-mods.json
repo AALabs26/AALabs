@@ -1,7 +1,7 @@
 {
  "bicim": "aalabs-index/bg3-mods",
- "surum": 17,
- "guncellendi": "2026-11-02T22:37:02+03:00",
+ "surum": 18,
+ "guncellendi": "2026-11-02T22:37:08+03:00",
  "uygulamalar": [
   {
    "id": "AlchTooltipFix",
@@ -222,6 +222,33 @@
    ],
    "varyant_grubu": "HotbarReset",
    "varyant": "24",
+   "stub": false,
+   "stub_not": "",
+   "onceki": []
+  },
+  {
+   "id": "HotbarReset_28",
+   "ad": "HotbarReset",
+   "tur": "bg3-mod",
+   "surum": "2.2.2",
+   "version64": 72339073309605888,
+   "uuid": "c0ee2590-757a-4a29-bfa8-82c7accd8e3d",
+   "tarih": "2026-11-02",
+   "durum": "test",
+   "kanal": "beta",
+   "degisiklik": "2.2.2: sutun varyantlari (28 sutun) BMG'de secilebilir; 2.2.0 sayfasi geri geldi (cokme suphesi suruyor)",
+   "dosya": "HotbarReset_28__2.2.2.pak",
+   "hedef": "HotbarReset_28.pak",
+   "parcalar": [
+    {
+     "id": "HotbarReset_28__2.2.2.pak",
+     "boyut": 421151,
+     "sha256": "ae757c4cc30251bfc1c7b168ccec8bb7f3f0951bc51caefa368ec1f7609aba94",
+     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/15d046f369a938afcb8266049790cb77d582b284/bg3-mods/paks/HotbarReset_28__2.2.2.pak"
+    }
+   ],
+   "varyant_grubu": "HotbarReset",
+   "varyant": "28",
    "stub": false,
    "stub_not": "",
    "onceki": []
