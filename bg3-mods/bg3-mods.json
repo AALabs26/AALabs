@@ -1,7 +1,7 @@
 {
  "bicim": "aalabs-index/bg3-mods",
- "surum": 9,
- "guncellendi": "2026-11-02T22:01:43+03:00",
+ "surum": 10,
+ "guncellendi": "2026-11-02T22:02:06+03:00",
  "uygulamalar": [
   {
    "id": "AlchTooltipFix",
@@ -109,6 +109,33 @@
    "varyant": "",
    "stub": true,
    "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
+   "onceki": []
+  },
+  {
+   "id": "KillMark",
+   "ad": "KillMark",
+   "tur": "bg3-mod",
+   "surum": "0.3.1",
+   "version64": 422214612549632,
+   "uuid": "396b43e0-667d-473a-a123-9b7acf34f49d",
+   "tarih": "2026-11-02",
+   "durum": "test",
+   "kanal": "beta",
+   "degisiklik": "meta.lsx'ten TargetModes kaldırıldı (K20 sökülebilirlik); işlev 0.3.0 ile aynı: yasak yalnız wiki tüccar listesi, ! yalnız liste",
+   "dosya": "KillMark__0.3.1.pak",
+   "hedef": "KillMark.pak",
+   "parcalar": [
+    {
+     "id": "KillMark__0.3.1.pak",
+     "boyut": 12379,
+     "sha256": "934dd005a3cda6f3e4eb3cdd2ca1d9468a53feedad8cbcf44a353089af2f27d4",
+     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/2d81bab47d371d6f02758c788c7cc1390db9568a/bg3-mods/paks/KillMark__0.3.1.pak"
+    }
+   ],
+   "varyant_grubu": "",
+   "varyant": "",
+   "stub": false,
+   "stub_not": "",
    "onceki": []
   },
   {
