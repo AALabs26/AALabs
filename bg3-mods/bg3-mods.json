@@ -1,7 +1,7 @@
 {
  "bicim": "aalabs-index/bg3-mods",
- "surum": 23,
- "guncellendi": "2026-11-02T22:46:53+03:00",
+ "surum": 24,
+ "guncellendi": "2026-11-02T22:46:59+03:00",
  "uygulamalar": [
   {
    "id": "AlchTooltipFix",
@@ -263,9 +263,9 @@
    "tarih": "2026-11-02",
    "durum": "test",
    "kanal": "beta",
-   "degisiklik": "2.2.2: sutun varyantlari (32 sutun) BMG'de secilebilir; 2.2.0 sayfasi geri geldi (cokme suphesi suruyor)",
+   "degisiklik": "2.2.2: sutun varyantlari (32 sutun) BMG'de secilebilir; dosya adi her varyantta HotbarReset.pak",
    "dosya": "HotbarReset_32__2.2.2.pak",
-   "hedef": "HotbarReset_32.pak",
+   "hedef": "HotbarReset.pak",
    "parcalar": [
     {
      "id": "HotbarReset_32__2.2.2.pak",
