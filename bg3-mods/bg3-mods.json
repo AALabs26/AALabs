@@ -1,500 +1,473 @@
 {
- "bicim": "aalabs-index/bg3-mods",
- "surum": 24,
- "guncellendi": "2026-11-02T22:46:59+03:00",
- "uygulamalar": [
-  {
-   "id": "AlchTooltipFix",
-   "ad": "AlchTooltipFix",
-   "tur": "bg3-mod",
-   "surum": "0.3.0",
-   "version64": 422212465065984,
-   "uuid": "2a19cc62-ffe4-4674-bfcc-8404cec79151",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "Bos surum (ozelliksiz). Tum ozellikler HQToolTips 0.7.x icinde.",
-   "dosya": "AlchTooltipFix__0.3.0.pak",
-   "hedef": "AlchTooltipFix.pak",
-   "parcalar": [
+  "bicim": "aalabs-index/bg3-mods",
+  "surum": 25,
+  "guncellendi": "2026-11-02T22:47:16",
+  "uygulamalar": [
     {
-     "id": "AlchTooltipFix__0.3.0.pak",
-     "boyut": 971,
-     "sha256": "c73768123b2a053a8b8c28250304506bdd7c21de528d0cdc4f72e1679618112b",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/3efa430bcf5b7d34be67fd8a5c919c8f335ba9e0/bg3-mods/paks/AlchTooltipFix__0.3.0.pak"
-    }
-   ],
-   "varyant_grubu": "",
-   "varyant": "",
-   "stub": true,
-   "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
-   "onceki": []
-  },
-  {
-   "id": "GrabNear",
-   "ad": "GrabNear",
-   "tur": "bg3-mod",
-   "surum": "2611-02b",
-   "version64": 938297268656668672,
-   "uuid": "bf8ee75c-602b-4cdc-bfac-2ad6de472788",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "Surum sistemi YYMM-DDx'e gecti (BG3MM'de 26.11.202.0). Davranis ayni.",
-   "dosya": "GrabNear__2611-02b.pak",
-   "hedef": "GrabNear.pak",
-   "parcalar": [
+      "id": "AlchTooltipFix",
+      "ad": "AlchTooltipFix",
+      "tur": "bg3-mod",
+      "surum": "0.3.0",
+      "version64": 422212465065984,
+      "uuid": "2a19cc62-ffe4-4674-bfcc-8404cec79151",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "Bos surum (ozelliksiz). Tum ozellikler HQToolTips 0.7.x icinde.",
+      "dosya": "AlchTooltipFix__0.3.0.pak",
+      "hedef": "AlchTooltipFix.pak",
+      "parcalar": [
+        {
+          "id": "AlchTooltipFix__0.3.0.pak",
+          "boyut": 971,
+          "sha256": "c73768123b2a053a8b8c28250304506bdd7c21de528d0cdc4f72e1679618112b",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/3efa430bcf5b7d34be67fd8a5c919c8f335ba9e0/bg3-mods/paks/AlchTooltipFix__0.3.0.pak"
+        }
+      ],
+      "varyant_grubu": "",
+      "varyant": "",
+      "stub": true,
+      "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
+      "onceki": []
+    },
     {
-     "id": "GrabNear__2611-02b.pak",
-     "boyut": 14379,
-     "sha256": "27357c8a50f02748bbb3093eb8f9a2e60e36c28fd2948b1470a34563e41929b0",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/416c25f25b8ceee4a9ad79cdf69c264421727bb3/bg3-mods/paks/GrabNear__2611-02b.pak"
-    }
-   ],
-   "varyant_grubu": "",
-   "varyant": "",
-   "stub": false,
-   "stub_not": "",
-   "onceki": [
+      "id": "GrabNear",
+      "ad": "GrabNear",
+      "tur": "bg3-mod",
+      "surum": "2611-02b",
+      "version64": 938297268656668672,
+      "uuid": "bf8ee75c-602b-4cdc-bfac-2ad6de472788",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "Surum sistemi YYMM-DDx'e gecti (BG3MM'de 26.11.202.0). Davranis ayni.",
+      "dosya": "GrabNear__2611-02b.pak",
+      "hedef": "GrabNear.pak",
+      "parcalar": [
+        {
+          "id": "GrabNear__2611-02b.pak",
+          "boyut": 14379,
+          "sha256": "27357c8a50f02748bbb3093eb8f9a2e60e36c28fd2948b1470a34563e41929b0",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/416c25f25b8ceee4a9ad79cdf69c264421727bb3/bg3-mods/paks/GrabNear__2611-02b.pak"
+        }
+      ],
+      "varyant_grubu": "",
+      "varyant": "",
+      "stub": false,
+      "stub_not": "",
+      "onceki": [
+        {
+          "surum": "0.3.1",
+          "tarih": "2026-11-02",
+          "durum": "test",
+          "degisiklik": "meta.lsx'ten TargetModes cikarildi: mod kayda yazilmaz, silinince kayit acilir. Davranis ayni."
+        }
+      ]
+    },
     {
-     "surum": "0.3.1",
-     "tarih": "2026-11-02",
-     "durum": "test",
-     "degisiklik": "meta.lsx'ten TargetModes cikarildi: mod kayda yazilmaz, silinince kayit acilir. Davranis ayni."
-    }
-   ]
-  },
-  {
-   "id": "HQToolTips",
-   "ad": "HQToolTips",
-   "tur": "bg3-mod",
-   "surum": "0.7.2",
-   "version64": 985166713454592,
-   "uuid": "e9d77ea5-1a02-4a68-916f-b94ab4d27edc",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "AlchPanel MAX_DEPTH 8 -> 12 (AlchemyRoot 11. seviyede olculdu); alchemy metni yeniden cikiyor",
-   "dosya": "HQToolTips__0.7.2.pak",
-   "hedef": "HQToolTips.pak",
-   "parcalar": [
+      "id": "HQToolTips",
+      "ad": "HQToolTips",
+      "tur": "bg3-mod",
+      "surum": "0.7.2",
+      "version64": 985166713454592,
+      "uuid": "e9d77ea5-1a02-4a68-916f-b94ab4d27edc",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "AlchPanel MAX_DEPTH 8 -> 12 (AlchemyRoot 11. seviyede olculdu); alchemy metni yeniden cikiyor",
+      "dosya": "HQToolTips__0.7.2.pak",
+      "hedef": "HQToolTips.pak",
+      "parcalar": [
+        {
+          "id": "HQToolTips__0.7.2.pak",
+          "boyut": 374364,
+          "sha256": "f182cf251cdab2722e6631ec9f7f11bdf0ff272770be3ddeb348f889e1fc57cf",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/257510e48553971ae7f1e460942e4b170ee59076/bg3-mods/paks/HQToolTips__0.7.2.pak"
+        }
+      ],
+      "varyant_grubu": "",
+      "varyant": "",
+      "stub": false,
+      "stub_not": "",
+      "onceki": []
+    },
     {
-     "id": "HQToolTips__0.7.2.pak",
-     "boyut": 374364,
-     "sha256": "f182cf251cdab2722e6631ec9f7f11bdf0ff272770be3ddeb348f889e1fc57cf",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/257510e48553971ae7f1e460942e4b170ee59076/bg3-mods/paks/HQToolTips__0.7.2.pak"
-    }
-   ],
-   "varyant_grubu": "",
-   "varyant": "",
-   "stub": false,
-   "stub_not": "",
-   "onceki": []
-  },
-  {
-   "id": "HagPotions",
-   "ad": "HagPotions",
-   "tur": "bg3-mod",
-   "surum": "0.4.0",
-   "version64": 562949953421312,
-   "uuid": "9b6d2998-20fa-446f-8f54-96033708b134",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "Bos surum (ozelliksiz). Tum ozellikler HQToolTips 0.7.x icinde.",
-   "dosya": "HagPotions__0.4.0.pak",
-   "hedef": "HagPotions.pak",
-   "parcalar": [
+      "id": "HagPotions",
+      "ad": "HagPotions",
+      "tur": "bg3-mod",
+      "surum": "0.4.0",
+      "version64": 562949953421312,
+      "uuid": "9b6d2998-20fa-446f-8f54-96033708b134",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "Bos surum (ozelliksiz). Tum ozellikler HQToolTips 0.7.x icinde.",
+      "dosya": "HagPotions__0.4.0.pak",
+      "hedef": "HagPotions.pak",
+      "parcalar": [
+        {
+          "id": "HagPotions__0.4.0.pak",
+          "boyut": 964,
+          "sha256": "768f30c3f93c5ce7bf9cd3ff6ca228090e796031875068bc29f8969a19c1f183",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/632768d282e2c5fcbd52ab2d6690583de48147a8/bg3-mods/paks/HagPotions__0.4.0.pak"
+        }
+      ],
+      "varyant_grubu": "",
+      "varyant": "",
+      "stub": true,
+      "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
+      "onceki": []
+    },
     {
-     "id": "HagPotions__0.4.0.pak",
-     "boyut": 964,
-     "sha256": "768f30c3f93c5ce7bf9cd3ff6ca228090e796031875068bc29f8969a19c1f183",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/632768d282e2c5fcbd52ab2d6690583de48147a8/bg3-mods/paks/HagPotions__0.4.0.pak"
-    }
-   ],
-   "varyant_grubu": "",
-   "varyant": "",
-   "stub": true,
-   "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
-   "onceki": []
-  },
-  {
-   "id": "HotbarReset",
-   "ad": "HotbarReset",
-   "tur": "bg3-mod",
-   "surum": "2.2.1",
-   "version64": 72339071162122240,
-   "uuid": "c0ee2590-757a-4a29-bfa8-82c7accd8e3d",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "2.2.1: GUI (gomulu sayfa + durum makinesi) cikarildi; vanilla hotbar, pay 16. Karakter degisiminde cokme suphesi icin guvenli surum.",
-   "dosya": "HotbarReset__2.2.1.pak",
-   "hedef": "HotbarReset.pak",
-   "parcalar": [
+      "id": "HotbarReset_16",
+      "ad": "HotbarReset",
+      "tur": "bg3-mod",
+      "surum": "2.2.2",
+      "version64": 72339073309605888,
+      "uuid": "c0ee2590-757a-4a29-bfa8-82c7accd8e3d",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "2.2.2: sutun varyantlari (16 sutun) BMG'de secilebilir; dosya adi her varyantta HotbarReset.pak",
+      "dosya": "HotbarReset_16__2.2.2.pak",
+      "hedef": "HotbarReset.pak",
+      "parcalar": [
+        {
+          "id": "HotbarReset_16__2.2.2.pak",
+          "boyut": 421151,
+          "sha256": "8d9edc19b872a169f8cd8abc164fcd338448ae16e9655aba5754f7d304e43045",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/8b5bd080cdf474767729d368ffb66e1cb5caefac/bg3-mods/paks/HotbarReset_16__2.2.2.pak"
+        }
+      ],
+      "varyant_grubu": "HotbarReset",
+      "varyant": "16",
+      "stub": false,
+      "stub_not": "",
+      "onceki": []
+    },
     {
-     "id": "HotbarReset__2.2.1.pak",
-     "boyut": 25099,
-     "sha256": "df16e30134a2a27b317461c61925c82ea6ef75834e3fa056fe6733894445da60",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/ce90560e1e95f224c76312b0c678bc7daba1944c/bg3-mods/paks/HotbarReset__2.2.1.pak"
-    }
-   ],
-   "varyant_grubu": "",
-   "varyant": "",
-   "stub": false,
-   "stub_not": "",
-   "onceki": []
-  },
-  {
-   "id": "HotbarReset_16",
-   "ad": "HotbarReset",
-   "tur": "bg3-mod",
-   "surum": "2.2.2",
-   "version64": 72339073309605888,
-   "uuid": "c0ee2590-757a-4a29-bfa8-82c7accd8e3d",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "2.2.2: sutun varyantlari (16 sutun) BMG'de secilebilir; dosya adi her varyantta HotbarReset.pak",
-   "dosya": "HotbarReset_16__2.2.2.pak",
-   "hedef": "HotbarReset.pak",
-   "parcalar": [
+      "id": "HotbarReset_20",
+      "ad": "HotbarReset",
+      "tur": "bg3-mod",
+      "surum": "2.2.2",
+      "version64": 72339073309605888,
+      "uuid": "c0ee2590-757a-4a29-bfa8-82c7accd8e3d",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "2.2.2: sutun varyantlari (20 sutun) BMG'de secilebilir; dosya adi her varyantta HotbarReset.pak",
+      "dosya": "HotbarReset_20__2.2.2.pak",
+      "hedef": "HotbarReset.pak",
+      "parcalar": [
+        {
+          "id": "HotbarReset_20__2.2.2.pak",
+          "boyut": 421151,
+          "sha256": "724d2c9fa0fb50d62b6b278077858f50519fdfcd7f9361fdd29a48e2b5674682",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/11965d4920bfa1f68b810ac91206cbb7e2ef04f3/bg3-mods/paks/HotbarReset_20__2.2.2.pak"
+        }
+      ],
+      "varyant_grubu": "HotbarReset",
+      "varyant": "20",
+      "stub": false,
+      "stub_not": "",
+      "onceki": []
+    },
     {
-     "id": "HotbarReset_16__2.2.2.pak",
-     "boyut": 421151,
-     "sha256": "8d9edc19b872a169f8cd8abc164fcd338448ae16e9655aba5754f7d304e43045",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/8b5bd080cdf474767729d368ffb66e1cb5caefac/bg3-mods/paks/HotbarReset_16__2.2.2.pak"
-    }
-   ],
-   "varyant_grubu": "HotbarReset",
-   "varyant": "16",
-   "stub": false,
-   "stub_not": "",
-   "onceki": []
-  },
-  {
-   "id": "HotbarReset_20",
-   "ad": "HotbarReset",
-   "tur": "bg3-mod",
-   "surum": "2.2.2",
-   "version64": 72339073309605888,
-   "uuid": "c0ee2590-757a-4a29-bfa8-82c7accd8e3d",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "2.2.2: sutun varyantlari (20 sutun) BMG'de secilebilir; dosya adi her varyantta HotbarReset.pak",
-   "dosya": "HotbarReset_20__2.2.2.pak",
-   "hedef": "HotbarReset.pak",
-   "parcalar": [
+      "id": "HotbarReset_24",
+      "ad": "HotbarReset",
+      "tur": "bg3-mod",
+      "surum": "2.2.2",
+      "version64": 72339073309605888,
+      "uuid": "c0ee2590-757a-4a29-bfa8-82c7accd8e3d",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "2.2.2: sutun varyantlari (24 sutun) BMG'de secilebilir; dosya adi her varyantta HotbarReset.pak",
+      "dosya": "HotbarReset_24__2.2.2.pak",
+      "hedef": "HotbarReset.pak",
+      "parcalar": [
+        {
+          "id": "HotbarReset_24__2.2.2.pak",
+          "boyut": 421151,
+          "sha256": "0230fc7497b956930bf6662df3134c4452255c001289619c189f5fab9a9ecd37",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/211069a72380dc6255d9a644e3438d69f543ab20/bg3-mods/paks/HotbarReset_24__2.2.2.pak"
+        }
+      ],
+      "varyant_grubu": "HotbarReset",
+      "varyant": "24",
+      "stub": false,
+      "stub_not": "",
+      "onceki": []
+    },
     {
-     "id": "HotbarReset_20__2.2.2.pak",
-     "boyut": 421151,
-     "sha256": "724d2c9fa0fb50d62b6b278077858f50519fdfcd7f9361fdd29a48e2b5674682",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/11965d4920bfa1f68b810ac91206cbb7e2ef04f3/bg3-mods/paks/HotbarReset_20__2.2.2.pak"
-    }
-   ],
-   "varyant_grubu": "HotbarReset",
-   "varyant": "20",
-   "stub": false,
-   "stub_not": "",
-   "onceki": []
-  },
-  {
-   "id": "HotbarReset_24",
-   "ad": "HotbarReset",
-   "tur": "bg3-mod",
-   "surum": "2.2.2",
-   "version64": 72339073309605888,
-   "uuid": "c0ee2590-757a-4a29-bfa8-82c7accd8e3d",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "2.2.2: sutun varyantlari (24 sutun) BMG'de secilebilir; dosya adi her varyantta HotbarReset.pak",
-   "dosya": "HotbarReset_24__2.2.2.pak",
-   "hedef": "HotbarReset.pak",
-   "parcalar": [
+      "id": "HotbarReset_28",
+      "ad": "HotbarReset",
+      "tur": "bg3-mod",
+      "surum": "2.2.2",
+      "version64": 72339073309605888,
+      "uuid": "c0ee2590-757a-4a29-bfa8-82c7accd8e3d",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "2.2.2: sutun varyantlari (28 sutun) BMG'de secilebilir; dosya adi her varyantta HotbarReset.pak",
+      "dosya": "HotbarReset_28__2.2.2.pak",
+      "hedef": "HotbarReset.pak",
+      "parcalar": [
+        {
+          "id": "HotbarReset_28__2.2.2.pak",
+          "boyut": 421151,
+          "sha256": "ae757c4cc30251bfc1c7b168ccec8bb7f3f0951bc51caefa368ec1f7609aba94",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/15d046f369a938afcb8266049790cb77d582b284/bg3-mods/paks/HotbarReset_28__2.2.2.pak"
+        }
+      ],
+      "varyant_grubu": "HotbarReset",
+      "varyant": "28",
+      "stub": false,
+      "stub_not": "",
+      "onceki": []
+    },
     {
-     "id": "HotbarReset_24__2.2.2.pak",
-     "boyut": 421151,
-     "sha256": "0230fc7497b956930bf6662df3134c4452255c001289619c189f5fab9a9ecd37",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/211069a72380dc6255d9a644e3438d69f543ab20/bg3-mods/paks/HotbarReset_24__2.2.2.pak"
-    }
-   ],
-   "varyant_grubu": "HotbarReset",
-   "varyant": "24",
-   "stub": false,
-   "stub_not": "",
-   "onceki": []
-  },
-  {
-   "id": "HotbarReset_28",
-   "ad": "HotbarReset",
-   "tur": "bg3-mod",
-   "surum": "2.2.2",
-   "version64": 72339073309605888,
-   "uuid": "c0ee2590-757a-4a29-bfa8-82c7accd8e3d",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "2.2.2: sutun varyantlari (28 sutun) BMG'de secilebilir; dosya adi her varyantta HotbarReset.pak",
-   "dosya": "HotbarReset_28__2.2.2.pak",
-   "hedef": "HotbarReset.pak",
-   "parcalar": [
+      "id": "HotbarReset_32",
+      "ad": "HotbarReset",
+      "tur": "bg3-mod",
+      "surum": "2.2.2",
+      "version64": 72339073309605888,
+      "uuid": "c0ee2590-757a-4a29-bfa8-82c7accd8e3d",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "2.2.2: sutun varyantlari (32 sutun) BMG'de secilebilir; dosya adi her varyantta HotbarReset.pak",
+      "dosya": "HotbarReset_32__2.2.2.pak",
+      "hedef": "HotbarReset.pak",
+      "parcalar": [
+        {
+          "id": "HotbarReset_32__2.2.2.pak",
+          "boyut": 421151,
+          "sha256": "4368c438e9b56ac8d430f82f8bab519e95d8076e2783ae161096a5a96a459f93",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/a9495aefadfddcd34685ef50d0fa878c6e56db65/bg3-mods/paks/HotbarReset_32__2.2.2.pak"
+        }
+      ],
+      "varyant_grubu": "HotbarReset",
+      "varyant": "32",
+      "stub": false,
+      "stub_not": "",
+      "onceki": []
+    },
     {
-     "id": "HotbarReset_28__2.2.2.pak",
-     "boyut": 421151,
-     "sha256": "ae757c4cc30251bfc1c7b168ccec8bb7f3f0951bc51caefa368ec1f7609aba94",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/15d046f369a938afcb8266049790cb77d582b284/bg3-mods/paks/HotbarReset_28__2.2.2.pak"
-    }
-   ],
-   "varyant_grubu": "HotbarReset",
-   "varyant": "28",
-   "stub": false,
-   "stub_not": "",
-   "onceki": []
-  },
-  {
-   "id": "HotbarReset_32",
-   "ad": "HotbarReset",
-   "tur": "bg3-mod",
-   "surum": "2.2.2",
-   "version64": 72339073309605888,
-   "uuid": "c0ee2590-757a-4a29-bfa8-82c7accd8e3d",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "2.2.2: sutun varyantlari (32 sutun) BMG'de secilebilir; dosya adi her varyantta HotbarReset.pak",
-   "dosya": "HotbarReset_32__2.2.2.pak",
-   "hedef": "HotbarReset.pak",
-   "parcalar": [
+      "id": "HoverStats",
+      "ad": "HoverStats",
+      "tur": "bg3-mod",
+      "surum": "0.3.3",
+      "version64": 422218907516928,
+      "uuid": "0b6b5683-7106-483c-8a60-eed356b40970",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "Direnç satırı Examine penceresinin ikon ve kalkan/ok düzeninin birebir kopyası",
+      "dosya": "HoverStats__0.3.3.pak",
+      "hedef": "HoverStats.pak",
+      "parcalar": [
+        {
+          "id": "HoverStats__0.3.3.pak",
+          "boyut": 22956,
+          "sha256": "b3ec26fb94aa64edebee93298e86d4194b7b7a726a512956f074ca27e1907803",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/65eded7f37d3b19c158df473b62228bc67e8b94c/bg3-mods/paks/HoverStats__0.3.3.pak"
+        }
+      ],
+      "varyant_grubu": "",
+      "varyant": "",
+      "stub": false,
+      "stub_not": "",
+      "onceki": []
+    },
     {
-     "id": "HotbarReset_32__2.2.2.pak",
-     "boyut": 421151,
-     "sha256": "4368c438e9b56ac8d430f82f8bab519e95d8076e2783ae161096a5a96a459f93",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/a9495aefadfddcd34685ef50d0fa878c6e56db65/bg3-mods/paks/HotbarReset_32__2.2.2.pak"
-    }
-   ],
-   "varyant_grubu": "HotbarReset",
-   "varyant": "32",
-   "stub": false,
-   "stub_not": "",
-   "onceki": []
-  },
-  {
-   "id": "HoverStats",
-   "ad": "HoverStats",
-   "tur": "bg3-mod",
-   "surum": "0.3.3",
-   "version64": 422218907516928,
-   "uuid": "0b6b5683-7106-483c-8a60-eed356b40970",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "Direnç satırı Examine penceresinin ikon ve kalkan/ok düzeninin birebir kopyası",
-   "dosya": "HoverStats__0.3.3.pak",
-   "hedef": "HoverStats.pak",
-   "parcalar": [
+      "id": "KillMark",
+      "ad": "KillMark",
+      "tur": "bg3-mod",
+      "surum": "0.3.1",
+      "version64": 422214612549632,
+      "uuid": "396b43e0-667d-473a-a123-9b7acf34f49d",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "meta.lsx'ten TargetModes kaldırıldı (K20 sökülebilirlik); işlev 0.3.0 ile aynı: yasak yalnız wiki tüccar listesi, ! yalnız liste",
+      "dosya": "KillMark__0.3.1.pak",
+      "hedef": "KillMark.pak",
+      "parcalar": [
+        {
+          "id": "KillMark__0.3.1.pak",
+          "boyut": 12379,
+          "sha256": "934dd005a3cda6f3e4eb3cdd2ca1d9468a53feedad8cbcf44a353089af2f27d4",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/2d81bab47d371d6f02758c788c7cc1390db9568a/bg3-mods/paks/KillMark__0.3.1.pak"
+        }
+      ],
+      "varyant_grubu": "",
+      "varyant": "",
+      "stub": false,
+      "stub_not": "",
+      "onceki": []
+    },
     {
-     "id": "HoverStats__0.3.3.pak",
-     "boyut": 22956,
-     "sha256": "b3ec26fb94aa64edebee93298e86d4194b7b7a726a512956f074ca27e1907803",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/65eded7f37d3b19c158df473b62228bc67e8b94c/bg3-mods/paks/HoverStats__0.3.3.pak"
-    }
-   ],
-   "varyant_grubu": "",
-   "varyant": "",
-   "stub": false,
-   "stub_not": "",
-   "onceki": []
-  },
-  {
-   "id": "KillMark",
-   "ad": "KillMark",
-   "tur": "bg3-mod",
-   "surum": "0.3.1",
-   "version64": 422214612549632,
-   "uuid": "396b43e0-667d-473a-a123-9b7acf34f49d",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "meta.lsx'ten TargetModes kaldırıldı (K20 sökülebilirlik); işlev 0.3.0 ile aynı: yasak yalnız wiki tüccar listesi, ! yalnız liste",
-   "dosya": "KillMark__0.3.1.pak",
-   "hedef": "KillMark.pak",
-   "parcalar": [
+      "id": "QuestFinder",
+      "ad": "QuestFinder",
+      "tur": "bg3-mod",
+      "surum": "0.4.1",
+      "version64": 562952100904960,
+      "uuid": "4e0c9a17-2b6d-4f83-91ac-7d5e8b03cf42",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "Harita süzgeci (bölge trigger'ı), panel açıkken 3 sn tazeleme, F6 kısayolu; TargetModes kaldırıldı (sökülebilir).",
+      "dosya": "QuestFinder__0.4.1.pak",
+      "hedef": "QuestFinder.pak",
+      "parcalar": [
+        {
+          "id": "QuestFinder__0.4.1.pak",
+          "boyut": 10802,
+          "sha256": "91671e1a0e441a0085498187b2415fbd32ff2b3a5d73aa9d27b0326ecc9fd872",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/cbfe1a21818b32ed716c0a62b22d9e6b9bdb93f6/bg3-mods/paks/QuestFinder__0.4.1.pak"
+        }
+      ],
+      "varyant_grubu": "",
+      "varyant": "",
+      "stub": false,
+      "stub_not": "",
+      "onceki": []
+    },
     {
-     "id": "KillMark__0.3.1.pak",
-     "boyut": 12379,
-     "sha256": "934dd005a3cda6f3e4eb3cdd2ca1d9468a53feedad8cbcf44a353089af2f27d4",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/2d81bab47d371d6f02758c788c7cc1390db9568a/bg3-mods/paks/KillMark__0.3.1.pak"
-    }
-   ],
-   "varyant_grubu": "",
-   "varyant": "",
-   "stub": false,
-   "stub_not": "",
-   "onceki": []
-  },
-  {
-   "id": "QuestFinder",
-   "ad": "QuestFinder",
-   "tur": "bg3-mod",
-   "surum": "0.4.1",
-   "version64": 562952100904960,
-   "uuid": "4e0c9a17-2b6d-4f83-91ac-7d5e8b03cf42",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "Harita süzgeci (bölge trigger'ı), panel açıkken 3 sn tazeleme, F6 kısayolu; TargetModes kaldırıldı (sökülebilir).",
-   "dosya": "QuestFinder__0.4.1.pak",
-   "hedef": "QuestFinder.pak",
-   "parcalar": [
+      "id": "QuickRoll",
+      "ad": "QuickRoll",
+      "tur": "bg3-mod",
+      "surum": "0.3.1",
+      "version64": 422214612549632,
+      "uuid": "12ec70d5-b53d-4f06-909d-52261e399404",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "meta.lsx'ten TargetModes kaldırıldı (K20); README'ye oyun sürümü satırı",
+      "dosya": "QuickRoll__0.3.1.pak",
+      "hedef": "QuickRoll.pak",
+      "parcalar": [
+        {
+          "id": "QuickRoll__0.3.1.pak",
+          "boyut": 65383,
+          "sha256": "c38baf5c5db902e885e1eba314436350871a6b8d7bb9632cbb451aa60d502d7c",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/9f1459808914c0f29b811c45caf5796867f060e5/bg3-mods/paks/QuickRoll__0.3.1.pak"
+        }
+      ],
+      "varyant_grubu": "",
+      "varyant": "",
+      "stub": false,
+      "stub_not": "",
+      "onceki": []
+    },
     {
-     "id": "QuestFinder__0.4.1.pak",
-     "boyut": 10802,
-     "sha256": "91671e1a0e441a0085498187b2415fbd32ff2b3a5d73aa9d27b0326ecc9fd872",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/cbfe1a21818b32ed716c0a62b22d9e6b9bdb93f6/bg3-mods/paks/QuestFinder__0.4.1.pak"
-    }
-   ],
-   "varyant_grubu": "",
-   "varyant": "",
-   "stub": false,
-   "stub_not": "",
-   "onceki": []
-  },
-  {
-   "id": "QuickRoll",
-   "ad": "QuickRoll",
-   "tur": "bg3-mod",
-   "surum": "0.3.1",
-   "version64": 422214612549632,
-   "uuid": "12ec70d5-b53d-4f06-909d-52261e399404",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "meta.lsx'ten TargetModes kaldırıldı (K20); README'ye oyun sürümü satırı",
-   "dosya": "QuickRoll__0.3.1.pak",
-   "hedef": "QuickRoll.pak",
-   "parcalar": [
+      "id": "StatusDock",
+      "ad": "StatusDock",
+      "tur": "bg3-mod",
+      "surum": "1.0.1",
+      "version64": 36028799166447616,
+      "uuid": "84c5e61b-5067-4968-b756-8d924c1a21ab",
+      "tarih": "2026-11-02",
+      "durum": "dogrulandi",
+      "kanal": "release",
+      "degisiklik": "1.0.1: yalniz paket bilgisi (Author ZmashAlp, README); XAML 1.0.0 ile ayni",
+      "dosya": "StatusDock__1.0.1.pak",
+      "hedef": "StatusDock.pak",
+      "parcalar": [
+        {
+          "id": "StatusDock__1.0.1.pak",
+          "boyut": 79923,
+          "sha256": "662c9ff23c86662b447c0c6ca3f5eb5cab1ad3f3a792c6570663e8dbab9eca7e",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/700070e6334a1008ac9eb83d79be2860d7090462/bg3-mods/paks/StatusDock__1.0.1.pak"
+        }
+      ],
+      "varyant_grubu": "",
+      "varyant": "",
+      "stub": false,
+      "stub_not": "",
+      "onceki": []
+    },
     {
-     "id": "QuickRoll__0.3.1.pak",
-     "boyut": 65383,
-     "sha256": "c38baf5c5db902e885e1eba314436350871a6b8d7bb9632cbb451aa60d502d7c",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/9f1459808914c0f29b811c45caf5796867f060e5/bg3-mods/paks/QuickRoll__0.3.1.pak"
-    }
-   ],
-   "varyant_grubu": "",
-   "varyant": "",
-   "stub": false,
-   "stub_not": "",
-   "onceki": []
-  },
-  {
-   "id": "StatusDock",
-   "ad": "StatusDock",
-   "tur": "bg3-mod",
-   "surum": "1.0.1",
-   "version64": 36028799166447616,
-   "uuid": "84c5e61b-5067-4968-b756-8d924c1a21ab",
-   "tarih": "2026-11-02",
-   "durum": "dogrulandi",
-   "kanal": "release",
-   "degisiklik": "1.0.1: yalniz paket bilgisi (Author ZmashAlp, README); XAML 1.0.0 ile ayni",
-   "dosya": "StatusDock__1.0.1.pak",
-   "hedef": "StatusDock.pak",
-   "parcalar": [
+      "id": "TooltipFill",
+      "ad": "TooltipFill",
+      "tur": "bg3-mod",
+      "surum": "0.3.1",
+      "version64": 422214612549632,
+      "uuid": "75a420c9-5624-4d89-a185-cf41f045d7de",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "Bos surum (ozelliksiz). Tum ozellikler HQToolTips 0.7.x icinde.",
+      "dosya": "TooltipFill__0.3.1.pak",
+      "hedef": "TooltipFill.pak",
+      "parcalar": [
+        {
+          "id": "TooltipFill__0.3.1.pak",
+          "boyut": 966,
+          "sha256": "93ad60450d69b7cd3d0dc8d2eff278607c29e30022c5df68fc8fc30b155a4c0c",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/06299b59050b104105c6337694ffe7e0281e463d/bg3-mods/paks/TooltipFill__0.3.1.pak"
+        }
+      ],
+      "varyant_grubu": "",
+      "varyant": "",
+      "stub": true,
+      "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
+      "onceki": []
+    },
     {
-     "id": "StatusDock__1.0.1.pak",
-     "boyut": 79923,
-     "sha256": "662c9ff23c86662b447c0c6ca3f5eb5cab1ad3f3a792c6570663e8dbab9eca7e",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/700070e6334a1008ac9eb83d79be2860d7090462/bg3-mods/paks/StatusDock__1.0.1.pak"
-    }
-   ],
-   "varyant_grubu": "",
-   "varyant": "",
-   "stub": false,
-   "stub_not": "",
-   "onceki": []
-  },
-  {
-   "id": "TooltipFill",
-   "ad": "TooltipFill",
-   "tur": "bg3-mod",
-   "surum": "0.3.1",
-   "version64": 422214612549632,
-   "uuid": "75a420c9-5624-4d89-a185-cf41f045d7de",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "Bos surum (ozelliksiz). Tum ozellikler HQToolTips 0.7.x icinde.",
-   "dosya": "TooltipFill__0.3.1.pak",
-   "hedef": "TooltipFill.pak",
-   "parcalar": [
+      "id": "TrashList",
+      "ad": "TrashList",
+      "tur": "bg3-mod",
+      "surum": "1.3.0",
+      "version64": 36451009484029952,
+      "uuid": "8e724da9-ff17-4f60-a313-d1d18f0904d2",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "Bos surum (ozelliksiz). Tum ozellikler HQToolTips 0.7.x icinde.",
+      "dosya": "TrashList__1.3.0.pak",
+      "hedef": "TrashList.pak",
+      "parcalar": [
+        {
+          "id": "TrashList__1.3.0.pak",
+          "boyut": 965,
+          "sha256": "089584d0531423edc4beaae51b6df8ced9c6a8858cab834261ce7120a3248260",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/b53b63b40b4074a6e28f8983b861b5f7f923f137/bg3-mods/paks/TrashList__1.3.0.pak"
+        }
+      ],
+      "varyant_grubu": "",
+      "varyant": "",
+      "stub": true,
+      "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
+      "onceki": []
+    },
     {
-     "id": "TooltipFill__0.3.1.pak",
-     "boyut": 966,
-     "sha256": "93ad60450d69b7cd3d0dc8d2eff278607c29e30022c5df68fc8fc30b155a4c0c",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/06299b59050b104105c6337694ffe7e0281e463d/bg3-mods/paks/TooltipFill__0.3.1.pak"
+      "id": "TrashMark",
+      "ad": "TrashMark",
+      "tur": "bg3-mod",
+      "surum": "1.2.2",
+      "version64": 36310276290641920,
+      "uuid": "68c7fc4b-7d52-4d41-ba18-7d8296c6bfe0",
+      "tarih": "2026-11-02",
+      "durum": "test",
+      "kanal": "beta",
+      "degisiklik": "Bos surum (ozelliksiz). Tum ozellikler HQToolTips 0.7.x icinde.",
+      "dosya": "TrashMark__1.2.2.pak",
+      "hedef": "TrashMark.pak",
+      "parcalar": [
+        {
+          "id": "TrashMark__1.2.2.pak",
+          "boyut": 965,
+          "sha256": "60c9e6197655d0df327f052b67fbdb4532ac5ead9fbfdb4b71bf569ae251cf95",
+          "url": "https://raw.githubusercontent.com/AALabs26/AALabs/24c2e2d38a9d6071f05fb9f01677fe5b91b4b1d3/bg3-mods/paks/TrashMark__1.2.2.pak"
+        }
+      ],
+      "varyant_grubu": "",
+      "varyant": "",
+      "stub": true,
+      "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
+      "onceki": []
     }
-   ],
-   "varyant_grubu": "",
-   "varyant": "",
-   "stub": true,
-   "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
-   "onceki": []
-  },
-  {
-   "id": "TrashList",
-   "ad": "TrashList",
-   "tur": "bg3-mod",
-   "surum": "1.3.0",
-   "version64": 36451009484029952,
-   "uuid": "8e724da9-ff17-4f60-a313-d1d18f0904d2",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "Bos surum (ozelliksiz). Tum ozellikler HQToolTips 0.7.x icinde.",
-   "dosya": "TrashList__1.3.0.pak",
-   "hedef": "TrashList.pak",
-   "parcalar": [
-    {
-     "id": "TrashList__1.3.0.pak",
-     "boyut": 965,
-     "sha256": "089584d0531423edc4beaae51b6df8ced9c6a8858cab834261ce7120a3248260",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/b53b63b40b4074a6e28f8983b861b5f7f923f137/bg3-mods/paks/TrashList__1.3.0.pak"
-    }
-   ],
-   "varyant_grubu": "",
-   "varyant": "",
-   "stub": true,
-   "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
-   "onceki": []
-  },
-  {
-   "id": "TrashMark",
-   "ad": "TrashMark",
-   "tur": "bg3-mod",
-   "surum": "1.2.2",
-   "version64": 36310276290641920,
-   "uuid": "68c7fc4b-7d52-4d41-ba18-7d8296c6bfe0",
-   "tarih": "2026-11-02",
-   "durum": "test",
-   "kanal": "beta",
-   "degisiklik": "Bos surum (ozelliksiz). Tum ozellikler HQToolTips 0.7.x icinde.",
-   "dosya": "TrashMark__1.2.2.pak",
-   "hedef": "TrashMark.pak",
-   "parcalar": [
-    {
-     "id": "TrashMark__1.2.2.pak",
-     "boyut": 965,
-     "sha256": "60c9e6197655d0df327f052b67fbdb4532ac5ead9fbfdb4b71bf569ae251cf95",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/24c2e2d38a9d6071f05fb9f01677fe5b91b4b1d3/bg3-mods/paks/TrashMark__1.2.2.pak"
-    }
-   ],
-   "varyant_grubu": "",
-   "varyant": "",
-   "stub": true,
-   "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
-   "onceki": []
-  }
- ]
+  ]
 }
