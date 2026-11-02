@@ -1,0 +1,1227 @@
+// ==UserScript==
+// @name         AALabs Google.com
+// @name:tr      Google.com
+// @name:en      Google.com
+// @namespace    aalabs
+// @version      26.11.2.4
+// @description  Google aramada linkleri yönlendirmesiz bırakır, sonuçların soluna sitenin resmini koyar, Görseller paneline Görseli aç / Görselle ara / TinEye / Yandex düğmeleri ekler.
+// @match        https://www.google.com/search*
+// @match        https://www.google.com.tr/search*
+// @icon         data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAIXUlEQVR4nO2be3BU1R3HP+duNrvZbJ5ACOEhSUAeAiHhKSAgBApFeQkUKn3IKCPlYcc66IzWsSPOCI4tNdRStOPU0o6CQikELBRBJFAsISEPoi0E8oAkPBJCXptssqd/7O7NbrLZ3GVGrg35/rN77/l97/n+fuee33ncOYKOIcwbNs5QUBYjmSwECVJKqxBC+OHoDimlFELUSkkhggwHjj22d7Z8Dkhf9j6dsax7ca5QxBZgxLeu+N4gTzrkxvptmw+1LfAOwOrVRospKk3Aar7jLR0wpJQSdtQ3Vq1nxw67+3ark07n9woh5uml8V5ASple31i1yB0ExV1gMUWldXXnAYQQ8yymqDT1GnefF6R3ude+I0gppWRe/bbNhxRACEVsuW+cx/kauJK8EOYNG2caUP6ptyY90IIjVVFQFustRC8oKIsVJJP1FqIbJJMVIUjQW4deEEImKFJKq95C9IKUWJXv+tz+24QQQiga7Lo0ugOgtwC90R0AvQXoje4A6C1Ab3QHQG8BeiPobokxYVZ+OC6FSYkDiYsIxyElpVXVnCq8wp6sHK5V3/HJ6xsZzlMPj2dS4kBiwsKw2e0UlFewOzOHwwXfdFrv6H5x/GjCWJIH9CXCbKbaZuNccSl/On2W3GtlAfshQje85HO72B+emTKRTQvmEhoc7LPc3tLC7N/+gX8XlXjdXzYmibTlizvkHci9wKoPP6K+yd6uTACvz5/LhhmPoPiYvTscDrYcPsamQ4FtbQTcBV6YNZ3fLF2gOtHU3MLF6ze5cquSFofDda+ZvGvlXrzZw4fw3splKq++qYmC8gpKq6pVm8dGDueDn6zwWe/Lc1P5+cypqvOVdfVcKKugsq7e6Yii8NKcmTyfOi0gfwLqAhPiB/DL788CoLmlhTcOHWX7iVPUNDYCEBFiZmlKEvE9o2mwt7ai2RhE2g8WYVAUHFLyevoR0o5/ic3eDEBy/768v3IZQ2JjmDdiGEuSR/FJVo7KHxYbwwuzHwWgusHGuo8+Zd/5fBxSIgTMHzWCd1c8QUSImVfmprI3O5fLNys1+RTQG/DaY9/DoChIKVn9l928deSY6rxb3PsZZ3h5n/f3h6UpSfSNjABg69ETvHXkmOo8QFbJVRZu/4C6xiYAnps51Yu/bvoUghSn1Gd27mJvdh4O6ey5UsK+83ms3rkLgOCgIH42Vfsej+YAJPTswZTEeAAO5hWwK/O85koWjnZ+YKpvauLtI8d92pRU3WbnmUxwJboHoqOcAoXg8VEPAZBZXMrBvAKf/PS8ArJLr3rVpwWaA5A6bLC6cfz7E6c0VwAwMX4gAMf/c4lqm61Du/25+eBcpzMp0ckZGhtDdKgFcLa0PxzIuQBAn4hw4ntEa9KmOQBJ/eLA1YonL17WSiMuIpyIEDMA54pL/dpmlVxV/w/tHQPAENdvwPzYGL+2bmgOQP+oSAAu3bhFsyvba0FseJj6v6Tqtl/b6gYbNTZnTomNCGvPr/TPL/V4vifPHzSPAuFmZyu6h53W+yYOP/dsO/v3Tp7mjxlfEWpqHfPdzvlDjc1GmNmkDpdWT36jf75neajJ1GldBBIA6cq6bT+oGxSFEXGx7ex7Wa0untYaXI935Rk3LRC68BKnjak5AHVNziEqwvUmuNHikFy8cVO9ju8RjUFp7Vm1Hq0Sbu68VcJcNu4hsdbmyTdzvaa2Uy5AjYvfGTQHoLy6BoCBbbLrHZuN0ZveVq+L3niFHtZQ9brMY03Q3zW0dYRoSwhW16vrXkuU3fHkR3oFuy3cecqp1/dapC00J8GvK64DEGkJ0ZxhASpqatW8MXZAP7+2KR7lX5dXAFBQfl291xl/jEd5QVmFJn2aA5BxqXXoWz42WSsNgFOFVwCY9mAiUZaQDu0WJDknMFJKMi45Of+tuKG+9gtHj/Rbz3wXv7iyiuJORhw3NAfgzOVidRh7durDDI7pqZXK3uxcAMxGIy/OnuHTZlCvnqwYl6zWdfW2c5EkPSZASf3iWJjke5a3JGUUw/v0BmBPVq5mbZoD4JCSrUdPAGA1mUhf+zRzhg/xWppGWywEGdo/cm9WLlduORcna6dP5tV5s7wS1iOD4vnbmqcwG40A/ProF178bcdP0tTcAsD2J5ewYlyyujYwGhSeHJ/C75Y/AUBDkz2gmWpA+wEGIdi/9mmmDm79nnqnwcb1mlospmBiw8PUgGw6eIQ3//G5ajdtcAL71qwiyGAA157Btdt3CDebiHJNdQF2ZWaz6sOP29X9i9Rp/OrxOep1XWMTN2pr6WW1es01nv9kHzu+/JfmABiCJ0x5TauxBP6ek8+IuFgGubqAyRhEdKiFMLOpdQyXkv25+Zwtap26FlVWkV9WzuxhQzAZgzAoCpGWEEKCjSrn47PZrPnrp7T4mDycLiwCYFLiQBQhCA4yEGkJITioNaCv7v+Md78IbJ1yVztCAI8+OIhFySMZ2juGkGAjdY1NlFTdJquklM/yv6Hw5i2fvF7WUH48cSyTEpxbYg12OxfKKth9LltNfP4wNDaGlePHkNy/L+EhZqobGsgsKuXPZ85y8YbvOv3hrgPQVXDf7wp3B0BvAXqjOwB6C9Ab3QHQW4De6A6A3gL0hiJloLt2XQdSSqkIITreZOviEIJaRUoK9RaiF6QUhQqCDL2F6AZBhuLAsUdvHXrBgWOPcC2Jc7rQGUGtyKt7581RCiClQ27kfhoNpHT6DNIAYP8q46JxwpQ+Qoixemu7F5Cwo37b5q14ToTqG6vWSynTdVV2DyDhQH1j1Xr3tUEtycx02Ec/tNtoMMcIGNPljtG1Hp39qe+jsx64fw9PtynzPj4vE6Tk/+T4PLVSCk3H5/8HbK4N59c8A44AAAAASUVORK5CYII=
+// @updateURL    http://127.0.0.1:47815/u/AALabs.GoogleCom.user.js
+// @downloadURL  http://127.0.0.1:47815/u/AALabs.GoogleCom.user.js
+// @grant        GM_getValue
+// @grant        GM_setValue
+// @grant        GM_registerMenuCommand
+// @grant        GM_unregisterMenuCommand
+// @grant        GM_setClipboard
+// @grant        GM_xmlhttpRequest
+// @grant        GM_openInTab
+// @connect      *
+// @run-at       document-start
+// @noframes
+// @aalabs-ikon  GOO
+// ==/UserScript==
+
+/* AALabs Google.com (GOO) — app-lab · 2611-02d
+ * Firefox eklentilerinin yerine: Don't track me Google, View Image, Search Result Previews.
+ * Tasarım kapısı (2026-11-02): tasarım onay · GOO son · Önizleme A · Kaynak A · Düğmeler B · Ayarlar B · +E1 +E2 +E4 +E5 · Çıkar yok · Kabul yok
+ *   Önizleme A: sonucun solunda küçük resim. Kaynak A: sitenin og:image etiketi; yoksa büyük favicon.
+ *   Düğmeler B: Görseller panelinde büyük resmin sağ üst köşesi. Ayarlar B: arama kutusunun yanında GOO düğmesi.
+ *   E1: küçük resme tıklayınca site açılır. E2: hedef linkten izleme ekleri (utm_, fbclid…) silinir.
+ *   E4: TinEye ve Yandex ile görsel arama. E5: GOO yanında 3 hızlı anahtar (Link · Görsel · Önizleme).
+ * Seçici: Google'ın üretilmiş sınıf adlarına bağlanmaz. Sonuç = başlık (h3 / role=heading) taşıyan bağlantı;
+ * blok = o başlığı tek başına taşıyan en üst ata. Görsel paneli = Google dışı adresli, büyük görünen resim.
+ * Linkler: Google'ın yönlendirme adresi (/url?q=) asıl adrese çevrilir, ping kalkar. Google tıklamada adresi geri
+ * yazarsa gözlemci hemen eski hâline getirir; tıklama anında (capture) bir kez daha bakılır.
+ */
+(function () {
+  'use strict';
+
+  const SURUM = '2611-02d';
+  const KOD = 'GOO';
+  const ONEK = 'aalabs-goo';
+  const UYGULAMA = 'AALabs.GoogleCom';
+  const YASAK = new Set(['Ctrl+T', 'Ctrl+W', 'Ctrl+N', 'Ctrl+L', 'Ctrl+R', 'Ctrl+F', 'Ctrl+P', 'Ctrl+S', 'Ctrl+D', 'Ctrl+H', 'Ctrl+J', 'Ctrl+K', 'Ctrl+U', 'Ctrl+Q',
+    'Ctrl+C', 'Ctrl+V', 'Ctrl+X', 'Ctrl+A', 'Ctrl+Z', 'Ctrl+Y', 'Ctrl+E', 'Ctrl+G', 'Ctrl+Shift+T', 'Ctrl+Shift+N', 'Ctrl+Shift+P', 'Ctrl+Shift+I', 'Ctrl+Shift+J',
+    'Alt+D', 'Alt+F4', 'Ctrl+Tab', 'Ctrl+Shift+Tab', 'Ctrl+Shift+Delete', 'Ctrl+Plus', 'Ctrl+Minus', 'Ctrl+0']);
+
+  // ---------- Metinler (iki dil zorunlu; anahtarlar iki dilde aynı) ----------
+  const METIN = {
+    tr: {
+      ad: 'Google.com', ayarlar: 'Ayarlar', kapat: 'Kapat', ara: 'Ayarlarda ara…', aramaYok: 'Eşleşen ayar yok.',
+      grupOrtak: 'ORTAK', bLinkler: 'Linkler', bGorseller: 'Görseller', bOnizleme: 'Önizleme',
+      bGenel: 'Genel', bKisayol: 'Klavye kısayolları', bTani: 'Tanı', bHakkinda: 'Hakkında',
+      linkAc: 'Linkleri temizle (Google yönlendirmesi ve ping kalkar)', linkIzleme: 'Hedef linkten izleme eklerini sil',
+      linkNot: 'Silinen ekler: utm_*, fbclid, gclid, gbraid, wbraid, dclid, msclkid, srsltid, mc_cid, mc_eid, igshid, yclid, _hsenc, _hsmi. Reklam linklerine dokunulmaz.',
+      linkKapatNot: 'Kapatınca bu sayfadaki linkler Google\'ın adresine döner.',
+      gorselAc: 'Görseller panelinde düğmeleri göster', gorselDugmeler: 'Hangi düğmeler',
+      dAc: 'Görseli aç', dLens: 'Görselle ara', dTineye: 'TinEye', dYandex: 'Yandex',
+      gorselNot: 'Düğmeler büyük resmin sağ üst köşesinde durur. Görseller sekmesinde bir resme tıklayınca çıkar.',
+      onzAc: 'Sonuçların soluna sitenin resmini koy', onzSekme: 'Hangi sekmelerde', sTumu: 'Tümü', sHaber: 'Haberler', sVideo: 'Videolar',
+      onzTikla: 'Küçük resme tıklayınca siteyi aç',
+      onzNot: 'Resim sitenin kendi og:image etiketinden gelir. Her sonuç için siteye bir istek gider (çerez gönderilmez). Resim yoksa büyük favicon görünür. Google kendi resmini koyduysa ek resim konmaz.',
+      onzIzinNot: 'İlk aramada Tampermonkey başka sitelere bağlanmak için izin sorar. "Tüm alan adlarına her zaman izin ver" seç.',
+      sifirla: 'Bu bölümü sıfırla',
+      tema: 'Tema', temaSayfa: 'Google\'a uy', temaAcik: 'Açık', temaKoyu: 'Koyu',
+      dil: 'Dil', olcek: 'Ölçek', dugme: 'Arama kutusunun yanında GOO düğmesi', dugmeGoster: 'Göster',
+      hizli: 'GOO yanında hızlı anahtarlar (Link · Görsel · Önizleme)', hizliGoster: 'Göster',
+      dugmeNot: 'Düğme kapalıyken Ayarlar Ctrl+, ve Tampermonkey menüsünden açılır.',
+      kisayolAyarlar: 'Ayarları aç', kisayolDegistir: 'Değiştir', kisayolBekle: 'Tuşa bas… (Esc: vazgeç)',
+      kisayolGecersiz: 'Bu tuş kullanılamaz. Ctrl ya da Alt ile bir harf seç.', kisayolSifirla: 'Varsayılan',
+      taniBaslik: 'Durum', raporuKopyala: 'Raporu kopyala', raporKopyalandi: 'Rapor kopyalandı.', kopyalanamadi: 'Kopyalanamadı. Metni seçtim: Ctrl+C.',
+      surum: 'Sürüm', yedek: 'Yedek', disaAktar: 'Ayarları dışa aktar', iceAktar: 'Ayarları içe aktar',
+      iceAktarildi: 'Ayarlar içe aktarıldı.', iceAktarHata: 'Dosya okunamadı. AALabs Google.com yedeği mi?',
+      hakkindaNot: 'Google aramada linkleri doğrudan siteye gönderir, sonuçlara sitenin resmini koyar ve Görseller panelinde resmi açma ve başka motorda arama düğmeleri ekler.',
+      menuAyarlar: 'Ayarlar (A)', menuDil: 'Language: English (L)',
+      dugmeEtiket: 'Google.com ayarları', dugmeUyari: 'Bir parça bulunamadı. Ayrıntı Tanı bölümünde.',
+      dilDugme: 'EN', temaDugme: 'Tema',
+      hLink: 'Link', hGorsel: 'Görsel', hOnz: 'Önizleme', acik: 'açık', kapali: 'kapalı',
+      hizliEtiket: (ad, a) => `${ad}: ${a ? 'açık' : 'kapalı'}. Değiştirmek için bas.`,
+      onzEtiket: (s) => `${s} sitesini aç`, yukleniyor: 'Yükleniyor…',
+      tSite: 'Sayfa', tSekme: 'Sekme', tForm: 'Arama kutusu', tFormYok: 'bulunamadı → GOO düğmesi sağ altta', tFormVar: 'bulundu',
+      tLink: 'Linkler', tLinkOzet: (n, y, p, i, r) => `${n} dış link · ${y} yönlendirme çözüldü · ${p} ping kalktı · ${i} izleme eki silindi · ${r} reklam linkine dokunulmadı`,
+      tGeriYaz: 'Google\'ın geri yazdığı adres düzeltildi', tSonuc: 'Sonuç blokları', tOnz: 'Önizleme',
+      tOnzOzet: (r, f, b, g) => `${r} resim · ${f} favicon · ${b} bekliyor · ${g} Google'ın kendi resmi var`,
+      tGorsel: 'Görsel paneli', tGorselBekliyor: 'bekliyor (Görseller\'de bir resme tıkla)', tGorselYok: 'Görseller sekmesi değil',
+      tIstek: 'Son istekler', tHata: 'Son hata', tBekci: 'Tarama sınırı (5 sn\'de 25)', tKapali: 'kapalı', tBekliyor: 'bekliyor (sayfada sonuç yok)',
+      sekmeAd: { tumu: 'Tümü', haber: 'Haberler', video: 'Videolar', gorsel: 'Görseller', diger: 'başka' }
+    },
+    en: {
+      ad: 'Google.com', ayarlar: 'Settings', kapat: 'Close', ara: 'Search settings…', aramaYok: 'No matching setting.',
+      grupOrtak: 'COMMON', bLinkler: 'Links', bGorseller: 'Images', bOnizleme: 'Previews',
+      bGenel: 'General', bKisayol: 'Keyboard shortcuts', bTani: 'Diagnostics', bHakkinda: 'About',
+      linkAc: 'Clean links (removes Google redirect and ping)', linkIzleme: 'Strip tracking tags from target links',
+      linkNot: 'Removed tags: utm_*, fbclid, gclid, gbraid, wbraid, dclid, msclkid, srsltid, mc_cid, mc_eid, igshid, yclid, _hsenc, _hsmi. Ad links are left alone.',
+      linkKapatNot: 'When off, links on this page return to Google\'s address.',
+      gorselAc: 'Show buttons in the Images panel', gorselDugmeler: 'Which buttons',
+      dAc: 'Open image', dLens: 'Search by image', dTineye: 'TinEye', dYandex: 'Yandex',
+      gorselNot: 'Buttons sit on the top-right corner of the large image. They appear after clicking an image on the Images tab.',
+      onzAc: 'Put the site\'s image left of each result', onzSekme: 'Which tabs', sTumu: 'All', sHaber: 'News', sVideo: 'Videos',
+      onzTikla: 'Click the thumbnail to open the site',
+      onzNot: 'The image comes from the site\'s own og:image tag. One request per result goes to the site (no cookies). Without an image a large favicon shows. No extra image when Google already shows one.',
+      onzIzinNot: 'On the first search Tampermonkey asks for permission to connect to other sites. Choose "Always allow all domains".',
+      sifirla: 'Reset this section',
+      tema: 'Theme', temaSayfa: 'Follow Google', temaAcik: 'Light', temaKoyu: 'Dark',
+      dil: 'Language', olcek: 'Scale', dugme: 'GOO button next to the search box', dugmeGoster: 'Show',
+      hizli: 'Quick switches next to GOO (Link · Image · Preview)', hizliGoster: 'Show',
+      dugmeNot: 'When the button is off, open Settings with Ctrl+, or the Tampermonkey menu.',
+      kisayolAyarlar: 'Open settings', kisayolDegistir: 'Change', kisayolBekle: 'Press a key… (Esc: cancel)',
+      kisayolGecersiz: 'This key cannot be used. Pick a letter with Ctrl or Alt.', kisayolSifirla: 'Default',
+      taniBaslik: 'Status', raporuKopyala: 'Copy report', raporKopyalandi: 'Report copied.', kopyalanamadi: 'Copy failed. Text selected: press Ctrl+C.',
+      surum: 'Version', yedek: 'Backup', disaAktar: 'Export settings', iceAktar: 'Import settings',
+      iceAktarildi: 'Settings imported.', iceAktarHata: 'Could not read the file. Is it an AALabs Google.com backup?',
+      hakkindaNot: 'Sends Google search links straight to the site, puts the site\'s image on results, and adds open-image and reverse-search buttons to the Images panel.',
+      menuAyarlar: 'Settings (S)', menuDil: 'Dil: Türkçe (L)',
+      dugmeEtiket: 'Google.com settings', dugmeUyari: 'A part was not found. See Diagnostics.',
+      dilDugme: 'TR', temaDugme: 'Theme',
+      hLink: 'Link', hGorsel: 'Image', hOnz: 'Preview', acik: 'on', kapali: 'off',
+      hizliEtiket: (ad, a) => `${ad}: ${a ? 'on' : 'off'}. Press to change.`,
+      onzEtiket: (s) => `Open ${s}`, yukleniyor: 'Loading…',
+      tSite: 'Page', tSekme: 'Tab', tForm: 'Search box', tFormYok: 'not found → GOO button bottom right', tFormVar: 'found',
+      tLink: 'Links', tLinkOzet: (n, y, p, i, r) => `${n} outside links · ${y} redirects resolved · ${p} pings removed · ${i} tracking tags removed · ${r} ad links left alone`,
+      tGeriYaz: 'Address rewritten by Google restored', tSonuc: 'Result blocks', tOnz: 'Previews',
+      tOnzOzet: (r, f, b, g) => `${r} images · ${f} favicons · ${b} waiting · ${g} with Google's own image`,
+      tGorsel: 'Image panel', tGorselBekliyor: 'waiting (click an image on Images)', tGorselYok: 'not the Images tab',
+      tIstek: 'Recent requests', tHata: 'Last error', tBekci: 'Scan limit (25 per 5 s)', tKapali: 'off', tBekliyor: 'waiting (no results on the page)',
+      sekmeAd: { tumu: 'All', haber: 'News', video: 'Videos', gorsel: 'Images', diger: 'other' }
+    }
+  };
+
+  // ---------- GM sarmalayıcıları (başka yöneticide çökmesin) ----------
+  const bellek = {};
+  function oku(ad, varsayilan) {
+    try { if (typeof GM_getValue === 'function') return GM_getValue(ad, varsayilan); } catch (_h) { /* yok */ }
+    return ad in bellek ? bellek[ad] : varsayilan;
+  }
+  function yaz(ad, deger) {
+    try { if (typeof GM_setValue === 'function') { GM_setValue(ad, deger); return; } } catch (_h) { /* yok */ }
+    bellek[ad] = deger;
+  }
+
+  // ---------- Ayarlar ----------
+  const VARSAYILAN = {
+    link: true, izleme: true,
+    gorsel: true, dAc: true, dLens: true, dTineye: true, dYandex: true,
+    onz: true, sTumu: true, sHaber: true, sVideo: true, onzTikla: true,
+    tema: 'sayfa', dil: 'tr', olcek: 100, dugme: true, hizli: true, kisayol: 'Ctrl+Comma'
+  };
+  const ACIK_KAPALI = ['link', 'izleme', 'gorsel', 'dAc', 'dLens', 'dTineye', 'dYandex', 'onz', 'sTumu', 'sHaber', 'sVideo', 'onzTikla', 'dugme', 'hizli'];
+  const BOLUM_AYAR = { linkler: ['link', 'izleme'], gorseller: ['gorsel', 'dAc', 'dLens', 'dTineye', 'dYandex'], onizleme: ['onz', 'sTumu', 'sHaber', 'sVideo', 'onzTikla'] };
+  function ayarDuzelt(a) {
+    const s = Object.assign({}, VARSAYILAN, a && typeof a === 'object' ? a : {});
+    ACIK_KAPALI.forEach(k => { s[k] = !!s[k]; });
+    if (!['sayfa', 'acik', 'koyu'].includes(s.tema)) s.tema = 'sayfa';
+    if (!['tr', 'en'].includes(s.dil)) s.dil = 'tr';
+    s.olcek = Number(s.olcek);
+    if (![90, 100, 110, 125].includes(s.olcek)) s.olcek = 100;
+    if (!komboKanonikMi(s.kisayol)) s.kisayol = VARSAYILAN.kisayol;
+    Object.keys(s).forEach(k => { if (!(k in VARSAYILAN)) delete s[k]; });
+    return s;
+  }
+  let ayar = null; // yükleme dosyanın sonunda (TDZ kuralı, platform-userscript §2.12)
+  function ayarKaydet() { yaz('ayar', ayar); }
+  const m = (k) => METIN[ayar.dil][k];
+
+  // ---------- Sayaçlar (Tanı) ----------
+  let sayac = null;
+  function sayacSifirla() {
+    const eski = sayac || {};
+    sayac = { harici: 0, yon: eski.yon || 0, ping: eski.ping || 0, izleme: eski.izleme || 0, reklam: 0, geriYaz: eski.geriYaz || 0,
+      baslik: 0, blok: 0, resim: 0, fav: 0, bekliyor: 0, google: 0, gorsel: '', form: false };
+  }
+  sayacSifirla();
+  const istekler = []; // son 8 istek: Tanı
+  function istekKaydet(adres, sonuc) {
+    let h = adres; try { h = new URL(adres).hostname; } catch (_h) { /* olduğu gibi */ }
+    istekler.unshift(`${h} → ${sonuc}`);
+    istekler.length = Math.min(istekler.length, 8);
+  }
+
+  // ---------- Adresler ----------
+  const IZLEME = /^(utm_[a-z0-9_]+|fbclid|gclid|gbraid|wbraid|dclid|msclkid|srsltid|mc_cid|mc_eid|igshid|yclid|_hsenc|_hsmi)$/i;
+  function googleMu(h) {
+    return /(^|\.)google\.[a-z]{2,3}(\.[a-z]{2})?$/i.test(h) || /(^|\.)(gstatic\.com|googleusercontent\.com|ggpht\.com)$/i.test(h);
+  }
+  function reklamMu(u) {
+    return /(^|\.)(googleadservices\.com|doubleclick\.net|googlesyndication\.com)$/i.test(u.hostname) ||
+      (googleMu(u.hostname) && /^\/(aclk|pagead)/.test(u.pathname));
+  }
+  // Arama sayfasının kendi alanı (www.google.<tld>): yalnız bu alandaki linkler "Google iç linki" sayılır.
+  // support.google.com, sites.google.com gibi gerçek sonuçlar dış link gibi işlenir (inceleme A).
+  function aramaGoogleMu(h) { return /^(www\.)?google\.[a-z]{2,3}(\.[a-z]{2})?$/i.test(h); }
+  // Ham sorgu parçalarıyla izleme eki silme: URLSearchParams yeniden kodlayıp adresi bozuyordu (%20 → +, ~ → %7E, eski kodlamalar)
+  function izlemeSil(u) {
+    if (!u.search || u.search === '?') return 0;
+    const parca = u.search.slice(1).split('&');
+    const kalan = parca.filter(x => { let ad = x.split('=')[0]; try { ad = decodeURIComponent(ad); } catch (_h) { /* ham kalsın */ } return !IZLEME.test(ad); });
+    const iz = parca.length - kalan.length;
+    if (iz) u.search = kalan.length ? '?' + kalan.join('&') : '';
+    return iz;
+  }
+  // İki adres aynı yere mi gidiyor (ham Unicode ↔ %-kodlu farkını yok sayar)
+  function ayniAdres(a, b) {
+    if (a === b) return true;
+    try { return new URL(a, location.href).href === new URL(b, location.href).href; } catch (_h) { return false; }
+  }
+  // Döner: null (dokunma) · {reklam:true} · {url, yon, iz}
+  function temizAdres(href) {
+    if (!href || href.charAt(0) === '#' || /^javascript:/i.test(href)) return null;
+    let u;
+    try { u = new URL(href, location.href); } catch (_h) { return null; }
+    if (!/^https?:$/.test(u.protocol)) return null;
+    if (reklamMu(u)) return { reklam: true };
+    let yon = false, metin = href; // değişmeyen link olduğu gibi kalır (gereksiz yazım yok)
+    if (aramaGoogleMu(u.hostname) && u.pathname === '/url') {
+      // q bazen arama sözcüğüdür; adres olan değeri al (q ya da url)
+      const h = [u.searchParams.get('q'), u.searchParams.get('url')].find(v => /^https?:\/\//i.test(v || ''));
+      if (!h) return null;
+      try { u = new URL(h); } catch (_h) { return null; }
+      if (reklamMu(u)) return null;
+      yon = true; metin = h;
+    } else if (aramaGoogleMu(u.hostname)) return null; // arama sayfasının kendi linki: dokunma
+    let iz = 0;
+    if (ayar.izleme) { iz = izlemeSil(u); if (iz) metin = u.href; }
+    return { url: metin, yon, iz };
+  }
+
+  // ---------- Linkler ----------
+  const linkler = new WeakMap(); // a → {asil, temiz, oz}
+  const izlenen = new Set();      // kopan düğümler her taramada atılır (linkleriTara)
+  const SILINEN = ['ping', 'data-jsarwt', 'data-usg', 'onmousedown'];
+  function linkIsle(a) {
+    const simdiki = a.getAttribute('href');
+    const k = linkler.get(a);
+    if (k && simdiki === k.temiz) { sayac.harici++; return; }
+    // Reklamverenin adresi href'te, tıklama adresi data-rw'de olan reklam: dokunma
+    if (a.hasAttribute('data-rw')) { if (k) linkler.delete(a); sayac.reklam++; return; }
+    const t = temizAdres(simdiki);
+    if (!t || t.reklam) {
+      if (k) { linkler.delete(a); izlenen.delete(a); } // link başka bir şeye dönüştü: eski kaydı bırak
+      if (t && t.reklam) sayac.reklam++;
+      return;
+    }
+    sayac.harici++;
+    if (k && ayniAdres(t.url, k.temiz)) {
+      // Google adresi geri yazdı: düzelt
+      a.setAttribute('href', k.temiz); sayac.geriYaz++;
+      SILINEN.forEach(o => { if (a.hasAttribute(o)) a.removeAttribute(o); });
+      return;
+    }
+    if (!k) { if (t.yon) sayac.yon++; sayac.izleme += t.iz; }
+    const oz = {};
+    SILINEN.forEach(o => { if (a.hasAttribute(o)) { oz[o] = a.getAttribute(o); a.removeAttribute(o); if (o === 'ping') sayac.ping++; } });
+    if (t.url !== simdiki) a.setAttribute('href', t.url);
+    linkler.set(a, { asil: simdiki, temiz: t.url, oz: Object.assign({}, k && k.oz, oz) });
+    izlenen.add(a);
+  }
+  function linkleriTara() {
+    for (const a of izlenen) if (!a.isConnected) izlenen.delete(a); // SPA ve sonsuz kaydırmada birikmesin
+    if (!ayar.link || !document.body) return;
+    for (const a of document.body.querySelectorAll('a[href]')) if (!bizimMi(a)) linkIsle(a);
+  }
+  function linkleriGeriAl() {
+    for (const a of izlenen) {
+      const k = linkler.get(a);
+      if (k && a.isConnected && a.getAttribute('href') === k.temiz) {
+        a.setAttribute('href', k.asil);
+        Object.entries(k.oz || {}).forEach(([o, v]) => a.setAttribute(o, v));
+      }
+      linkler.delete(a);
+    }
+    izlenen.clear();
+  }
+  // Tıklama anında son bakış (Google mousedown'da adresi yeniden yazabilir; gözlemci geç kalırsa).
+  // Kaydı olmayan yeni link de burada işlenir (tarama 200–800 ms gecikebilir).
+  function tiklamaAni(e) {
+    if (!ayar || !ayar.link) return;
+    const a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a || bizimMi(a)) return;
+    linkIsle(a);
+  }
+  ['mousedown', 'click', 'auxclick', 'contextmenu', 'dragstart'].forEach(o => window.addEventListener(o, tiklamaAni, true));
+  window.addEventListener('keydown', (e) => { if (e.key === 'Enter') tiklamaAni(e); }, true);
+
+  // ---------- Sekme ----------
+  function sekme() {
+    const p = new URLSearchParams(location.search);
+    const tbm = p.get('tbm'), udm = p.get('udm');
+    if (tbm === 'isch' || udm === '2') return 'gorsel';
+    if (tbm === 'nws') return 'haber';
+    if (tbm === 'vid' || udm === '7') return 'video';
+    if (!tbm && (!udm || udm === '14')) return 'tumu';
+    return 'diger';
+  }
+  function onzAcikMi() {
+    if (!ayar.onz) return false;
+    return ({ tumu: ayar.sTumu, haber: ayar.sHaber, video: ayar.sVideo })[sekme()] === true;
+  }
+
+  // ---------- Önizleme: sonuç blokları ----------
+  const BASLIK = 'a h3, a [role="heading"]';
+  function sonucKoku() { return document.getElementById('rso') || document.getElementById('search') || document.getElementById('main'); }
+  function sonuclariBul() {
+    const kok = sonucKoku();
+    if (!kok) return [];
+    const say = (e) => e.querySelectorAll(BASLIK).length;
+    const goruldu = new Set(), sonuc = [];
+    for (const h of kok.querySelectorAll(BASLIK)) {
+      const a = h.closest('a[href]');
+      if (!a || bizimMi(a) || !kok.contains(a) || !a.getClientRects().length) continue; // gizli sonuç: istek yok
+      const k = linkler.get(a);
+      let hedef = k ? k.temiz : null;
+      if (!hedef) { const t = temizAdres(a.getAttribute('href')); if (!t || t.reklam) continue; hedef = t.url; }
+      sayac.baslik++; // payda: yalnız dış siteye giden sonuç başlıkları (reklam ve Google iç linki sayılmaz)
+      let blok = a;
+      while (blok.parentElement && blok.parentElement !== kok && say(blok.parentElement) === 1) blok = blok.parentElement;
+      if (blok === a || blok.tagName === 'A' || goruldu.has(blok)) continue;
+      if (blok.closest('#rhs, [role="complementary"]')) continue;
+      // "Diğer kullanıcılar şunları da sordu" (açılır soru), dar kart ya da birden çok parçayı kapsayan blok: dokunma
+      if (blok.querySelector('[aria-expanded]') || blok.closest('[aria-expanded="true"]')) continue;
+      const br = blok.getBoundingClientRect();
+      if (br.width < 320 || br.height > 400) continue;
+      goruldu.add(blok);
+      sonuc.push({ a, blok, hedef });
+    }
+    return sonuc;
+  }
+  function googleResmiVar(blok) {
+    for (const img of blok.querySelectorAll('img')) {
+      if (bizimMi(img)) continue;
+      const r = img.getBoundingClientRect();
+      if (r.width >= 48 && r.height >= 40) return true;
+    }
+    return false;
+  }
+  const bloklar = new Map(); // blok → {el, hedef, durum}
+  function onizlemeleriKaldir() {
+    for (const [blok, o] of bloklar) { o.kaldi = true; o.el.remove(); blok.classList.remove(`${ONEK}-blok`); }
+    bloklar.clear();
+    kuyruk.splice(0).forEach(is => { onbellek.delete(is.adres); is.coz(null); }); // kapatınca sıradaki istekler gitmesin
+  }
+  function siteAdi(hedef) { try { return new URL(hedef).hostname.replace(/^www\./, ''); } catch (_h) { return hedef; } }
+  function onizlemeleriKur() {
+    if (!onzAcikMi()) { onizlemeleriKaldir(); return; }
+    const sonuclar = sonuclariBul();
+    const canli = new Set();
+    for (const r of sonuclar) {
+      if (googleResmiVar(r.blok)) { sayac.google++; continue; }
+      canli.add(r.blok);
+      let o = bloklar.get(r.blok);
+      if (o && (o.hedef !== r.hedef || o.tikla !== ayar.onzTikla)) { o.kaldi = true; o.el.remove(); bloklar.delete(r.blok); o = null; }
+      if (!o) {
+        const etiket = m('onzEtiket')(siteAdi(r.hedef));
+        const kap = ayar.onzTikla
+          ? el('a', { class: `${ONEK}-onz`, href: r.hedef, 'aria-label': etiket, title: etiket, rel: 'noopener', 'data-goo': '1' })
+          : el('span', { class: `${ONEK}-onz`, 'aria-hidden': 'true' });
+        o = { el: kap, hedef: r.hedef, tikla: ayar.onzTikla, durum: 'bekliyor' };
+        bloklar.set(r.blok, o);
+        durumYaz(o, 'bekliyor');
+        r.blok.classList.add(`${ONEK}-blok`);
+        r.blok.prepend(kap);
+        resimYukle(o);
+      } else if (!o.el.isConnected) { r.blok.classList.add(`${ONEK}-blok`); r.blok.prepend(o.el); }
+      sayac.blok++;
+      if (o.durum === 'resim') sayac.resim++; else if (o.durum === 'fav') sayac.fav++; else sayac.bekliyor++;
+    }
+    for (const [blok, o] of bloklar) if (!canli.has(blok)) { o.kaldi = true; o.el.remove(); blok.classList.remove(`${ONEK}-blok`); bloklar.delete(blok); }
+  }
+  function durumYaz(o, durum, src) {
+    o.durum = durum;
+    const k = o.el;
+    k.textContent = '';
+    if (durum === 'bekliyor') {
+      k.append(el('span', { class: `${ONEK}-yuk`, role: 'img', 'aria-label': m('yukleniyor') }, el('i')));
+    } else if (durum === 'resim') {
+      const img = el('img', { class: `${ONEK}-r`, alt: '', referrerpolicy: 'no-referrer', decoding: 'async' });
+      img.addEventListener('load', () => { if (img.naturalWidth && img.naturalWidth < 48) favYaz(o); });
+      img.addEventListener('error', () => { if (o.denendi) { favYaz(o); return; } o.denendi = true; veriAdresi(src).then(v => { if (v) img.src = v; else favYaz(o); }); });
+      img.src = src;
+      k.append(img);
+    }
+  }
+  function favYaz(o) {
+    o.durum = 'fav';
+    const k = o.el;
+    k.textContent = '';
+    const host = siteAdi(o.hedef);
+    const harf = el('span', { class: `${ONEK}-harf` }, (host.charAt(0) || '?').toUpperCase());
+    const img = el('img', { alt: '', referrerpolicy: 'no-referrer' });
+    img.addEventListener('error', () => { img.replaceWith(harf); });
+    img.addEventListener('load', () => { if (img.naturalWidth && img.naturalWidth < 17) img.replaceWith(harf); });
+    img.src = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=64`;
+    k.append(el('span', { class: `${ONEK}-fav` }, img));
+    dugmeDurumu(); taniYenile();
+  }
+
+  // ---------- og:image okuma (çerezsiz, sınırlı, sıralı) ----------
+  const onbellek = new Map(); // bu sayfa için: adres → Promise<string|null>
+  const kuyruk = [];
+  let aktif = 0;
+  const AYNI_ANDA = 4;
+  function resimYukle(o) {
+    if (/\.pdf($|[?#])/i.test(o.hedef)) { favYaz(o); return; }
+    if (o.kaldi) return;
+    ogResmi(o.hedef).then((src) => {
+      if (o.kaldi) return; // kutu kaldırıldı: boşa resim yükleme
+      if (src) durumYaz(o, 'resim', src); else favYaz(o);
+      dugmeDurumu(); taniYenile();
+    });
+  }
+  function ogResmi(hedef) {
+    const anahtar = hedef.split('#')[0];
+    if (onbellek.has(anahtar)) return onbellek.get(anahtar);
+    const p = new Promise((coz) => kuyruk.push({ adres: anahtar, coz }));
+    onbellek.set(anahtar, p);
+    kuyrukIsle();
+    return p;
+  }
+  function kuyrukIsle() {
+    while (aktif < AYNI_ANDA && kuyruk.length) {
+      const is = kuyruk.shift();
+      aktif++;
+      sayfaGetir(is.adres).then(is.coz, () => is.coz(null)).finally(() => { aktif--; kuyrukIsle(); });
+    }
+  }
+  function sayfaGetir(adres) {
+    return new Promise((coz) => {
+      if (typeof GM_xmlhttpRequest !== 'function') { istekKaydet(adres, 'GM_xmlhttpRequest yok'); coz(null); return; }
+      let bitti = false, istek = null;
+      const son = (v, not) => {
+        if (bitti) return;
+        bitti = true; clearTimeout(zaman);
+        istekKaydet(adres, not || (v ? 'og:image ✓' : 'og:image yok'));
+        try { if (istek && istek.abort) istek.abort(); } catch (_h) { /* bitti */ }
+        coz(v || null);
+      };
+      const bak = (metin, taban) => {
+        const sade = sadeHtml(metin);
+        const r = ogBul(sade, taban, true);
+        if (r) return r;
+        if (/<\/head\s*>|<body[\s>]/i.test(sade) || metin.length > 400000) return '';
+        return undefined;
+      };
+      const zaman = setTimeout(() => son(null, 'zaman aşımı'), 9000);
+      try {
+        istek = GM_xmlhttpRequest({
+          method: 'GET', url: adres, anonymous: true, timeout: 9000,
+          headers: { Accept: 'text/html,application/xhtml+xml;q=0.9,*/*;q=0.5' },
+          onprogress: (r) => {
+            if (r && r.status >= 400) { son(null, `HTTP ${r.status}`); return; }
+            let t = '';
+            try { t = r.responseText || ''; } catch (_h) { return; }
+            if (!t) return;
+            const v = bak(t, r.finalUrl || adres);
+            if (v !== undefined) son(v);
+          },
+          onload: (r) => {
+            if (r.status >= 400) { son(null, `HTTP ${r.status}`); return; }
+            const tur = /content-type:\s*([^;\r\n]+)/i.exec(r.responseHeaders || '');
+            if (tur && !/html|xml/i.test(tur[1])) { son(null, tur[1].trim()); return; }
+            son(bak(r.responseText || '', r.finalUrl || adres) || null);
+          },
+          onerror: (r) => son(null, 'onerror' + (r && r.finalUrl && r.finalUrl !== adres ? ` (finalUrl ${r.finalUrl})` : '')),
+          onabort: () => son(null, 'onabort'),
+          ontimeout: () => son(null, 'zaman aşımı')
+        });
+      } catch (h) { son(null, 'istek kurulamadı: ' + (h && h.message || h)); }
+    });
+  }
+  const OG_SIRA = ['og:image:secure_url', 'og:image', 'og:image:url', 'twitter:image', 'twitter:image:src'];
+  // script, style, template ve yorumlar ayıklanır: içlerindeki "<body" ya da eski meta yanıltmasın (inceleme B)
+  function sadeHtml(html) { return html.replace(/<(script|style|template)\b[\s\S]*?(?:<\/\1\s*>|$)|<!--[\s\S]*?(?:-->|$)/gi, ''); }
+  function varlikCoz(v) {
+    return v.replace(/&#(x[0-9a-f]+|\d+);/gi, (_t, n) => { try { return String.fromCodePoint(/^x/i.test(n) ? parseInt(n.slice(1), 16) : Number(n)); } catch (_h) { return _t; } })
+      .replace(/&amp;/gi, '&').replace(/&quot;/gi, '"').replace(/&apos;/gi, "'");
+  }
+  // Öznitelik değeri: yalnız etiket içindeki gerçek öznitelik (başka değerin içindeki "name=" eşleşmesin)
+  function oznitelik(etiket, ad) {
+    const re = new RegExp(`\\s${ad}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s"'>]+))`, 'i');
+    const m = re.exec(etiket);
+    if (!m) return null;
+    if (m[1] != null) return m[1];
+    if (m[2] != null) return m[2];
+    return m[3].replace(/\/$/, ''); // tırnaksız ve "/>" ile kapanan değer
+  }
+  function ogBul(html, taban, sadeMi) {
+    const metin = sadeMi ? html : sadeHtml(html);
+    const bulunan = {};
+    for (const t of (metin.match(/<meta\b[^>]*>/gi) || [])) {
+      const ad = (oznitelik(t, 'property') || oznitelik(t, 'name') || oznitelik(t, 'itemprop') || '').toLowerCase();
+      const ic = oznitelik(t, 'content');
+      if (!ad || ic == null || !OG_SIRA.includes(ad)) continue;
+      (bulunan[ad] = bulunan[ad] || []).push(ic);
+    }
+    const adaylar = OG_SIRA.flatMap(k => bulunan[k] || []);
+    const l = /<link\b[^>]*\brel\s*=\s*["']?image_src["']?[^>]*>/i.exec(metin);
+    if (l) { const h = oznitelik(l[0], 'href'); if (h) adaylar.push(h); }
+    for (const ham of adaylar) { // ilk geçerli http(s) adres; data: ya da bozuk olan atlanır
+      try { const u = new URL(varlikCoz(ham.trim()), taban); if (/^https?:$/.test(u.protocol)) return u.href; } catch (_h) { /* sonraki aday */ }
+    }
+    return null;
+  }
+  // Doğrudan yüklenemeyen resim (sıcak bağlantı engeli, karışık içerik): çerezsiz indir, data: adresine çevir
+  function veriAdresi(src) {
+    return new Promise((coz) => {
+      if (typeof GM_xmlhttpRequest !== 'function' || !src) { coz(null); return; }
+      let bitti = false, istek = null;
+      const son = (v, not) => {
+        if (bitti) return;
+        bitti = true; clearTimeout(zaman);
+        istekKaydet(src, not || (v ? 'resim (data:)' : 'resim indirilemedi'));
+        try { if (!v && istek && istek.abort) istek.abort(); } catch (_h) { /* bitti */ }
+        coz(v || null);
+      };
+      const zaman = setTimeout(() => son(null, 'resim zaman aşımı'), 10000);
+      try {
+        istek = GM_xmlhttpRequest({
+          method: 'GET', url: src, anonymous: true, responseType: 'arraybuffer', timeout: 10000,
+          onprogress: (r) => { if (r && (r.loaded > 3000000 || r.status >= 400)) son(null, r.status >= 400 ? `resim HTTP ${r.status}` : 'resim 3 MB üstü'); },
+          onload: (r) => {
+            const b = r.response;
+            const tur = (/content-type:\s*(image\/[^;\r\n]+)/i.exec(r.responseHeaders || '') || [])[1];
+            if (r.status >= 400 || !tur || !b || !b.byteLength || b.byteLength > 3000000) { son(null); return; }
+            const u8 = new Uint8Array(b); let s2 = '';
+            for (let i = 0; i < u8.length; i += 0x8000) s2 += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000));
+            son(`data:${tur.trim()};base64,${btoa(s2)}`);
+          },
+          onerror: () => son(null, 'resim onerror'), ontimeout: () => son(null, 'resim zaman aşımı'), onabort: () => son(null, 'resim onabort')
+        });
+      } catch (_h) { son(null); }
+    });
+  }
+
+  // ---------- Görseller paneli ----------
+  let gorselImg = null;
+  function gorselPaneliBul() {
+    if (sekme() !== 'gorsel' || !ayar.gorsel) return null;
+    let en = null, enAlan = 0;
+    for (const img of document.images) {
+      if (bizimMi(img)) continue;
+      const s = img.currentSrc || img.src || '';
+      if (!/^https?:/i.test(s)) continue;
+      let h = '';
+      try { h = new URL(s).hostname; } catch (_h) { continue; }
+      if (googleMu(h)) continue;
+      const r = img.getBoundingClientRect();
+      if (r.width < 160 || r.height < 100 || r.bottom < 40 || r.top > innerHeight - 40 || r.right < 40 || r.left > innerWidth - 40) continue;
+      const st = getComputedStyle(img);
+      if (st.visibility !== 'visible' || Number(st.opacity) < 0.1) continue;
+      const alan = r.width * r.height;
+      if (alan > enAlan) { en = img; enAlan = alan; }
+    }
+    return en;
+  }
+  function koseKonumla() {
+    if (!UI) return;
+    const img = gorselImg && gorselImg.isConnected ? gorselImg : null;
+    const k = UI.kose;
+    if (!img) { if (!k.hidden) k.hidden = true; return; }
+    const r = img.getBoundingClientRect();
+    if (r.width < 160 || r.bottom < 40 || r.top > innerHeight - 40 || r.right < 40 || r.left > innerWidth - 40) { k.hidden = true; return; }
+    k.hidden = false;
+    k.style.top = `${Math.max(4, r.top + 8)}px`;
+    k.style.right = `${Math.max(4, document.documentElement.clientWidth - r.right + 8)}px`;
+    k.style.maxWidth = `${Math.max(120, r.width - 16)}px`;
+  }
+  function koseKur() {
+    if (!UI) return;
+    const k = UI.kose;
+    k.textContent = '';
+    const src = () => (gorselImg && (gorselImg.currentSrc || gorselImg.src)) || '';
+    const d = [
+      ['dAc', 'ana', () => src()],
+      ['dLens', '', () => 'https://lens.google.com/uploadbyurl?url=' + encodeURIComponent(src())],
+      ['dTineye', '', () => 'https://tineye.com/search?url=' + encodeURIComponent(src())],
+      ['dYandex', '', () => 'https://yandex.com/images/search?rpt=imageview&url=' + encodeURIComponent(src())]
+    ];
+    const tikla = (adres) => () => {
+      gorselImg = gorselPaneliBul() || gorselImg; // 500 ms'lik bakış eski kalmış olabilir
+      if (!gorselImg || !/^https?:/i.test(src())) return; // data:/blob: dışarı gitmez
+      yeniSekme(adres());
+    };
+    d.filter(([a]) => ayar[a]).forEach(([a, sinif, adres]) => k.append(el('button', { class: `dug ${sinif}`, type: 'button', id: `${ONEK}-k-${a}`, on: { click: tikla(adres) } }, m(a))));
+  }
+  function yeniSekme(u) {
+    try { if (typeof GM_openInTab === 'function') { GM_openInTab(u, { active: true, insert: true }); return; } } catch (_h) { /* sonraki yol */ }
+    const w = window.open(u, '_blank', 'noopener,noreferrer');
+    if (w) try { w.opener = null; } catch (_h) { /* yok */ }
+  }
+
+  // ---------- Sayfa stili ----------
+  // TOKEN-BASLA (aalabs-tema.css 1.7.0'dan)
+  const T = {
+    acik: { ana: '#2456D6', anaAcik: '#E5EBFA', anaHover: '#F2F5FD', anaUzeri: '#FFFFFF', vurgu: '#2456D6', zemin: '#F6F9FC', yuzey: '#FFFFFF', metin: '#17252E', metin2: '#4E6269', kenar: '#7A9199', ayirici: '#D3DEE6', hata: '#C4313B', basari: '#18763F', basariBg: '#E4F5E8', uyari: '#9A5B00', uyariBg: '#FDF6D8' },
+    koyu: { ana: '#2456D6', anaAcik: '#1D2C4F', anaHover: '#1B2434', anaUzeri: '#FFFFFF', vurgu: '#86A8FF', zemin: '#0F1520', yuzey: '#161E2B', metin: '#E6ECF5', metin2: '#9AA8BC', kenar: '#6A7B93', ayirici: '#263142', hata: '#FF8189', basari: '#4CC38A', basariBg: '#15291F', uyari: '#E8AC45', uyariBg: '#33270F' },
+    tostZemin: '#17252E', tostYazi: '#FFFFFF', anaBasili: '#204CBD', perde: 'rgba(0,0,0,.35)', kapali: '#7A9199'
+  };
+  // TOKEN-BITIR
+  const YAZI = '"Open Sans","Segoe UI",Roboto,Arial,sans-serif';
+  function sayfaCss() {
+    const c = T[temaSec()];
+    return `
+.${ONEK}-blok{position:relative !important;padding-left:124px !important;min-height:78px !important;box-sizing:border-box !important}
+.${ONEK}-onz{all:initial;position:absolute !important;left:0 !important;top:2px !important;width:112px !important;height:72px !important;display:block !important;
+  box-sizing:border-box !important;overflow:hidden !important;border-radius:6px !important;border:1px solid ${c.ayirici} !important;background:${c.zemin} !important;cursor:pointer}
+span.${ONEK}-onz{cursor:default}
+.${ONEK}-onz:focus-visible{outline:2px solid ${c.vurgu} !important;outline-offset:2px}
+.${ONEK}-r{all:initial;display:block !important;width:100% !important;height:100% !important;object-fit:cover !important}
+.${ONEK}-fav{all:initial;display:grid !important;place-items:center;width:100%;height:100%}
+.${ONEK}-fav img{all:initial;width:36px !important;height:36px !important;border-radius:6px !important}
+.${ONEK}-harf{all:initial;display:grid !important;place-items:center;width:36px;height:36px;border-radius:6px;background:${c.ana};color:${c.anaUzeri};font:700 18px ${YAZI}}
+.${ONEK}-yuk{all:initial;display:grid !important;place-items:center;width:100%;height:100%}
+.${ONEK}-yuk i{all:initial;display:block;width:60%;height:4px;border-radius:2px;background:${c.ayirici}}
+@media (max-width:700px){.${ONEK}-blok{padding-left:92px !important;min-height:62px !important}.${ONEK}-onz{width:80px !important;height:56px !important}}
+#${ONEK}-ust{all:initial;display:inline-flex !important;align-items:center;margin:0 0 0 12px;vertical-align:middle;flex:none}
+#${ONEK}-ust.${ONEK}-mutlak{position:absolute !important;z-index:2147483640 !important;margin:0}
+`;
+  }
+  function sayfaStiliEkle() {
+    const yer = document.head || document.documentElement;
+    if (!yer) return; // belge henüz yoksa domHazir yeniden dener
+    let s = document.getElementById(`${ONEK}-stil`);
+    if (!s) { s = document.createElement('style'); s.id = `${ONEK}-stil`; yer.appendChild(s); }
+    const css = sayfaCss();
+    if (s.textContent !== css) s.textContent = css;
+  }
+
+  // ---------- Tarama ----------
+  const BIZIM = `.${ONEK}-onz,#${ONEK}-kok,#${ONEK}-ust,#${ONEK}-stil`;
+  function bizimMi(n) {
+    const e = n && (n.nodeType === 1 ? n : n.parentElement);
+    return !!(e && e.closest && e.closest(BIZIM));
+  }
+  let sonHata = '', bekci = { bas: 0, n: 0, durdu: 0 };
+  function tara() {
+    if (!document.body) return;
+    const simdi = Date.now();
+    if (simdi - bekci.bas > 5000) { bekci.bas = simdi; bekci.n = 0; }
+    if (++bekci.n > 25) { // döngü bekçisi (platform-userscript §2.6): pencere bitince bir kez daha tara, takılı kalmasın
+      bekci.durdu++;
+      clearTimeout(taramaZaman);
+      taramaZaman = setTimeout(() => { taramaZaman = 0; ilkIstek = 0; tara(); }, Math.max(50, bekci.bas + 5050 - simdi));
+      return;
+    }
+    gozlemciDurdur();
+    sayacSifirla();
+    try {
+      sayfaStiliEkle();
+      if (UI && !UI.host.isConnected) document.body.appendChild(UI.host); // site kökü sildiyse geri tak
+      linkleriTara();
+      onizlemeleriKur();
+      ustDugmeKur();
+      ustKonumla();
+      gorselImg = gorselPaneliBul();
+      sayac.gorsel = sekme() !== 'gorsel' ? 'yok' : (gorselImg ? (siteAdi(gorselImg.currentSrc || gorselImg.src)) : '');
+      koseKonumla();
+      sonHata = '';
+    } catch (h) {
+      sonHata = String(h && h.stack || h).split('\n').slice(0, 2).join(' | ');
+    } finally { gozlemciBaslat(); dugmeDurumu(); taniYenile(); }
+  }
+  // Sondan erteleme: değişiklik sürdükçe 200 ms bekle, ama ilk istekten en çok 800 ms sonra tara.
+  let taramaZaman = 0, ilkIstek = 0;
+  function taramaIste() {
+    const simdi = Date.now();
+    if (!ilkIstek) ilkIstek = simdi;
+    clearTimeout(taramaZaman);
+    const bekle = Math.max(0, Math.min(200, ilkIstek + 800 - simdi));
+    taramaZaman = setTimeout(() => { taramaZaman = 0; ilkIstek = 0; tara(); }, bekle);
+  }
+  let gozlemci = null;
+  function gozlemciBaslat() {
+    if (!gozlemci) {
+      gozlemci = new MutationObserver((kayitlar) => {
+        let iste = false;
+        for (const k of kayitlar) {
+          if (k.type === 'attributes') {
+            const t = k.target;
+            if (bizimMi(t)) continue;
+            if (k.attributeName === 'href' && t.tagName === 'A') {
+              const kayit = linkler.get(t);
+              const h = t.getAttribute('href');
+              if (kayit && h === kayit.temiz) continue; // kendi yazdığımız
+              if (kayit && ayar.link) {
+                // Google adresi geri yazdı: hemen (eşzamanlı) düzelt; tıklamadan önce
+                const t2 = temizAdres(h);
+                if (t2 && !t2.reklam && ayniAdres(t2.url, kayit.temiz)) { t.setAttribute('href', kayit.temiz); sayac.geriYaz++; if (t.hasAttribute('ping')) t.removeAttribute('ping'); continue; }
+              }
+              iste = true; continue;
+            }
+            if (k.attributeName === 'src' && sekme() === 'gorsel') { iste = true; continue; }
+            continue;
+          }
+          if (bizimMi(k.target)) continue;
+          // Yalnız bizim eklediklerimiz: atla. Google bizim düğmeyi/kutuyu sildiyse yeniden kur.
+          if (k.addedNodes.length && !k.removedNodes.length && [...k.addedNodes].every(bizimMi)) continue;
+          iste = true;
+        }
+        if (iste) taramaIste();
+      });
+    }
+    if (document.body) gozlemci.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['href', 'src'] });
+  }
+  function gozlemciDurdur() { if (gozlemci) { gozlemci.takeRecords(); gozlemci.disconnect(); } }
+  let konumKare = 0;
+  function konumIste() { if (konumKare) return; konumKare = requestAnimationFrame(() => { konumKare = 0; ustKonumla(); if (sekme() === 'gorsel') { gorselImg = gorselPaneliBul() || gorselImg; koseKonumla(); } }); }
+  window.addEventListener('scroll', konumIste, { capture: true, passive: true });
+  window.addEventListener('resize', () => { konumIste(); ustKonumla(); }, { passive: true });
+  // Görseller'de panel kayarak açılır: gözlemci görmeyebilir; yalnız bu sekmede yarım saniyede bir bak
+  setInterval(() => { if (ayar && ayar.gorsel && sekme() === 'gorsel' && document.visibilityState === 'visible') { const y = gorselPaneliBul(); if (y !== gorselImg) { gorselImg = y; sayac.gorsel = y ? siteAdi(y.currentSrc || y.src) : ''; taniYenile(); } koseKonumla(); } }, 500);
+
+  // ---------- Arayüz (gölge kök) ----------
+  let UI = null, UST = null;
+  const SVG = {
+    kapat: [['path', { d: 'M18 6 6 18M6 6l12 12' }]],
+    dil: [['circle', { cx: 12, cy: 12, r: 10 }], ['path', { d: 'M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20' }]],
+    tema: [['path', { d: 'M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z' }]],
+    ara: [['circle', { cx: 11, cy: 11, r: 8 }], ['path', { d: 'm21 21-4.3-4.3' }]]
+  };
+  // innerHTML / DOMParser yok: Trusted Types'lı sayfada da çalışsın
+  function ikon(ad) {
+    const ns = 'http://www.w3.org/2000/svg';
+    const s = document.createElementNS(ns, 'svg');
+    s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('width', '16'); s.setAttribute('height', '16'); s.setAttribute('aria-hidden', 'true');
+    SVG[ad].forEach(([etiket, oz]) => { const p = document.createElementNS(ns, etiket); Object.entries(oz).forEach(([k, v]) => p.setAttribute(k, String(v))); s.appendChild(p); });
+    return s;
+  }
+  function ekle(e, cocuklar) {
+    for (const c of [cocuklar].flat(Infinity)) {
+      if (c == null || c === false) continue;
+      e.append(c instanceof Node ? c : document.createTextNode(String(c)));
+    }
+    return e;
+  }
+  function el(etiket, ozellik, ...cocuklar) {
+    const e = document.createElement(etiket);
+    if (ozellik) Object.entries(ozellik).forEach(([k, v]) => {
+      if (v == null || v === false) return;
+      if (k === 'on') Object.entries(v).forEach(([o, f]) => e.addEventListener(o, f));
+      else if (k === 'class') e.className = v;
+      else if (k in e && typeof v !== 'string') e[k] = v;
+      else e.setAttribute(k, v === true ? '' : v);
+    });
+    return ekle(e, cocuklar);
+  }
+  const carp = (s) => s.replace(/(^|[^\w.#-])(\d+(?:\.\d+)?)px/g, (mm, on, n) => (Number(n) <= 2 ? mm : `${on}calc(${n}px*var(--o))`));
+
+  function temaSec() {
+    if (!ayar || ayar.tema === 'acik') return 'acik';
+    if (ayar.tema === 'koyu') return 'koyu';
+    let renk = '';
+    for (const e of [document.body, document.documentElement]) {
+      if (!e) continue;
+      const c = getComputedStyle(e).backgroundColor;
+      if (c && !/rgba\(0, 0, 0, 0\)|transparent/.test(c)) { renk = c; break; }
+    }
+    const r = /rgba?\((\d+), (\d+), (\d+)/.exec(renk);
+    if (!r) return matchMedia('(prefers-color-scheme: dark)').matches ? 'koyu' : 'acik';
+    return (0.299 * r[1] + 0.587 * r[2] + 0.114 * r[3]) / 255 < 0.5 ? 'koyu' : 'acik';
+  }
+
+  function ortakCss(c) {
+    return `
+:host{all:initial}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+.sar{--o:${ayar.olcek / 100};font-family:${YAZI};font-size:13px;line-height:1.5;color:${c.metin}}
+.dugme{position:relative;width:32px;height:32px;border-radius:6px;border:0;background:${c.ana};color:${c.anaUzeri};
+  font:700 10px ${YAZI};letter-spacing:.02em;cursor:pointer;display:grid;place-items:center;padding:0;flex:none}
+.dugme:hover{background:${T.anaBasili}}
+.nokta{position:absolute;top:-3px;right:-3px;width:10px;height:10px;border-radius:50%;background:${c.hata};border:2px solid ${c.yuzey}}
+.dug{font:inherit;font-weight:600;height:24px;padding:0 8px;border:1px solid ${c.kenar};border-radius:4px;background:${c.yuzey};color:${c.metin};cursor:pointer;
+  display:inline-flex;align-items:center;gap:4px;text-decoration:none;white-space:nowrap}
+.dug:hover{background:${c.anaHover}}
+.dug.ana{background:${c.ana};border-color:${c.ana};color:${c.anaUzeri}}
+.dug svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dugme:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid ${c.vurgu};outline-offset:2px}
+.anahtar{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 8px 0 4px;border:1px solid ${c.kenar};border-radius:12px;background:${c.yuzey};
+  color:${c.metin};font:600 12px ${YAZI};cursor:pointer;white-space:nowrap}
+.anahtar i{display:block;width:24px;height:14px;border-radius:7px;background:${T.kapali};position:relative;flex:none}
+.anahtar i::after{content:"";position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:${c.yuzey}}
+.anahtar[aria-pressed="true"] i{background:${c.ana}}
+.anahtar[aria-pressed="true"] i::after{left:12px}
+.anahtar:hover{background:${c.anaHover}}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+`;
+  }
+  function panelCss() {
+    const c = T[temaSec()];
+    return carp(ortakCss(c) + `
+.alt{position:fixed;right:16px;bottom:16px;z-index:2147483645;display:flex;gap:8px;align-items:center}
+.kose{position:fixed;z-index:2147483644;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px}
+.kose .dug{height:28px;padding:0 10px;font-size:12px}
+.tablo{width:100%;border-collapse:collapse}
+dialog{border:1px solid ${c.kenar};border-radius:6px;padding:0;background:${c.yuzey};color:${c.metin};width:min(720px,calc(100vw - 32px));
+  max-height:min(560px,calc(100vh - 32px));overflow:hidden;font:inherit}
+dialog[open]{display:flex;flex-direction:column}
+dialog::backdrop{background:${T.perde}}
+.ust{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid ${c.ayirici};flex-wrap:wrap}
+.logo{width:24px;height:24px;border-radius:4px;background:${c.ana};color:${c.anaUzeri};display:grid;place-items:center;font-weight:700;font-size:8px;flex:none}
+.baslik{font-weight:600;flex:1;min-width:120px}
+.arama{display:flex;align-items:center;gap:4px;height:24px;border:1px solid ${c.kenar};border-radius:4px;padding:0 6px;background:${c.zemin};color:${c.metin2}}
+.arama input{border:0;background:transparent;color:${c.metin};font:inherit;width:150px;outline:none}
+.arama svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.govde{display:grid;grid-template-columns:180px 1fr;min-height:0;flex:1}
+nav{border-right:1px solid ${c.ayirici};padding:8px 0;background:${c.zemin};overflow:auto}
+nav .grup{font-size:11px;font-weight:600;letter-spacing:.06em;color:${c.metin2};padding:8px 12px 2px}
+nav button{display:block;width:100%;font:inherit;text-align:left;border:0;background:transparent;color:${c.metin};height:28px;padding:0 12px 0 20px;
+  cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+nav button:hover{background:${c.anaHover}}
+nav button[aria-current="true"]{background:${c.anaAcik};font-weight:600}
+.icerik{padding:12px 16px;overflow:auto;display:flex;flex-direction:column;gap:12px;min-width:0}
+.icerik h3{margin:0;font-size:14px;font-weight:600}
+.alan{display:flex;flex-direction:column;gap:4px}
+.alan>.ad{font-weight:600}
+.alan small,.not{color:${c.metin2};font-size:12px;margin:0}
+.satir{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.dikey{display:flex;flex-direction:column;gap:4px}
+label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+input[type=radio],input[type=checkbox]{accent-color:${c.ana};margin:0}
+.kod{font-family:Consolas,"Cascadia Mono",monospace;font-size:12px;white-space:pre-wrap;background:${c.zemin};border:1px solid ${c.ayirici};border-radius:4px;padding:8px;
+  max-height:240px;overflow:auto;user-select:text;overflow-wrap:anywhere}
+.kisayol{font-weight:700}
+.tost{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:2147483647;background:${T.tostZemin};color:${T.tostYazi};
+  padding:8px 14px;border-radius:4px;font-weight:600;max-width:calc(100vw - 32px)}
+@media (max-width:560px){.govde{grid-template-columns:1fr}nav{border-right:0;border-bottom:1px solid ${c.ayirici};display:flex;flex-wrap:wrap;padding:4px}
+  nav .grup{width:100%;padding:4px 8px 0}nav button{width:auto;padding:0 10px}}
+`);
+  }
+  function ustCss() {
+    const c = T[temaSec()];
+    return carp(ortakCss(c) + `.sar{display:inline-flex;align-items:center;gap:6px;flex-wrap:nowrap}`);
+  }
+
+  let bolum = 'linkler', aramaMetni = '', kisayolDinle = false, sonOdak = null, panelCiziliyor = false;
+  const BOLUMLER = [
+    { id: 'linkler', grup: KOD, ad: 'bLinkler', ara: ['linkAc', 'linkIzleme', 'linkNot'] },
+    { id: 'gorseller', grup: KOD, ad: 'bGorseller', ara: ['gorselAc', 'gorselDugmeler', 'dAc', 'dLens', 'dTineye', 'dYandex'] },
+    { id: 'onizleme', grup: KOD, ad: 'bOnizleme', ara: ['onzAc', 'onzSekme', 'sTumu', 'sHaber', 'sVideo', 'onzTikla', 'onzNot'] },
+    { id: 'genel', grup: 'ortak', ad: 'bGenel', ara: ['tema', 'dil', 'olcek', 'dugme', 'hizli'] },
+    { id: 'kisayol', grup: 'ortak', ad: 'bKisayol', ara: ['kisayolAyarlar'] },
+    { id: 'tani', grup: 'ortak', ad: 'bTani', ara: ['taniBaslik', 'raporuKopyala'] },
+    { id: 'hakkinda', grup: 'ortak', ad: 'bHakkinda', ara: ['surum', 'yedek', 'disaAktar', 'iceAktar'] }
+  ];
+  function katla(s) { return String(s).toLocaleLowerCase('tr-TR').replace(/ı/g, 'i'); }
+  function bolumEslesir(b) {
+    if (!aramaMetni) return true;
+    const q = katla(aramaMetni);
+    return [b.ad, ...b.ara].some(k => katla(METIN.tr[k]).includes(q) || katla(METIN.en[k]).includes(q));
+  }
+
+  function arayuzKur() {
+    if (UI || !document.body) return;
+    const host = el('div', { id: `${ONEK}-kok` });
+    const kok = host.attachShadow({ mode: 'closed' });
+    const stil = el('style');
+    const sar = el('div', { class: 'sar' });
+    const dugme = el('button', { class: 'dugme', type: 'button', on: { click: ayarlarAc } }, KOD);
+    const alt = el('div', { class: 'alt', hidden: true }, dugme);
+    const kose = el('div', { class: 'kose', hidden: true, role: 'group', 'aria-label': m('bGorseller') });
+    const dialog = el('dialog', { 'aria-labelledby': `${ONEK}-baslik` });
+    const tostEl = el('div', { class: 'tost', role: 'status', hidden: true });
+    const temizle = () => { if (dialog.open) return; kisayolDinle = false; if (sonOdak && sonOdak.focus) try { sonOdak.focus(); } catch (_h) { /* yok */ } sonOdak = null; };
+    dialog.addEventListener('close', temizle);
+    dialog.addEventListener('cancel', () => setTimeout(temizle, 0));
+    ['keydown', 'keypress', 'keyup'].forEach(o => sar.addEventListener(o, (e) => e.stopPropagation())); // Google'ın tuşları (ok, Esc, "/") bizim düğmelere ulaşmasın
+    sar.append(alt, kose, dialog, tostEl);
+    kok.append(stil, sar);
+    document.body.appendChild(host);
+    UI = { host, kok, stil, sar, dugme, alt, kose, dialog, tostEl };
+    temaUygula();
+    koseKur();
+  }
+
+  // Arama kutusunun yanındaki GOO düğmesi ve hızlı anahtarlar (Ayarlar B + E5)
+  function aramaFormu() { return document.querySelector('form[role="search"]') || document.querySelector('form[action="/search"]'); }
+  function ustDugmeKur() {
+    const f = aramaFormu();
+    sayac.form = !!f;
+    if (!f || !ayar.dugme) {
+      if (UST) { UST.host.remove(); UST = null; }
+      if (UI) UI.alt.hidden = !ayar.dugme || !!f;
+      return;
+    }
+    if (UI) UI.alt.hidden = true;
+    if (!UST) {
+      const host = el('span', { id: `${ONEK}-ust` });
+      const kok = host.attachShadow({ mode: 'closed' });
+      const stil = el('style');
+      const sar = el('span', { class: 'sar' });
+      const dugme = el('button', { class: 'dugme', type: 'button', id: `${ONEK}-ust-dugme`, on: { click: ayarlarAc } }, KOD);
+      const anahtarlar = [['link', 'hLink'], ['gorsel', 'hGorsel'], ['onz', 'hOnz']].map(([a, ad]) =>
+        el('button', { class: 'anahtar', type: 'button', id: `${ONEK}-h-${a}`, 'data-a': a, on: { click: () => degistir(() => { ayar[a] = !ayar[a]; }, true) } }, el('i', { 'aria-hidden': 'true' }), el('span', { 'data-ad': ad })));
+      ['keydown', 'keypress', 'keyup'].forEach(o => sar.addEventListener(o, (e) => e.stopPropagation()));
+      sar.append(dugme, ...anahtarlar);
+      kok.append(stil, sar);
+      UST = { host, kok, stil, sar, dugme, anahtarlar, form: null };
+    }
+    if (UST.form !== f || !UST.host.isConnected) {
+      UST.host.classList.remove(`${ONEK}-mutlak`);
+      f.after(UST.host);
+      UST.form = f;
+      ustYaz();
+      ustKonumla(true);
+    }
+  }
+  function ustYaz() {
+    if (!UST) return;
+    const css = ustCss();
+    if (UST.stil.textContent !== css) UST.stil.textContent = css;
+    UST.anahtarlar.forEach(b => {
+      const a = b.dataset.a, s = b.querySelector('span'), ad = m(s.dataset.ad);
+      b.hidden = !ayar.hizli;
+      b.setAttribute('aria-pressed', String(!!ayar[a]));
+      if (s.textContent !== ad) s.textContent = ad;
+      b.title = m('hizliEtiket')(ad, ayar[a]);
+    });
+  }
+  // Form satırına sığmayıp alta düştüyse (ya da sağdan taştıysa) arama kutusunun sağına mutlak konumla.
+  // Konum her taramada ve kaydırma/yeniden boyutta yeniden hesaplanır (yapışkan başlık, geç gelen CSS).
+  function aramaKutusu(f) {
+    const q = f.querySelector('[name="q"]');
+    if (!q) return f;
+    let e = q, fw = f.getBoundingClientRect().width;
+    while (e.parentElement && e.parentElement !== f && e.parentElement.getBoundingClientRect().width < fw * 0.95) e = e.parentElement;
+    return e;
+  }
+  function ustKonumla(yeni) {
+    if (!UST || !UST.form || !UST.host.isConnected) return;
+    const f = UST.form.getBoundingClientRect();
+    if (!f.width) return; // form henüz ölçülmedi: sonraki taramada
+    const gen = document.documentElement.clientWidth;
+    if (yeni) {
+      const h = UST.host.getBoundingClientRect();
+      if (h.height && h.top < f.bottom - 4 && h.right <= gen) return; // satırda ve ekranda: dokunma
+      document.body.appendChild(UST.host);
+      UST.host.classList.add(`${ONEK}-mutlak`);
+    }
+    if (!UST.host.classList.contains(`${ONEK}-mutlak`)) return;
+    const kutu = aramaKutusu(UST.form).getBoundingClientRect();
+    const hw = UST.host.getBoundingClientRect().width || 180;
+    UST.host.style.setProperty('top', `${f.top + scrollY + Math.max(0, (f.height - 32) / 2)}px`);
+    UST.host.style.setProperty('left', `${Math.max(8, Math.min(kutu.right + 12, gen - hw - 8)) + scrollX}px`);
+  }
+
+  function temaUygula() {
+    if (!UI) return;
+    UI.stil.textContent = panelCss();
+    sayfaStiliEkle();
+    ustYaz();
+  }
+  function sorunVarMi() {
+    const s = sekme();
+    if (sonHata) return true;
+    if (onzAcikMi() && sayac.baslik >= 3 && sayac.blok + sayac.google === 0) return true;
+    return (s === 'tumu' || s === 'gorsel') && document.readyState === 'complete' && !sayac.form && !!document.getElementById('main');
+  }
+  function dugmeDurumu() {
+    const sorun = sorunVarMi();
+    [UI && UI.dugme, UST && UST.dugme].filter(Boolean).forEach(d => {
+      const et = sorun ? `${m('dugmeEtiket')} · ${m('dugmeUyari')}` : m('dugmeEtiket');
+      if (d.getAttribute('aria-label') !== et) { d.setAttribute('aria-label', et); d.title = et; }
+      const n = d.querySelector('.nokta');
+      if (sorun && !n) d.append(el('span', { class: 'nokta', 'aria-hidden': 'true' }));
+      if (!sorun && n) n.remove();
+    });
+    const ustGorunur = !!(UST && UST.host.isConnected && UST.host.getClientRects().length);
+    if (UI) UI.alt.hidden = !ayar.dugme || ustGorunur;
+  }
+  let tostZaman = 0;
+  function tost(metin) {
+    arayuzKur(); if (!UI) return;
+    const yer = UI.dialog.open ? UI.dialog : UI.sar;
+    if (UI.tostEl.parentNode !== yer) yer.append(UI.tostEl);
+    UI.tostEl.textContent = metin; UI.tostEl.hidden = false;
+    clearTimeout(tostZaman); tostZaman = setTimeout(() => { UI.tostEl.hidden = true; }, 2500);
+  }
+
+  function ayarlarAc() {
+    arayuzKur(); if (!UI) return;
+    if (UI.dialog.open) return; // açık paneli yeniden açma: odak yerinde kalsın
+    sonOdak = document.activeElement;
+    temaUygula();
+    panelCiz();
+    try { UI.dialog.showModal(); } catch (_h) { UI.dialog.setAttribute('open', ''); }
+    const ilk = UI.dialog.querySelector('nav button[aria-current="true"]'); if (ilk) ilk.focus();
+  }
+  // Taramadan sonra yalnız Tanı metni güncellenir; panelin geri kalanı yeniden kurulmaz (odak ve kaydırma kalsın)
+  function taniYenile() {
+    if (!UI || !UI.dialog.open || bolum !== 'tani') return;
+    const k = UI.dialog.querySelector(`#${ONEK}-rapor`);
+    const r = taniRaporu();
+    if (k && k.textContent !== r) k.textContent = r;
+  }
+  function panelYenile() { if (UI && UI.dialog.open && !kisayolDinle) panelCiz(); }
+
+  function degistir(fn, yenidenTara) {
+    const eskiLink = ayar.link, eskiIzleme = ayar.izleme;
+    fn(); ayar = ayarDuzelt(ayar); ayarKaydet();
+    temaUygula(); menuKur(); koseKur();
+    if (yenidenTara) {
+      if ((eskiLink && !ayar.link) || eskiIzleme !== ayar.izleme) linkleriGeriAl();
+      if (!onzAcikMi()) onizlemeleriKaldir();
+      else if (bloklar.size) onizlemeleriKaldir(); // tıklama türü değişmiş olabilir: yeniden kur
+      bekci.n = 0;
+      tara();
+    }
+    panelYenile(); dugmeDurumu();
+  }
+
+  function radyo(ad, secenekler, secili, fn) {
+    return el('div', { class: 'satir', role: 'radiogroup' }, secenekler.map(([v, y]) =>
+      el('label', null, el('input', { type: 'radio', name: `${ONEK}-${ad}`, id: `${ONEK}-${ad}-${v}`, checked: v === secili, on: { change: () => fn(v) } }), y)));
+  }
+  function onay(id, yazi, deger, fn, kapali) {
+    return el('label', null, el('input', { type: 'checkbox', id: `${ONEK}-${id}`, checked: !!deger, disabled: !!kapali, on: { change: (e) => fn(e.target.checked) } }), yazi);
+  }
+  function alan(ad, ...ic) { return el('div', { class: 'alan' }, el('span', { class: 'ad' }, ad), ...ic); }
+  function sifirlaDugmesi(b) {
+    return el('div', null, el('button', { class: 'dug', type: 'button', id: `${ONEK}-sifirla-${b}`, on: { click: () => degistir(() => { BOLUM_AYAR[b].forEach(k => { ayar[k] = VARSAYILAN[k]; }); }, true) } }, m('sifirla')));
+  }
+
+  function panelCiz() {
+    if (panelCiziliyor) return;
+    panelCiziliyor = true;
+    try {
+      const d = UI.dialog;
+      const odakId = (UI.kok.activeElement && UI.kok.activeElement.id) || '';
+      const tostAcik = !UI.tostEl.hidden;
+      d.textContent = '';
+      const aramaInput = el('input', { type: 'search', id: `${ONEK}-ara`, 'aria-label': m('ara'), placeholder: m('ara'), value: aramaMetni });
+      aramaInput.addEventListener('input', (e) => { if (e.isComposing) return; aramaMetni = aramaInput.value; panelCiz(); });
+      aramaInput.addEventListener('compositionend', () => { aramaMetni = aramaInput.value; panelCiz(); });
+      const ust = el('div', { class: 'ust' },
+        el('div', { class: 'logo', 'aria-hidden': 'true' }, KOD),
+        el('span', { class: 'baslik', id: `${ONEK}-baslik` }, `${m('ad')} · ${m('ayarlar')}`),
+        el('span', { class: 'arama' }, ikon('ara'), aramaInput),
+        el('button', { class: 'dug', type: 'button', id: `${ONEK}-dil`, title: 'TR / EN', on: { click: () => degistir(() => { ayar.dil = ayar.dil === 'tr' ? 'en' : 'tr'; }, true) } }, ikon('dil'), m('dilDugme')),
+        el('button', { class: 'dug', type: 'button', id: `${ONEK}-tema`, on: { click: () => degistir(() => { ayar.tema = { sayfa: 'acik', acik: 'koyu', koyu: 'sayfa' }[ayar.tema]; }) } }, ikon('tema'), m('temaDugme')),
+        el('button', { class: 'dug', type: 'button', id: `${ONEK}-kapat`, 'aria-label': m('kapat'), title: m('kapat'), on: { click: () => d.close() } }, ikon('kapat')));
+      const gorunen = BOLUMLER.filter(bolumEslesir);
+      if (gorunen.length && !gorunen.some(b => b.id === bolum)) bolum = gorunen[0].id;
+      const nav = el('nav', { 'aria-label': m('ayarlar') });
+      let sonGrup = '';
+      gorunen.forEach(b => {
+        if (b.grup !== sonGrup) { nav.append(el('div', { class: 'grup' }, b.grup === 'ortak' ? m('grupOrtak') : KOD)); sonGrup = b.grup; }
+        nav.append(el('button', { type: 'button', id: `${ONEK}-nav-${b.id}`, 'aria-current': String(b.id === bolum), on: { click: () => { bolum = b.id; panelCiz(); } } }, m(b.ad)));
+      });
+      const icerik = el('div', { class: 'icerik' });
+      if (!gorunen.length) icerik.append(el('p', { class: 'not' }, m('aramaYok')));
+      else bolumIcerik(icerik);
+      d.append(ust, el('div', { class: 'govde' }, nav, icerik));
+      if (tostAcik) d.append(UI.tostEl);
+      const odak = odakId && d.querySelector('#' + CSS.escape(odakId));
+      if (odak) { odak.focus(); if (odak === aramaInput) aramaInput.setSelectionRange(aramaInput.value.length, aramaInput.value.length); }
+    } finally { panelCiziliyor = false; }
+  }
+
+  function bolumIcerik(ic) {
+    const b = BOLUMLER.find(x => x.id === bolum);
+    ic.append(el('h3', null, m(b.ad)));
+    const ac = (k, yeniden = true) => (v) => degistir(() => { ayar[k] = v; }, yeniden);
+    if (bolum === 'linkler') {
+      ic.append(el('div', { class: 'dikey' },
+        onay('link', m('linkAc'), ayar.link, ac('link')),
+        onay('izleme', m('linkIzleme'), ayar.izleme, ac('izleme'), !ayar.link)));
+      ic.append(el('small', { class: 'not' }, m('linkNot')), el('small', { class: 'not' }, m('linkKapatNot')));
+      ic.append(sifirlaDugmesi('linkler'));
+    } else if (bolum === 'gorseller') {
+      ic.append(onay('gorsel', m('gorselAc'), ayar.gorsel, ac('gorsel')));
+      ic.append(alan(m('gorselDugmeler'), el('div', { class: 'satir' }, ['dAc', 'dLens', 'dTineye', 'dYandex'].map(k => onay(k, m(k), ayar[k], ac(k, false), !ayar.gorsel)))));
+      ic.append(el('small', { class: 'not' }, m('gorselNot')));
+      ic.append(sifirlaDugmesi('gorseller'));
+    } else if (bolum === 'onizleme') {
+      ic.append(onay('onz', m('onzAc'), ayar.onz, ac('onz')));
+      ic.append(alan(m('onzSekme'), el('div', { class: 'satir' }, ['sTumu', 'sHaber', 'sVideo'].map(k => onay(k, m(k), ayar[k], ac(k), !ayar.onz)))));
+      ic.append(onay('onzTikla', m('onzTikla'), ayar.onzTikla, ac('onzTikla'), !ayar.onz));
+      ic.append(el('small', { class: 'not' }, m('onzNot')), el('small', { class: 'not' }, m('onzIzinNot')));
+      ic.append(sifirlaDugmesi('onizleme'));
+    } else if (bolum === 'genel') {
+      ic.append(alan(m('tema'), radyo('tema', [['sayfa', m('temaSayfa')], ['acik', m('temaAcik')], ['koyu', m('temaKoyu')]], ayar.tema, v => degistir(() => { ayar.tema = v; }))));
+      ic.append(alan(m('dil'), radyo('dil', [['tr', 'Türkçe'], ['en', 'English']], ayar.dil, v => degistir(() => { ayar.dil = v; }, true))));
+      ic.append(alan(m('olcek'), radyo('olcek', [90, 100, 110, 125].map(o => [o, '%' + o]), ayar.olcek, v => degistir(() => { ayar.olcek = v; }))));
+      ic.append(alan(m('dugme'), el('div', { class: 'satir' }, onay('dugme', m('dugmeGoster'), ayar.dugme, ac('dugme'))), el('small', null, m('dugmeNot'))));
+      ic.append(alan(m('hizli'), el('div', { class: 'satir' }, onay('hizli', m('hizliGoster'), ayar.hizli, ac('hizli', false), !ayar.dugme))));
+    } else if (bolum === 'kisayol') {
+      const goster = el('span', { class: 'kisayol', id: `${ONEK}-kisayol-deger` }, kisayolGoster(ayar.kisayol));
+      const bilgi = el('small', { role: 'status' }, kisayolDinle ? m('kisayolBekle') : '');
+      const dg = el('button', { class: 'dug', type: 'button', id: `${ONEK}-kisayol-degistir` }, m('kisayolDegistir'));
+      dg.addEventListener('click', () => { kisayolDinle = true; bilgi.textContent = m('kisayolBekle'); });
+      dg.addEventListener('blur', () => { if (kisayolDinle) { kisayolDinle = false; bilgi.textContent = ''; } });
+      dg.addEventListener('keydown', (e) => {
+        if (!kisayolDinle) return;
+        e.preventDefault(); e.stopPropagation();
+        if (e.key === 'Escape') { kisayolDinle = false; bilgi.textContent = ''; return; }
+        const k = tusKombo(e);
+        if (!k) return;
+        if (!komboKanonikMi(k)) { bilgi.textContent = m('kisayolGecersiz'); return; }
+        kisayolDinle = false; degistir(() => { ayar.kisayol = k; });
+      });
+      ic.append(alan(m('kisayolAyarlar'), el('div', { class: 'satir' }, goster, dg,
+        el('button', { class: 'dug', type: 'button', on: { click: () => degistir(() => { ayar.kisayol = VARSAYILAN.kisayol; }) } }, m('kisayolSifirla'))), bilgi));
+    } else if (bolum === 'tani') {
+      const rapor = taniRaporu();
+      ic.append(alan(m('taniBaslik'), el('div', { class: 'kod', id: `${ONEK}-rapor` }, rapor)));
+      ic.append(el('div', null, el('button', { class: 'dug ana', type: 'button', id: `${ONEK}-rapor-kopyala`, on: { click: () => panoyaYaz(taniRaporu()).then(() => tost(m('raporKopyalandi')), () => { secMetin(UI.dialog.querySelector(`#${ONEK}-rapor`)); tost(m('kopyalanamadi')); }) } }, m('raporuKopyala'))));
+    } else if (bolum === 'hakkinda') {
+      ic.append(el('p', { class: 'not' }, m('hakkindaNot')));
+      ic.append(alan(m('surum'), el('span', null, `${m('ad')} ${SURUM} · ${KOD}`)));
+      const veri = JSON.stringify({ uygulama: UYGULAMA, surum: SURUM, ayar }, null, 2);
+      const indir = el('a', { class: 'dug', href: 'data:application/json;charset=utf-8,' + encodeURIComponent(veri), download: `${UYGULAMA}.ayar.json` }, m('disaAktar'));
+      const dosya = el('input', { type: 'file', accept: '.json,application/json', id: `${ONEK}-ice-dosya`, hidden: true });
+      dosya.addEventListener('change', () => {
+        const f = dosya.files && dosya.files[0]; if (!f) return;
+        const r = new FileReader();
+        r.onload = () => {
+          try { const j = JSON.parse(r.result); if (!j || j.uygulama !== UYGULAMA || !j.ayar) throw new Error('biçim'); degistir(() => { ayar = j.ayar; }, true); tost(m('iceAktarildi')); }
+          catch (_h) { tost(m('iceAktarHata')); }
+        };
+        r.readAsText(f);
+        dosya.value = '';
+      });
+      ic.append(alan(m('yedek'), el('div', { class: 'satir' }, indir, el('button', { class: 'dug', type: 'button', on: { click: () => dosya.click() } }, m('iceAktar')), dosya)));
+    }
+  }
+  function secMetin(e) { if (!e) return; const r = document.createRange(); r.selectNodeContents(e); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  function panoyaYaz(metin) {
+    return new Promise((coz, red) => {
+      try { if (typeof GM_setClipboard === 'function') { GM_setClipboard(metin, 'text'); coz(); return; } } catch (_h) { /* sonraki yol */ }
+      try { navigator.clipboard.writeText(metin).then(coz, red); } catch (h) { red(h); }
+    });
+  }
+
+  function taniRaporu() {
+    const s = sekme();
+    const isaret = (iyi, bek) => bek ? '…' : (iyi ? '✓' : '✗');
+    const onz = onzAcikMi();
+    const satirlar = [
+      `${m('ad')} ${SURUM} · ${typeof GM_info === 'object' && GM_info ? (GM_info.scriptHandler || '?') + ' ' + (GM_info.version || '') : '?'}`,
+      `· ${m('tSite')}: ${location.hostname}${location.pathname} · ${m('tSekme')}: ${m('sekmeAd')[s]}`,
+      `${isaret(sayac.form)} ${m('tForm')} (form[role=search]): ${sayac.form ? m('tFormVar') : m('tFormYok')}`,
+      ayar.link
+        ? `${isaret(sayac.harici > 0, sayac.harici === 0)} ${m('tLink')}: ${m('tLinkOzet')(sayac.harici, sayac.yon, sayac.ping, sayac.izleme, sayac.reklam)}`
+        : `· ${m('tLink')}: ${m('tKapali')}`,
+      `· ${m('tGeriYaz')}: ${sayac.geriYaz}`,
+      onz
+        ? `${isaret(sayac.blok + sayac.google > 0, sayac.baslik === 0)} ${m('tSonuc')} (${BASLIK}): ${sayac.baslik === 0 ? m('tBekliyor') : `${sayac.blok + sayac.google}/${sayac.baslik}`}`
+        : `· ${m('tSonuc')}: ${m('tKapali')}`,
+      onz ? (() => { const d = [...bloklar.values()].map(o => o.durum); const n = (x) => d.filter(y => y === x).length;
+        return `· ${m('tOnz')}: ${m('tOnzOzet')(n('resim'), n('fav'), n('bekliyor'), sayac.google)}`; })() : null,
+      !ayar.gorsel ? `· ${m('tGorsel')}: ${m('tKapali')}`
+        : s !== 'gorsel' ? `· ${m('tGorsel')}: ${m('tGorselYok')}`
+          : `${isaret(!!sayac.gorsel, !sayac.gorsel)} ${m('tGorsel')}: ${sayac.gorsel || m('tGorselBekliyor')}`,
+      `· ${m('tIstek')}: ${istekler.length ? '\n    ' + istekler.join('\n    ') : '-'}`,
+      `${bekci.durdu ? '✗' : '✓'} ${m('tBekci')}: ${bekci.durdu}`,
+      `${sonHata ? '✗' : '✓'} ${m('tHata')}: ${sonHata || '-'}`,
+      `· ayar: ${JSON.stringify(Object.fromEntries(ACIK_KAPALI.map(k => [k, ayar[k]])))}`
+    ];
+    return satirlar.filter(Boolean).join('\n');
+  }
+
+  // ---------- Klavye ----------
+  function tusKombo(e) {
+    if (e.getModifierState && e.getModifierState('AltGraph')) return null;
+    if (e.repeat || e.metaKey) return null;
+    if (e.ctrlKey && e.altKey) return null;
+    let ad = null;
+    if (e.key === ',') ad = 'Comma';
+    else if (e.key === '.') ad = 'Period';
+    else if (/^Key[A-Z]$/.test(e.code || '')) ad = e.code.slice(3);
+    else if (/^Digit\d$/.test(e.code || '')) ad = e.code.slice(5);
+    else if (/^F\d{1,2}$/.test(e.key || '')) ad = e.key;
+    if (!ad) return null;
+    return (e.ctrlKey ? 'Ctrl+' : '') + (e.altKey ? 'Alt+' : '') + (e.shiftKey ? 'Shift+' : '') + ad;
+  }
+  function komboKanonikMi(v) {
+    return /^(Ctrl\+|Alt\+)(Shift\+)?([A-Z0-9]|Comma|Period|F\d{1,2})$/.test(String(v || '')) && !YASAK.has(v);
+  }
+  function kisayolGoster(k) { return k.replace('Comma', ',').replace('Period', '.'); }
+  document.addEventListener('keydown', (e) => {
+    if (kisayolDinle || !ayar) return;
+    const hedef = e.composedPath ? e.composedPath()[0] : e.target;
+    const yaziAlani = hedef && hedef.nodeType === 1 && (hedef.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(hedef.tagName));
+    if (yaziAlani && !e.ctrlKey) return;
+    const k = tusKombo(e);
+    if (!k || k !== ayar.kisayol) return;
+    e.preventDefault(); e.stopPropagation();
+    if (UI && UI.dialog.open) UI.dialog.close(); else ayarlarAc();
+  }, true);
+
+  // ---------- Tampermonkey menüsü ----------
+  let menuKimlikleri = [];
+  function menuKur() {
+    if (typeof GM_registerMenuCommand !== 'function') return;
+    if (typeof GM_unregisterMenuCommand !== 'function' && menuKimlikleri.length) return; // eskisi silinemiyor: çoğaltma
+    if (typeof GM_unregisterMenuCommand === 'function') menuKimlikleri.forEach(k => { try { GM_unregisterMenuCommand(k); } catch (_h) { /* yok */ } });
+    const harf = (s) => (/\((.)\)\s*$/.exec(s) || [])[1];
+    const ogeler = [
+      [m('menuAyarlar'), ayarlarAc],
+      [m('menuDil'), () => degistir(() => { ayar.dil = ayar.dil === 'tr' ? 'en' : 'tr'; }, true)]
+    ];
+    menuKimlikleri = ogeler.map(([ad, fn]) => { try { return GM_registerMenuCommand(ad, fn, (harf(ad) || '').toLowerCase()); } catch (_h) { return null; } }).filter(x => x != null);
+  }
+
+  // ---------- Test kancası ----------
+  let testMi = false;
+  try { testMi = typeof GM_info === 'object' && GM_info && GM_info.scriptHandler === 'Test'; } catch (_h) { testMi = false; }
+  if (testMi && window.__AALABS_TEST__ && typeof window.__AALABS_TEST__ === 'object') {
+    window.__AALABS_TEST__.goo = {
+      ui: () => UI, ust: () => UST, ayar: () => ayar, sayac: () => sayac, tani: taniRaporu, tara, temizAdres, ogBul, sekme,
+      ayarlarAc, METIN, gorsel: () => gorselImg, ayarYaz: (a) => degistir(() => { ayar = Object.assign({}, ayar, a); }, true)
+    };
+  }
+
+  // ---------- Başlat ----------
+  ayar = ayarDuzelt(oku('ayar', null));
+  sayfaStiliEkle();
+  function domHazir() {
+    sayfaStiliEkle();
+    arayuzKur();
+    menuKur();
+    tara();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', domHazir, { once: true });
+  else domHazir();
+  window.addEventListener('load', () => { bekci.n = 0; tara(); }, { once: true });
+})();
