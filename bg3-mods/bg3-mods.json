@@ -1,7 +1,7 @@
 {
  "bicim": "aalabs-index/bg3-mods",
- "surum": 11,
- "guncellendi": "2026-11-02T22:03:07+03:00",
+ "surum": 12,
+ "guncellendi": "2026-11-02T22:12:48+03:00",
  "uygulamalar": [
   {
    "id": "AlchTooltipFix",
@@ -34,28 +34,35 @@
    "id": "GrabNear",
    "ad": "GrabNear",
    "tur": "bg3-mod",
-   "surum": "0.3.1",
-   "version64": 422214612549632,
+   "surum": "2611-02b",
+   "version64": 938297268656668672,
    "uuid": "bf8ee75c-602b-4cdc-bfac-2ad6de472788",
    "tarih": "2026-11-02",
    "durum": "test",
    "kanal": "beta",
-   "degisiklik": "meta.lsx'ten TargetModes cikarildi: mod kayda yazilmaz, silinince kayit acilir. Davranis ayni.",
-   "dosya": "GrabNear__0.3.1.pak",
+   "degisiklik": "Surum sistemi YYMM-DDx'e gecti (BG3MM'de 26.11.202.0). Davranis ayni.",
+   "dosya": "GrabNear__2611-02b.pak",
    "hedef": "GrabNear.pak",
    "parcalar": [
     {
-     "id": "GrabNear__0.3.1.pak",
-     "boyut": 14315,
-     "sha256": "9e69c5452923fd7dd53f9eb8ee0421805846c199e163748a5e0a4f4c68ecd0f1",
-     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/c30069ed1a0427d5299aa6bdbbb4dfa02c7bd90e/bg3-mods/paks/GrabNear__0.3.1.pak"
+     "id": "GrabNear__2611-02b.pak",
+     "boyut": 14379,
+     "sha256": "27357c8a50f02748bbb3093eb8f9a2e60e36c28fd2948b1470a34563e41929b0",
+     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/416c25f25b8ceee4a9ad79cdf69c264421727bb3/bg3-mods/paks/GrabNear__2611-02b.pak"
     }
    ],
    "varyant_grubu": "",
    "varyant": "",
    "stub": false,
    "stub_not": "",
-   "onceki": []
+   "onceki": [
+    {
+     "surum": "0.3.1",
+     "tarih": "2026-11-02",
+     "durum": "test",
+     "degisiklik": "meta.lsx'ten TargetModes cikarildi: mod kayda yazilmaz, silinince kayit acilir. Davranis ayni."
+    }
+   ]
   },
   {
    "id": "HQToolTips",
