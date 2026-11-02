@@ -1,7 +1,7 @@
 {
  "bicim": "aalabs-index/bg3-mods",
- "surum": 7,
- "guncellendi": "2026-11-02T22:00:41+03:00",
+ "surum": 8,
+ "guncellendi": "2026-11-02T22:00:47+03:00",
  "uygulamalar": [
   {
    "id": "AlchTooltipFix",
@@ -109,6 +109,33 @@
    "varyant": "",
    "stub": true,
    "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
+   "onceki": []
+  },
+  {
+   "id": "QuickRoll",
+   "ad": "QuickRoll",
+   "tur": "bg3-mod",
+   "surum": "0.3.1",
+   "version64": 422214612549632,
+   "uuid": "12ec70d5-b53d-4f06-909d-52261e399404",
+   "tarih": "2026-11-02",
+   "durum": "test",
+   "kanal": "beta",
+   "degisiklik": "meta.lsx'ten TargetModes kaldırıldı (K20); README'ye oyun sürümü satırı",
+   "dosya": "QuickRoll__0.3.1.pak",
+   "hedef": "QuickRoll.pak",
+   "parcalar": [
+    {
+     "id": "QuickRoll__0.3.1.pak",
+     "boyut": 65383,
+     "sha256": "c38baf5c5db902e885e1eba314436350871a6b8d7bb9632cbb451aa60d502d7c",
+     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/9f1459808914c0f29b811c45caf5796867f060e5/bg3-mods/paks/QuickRoll__0.3.1.pak"
+    }
+   ],
+   "varyant_grubu": "",
+   "varyant": "",
+   "stub": false,
+   "stub_not": "",
    "onceki": []
   },
   {
