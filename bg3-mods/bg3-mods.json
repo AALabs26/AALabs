@@ -1,7 +1,7 @@
 {
  "bicim": "aalabs-index/bg3-mods",
- "surum": 3,
- "guncellendi": "2026-11-02T22:00:21+03:00",
+ "surum": 4,
+ "guncellendi": "2026-11-02T22:00:26+03:00",
  "uygulamalar": [
   {
    "id": "AlchTooltipFix",
@@ -82,6 +82,33 @@
    "varyant": "",
    "stub": false,
    "stub_not": "",
+   "onceki": []
+  },
+  {
+   "id": "HagPotions",
+   "ad": "HagPotions",
+   "tur": "bg3-mod",
+   "surum": "0.4.0",
+   "version64": 562949953421312,
+   "uuid": "9b6d2998-20fa-446f-8f54-96033708b134",
+   "tarih": "2026-11-02",
+   "durum": "test",
+   "kanal": "beta",
+   "degisiklik": "Bos surum (ozelliksiz). Tum ozellikler HQToolTips 0.7.x icinde.",
+   "dosya": "HagPotions__0.4.0.pak",
+   "hedef": "HagPotions.pak",
+   "parcalar": [
+    {
+     "id": "HagPotions__0.4.0.pak",
+     "boyut": 964,
+     "sha256": "768f30c3f93c5ce7bf9cd3ff6ca228090e796031875068bc29f8969a19c1f183",
+     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/632768d282e2c5fcbd52ab2d6690583de48147a8/bg3-mods/paks/HagPotions__0.4.0.pak"
+    }
+   ],
+   "varyant_grubu": "",
+   "varyant": "",
+   "stub": true,
+   "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
    "onceki": []
   }
  ]
