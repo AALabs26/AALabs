@@ -1,7 +1,7 @@
 {
  "bicim": "aalabs-index/bg3-mods",
- "surum": 8,
- "guncellendi": "2026-11-02T22:00:47+03:00",
+ "surum": 9,
+ "guncellendi": "2026-11-02T22:01:43+03:00",
  "uygulamalar": [
   {
    "id": "AlchTooltipFix",
@@ -109,6 +109,33 @@
    "varyant": "",
    "stub": true,
    "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
+   "onceki": []
+  },
+  {
+   "id": "QuestFinder",
+   "ad": "QuestFinder",
+   "tur": "bg3-mod",
+   "surum": "0.4.1",
+   "version64": 562952100904960,
+   "uuid": "4e0c9a17-2b6d-4f83-91ac-7d5e8b03cf42",
+   "tarih": "2026-11-02",
+   "durum": "test",
+   "kanal": "beta",
+   "degisiklik": "Harita süzgeci (bölge trigger'ı), panel açıkken 3 sn tazeleme, F6 kısayolu; TargetModes kaldırıldı (sökülebilir).",
+   "dosya": "QuestFinder__0.4.1.pak",
+   "hedef": "QuestFinder.pak",
+   "parcalar": [
+    {
+     "id": "QuestFinder__0.4.1.pak",
+     "boyut": 10802,
+     "sha256": "91671e1a0e441a0085498187b2415fbd32ff2b3a5d73aa9d27b0326ecc9fd872",
+     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/cbfe1a21818b32ed716c0a62b22d9e6b9bdb93f6/bg3-mods/paks/QuestFinder__0.4.1.pak"
+    }
+   ],
+   "varyant_grubu": "",
+   "varyant": "",
+   "stub": false,
+   "stub_not": "",
    "onceki": []
   },
   {
