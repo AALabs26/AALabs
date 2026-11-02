@@ -1,7 +1,7 @@
 {
  "bicim": "aalabs-index/bg3-mods",
- "surum": 12,
- "guncellendi": "2026-11-02T22:12:48+03:00",
+ "surum": 13,
+ "guncellendi": "2026-11-02T22:18:12+03:00",
  "uygulamalar": [
   {
    "id": "AlchTooltipFix",
@@ -116,6 +116,33 @@
    "varyant": "",
    "stub": true,
    "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
+   "onceki": []
+  },
+  {
+   "id": "HotbarReset",
+   "ad": "HotbarReset",
+   "tur": "bg3-mod",
+   "surum": "2.2.1",
+   "version64": 72339071162122240,
+   "uuid": "c0ee2590-757a-4a29-bfa8-82c7accd8e3d",
+   "tarih": "2026-11-02",
+   "durum": "test",
+   "kanal": "beta",
+   "degisiklik": "2.2.1: GUI (gomulu sayfa + durum makinesi) cikarildi; vanilla hotbar, pay 16. Karakter degisiminde cokme suphesi icin guvenli surum.",
+   "dosya": "HotbarReset__2.2.1.pak",
+   "hedef": "HotbarReset.pak",
+   "parcalar": [
+    {
+     "id": "HotbarReset__2.2.1.pak",
+     "boyut": 25099,
+     "sha256": "df16e30134a2a27b317461c61925c82ea6ef75834e3fa056fe6733894445da60",
+     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/ce90560e1e95f224c76312b0c678bc7daba1944c/bg3-mods/paks/HotbarReset__2.2.1.pak"
+    }
+   ],
+   "varyant_grubu": "",
+   "varyant": "",
+   "stub": false,
+   "stub_not": "",
    "onceki": []
   },
   {
