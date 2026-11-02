@@ -1,7 +1,7 @@
 {
  "bicim": "aalabs-index/bg3-mods",
- "surum": 6,
- "guncellendi": "2026-11-02T22:00:36+03:00",
+ "surum": 7,
+ "guncellendi": "2026-11-02T22:00:41+03:00",
  "uygulamalar": [
   {
    "id": "AlchTooltipFix",
@@ -103,6 +103,33 @@
      "boyut": 964,
      "sha256": "768f30c3f93c5ce7bf9cd3ff6ca228090e796031875068bc29f8969a19c1f183",
      "url": "https://raw.githubusercontent.com/AALabs26/AALabs/632768d282e2c5fcbd52ab2d6690583de48147a8/bg3-mods/paks/HagPotions__0.4.0.pak"
+    }
+   ],
+   "varyant_grubu": "",
+   "varyant": "",
+   "stub": true,
+   "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
+   "onceki": []
+  },
+  {
+   "id": "TooltipFill",
+   "ad": "TooltipFill",
+   "tur": "bg3-mod",
+   "surum": "0.3.1",
+   "version64": 422214612549632,
+   "uuid": "75a420c9-5624-4d89-a185-cf41f045d7de",
+   "tarih": "2026-11-02",
+   "durum": "test",
+   "kanal": "beta",
+   "degisiklik": "Bos surum (ozelliksiz). Tum ozellikler HQToolTips 0.7.x icinde.",
+   "dosya": "TooltipFill__0.3.1.pak",
+   "hedef": "TooltipFill.pak",
+   "parcalar": [
+    {
+     "id": "TooltipFill__0.3.1.pak",
+     "boyut": 966,
+     "sha256": "93ad60450d69b7cd3d0dc8d2eff278607c29e30022c5df68fc8fc30b155a4c0c",
+     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/06299b59050b104105c6337694ffe7e0281e463d/bg3-mods/paks/TooltipFill__0.3.1.pak"
     }
    ],
    "varyant_grubu": "",
