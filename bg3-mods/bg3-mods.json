@@ -1,7 +1,7 @@
 {
  "bicim": "aalabs-index/bg3-mods",
- "surum": 13,
- "guncellendi": "2026-11-02T22:18:12+03:00",
+ "surum": 14,
+ "guncellendi": "2026-11-02T22:18:26+03:00",
  "uygulamalar": [
   {
    "id": "AlchTooltipFix",
@@ -137,6 +137,33 @@
      "boyut": 25099,
      "sha256": "df16e30134a2a27b317461c61925c82ea6ef75834e3fa056fe6733894445da60",
      "url": "https://raw.githubusercontent.com/AALabs26/AALabs/ce90560e1e95f224c76312b0c678bc7daba1944c/bg3-mods/paks/HotbarReset__2.2.1.pak"
+    }
+   ],
+   "varyant_grubu": "",
+   "varyant": "",
+   "stub": false,
+   "stub_not": "",
+   "onceki": []
+  },
+  {
+   "id": "HoverStats",
+   "ad": "HoverStats",
+   "tur": "bg3-mod",
+   "surum": "0.3.3",
+   "version64": 422218907516928,
+   "uuid": "0b6b5683-7106-483c-8a60-eed356b40970",
+   "tarih": "2026-11-02",
+   "durum": "test",
+   "kanal": "beta",
+   "degisiklik": "Direnç satırı Examine penceresinin ikon ve kalkan/ok düzeninin birebir kopyası",
+   "dosya": "HoverStats__0.3.3.pak",
+   "hedef": "HoverStats.pak",
+   "parcalar": [
+    {
+     "id": "HoverStats__0.3.3.pak",
+     "boyut": 22956,
+     "sha256": "b3ec26fb94aa64edebee93298e86d4194b7b7a726a512956f074ca27e1907803",
+     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/65eded7f37d3b19c158df473b62228bc67e8b94c/bg3-mods/paks/HoverStats__0.3.3.pak"
     }
    ],
    "varyant_grubu": "",
