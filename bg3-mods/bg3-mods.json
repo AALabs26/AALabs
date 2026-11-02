@@ -1,8 +1,35 @@
 {
  "bicim": "aalabs-index/bg3-mods",
- "surum": 2,
- "guncellendi": "2026-11-02T22:00:15+03:00",
+ "surum": 3,
+ "guncellendi": "2026-11-02T22:00:21+03:00",
  "uygulamalar": [
+  {
+   "id": "AlchTooltipFix",
+   "ad": "AlchTooltipFix",
+   "tur": "bg3-mod",
+   "surum": "0.3.0",
+   "version64": 422212465065984,
+   "uuid": "2a19cc62-ffe4-4674-bfcc-8404cec79151",
+   "tarih": "2026-11-02",
+   "durum": "test",
+   "kanal": "beta",
+   "degisiklik": "Bos surum (ozelliksiz). Tum ozellikler HQToolTips 0.7.x icinde.",
+   "dosya": "AlchTooltipFix__0.3.0.pak",
+   "hedef": "AlchTooltipFix.pak",
+   "parcalar": [
+    {
+     "id": "AlchTooltipFix__0.3.0.pak",
+     "boyut": 971,
+     "sha256": "c73768123b2a053a8b8c28250304506bdd7c21de528d0cdc4f72e1679618112b",
+     "url": "https://raw.githubusercontent.com/AALabs26/AALabs/3efa430bcf5b7d34be67fd8a5c919c8f335ba9e0/bg3-mods/paks/AlchTooltipFix__0.3.0.pak"
+    }
+   ],
+   "varyant_grubu": "",
+   "varyant": "",
+   "stub": true,
+   "stub_not": "HQToolTips'e katildi · save gecisi: kaydet, sonra kaldir",
+   "onceki": []
+  },
   {
    "id": "GrabNear",
    "ad": "GrabNear",
