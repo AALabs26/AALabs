@@ -3,7 +3,7 @@
 // @name:tr      Claude Suite
 // @name:en      Claude Suite
 // @namespace    aalabs.claude-suite
-// @version      26.11.10.6
+// @version      26.11.14.1
 // @description  claude.ai için AALabs araç takımı: kullanım göstergesi, proje etiketleri ve filtresi, başlık kodu, mesaj saatleri, şablonlar, komut paleti. Türkçe ve İngilizce; her özellik Ayarlar'dan ayrı açılıp kapanır.
 // @author       AALabs
 // @match        https://claude.ai/*
@@ -47,7 +47,7 @@
 
   const UYGULAMA_ADI = 'Claude Suite';
   const UYGULAMA_ID = 'AALabs.ClaudeSuite';
-  const SURUM = '2611-10f';   // görünen sürüm YYMM-DDx; @version aynı sürümün YY.A.G.N karşılığı
+  const SURUM = '2611-14a';   // görünen sürüm YYMM-DDx; @version aynı sürümün YY.A.G.N karşılığı
   const TEMA_SURUM = '1.8.0';
   const IKON_KODU = 'CLS';
   // Tampermonkey / Violentmonkey betik başlığındaki @version (yoksa null).
@@ -326,7 +326,8 @@
       sub(fn) { hook(); subs.add(fn); return () => subs.delete(fn); },
       setWide(v) { hook(); wide = !!v; },
       get(url, opts) { return istek(url, opts); },
-      put(url, govde) { return istek(url, { method: 'PUT' }, govde); }
+      put(url, govde) { return istek(url, { method: 'PUT' }, govde); },
+      del(url) { return istek(url, { method: 'DELETE' }); }
     };
   })();
 
@@ -884,6 +885,22 @@
     "Şema {0}": "Schema {0}",
     "şemaya uygun": "fits the schema",
     "şemaya uymuyor": "does not fit the schema",
+    "süren ya da test edilmemiş": "ongoing or untested",
+    "kullanımda ya da kapandı": "in use or closed",
+    "soru cevap": "question and answer",
+    "sonra bakılacak": "look at later",
+    "terk edildi": "abandoned",
+    "devredildi": "handed off",
+    "silinecek": "to delete",
+    "Sohbeti sil": "Delete chat",
+    "\"{0}\" kalıcı olarak silinecek. Geri alınamaz.": "\"{0}\" will be deleted permanently. This cannot be undone.",
+    "Silindi: {0}": "Deleted: {0}",
+    "Silinemedi ({0}).": "Could not delete ({0}).",
+    "{0} yap": "Make {0}",
+    "Bu sohbeti sil (onay sorulur)": "Delete this chat (asks first)",
+    "tıkla: projeyi aç": "click: open the project",
+    "Sohbet başlığını \"DURUM KOD Ad\" biçiminde düzenler (TO-DO WIN+MOB Home Admin; tarih yok). SAĞLIK ve HUKUK'ta sonda belge tarihi olabilir (YYMM-DD). Başlığın yanında durum düğmesi (tıkladıkça TO-DO → OK → QA → LATER → XX → OLD → DEL), Claude süresi ve claude.ai menüsünün komutları ikon olarak.": "Edits the chat title in the \"STATUS CODE Name\" format (TO-DO WIN+MOB Home Admin; no date). SAĞLIK and HUKUK may end with a document date (YYMM-DD). Next to the title: a status button (each click: TO-DO → OK → QA → LATER → XX → OLD → DEL), Claude time and claude.ai's menu commands as icons.",
+    "Sohbet listelerinde yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; XX, OLD ve DEL sönük görünür. Biçime (DURUM KOD Ad) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Kenarda durum süzgeci ve XX gizle var. Sohbetler sayfasında DEL satırında Sil düğmesi.": "In chat lists the seven statuses (TO-DO, OK, QA, LATER, XX, OLD, DEL) become coloured chips; XX, OLD and DEL rows are dimmed. Titles that do not fit the format (STATUS CODE Name) show what is missing; clicking the badge opens the title grid. The sidebar gets a status filter and Hide XX. On the Chats page DEL rows get a Delete button.",
     "TO-DO yap": "Make TO-DO",
     "OK yap": "Make OK",
     "XX yap": "Make XX",
@@ -4165,7 +4182,10 @@
         vertical-align:middle!important;text-decoration:none!important;
         font:600 10.5px/1.45 "Open Sans","Segoe UI",system-ui,sans-serif!important;
         letter-spacing:.015em!important;
-        box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)!important;}`);
+        box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)!important;}
+      .${CHIP}.solda{width:112px!important;text-align:center!important;position:relative!important;z-index:2!important;cursor:pointer!important}
+      .${CHIP}.solda:hover{filter:brightness(1.08)}
+      .${CHIP}.solda:focus-visible{outline:2px solid currentColor!important;outline-offset:2px}`);
       function strip() {
         document.querySelectorAll('.' + CHIP).forEach(n => n.remove());
       }
@@ -4224,6 +4244,37 @@
         return chip;
       }
 
+      /* Sohbetler sayfası (2611-14a, maket CLS son: Etiket B · E3): rozet satırın solunda, durum çipi ve
+         addan önce; sabit genişlik, hizalı sütun. Tıklayınca projenin sayfası açılır. */
+      function solHedef(a) {
+        const kap = a.textContent.trim() ? a : a.parentElement;
+        if (!kap) return null;
+        const yap = [...kap.querySelectorAll('span,div,p')].filter(e => !e.children.length && (e.textContent || '').trim() &&
+          !e.closest('.' + CHIP + ',.cls-liste-arac,.sr-only,time') && !TIME_RE.test(e.textContent || ''));
+        const e = yap.find(x => x.hasAttribute('data-cls-durum')) || yap.find(x => /truncate/.test(x.className || '')) ||
+          yap.sort((x, y) => (y.textContent || '').length - (x.textContent || '').length)[0];
+        if (!e) return null;
+        const tr = e.closest('.truncate');
+        return tr && kap.contains(tr) && tr !== kap ? tr : e;
+      }
+      function solaKoy(chip, a, pid) {
+        const h = solHedef(a);
+        if (!h || !h.parentElement) return false;
+        chip.classList.add('solda');
+        chip.style.setProperty('margin', '0 10px 0 0', 'important');
+        if (!chip.dataset.tik) {
+          chip.dataset.tik = '1';
+          chip.tabIndex = 0; chip.setAttribute('role', 'link');
+          chip.title = _('Proje') + ': ' + chip.textContent + ' · ' + _('tıkla: projeyi aç');
+          const git = ev => { ev.preventDefault(); ev.stopPropagation(); location.assign('/project/' + pid); };
+          chip.addEventListener('click', git);
+          chip.addEventListener('keydown', ev => { if (ev.key === 'Enter') git(ev); });
+          for (const t of ['pointerdown', 'mousedown']) chip.addEventListener(t, ev => ev.stopPropagation());
+        }
+        if (h.previousElementSibling !== chip) h.parentElement.insertBefore(chip, h);
+        return true;
+      }
+
       function decorate() {
         const wanted = new Map();
         for (const a of document.querySelectorAll('a[href*="/chat/"]')) {
@@ -4239,10 +4290,13 @@
           if (!w || c.dataset.pid !== w.pid) c.remove();
         }
 
-        // Eksikleri yerleştir
+        // Eksikleri yerleştir; sohbetler sayfasında yeri her turda denetlenir (satır yeniden çizilebilir).
+        const liste = CHATDOM.onListPage();
         for (const [id, w] of wanted) {
-          if (document.querySelector('.' + CHIP + '[data-chat="' + id + '"]')) continue;
+          const var_ = document.querySelector('.' + CHIP + '[data-chat="' + id + '"]');
+          if (var_) { if (liste && w.a.closest('table')) solaKoy(var_, w.a, w.pid); continue; }
           const chip = build(id, w.pid);
+          if (liste && w.a.closest('table') && solaKoy(chip, w.a, w.pid)) continue;
           const t = timeFor(w.a);
           if (t && t.parentElement) {
             chip.style.setProperty('margin', '0 10px 0 0', 'important');
@@ -5112,16 +5166,21 @@
    * İstisna (2611-08f): SAĞLIK ve HUKUK (alt kodları dahil) Ad'dan sonra YYMM-DD tarih TAŞIYABİLİR.
    *   Bu sohbetin değil belgenin (ya da yüklemenin) tarihidir. Tarihli ve tarihsiz iki biçim de geçerli.
    *   ör. TO-DO HUKUK Kira ihtarnamesi 2611-05 · TO-DO HUKUK Kira ihtarnamesi
-   * DURUM: TO-DO · OK · XX. KOD: kod listesindeki kodlar, "+" ile birleşir (WIN+MOB).
+   * DURUM (2611-14a): TO-DO · OK · QA · LATER · XX · OLD · DEL. KOD: kod listesindeki kodlar, "+" ile birleşir (WIN+MOB).
    * Biçime uymayan eski başlık yalnız işaretlenir; adı kendiliğinden değişmez.
    * ===================================================================== */
-  const DURUMLAR = ['TO-DO', 'OK', 'XX'];
+  const DURUMLAR = ['TO-DO', 'OK', 'QA', 'LATER', 'XX', 'OLD', 'DEL'];
+  // Durumların anlamı (sağ tık listesi, ipucu). XX artık yalnız terk edildi; devredilen OLD (2611-14a).
+  const DURUM_ANLAM = { 'TO-DO': 'süren ya da test edilmemiş', 'OK': 'kullanımda ya da kapandı', 'QA': 'soru cevap',
+    'LATER': 'sonra bakılacak', 'XX': 'terk edildi', 'OLD': 'devredildi', 'DEL': 'silinecek' };
+  const DURUM_SINIF = d => ({ 'TO-DO': 'd-todo', 'OK': 'd-ok', 'QA': 'd-qa', 'LATER': 'd-later', 'XX': 'd-xx', 'OLD': 'd-old', 'DEL': 'd-del' })[d] || 'd-yok';
+  const SONUK_DURUMLAR = ['XX', 'OLD', 'DEL'];   // liste satırı sönük (maket CLS son: Sönük B)
   const PLATFORM_SIRA = ['WIN', 'MOB', 'SCR', 'HTML'];
   /* Sondaki sürüm ya da zaman: YYMM-DD, YYMM-DDx, YYMM-DD-HHMM; eski YYYY-MMDD ve YYMM-HHMM.
      Ay ve gün gerçek değer olmalı: "Port 8080-8081", "Rapor 2026-11" tarih sayılmaz. */
   const AY = '(?:0[1-9]|1[0-2])', GUN = '(?:0[1-9]|[12]\\d|3[01])', SAAT = '(?:[01]\\d|2[0-3])[0-5]\\d';
   const TARIH_SON = new RegExp('\\s+(\\d{2}' + AY + '-' + GUN + '(?:-' + SAAT + '|[a-z]{1,3})?|20\\d{2}-' + AY + GUN + '|\\d{2}' + AY + '-' + SAAT + ')$');
-  const DURUM_BAS = /^(TO-DO|OK|XX)(?=\s|$)/;
+  const DURUM_BAS = /^(TO-DO|OK|QA|LATER|XX|OLD|DEL)(?=\s|$)/;
   const TARIHLI_KODLAR = ['SAĞLIK', 'HUKUK'];   // bu kodlarda sondaki YYMM-DD belge tarihi adın parçasıdır (isteğe bağlı)
   const BELGE_TARIHI = new RegExp('\\s+\\d{2}' + AY + '-' + GUN + '$');
   /* Sahip kodu (2611-08j): isteğe bağlı, DURUM'dan sonra asıl koddan önce: TO-DO ALP IMG Gülen Adam ·
@@ -5236,7 +5295,7 @@
   define({
     id: 'titleCode',
     label: 'Başlık kodu',
-    desc: 'Sohbet başlığını "DURUM KOD Ad" biçiminde düzenler (TO-DO WIN+MOB Home Admin; tarih yok). SAĞLIK ve HUKUK\'ta sonda belge tarihi olabilir (YYMM-DD). Başlığın yanında durum düğmesi (OK → TO-DO → XX), Claude süresi ve claude.ai menüsünün komutları ikon olarak.',
+    desc: 'Sohbet başlığını "DURUM KOD Ad" biçiminde düzenler (TO-DO WIN+MOB Home Admin; tarih yok). SAĞLIK ve HUKUK\'ta sonda belge tarihi olabilir (YYMM-DD). Başlığın yanında durum düğmesi (tıkladıkça TO-DO → OK → QA → LATER → XX → OLD → DEL), Claude süresi ve claude.ai menüsünün komutları ikon olarak.',
     group: 'Yazma',
     kisayol: 'baslik',
     health() { return BASLIK._durum || { tamam: true, metin: _('Sohbet sayfasında çalışır') }; },
@@ -5255,6 +5314,10 @@
       .cls-baslik-arac .d-todo{color:var(--cls-turuncu);background:var(--cls-turuncu-bg)}
       .cls-baslik-arac .d-ok{color:var(--cls-basari);background:var(--cls-basari-bg)}
       .cls-baslik-arac .d-xx,.cls-baslik-arac .d-yok{color:var(--cls-ikincil);background:transparent}
+      .cls-baslik-arac .d-qa{color:var(--cls-vurgu);background:var(--cls-ana-acik)}
+      .cls-baslik-arac .d-later{color:var(--cls-uyari);background:var(--cls-uyari-bg)}
+      .cls-baslik-arac .d-del{color:var(--cls-hata);background:var(--cls-hata-bg)}
+      .cls-baslik-arac .d-old{color:var(--cls-ikincil);background:transparent;border-style:dashed}
       .cls-baslik-arac .durum.hatali{border:2px solid var(--cls-hata);box-shadow:none}
       .cls-baslik-arac .sure{font-weight:400;color:var(--cls-ikincil)}
       .cls-baslik-arac .ayrac{width:1px;height:20px;background:currentColor;opacity:.2}
@@ -5269,15 +5332,22 @@
         background:var(--cls-yuzey);color:var(--cls-metin);border:1px solid var(--cls-ayirici);font:600 12px/1 "Open Sans","Segoe UI",system-ui,sans-serif}
       .cls-durum-menu button{all:unset;box-sizing:border-box;padding:8px 10px;border-radius:4px;cursor:pointer}
       .cls-durum-menu button:hover,.cls-durum-menu button:focus-visible{background:rgba(127,127,127,.15)}
-      .cls-durum-menu button[aria-current]{font-weight:700;text-decoration:underline}`);
+      .cls-durum-menu button[aria-current]{font-weight:700;text-decoration:underline}
+      .cls-durum-menu button{display:flex;align-items:center;gap:8px}
+      .cls-durum-menu i{font-style:normal;min-width:44px;text-align:center;padding:0 4px;border:1px solid currentColor;border-radius:3px;font:600 10px/16px "Open Sans","Segoe UI",system-ui,sans-serif}
+      .cls-durum-menu .anlam{font-weight:400;color:var(--cls-ikincil)}
+      .cls-durum-menu .d-todo{color:var(--cls-turuncu);background:var(--cls-turuncu-bg)} .cls-durum-menu .d-ok{color:var(--cls-basari);background:var(--cls-basari-bg)}
+      .cls-durum-menu .d-qa{color:var(--cls-vurgu);background:var(--cls-ana-acik)} .cls-durum-menu .d-later{color:var(--cls-uyari);background:var(--cls-uyari-bg)}
+      .cls-durum-menu .d-del{color:var(--cls-hata);background:var(--cls-hata-bg)} .cls-durum-menu .d-xx{color:var(--cls-ikincil)} .cls-durum-menu .d-old{color:var(--cls-ikincil);border-style:dashed}`);
       const renkleriYaz = () => {
         const v = TEMA.vars(), st = document.documentElement.style;
         for (const [a, b] of [['turuncu', 'turuncu'], ['turuncu-bg', 'turuncu-bg'], ['basari', 'basari'], ['basari-bg', 'basari-bg'],
                               ['ikincil', 'metin-ikincil'], ['ana', 'ana'], ['ana-uzeri', 'ana-uzeri'], ['hata', 'hata'],
-                              ['yuzey', 'yuzey'], ['metin', 'metin'], ['ayirici', 'ayirici']]) st.setProperty('--cls-' + a, v[b]);
+                              ['yuzey', 'yuzey'], ['metin', 'metin'], ['ayirici', 'ayirici'], ['vurgu', 'vurgu'], ['ana-acik', 'ana-acik'],
+                              ['uyari', 'uyari'], ['uyari-bg', 'uyari-bg'], ['hata-bg', 'hata-bg']]) st.setProperty('--cls-' + a, v[b]);
       };
       renkleriYaz();
-      ctx.undo(() => ['turuncu', 'turuncu-bg', 'basari', 'basari-bg', 'ikincil', 'ana', 'ana-uzeri', 'hata', 'yuzey', 'metin', 'ayirici'].forEach(a => document.documentElement.style.removeProperty('--cls-' + a)));
+      ctx.undo(() => ['turuncu', 'turuncu-bg', 'basari', 'basari-bg', 'ikincil', 'ana', 'ana-uzeri', 'hata', 'yuzey', 'metin', 'ayirici', 'vurgu', 'ana-acik', 'uyari', 'uyari-bg', 'hata-bg'].forEach(a => document.documentElement.style.removeProperty('--cls-' + a)));
 
       let ad = null, sonId = null, sure = null, sabit = null;
 
@@ -5360,7 +5430,8 @@
       /* Üst şerit (onaylı maket CLS_UST-SERIT-SON_2611-09-1032): tek durum düğmesi (OK → TO-DO → XX → OK,
          sağ tık: doğrudan seçim) · Claude süresi · claude.ai menüsünün komutları ikon olarak. İkonlar
          claude.ai menüsünden kopyalanır; olmazsa yedek çizim. Komutlar claude.ai'nin kendi menüsünü çalıştırır. */
-      const SONRAKI = { 'OK': 'TO-DO', 'TO-DO': 'XX', 'XX': 'OK' };
+      // Döngü B (maket CLS son 2611-14): yedi durum sırayla.
+      const SONRAKI = { 'TO-DO': 'OK', 'OK': 'QA', 'QA': 'LATER', 'LATER': 'XX', 'XX': 'OLD', 'OLD': 'DEL', 'DEL': 'TO-DO' };
       const KOMUTLAR = [
         { k: 'pin', ad: 'Sabitle', tus: 'P', re: /^(un)?pin|^sabitle/i },
         { k: 'kalem', ad: 'Yeniden adlandır', tus: 'R', re: /^rename|^yeniden adlandır/i },
@@ -5483,10 +5554,13 @@
         document.querySelectorAll('.cls-durum-menu').forEach(n => n.remove());
         const m = document.createElement('div');
         m.className = 'cls-durum-menu'; m.setAttribute('role', 'menu');
-        m.style.left = Math.min(x, innerWidth - 140) + 'px'; m.style.top = y + 'px';
+        m.style.left = Math.min(x, innerWidth - 260) + 'px'; m.style.top = y + 'px';
         for (const d of DURUMLAR) {
           const b = document.createElement('button');
-          b.type = 'button'; b.setAttribute('role', 'menuitem'); b.textContent = d;
+          b.type = 'button'; b.setAttribute('role', 'menuitem');
+          const ic = document.createElement('i'); ic.className = DURUM_SINIF(d); ic.textContent = d;
+          const an = document.createElement('span'); an.className = 'anlam'; an.textContent = _(DURUM_ANLAM[d]);
+          b.append(ic, an);
           if (d === durum) b.setAttribute('aria-current', 'true');
           b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); kapat(); if (d !== durum) uygula(cur => SEMA.durumYap(cur, d)); });
           m.appendChild(b);
@@ -5512,12 +5586,12 @@
 
         const db = document.createElement('button');
         db.type = 'button';
-        db.className = 'durum ' + (durum === 'TO-DO' ? 'd-todo' : durum === 'OK' ? 'd-ok' : durum === 'XX' ? 'd-xx' : 'd-yok');
+        db.className = 'durum ' + DURUM_SINIF(durum);
         if (!den.uygun) db.classList.add('hatali');
         const nk = document.createElement('i'); nk.className = 'nokta';
         db.append(nk, document.createTextNode(durum || _('Durum yok')));
         const sonra = SONRAKI[durum] || 'TO-DO';
-        db.title = (durum ? _f('Durum: {0} · tıkla: {1}', durum, sonra) : _f('Durum yok · tıkla: {0}', sonra)) + ' · ' + _('Sağ tık: durumu doğrudan seç') +
+        db.title = (durum ? _f('Durum: {0} · tıkla: {1}', durum + ' (' + _(DURUM_ANLAM[durum]) + ')', sonra) : _f('Durum yok · tıkla: {0}', sonra)) + ' · ' + _('Sağ tık: durumu doğrudan seç') +
           (den.uygun ? '' : '\n' + _('Başlık biçime uymuyor') + ': ' + den.eksik.map(x => _(x)).join(', ') + '. ' + _f('Düzenlemek için kalem ya da {0}', KISAYOL.tus('baslik')));
         db.setAttribute('aria-label', db.title);
         db.addEventListener('click', e => { dur(e); uygula(cur => SEMA.durumYap(cur, SONRAKI[SEMA.durumu(cur)] || 'TO-DO')); });
@@ -6760,8 +6834,15 @@
       }
 
       // Açık pencere (claude.ai iletişim kutusu) varken şerit gizlenir.
-      const pencereAcik = () => [...document.querySelectorAll('[role="dialog"][data-state="open"],[aria-modal="true"]')]
-        .some(d => d.getClientRects().length && !UI_HOSTS.has(d.getRootNode && d.getRootNode().host));
+      /* 2611-11b: claude.ai'nin bazı pencereleri (proje "Context" dosya listesi) data-state/aria-modal taşımıyor;
+         görünür ve büyük (≥ 300×150) her dialog sayılır, kapanmakta olan (data-state=closed) sayılmaz. */
+      const pencereAcik = () => [...document.querySelectorAll('[role="dialog"],[role="alertdialog"],[aria-modal="true"]')]
+        .some(d => {
+          if (d.getAttribute('data-state') === 'closed' || UI_HOSTS.has(d.getRootNode && d.getRootNode().host)) return false;
+          if (d.getAttribute('aria-modal') === 'true' || d.getAttribute('data-state') === 'open') return !!d.getClientRects().length;
+          const r = d.getBoundingClientRect();
+          return r.width >= 300 && r.height >= 150;
+        });
       let izlenen = null, ro = null;
       ctx.undo(() => ro && ro.disconnect());
       function ciz() {
@@ -7564,7 +7645,7 @@
     id: 'titleSchemaSidebar',
     parent: 'titleCode',
     label: 'Kenar çubuğunda durum ve biçim',
-    desc: 'Sohbet listelerinde TO-DO, OK, XX renkli çip olur; XX sönük görünür. Biçime (DURUM KOD Ad) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Kenarda durum süzgeci ve XX gizle var.',
+    desc: 'Sohbet listelerinde yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; XX, OLD ve DEL sönük görünür. Biçime (DURUM KOD Ad) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Kenarda durum süzgeci ve XX gizle var. Sohbetler sayfasında DEL satırında Sil düğmesi.',
     group: 'Yazma',
     health() {
       const d = document.querySelectorAll('[data-cls-durum]').length;
@@ -7580,6 +7661,11 @@
       [${DUR}="TO-DO"]::before{color:var(--cls-turuncu);background:var(--cls-turuncu-bg)}
       [${DUR}="OK"]::before{color:var(--cls-basari);background:var(--cls-basari-bg)}
       [${DUR}="XX"]::before{color:var(--cls-ikincil)}
+      [${DUR}="QA"]::before{color:var(--cls-vurgu);background:var(--cls-ana-acik)}
+      [${DUR}="LATER"]::before{color:var(--cls-uyari);background:var(--cls-uyari-bg)}
+      [${DUR}="DEL"]::before{color:var(--cls-hata);background:var(--cls-hata-bg)}
+      [${DUR}="OLD"]::before{color:var(--cls-ikincil);border-style:dashed}
+      .cls-liste-arac button.sil{color:var(--cls-hata);border-color:var(--cls-hata)}
       a[${XX}],tr[${XX}]{opacity:.55}
       span[${EKS}]::after{content:attr(${EKS});display:inline-block;margin-left:6px;padding:0 4px;white-space:nowrap;vertical-align:1px;
         border:1px solid var(--cls-hata);border-radius:3px;color:var(--cls-hata);background:var(--cls-hata-bg);
@@ -7624,7 +7710,7 @@
          soyulan: yazı düğümü → bizim yazdığımız değer. Düğümün değeri bundan farklıysa yazıyı
          React yeniden yazmıştır: durum yeniden okunur, yoksa çip kalkar. */
       const soyulan = new WeakMap();
-      const DURUM_SOY = /^\s*(TO-DO|OK|XX)(?:\s+|$)/;
+      const DURUM_SOY = /^\s*(TO-DO|OK|QA|LATER|XX|OLD|DEL)(?:\s+|$)/;
       function durumIsle(e, bilinen) {
         const n = ilkYazi(e);
         if (n && soyulan.has(n) && soyulan.get(n) === n.nodeValue) {
@@ -7693,11 +7779,11 @@
           durumIsle(e, adlar[id]);
           const tam = tamBaslik(e);
           const d = e.getAttribute(DUR);   // yalnız çipe taşınan (ardından geçerli kod gelen) durum sayılır
-          if (d === 'XX') satir.setAttribute(XX, ''); else satir.removeAttribute(XX);
+          if (SONUK_DURUMLAR.includes(d)) satir.setAttribute(XX, ''); else satir.removeAttribute(XX);   // Sönük B: XX, OLD, DEL
           const den = SEMA.denetle(tam);
           const yazi = den.uygun ? null : SEMA.kisaNeden(den.eksik);
           if (yazi) { if (isaret.getAttribute(EKS) !== yazi) isaret.setAttribute(EKS, yazi); } else isaret.removeAttribute(EKS);
-          if (listede) aracKur(e, id, d);
+          if (listede) aracKur(e, id, d, a);
           // Süzgeç kenar çubuğundaki ve liste sayfasındaki satırlara uygulanır; açık sohbetin satırı hiç gizlenmez.
           // "Düzelt": yalnız biçime uymayan (etiketsiz dahil) başlıklar görünür.
           const szx = szL(listede);
@@ -7753,8 +7839,9 @@
         const seg = document.createElement('span');
         seg.setAttribute('role', 'radiogroup');
         seg.setAttribute('aria-label', _('Durum süzgeci'));
-        seg.style.cssText = `display:inline-flex;border:1px solid ${v.kenar};border-radius:2px;overflow:hidden`;
-        const secenek = [['hepsi', _('Tümü')], ['TO-DO', 'TO-DO'], ['OK', 'OK'], ['XX', 'XX'], ['duzelt', _('Düzelt')]];
+        seg.style.cssText = `display:inline-flex;flex-wrap:wrap;border:1px solid ${v.kenar};border-radius:2px;overflow:hidden`;
+        // Süzgeç A (maket CLS son 2611-14): yedi durum da düğme; şerit sarılır.
+        const secenek = [['hepsi', _('Tümü')], ['TO-DO', 'TO-DO'], ['OK', 'OK'], ['XX', 'XX'], ['QA', 'QA'], ['LATER', 'LATER'], ['DEL', 'DEL'], ['OLD', 'OLD'], ['duzelt', _('Düzelt')]];
         const bs = secenek.map(([k, et], i) => {
           const b = document.createElement('button');
           b.type = 'button'; b.textContent = et; b.setAttribute('role', 'radio');
@@ -7785,20 +7872,48 @@
       }
       /* Liste satırı düğmeleri: TO-DO yap · OK yap · XX yap · Düzenle. Satırın üstüne gelince görünür;
          başlık yazısının satırına eklenir. Basınca ad sunucudan taze okunur, yalnız baştaki durum değişir. */
-      function aracKur(e, id, d) {
+      /* DEL satırında Sil (E2, maket CLS son 2611-14): önce satırın kendi claude.ai menüsü (claude.ai onayı);
+         menü yoksa CLS onayı ve claude.ai'nin silme isteği. */
+      async function satirSil(id, a, ad) {
+        const row = a && CHATDOM.rowOf(a);
+        const tetik = row && [...row.querySelectorAll('button[aria-haspopup="menu"]')].find(b => !b.closest('.cls-liste-arac'));
+        if (tetik) {
+          tetik.click();
+          let menu = null;
+          for (let t = 0; t < 1200 && !menu; t += 50) {
+            await new Promise(r => setTimeout(r, 50));
+            menu = [...document.querySelectorAll('[role="menu"]')].find(m => m.getBoundingClientRect().width && m.querySelector('[role^="menuitem"]'));
+          }
+          const metin = o => (o.textContent || '').replace(/[\uE000-\uF8FF]/g, '').replace(/\s+/g, ' ').trim();
+          const oge = menu && [...menu.querySelectorAll('[role^="menuitem"]')].find(o => /^(delete|sil)\b/i.test(metin(o)));
+          if (oge) { oge.click(); return; }
+          if (menu) menu.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+        }
+        const ok = await onayla({ baslik: _('Sohbeti sil'), metin: _f('"{0}" kalıcı olarak silinecek. Geri alınamaz.', ad || id),
+          secenekler: [{ metin: _('Vazgeç'), harf: 'V', deger: false }, { metin: _('Sil'), harf: 'S', deger: true }] });
+        if (!ok) return;
+        try {
+          await orgIle(o => NET.del(`/api/organizations/${o}/chat_conversations/${id}`));
+          gunluk('titleSchemaSidebar', _('silindi') + ': ' + (ad || id));
+          bildir(_f('Silindi: {0}', ad || id), 'basari');
+          if (row) row.setAttribute(SUZ, '');
+        } catch (e) { bildir(_f('Silinemedi ({0}).', String(e && e.message || e)), 'hata'); }
+      }
+      function aracKur(e, id, d, a) {
         const yer = (e.closest('.truncate') || e).parentElement;
         if (!yer) return;
         let g = yer.querySelector(':scope > .cls-liste-arac');
-        const imza = id + '|' + d + '|' + DIL.aktif();
+        const imza = id + '|' + d + '|' + DIL.aktif() + '|2';
         if (g && g.dataset.imza === imza) return;
         if (g) g.remove();
         g = document.createElement('span');
         g.className = 'cls-liste-arac';
         g.dataset.imza = imza;
         const dur = ev => { ev.preventDefault(); ev.stopPropagation(); };
-        for (const [k, et] of [['TO-DO', _('TO-DO yap')], ['OK', _('OK yap')], ['XX', _('XX yap')]]) {
+        // Yedi durum: düğmede yalnız adı, ipucunda anlamı (2611-14a).
+        for (const k of DURUMLAR) {
           const b = document.createElement('button');
-          b.type = 'button'; b.textContent = et;
+          b.type = 'button'; b.textContent = k; b.title = _f('{0} yap', k) + ' · ' + _(DURUM_ANLAM[k]);
           b.setAttribute('aria-pressed', k === d ? 'true' : 'false');
           b.addEventListener('click', ev => { dur(ev); if (k !== d && BASLIKUI.durumId) BASLIKUI.durumId(id, k); });
           g.appendChild(b);
@@ -7807,6 +7922,12 @@
         du.type = 'button'; du.textContent = _('Düzenle'); du.title = _('Başlık ızgarasını aç');
         du.addEventListener('click', ev => { dur(ev); if (BASLIKUI.acId) BASLIKUI.acId(id); });
         g.appendChild(du);
+        if (d === 'DEL') {
+          const sl = document.createElement('button');
+          sl.type = 'button'; sl.className = 'sil'; sl.textContent = _('Sil'); sl.title = _('Bu sohbeti sil (onay sorulur)');
+          sl.addEventListener('click', ev => { dur(ev); satirSil(id, a, (PROJ.chatNames() || {})[id]); });
+          g.appendChild(sl);
+        }
         for (const t of ['pointerdown', 'mousedown']) g.addEventListener(t, ev => ev.stopPropagation());
         yer.appendChild(g);
       }
@@ -7889,7 +8010,9 @@
   const DEGISIKLIK = (function () {
     const VERI = [
     // @@CHG-BASLA
-    {"s": "2611-10f", "t": "2026-11-10", "m": [{"k": "duzeldi", "tr": "Üst şeritteki proje ikonu projesi olmayan sohbette çalışmıyordu.", "n": "claude.ai bu sohbetlerde menüye \"Change project\" değil \"Add to project\" yazıyor; ikon yalnız ilkini arıyordu. Artık ikisini de buluyor ve proje listesini açıyor.", "en": "The project icon on the top strip did not work in chats without a project.", "w": "In those chats claude.ai's menu says \"Add to project\", not \"Change project\"; the icon only looked for the latter. It now finds both and opens the project list."}]},
+    {"s": "2611-14a", "t": "2026-11-14", "m": [{"k": "degisti", "tr": "Sohbetler sayfasında proje etiketi sağdan ==sola== geldi: Proje · DURUM · Ad. Etiket sabit genişlikte, alt alta hizalı; tıklayınca proje açılır.", "en": "On the Chats page the project tag moved from the right ==to the left==: Project · STATUS · Name. The tag has a fixed width and lines up; clicking it opens the project."}, {"k": "yeni", "tr": "Dört yeni durum: ==QA== soru cevap, ==LATER== sonra bakılacak, ==DEL== silinecek, ==OLD== devredildi. XX artık yalnız terk edildi. Her durum kendi renginde; XX, OLD ve DEL satırları sönük.", "en": "Four new statuses: ==QA== question and answer, ==LATER== look at later, ==DEL== to delete, ==OLD== handed off. XX now means abandoned only. Each status has its own colour; XX, OLD and DEL rows are dimmed."}, {"k": "degisti", "tr": "Durum düğmesi tıkladıkça yedi durumu sırayla gezer: TO-DO → OK → QA → LATER → XX → OLD → DEL. Sağ tık listesi her durumun anlamını yazar. Kenar süzgecinde yedi durum da düğme.", "en": "Each click on the status button steps through all seven: TO-DO → OK → QA → LATER → XX → OLD → DEL. The right-click list shows what each status means. The sidebar filter has a button for each of the seven."}, {"k": "yeni", "tr": "Sohbetler sayfasında DEL satırının üstüne gelince ==Sil== düğmesi. claude.ai'nin silme onayı sorulur.", "en": "On the Chats page a ==Delete== button appears on DEL rows on hover. claude.ai's delete confirmation is asked."}]},
+    {"s": "2611-11b", "t": "2026-11-11", "m": [{"k": "duzeldi", "tr": "Efor şeridi projenin \"Context\" dosya penceresinin üstünde kalıp dosya adlarını kapatıyordu.", "n": "Şerit yalnız \"açık\" işareti taşıyan pencerelerde gizleniyordu; bu pencerede o işaret yok. Artık görünür her büyük pencere açıkken şerit gizlenir, kapanınca geri gelir.", "en": "The effort strip stayed on top of the project's \"Context\" file window and covered file names.", "w": "The strip hid only for windows carrying an \"open\" marker; this window has none. It now hides while any visible large window is open and returns when it closes."}]},
+    {"s": "2611-11a", "t": "2026-11-11", "m": [{"k": "duzeldi", "tr": "Üst şeritteki proje ikonu projesi olmayan sohbette çalışmıyordu.", "n": "claude.ai bu sohbetlerde menüye \"Change project\" değil \"Add to project\" yazıyor; ikon yalnız ilkini arıyordu. Artık ikisini de buluyor ve proje listesini açıyor.", "en": "The project icon on the top strip did not work in chats without a project.", "w": "In those chats claude.ai's menu says \"Add to project\", not \"Change project\"; the icon only looked for the latter. It now finds both and opens the project list."}]},
     {"s": "2611-10e", "t": "2026-11-10", "m": [{"k": "yeni", "tr": "==Toplu web izni==. Claude bir siteyi okumak isteyince çıkan izin kartına \"Bu sohbette her siteye izin ver\" düğmesi eklendi. Basınca o sohbetteki her web okuma kartı kendiliğinden \"Allow once\" ile geçer, site adı kısa bildirimle görünür. Bilgisayar, tarayıcı, gönderme gibi öbür izin kartlarına dokunulmaz. İzin yalnız o sohbette geçerli; kapatmak için komut paleti: \"Bu sohbette web iznini kapat\".", "en": "==Bulk web permission==. The permission card shown when Claude wants to read a site gets an \"Allow every site in this chat\" button. Once pressed, every web-read card in that chat passes with \"Allow once\" by itself, and the site name shows in a short notice. Other permission cards (computer, browser, sending) are never touched. The permission holds only in that chat; to turn it off use the command palette: \"Turn off web permission in this chat\"."}]},
     {"s": "2611-10d", "t": "2026-11-10", "m": [{"k": "duzeldi", "tr": "Claude bilgisayarda çalışırken mesajdaki \"Watch on Claude Desktop\" kartında kırmızı \"durum, kod yok\" rozeti çıkıyordu.", "n": "Kart bir sohbet bağlantısıdır; betik onu sol menü satırı sanıp başlık biçimini denetliyordu. Mesaj içindeki bağlantılar artık işaretlenmez; kart claude.ai'nin gösterdiği gibi kalır.", "en": "While Claude worked on the computer, the \"Watch on Claude Desktop\" card in the message showed a red \"status, code missing\" badge.", "w": "The card is a chat link; the script took it for a left-menu row and checked its title format. Links inside messages are no longer marked; the card stays as claude.ai shows it."}]},
     {"s": "2611-10b", "t": "2026-11-10", "m": [{"k": "duzeldi", "tr": "Sol menüde bazı sohbetlerde durum çipi iki kez görünüyordu (TO-DO TO-DO).", "n": "claude.ai başlık yazısını yeni bir iç öğeye taşıyınca eski öğedeki çip silinmiyordu. Artık satırda yalnız yazıyı taşıyan öğede çip kalır.", "en": "In the left menu some chats showed the status chip twice (TO-DO TO-DO).", "w": "When claude.ai moved the title text into a new inner element, the chip on the old element was not removed. Now only the element holding the text keeps the chip."}]},
