@@ -1,12 +1,16 @@
 // ==UserScript==
 // @name         AALabs YouTube Watch Later Organizer
+// @name:tr      AALabs YouTube Scripts
+// @name:en      AALabs YouTube Scripts
 // @namespace    https://github.com/alpatalik
-// @version      3.2.0
-// @description  Oynatma listesini süreye göre sıralar, kategorilere ayırır, kanal etiketler, listelere taşır, çift listeleri birleştirir.
-// @description:en  Sorts a playlist by length, sorts videos into categories, tags channels, moves videos to playlists and merges duplicate playlists.
+// @version      26.11.16.1
+// @description  Oynatma listesini süreye, kanala ya da başlığa göre sıralar, sırayı YouTube'a yazar, kategorilere ayırır, kanal etiketler, listelere taşır, çift listeleri birleştirir. Video ve Shorts sayfasında beğenmeme sayısını gösterir (Return YouTube Dislike).
+// @description:en  Sorts a playlist by length, channel or title, writes the order to YouTube, sorts videos into categories, tags channels, moves videos to playlists and merges duplicate playlists. Shows dislike counts on videos and Shorts (Return YouTube Dislike).
 // @author       Alp
 // @match        https://www.youtube.com/*
-// @icon         data:image/png;base64,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
+// @icon         data:image/png;base64,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
+// @updateURL    http://127.0.0.1:47815/u/AALabs.YouTubeWatchLaterOrganizer.user.js
+// @downloadURL  http://127.0.0.1:47815/u/AALabs.YouTubeWatchLaterOrganizer.user.js
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_registerMenuCommand
@@ -16,11 +20,13 @@
 // @inject-into  content
 // @run-at       document-idle
 // @noframes
-// @aalabs-ikon  WLO
+// @aalabs-ikon  YTO
 // ==/UserScript==
 
 /*
- * AALabs YouTube Watch Later Organizer 3.2.0 · 2026-10-18 · oturum v6wlt
+ * AALabs YouTube Scripts 2611-16a · 2026-11-16 (Dislike modülü)
+ * Asıl @name "AALabs YouTube Watch Later Organizer" kalır: eklenti betiği @name + @namespace ile tanır;
+ * değişirse yeni betik kurulur ve GM deposu boş başlar. Görünen ad @name:tr / @name:en ile gelir.
  * AALabs tasarım dili 1.4.1 · app-lab v02.01. Kodda sabit renk yok; renkler TOKEN bloğundan gelir.
  * YouTube "require-trusted-types-for 'script'" kuralı nedeniyle innerHTML hiç kullanılmaz.
  * Bütün arayüz bir Shadow DOM içinde durur: YouTube stilleri sızmaz, bizimkiler de dışarı taşmaz.
@@ -33,20 +39,22 @@
   if (window.top !== window.self) return;
 
   const UYG = {
-    ad: "AALabs YouTube Watch Later Organizer",
-    kisaAd: "YouTube Watch Later Organizer",
+    ad: "AALabs YouTube Scripts",
+    kisaAd: "YouTube Scripts",
     id: "YouTubeWatchLaterOrganizer",
-    surum: "3.2.0",
-    tarih: "2026-10-18",
-    oturum: "v6wlt",
+    surum: "2611-16a",
+    tarih: "2026-11-16",
+    oturum: "1016",
     tasarim: "1.4.1",
-    ikon: "WLO",
+    ikon: "YTO",
   };
   const VARSAYILAN_ONEK = "WL ▸ ";
   const AYAR_ANAHTAR = "wlo_ayar_v3";
   const GUNLUK_ANAHTAR = "wlo_gunluk";
   const PARCA = 25; // tek istekte gönderilen düzenleme sayısı
   const OLCEKLER = [90, 100, 115, 130];
+  const SIRALAR = ["liste", "ters", "uzun", "kisa", "kanal", "baslik"];
+  const GRUP_SIRALARI = ["uzun", "kisa", "ters"];
   const GORUNURLUKLER = ["UNLISTED", "PRIVATE", "PUBLIC"];
   const VARSAYILAN_KISAYOLLAR = { ayarlar: "Ctrl+,", tema: "Alt+Shift+T", dil: "Alt+Shift+L", palet: "Ctrl+K", ara: "/", geri: "Ctrl+Z", ileri: "Ctrl+Y", kapat: "Esc" };
   const KISAYOL_SIRASI = ["ayarlar", "tema", "dil", "palet", "ara", "geri", "ileri", "kapat"];
@@ -59,7 +67,7 @@
     "Ctrl+Tab", "Ctrl+Shift+Tab", "Ctrl+PageUp", "Ctrl+PageDown", "Ctrl+F4", "Ctrl+F5", "F1", "F5", "F6", "F7", "F11", "F12",
   ]);
 
-  const IKONLAR = {"baby":[["path",{"d":"M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"}],["path",{"d":"M15 12h.01"}],["path",{"d":"M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"}],["path",{"d":"M9 12h.01"}]],"bike":[["circle",{"cx":"18.5","cy":"17.5","r":"3.5"}],["circle",{"cx":"5.5","cy":"17.5","r":"3.5"}],["circle",{"cx":"15","cy":"5","r":"1"}],["path",{"d":"M12 17.5V14l-3-3 4-3 2 3h2"}]],"book-open":[["path",{"d":"M12 5v16"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"}]],"brain":[["path",{"d":"M12 18V5"}],["path",{"d":"M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"}],["path",{"d":"M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"}],["path",{"d":"M17.997 5.125a4 4 0 0 1 2.526 5.77"}],["path",{"d":"M18 18a4 4 0 0 0 2-7.464"}],["path",{"d":"M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"}],["path",{"d":"M6 18a4 4 0 0 1-2-7.464"}],["path",{"d":"M6.003 5.125a4 4 0 0 0-2.526 5.77"}]],"briefcase":[["path",{"d":"M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"}],["rect",{"width":"20","height":"14","x":"2","y":"6","rx":"2"}]],"car":[["path",{"d":"M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"}],["circle",{"cx":"7","cy":"17","r":"2"}],["path",{"d":"M9 17h6"}],["circle",{"cx":"17","cy":"17","r":"2"}]],"check":[["path",{"d":"M20 6 9 17l-5-5"}]],"circle-check":[["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"m16 9-5.5 5.5L8 12"}]],"circle-help":[["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"}],["path",{"d":"M12 17h.01"}]],"circle-x":[["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"m15 9-6 6"}],["path",{"d":"m9 9 6 6"}]],"clapperboard":[["path",{"d":"m12.296 3.464 3.02 3.956"}],["path",{"d":"M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3z"}],["path",{"d":"M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"}],["path",{"d":"m6.18 5.276 3.1 3.899"}]],"cpu":[["path",{"d":"M12 20v2"}],["path",{"d":"M12 2v2"}],["path",{"d":"M17 20v2"}],["path",{"d":"M17 2v2"}],["path",{"d":"M2 12h2"}],["path",{"d":"M2 17h2"}],["path",{"d":"M2 7h2"}],["path",{"d":"M20 12h2"}],["path",{"d":"M20 17h2"}],["path",{"d":"M20 7h2"}],["path",{"d":"M7 20v2"}],["path",{"d":"M7 2v2"}],["rect",{"x":"4","y":"4","width":"16","height":"16","rx":"2"}],["rect",{"x":"8","y":"8","width":"8","height":"8","rx":"1"}]],"download":[["path",{"d":"M12 15V3"}],["path",{"d":"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"}],["path",{"d":"m7 10 5 5 5-5"}]],"drama":[["path",{"d":"M10 11h.01"}],["path",{"d":"M14 6h.01"}],["path",{"d":"M18 6h.01"}],["path",{"d":"M6.5 13.1h.01"}],["path",{"d":"M22 5c0 9-4 12-6 12s-6-3-6-12c0-2 2-3 6-3s6 1 6 3"}],["path",{"d":"M17.4 9.9c-.8.8-2 .8-2.8 0"}],["path",{"d":"M10.1 7.1C9 7.2 7.7 7.7 6 8.6c-3.5 2-4.7 3.9-3.7 5.6 4.5 7.8 9.5 8.4 11.2 7.4.9-.5 1.9-2.1 1.9-4.7"}],["path",{"d":"M9.1 16.5c.3-1.1 1.4-1.7 2.4-1.4"}]],"dumbbell":[["path",{"d":"M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"}],["path",{"d":"m2.5 21.5 1.4-1.4"}],["path",{"d":"m20.1 3.9 1.4-1.4"}],["path",{"d":"M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"}],["path",{"d":"m9.6 14.4 4.8-4.8"}]],"ellipsis-vertical":[["circle",{"cx":"12","cy":"12","r":"1"}],["circle",{"cx":"12","cy":"5","r":"1"}],["circle",{"cx":"12","cy":"19","r":"1"}]],"file-down":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5"}],["path",{"d":"M12 18v-6"}],["path",{"d":"m9 15 3 3 3-3"}]],"file-up":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5"}],["path",{"d":"M12 12v6"}],["path",{"d":"m15 15-3-3-3 3"}]],"folder":[["path",{"d":"M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"}]],"folder-input":[["path",{"d":"M2 9V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1"}],["path",{"d":"M2 13h10"}],["path",{"d":"m9 16 3-3-3-3"}]],"gamepad-2":[["line",{"x1":"6","x2":"10","y1":"11","y2":"11"}],["line",{"x1":"8","x2":"8","y1":"9","y2":"13"}],["line",{"x1":"15","x2":"15.01","y1":"12","y2":"12"}],["line",{"x1":"18","x2":"18.01","y1":"10","y2":"10"}],["path",{"d":"M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"}]],"globe":[["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"}],["path",{"d":"M2 12h20"}]],"graduation-cap":[["path",{"d":"M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"}],["path",{"d":"M22 10v6"}],["path",{"d":"M6 12.5V16a6 3 0 0 0 12 0v-3.5"}]],"hammer":[["path",{"d":"m15 12-9.373 9.373a1 1 0 0 1-3.001-3L12 9"}],["path",{"d":"m18 15 4-4"}],["path",{"d":"m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"}]],"heart":[["path",{"d":"M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"}]],"info":[["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M12 16v-4"}],["path",{"d":"M12 8h.01"}]],"landmark":[["path",{"d":"M10 18v-7"}],["path",{"d":"M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z"}],["path",{"d":"M14 18v-7"}],["path",{"d":"M18 18v-7"}],["path",{"d":"M3 22h18"}],["path",{"d":"M6 18v-7"}]],"laugh":[["path",{"d":"M15 10V9"}],["path",{"d":"M7.084 14.302a5.12 5.12 0 009.833 0 .24.24 0 00-.235-.302H7.32a.24.24 0 00-.235.302"}],["path",{"d":"M9 10V9"}],["circle",{"cx":"12","cy":"12","r":"10"}]],"leaf":[["path",{"d":"M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20"}],["path",{"d":"M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13"}]],"list-checks":[["path",{"d":"M13 5h8"}],["path",{"d":"M13 12h8"}],["path",{"d":"M13 19h8"}],["path",{"d":"m3 17 2 2 4-4"}],["path",{"d":"m3 7 2 2 4-4"}]],"list-video":[["path",{"d":"M21 5H3"}],["path",{"d":"M10 12H3"}],["path",{"d":"M10 19H3"}],["path",{"d":"M15 12.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997a1 1 0 0 1-1.517-.86z"}]],"loader-circle":[["path",{"d":"M21 12a9 9 0 1 1-6.219-8.56"}]],"merge":[["path",{"d":"m8 6 4-4 4 4"}],["path",{"d":"M12 2v10.3a4 4 0 0 1-1.172 2.872L4 22"}],["path",{"d":"m20 22-5-5"}]],"mic":[["path",{"d":"M12 19v3"}],["path",{"d":"M19 10v2a7 7 0 0 1-14 0v-2"}],["rect",{"x":"9","y":"2","width":"6","height":"13","rx":"3"}]],"microscope":[["path",{"d":"M6 18h8"}],["path",{"d":"M3 22h18"}],["path",{"d":"M14 22a7 7 0 1 0 0-14h-1"}],["path",{"d":"M9 14h2"}],["path",{"d":"M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"}],["path",{"d":"M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"}]],"moon":[["path",{"d":"M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"}]],"music":[["path",{"d":"M9 18V5l12-2v13"}],["circle",{"cx":"6","cy":"18","r":"3"}],["circle",{"cx":"18","cy":"16","r":"3"}]],"newspaper":[["path",{"d":"M15 18h-5"}],["path",{"d":"M18 14h-8"}],["path",{"d":"M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"}],["rect",{"width":"8","height":"4","x":"10","y":"6","rx":"1"}]],"octagon-x":[["path",{"d":"m15 9-6 6"}],["path",{"d":"M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z"}],["path",{"d":"m9 9 6 6"}]],"palette":[["path",{"d":"M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"}],["circle",{"cx":"13.5","cy":"6.5","r":".5","fill":"currentColor"}],["circle",{"cx":"17.5","cy":"10.5","r":".5","fill":"currentColor"}],["circle",{"cx":"6.5","cy":"12.5","r":".5","fill":"currentColor"}],["circle",{"cx":"8.5","cy":"7.5","r":".5","fill":"currentColor"}]],"paw-print":[["circle",{"cx":"11","cy":"4","r":"2"}],["circle",{"cx":"18","cy":"8","r":"2"}],["circle",{"cx":"20","cy":"16","r":"2"}],["path",{"d":"M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"}]],"pencil":[["path",{"d":"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"}],["path",{"d":"m15 5 4 4"}]],"plane":[["path",{"d":"M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"}]],"plus":[["path",{"d":"M5 12h14"}],["path",{"d":"M12 5v14"}]],"refresh-cw":[["path",{"d":"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"}],["path",{"d":"M21 3v5h-5"}],["path",{"d":"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"}],["path",{"d":"M8 16H3v5"}]],"search":[["path",{"d":"m21 21-4.34-4.34"}],["circle",{"cx":"11","cy":"11","r":"8"}]],"shirt":[["path",{"d":"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"}]],"sparkles":[["path",{"d":"M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"}],["path",{"d":"M20 2v4"}],["path",{"d":"M22 4h-4"}],["circle",{"cx":"4","cy":"20","r":"2"}]],"square":[["rect",{"width":"18","height":"18","x":"3","y":"3","rx":"2"}]],"star":[["path",{"d":"M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"}]],"sun":[["circle",{"cx":"12","cy":"12","r":"4"}],["path",{"d":"M12 2v2"}],["path",{"d":"M12 20v2"}],["path",{"d":"m4.93 4.93 1.41 1.41"}],["path",{"d":"m17.66 17.66 1.41 1.41"}],["path",{"d":"M2 12h2"}],["path",{"d":"M20 12h2"}],["path",{"d":"m6.34 17.66-1.41 1.41"}],["path",{"d":"m19.07 4.93-1.41 1.41"}]],"tag":[["path",{"d":"M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"}],["circle",{"cx":"7.5","cy":"7.5","r":".5","fill":"currentColor"}]],"tags":[["path",{"d":"M13.172 2a2 2 0 0 1 1.414.586l6.71 6.71a2.4 2.4 0 0 1 0 3.408l-4.592 4.592a2.4 2.4 0 0 1-3.408 0l-6.71-6.71A2 2 0 0 1 6 9.172V3a1 1 0 0 1 1-1z"}],["path",{"d":"M2 7v6.172a2 2 0 0 0 .586 1.414l6.71 6.71a2.4 2.4 0 0 0 3.191.193"}],["circle",{"cx":"10.5","cy":"6.5","r":".5","fill":"currentColor"}]],"trash-2":[["path",{"d":"M10 11v6"}],["path",{"d":"M14 11v6"}],["path",{"d":"M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"}],["path",{"d":"M3 6h18"}],["path",{"d":"M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"}]],"triangle-alert":[["path",{"d":"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"}],["path",{"d":"M12 9v4"}],["path",{"d":"M12 17h.01"}]],"trophy":[["path",{"d":"M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2"}],["path",{"d":"M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2"}],["path",{"d":"M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3"}],["path",{"d":"M4 22h16"}],["path",{"d":"M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"}],["path",{"d":"M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3"}]],"tv":[["path",{"d":"m17 2-5 5-5-5"}],["rect",{"width":"20","height":"15","x":"2","y":"7","rx":"2"}]],"undo-2":[["path",{"d":"M9 14 4 9l5-5"}],["path",{"d":"M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"}]],"utensils":[["path",{"d":"M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"}],["path",{"d":"M7 2v20"}],["path",{"d":"M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"}]],"x":[["path",{"d":"M18 6 6 18"}],["path",{"d":"m6 6 12 12"}]],"settings":[["path",{"d":"M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"}],["circle",{"cx":"12","cy":"12","r":"3"}]],"keyboard":[["path",{"d":"M10 8h.01"}],["path",{"d":"M12 12h.01"}],["path",{"d":"M14 8h.01"}],["path",{"d":"M16 12h.01"}],["path",{"d":"M18 8h.01"}],["path",{"d":"M6 8h.01"}],["path",{"d":"M7 16h10"}],["path",{"d":"M8 12h.01"}],["rect",{"width":"20","height":"16","x":"2","y":"4","rx":"2"}]],"stethoscope":[["path",{"d":"M11 2v2"}],["path",{"d":"M5 2v2"}],["path",{"d":"M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"}],["path",{"d":"M8 15a6 6 0 0 0 12 0v-3"}],["circle",{"cx":"20","cy":"10","r":"2"}]],"languages":[["path",{"d":"m5 8 6 6"}],["path",{"d":"m4 14 6-6 2-3"}],["path",{"d":"M2 5h12"}],["path",{"d":"M7 2h1"}],["path",{"d":"m22 22-5-10-5 10"}],["path",{"d":"M14 18h6"}]],"rotate-ccw":[["path",{"d":"M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"}],["path",{"d":"M3 3v5h5"}]],"copy":[["rect",{"width":"14","height":"14","x":"8","y":"8","rx":"2","ry":"2"}],["path",{"d":"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"}]],"list":[["path",{"d":"M3 5h.01"}],["path",{"d":"M3 12h.01"}],["path",{"d":"M3 19h.01"}],["path",{"d":"M8 5h13"}],["path",{"d":"M8 12h13"}],["path",{"d":"M8 19h13"}]],"eye":[["path",{"d":"M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"}],["circle",{"cx":"12","cy":"12","r":"3"}]],"lock":[["rect",{"width":"18","height":"11","x":"3","y":"11","rx":"2","ry":"2"}],["path",{"d":"M7 11V7a5 5 0 0 1 10 0v4"}]]};
+  const IKONLAR = {"baby":[["path",{"d":"M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"}],["path",{"d":"M15 12h.01"}],["path",{"d":"M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"}],["path",{"d":"M9 12h.01"}]],"bike":[["circle",{"cx":"18.5","cy":"17.5","r":"3.5"}],["circle",{"cx":"5.5","cy":"17.5","r":"3.5"}],["circle",{"cx":"15","cy":"5","r":"1"}],["path",{"d":"M12 17.5V14l-3-3 4-3 2 3h2"}]],"book-open":[["path",{"d":"M12 5v16"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"}]],"brain":[["path",{"d":"M12 18V5"}],["path",{"d":"M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"}],["path",{"d":"M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"}],["path",{"d":"M17.997 5.125a4 4 0 0 1 2.526 5.77"}],["path",{"d":"M18 18a4 4 0 0 0 2-7.464"}],["path",{"d":"M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"}],["path",{"d":"M6 18a4 4 0 0 1-2-7.464"}],["path",{"d":"M6.003 5.125a4 4 0 0 0-2.526 5.77"}]],"briefcase":[["path",{"d":"M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"}],["rect",{"width":"20","height":"14","x":"2","y":"6","rx":"2"}]],"car":[["path",{"d":"M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"}],["circle",{"cx":"7","cy":"17","r":"2"}],["path",{"d":"M9 17h6"}],["circle",{"cx":"17","cy":"17","r":"2"}]],"check":[["path",{"d":"M20 6 9 17l-5-5"}]],"circle-check":[["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"m16 9-5.5 5.5L8 12"}]],"circle-help":[["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"}],["path",{"d":"M12 17h.01"}]],"circle-x":[["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"m15 9-6 6"}],["path",{"d":"m9 9 6 6"}]],"clapperboard":[["path",{"d":"m12.296 3.464 3.02 3.956"}],["path",{"d":"M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3z"}],["path",{"d":"M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"}],["path",{"d":"m6.18 5.276 3.1 3.899"}]],"cpu":[["path",{"d":"M12 20v2"}],["path",{"d":"M12 2v2"}],["path",{"d":"M17 20v2"}],["path",{"d":"M17 2v2"}],["path",{"d":"M2 12h2"}],["path",{"d":"M2 17h2"}],["path",{"d":"M2 7h2"}],["path",{"d":"M20 12h2"}],["path",{"d":"M20 17h2"}],["path",{"d":"M20 7h2"}],["path",{"d":"M7 20v2"}],["path",{"d":"M7 2v2"}],["rect",{"x":"4","y":"4","width":"16","height":"16","rx":"2"}],["rect",{"x":"8","y":"8","width":"8","height":"8","rx":"1"}]],"download":[["path",{"d":"M12 15V3"}],["path",{"d":"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"}],["path",{"d":"m7 10 5 5 5-5"}]],"drama":[["path",{"d":"M10 11h.01"}],["path",{"d":"M14 6h.01"}],["path",{"d":"M18 6h.01"}],["path",{"d":"M6.5 13.1h.01"}],["path",{"d":"M22 5c0 9-4 12-6 12s-6-3-6-12c0-2 2-3 6-3s6 1 6 3"}],["path",{"d":"M17.4 9.9c-.8.8-2 .8-2.8 0"}],["path",{"d":"M10.1 7.1C9 7.2 7.7 7.7 6 8.6c-3.5 2-4.7 3.9-3.7 5.6 4.5 7.8 9.5 8.4 11.2 7.4.9-.5 1.9-2.1 1.9-4.7"}],["path",{"d":"M9.1 16.5c.3-1.1 1.4-1.7 2.4-1.4"}]],"dumbbell":[["path",{"d":"M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"}],["path",{"d":"m2.5 21.5 1.4-1.4"}],["path",{"d":"m20.1 3.9 1.4-1.4"}],["path",{"d":"M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"}],["path",{"d":"m9.6 14.4 4.8-4.8"}]],"ellipsis-vertical":[["circle",{"cx":"12","cy":"12","r":"1"}],["circle",{"cx":"12","cy":"5","r":"1"}],["circle",{"cx":"12","cy":"19","r":"1"}]],"file-down":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5"}],["path",{"d":"M12 18v-6"}],["path",{"d":"m9 15 3 3 3-3"}]],"file-up":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5"}],["path",{"d":"M12 12v6"}],["path",{"d":"m15 15-3-3-3 3"}]],"folder":[["path",{"d":"M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"}]],"folder-input":[["path",{"d":"M2 9V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1"}],["path",{"d":"M2 13h10"}],["path",{"d":"m9 16 3-3-3-3"}]],"gamepad-2":[["line",{"x1":"6","x2":"10","y1":"11","y2":"11"}],["line",{"x1":"8","x2":"8","y1":"9","y2":"13"}],["line",{"x1":"15","x2":"15.01","y1":"12","y2":"12"}],["line",{"x1":"18","x2":"18.01","y1":"10","y2":"10"}],["path",{"d":"M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"}]],"globe":[["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"}],["path",{"d":"M2 12h20"}]],"graduation-cap":[["path",{"d":"M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"}],["path",{"d":"M22 10v6"}],["path",{"d":"M6 12.5V16a6 3 0 0 0 12 0v-3.5"}]],"hammer":[["path",{"d":"m15 12-9.373 9.373a1 1 0 0 1-3.001-3L12 9"}],["path",{"d":"m18 15 4-4"}],["path",{"d":"m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"}]],"heart":[["path",{"d":"M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"}]],"info":[["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M12 16v-4"}],["path",{"d":"M12 8h.01"}]],"landmark":[["path",{"d":"M10 18v-7"}],["path",{"d":"M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z"}],["path",{"d":"M14 18v-7"}],["path",{"d":"M18 18v-7"}],["path",{"d":"M3 22h18"}],["path",{"d":"M6 18v-7"}]],"laugh":[["path",{"d":"M15 10V9"}],["path",{"d":"M7.084 14.302a5.12 5.12 0 009.833 0 .24.24 0 00-.235-.302H7.32a.24.24 0 00-.235.302"}],["path",{"d":"M9 10V9"}],["circle",{"cx":"12","cy":"12","r":"10"}]],"leaf":[["path",{"d":"M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20"}],["path",{"d":"M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13"}]],"list-checks":[["path",{"d":"M13 5h8"}],["path",{"d":"M13 12h8"}],["path",{"d":"M13 19h8"}],["path",{"d":"m3 17 2 2 4-4"}],["path",{"d":"m3 7 2 2 4-4"}]],"list-video":[["path",{"d":"M21 5H3"}],["path",{"d":"M10 12H3"}],["path",{"d":"M10 19H3"}],["path",{"d":"M15 12.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997a1 1 0 0 1-1.517-.86z"}]],"loader-circle":[["path",{"d":"M21 12a9 9 0 1 1-6.219-8.56"}]],"merge":[["path",{"d":"m8 6 4-4 4 4"}],["path",{"d":"M12 2v10.3a4 4 0 0 1-1.172 2.872L4 22"}],["path",{"d":"m20 22-5-5"}]],"mic":[["path",{"d":"M12 19v3"}],["path",{"d":"M19 10v2a7 7 0 0 1-14 0v-2"}],["rect",{"x":"9","y":"2","width":"6","height":"13","rx":"3"}]],"microscope":[["path",{"d":"M6 18h8"}],["path",{"d":"M3 22h18"}],["path",{"d":"M14 22a7 7 0 1 0 0-14h-1"}],["path",{"d":"M9 14h2"}],["path",{"d":"M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"}],["path",{"d":"M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"}]],"moon":[["path",{"d":"M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"}]],"music":[["path",{"d":"M9 18V5l12-2v13"}],["circle",{"cx":"6","cy":"18","r":"3"}],["circle",{"cx":"18","cy":"16","r":"3"}]],"newspaper":[["path",{"d":"M15 18h-5"}],["path",{"d":"M18 14h-8"}],["path",{"d":"M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"}],["rect",{"width":"8","height":"4","x":"10","y":"6","rx":"1"}]],"octagon-x":[["path",{"d":"m15 9-6 6"}],["path",{"d":"M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z"}],["path",{"d":"m9 9 6 6"}]],"palette":[["path",{"d":"M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"}],["circle",{"cx":"13.5","cy":"6.5","r":".5","fill":"currentColor"}],["circle",{"cx":"17.5","cy":"10.5","r":".5","fill":"currentColor"}],["circle",{"cx":"6.5","cy":"12.5","r":".5","fill":"currentColor"}],["circle",{"cx":"8.5","cy":"7.5","r":".5","fill":"currentColor"}]],"paw-print":[["circle",{"cx":"11","cy":"4","r":"2"}],["circle",{"cx":"18","cy":"8","r":"2"}],["circle",{"cx":"20","cy":"16","r":"2"}],["path",{"d":"M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"}]],"pencil":[["path",{"d":"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"}],["path",{"d":"m15 5 4 4"}]],"plane":[["path",{"d":"M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"}]],"plus":[["path",{"d":"M5 12h14"}],["path",{"d":"M12 5v14"}]],"refresh-cw":[["path",{"d":"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"}],["path",{"d":"M21 3v5h-5"}],["path",{"d":"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"}],["path",{"d":"M8 16H3v5"}]],"search":[["path",{"d":"m21 21-4.34-4.34"}],["circle",{"cx":"11","cy":"11","r":"8"}]],"shirt":[["path",{"d":"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"}]],"sparkles":[["path",{"d":"M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"}],["path",{"d":"M20 2v4"}],["path",{"d":"M22 4h-4"}],["circle",{"cx":"4","cy":"20","r":"2"}]],"square":[["rect",{"width":"18","height":"18","x":"3","y":"3","rx":"2"}]],"star":[["path",{"d":"M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"}]],"sun":[["circle",{"cx":"12","cy":"12","r":"4"}],["path",{"d":"M12 2v2"}],["path",{"d":"M12 20v2"}],["path",{"d":"m4.93 4.93 1.41 1.41"}],["path",{"d":"m17.66 17.66 1.41 1.41"}],["path",{"d":"M2 12h2"}],["path",{"d":"M20 12h2"}],["path",{"d":"m6.34 17.66-1.41 1.41"}],["path",{"d":"m19.07 4.93-1.41 1.41"}]],"tag":[["path",{"d":"M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"}],["circle",{"cx":"7.5","cy":"7.5","r":".5","fill":"currentColor"}]],"tags":[["path",{"d":"M13.172 2a2 2 0 0 1 1.414.586l6.71 6.71a2.4 2.4 0 0 1 0 3.408l-4.592 4.592a2.4 2.4 0 0 1-3.408 0l-6.71-6.71A2 2 0 0 1 6 9.172V3a1 1 0 0 1 1-1z"}],["path",{"d":"M2 7v6.172a2 2 0 0 0 .586 1.414l6.71 6.71a2.4 2.4 0 0 0 3.191.193"}],["circle",{"cx":"10.5","cy":"6.5","r":".5","fill":"currentColor"}]],"trash-2":[["path",{"d":"M10 11v6"}],["path",{"d":"M14 11v6"}],["path",{"d":"M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"}],["path",{"d":"M3 6h18"}],["path",{"d":"M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"}]],"triangle-alert":[["path",{"d":"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"}],["path",{"d":"M12 9v4"}],["path",{"d":"M12 17h.01"}]],"trophy":[["path",{"d":"M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2"}],["path",{"d":"M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2"}],["path",{"d":"M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3"}],["path",{"d":"M4 22h16"}],["path",{"d":"M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"}],["path",{"d":"M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3"}]],"tv":[["path",{"d":"m17 2-5 5-5-5"}],["rect",{"width":"20","height":"15","x":"2","y":"7","rx":"2"}]],"undo-2":[["path",{"d":"M9 14 4 9l5-5"}],["path",{"d":"M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"}]],"utensils":[["path",{"d":"M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"}],["path",{"d":"M7 2v20"}],["path",{"d":"M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"}]],"x":[["path",{"d":"M18 6 6 18"}],["path",{"d":"m6 6 12 12"}]],"settings":[["path",{"d":"M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"}],["circle",{"cx":"12","cy":"12","r":"3"}]],"keyboard":[["path",{"d":"M10 8h.01"}],["path",{"d":"M12 12h.01"}],["path",{"d":"M14 8h.01"}],["path",{"d":"M16 12h.01"}],["path",{"d":"M18 8h.01"}],["path",{"d":"M6 8h.01"}],["path",{"d":"M7 16h10"}],["path",{"d":"M8 12h.01"}],["rect",{"width":"20","height":"16","x":"2","y":"4","rx":"2"}]],"stethoscope":[["path",{"d":"M11 2v2"}],["path",{"d":"M5 2v2"}],["path",{"d":"M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"}],["path",{"d":"M8 15a6 6 0 0 0 12 0v-3"}],["circle",{"cx":"20","cy":"10","r":"2"}]],"languages":[["path",{"d":"m5 8 6 6"}],["path",{"d":"m4 14 6-6 2-3"}],["path",{"d":"M2 5h12"}],["path",{"d":"M7 2h1"}],["path",{"d":"m22 22-5-10-5 10"}],["path",{"d":"M14 18h6"}]],"rotate-ccw":[["path",{"d":"M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"}],["path",{"d":"M3 3v5h5"}]],"copy":[["rect",{"width":"14","height":"14","x":"8","y":"8","rx":"2","ry":"2"}],["path",{"d":"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"}]],"list":[["path",{"d":"M3 5h.01"}],["path",{"d":"M3 12h.01"}],["path",{"d":"M3 19h.01"}],["path",{"d":"M8 5h13"}],["path",{"d":"M8 12h13"}],["path",{"d":"M8 19h13"}]],"eye":[["path",{"d":"M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"}],["circle",{"cx":"12","cy":"12","r":"3"}]],"lock":[["rect",{"width":"18","height":"11","x":"3","y":"11","rx":"2","ry":"2"}],["path",{"d":"M7 11V7a5 5 0 0 1 10 0v4"}]],"thumbs-down":[["path",{"d":"M17 14V2"}],["path",{"d":"M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"}]],"arrow-down-up":[["path",{"d":"m3 16 4 4 4-4"}],["path",{"d":"M7 20V4"}],["path",{"d":"m21 8-4-4-4 4"}],["path",{"d":"M17 4v16"}]]};
 
   // TOKEN-BASLA — aalabs-tema.css 1.4.1 kopyası (denetle.py bu blokta sabit rengi saymaz)
   const TOKEN_CSS = `
@@ -179,6 +187,17 @@ select.kat{height:28px;width:150px;border-radius:var(--kose-m);border:1px solid 
 select.kat option,select.girdi option{background:var(--yuzey);color:var(--metin)}
 .uyari-rozet{font-size:11px;color:var(--uyari);display:inline-flex;gap:3px;align-items:center}
 .uyari-rozet svg{width:12px;height:12px}
+.sirala{display:inline-flex;align-items:center;gap:6px;flex:none;font-size:13px}
+.sirala[hidden]{display:none}
+.sirala-ad{color:var(--metin-ikincil)}
+select.sirala-sec{width:auto;max-width:200px;padding:0 4px}
+select.ay-secim{width:240px;max-width:100%}
+.serit{display:inline-block;width:4px;height:14px;border-radius:var(--kose-s);background:var(--k);flex:none}
+.rozet-sira{min-width:34px;height:20px;padding:0 4px;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--uyari);background:var(--uyari-bg);border:1px solid var(--uyari);border-radius:var(--kose-m);display:inline-flex;align-items:center;justify-content:center;flex:none}
+.rozet-sira.yer{visibility:hidden}
+.satir.imlec .rozet-sira{outline:1px solid var(--ana-uzeri)}
+.tasinacak{font-size:12px;font-weight:600;color:var(--uyari)}
+.tasinacak[hidden]{display:none}
 
 .bos{margin:48px auto;max-width:440px;text-align:center;display:flex;flex-direction:column;gap:8px;align-items:center;color:var(--metin)}
 .bos h3{margin:0;font-size:15px;font-weight:600}
@@ -270,6 +289,7 @@ dialog.ayarlar[open]{display:flex}
 .ay-alan .girdi{width:220px}
 .ay-ad{font-size:12px;font-weight:600;color:var(--metin)}
 .ay-not{font-size:12px;color:var(--metin-ikincil)}
+.ay-not a{color:var(--vurgu)}
 .ay-hata{font-size:12px;color:var(--hata);display:flex;gap:4px;align-items:center}
 .ay-hata svg{width:14px;height:14px}
 .anahtar{display:inline-flex;align-items:center;gap:10px;border:0;background:transparent;color:var(--metin);font-size:13px;cursor:pointer;padding:2px 0;text-align:left}
@@ -288,6 +308,7 @@ dialog.ayarlar[open]{display:flex}
 @media (max-width:600px){dialog.ayarlar[open]{flex-direction:column}.gezinti{width:auto;flex-direction:row;align-items:center;overflow-x:auto;overflow-y:hidden;border-right:0;border-bottom:1px solid var(--ayirici);padding:6px 8px}.gezinti .arama{flex:0 0 150px;margin:0 6px 0 0}.g-liste{flex-direction:row;align-items:center}.g-oge{width:auto}.g-baslik{padding:0 4px}}
 
 @media (max-width:820px){.yazi-gizle{display:none}.kucukresim{display:none}.sira{display:none}select.kat{width:110px}}
+@media (max-width:480px){select.kat{width:88px}.rozet-sira.yer{display:none}.rozet-sira{min-width:0}}
 `;
   // Ölçek (Ayarlar › Genel): 3 px ve üstü her ölçü --o ile çarpılır; 1–2 px kenarlar keskin kalır.
   function olcekliCss(css) {
@@ -334,9 +355,28 @@ dialog.ayarlar[open]{display:flex}
       aramaYer: "Başlık ya da kanal ara",
       videoAra: "Video ara",
       siralama: "Sıralama",
-      kisaOnce: "Kısa önce",
-      uzunOnce: "Uzun önce",
+      kisaOnce: "Kısa → uzun",
+      uzunOnce: "Uzun → kısa",
       listeSirasi: "Liste sırası",
+      tersListe: "Ters liste sırası",
+      kanalaGore: "Kanala göre",
+      baslikAZ: "Başlık A–Z",
+      sirala: "Sırala",
+      grupIci: "Grup içi",
+      grupIciAria: "Kanal grubunun içindeki sıra",
+      ytUygula: "YouTube'a uygula",
+      ytUygulaIpucu: "Bu sırayı YouTube'daki listeye yazar. Geri al eski sırayı getirir.",
+      tasinacak: (n) => `${n} video yer değiştirecek`,
+      yukariN: (n) => `${n} sıra yukarı`,
+      asagiN: (n) => `${n} sıra aşağı`,
+      siraAyni: "Liste zaten bu sırada.",
+      siraKimliksiz: "Bu liste sayfadan okundu. Sıra YouTube'a yazılamaz. Yenile'ye basıp tekrar dene.",
+      siraYaziliyor: (n) => `Sıra YouTube'a yazılıyor… ${n} video`,
+      siraDogrulaniyor: "Liste yeniden okunuyor, sıra denetleniyor…",
+      siraYazildi: (n) => `Sıra YouTube'a yazıldı · ${n} video yer değiştirdi.`,
+      siraEksik: (n) => `YouTube sırayı tam yazmadı: ${n} video yerinde değil. Liste yeniden okundu; tekrar uygula.`,
+      siraGeriYukleniyor: "Eski sıra YouTube'a yazılıyor…",
+      g_siralama: "YouTube'daki sıra",
       katSuzgeci: "Kategori süzgeci",
       videolar: "Videolar",
       gorunenleriSec: "Görünenleri seç",
@@ -588,6 +628,15 @@ dialog.ayarlar[open]{display:flex}
       ayarlarAra: "Ara (Ctrl+F)",
       ayarlardaAra: "Ayarlarda ara",
       ortak: "ORTAK",
+      b_dis: "Dislike",
+      rydAciklama: "Video ve Shorts sayfasında beğenmeme sayısını gösterir. Video sayfasında düğmelerin altında beğeni oranı çubuğu çıkar.",
+      rydKaynak: "Veri:",
+      rydHakkinda: "Dislike verisi Return YouTube Dislike'tan gelir. Önbellek 10 dk; dakikada en çok 100 istek.",
+      rydIpucu: (b, d) => `Beğeni ${b} · Beğenmeme ${d} · Veri: Return YouTube Dislike`,
+      rydYukleniyor: "Beğenmeme sayısı yükleniyor…",
+      rydCok: "Dislike verisi alınamadı (çok istek). 1 dk sonra kendiliğinden yeniden denenir.",
+      rydAg: "Dislike verisi alınamadı (bağlantı). 1 dk sonra kendiliğinden yeniden denenir.",
+      rydYok: "Bu video için dislike verisi yok.",
       b_kat: "Kategoriler", b_etk: "Kanal etiketleri", b_tas: "Taşıma", b_lst: "Liste görünümü",
       b_gen: "Genel", b_kis: "Klavye kısayolları", b_tan: "Tanı", b_hak: "Hakkında",
 
@@ -701,9 +750,28 @@ dialog.ayarlar[open]{display:flex}
       aramaYer: "Search title or channel",
       videoAra: "Search videos",
       siralama: "Sort order",
-      kisaOnce: "Shortest first",
-      uzunOnce: "Longest first",
+      kisaOnce: "Short → long",
+      uzunOnce: "Long → short",
       listeSirasi: "Playlist order",
+      tersListe: "Reverse playlist order",
+      kanalaGore: "By channel",
+      baslikAZ: "Title A–Z",
+      sirala: "Sort",
+      grupIci: "Within group",
+      grupIciAria: "Order inside each channel group",
+      ytUygula: "Apply to YouTube",
+      ytUygulaIpucu: "Writes this order to the playlist on YouTube. Undo restores the old order.",
+      tasinacak: (n) => `${n} ${cogul(n, "video", "videos")} will move`,
+      yukariN: (n) => `${n} ${cogul(n, "place", "places")} up`,
+      asagiN: (n) => `${n} ${cogul(n, "place", "places")} down`,
+      siraAyni: "The playlist is already in this order.",
+      siraKimliksiz: "This playlist was read from the page. The order can't be written to YouTube. Press Refresh and try again.",
+      siraYaziliyor: (n) => `Writing the order to YouTube… ${n} ${cogul(n, "video", "videos")}`,
+      siraDogrulaniyor: "Reading the playlist again to check the order…",
+      siraYazildi: (n) => `Order written to YouTube · ${n} ${cogul(n, "video", "videos")} moved.`,
+      siraEksik: (n) => `YouTube did not write the whole order: ${n} ${cogul(n, "video is", "videos are")} out of place. The playlist was read again; apply once more.`,
+      siraGeriYukleniyor: "Writing the old order to YouTube…",
+      g_siralama: "the order on YouTube",
       katSuzgeci: "Category filter",
       videolar: "Videos",
       gorunenleriSec: "Select shown",
@@ -955,6 +1023,15 @@ dialog.ayarlar[open]{display:flex}
       ayarlarAra: "Search (Ctrl+F)",
       ayarlardaAra: "Search settings",
       ortak: "COMMON",
+      b_dis: "Dislike",
+      rydAciklama: "Shows the dislike count on videos and Shorts. On videos a like-ratio bar appears under the buttons.",
+      rydKaynak: "Data:",
+      rydHakkinda: "Dislike data comes from Return YouTube Dislike. Cached for 10 min; at most 100 requests per minute.",
+      rydIpucu: (b, d) => `Likes ${b} · Dislikes ${d} · Data: Return YouTube Dislike`,
+      rydYukleniyor: "Loading dislike count…",
+      rydCok: "Could not get dislike data (too many requests). Retries by itself in 1 min.",
+      rydAg: "Could not get dislike data (connection). Retries by itself in 1 min.",
+      rydYok: "No dislike data for this video.",
       b_kat: "Categories", b_etk: "Channel tags", b_tas: "Moving", b_lst: "List view",
       b_gen: "General", b_kis: "Keyboard shortcuts", b_tan: "Diagnostics", b_hak: "About",
 
@@ -1188,7 +1265,8 @@ dialog.ayarlar[open]{display:flex}
       tema: a.tema === "acik" || a.tema === "koyu" ? a.tema : null,
       dil: a.dil === "tr" || a.dil === "en" ? a.dil : null,
       olcek: OLCEKLER.includes(a.olcek) ? a.olcek : 100,
-      siralama: ["kisa", "uzun", "liste"].includes(a.siralama) ? a.siralama : "kisa",
+      siralama: SIRALAR.includes(a.siralama) ? a.siralama : "kisa",
+      grupIci: GRUP_SIRALARI.includes(a.grupIci) ? a.grupIci : "uzun",
       onek: typeof a.onek === "string" && a.onek.trim().length >= 2 ? Array.from(a.onek).slice(0, 20).join("") : VARSAYILAN_ONEK,
       gorunurluk: GORUNURLUKLER.includes(a.gorunurluk) ? a.gorunurluk : "UNLISTED",
       kucukResim: a.kucukResim !== false,
@@ -1738,6 +1816,7 @@ dialog.ayarlar[open]{display:flex}
     }
     if (tetik) { const gizli = tetik.hidden; tetikGoster(); tetik.hidden = gizli; } // gizli tetik de yeni dille yazılır
     ayarlarTazele(true);
+    rydCiz();
     gmMenuKaydet();
   }
   const acikModal = () => (kok ? [...kok.querySelectorAll("dialog[open]")].pop() || null : null);
@@ -1790,9 +1869,15 @@ dialog.ayarlar[open]{display:flex}
     UI.temaBtn = h("button", { type: "button", class: "btn ikon", onclick: temaDegistir });
     UI.dilBtn = h("button", { type: "button", class: "btn", title: t("dilDugme", ks.dil), "aria-label": t("dilDugme", ks.dil), onclick: dilDegistir }, ikon("languages"), h("span", null, DIL.toUpperCase()));
     UI.arama = h("input", { type: "search", class: "girdi", value: D.arama, placeholder: t("aramaYer"), "aria-label": t("videoAra"), oninput: (e) => { D.arama = e.target.value; listeCiz(); } });
-    UI.segment = h("div", { class: "segment", role: "group", "aria-label": t("siralama") },
-      [["kisa", t("kisaOnce")], ["uzun", t("uzunOnce")], ["liste", t("listeSirasi")]].map(([d, ad]) =>
-        h("button", { type: "button", "data-sira": d, "aria-pressed": String(ayar.siralama === d), onclick: () => { ayar.siralama = d; ayarKaydet(); segmentCiz(); listeCiz(); ayarlarTazele(); } }, ad)));
+    const siraDegisti = () => { ayarKaydet(); siraCiz(); listeCiz(); ayarlarTazele(); };
+    UI.siraSec = h("select", { class: "girdi sirala-sec", "aria-label": t("sirala"), onchange: (e) => { ayar.siralama = e.target.value; siraDegisti(); } },
+      siraSecenekleri().map(([d, ad]) => h("option", { value: d, selected: ayar.siralama === d }, ad)));
+    UI.grupSec = h("select", { class: "girdi sirala-sec", "aria-label": t("grupIciAria"), onchange: (e) => { ayar.grupIci = e.target.value; siraDegisti(); } },
+      [["uzun", t("uzunOnce")], ["kisa", t("kisaOnce")], ["ters", t("tersListe")]].map(([d, ad]) => h("option", { value: d, selected: ayar.grupIci === d }, ad)));
+    UI.siraAlan = h("label", { class: "sirala" }, h("span", { class: "sirala-ad" }, t("sirala")), UI.siraSec);
+    UI.grupAlan = h("label", { class: "sirala" }, h("span", { class: "sirala-ad" }, t("grupIci")), UI.grupSec);
+    UI.uygulaBtn = dugme({ tur: "ana", tik: () => siraUygula(), ipucu: t("ytUygulaIpucu") }, "arrow-down-up", t("ytUygula"));
+    UI.tasinacak = h("span", { class: "tasinacak", hidden: true });
     UI.cipler = h("div", { class: "cipler", role: "group", "aria-label": t("katSuzgeci") });
     UI.liste = h("div", { class: "liste", tabindex: "0", role: "list", "aria-label": t("videolar"), onkeydown: listeTusu });
     UI.islem = UI.islem || h("div", { class: "islem", hidden: true, role: "status", "aria-live": "polite" });
@@ -1821,13 +1906,15 @@ dialog.ayarlar[open]{display:flex}
           dugme({ tur: "ikon", tik: panelKapat, ipucu: t("kapatTus", ks.kapat) }, "x"))),
       h("div", { class: "filtre" },
         h("div", { class: "arama" }, ikon("search"), UI.arama),
-        UI.segment,
+        UI.siraAlan,
+        UI.grupAlan,
+        UI.uygulaBtn,
         dugme({ tur: "hayalet", tik: () => topluSec(true), yaziGizle: true }, "list-checks", t("gorunenleriSec")),
         dugme({ tur: "hayalet", tik: () => topluSec(false), yaziGizle: true }, "square", t("secimiKaldir"))),
       UI.cipler,
       UI.liste,
       UI.islem,
-      h("div", { class: "alt" }, UI.altBilgi, h("div", { class: "esnek" }), UI.cikarBtn, UI.tasiBtn));
+      h("div", { class: "alt" }, UI.altBilgi, UI.tasinacak, h("div", { class: "esnek" }), UI.cikarBtn, UI.tasiBtn));
     UI.sar.append(panel);
     temaUygula();
     taniIsaretle();
@@ -1854,8 +1941,8 @@ dialog.ayarlar[open]{display:flex}
   }
 
   // ─── Yükleme ───
-  async function yukle() {
-    if (D.mesgul) return bildir(t("islemSuruyor"));
+  async function yukle(zorla) {
+    if (D.mesgul && !zorla) return bildir(t("islemSuruyor"));
     const id = listeSayfasi();
     if (!id) return;
     const onceki = new Map(D.listeId === id ? D.videolar.map((v) => [v.vid, v]) : []);
@@ -1889,27 +1976,88 @@ dialog.ayarlar[open]{display:flex}
   }
 
   // ─── Görünüm ───
+  function siraSecenekleri() {
+    return [["liste", t("listeSirasi")], ["ters", t("tersListe")], ["uzun", t("uzunOnce")], ["kisa", t("kisaOnce")], ["kanal", t("kanalaGore")], ["baslik", t("baslikAZ")]];
+  }
+  // Karşılaştırıcılar. Eşitlikte liste sırası korunur (kararlı, her açılışta aynı sonuç).
+  function karsilastirici(tur) {
+    const sonda = ayar.suresizSonda;
+    const sira = (a, b) => a.sira - b.sira;
+    if (tur === "kisa") return (a, b) => (a.sure || (sonda ? Infinity : 0)) - (b.sure || (sonda ? Infinity : 0)) || sira(a, b);
+    if (tur === "uzun") return (a, b) => (b.sure || (sonda ? -Infinity : Infinity)) - (a.sure || (sonda ? -Infinity : Infinity)) || sira(a, b);
+    if (tur === "ters") return (a, b) => b.sira - a.sira;
+    if (tur === "baslik") { const c = new Intl.Collator(DIL, { sensitivity: "base", numeric: true }); return (a, b) => c.compare(a.baslik || "", b.baslik || "") || sira(a, b); }
+    if (tur === "kanal") {
+      const c = new Intl.Collator(DIL, { sensitivity: "base", numeric: true });
+      const ic = karsilastirici(ayar.grupIci);
+      return (a, b) => {
+        if (!a.kanal !== !b.kanal) return a.kanal ? -1 : 1; // kanalı bilinmeyenler sonda
+        return c.compare(a.kanal || "", b.kanal || "") || (a.kanalId || "").localeCompare(b.kanalId || "") || ic(a, b);
+      };
+    }
+    return sira;
+  }
+  function siraliTum() { return [...D.videolar].sort(karsilastirici(ayar.siralama)); }
+  // Sırayı YouTube'a yazmak için en az taşıma: hedef sırada artan en uzun alt dizi (LIS) yerinde kalır,
+  // ötekiler hedefteki öncülünün hemen arkasına (ya da en üste) taşınır. Taşıma sayısı = n − LIS.
+  function tasimaPlani(simdiki, hedef) {
+    const yer = new Map(simdiki.map((v, i) => [v, i]));
+    const p = hedef.map((v) => yer.get(v));
+    const kuyruk = [], onceki = new Array(p.length).fill(-1), uclar = [];
+    for (let i = 0; i < p.length; i++) {
+      let lo = 0, hi = kuyruk.length;
+      while (lo < hi) { const m = (lo + hi) >> 1; if (p[uclar[m]] < p[i]) lo = m + 1; else hi = m; }
+      if (lo > 0) onceki[i] = uclar[lo - 1];
+      uclar[lo] = i; kuyruk[lo] = p[i];
+    }
+    const kalan = new Set();
+    for (let i = uclar[kuyruk.length - 1] ?? -1; i >= 0; i = onceki[i]) kalan.add(hedef[i]);
+    const dizi = [...simdiki];
+    const hareketler = [];
+    hedef.forEach((v, i) => {
+      if (kalan.has(v)) return;
+      dizi.splice(dizi.indexOf(v), 1);
+      if (i === 0) { hareketler.push({ v, sonraki: dizi[0] || null }); dizi.unshift(v); }
+      else { const o = hedef[i - 1]; hareketler.push({ v, onceki: o }); dizi.splice(dizi.indexOf(o) + 1, 0, v); }
+    });
+    return { hareketler, tasinan: new Set(hareketler.map((x) => x.v)) };
+  }
+  function planHesapla() {
+    D.plan = null;
+    if (!D.videolar.length || ayar.siralama === "liste") return;
+    const simdiki = [...D.videolar].sort((a, b) => a.sira - b.sira);
+    const hedef = siraliTum();
+    const plan = tasimaPlani(simdiki, hedef);
+    plan.kayma = new Map(hedef.map((v, i) => [v, v.sira - i])); // + yukarı, − aşağı
+    plan.hedef = hedef;
+    plan.degisen = plan.hareketler.filter((x) => plan.kayma.get(x.v) !== 0).length; // rozet gösterilen satır sayısı
+    D.plan = plan;
+  }
   function gorunenler() {
     const q = normal(D.arama.trim());
-    let l = D.videolar;
+    let l = siraliTum();
     if (D.filtre) l = l.filter((v) => v.kategori === D.filtre);
     if (q) l = l.filter((v) => normal(v.baslik).includes(q) || normal(v.kanal).includes(q));
-    const s = [...l];
-    const sonda = ayar.suresizSonda;
-    if (ayar.siralama === "kisa") s.sort((a, b) => (a.sure || (sonda ? Infinity : 0)) - (b.sure || (sonda ? Infinity : 0)) || a.sira - b.sira);
-    else if (ayar.siralama === "uzun") s.sort((a, b) => (b.sure || (sonda ? -Infinity : Infinity)) - (a.sure || (sonda ? -Infinity : Infinity)) || a.sira - b.sira);
-    else s.sort((a, b) => a.sira - b.sira);
-    return s;
+    return l;
+  }
+  // Kanal şeridi rengi: kanal adından sabit bir kategori rengi (8 renk; aynı kanal hep aynı renk).
+  function kanalRengi(v) {
+    const a = v.kanalId || kanalAnahtari(v.kanal);
+    let x = 0;
+    for (let i = 0; i < a.length; i++) x = (x * 31 + a.charCodeAt(i)) >>> 0;
+    return RENKLER[x % 8];
   }
   function ciz() {
     if (!panel) return;
     panel.classList.toggle("resimsiz", !ayar.kucukResim);
     UI.altBaslik.textContent = `${D.listeAdi || (D.listeId === "WL" ? "Watch Later" : t("oynatmaListesi"))}${D.videolar.length ? ` · ${t("nVideo", D.videolar.length)}` : ""}${D.gizli ? ` · ${t("gizliVideo", D.gizli)}` : ""}${D.kaynak === "sayfa" ? ` · ${t("sayfadanOkundu")}` : ""}`;
-    segmentCiz(); ciplerCiz(); listeCiz(); temaUygula();
+    siraCiz(); ciplerCiz(); listeCiz(); temaUygula();
   }
-  function segmentCiz() {
-    if (!UI.segment) return;
-    for (const b of UI.segment.querySelectorAll("button")) b.setAttribute("aria-pressed", String(b.dataset.sira === ayar.siralama));
+  function siraCiz() {
+    if (!UI.siraSec) return;
+    UI.siraSec.value = ayar.siralama;
+    UI.grupSec.value = ayar.grupIci;
+    UI.grupAlan.hidden = ayar.siralama !== "kanal";
   }
   function ciplerCiz() {
     const sayac = {};
@@ -1928,6 +2076,7 @@ dialog.ayarlar[open]{display:flex}
   function listeCiz() {
     if (!panel) return;
     const kap = bosalt(UI.liste);
+    planHesapla();
     altCiz();
     if (D.yukleniyor) {
       const yazi = D.yuklemeSayfadan ? t("sayfadanOkunuyor", D.yuklemeSayi || 0) : D.yuklemeSayi ? t("okunuyorN", D.yuklemeSayi) : t("okunuyor");
@@ -1959,15 +2108,24 @@ dialog.ayarlar[open]{display:flex}
       h("div", { class: "bilgi soluk" },
         h("button", { type: "button", class: "vbaslik", title: baslik, onclick: (e) => { e.stopPropagation(); videoAc(v); } }, baslik),
         h("div", { class: "kanalsatir" },
+          ayar.siralama === "kanal" && v.kanal ? h("i", { class: "serit", style: renkDegiskenleri(kanalRengi(v)), "aria-hidden": "true" }) : null,
           h("span", { class: "ikincil" }, v.kanal || t("kanalBilinmiyor")),
           v.kanal ? h("button", { type: "button", class: `etiketbtn${etiketKat ? " etiketli" : ""}`, title: etiketKat ? t("kanalEtiketiIpucu", etiketKat.ad) : t("kanalBagla"), onclick: (e) => { e.stopPropagation(); kanalEtiketiModal(v.kanal); } },
             ikon("tag"), etiketKat ? etiketKat.ad : t("etiketle")) : null,
           !v.oynatilabilir ? h("span", { class: "uyari-rozet" }, ikon("triangle-alert"), t("oynatilamiyor")) : null,
           !v.setId && D.kaynak === "sayfa" ? h("span", { class: "uyari-rozet" }, ikon("triangle-alert"), t("kimlikYok")) : null)),
+      siraRozeti(v),
       h("span", { class: "sure soluk" }, sureYaz(v.sure)),
       sec,
       dugme({ tur: "hayalet ikon kucuk", ipucu: t("listedenCikarIpucu"), tik: (e) => { e.stopPropagation(); videolariCikar([v], { tek: true }); } }, "trash-2"));
     return satir;
+  }
+  function siraRozeti(v) {
+    if (!D.plan || !D.plan.hareketler.length) return null;
+    const k = D.plan.tasinan.has(v) ? D.plan.kayma.get(v) : 0;
+    if (!k) return h("span", { class: "rozet-sira yer", "aria-hidden": "true" });
+    const yazi = k > 0 ? t("yukariN", k) : t("asagiN", -k);
+    return h("span", { class: "rozet-sira", title: yazi, "aria-label": yazi }, `${k > 0 ? "↑" : "↓"}${Math.abs(k)}`);
   }
   function altCiz() {
     if (!panel) return;
@@ -1979,6 +2137,11 @@ dialog.ayarlar[open]{display:flex}
     UI.cikarBtn.lastChild.textContent = t("btnCikar", secili.length);
     const kapali = D.mesgul || D.yukleniyor || !secili.length;
     UI.tasiBtn.disabled = kapali; UI.cikarBtn.disabled = kapali;
+    const n = D.plan && !D.yukleniyor && !D.hata ? D.plan.hareketler.length : 0;
+    UI.tasinacak.hidden = !n;
+    UI.tasinacak.textContent = n ? t("tasinacak", D.plan.degisen) : "";
+    UI.uygulaBtn.hidden = ayar.siralama === "liste";
+    UI.uygulaBtn.disabled = D.mesgul || D.yukleniyor || !!D.hata || !n;
   }
   function durumCiz() { if (D.yukleniyor) listeCiz(); }
   function imlecKoy(vid, kaydir = true) {
@@ -2234,6 +2397,7 @@ dialog.ayarlar[open]{display:flex}
     { id: "etk", grup: "uyg", ikon: "tags" },
     { id: "tas", grup: "uyg", ikon: "folder-input" },
     { id: "lst", grup: "uyg", ikon: "list" },
+    { id: "dis", grup: "uyg", ikon: "thumbs-down" },
     { id: "gen", grup: "ortak", ikon: "settings" },
     { id: "kis", grup: "ortak", ikon: "keyboard" },
     { id: "tan", grup: "ortak", ikon: "stethoscope" },
@@ -2323,7 +2487,7 @@ dialog.ayarlar[open]{display:flex}
     gezintiCiz();
     if (AY.bolum !== id) return; // arama süzgeci başka bölümü seçti; o bölüm zaten çizildi
     AY.baslik.textContent = bolumAdi(id);
-    AY.sifir.hidden = id === "tan" || id === "hak";
+    AY.sifir.hidden = id === "tan" || id === "hak" || id === "dis";
     doldur(AY.govde, bolumKur(id));
     AY.govde.scrollTop = 0;
     if (araOdakta) AY.ara.focus();
@@ -2335,6 +2499,7 @@ dialog.ayarlar[open]{display:flex}
       case "etk": return bolumEtiketler();
       case "tas": return bolumTasima();
       case "lst": return bolumListe();
+      case "dis": return bolumDislike();
       case "gen": return bolumGenel();
       case "kis": return bolumKisayollar();
       case "tan": return bolumTani();
@@ -2480,7 +2645,8 @@ dialog.ayarlar[open]{display:flex}
   function bolumListe() {
     const yenidenCiz = () => { ayarKaydet(); ciz(); };
     return h("div", { style: "display:flex;flex-direction:column;gap:14px" },
-      alan(alanAdi(t("acilisSiralama")), segmentKur(t("acilisSiralama"), [["kisa", t("kisaOnce")], ["uzun", t("uzunOnce")], ["liste", t("listeSirasi")]], ayar.siralama, (d) => { ayar.siralama = d; yenidenCiz(); ayarlarTazele(); })),
+      alan(h("label", { class: "ay-ad", for: "ay-sirala" }, t("acilisSiralama")), h("select", { id: "ay-sirala", class: "girdi ay-secim", onchange: (e) => { ayar.siralama = e.target.value; yenidenCiz(); } },
+        siraSecenekleri().map(([d, ad]) => h("option", { value: d, selected: ayar.siralama === d }, ad)))),
       alan(anahtarKur(t("kucukResim"), ayar.kucukResim, (v) => { ayar.kucukResim = v; yenidenCiz(); })),
       alan(anahtarKur(t("suresizSonda"), ayar.suresizSonda, (v) => { ayar.suresizSonda = v; yenidenCiz(); }), alanNotu(t("suresizNot"))),
       alan(anahtarKur(t("acilistaSecili"), ayar.acilistaSecili, (v) => { ayar.acilistaSecili = v; ayarKaydet(); }), alanNotu(t("acilistaSeciliNot"))));
@@ -2648,6 +2814,12 @@ dialog.ayarlar[open]{display:flex}
   }
 
   // ── Hakkında + Yedekleme ──
+  const rydBag = () => h("a", { href: "https://returnyoutubedislike.com", target: "_blank", rel: "noopener noreferrer" }, "returnyoutubedislike.com");
+  function bolumDislike() {
+    return h("div", { style: "display:flex;flex-direction:column;gap:14px" },
+      alan(alanNotu(t("rydAciklama"))),
+      alan(alanNotu([t("rydKaynak"), " ", rydBag()])));
+  }
   function bolumHakkinda() {
     return h("div", { style: "display:flex;flex-direction:column;gap:14px" },
       h("div", { class: "arac", style: "gap:12px;flex-wrap:nowrap" },
@@ -2660,9 +2832,10 @@ dialog.ayarlar[open]{display:flex}
         alanNotu(t("yedekNot")),
         alanNotu(t("yedekEskiNot")),
         alanNotu(t("sonYedek", ayar.sonYedek || t("henuzYok")))),
+      alanNotu([t("rydHakkinda"), " ", rydBag()]),
       alanNotu("Lucide 1.55.0 (ISC) · Open Sans (OFL)"));
   }
-  const YEDEK_ALANLARI = ["kategoriler", "kanal", "onek", "gorunurluk", "siralama", "kucukResim", "suresizSonda", "acilistaSecili", "tema", "dil", "olcek", "kisayollar"];
+  const YEDEK_ALANLARI = ["kategoriler", "kanal", "onek", "gorunurluk", "siralama", "grupIci", "kucukResim", "suresizSonda", "acilistaSecili", "tema", "dil", "olcek", "kisayollar"];
   function yedekOlustur() {
     const veri = { uygulama: UYG.ad, tur: "yedek", surum: UYG.surum, tarih: damga(), ayar: {} };
     for (const a of YEDEK_ALANLARI) veri.ayar[a] = JSON.parse(JSON.stringify(ayar[a]));
@@ -2698,7 +2871,8 @@ dialog.ayarlar[open]{display:flex}
       kanal: (x) => nesne(x) && Object.values(x).every((v) => typeof v === "string"),
       onek: (x) => typeof x === "string" && x.trim().length >= 2,
       gorunurluk: (x) => GORUNURLUKLER.includes(x),
-      siralama: (x) => ["kisa", "uzun", "liste"].includes(x),
+      siralama: (x) => SIRALAR.includes(x),
+      grupIci: (x) => GRUP_SIRALARI.includes(x),
       kucukResim: (x) => typeof x === "boolean", suresizSonda: (x) => typeof x === "boolean", acilistaSecili: (x) => typeof x === "boolean",
       tema: (x) => x === null || x === "acik" || x === "koyu",
       dil: (x) => x === null || x === "tr" || x === "en",
@@ -2806,7 +2980,7 @@ dialog.ayarlar[open]{display:flex}
     const ad = bolumAdi(id);
     const once = ayarAnlik();
     const videolar = D.videolar.map((v) => [v, v.kategori, v.elle]);
-    const ALANLAR = { kat: ["kategoriler", "kanal"], etk: ["kanal"], tas: ["onek", "gorunurluk"], lst: ["siralama", "kucukResim", "suresizSonda", "acilistaSecili"], gen: ["dil", "tema", "olcek"], kis: ["kisayollar"] };
+    const ALANLAR = { kat: ["kategoriler", "kanal"], etk: ["kanal"], tas: ["onek", "gorunurluk"], lst: ["siralama", "grupIci", "kucukResim", "suresizSonda", "acilistaSecili"], gen: ["dil", "tema", "olcek"], kis: ["kisayollar"] };
     let uygula = null;
     if (id === "kat") {
       const varsayilanIdler = new Set(VARSAYILAN_KATEGORILER.map((k) => k.id));
@@ -2824,7 +2998,7 @@ dialog.ayarlar[open]{display:flex}
       if (!(await onayla(t("etkSifirBaslik"), [h("p", null, t("etkSifirMetin", n)), not(t("sifirGeriNot"))], t("varsayilanaDon"), "tehlike", "rotate-ccw"))) return;
       uygula = () => { ayar.kanal = {}; for (const v of D.videolar) if (!v.elle) v.kategori = kategoriTahmin(v.baslik, v.kanal); };
     } else if (id === "tas") uygula = () => { ayar.onek = VARSAYILAN_ONEK; ayar.gorunurluk = "UNLISTED"; };
-    else if (id === "lst") uygula = () => { ayar.siralama = "kisa"; ayar.kucukResim = true; ayar.suresizSonda = true; ayar.acilistaSecili = true; };
+    else if (id === "lst") uygula = () => { ayar.siralama = "kisa"; ayar.grupIci = "uzun"; ayar.kucukResim = true; ayar.suresizSonda = true; ayar.acilistaSecili = true; };
     else if (id === "gen") uygula = () => { ayar.dil = null; ayar.tema = null; ayar.olcek = 100; };
     else if (id === "kis") uygula = () => { ayar.kisayollar = { ...VARSAYILAN_KISAYOLLAR }; };
     if (!uygula) return;
@@ -3025,6 +3199,61 @@ dialog.ayarlar[open]{display:flex}
       islem.bitir(kullaniciMesaji(e), "hata"); log("hata", "çıkarma", e);
     }
   }
+  // ─── Sırayı YouTube'a yazma (taşıma planı + doğrulama + geri al) ───
+  function hareketEylemi(x) {
+    if (x.onceki) return { action: "ACTION_MOVE_VIDEO_AFTER", setVideoId: x.v.setId, movedSetVideoIdPredecessor: x.onceki.setId };
+    return x.sonraki ? { action: "ACTION_MOVE_VIDEO_BEFORE", setVideoId: x.v.setId, movedSetVideoIdSuccessor: x.sonraki.setId } : null;
+  }
+  async function siraYaz(hedefIdler, baslik, islemAdi) {
+    const listeId = D.listeId;
+    const simdiki = [...D.videolar].sort((a, b) => a.sira - b.sira);
+    const bySet = new Map(simdiki.map((v) => [v.setId, v]));
+    const hedef = hedefIdler.map((id) => bySet.get(id)).filter(Boolean);
+    for (const v of simdiki) if (!hedefIdler.includes(v.setId)) hedef.push(v); // sonradan eklenen video sonda kalır
+    const { hareketler } = tasimaPlani(simdiki, hedef);
+    if (!hareketler.length) return { tasinan: 0, eksik: 0 };
+    const degisen = hareketler.filter((x) => simdiki.indexOf(x.v) !== hedef.indexOf(x.v)).length;
+    const islem = islemBaslat(islemAdi || t("siraYaziliyor", hareketler.length));
+    try {
+      const r = await parcaParca(listeId, hareketler, hareketEylemi, islem);
+      const durdu = D.iptal;
+      islem.adim(t("siraDogrulaniyor"));
+      if (listeSayfasi() !== listeId) { islem.bitir(t("baskaListe"), "uyari"); return { tasinan: r.basarili.length, degisen, eksik: 0 }; }
+      await yukle(true);
+      // Doğrulama: yeniden okunan sıra hedefle aynı mı (iki listede de olan videolar üzerinden).
+      const okunan = [...D.videolar].sort((a, b) => a.sira - b.sira).map((v) => v.setId);
+      const ortak = new Set(okunan);
+      const beklenen = hedef.map((v) => v.setId).filter((id) => ortak.has(id));
+      const kume = new Set(beklenen);
+      const gercek = okunan.filter((id) => kume.has(id));
+      const eksik = beklenen.filter((id, i) => gercek[i] !== id).length;
+      const ozet = durdu ? `${t("siraYazildi", r.basarili.length)}${t("durduruldu")}`
+        : eksik || D.hata ? t("siraEksik", eksik) : (baslik || t("siraYazildi", degisen));
+      islem.bitir(ozet, eksik || durdu || r.hatali.length || D.hata ? "uyari" : "ok");
+      return { tasinan: r.basarili.length, degisen, eksik };
+    } catch (e) {
+      islem.bitir(kullaniciMesaji(e), "hata"); log("hata", "sıra yazma", e);
+      throw e;
+    }
+  }
+  async function siraUygula() {
+    if (D.mesgul) return bildir(t("islemSuruyor"));
+    if (D.kaynak === "sayfa" || D.videolar.some((v) => !v.setId)) return bildir(t("siraKimliksiz"));
+    planHesapla();
+    if (!D.plan || !D.plan.hareketler.length) return bildir(t("siraAyni"));
+    const listeId = D.listeId;
+    const eski = [...D.videolar].sort((a, b) => a.sira - b.sira).map((v) => v.setId);
+    const yeni = D.plan.hedef.map((v) => v.setId);
+    let sonuc;
+    try { sonuc = await siraYaz(yeni); } catch (e) { return; }
+    if (!sonuc.tasinan) return;
+    const yaz = (idler, ad) => async () => {
+      if (D.listeId !== listeId) throw new KullaniciHatasi(t("baskaListe"));
+      await siraYaz(idler, null, ad);
+    };
+    geriKaydet(t("g_siralama"), yaz(eski, t("siraGeriYukleniyor")), yaz(yeni));
+    bildir(sonuc.eksik ? t("siraEksik", sonuc.eksik) : t("siraYazildi", sonuc.degisen), { geriAl: true });
+  }
   async function seciliCikar() {
     const secili = D.videolar.filter((v) => v.secili);
     if (!secili.length) return bildir(t("seciliYokCikar"));
@@ -3217,8 +3446,200 @@ dialog.ayarlar[open]{display:flex}
     } catch (e) { is.bitir(kullaniciMesaji(e), "hata"); }
   }
 
+  // ─── Dislike modülü (Return YouTube Dislike verisi · maket "YTO Dislike" son, 2026-11-16) ───
+  // Düğme seçicileri RYD 3.2.2 userscript'inden alındı (github.com/Anarios/return-youtube-dislike).
+  // YouTube düzeni değişirse yalnız bu bölüm güncellenir. Sayfaya YouTube'un kendi renk değişkenleriyle yazar.
+  const RYD = {
+    api: "https://returnyoutubedislikeapi.com/votes?videoId=",
+    onbellekMs: 10 * 60 * 1000, beklemeMs: 60 * 1000, denemeSiniri: 40,
+    onbellek: new Map(), id: null, veri: null, hata: null, bas: null,
+    dugmeler: null, izleyici: null, zaman: null, tekrar: null, deneme: 0, cizBekliyor: false,
+  };
+  const rydShortsMu = () => location.pathname.startsWith("/shorts/");
+  function rydVideoId() {
+    if (location.pathname === "/watch") return new URLSearchParams(location.search).get("v");
+    const m = location.pathname.match(/^\/shorts\/([\w-]{11})/);
+    return m ? m[1] : null;
+  }
+  function rydGorunur(el) {
+    const r = el.getBoundingClientRect();
+    return r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < innerHeight;
+  }
+  function rydDugmeler() {
+    if (rydShortsMu()) {
+      const reel = [...document.querySelectorAll("ytd-reel-video-renderer")];
+      const aktif = reel.filter((r) => r.hasAttribute("is-active")).concat(reel.filter(rydGorunur));
+      for (const r of aktif) { const bar = r.querySelector("reel-action-bar-view-model, #actions"); if (bar) return bar; }
+      return null;
+    }
+    const aday = [...document.querySelectorAll("#menu-container #top-level-buttons-computed, ytd-menu-renderer.ytd-watch-metadata > div, ytd-menu-renderer.ytd-video-primary-info-renderer > div")]
+      .filter((c) => c.querySelector("segmented-like-dislike-button-view-model, ytd-segmented-like-dislike-button-renderer, like-button-view-model, #segmented-like-button"));
+    return aday.find(rydGorunur) || aday[0] || null;
+  }
+  function rydBegenmeme(b) {
+    if (!b) return null;
+    if (rydShortsMu()) return b.querySelector("dislike-button-view-model, #dislike-button");
+    const ilk = b.children[0];
+    if (ilk && ilk.tagName === "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER") return b.querySelector("#segmented-dislike-button") || ilk.children[1] || null;
+    return b.querySelector("dislike-button-view-model") || null;
+  }
+  function rydBegeni(b) {
+    if (!b) return null;
+    return b.querySelector("like-button-view-model, #segmented-like-button, #like-button");
+  }
+  const rydDugme = (el) => (el && (el.querySelector("button") || el)) || null;
+  const rydBasili = (el) => { const d = rydDugme(el); return !!d && d.getAttribute("aria-pressed") === "true"; };
+  // Sayının yazılacağı yer: YouTube'un yazı kutusu; yoksa RYD gibi düğmeye bir kutu eklenir.
+  function rydYaziYeri(d) {
+    let y = d.querySelector("#text") || d.querySelector("span[role='text']") ||
+      d.querySelector(".ytSpecButtonShapeNextButtonTextContent, .yt-spec-button-shape-next__button-text-content");
+    if (y) return y;
+    const btn = d.querySelector("button");
+    if (!btn) return null;
+    const yerli = !rydShortsMu() && btn.matches(".ytSpecButtonShapeNextHost, .yt-spec-button-shape-next");
+    y = document.createElement(yerli ? "div" : "span");
+    y.id = "text";
+    y.setAttribute("role", "text");
+    if (yerli) {
+      y.className = "ytSpecButtonShapeNextButtonTextContent yt-spec-button-shape-next__button-text-content";
+      btn.classList.remove("ytSpecButtonShapeNextIconButton", "yt-spec-button-shape-next--icon-button");
+      btn.classList.add("ytSpecButtonShapeNextIconLeading", "yt-spec-button-shape-next--icon-leading");
+    } else {
+      y.style.marginInlineStart = "6px";
+      btn.style.width = "auto";
+    }
+    btn.append(y);
+    return y;
+  }
+  function rydKisa(n) {
+    try { return new Intl.NumberFormat(document.documentElement.lang || DIL, { notation: "compact", maximumFractionDigits: 1 }).format(n); }
+    catch (_e) { return String(n); }
+  }
+  const rydTam = (n) => new Intl.NumberFormat(DIL === "tr" ? "tr-TR" : "en-US").format(n);
+  async function rydGetir(id) {
+    const o = RYD.onbellek.get(id);
+    if (o && Date.now() - o.zaman < RYD.onbellekMs) return o.veri;
+    let r;
+    try { r = await fetch(RYD.api + encodeURIComponent(id), { credentials: "omit" }); }
+    catch (e) { throw Object.assign(new Error(`bağlantı: ${e.message}`), { ryd: "ag" }); }
+    if (r.status === 429) throw Object.assign(new Error("HTTP 429"), { ryd: "cok" });
+    if (r.status === 400 || r.status === 404) throw Object.assign(new Error(`HTTP ${r.status}`), { ryd: "yok" });
+    if (!r.ok) throw Object.assign(new Error(`HTTP ${r.status}`), { ryd: "ag" });
+    const j = await r.json();
+    const veri = { likes: Math.max(0, Number(j.likes) || 0), dislikes: Math.max(0, Number(j.dislikes) || 0) };
+    RYD.onbellek.set(id, { zaman: Date.now(), veri });
+    for (const [k, v] of RYD.onbellek) if (Date.now() - v.zaman >= RYD.onbellekMs) RYD.onbellek.delete(k);
+    return veri;
+  }
+  function rydDurdur() {
+    clearTimeout(RYD.zaman); RYD.zaman = null;
+    clearTimeout(RYD.tekrar); RYD.tekrar = null;
+    if (RYD.izleyici) RYD.izleyici.disconnect();
+    RYD.izleyici = null;
+    for (const el of document.querySelectorAll("[data-aalabs-ryd]")) el.remove();
+    RYD.dugmeler = null; RYD.veri = null; RYD.hata = null; RYD.bas = null; RYD.deneme = 0;
+  }
+  function rydSayfa() {
+    const id = rydVideoId();
+    if (id === RYD.id) { if (id && RYD.dugmeler && !RYD.dugmeler.isConnected) rydBagla(); return; }
+    rydDurdur();
+    RYD.id = id;
+    if (id) { rydBagla(); rydYukle(id); }
+  }
+  // Düğmeler sayfaya gelene kadar 0,5 sn arayla aranır (en çok 20 sn).
+  function rydBagla() {
+    clearTimeout(RYD.zaman);
+    if (RYD.izleyici) RYD.izleyici.disconnect();
+    const b = rydDugmeler();
+    if (!b || !rydBegenmeme(b)) {
+      if (++RYD.deneme <= RYD.denemeSiniri) RYD.zaman = setTimeout(guvenli(rydBagla), 500);
+      else log("uyari", `Dislike: düğmeler bulunamadı (${location.pathname})`);
+      return;
+    }
+    RYD.dugmeler = b; RYD.deneme = 0;
+    RYD.izleyici = new MutationObserver(rydCizSirala);
+    RYD.izleyici.observe(b, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ["aria-pressed"] });
+    rydCiz();
+  }
+  async function rydYukle(id) {
+    try {
+      const veri = await rydGetir(id);
+      if (RYD.id !== id) return;
+      RYD.veri = veri; RYD.hata = null;
+    } catch (e) {
+      if (RYD.id !== id) return;
+      RYD.hata = e.ryd || "ag";
+      log("uyari", `Dislike ${id}: ${e.message}`);
+      if (RYD.hata !== "yok") RYD.tekrar = setTimeout(() => { if (RYD.id === id) guvenli(rydYukle)(id); }, RYD.beklemeMs);
+    }
+    rydCiz();
+  }
+  function rydCizSirala() {
+    if (RYD.cizBekliyor) return;
+    RYD.cizBekliyor = true;
+    requestAnimationFrame(() => { RYD.cizBekliyor = false; guvenli(rydCiz)(); });
+  }
+  function rydCiz() {
+    const b = RYD.dugmeler;
+    if (!b) return;
+    if (!b.isConnected) { rydBagla(); return; }
+    const d = rydBegenmeme(b);
+    if (!d) return;
+    const y = rydYaziYeri(d);
+    const btn = rydDugme(d);
+    const l = rydBegeni(b);
+    let yazi, ipucu, oran = null, mesaj = null;
+    if (RYD.hata) {
+      mesaj = t(RYD.hata === "cok" ? "rydCok" : RYD.hata === "yok" ? "rydYok" : "rydAg");
+      yazi = RYD.hata === "yok" ? "" : "—";
+      ipucu = mesaj;
+    } else if (!RYD.veri) {
+      yazi = "…"; ipucu = t("rydYukleniyor");
+    } else {
+      // Veri geldiği andaki basılı durum taban alınır; kullanıcının sonraki tıklaması sayıya ±1 olarak yansır.
+      if (!RYD.bas) RYD.bas = { dis: rydBasili(d), lk: rydBasili(l) };
+      const dis = Math.max(0, RYD.veri.dislikes + (rydBasili(d) ? 1 : 0) - (RYD.bas.dis ? 1 : 0));
+      const lk = Math.max(0, RYD.veri.likes + (rydBasili(l) ? 1 : 0) - (RYD.bas.lk ? 1 : 0));
+      yazi = rydKisa(dis);
+      ipucu = t("rydIpucu", rydTam(lk), rydTam(dis));
+      oran = lk + dis ? lk / (lk + dis) : null;
+    }
+    if (y && y.textContent !== yazi) y.textContent = yazi;
+    if (btn && btn.title !== ipucu) btn.title = ipucu;
+    if (!rydShortsMu()) rydCubuk(b, oran, RYD.hata && RYD.hata !== "yok" ? mesaj : null);
+  }
+  // Oran çubuğu ve hata notu: beğen/beğenme kutusunun hemen altında, sayfanın akışını itmeden.
+  function rydCubuk(b, oran, mesaj) {
+    const kap = b.querySelector("segmented-like-dislike-button-view-model, ytd-segmented-like-dislike-button-renderer");
+    if (!kap) return;
+    let c = kap.querySelector(":scope > [data-aalabs-ryd='cubuk']");
+    if (!c) {
+      if (getComputedStyle(kap).position === "static") kap.style.position = "relative";
+      c = document.createElement("div");
+      c.setAttribute("data-aalabs-ryd", "cubuk");
+      c.setAttribute("aria-hidden", "true");
+      c.style.cssText = "position:absolute;left:12px;right:12px;bottom:-6px;height:3px;border-radius:2px;overflow:hidden;pointer-events:none;background:var(--yt-spec-10-percent-layer)";
+      const dolu = document.createElement("div");
+      dolu.style.cssText = "height:100%;width:0;background:var(--yt-spec-text-primary)";
+      c.append(dolu);
+      kap.append(c);
+    }
+    c.hidden = oran == null;
+    if (oran != null) c.firstChild.style.width = `${(oran * 100).toFixed(1)}%`;
+    let n = kap.querySelector(":scope > [data-aalabs-ryd='not']");
+    if (mesaj && !n) {
+      n = document.createElement("div");
+      n.setAttribute("data-aalabs-ryd", "not");
+      n.setAttribute("role", "status");
+      n.style.cssText = "position:absolute;left:0;top:calc(100% + 8px);z-index:1;white-space:nowrap;font-size:1.2rem;line-height:1.6rem;color:var(--yt-spec-text-secondary)";
+      kap.append(n);
+    }
+    if (n) { if (mesaj) { if (n.textContent !== mesaj) n.textContent = mesaj; } else n.remove(); }
+  }
+
   // ─── Sayfa takibi (YouTube tek sayfa uygulamasıdır) ───
   function sayfaDegisti() {
+    guvenli(rydSayfa)();
     const id = listeSayfasi();
     if (!id) { tetikGizle(); if (panelAcikMi()) panelKapat(); return; }
     if (D.listeId && D.listeId !== id) {
