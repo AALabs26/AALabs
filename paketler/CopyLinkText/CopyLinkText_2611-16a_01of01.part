@@ -1,0 +1,1281 @@
+// ==UserScript==
+// @name         AALabs Copy Link Text
+// @name:tr      AALabs Copy Link Text
+// @name:en      AALabs Copy Link Text
+// @namespace    aalabs
+// @version      26.11.16.1
+// @description  Fare linkin üstündeyken Ctrl + sağ tık linkin yazısını panoya kopyalar. Her sitede çalışır.
+// @author       AALabs
+// @match        *://*/*
+// @icon         data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAIM0lEQVR42u2ba4xdVRXHf2vvc+5j7p1nZxoegy1gQSj46AsGE4sRCRZjUvGWkEA0YjRGE000fEECXyAkRD8gisFoMCqxHahEpCEiCa1Ja/rgUQmvEWRgtFCm8+jMvXfmnrP38sO5c6fTeRSGgXTmzk7Oh7vPvuee/V9rr/1f/7uXMKWpUOg2dG9zAGsKB68FvU5VN+Hj1QgNIMJp3VRRSpjgDRHZD/JIT/eGxwEo7LB0FzyIToyWKZOv3ji/sO8rgrlVsJvEhKiPUI1BlUXRRBAJqL07br/i73ytu+svJ89VJjtg8+1P274XcvfaMPNd1OPjkqIogpz+lp/RExRBTNAgiMFF5V929pd+sHv3la6KlMqE269vPc8MH4u323TLVjc26Kr+YVkKTXEANtNq3fjQn8++5LJtu1/sVroL3hYKa+2L3dtcw6qv/yLItN0Ujw1EIhIgGJZKEwyC8XEpCjJta4eO9HQMPnzNXwuFtVYA1nx13xZJ5R93UTESNGQJN0ViG+YCrYxe27Oza5es//bBcPhY9E8TZD/jo7JfMm4/x3IwYdb4uPxs84rwcnP83fhqMeE6H5d1yU++Gtd8XFYx4brj/fpFo/jrxYSgKPXSFBUTosTXGzWyUX0EoqZuABA1Cbdhk0H1HNWYxbfPfzCmpBqD0GlEaFg0DG+BeZKI5kx9WX66JxjqvC0DsAzAMgDLACwDsHA0e/FtqsEHfYA1AgLeK94nqpmRyX71ij+BZxkjNZBOvjejhSbG61QBbw6en/yuJu/0oQFgjOC9MlyM8V7Jpi3ZtEEEojjpd05JpwyZlJmQ6iiWHVHsAUiFhmzazEpERWC05Iidn5dhcln74QBgjTBadqRC4UtdbXxhQxtrzsnS2hRiDJTGPEf6x3nmlRH2PDdET28ZY4Vi2fGNa8/g8kuaAXjq4CDdTx0ll7XTrGVMMv47W89i3YWNVCKPMTNouVNMD95DGAg9fWXu6+4jsDIn0w/mM/nh0ZgNFzdy+83nsuGixhnHXXp+jqsva+OWm1Zxx6//w28f+x/OwRWfbGbLFSsAGB6N+eMTb5NvsDNavxJ5rlzfwuc+3fK+jfRKb4l7t/dxKoUjeN+TL8Zcc0Ub999yYc21AQZHYvqOjlOJPO0tIZ0r01gjGIHD/x4lsAbnPMWyw7nEJKVxP2fQNAaODUeMVr9jrYAm4KRTpuYH45HHe2qxyBjh6GC0sEHQCJTGHGvPzXHfjy8gkzKoKsNFx08fepMn9g0wNJLEg0zKsPqsLNuuWkkmZTj00gj5Bkt53GGMJBOpPnO25pySz1ruerCXnz30FlodH8VKe3OKP915MbmMxavyvXte5YXXijRkTC2oViI9pfu/Pw8Qwavyk2+uJpexxE4ZLTluvONF9h4epiUfYK1gjDAWKc/3jHLo5RGyaUMmbeYlN4kI/UMRXie32EqsjFd0ysTeGajQ+844+axJdqIqWIGVhfGAiYC08aImNq9rwfsE3bt/38vew8Oc2Z4min3tpaxALmsRwKt+ILkhDGRKXBCBVCjTxqRDIRVKshQmU/6FAWAiIF21qS2xhBF63x7j0af7WdEcTpn8RDxWrwulW0z7PFvfTPcWhAmqT/bzT63J1/r2Hh5mcCTCvod1tqipsADOQz5rObM9Vet/9c1yneQCkqzjMBAaT2BWAyNRfSVDIif9ma51lA2KCFGslMYmQ2xLPqgPAFTBGiiWPe8OVmr953dm68cDjBHKFcdLb5Rqrn/Z2ibyMyQxSzMGKFgR9jw3hAg4r3xiVQOfX9/K4EhMOjRTOP0Ea7NGEl3gFALKXNdpAYD3Si5r+cezw7z+3zGMJFrAbTev5ryzsrw9UKklOABeEy4+NBozNBrPzve9Uolmv6JYTw8AlIRXHy/G3POHN6teAKvOyPDI3Zdww9Urac6HNbCCQDhjRYqtm9u55caPkQ5NdalMNWm+wdK5Ms3ZHdOvzo407c3hh77bvOdQ7rzSlA94dM+7rD2vge8XOgHoXJnm5z+6gP6hiCPHKkSRpzFnWdmaojkfMFKMefDxI1O8yTnFeWXrlR18+bPt0/QN5xVrhL2Hh/nWnS/TUE1yTh7jnCa5xkelCXqvNGYtd/2ulyP9FX54wzl0tCSWb28JaW+ZfrrmeNHhfDJH1SRJsnYyJc6kZv+9jtZwRs1QBJpzyatbhMDIvEGY12be2BDwm8eO8OSBQbZ0tdF1aTNntqeq+TkUxxxHByo83zPKnmeHGK94rE2ytb3/Gq7m6x6ZJcp5r6RCwwuvF6fl9CIwXvHs+PtRsmmDUxg4Hr2n3H/GQPzx6/bpfHXB8chTGnMYSQTIVJi8RCVWymOO2CvpcKooWhrzNVH0lNaxQi5jp1lXFUZKrqYD5rJ23l4wbzrnfJIftDaFoJMRfULpacwFyEmy+MQSELFzy9ynkLZFoLUxqH3fO/1ol8CJljhx+5vY8pXZNfmFIk5ugZ4TLOzZo+X/BpcBWAZgGYBlAJYBWGQA1OMpyUkmY1Qp1eVZSRFUpWgQeUskoL48QVUkAKXPiNcDyXF58fUzf/FiQkTYbwSzPTkuT/2sA0HURwjBdtPUEfxNffSMCbIyUV215Etmgqyoj55papcnzaEHNkSi3IZYURFd+t4vilgR5bZDD2yITKGww/bs7NrlKsd/FaRbAlWNlm7o81GQbglcNHJ/z86uXYXCDlv3hZNTS2c3P2372uuudHaW4mlvbhWzRIqnvduvZs7i6VnK57cd2ILyNVU2qo9Xi2huMZTPq0pRTPCGKAewPNyzY+MuYMby+f8DNmwbKHcVrBEAAAAASUVORK5CYII=
+// @updateURL    http://127.0.0.1:47815/u/AALabs.CopyLinkText.user.js
+// @downloadURL  http://127.0.0.1:47815/u/AALabs.CopyLinkText.user.js
+// @run-at       document-start
+// @noframes
+// @grant        GM_getValue
+// @grant        GM_setValue
+// @grant        GM_registerMenuCommand
+// @grant        GM_unregisterMenuCommand
+// @grant        GM_setClipboard
+// @grant        GM.setClipboard
+// @grant        GM_info
+// @aalabs-ikon  CLT
+// ==/UserScript==
+
+/*
+ * Ne yapar
+ *   Fare bir linkin üstündeyken Ctrl + sağ tık (Ayarlar'dan Alt + sağ tık) linkin görünen yazısını panoya yazar.
+ *   O tıklamada sayfanın sağ tık menüsü açılmaz. İmlecin yanında 1,5 sn "Kopyalandı · <ilk 25 harf>" balonu çıkar.
+ *   Yazısız linkte (yalnız resim) linkin adresi kopyalanır. Fazla boşluk ve satır sonu tek boşluğa iner.
+ *
+ * Neye dokunmaz
+ *   - Değiştiricisiz sağ tık ve Shift + sağ tık (Firefox Shift + sağ tıkta menüyü her zaman açar; sayfa engelleyemez).
+ *   - Yazı alanları (input, textarea, düzenlenebilir alan).
+ *   - Sayfada seçili yazı varken (normal menü açılır; seçimle kopyalama bozulmaz).
+ *   - Linkten başka öğeler.
+ *
+ * Firefox'taki "Copy Link Text" eklentisinin yerine yazıldı. Tasarım kapısı: CLT son · Kısayol E · Bildirim A ·
+ * Yazısız B · +E1 · -Ç1 (Tanı bölümü yok: betik sayfa parçası aramaz).
+ */
+(function () {
+  'use strict';
+
+  const SURUM = '2611-16a';
+  const ID = 'CopyLinkText';
+  const KOD = 'CLT';
+  const AD = 'AALabs Copy Link Text';
+  const BALON_MS = 1500;          // balon süresi (tasarım: 1,5 sn)
+  const ONIZLEME_HARF = 25;       // balonda gösterilen metin başı (E1)
+
+  let TEST = false;
+  try { TEST = typeof GM_info === 'object' && !!GM_info && GM_info.scriptHandler === 'Test'; } catch (_e) { TEST = false; }
+
+  // ---------------------------------------------------------------- tema tokenları (aalabs-tema.css'ten üretildi)
+  // TOKEN-BASLA
+  const TEMA_CSS = ":host { --tv-olcek: 1; --yazi: \"Open Sans\", \"Segoe UI\", Roboto, sans-serif; --yazi-govde: calc(14px * var(--tv-olcek)); --kontrol: calc(32px * var(--tv-olcek)); --kose-s: calc(2px * var(--tv-olcek)); --kose-m: calc(4px * var(--tv-olcek)); --kose-l: calc(6px * var(--tv-olcek)); --bosluk-1: calc(4px * var(--tv-olcek)); --bosluk-2: calc(8px * var(--tv-olcek)); --bosluk-3: calc(12px * var(--tv-olcek)); --bosluk-4: calc(16px * var(--tv-olcek)); --bosluk-5: calc(24px * var(--tv-olcek)); --bosluk-6: calc(32px * var(--tv-olcek)); --ana: #2456D6; --ana-acik: #E5EBFA; --ana-hover: #F2F5FD; --ana-uzeri: #FFFFFF; --vurgu: #2456D6; --zemin: #F6F9FC; --yuzey: #FFFFFF; --metin: #17252E; --metin-ikincil: #4E6269; --kenar: #7A9199; --ayirici: #D3DEE6; --basari: #18763F; --basari-bg: #E4F5E8; --uyari: #9A5B00; --uyari-bg: #FDF6D8; --hata: #C4313B; --hata-bg: #FDE8E8; --turuncu: #A34400; --turuncu-bg: #FFE7D1; --kat-belge: #6237C8; --kat-tablo: #1D7A3A; --kat-gorsel: #B0256C; --kat-kod: #2453C7; --kat-video: #A8500F; --kat-arsiv: #7A5A00; --kat-onemli: #B4232B; --kat-oyun: #0B6E78; color-scheme: light; }\n:host([data-theme=\"dark\"]) { --ana: #2456D6; --ana-acik: #1D2C4F; --ana-hover: #1B2434; --ana-uzeri: #FFFFFF; --vurgu: #86A8FF; --zemin: #0F1520; --yuzey: #161E2B; --metin: #E6ECF5; --metin-ikincil: #9AA8BC; --kenar: #6A7B93; --ayirici: #263142; --basari: #4CC38A; --basari-bg: #13301F; --uyari: #E8AC45; --uyari-bg: #33270F; --hata: #FF8189; --hata-bg: #3A161A; --turuncu: #FF7A33; --turuncu-bg: #45210C; color-scheme: dark; }\n";
+  // TOKEN-BITIR
+
+  // ---------------------------------------------------------------- dil (TR kaynak, EN çeviri)
+  const METIN = {
+    tr: {
+      ayarlar: 'Ayarlar', ara: 'Ayarlarda ara (Ctrl+F)', sonucYok: 'Sonuç yok. Başka bir kelime dene.', ortak: 'ORTAK',
+      kapat: 'Kapat (Esc)', varsayilan: 'Varsayılana dön', sifirlandi: 'Bu bölüm varsayılana döndü',
+      b_kopya: 'Kopyalama', b_genel: 'Genel', b_kisayol: 'Klavye kısayolları', b_degisiklik: 'Değişiklikler', b_hakkinda: 'Hakkında',
+      kopyaAlt: 'Fare linkin üstündeyken kısayola bas. Linkin görünen yazısı panoya gider. Yazı alanında ve seçili yazı varken çalışmaz.',
+      tus: 'Kopyalama kısayolu', tusAc: 'Bu tıklamada sağ tık menüsü açılmaz. Shift kullanılamaz: Firefox Shift + sağ tıkta menüyü her zaman açar.',
+      tus_ctrl: 'Ctrl + sağ tık', tus_alt: 'Alt + sağ tık',
+      balon: 'Kopyalayınca balon göster', balonAc: 'İmlecin yanında 1,5 sn görünür. Hata balonu bu ayardan bağımsız her zaman çıkar.',
+      onizle: 'Balonda metnin başını göster', onizleAc: 'Kopyalanan metnin ilk 25 harfi balonda görünür.',
+      yazisizNot: 'Yazısız link (yalnız resim): linkin adresi kopyalanır.',
+      dil: 'Dil', dil_tr: 'Türkçe', dil_en: 'English', dil_tarayici: 'Tarayıcı dili', algilanan: 'Algılanan: {dil}',
+      tema: 'Tema', tema_sayfa: 'Sayfayı izle', tema_acik: 'Açık', tema_koyu: 'Koyu',
+      kisayolNot: 'Tuş kutusuna tıkla, yeni tuşu bas. Vazgeçmek için Esc. Tarayıcının kullandığı tuş kabul edilmez.',
+      k_ayarlar: 'Ayarları aç', k_kopyala: 'Link yazısını kopyala', k_kopyalaAc: 'Kopyalama bölümünden değişir.', tusaBas: 'Tuşa bas…',
+      tusDegisti: 'Kısayol {tus} oldu', tusRed: '{tus} kullanılamaz: {neden} Başka tuş seç.',
+      neden_degistirici: 'Ctrl ya da Alt ile birlikte basılmalı.', neden_tarayici: 'tarayıcı bu tuşu kullanıyor.',
+      neden_altgr: 'Ctrl + Alt Türkçe klavyede AltGr ile karışır.',
+      surum: 'Sürüm {s}', store: 'AALabs App Store ile güncellenir.',
+      yedek: 'Ayar yedeği', yedekle: 'Yedekle (dosya)', geriYukle: 'Geri yükle (dosya)',
+      sonYedek: 'Son yedek: {t}', sonYedekYok: 'Son yedek: henüz yok',
+      yedekAc: 'Yedek, bu betiğin ayarlarını tek bir JSON dosyasına yazar. Geri yükleyince ayarlar hemen uygulanır.',
+      yedeklendi: 'Ayarlar dosyaya yazıldı', geriYuklendi: 'Ayarlar geri yüklendi',
+      yedekHata: 'Dosya okunamadı. AALabs Copy Link Text yedeği (.json) seç.',
+      kopyalandi: 'Kopyalandı', kopyaHata: 'Kopyalanamadı', bildirimKapat: 'Bildirimi kapat',
+      menuAyarlar: 'Ayarlar (A)', menuDegisiklik: 'Değişiklikler (D)',
+      // Değişiklikler parçası (assets/userscript/degisiklik.js) Türkçe metni anahtar olarak kullanır
+      'Değişiklikler': 'Değişiklikler', 'Yeni': 'Yeni', 'Düzeldi': 'Düzeldi', 'Değişti': 'Değişti', 'Kaldırıldı': 'Kaldırıldı',
+      'Tümü': 'Tümü', 'Süzgeç': 'Süzgeç', 'Oraya git': 'Oraya git',
+      'Yeni sürüm kuruldu. Bu pencere her yeni sürümde bir kez açılır.': 'Yeni sürüm kuruldu. Bu pencere her yeni sürümde bir kez açılır.',
+      'Değişikliklerde ara': 'Değişikliklerde ara', 'Yeni sürümde otomatik açma': 'Yeni sürümde otomatik açma',
+      'Kopyala': 'Kopyala', 'Tamam': 'Tamam', 'Bu süzgeçle değişiklik yok.': 'Bu süzgeçle değişiklik yok.',
+      'Değişiklik kaydı yok.': 'Değişiklik kaydı yok.', 'Kurulu': 'Kurulu', 'Atladığın sürüm': 'Atladığın sürüm',
+      '{0} sürüm · {1} değişiklik': '{0} sürüm · {1} değişiklik', 'Kopyalandı': 'Kopyalandı', 'Kopyalanamadı': 'Kopyalanamadı',
+    },
+    en: {
+      ayarlar: 'Settings', ara: 'Search settings (Ctrl+F)', sonucYok: 'No results. Try another word.', ortak: 'COMMON',
+      kapat: 'Close (Esc)', varsayilan: 'Reset to default', sifirlandi: 'This section was reset',
+      b_kopya: 'Copying', b_genel: 'General', b_kisayol: 'Keyboard shortcuts', b_degisiklik: 'Changes', b_hakkinda: 'About',
+      kopyaAlt: 'Hover a link and use the shortcut. The visible link text goes to the clipboard. Inactive in text fields and while text is selected.',
+      tus: 'Copy shortcut', tusAc: 'No context menu opens on that click. Shift is not offered: Firefox always opens its menu on Shift + right-click.',
+      tus_ctrl: 'Ctrl + right-click', tus_alt: 'Alt + right-click',
+      balon: 'Show a bubble after copying', balonAc: 'Appears by the cursor for 1.5 s. Error bubbles always appear, whatever this setting is.',
+      onizle: 'Show the start of the text', onizleAc: 'The first 25 letters of the copied text appear in the bubble.',
+      yazisizNot: 'Link without text (image only): the link address is copied.',
+      dil: 'Language', dil_tr: 'Türkçe', dil_en: 'English', dil_tarayici: 'Browser language', algilanan: 'Detected: {dil}',
+      tema: 'Theme', tema_sayfa: 'Follow the page', tema_acik: 'Light', tema_koyu: 'Dark',
+      kisayolNot: 'Click a key box, then press the new keys. Esc cancels. Keys used by the browser are refused.',
+      k_ayarlar: 'Open settings', k_kopyala: 'Copy link text', k_kopyalaAc: 'Change it in the Copying section.', tusaBas: 'Press keys…',
+      tusDegisti: 'Shortcut is now {tus}', tusRed: "{tus} can't be used: {neden} Pick another key.",
+      neden_degistirici: 'press it together with Ctrl or Alt.', neden_tarayici: 'the browser uses this key.',
+      neden_altgr: 'Ctrl + Alt clashes with AltGr on Turkish keyboards.',
+      surum: 'Version {s}', store: 'Updated by AALabs App Store.',
+      yedek: 'Settings backup', yedekle: 'Back up (file)', geriYukle: 'Restore (file)',
+      sonYedek: 'Last backup: {t}', sonYedekYok: 'Last backup: none yet',
+      yedekAc: "The backup writes this script's settings to one JSON file. Restoring applies them at once.",
+      yedeklendi: 'Settings written to a file', geriYuklendi: 'Settings restored',
+      yedekHata: "Couldn't read the file. Pick an AALabs Copy Link Text backup (.json).",
+      kopyalandi: 'Copied', kopyaHata: "Couldn't copy", bildirimKapat: 'Close notification',
+      menuAyarlar: 'Settings (S)', menuDegisiklik: 'Changes (C)',
+      'Değişiklikler': 'Changes', 'Yeni': 'New', 'Düzeldi': 'Fixed', 'Değişti': 'Changed', 'Kaldırıldı': 'Removed',
+      'Tümü': 'All', 'Süzgeç': 'Filter', 'Oraya git': 'Go there',
+      'Yeni sürüm kuruldu. Bu pencere her yeni sürümde bir kez açılır.': 'A new version was installed. This window opens once for each new version.',
+      'Değişikliklerde ara': 'Search changes', 'Yeni sürümde otomatik açma': "Don't open on new versions",
+      'Kopyala': 'Copy', 'Tamam': 'OK', 'Bu süzgeçle değişiklik yok.': 'No changes match this filter.',
+      'Değişiklik kaydı yok.': 'No change log yet.', 'Kurulu': 'Installed', 'Atladığın sürüm': 'Skipped version',
+      '{0} sürüm · {1} değişiklik': '{0} versions · {1} changes', 'Kopyalandı': 'Copied', 'Kopyalanamadı': "Couldn't copy",
+    },
+  };
+
+  // ---------------------------------------------------------------- ayar deposu
+  const VARSAYILAN = Object.freeze({
+    tus: 'ctrl', balon: true, onizle: true,
+    dil: 'tr', tema: 'sayfa',
+    kisayolAyarlar: 'Ctrl+,', sonYedek: '',
+  });
+  const SECENEK = { tus: ['ctrl', 'alt'], dil: ['tr', 'en', 'tarayici'], tema: ['sayfa', 'acik', 'koyu'] };
+  const BOLUM_ANAHTAR = { kopya: ['tus', 'balon', 'onizle'], genel: ['dil', 'tema'], kisayol: ['kisayolAyarlar'] };
+  const gmDepo = (() => { try { return typeof GM_getValue === 'function' && typeof GM_setValue === 'function'; } catch (_e) { return false; } })();
+  const bellek = {};   // GM deposu yoksa ayarlar burada (sayfa kapanınca gider)
+
+  function depoOku(ad, varsayilan) {
+    if (!gmDepo) return ad in bellek ? bellek[ad] : varsayilan;
+    try { const v = GM_getValue(ad, varsayilan); return v === undefined ? varsayilan : v; } catch (_e) { return varsayilan; }
+  }
+  function depoYaz(ad, deger) {
+    if (!gmDepo) { bellek[ad] = deger; return; }
+    try { GM_setValue(ad, deger); } catch (_e) { bellek[ad] = deger; }
+  }
+
+  // Değişiklikler parçası "ilk kurulum mu" sorusunu betik başlarken okunan depodan yanıtlar
+  const DEPO_VARDI = depoOku('ayarlar', null) !== null;
+
+  // ---------------------------------------------------------------- kısayol kuralları
+  const TARAYICI_YASAK = new Set(['Ctrl+T', 'Ctrl+W', 'Ctrl+N', 'Ctrl+L', 'Ctrl+R', 'Ctrl+F', 'Ctrl+P', 'Ctrl+S', 'Ctrl+D',
+    'Ctrl+H', 'Ctrl+J', 'Ctrl+K', 'Ctrl+U', 'Ctrl+O', 'Ctrl+G', 'Ctrl+E', 'Ctrl+A', 'Ctrl+C', 'Ctrl+V', 'Ctrl+X', 'Ctrl+Z', 'Ctrl+Y', 'Ctrl+B', 'Ctrl+I',
+    'Ctrl+Shift+T', 'Ctrl+Shift+N', 'Ctrl+Shift+W', 'Ctrl+Shift+I', 'Ctrl+Shift+J', 'Ctrl+Shift+C', 'Ctrl+Shift+K', 'Ctrl+Shift+E', 'Ctrl+Shift+M', 'Ctrl+Shift+Delete',
+    'Ctrl+Shift+B', 'Ctrl+Shift+O', 'Ctrl+Shift+P', 'Ctrl+Shift+R', 'Ctrl+Shift+V', 'Ctrl+Shift+Z', 'Ctrl+Shift+Enter',
+    'Ctrl+Tab', 'Ctrl+Shift+Tab', 'Ctrl+F4', 'Alt+F4', 'Ctrl+Space', 'Ctrl+Enter',
+    'Alt+D', 'Alt+E', 'Alt+F', 'Alt+Home', 'Alt+ArrowLeft', 'Alt+ArrowRight', 'Ctrl+Plus', 'Ctrl+-', 'Ctrl+0', 'Ctrl+=',
+    'Ctrl+1', 'Ctrl+2', 'Ctrl+3', 'Ctrl+4', 'Ctrl+5', 'Ctrl+6', 'Ctrl+7', 'Ctrl+8', 'Ctrl+9',
+    'Ctrl+ArrowLeft', 'Ctrl+ArrowRight', 'Ctrl+ArrowUp', 'Ctrl+ArrowDown', 'Ctrl+Home', 'Ctrl+End', 'Ctrl+PageUp', 'Ctrl+PageDown',
+    'Ctrl+Insert', 'Ctrl+Delete', 'Ctrl+Backspace', 'Shift+Insert',
+    'Ctrl+Shift+ArrowLeft', 'Ctrl+Shift+ArrowRight', 'Ctrl+Shift+ArrowUp', 'Ctrl+Shift+ArrowDown', 'Ctrl+Shift+Home', 'Ctrl+Shift+End',
+    'Ctrl+Shift+PageUp', 'Ctrl+Shift+PageDown']);
+
+  /** Tuşun adı (platform-userscript.md §2.8): harf ve rakam e.code ile; noktalama e.key ile; AltGr yok sayılır. */
+  function tusAdi(e) {
+    if (e.getModifierState && e.getModifierState('AltGraph')) return null;   // AltGr yazı içindir
+    const k = e.key || '';
+    if (k === ' ' || k === 'Unidentified' || k === 'Process' || k === 'Dead') return null;
+    if (k === '+') return 'Plus';
+    if (k.length === 1 && !/[A-Za-z0-9\s]/.test(k) && !/^\p{L}$/u.test(k)) return k.toUpperCase();   // "," = Türkçe Q'da Backslash tuşu
+    if (/^Key[A-Z]$/.test(e.code || '')) return e.code.slice(3);
+    if (/^Digit\d$/.test(e.code || '')) return e.code.slice(5);
+    if (k.length === 1) return k.toLocaleUpperCase('en-US');
+    if (['Control', 'Alt', 'Shift', 'Meta', 'AltGraph', 'OS'].includes(k)) return null;
+    return k;
+  }
+
+  function tusKombo(e) {
+    const k = tusAdi(e);
+    if (!k) return null;
+    const p = [];
+    if (e.ctrlKey) p.push('Ctrl');
+    if (e.altKey) p.push('Alt');
+    if (e.shiftKey) p.push('Shift');
+    if (e.metaKey) p.push('Meta');
+    p.push(k);
+    return p.join('+');
+  }
+
+  /** tusKombo'nun üretebileceği biçim mi (dosyadan gelen değer için). */
+  function komboKanonikMi(v) {
+    if (typeof v !== 'string' || v.length > 40) return false;
+    const m = /^(Ctrl\+)?(Alt\+)?(Shift\+)?(Meta\+)?([^+]+|Plus)$/.exec(v);
+    if (!m || !(m[1] || m[2] || m[4])) return false;
+    const tus = m[5];
+    if ([...tus].length === 1) return tus === tus.toLocaleUpperCase('en-US');
+    return /^[A-Z][A-Za-z0-9]{1,15}$/.test(tus);
+  }
+
+  /** null = geçerli; değilse neden anahtarı. */
+  function tusGecerliMi(kombo) {
+    const p = kombo.split('+');
+    if (!p.some((x) => x === 'Ctrl' || x === 'Alt' || x === 'Meta')) return 'neden_degistirici';
+    if (p.includes('Ctrl') && p.includes('Alt')) return 'neden_altgr';
+    const esdeger = p.includes('Meta') ? ['Ctrl', ...p.filter((x) => x !== 'Meta' && x !== 'Ctrl')].join('+') : kombo;
+    if (TARAYICI_YASAK.has(kombo) || TARAYICI_YASAK.has(esdeger)) return 'neden_tarayici';
+    return null;
+  }
+
+  function ayarDogrula(ham) {
+    const a = Object.assign({}, VARSAYILAN);
+    if (!ham || typeof ham !== 'object') return a;
+    for (const k of Object.keys(VARSAYILAN)) {
+      if (!(k in ham)) continue;
+      const v = ham[k];
+      if (typeof VARSAYILAN[k] === 'boolean') { if (typeof v === 'boolean') a[k] = v; continue; }
+      if (SECENEK[k]) { if (SECENEK[k].includes(v)) a[k] = v; continue; }
+      if (k === 'kisayolAyarlar') { if (komboKanonikMi(v) && tusGecerliMi(v) === null) a[k] = v; continue; }
+      if (typeof v === 'string') a[k] = v.slice(0, 40);
+    }
+    return a;
+  }
+
+  function ayarlariOku() {
+    const ham = depoOku('ayarlar', null);
+    try { return ayarDogrula(typeof ham === 'string' ? JSON.parse(ham) : ham); } catch (_e) { return ayarDogrula(null); }
+  }
+  function ayarlariYaz() { depoYaz('ayarlar', JSON.stringify(ayar)); }
+
+  let ayar = ayarlariOku();
+
+  // ---------------------------------------------------------------- dil yardımcıları
+  function tarayiciDili() {
+    const d = ((navigator.languages && navigator.languages[0]) || navigator.language || 'tr').toLowerCase();
+    return d.startsWith('tr') ? 'tr' : 'en';
+  }
+  function dilKodu() {
+    if (ayar.dil === 'tarayici') return tarayiciDili();
+    return ayar.dil === 'en' ? 'en' : 'tr';
+  }
+  function _(k, deger) {
+    const s = (METIN[dilKodu()] || METIN.tr)[k] ?? METIN.tr[k] ?? k;
+    return deger ? s.replace(/\{(\w+)\}/g, (m, a) => (a in deger ? String(deger[a]) : m)) : s;
+  }
+  const _n = (s) => s;                                                     // yalnız işaret: çeviri çizimde yapılır
+  const _f = (s, ...d) => _(s).replace(/\{(\d+)\}/g, (m, i) => (i in d ? String(d[i]) : m));
+  const DIL = { aktif: dilKodu };
+  /** Arama için harf katlama: Türkçe I/ı ile İngilizce I/i aynı sayılır. */
+  function katla(s) { return String(s).toLocaleLowerCase('tr-TR').replace(/ı/g, 'i'); }
+  const fold = katla;
+
+  // ---------------------------------------------------------------- link ve yazısı
+  const DUZENLENEBILIR = 'input, textarea, select, [contenteditable=""], [contenteditable="true"], [contenteditable="plaintext-only"]';
+
+  function duzenlenebilirMi(o) {
+    if (!o || o.nodeType !== 1) return false;
+    return o.isContentEditable || !!o.closest(DUZENLENEBILIR);
+  }
+
+  /** Tıklanan noktadaki link (gölge DOM içinde de). */
+  function linkBul(e) {
+    const yol = typeof e.composedPath === 'function' ? e.composedPath() : [e.target];
+    for (const d of yol) {
+      if (!d || d.nodeType !== 1) continue;
+      if (d === ev) return null;                                   // kendi arayüzümüz
+      if (duzenlenebilirMi(d)) return null;
+      if (d.matches && d.matches('a[href], area[href]')) return d;
+    }
+    return null;
+  }
+
+  /** Linkin görünen yazısı; yazı yoksa adresi (tasarım: Yazısız B). */
+  function linkMetni(a) {
+    let metin = '';
+    if (a.tagName === 'AREA') metin = a.getAttribute('alt') || '';
+    else metin = typeof a.innerText === 'string' ? a.innerText : (a.textContent || '');
+    metin = metin.replace(/\s+/g, ' ').trim();
+    if (metin) return metin;
+    let adres = '';
+    try { adres = a.href && typeof a.href === 'object' ? a.href.baseVal : a.href; } catch (_e) { adres = ''; }
+    return String(adres || a.getAttribute('href') || '').trim();
+  }
+
+  function seciliYaziVar() {
+    try {
+      const s = window.getSelection();
+      return !!(s && !s.isCollapsed && s.toString().trim());
+    } catch (_e) { return false; }
+  }
+
+  function degistiriciTutuyor(e) {
+    if (e.shiftKey || e.metaKey) return false;
+    if (ayar.tus === 'alt') return e.altKey && !e.ctrlKey;
+    return e.ctrlKey && !e.altKey;
+  }
+
+  // ---------------------------------------------------------------- panoya yazma
+  function gmPano() {
+    try { if (typeof GM_setClipboard === 'function') return (t) => GM_setClipboard(t, 'text'); } catch (_e) { /* yok */ }
+    try { if (typeof GM !== 'undefined' && GM && typeof GM.setClipboard === 'function') return (t) => GM.setClipboard(t, 'text'); } catch (_e) { /* yok */ }
+    return null;
+  }
+
+  function execKopyala(metin) {
+    const kutu = document.createElement('textarea');
+    kutu.value = metin;
+    kutu.setAttribute('readonly', '');
+    kutu.setAttribute('aria-hidden', 'true');
+    kutu.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0';
+    (document.body || document.documentElement).appendChild(kutu);
+    const odak = document.activeElement;
+    kutu.select();
+    let tamam = false;
+    try { tamam = document.execCommand('copy'); } catch (_e) { tamam = false; }
+    kutu.remove();
+    if (odak && typeof odak.focus === 'function') { try { odak.focus({ preventScroll: true }); } catch (_e) { /* yok */ } }
+    return tamam;
+  }
+
+  /** Panoya yazar; başarılıysa true. */
+  async function panoyaYaz(metin) {
+    const gm = gmPano();
+    if (gm) { try { await gm(metin); return true; } catch (_e) { /* sıradakini dene */ } }
+    if (navigator.clipboard && window.isSecureContext) {
+      try { await navigator.clipboard.writeText(metin); return true; } catch (_e) { /* sıradakini dene */ }
+    }
+    return execKopyala(metin);
+  }
+
+  // ---------------------------------------------------------------- Ctrl + sağ tık akışı
+  let sonKopya = { zaman: 0, metin: '' };
+
+  function sagTik(e) {
+    if (!e.isTrusted || (e.button !== undefined && e.button !== 2 && e.button !== 0)) return;
+    if (!degistiriciTutuyor(e)) return;
+    if (seciliYaziVar()) return;                    // seçim varken normal menü açılsın
+    const a = linkBul(e);
+    if (!a) return;
+    const metin = linkMetni(a);
+    if (!metin) return;
+    // Bu tıklamada menü açılmasın; sayfanın kendi sağ tık dinleyicileri de çalışmasın
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const x = e.clientX, y = e.clientY;
+    sonKopya = { zaman: Date.now(), metin };
+    panoyaYaz(metin).then((tamam) => {
+      if (!tamam) { balonGoster(x, y, _('kopyaHata'), 'hata'); return; }
+      if (!ayar.balon) return;
+      let yazi = _('kopyalandi');
+      if (ayar.onizle) {
+        const harf = Array.from(metin);
+        yazi += ' · ' + (harf.length > ONIZLEME_HARF ? harf.slice(0, ONIZLEME_HARF).join('').trimEnd() + '…' : metin);
+      }
+      balonGoster(x, y, yazi, 'basari');
+    }).catch(() => balonGoster(x, y, _('kopyaHata'), 'hata'));
+  }
+
+  window.addEventListener('contextmenu', sagTik, true);
+  // Bazı siteler sağ tıkı mousedown'da yakalar (kendi menüsünü açar): o anda onları durdur.
+  window.addEventListener('mousedown', (e) => {
+    if (!e.isTrusted || e.button !== 2 || !degistiriciTutuyor(e) || seciliYaziVar()) return;
+    if (linkBul(e)) e.stopImmediatePropagation();
+  }, true);
+
+  // ---------------------------------------------------------------- sayfa teması
+  function parlaklik(renk) {
+    const m = /rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,\s/]+([\d.]+))?/.exec(renk || '');
+    if (!m) return null;
+    if (m[4] !== undefined && Number(m[4]) === 0) return null;   // saydam
+    const kanal = (v) => { v = Number(v) / 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+    return 0.2126 * kanal(m[1]) + 0.7152 * kanal(m[2]) + 0.0722 * kanal(m[3]);
+  }
+
+  function koyuMu() {
+    if (ayar.tema === 'acik') return false;
+    if (ayar.tema === 'koyu') return true;
+    for (const o of [document.body, document.documentElement]) {
+      if (!o) continue;
+      const l = parlaklik(getComputedStyle(o).backgroundColor);
+      if (l !== null) return l < 0.18;
+    }
+    return !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  }
+
+  function temaUygula() { if (ev) ev.setAttribute('data-theme', koyuMu() ? 'dark' : 'light'); }
+
+  // ---------------------------------------------------------------- ikonlar (Lucide 1.55.0, ISC)
+  const SVG = 'http://www.w3.org/2000/svg';
+  const IKON = {
+    tamam: [['path', { d: 'M20 6 9 17l-5-5' }]],
+    hata: [['circle', { cx: 12, cy: 12, r: 10 }], ['line', { x1: 12, x2: 12, y1: 8, y2: 12 }], ['line', { x1: 12, x2: 12.01, y1: 16, y2: 16 }]],
+    kapat: [['path', { d: 'M18 6 6 18' }], ['path', { d: 'm6 6 12 12' }]],
+    kopya: [['rect', { width: 14, height: 14, x: 8, y: 8, rx: 2, ry: 2 }], ['path', { d: 'M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2' }]],
+    bilgi: [['circle', { cx: 12, cy: 12, r: 10 }], ['path', { d: 'M12 16v-4' }], ['path', { d: 'M12 8h.01' }]],
+    git: [['path', { d: 'm9 18 6-6-6-6' }]],
+  };
+
+  function ikonEl(ad, boy = 16) {
+    const s = document.createElementNS(SVG, 'svg');
+    const oz = { viewBox: '0 0 24 24', width: boy, height: boy, fill: 'none', stroke: 'currentColor',
+      'stroke-width': 2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'aria-hidden': 'true', focusable: 'false' };
+    for (const [k, v] of Object.entries(oz)) s.setAttribute(k, String(v));
+    for (const [etiket, o] of IKON[ad] || []) {
+      const p = document.createElementNS(SVG, etiket);
+      for (const [k, v] of Object.entries(o)) p.setAttribute(k, String(v));
+      s.appendChild(p);
+    }
+    return s;
+  }
+
+  // Trusted Types (YouTube, Google…): Değişiklikler parçası HTML dizesiyle ikon yazar; dize bu ilkeden geçer.
+  let ttIlke = null;
+  try {
+    if (window.trustedTypes && typeof window.trustedTypes.createPolicy === 'function') {
+      ttIlke = window.trustedTypes.createPolicy('aalabs-clt', { createHTML: (s) => s });
+    }
+  } catch (_e) { ttIlke = null; }   // sitenin trusted-types listesi adı kabul etmedi
+  const guvenliHtml = (s) => (ttIlke ? ttIlke.createHTML(s) : s);
+
+  /** Değişiklikler parçası için: ikon HTML dizesi (yalnız sabit SVG, dış veri yok). */
+  function ikon(ad) {
+    const kap = document.createElement('div');
+    kap.appendChild(ikonEl(ad, 16));
+    return guvenliHtml(kap.innerHTML);
+  }
+
+  /** Öğe kurucu: innerHTML yok (Trusted Types). */
+  function el(etiket, oz, ...cocuk) {
+    const e = document.createElement(etiket);
+    if (oz) {
+      for (const [k, v] of Object.entries(oz)) {
+        if (v === undefined || v === null || v === false) continue;
+        if (k === 'class') e.className = v;
+        else if (k === 'text') e.textContent = v;
+        else if (k.startsWith('on') && typeof v === 'function') e.addEventListener(k.slice(2), v);
+        else e.setAttribute(k, v === true ? '' : String(v));
+      }
+    }
+    for (const c of cocuk.flat(Infinity)) {
+      if (c === null || c === undefined || c === false) continue;
+      e.append(c instanceof Node ? c : document.createTextNode(String(c)));
+    }
+    return e;
+  }
+
+  /** Değişiklikler parçası için düğme. kisayol {tr,en}: menü harfi (yalnız ipucu). */
+  function dugme(yazi, kisayol, rol, ikonAd) {
+    const b = el('button', { class: 'btn' + (rol ? ' ' + rol : ''), type: 'button' });
+    if (ikonAd) b.append(ikonEl(ikonAd === 'kopya' ? 'kopya' : ikonAd));
+    b.append(yazi);
+    return b;
+  }
+
+  // ---------------------------------------------------------------- arayüz (Shadow DOM)
+  const ARAYUZ_CSS = `
+:host { all: initial; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+.yazi { font: 400 13px/1.45 var(--yazi); color: var(--metin); }
+button, input { font: inherit; color: inherit; }
+button:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 1px; }
+
+/* Balon: imlecin yanında (tasarım: Bildirim A) */
+.balon { position: fixed; z-index: 2147483647; display: flex; align-items: center; gap: 6px; max-width: min(320px, calc(100vw - 16px));
+  padding: 4px 10px; border-radius: var(--kose-m); font: 400 13px/1.4 var(--yazi); pointer-events: none;
+  opacity: 0; transition: opacity 120ms linear; overflow-wrap: anywhere; }
+.balon.acik { opacity: 1; }
+.balon.basari { background: var(--basari-bg); color: var(--metin); border: 1px solid var(--basari); }
+.balon.basari svg { color: var(--basari); }
+.balon.hata { background: var(--hata-bg); color: var(--hata); border: 1px solid var(--hata); }
+.balon svg { flex: none; }
+
+/* Alt orta bildirim (Ayarlar işleri: yedek, kısayol) */
+.yer { position: fixed; left: 0; right: 0; bottom: 32px; display: flex; justify-content: center; pointer-events: none; z-index: 2147483647; }
+.kutu { display: flex; align-items: center; gap: var(--bosluk-2); max-width: min(480px, calc(100vw - 32px));
+  min-height: var(--kontrol); padding: 0 var(--bosluk-3); border-radius: var(--kose-m); font: 400 13px/1.4 var(--yazi);
+  opacity: 0; transition: opacity 120ms linear; }
+.kutu.acik { opacity: 1; }
+.kutu.basari { background: var(--basari-bg); color: var(--basari); border-left: 3px solid var(--basari); }
+.kutu.hata { background: var(--hata-bg); color: var(--hata); border-left: 3px solid var(--hata); }
+
+/* Ayarlar paneli (ortada pencere) */
+.perde { position: fixed; inset: 0; background: color-mix(in srgb, var(--metin) 35%, transparent); z-index: 2147483646; }
+:host([data-theme="dark"]) .perde { background: color-mix(in srgb, var(--zemin) 60%, transparent); }
+.panel { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2147483647;
+  width: min(760px, calc(100vw - 32px)); height: min(520px, calc(100vh - 32px));
+  display: grid; grid-template-rows: 44px minmax(0, 1fr); background: var(--yuzey); color: var(--metin);
+  border: 1px solid var(--ayirici); border-radius: var(--kose-l); font: 400 13px/1.45 var(--yazi); }
+.ust { display: flex; align-items: center; gap: 10px; padding: 0 6px 0 14px; border-bottom: 1px solid var(--ayirici); min-width: 0; }
+.rozet { width: 22px; height: 22px; border-radius: var(--kose-m); background: var(--ana); color: var(--ana-uzeri);
+  font: 600 8px/22px var(--yazi); text-align: center; letter-spacing: .02em; flex: none; }
+.ust h2 { flex: 1; min-width: 0; margin: 0; font: 600 14px/1.3 var(--yazi); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ikonbtn { width: 32px; height: 32px; border: 1px solid transparent; border-radius: var(--kose-s); background: transparent;
+  cursor: pointer; display: inline-grid; place-items: center; }
+.ikonbtn:hover { background: var(--ana-hover); }
+.govde { display: grid; grid-template-columns: 196px minmax(0, 1fr); min-height: 0; }
+.nav { border-right: 1px solid var(--ayirici); padding: 8px; display: flex; flex-direction: column; gap: 2px; overflow: auto; min-height: 0; }
+.nav input { height: 28px; padding: 0 8px; border: 1px solid var(--kenar); border-radius: var(--kose-s);
+  background: var(--yuzey); margin-bottom: 6px; width: 100%; }
+.nav input::placeholder { color: var(--metin-ikincil); }
+.grup { font: 600 11px/1.3 var(--yazi); letter-spacing: .06em; color: var(--metin-ikincil); padding: 8px 8px 2px; }
+.nav .oge { text-align: left; min-height: 28px; padding: 0 8px; border: 0; border-radius: var(--kose-s); background: transparent;
+  cursor: pointer; display: flex; align-items: center; gap: 6px; min-width: 0; }
+.nav .oge span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.nav .oge[aria-current="true"] { background: var(--ana-acik); font-weight: 600; }
+.nav .oge:hover { background: var(--ana-hover); }
+.nav .yok { color: var(--metin-ikincil); padding: 6px 8px; }
+.icerik { padding: 14px 18px; overflow: auto; display: flex; flex-direction: column; gap: 12px; min-width: 0; min-height: 0; }
+.icerik.chg { padding: 0; gap: 0; }
+.icerik h3 { margin: 0; font: 600 15px/1.3 var(--yazi); }
+.icerik.chg > h3 { padding: 14px 18px 0; }
+.icerik h4 { margin: 4px 0 0; font: 600 13px/1.3 var(--yazi); }
+.alt { color: var(--metin-ikincil); margin: -6px 0 0; }
+.ayar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--ayirici); }
+.ayar small { grid-column: 1 / -1; color: var(--metin-ikincil); font-size: 12px; }
+.anahtar { width: 36px; height: 20px; border-radius: 10px; border: 1px solid var(--kenar); background: var(--yuzey); position: relative; cursor: pointer; padding: 0; }
+.anahtar::after { content: ""; position: absolute; top: 3px; left: 3px; width: 12px; height: 12px; border-radius: 50%; background: var(--kenar); transition: left 120ms linear; }
+.anahtar[aria-checked="true"] { background: var(--ana); border-color: var(--ana); }
+.anahtar[aria-checked="true"]::after { left: 19px; background: var(--ana-uzeri); }
+.seg { display: inline-flex; flex-wrap: wrap; justify-content: flex-end; }
+.seg button { height: 28px; padding: 0 10px; border: 1px solid var(--kenar); background: var(--yuzey); margin-left: -1px; cursor: pointer; white-space: nowrap; }
+.seg button:first-child { margin-left: 0; border-radius: var(--kose-s) 0 0 var(--kose-s); }
+.seg button:last-child { border-radius: 0 var(--kose-s) var(--kose-s) 0; }
+.seg button[aria-checked="true"] { background: var(--ana); border-color: var(--ana); color: var(--ana-uzeri); position: relative; z-index: 1; }
+.seg button:hover:not([aria-checked="true"]) { background: var(--ana-hover); }
+.tus { min-width: 104px; height: 28px; padding: 0 8px; border: 1px solid var(--kenar); border-radius: var(--kose-s); background: var(--zemin);
+  font-weight: 600; cursor: pointer; }
+.tus[aria-disabled="true"] { cursor: default; opacity: .7; display: inline-flex; align-items: center; justify-content: center; }
+.tus.kayit { border-color: var(--vurgu); color: var(--vurgu); }
+.uyari-satir { color: var(--hata); font-size: 12px; }
+.btn { min-height: 32px; padding: 0 12px; border: 1px solid var(--kenar); border-radius: var(--kose-s); background: var(--yuzey);
+  cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.btn:hover { background: var(--ana-hover); }
+.btn.ana { background: var(--ana); border-color: var(--ana); color: var(--ana-uzeri); }
+.btn.ana:hover { filter: brightness(1.08); background: var(--ana); }
+.girdi { height: 28px; padding: 0 8px; border: 1px solid var(--kenar); border-radius: var(--kose-s); background: var(--yuzey); min-width: 0; }
+.bos { color: var(--metin-ikincil); }
+.satir-btn { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; margin-top: auto; padding-top: 8px; }
+.satir-btn.sol { justify-content: flex-start; margin-top: 0; padding-top: 0; }
+.gizli { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 560px) { .govde { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .nav { border-right: 0; border-bottom: 1px solid var(--ayirici); flex-direction: row; flex-wrap: wrap; max-height: 40vh; }
+  .nav input { flex: 1 0 100%; } .grup { display: none; } }
+@media (prefers-reduced-motion: reduce) { .balon, .kutu, .anahtar::after { transition: none; } }
+`;
+
+  let ev = null;      // <aalabs-clt> barındırıcı
+  let kok = null;     // gölge kök
+  const bil = { balon: null, balonSayac: 0, yer: null, kutu: null, kutuSayac: 0, perde: null, panel: null, ara: null };
+
+  function kokKur() {
+    if (ev) { if (!ev.isConnected) (document.body || document.documentElement).appendChild(ev); return; }
+    ev = document.createElement('aalabs-clt');
+    ev.setAttribute('data-aalabs', ID);
+    kok = ev.attachShadow({ mode: TEST ? 'open' : 'closed' });
+    const css = TEMA_CSS + ARAYUZ_CSS + DEGISIKLIK.CSS;
+    let eklendi = false;
+    try { const s = new CSSStyleSheet(); s.replaceSync(css); kok.adoptedStyleSheets = [s]; eklendi = true; } catch (_e) { /* eski tarayıcı */ }
+    if (!eklendi) kok.appendChild(el('style', { text: css }));
+    // Gölge kökteki yazı alanında sitenin tek harfli kısayolları çalışmasın (platform-userscript.md §1.5)
+    for (const t of ['keydown', 'keypress', 'keyup']) {
+      kok.addEventListener(t, (e) => { if (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName)) e.stopPropagation(); });
+    }
+    bil.balon = el('div', { class: 'balon', role: 'status', 'aria-live': 'polite', hidden: true });
+    bil.yer = el('div', { class: 'yer' });
+    bil.kutu = el('div', { class: 'kutu', role: 'status', 'aria-live': 'polite' });
+    bil.yer.append(bil.kutu);
+    kok.append(bil.balon, bil.yer);
+    temaUygula();
+    (document.body || document.documentElement).appendChild(ev);
+  }
+
+  function balonGoster(x, y, yazi, tur) {
+    kokKur();
+    temaUygula();
+    const b = bil.balon;
+    clearTimeout(bil.balonSayac);
+    b.className = 'balon yazi ' + tur;
+    b.setAttribute('role', tur === 'hata' ? 'alert' : 'status');
+    b.replaceChildren(ikonEl(tur === 'hata' ? 'hata' : 'tamam', 14), el('span', {}, yazi));
+    b.hidden = false;
+    b.style.left = '0px';
+    b.style.top = '0px';
+    const r = b.getBoundingClientRect();
+    const sol = Math.max(8, Math.min(x + 14, window.innerWidth - r.width - 8));
+    const ust = y + 18 + r.height > window.innerHeight - 8 ? Math.max(8, y - r.height - 10) : y + 18;
+    b.style.left = sol + 'px';
+    b.style.top = ust + 'px';
+    requestAnimationFrame(() => b.classList.add('acik'));
+    bil.balonSayac = setTimeout(() => {
+      b.classList.remove('acik');
+      bil.balonSayac = setTimeout(() => { b.hidden = true; }, 150);
+    }, tur === 'hata' ? BALON_MS * 2 : BALON_MS);
+  }
+
+  /** Alt orta bildirim; açık panel varsa onun içinde (top layer kuralı). bildir(yazi, tur) — Değişiklikler parçasıyla aynı sıra. */
+  function bildir(yazi, tur) {
+    kokKur();
+    temaUygula();
+    clearTimeout(bil.kutuSayac);
+    if (panelAcik()) bil.panel.append(bil.yer); else kok.append(bil.yer);
+    bil.kutu.className = 'kutu ' + (tur || 'basari');
+    bil.kutu.setAttribute('role', tur === 'hata' ? 'alert' : 'status');
+    bil.kutu.replaceChildren(ikonEl(tur === 'hata' ? 'hata' : 'tamam'), el('span', {}, yazi));
+    requestAnimationFrame(() => bil.kutu.classList.add('acik'));
+    bil.kutuSayac = setTimeout(() => bil.kutu.classList.remove('acik'), tur === 'hata' ? 4000 : 2000);
+  }
+
+  // ---------------------------------------------------------------- Değişiklikler parçasının depo yardımcıları
+  function readPrefs() { const v = depoOku('degisiklik', null); return { ayar: v && typeof v === 'object' ? v : {} }; }
+  function ayarOku(k, varsayilan) { const a = readPrefs().ayar; return k in a ? a[k] : varsayilan; }
+  function ayarYaz(k, v) { const a = Object.assign({}, readPrefs().ayar); a[k] = v; depoYaz('degisiklik', a); }
+
+  // ==== Değişiklikler parçası (app-lab assets/userscript/degisiklik.js 2611-10a). Uyarlama: innerHTML'e giden dizeler
+  // guvenliHtml'den geçer (Trusted Types sitelerinde parça yoksa hata veriyordu). ====
+  /* AALabs userscript parçası — Değişiklikler (CHG) · app-lab 2611-10a (kaynak: CLS 2611-09g)
+   * Görünüş: maket CHG_son (kurallar.md §2.7). Biçim: teslim.md §2b. Ayrıntı: platform-userscript.md "Değişiklikler".
+   *
+   * Kullanım: bu bloğu betiğe kopyala; derlemede veriyi göm:
+   *   python scripts/degisiklik-json.py DEGISIKLIKLER.md --gom <betik.user.js>
+   * Betikte bulunması gereken yardımcılar:
+   *   SURUM · DEPO_VARDI (betik başlarken depo dolu muydu; açılışta 2,5 sn sonra okunmaz)
+   *   _ · _n · _f · DIL.aktif() · fold · ikon(ad) · dugme(yazi, kisayol, rol, ikon) · panoyaYaz · bildir
+   *   ayarOku(k, varsayilan) · ayarYaz(k, v) · readPrefs()  (ayar anahtarı readPrefs().ayar altında)
+   * Ayarlar bölümünde:  DEGISIKLIK.ciz({ sayfa, baslik, kapat, bilgi: DEGISIKLIK.bilgiAl(), git: hedef => … })
+   * Açılışta:           DEGISIKLIK.ilkKayit();
+   *                     setTimeout(() => DEGISIKLIK.acilista(ac, yaziyor), 2500);
+   *   ac(): bölümü açar, açtıysa true · yaziyor(): kullanıcı alana yazıyorsa true
+   * Tek pencere kuralı olan betikte ayrı pencere açılmaz: Ayarlar › Ortak › Değişiklikler.
+   */
+  const DEGISIKLIK = (function () {
+    const VERI = [
+    // @@CHG-BASLA
+    {"s": "2611-16a", "t": "2026-11-16", "m": [{"k": "yeni", "tr": "**Link yazısını kopyala** · Fare linkin üstündeyken `Ctrl` + sağ tık linkin görünen yazısını panoya yazar; o tıklamada sağ tık menüsü açılmaz.", "n": "Firefox'taki Copy Link Text eklentisinin yerine.", "en": "**Copy link text** · With the mouse over a link, `Ctrl` + right-click copies the visible link text; no context menu opens on that click.", "w": "Replaces the Copy Link Text add-on in Firefox."}, {"k": "yeni", "tr": "İmlecin yanında 1,5 sn **Kopyalandı** balonu; metnin ilk 25 harfi de görünür.", "en": "A **Copied** bubble by the cursor for 1.5 s, with the first 25 letters of the text."}, {"k": "yeni", "tr": "Yazısız linkte (yalnız resim) linkin adresi kopyalanır.", "en": "On a link without text (image only) the link address is copied."}, {"k": "yeni", "tr": "[Ayarlar › Kopyalama](ayarlar:kopya) bölümünde kısayol `Alt` + sağ tık yapılabilir, balon kapatılabilir.", "en": "In [Settings › Copying](ayarlar:kopya) the shortcut can be `Alt` + right-click and the bubble can be turned off."}]},
+    // @@CHG-BITIR
+    ];
+    const TURLER = [['yeni', _n('Yeni')], ['duzeldi', _n('Düzeldi')], ['degisti', _n('Değişti')], ['kaldirildi', _n('Kaldırıldı')]];
+    const TUR_AD = Object.fromEntries(TURLER);
+    let bilgiBekliyor = false;
+
+    const CSS = `
+    .chg-bilgi{display:flex;align-items:center;gap:8px;padding:8px 16px;background:var(--ana-acik);color:var(--metin)}
+    .chg-bilgi svg{color:var(--vurgu);flex:none}
+    .chg-arac{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 16px 0}
+    .chg-ara{max-width:320px;height:30px}
+    .chg-icerik{display:grid;gap:16px;padding:12px 16px}
+    .chg-surum-bas{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin:0 0 6px;font:600 15px/1.3 var(--yazi)}
+    .chg-kod{font-variant-numeric:tabular-nums}
+    .chg-tarih{font-size:12px;font-weight:400;color:var(--metin-ikincil)}
+    .chg-rozet{display:inline-flex;align-items:center;min-height:20px;padding:0 6px;font-size:12px;font-weight:400;
+      border-radius:var(--kose-m);background:var(--ana);color:var(--ana-uzeri)}
+    .chg-atlanan{display:inline-flex;align-items:center;min-height:20px;padding:0 6px;font-size:12px;font-weight:400;
+      color:var(--uyari);background:var(--uyari-bg);border:1px solid var(--uyari);border-radius:var(--kose-m)}
+    .chg-liste{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+    .aalabs-degisiklik{display:flex;align-items:flex-start;gap:8px;min-width:0}
+    .aalabs-degisiklik[data-tur="yeni"]{--tur:var(--basari);--tur-bg:var(--basari-bg)}
+    .aalabs-degisiklik[data-tur="duzeldi"]{--tur:var(--vurgu);--tur-bg:var(--ana-acik)}
+    .aalabs-degisiklik[data-tur="degisti"]{--tur:var(--uyari);--tur-bg:var(--uyari-bg)}
+    .aalabs-degisiklik[data-tur="kaldirildi"]{--tur:var(--hata);--tur-bg:var(--hata-bg)}
+    .chg-isaret{flex:none;min-width:78px}
+    .chg-rz{display:inline-flex;justify-content:center;min-width:72px;min-height:20px;padding:0 6px;box-sizing:border-box;
+      font-size:12px;color:var(--tur);background:var(--tur-bg);border:1px solid var(--tur);border-radius:var(--kose-m)}
+    .chg-metin{min-width:0;overflow-wrap:anywhere}
+    .chg-metin b{font-weight:600}
+    .chg-metin s{color:var(--metin-ikincil)}
+    .chg-metin .yeni-deger{font-weight:600;color:var(--basari)}
+    .chg-metin kbd{padding:0 4px;font:inherit;font-size:12px;border:1px solid var(--kenar);border-radius:var(--kose-s)}
+    .chg-git{all:unset;cursor:pointer;color:var(--vurgu);display:inline-flex;align-items:center;gap:2px}
+    .chg-git svg{width:14px;height:14px}
+    .chg-git:focus-visible{outline:2px solid var(--vurgu);outline-offset:1px}
+    .aalabs-neden{display:block;margin-top:2px;font-size:12px;font-style:italic;color:var(--metin-ikincil)}
+    .chg-alt{position:sticky;bottom:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 16px;border-top:1px solid var(--ayirici);background:var(--yuzey)}
+    .chg-alt-not{margin-right:auto;font-size:12px;color:var(--metin-ikincil)}
+    .chg-kutu{display:flex;align-items:center;gap:6px;min-height:28px;font-size:12px;cursor:pointer}
+    .chg-kutu input{accent-color:var(--ana);margin:0}`;
+
+    /* Satır içi biçim: **ad** · ~~eski~~ · ==yeni== · `tuş` · [yol](ayarlar:bölüm). innerHTML yok. */
+    const SATIR_ICI = /\*\*(.+?)\*\*|~~(.+?)~~|==(.+?)==|`([^`]+)`|\[([^\]]+)\]\(([^)\s]+)\)/g;
+    function satirIci(metin, git) {
+      const f = document.createDocumentFragment();
+      let son = 0, m;
+      SATIR_ICI.lastIndex = 0;
+      while ((m = SATIR_ICI.exec(metin))) {
+        if (m.index > son) f.appendChild(document.createTextNode(metin.slice(son, m.index)));
+        let el;
+        if (m[1] !== undefined) { el = document.createElement('b'); el.textContent = m[1]; }
+        else if (m[2] !== undefined) { el = document.createElement('s'); el.textContent = m[2]; }
+        else if (m[3] !== undefined) { el = document.createElement('span'); el.className = 'yeni-deger'; el.textContent = m[3]; }
+        else if (m[4] !== undefined) { el = document.createElement('kbd'); el.textContent = m[4]; }
+        else {
+          const hedef = (m[6].match(/^ayarlar:(.+)$/) || [])[1];
+          el = document.createElement(hedef && git ? 'button' : 'span');
+          el.textContent = m[5];
+          if (hedef && git) {
+            el.type = 'button';
+            el.className = 'chg-git';
+            el.title = _('Oraya git');
+            el.insertAdjacentHTML('beforeend', ikon('git'));
+            el.addEventListener('click', () => git(hedef));
+          }
+        }
+        f.appendChild(el);
+        son = SATIR_ICI.lastIndex;
+      }
+      if (son < metin.length) f.appendChild(document.createTextNode(metin.slice(son)));
+      return f;
+    }
+    const duzMetin = s => String(s || '').replace(SATIR_ICI, (x, a, b, c, d, e) => a || b || c || d || e || '');
+    const maddeMetni = x => (DIL.aktif() === 'en' && x.en ? x.en : x.tr);
+    const nedenMetni = x => (DIL.aktif() === 'en' && x.w ? x.w : x.n);
+
+    function tarihYaz(t) {
+      const m = String(t || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      return m ? m[3] + '.' + m[2] + '.' + m[1] : String(t || '');
+    }
+
+    /* Son görülen sürümle bu sürüm arasında kalanlar "Atladığın sürüm" olur. Karşılaştırma
+       sürüm anahtarıyla: önceki sürüm listede olmasa da (maddesiz sürüm) doğru çalışır.
+       YYMM-DDx her eski X.Y.Z'den yeni sayılır. */
+    const anahtar = v => (/^\d{4}-\d{2}[a-z]*$/.test(v) ? '1' + v.slice(0, 7) + String(v.length).padStart(2, '0') + v.slice(7) : '0' + v);
+    function atlananlar() {
+      const onceki = ayarOku('degisiklikOnceki', null);
+      if (!onceki) return new Set();
+      const ust = anahtar(SURUM), alt = anahtar(onceki);
+      return new Set(VERI.filter(v => { const k = anahtar(v.s); return k < ust && k > alt; }).map(v => v.s));
+    }
+    // Süzgeç ve arama pencere açık kaldıkça korunur (dil değişimi ya da yenileme bölümü baştan çizer).
+    const durum = { tur: 'hepsi', sorgu: '' };
+
+    /* Ayarlar sayfasına çizer. d: { sayfa, baslik, git, kapat, bilgi } */
+    function ciz(d) {
+      const { sayfa } = d;
+      let { tur, sorgu } = durum;
+      d.baslik(_('Değişiklikler'));
+      if (d.bilgi) {
+        const b = document.createElement('div');
+        b.className = 'chg-bilgi';
+        b.setAttribute('role', 'status');
+        b.innerHTML = ikon('bilgi');
+        const y = document.createElement('span');
+        y.textContent = _('Yeni sürüm kuruldu. Bu pencere her yeni sürümde bir kez açılır.');
+        b.appendChild(y);
+        sayfa.appendChild(b);
+      }
+
+      const arac = document.createElement('div');
+      arac.className = 'chg-arac';
+      const seg = document.createElement('div');
+      seg.className = 'seg';
+      seg.setAttribute('role', 'radiogroup');
+      seg.setAttribute('aria-label', _('Süzgeç'));
+      const secenek = [['hepsi', _n('Tümü')], ...TURLER];
+      const segDugme = secenek.map(([v, et], i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('role', 'radio');
+        b.dataset.odak = 'chg-tur:' + v;
+        b.textContent = _(et);
+        b.addEventListener('click', () => { tur = durum.tur = v; isaretle(); listele(); });
+        b.addEventListener('keydown', e => {
+          const yon = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+          if (!yon) return;
+          e.preventDefault();
+          const j = (i + yon + secenek.length) % secenek.length;
+          tur = durum.tur = secenek[j][0]; isaretle(); listele(); segDugme[j].focus();
+        });
+        seg.appendChild(b);
+        return b;
+      });
+      function isaretle() {
+        segDugme.forEach((b, i) => {
+          const sec = secenek[i][0] === tur;
+          b.setAttribute('aria-checked', sec ? 'true' : 'false');
+          b.tabIndex = sec ? 0 : -1;
+        });
+      }
+      const ara = document.createElement('input');
+      ara.type = 'search';
+      ara.className = 'girdi chg-ara';
+      ara.dataset.odak = 'chg-ara';
+      ara.placeholder = _('Değişikliklerde ara');
+      ara.setAttribute('aria-label', _('Değişikliklerde ara'));
+      ara.value = sorgu;
+      ara.addEventListener('input', e => { if (e.isComposing) return; sorgu = durum.sorgu = ara.value.trim(); listele(); });
+      ara.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && ara.value) { e.preventDefault(); e.stopPropagation(); ara.value = ''; sorgu = durum.sorgu = ''; listele(); }
+      });
+      arac.append(seg, ara);
+      sayfa.appendChild(arac);
+
+      const icerik = document.createElement('div');
+      icerik.className = 'chg-icerik';
+      sayfa.appendChild(icerik);
+
+      const alt = document.createElement('div');
+      alt.className = 'chg-alt';
+      const altNot = document.createElement('span');
+      altNot.className = 'chg-alt-not';
+      altNot.setAttribute('aria-live', 'polite');
+      const kutu = document.createElement('label');
+      kutu.className = 'chg-kutu';
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.dataset.odak = 'chg-oto';
+      cb.checked = ayarOku('degisiklikOtomatikKapali', false) === true;
+      cb.addEventListener('change', () => ayarYaz('degisiklikOtomatikKapali', cb.checked));
+      const kutuY = document.createElement('span');
+      kutuY.textContent = _('Yeni sürümde otomatik açma');
+      kutu.append(cb, kutuY);
+      const kop = dugme(_('Kopyala'), { tr: 'K', en: 'C' }, '', 'kopya');
+      kop.dataset.odak = 'chg-kopya';
+      const tamam = dugme(_('Tamam'), { tr: 'T', en: 'O' }, 'ana');
+      tamam.dataset.odak = 'chg-tamam';
+      tamam.addEventListener('click', d.kapat);
+      alt.append(altNot, kutu, kop, tamam);
+      sayfa.appendChild(alt);
+
+      let gorunen = [];
+      function sec() {
+        const t = fold(sorgu).split(/\s+/).filter(Boolean);
+        return VERI.map(v => ({ v, m: v.m.filter(x => (tur === 'hepsi' || x.k === tur) &&
+          (!t.length || t.every(w => fold(duzMetin(maddeMetni(x)) + ' ' + duzMetin(nedenMetni(x)) + ' ' + duzMetin(x.tr) + ' ' + v.s).includes(w)))) }))
+          .filter(x => x.m.length);
+      }
+      function listele() {
+        gorunen = sec();
+        const atl = atlananlar();
+        icerik.replaceChildren();   // CLT uyarlaması: Trusted Types sitelerinde düz dize atanamaz
+        if (!gorunen.length) {
+          const b = document.createElement('div');
+          b.className = 'bos';
+          b.textContent = VERI.length ? _('Bu süzgeçle değişiklik yok.') : _('Değişiklik kaydı yok.');
+          icerik.appendChild(b);
+        }
+        for (const { v, m } of gorunen) {
+          const sec2 = document.createElement('section');
+          const h = document.createElement('h3');
+          h.className = 'chg-surum-bas';
+          const kod = document.createElement('span');
+          kod.className = 'chg-kod';
+          kod.textContent = v.s;
+          h.appendChild(kod);
+          if (v.s === SURUM) { const r = document.createElement('span'); r.className = 'chg-rozet'; r.textContent = _('Kurulu'); h.appendChild(r); }
+          if (atl.has(v.s)) { const r = document.createElement('span'); r.className = 'chg-atlanan'; r.textContent = _('Atladığın sürüm'); h.appendChild(r); }
+          const tr = document.createElement('span');
+          tr.className = 'chg-tarih';
+          tr.textContent = tarihYaz(v.t);
+          h.appendChild(tr);
+          const ul = document.createElement('ul');
+          ul.className = 'chg-liste';
+          for (const x of m) {
+            const li = document.createElement('li');
+            li.className = 'aalabs-degisiklik';
+            if (x.k) li.dataset.tur = x.k;
+            const is = document.createElement('span');
+            is.className = 'chg-isaret';
+            if (x.k) { const rz = document.createElement('span'); rz.className = 'chg-rz'; rz.textContent = _(TUR_AD[x.k]); is.appendChild(rz); }
+            const mt = document.createElement('span');
+            mt.className = 'chg-metin';
+            mt.appendChild(satirIci(maddeMetni(x), d.git));
+            const nd = nedenMetni(x);
+            if (nd) { const n = document.createElement('span'); n.className = 'aalabs-neden'; n.textContent = (DIL.aktif() === 'en' ? 'Why: ' : 'Neden: ') + duzMetin(nd); mt.appendChild(n); }
+            li.append(is, mt);
+            ul.appendChild(li);
+          }
+          sec2.append(h, ul);
+          icerik.appendChild(sec2);
+        }
+        const n = gorunen.reduce((a, x) => a + x.m.length, 0);
+        altNot.textContent = _f('{0} sürüm · {1} değişiklik', gorunen.length, n);
+      }
+      kop.addEventListener('click', async () => {
+        const metin = gorunen.map(({ v, m }) => v.s + ' — ' + tarihYaz(v.t) + '\n' +
+          m.map(x => '- ' + (x.k ? _(TUR_AD[x.k]) + ': ' : '') + duzMetin(maddeMetni(x))).join('\n')).join('\n\n');
+        const ok = await panoyaYaz(metin);
+        bildir(ok ? _('Kopyalandı') : _('Kopyalanamadı'), ok ? 'basari' : 'hata');
+      });
+      isaretle();
+      listele();
+    }
+
+    /* Açılışta: yeni sürüm ilk kez çalışıyorsa bir kez aç. İlk kurulumda açma.
+       Önceki sürümler bu kaydı tutmuyordu: betik başlarken depo doluysa güncelleme sayılır.
+       - ilkKayit(): betik başlarken hemen çalışır; ilk kurulumda görülen sürümü yazar
+         (sekme 2,5 sn dolmadan kapanırsa sonraki açılış güncelleme sanılmasın).
+       - acilista(ac, yaziyor): sekme görünürken ve kullanıcı bir alana yazmıyorken açar;
+         değilse 3 sn'de bir yeniden dener. Görülen sürüm, pencere gerçekten açılınca yazılır.
+         Karar her seferinde depodan taze okunur: aynı anda açık öteki sekme kazandıysa açılmaz. */
+    const tazeAyar = k => { try { return ((readPrefs().ayar) || {})[k]; } catch (e) { return undefined; } };
+    function ilkKayit() {
+      if (!DEPO_VARDI && !tazeAyar('degisiklikGorulen')) ayarYaz('degisiklikGorulen', SURUM);
+    }
+    function acilista(ac, yaziyor) {
+      const gorulen = tazeAyar('degisiklikGorulen') || null;
+      if (gorulen === SURUM) return;
+      if (anahtar(gorulen || '0') > anahtar(SURUM)) return;      // eski sürüme dönüldü: açma
+      if (tazeAyar('degisiklikOtomatikKapali') === true || !VERI.some(v => v.s === SURUM)) {
+        ayarYaz('degisiklikOnceki', gorulen); ayarYaz('degisiklikGorulen', SURUM); return;
+      }
+      if (document.visibilityState === 'hidden' || yaziyor()) { setTimeout(() => acilista(ac, yaziyor), 3000); return; }
+      ayarYaz('degisiklikOnceki', gorulen);
+      bilgiBekliyor = true;
+      if (ac()) ayarYaz('degisiklikGorulen', SURUM);
+      else { bilgiBekliyor = false; setTimeout(() => acilista(ac, yaziyor), 3000); }
+    }
+    function bilgiAl() {
+      const b = bilgiBekliyor; bilgiBekliyor = false;
+      durum.tur = 'hepsi'; durum.sorgu = '';                       // yeni pencere temiz başlar
+      return b;
+    }
+
+    return { CSS, ciz, ilkKayit, acilista, bilgiAl };
+  })();
+
+  // ---------------------------------------------------------------- Tampermonkey menüsü
+  let menuIdleri = [];
+  let menuKayitli = false;
+  let idsizMenu = false;
+  function menuKaydet() {
+    if (typeof GM_registerMenuCommand !== 'function') return;
+    const silinebilir = typeof GM_unregisterMenuCommand === 'function' && !idsizMenu;
+    if (menuKayitli && !silinebilir) return;   // silinemiyorsa ikinci kez eklenmez (çift satır olmasın)
+    try {
+      if (silinebilir) for (const id of menuIdleri) { try { GM_unregisterMenuCommand(id); } catch (_e) { /* yok */ } }
+      menuIdleri = [];
+      menuKayitli = true;
+      const ekle = (ad, fn, harf) => {
+        const id = GM_registerMenuCommand(ad, fn, harf);
+        if (id === undefined || id === null) idsizMenu = true; else menuIdleri.push(id);
+      };
+      const tr = dilKodu() === 'tr';
+      ekle(_('menuAyarlar'), () => panelAc(), tr ? 'a' : 's');
+      ekle(_('menuDegisiklik'), () => panelAc('degisiklik'), tr ? 'd' : 'c');
+    } catch (_e) { /* yönetici menüyü desteklemiyor */ }
+  }
+
+  // ---------------------------------------------------------------- Ayarlar paneli
+  let panelBolum = 'kopya';
+  let aramaMetni = '';
+  let oncekiOdak = null;
+  let kayit = null;          // kısayol kaydı sürerken { dinle }
+  let tusHatasi = '';
+  let ciziliyor = false;
+
+  function panelAcik() { return !!(bil.panel && bil.panel.isConnected); }
+
+  /** Kipli panel: Tab odağı panelin içinde döner. */
+  function odakDongusu(e) {
+    const ogeler = Array.from(bil.panel.querySelectorAll('button, input:not([type="file"]), [tabindex]:not([tabindex="-1"])'))
+      .filter((o) => !o.disabled && o.getClientRects().length);
+    if (!ogeler.length) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const simdiki = ogeler.indexOf(kok.activeElement);
+    const sonraki = simdiki < 0 ? 0 : (simdiki + (e.shiftKey ? -1 : 1) + ogeler.length) % ogeler.length;
+    ogeler[sonraki].focus({ preventScroll: false });
+  }
+
+  function panelAc(bolum) {
+    if (!document.body) return false;
+    kokKur();
+    temaUygula();
+    if (bolum) panelBolum = bolum;
+    if (!panelAcik() && document.activeElement !== ev) oncekiOdak = document.activeElement;
+    if (!panelAcik()) {
+      bil.perde = el('div', { class: 'perde', onpointerdown: (e) => { bil.perde.basladi = e.target === bil.perde; },
+        onclick: (e) => { if (bil.perde.basladi && e.target === bil.perde) panelKapat(); } });
+      bil.panel = el('div', { class: 'panel yazi', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'clt-baslik' });
+      kok.append(bil.perde, bil.panel);
+    }
+    panelCiz();
+    if (panelBolum !== 'degisiklik' && bil.ara) bil.ara.focus({ preventScroll: true });
+    return true;
+  }
+
+  function panelKapat() {
+    kayitBitir();
+    if (bil.panel) bil.panel.remove();
+    if (bil.perde) bil.perde.remove();
+    kok.append(bil.yer);
+    bil.panel = bil.perde = bil.ara = null;
+    aramaMetni = '';
+    tusHatasi = '';
+    if (oncekiOdak && oncekiOdak.isConnected && typeof oncekiOdak.focus === 'function') {
+      try { oncekiOdak.focus({ preventScroll: true }); } catch (_e) { /* yok */ }
+    }
+    oncekiOdak = null;
+  }
+
+  function ayarDegis(k, v) {
+    ayar[k] = v;
+    ayarlariYaz();
+    if (k === 'dil') menuKaydet();
+    if (k === 'tema') temaUygula();
+    panelCiz();
+  }
+
+  function bolumSifirla(bolum) {
+    for (const k of BOLUM_ANAHTAR[bolum] || []) ayar[k] = VARSAYILAN[k];
+    ayarlariYaz();
+    menuKaydet();
+    temaUygula();
+    tusHatasi = '';
+    panelCiz();
+    bildir(_('sifirlandi'), 'basari');
+  }
+
+  function anahtar(k, etiketId) {
+    return el('button', { class: 'anahtar', type: 'button', role: 'switch', 'aria-checked': String(!!ayar[k]),
+      'aria-labelledby': etiketId, 'data-ayar': k, onclick: () => ayarDegis(k, !ayar[k]) });
+  }
+
+  function segment(k, secenekler, etiketId) {
+    const g = el('div', { class: 'seg', role: 'radiogroup', 'aria-labelledby': etiketId, 'data-ayar': k });
+    for (const [deger, yazi] of secenekler) {
+      g.append(el('button', { type: 'button', role: 'radio', 'aria-checked': String(ayar[k] === deger), 'data-deger': String(deger),
+        onclick: () => ayarDegis(k, deger) }, yazi));
+    }
+    return g;
+  }
+
+  let etiketSayac = 0;
+  function ayarSatiri(ad, aciklama, denetimKur) {
+    const id = 'e' + (++etiketSayac);
+    const s = el('div', { class: 'ayar' }, el('span', { id }, ad), denetimKur(id));
+    if (aciklama) s.append(el('small', {}, aciklama));
+    return s;
+  }
+
+  function sifirlaDugmesi(bolum) {
+    return el('div', { class: 'satir-btn' }, el('button', { class: 'btn', type: 'button', 'data-sifirla': bolum, onclick: () => bolumSifirla(bolum) }, _('varsayilan')));
+  }
+
+  function bolumMetni(b) {
+    const anahtarlar = {
+      kopya: ['b_kopya', 'tus', 'tus_ctrl', 'tus_alt', 'balon', 'onizle', 'kopyaAlt', 'yazisizNot'],
+      genel: ['b_genel', 'dil', 'tema', 'dil_tarayici', 'tema_sayfa'],
+      kisayol: ['b_kisayol', 'k_ayarlar', 'k_kopyala'],
+      degisiklik: ['b_degisiklik'],
+      hakkinda: ['b_hakkinda', 'yedek', 'yedekle', 'geriYukle', 'store'],
+    }[b];
+    return katla(anahtarlar.map((k) => _(k)).join(' '));
+  }
+
+  function panelCiz() {
+    kayitBitir();
+    if (!panelAcik() || ciziliyor) return;
+    ciziliyor = true;
+    try {
+      etiketSayac = 0;
+      const p = bil.panel;
+      const aramaOdakta = kok.activeElement === bil.ara;
+      const imlec = bil.ara ? bil.ara.selectionStart : null;
+      const odakSecici = odakSeciciBul(kok.activeElement);
+      p.replaceChildren();
+      p.setAttribute('lang', dilKodu());
+
+      const kapat = el('button', { class: 'ikonbtn', type: 'button', title: _('kapat'), 'aria-label': _('kapat'), onclick: () => panelKapat() }, ikonEl('kapat'));
+      p.append(el('div', { class: 'ust' }, el('span', { class: 'rozet', 'aria-hidden': 'true' }, KOD),
+        el('h2', { id: 'clt-baslik' }, AD + ' · ' + _('ayarlar')), kapat));
+
+      const arama = el('input', { type: 'search', placeholder: _('ara'), 'aria-label': _('ara') });
+      arama.value = aramaMetni;
+      arama.addEventListener('input', (e) => { if (e.isComposing) return; aramaMetni = arama.value; panelCiz(); });
+      arama.addEventListener('compositionend', () => { aramaMetni = arama.value; panelCiz(); });
+      bil.ara = arama;
+      const nav = el('nav', { class: 'nav', 'aria-label': _('ayarlar') }, arama);
+      const sorgu = katla(aramaMetni.trim());
+      const uyan = (b) => !sorgu || bolumMetni(b).includes(sorgu);
+      const tum = ['kopya', 'genel', 'kisayol', 'degisiklik', 'hakkinda'];
+      const gorunen = tum.filter(uyan);
+      if (gorunen.length && !gorunen.includes(panelBolum)) panelBolum = gorunen[0];
+      const oge = (b) => el('button', { class: 'oge', type: 'button', title: _('b_' + b), 'aria-current': String(panelBolum === b), 'data-bolum': b,
+        onclick: () => { panelBolum = b; tusHatasi = ''; panelCiz(); } }, el('span', {}, _('b_' + b)));
+      const kendi = ['kopya'].filter(uyan);
+      const ort = ['genel', 'kisayol', 'degisiklik', 'hakkinda'].filter(uyan);
+      if (kendi.length) nav.append(el('div', { class: 'grup' }, KOD), ...kendi.map(oge));
+      if (ort.length) nav.append(el('div', { class: 'grup' }, _('ortak')), ...ort.map(oge));
+      if (!gorunen.length) nav.append(el('div', { class: 'yok', role: 'status' }, _('sonucYok')));
+
+      const ic = el('div', { class: 'icerik' + (panelBolum === 'degisiklik' ? ' chg' : ''), 'data-icerik': panelBolum });
+      if (gorunen.length) {
+        if (panelBolum === 'degisiklik') bolumDegisiklik(ic);
+        else {
+          ic.append(el('h3', {}, _('b_' + panelBolum)));
+          ({ kopya: bolumKopya, genel: bolumGenel, kisayol: bolumKisayol, hakkinda: bolumHakkinda })[panelBolum](ic);
+        }
+      }
+      p.append(el('div', { class: 'govde' }, nav, ic));
+      if (bil.kutu && bil.kutu.classList.contains('acik')) p.append(bil.yer);
+      if (aramaOdakta) {
+        arama.focus({ preventScroll: true });
+        if (imlec !== null) { try { arama.setSelectionRange(imlec, imlec); } catch (_e) { /* yok */ } }
+      } else if (odakSecici) {
+        let hedef = null;
+        try { hedef = p.querySelector(odakSecici); } catch (_e) { hedef = null; }
+        if (hedef) hedef.focus({ preventScroll: true });
+      }
+    } finally {
+      ciziliyor = false;
+    }
+  }
+
+  function odakSeciciBul(o) {
+    if (!o || o === bil.ara || !o.getAttribute) return '';
+    const q = (ad) => `[${ad}="${CSS.escape(o.getAttribute(ad))}"]`;
+    if (o.hasAttribute('data-deger') && o.parentElement && o.parentElement.hasAttribute('data-ayar')) {
+      return `[data-ayar="${CSS.escape(o.parentElement.getAttribute('data-ayar'))}"] ${q('data-deger')}`;
+    }
+    for (const ad of ['data-ayar', 'data-bolum', 'data-sifirla', 'data-kisayol', 'data-yedekle', 'data-geri-yukle', 'data-odak']) {
+      if (o.hasAttribute(ad)) return q(ad);
+    }
+    return '';
+  }
+
+  function bolumKopya(ic) {
+    ic.append(el('p', { class: 'alt' }, _('kopyaAlt')));
+    ic.append(ayarSatiri(_('tus'), _('tusAc'), (id) => segment('tus', [['ctrl', _('tus_ctrl')], ['alt', _('tus_alt')]], id)));
+    ic.append(ayarSatiri(_('balon'), _('balonAc'), (id) => anahtar('balon', id)));
+    ic.append(ayarSatiri(_('onizle'), _('onizleAc'), (id) => anahtar('onizle', id)));
+    ic.append(el('p', { class: 'alt', style: 'margin:0' }, _('yazisizNot')));
+    ic.append(sifirlaDugmesi('kopya'));
+  }
+
+  function bolumGenel(ic) {
+    const algi = _('algilanan', { dil: tarayiciDili() === 'tr' ? 'Türkçe' : 'English' });
+    ic.append(ayarSatiri(_('dil'), algi, (id) => segment('dil', [['tr', _('dil_tr')], ['en', _('dil_en')], ['tarayici', _('dil_tarayici')]], id)));
+    ic.append(ayarSatiri(_('tema'), '', (id) => segment('tema', [['sayfa', _('tema_sayfa')], ['acik', _('tema_acik')], ['koyu', _('tema_koyu')]], id)));
+    ic.append(sifirlaDugmesi('genel'));
+  }
+
+  function bolumKisayol(ic) {
+    ic.append(el('p', { class: 'alt' }, _('kisayolNot')));
+    const hataYeri = el('div', { class: 'uyari-satir', role: 'alert' }, tusHatasi);
+    const tus = el('button', { class: 'tus', type: 'button', 'data-kisayol': 'kisayolAyarlar' }, ayar.kisayolAyarlar);
+    tus.addEventListener('click', () => kayitBasla(tus));
+    ic.append(ayarSatiri(_('k_ayarlar'), '', (id) => { tus.setAttribute('aria-labelledby', id); return tus; }));
+    if (tusHatasi) ic.append(hataYeri);
+    ic.append(ayarSatiri(_('k_kopyala'), _('k_kopyalaAc'), () => el('span', { class: 'tus', 'aria-disabled': 'true' }, _('tus_' + ayar.tus))));
+    ic.append(sifirlaDugmesi('kisayol'));
+  }
+
+  function kayitBasla(tus) {
+    kayitBitir();
+    tus.classList.add('kayit');
+    tus.textContent = _('tusaBas');
+    const dinle = (e) => {
+      if (!e.isTrusted) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if (e.repeat) return;
+      if (e.key === 'Escape') { kayitBitir(); panelCiz(); return; }
+      const kombo = tusKombo(e);
+      if (!kombo) return;                       // yalnız değiştirici basıldı: beklemeye devam
+      const neden = tusGecerliMi(kombo);
+      kayitBitir();
+      if (neden) { tusHatasi = _('tusRed', { tus: kombo, neden: _(neden) }); panelCiz(); return; }
+      tusHatasi = '';
+      ayarDegis('kisayolAyarlar', kombo);
+      bildir(_('tusDegisti', { tus: kombo }), 'basari');
+    };
+    const bitir = () => { if (kayit) { kayitBitir(); panelCiz(); } };
+    kayit = { dinle, bitir, tus };
+    window.addEventListener('keydown', dinle, true);
+    tus.addEventListener('blur', bitir, { once: true });   // odak kaybında kayıt biter (g7snk)
+  }
+
+  function kayitBitir() {
+    if (!kayit) return;
+    window.removeEventListener('keydown', kayit.dinle, true);
+    try { kayit.tus.removeEventListener('blur', kayit.bitir); } catch (_e) { /* yok */ }
+    kayit = null;
+  }
+
+  function bolumDegisiklik(ic) {
+    try {
+      DEGISIKLIK.ciz({
+        sayfa: ic,
+        baslik: (t) => ic.append(el('h3', {}, t)),
+        kapat: () => panelKapat(),
+        bilgi: DEGISIKLIK.bilgiAl(),
+        git: (hedef) => { panelBolum = hedef; panelCiz(); },
+      });
+    } catch (_e) {
+      ic.replaceChildren(el('h3', {}, _('b_degisiklik')), el('p', { class: 'bos' }, _('Değişiklik kaydı yok.')));
+    }
+  }
+
+  function bolumHakkinda(ic) {
+    ic.append(el('p', { style: 'margin:0' }, _('surum', { s: SURUM })), el('p', { class: 'alt', style: 'margin:0' }, _('store')));
+    ic.append(el('h4', {}, _('yedek')), el('p', { class: 'alt', style: 'margin:0' }, _('yedekAc')));
+    ic.append(el('p', { class: 'alt', style: 'margin:0', 'data-son-yedek': '' }, ayar.sonYedek ? _('sonYedek', { t: ayar.sonYedek }) : _('sonYedekYok')));
+    const dosya = el('input', { type: 'file', accept: '.json,application/json', class: 'gizli', 'aria-hidden': 'true', tabindex: '-1' });
+    dosya.addEventListener('change', () => { if (dosya.files && dosya.files[0]) geriYukle(dosya.files[0]); });
+    ic.append(dosya, el('div', { class: 'satir-btn sol' },
+      el('button', { class: 'btn', type: 'button', 'data-yedekle': '', onclick: () => yedekle() }, _('yedekle')),
+      el('button', { class: 'btn', type: 'button', 'data-geri-yukle': '', onclick: () => dosya.click() }, _('geriYukle'))));
+  }
+
+  function zamanDamgasi() {
+    const d = new Date();
+    const p = (n) => String(n).padStart(2, '0');
+    return `${String(d.getFullYear()).slice(2)}${p(d.getMonth() + 1)}-${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}`;
+  }
+
+  function yedekle() {
+    const damga = zamanDamgasi();
+    const ayarKopya = Object.assign({}, ayar);
+    delete ayarKopya.sonYedek;
+    const veri = JSON.stringify({ uygulama: ID, surum: SURUM, tarih: damga, ayarlar: ayarKopya }, null, 2);
+    // data: adresi (Blob değil): Firefox'ta betik ayrı bağlamda çalışınca Blob adresi sayfadan inmeyebilir
+    const a = el('a', { href: 'data:application/json;charset=utf-8,' + encodeURIComponent(veri), download: `CLT_AYARLAR_${damga}.json` });
+    kok.appendChild(a);
+    a.click();
+    a.remove();
+    ayar.sonYedek = damga;
+    ayarlariYaz();
+    panelCiz();
+    bildir(_('yedeklendi'), 'basari');
+  }
+
+  function geriYukle(dosya) {
+    if (dosya.size > 64 * 1024) { bildir(_('yedekHata'), 'hata'); return; }
+    const okuyucu = new FileReader();
+    okuyucu.onload = () => {
+      try {
+        const v = JSON.parse(String(okuyucu.result));
+        if (!v || v.uygulama !== ID || !v.ayarlar || typeof v.ayarlar !== 'object' || Array.isArray(v.ayarlar)) throw new Error('biçim');
+        const sonYedek = ayar.sonYedek;
+        ayar = ayarDogrula(v.ayarlar);
+        ayar.sonYedek = sonYedek;
+        ayarlariYaz();
+        menuKaydet();
+        temaUygula();
+        panelCiz();
+        bildir(_('geriYuklendi'), 'basari');
+      } catch (_e) {
+        bildir(_('yedekHata'), 'hata');
+      }
+    };
+    okuyucu.onerror = () => bildir(_('yedekHata'), 'hata');
+    okuyucu.readAsText(dosya);
+  }
+
+  // ---------------------------------------------------------------- klavye (Ayarlar kısayolu, panel içi)
+  function tusBasildi(e) {
+    if (!e.isTrusted || kayit) return;
+    if (panelAcik()) {
+      if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); panelKapat(); return; }
+      if ((e.ctrlKey || e.metaKey) && !e.altKey && !e.shiftKey && e.code === 'KeyF') {
+        e.preventDefault(); e.stopImmediatePropagation(); if (bil.ara) bil.ara.focus(); return;
+      }
+      if (e.key === 'Tab' && !e.ctrlKey && !e.altKey && !e.metaKey) { odakDongusu(e); return; }
+    }
+    if (!(e.ctrlKey || e.metaKey || e.altKey)) return;     // yalnız değiştiricili kombo (yazı yazarken tetiklenmesin)
+    const kombo = tusKombo(e);
+    if (!kombo || kombo !== ayar.kisayolAyarlar || e.repeat) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    if (panelAcik()) panelKapat(); else panelAc();
+  }
+  window.addEventListener('keydown', tusBasildi, true);
+
+  // ---------------------------------------------------------------- açılış
+  function yaziyor() { const a = document.activeElement; return !!(a && a !== ev && duzenlenebilirMi(a)); }
+
+  function basla() {
+    DEGISIKLIK.acilista(() => (panelAcik() ? false : panelAc('degisiklik')), yaziyor);
+  }
+
+  if (!DEPO_VARDI) ayarlariYaz();          // ilk kurulumu işaretle (sonraki açılış güncelleme sayılsın)
+  DEGISIKLIK.ilkKayit();
+  menuKaydet();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(basla, 2500), { once: true });
+  else setTimeout(basla, 2500);
+
+  if (TEST && window.__AALABS_TEST__ && typeof window.__AALABS_TEST__ === 'object') {
+    window.__AALABS_TEST__.clt = { metin: METIN, ayar: () => ayar, kok: () => kok, panelAc, panelKapat, linkMetni };
+  }
+})();
