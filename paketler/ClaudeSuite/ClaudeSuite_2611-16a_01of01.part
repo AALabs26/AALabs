@@ -3,7 +3,7 @@
 // @name:tr      Claude Suite
 // @name:en      Claude Suite
 // @namespace    aalabs.claude-suite
-// @version      26.11.14.1
+// @version      26.11.16.1
 // @description  claude.ai için AALabs araç takımı: kullanım göstergesi, proje etiketleri ve filtresi, başlık kodu, mesaj saatleri, şablonlar, komut paleti. Türkçe ve İngilizce; her özellik Ayarlar'dan ayrı açılıp kapanır.
 // @author       AALabs
 // @match        https://claude.ai/*
@@ -47,7 +47,7 @@
 
   const UYGULAMA_ADI = 'Claude Suite';
   const UYGULAMA_ID = 'AALabs.ClaudeSuite';
-  const SURUM = '2611-14a';   // görünen sürüm YYMM-DDx; @version aynı sürümün YY.A.G.N karşılığı
+  const SURUM = '2611-16a';   // görünen sürüm YYMM-DDx; @version aynı sürümün YY.A.G.N karşılığı
   const TEMA_SURUM = '1.8.0';
   const IKON_KODU = 'CLS';
   // Tampermonkey / Violentmonkey betik başlığındaki @version (yoksa null).
@@ -901,6 +901,12 @@
     "tıkla: projeyi aç": "click: open the project",
     "Sohbet başlığını \"DURUM KOD Ad\" biçiminde düzenler (TO-DO WIN+MOB Home Admin; tarih yok). SAĞLIK ve HUKUK'ta sonda belge tarihi olabilir (YYMM-DD). Başlığın yanında durum düğmesi (tıkladıkça TO-DO → OK → QA → LATER → XX → OLD → DEL), Claude süresi ve claude.ai menüsünün komutları ikon olarak.": "Edits the chat title in the \"STATUS CODE Name\" format (TO-DO WIN+MOB Home Admin; no date). SAĞLIK and HUKUK may end with a document date (YYMM-DD). Next to the title: a status button (each click: TO-DO → OK → QA → LATER → XX → OLD → DEL), Claude time and claude.ai's menu commands as icons.",
     "Sohbet listelerinde yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; XX, OLD ve DEL sönük görünür. Biçime (DURUM KOD Ad) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Kenarda durum süzgeci ve XX gizle var. Sohbetler sayfasında DEL satırında Sil düğmesi.": "In chat lists the seven statuses (TO-DO, OK, QA, LATER, XX, OLD, DEL) become coloured chips; XX, OLD and DEL rows are dimmed. Titles that do not fit the format (STATUS CODE Name) show what is missing; clicking the badge opens the title grid. The sidebar gets a status filter and Hide XX. On the Chats page DEL rows get a Delete button.",
+    "Sohbet başlığını \"DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET\" biçiminde düzenler (TO-DO ALP IMG Gülen Adam +yüz ifadesi denemesi; SAHİP, KOD ve özet isteğe bağlı; tarih yok). SAĞLIK ve HUKUK'ta en sonda belge tarihi olabilir (YYMM-DD). Başlığın yanında durum düğmesi (tıkladıkça TO-DO → OK → QA → LATER → XX → OLD → DEL), Claude süresi ve claude.ai menüsünün komutları ikon olarak.": "Edits the chat title in the \"STATUS OWNER CODE CHAT-NAME +SHORT-SUMMARY\" format (TO-DO ALP IMG Gülen Adam +yüz ifadesi denemesi; owner, code and summary optional; no date). SAĞLIK and HUKUK may end with a document date (YYMM-DD). Next to the title: a status button (each click: TO-DO → OK → QA → LATER → XX → OLD → DEL), Claude time and claude.ai's menu commands as icons.",
+    "Sohbet listelerinde yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; XX, OLD ve DEL sönük görünür. Biçime (DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Kenarda durum süzgeci ve XX gizle var. Sohbetler sayfasında DEL satırında Sil düğmesi.": "In chat lists the seven statuses (TO-DO, OK, QA, LATER, XX, OLD, DEL) become coloured chips; XX, OLD and DEL rows are dimmed. Titles that do not fit the format (STATUS OWNER CODE CHAT-NAME +SHORT-SUMMARY) show what is missing; clicking the badge opens the title grid. The sidebar gets a status filter and Hide XX. On the Chats page DEL rows get a Delete button.",
+    "Biçim: DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET [YYMM-DD belge tarihi].": "Format: STATUS OWNER CODE CHAT-NAME +SHORT-SUMMARY [YYMM-DD document date].",
+    "Biçim: DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET, tarih yok.": "Format: STATUS OWNER CODE CHAT-NAME +SHORT-SUMMARY, no date.",
+    "özet boş": "summary empty",
+    "özet 3–5 kelime": "summary 3–5 words",
     "TO-DO yap": "Make TO-DO",
     "OK yap": "Make OK",
     "XX yap": "Make XX",
@@ -5089,7 +5095,7 @@
   const KOD_VARSAYILAN = [
     'İş: ZMASH, ZKC, HUKUK, SHOP',
     'Yazılım: WIN, MOB, SCR, HTML, TECH, TOOL',
-    'Claude: CLAUDE, SKILL, CAI, MODEL',
+    'Claude: CLAUDE, SKILL, COCO, MODEL',
     'Üretim: IMG, VID, TEXT',
     'Kişisel: GRK, FOOD, SAĞLIK, 3DP',
     'Oyun: GAME, BG3, Hercules'
@@ -5129,6 +5135,17 @@
   }
   kodGoc('kodGocu2611-08d', ['IMG', 'VID', 'CAI', 'MODEL', 'TOOL', 'TEXT']);
   kodGoc('kodGocu2611-09a', ['GAME', 'BG3', 'Hercules']);
+  /* 2611-16a: CAI uygulamasının adı COCO oldu; kayıtlı listede CAI bir kez COCO'ya çevrilir (CAI yoksa COCO eklenir). */
+  (function kodGocu16a() {
+    try {
+      if (ayarOku('kodGocu2611-16a', false)) return;
+      const k = String(ayarOku('baslikKodlari', KOD_VARSAYILAN));
+      const re = /(^|[\s,:])CAI(?=\s*(,|$))/m;
+      if (re.test(k)) ayarYaz('baslikKodlari', k.replace(re, '$1COCO'));
+      else kodGoc('kodGocu2611-16a-ek', ['COCO']);
+      ayarYaz('kodGocu2611-16a', true);
+    } catch (e) {}
+  })();
   const GRUP_RENK = ['kat-onemli', 'kat-kod', 'kat-oyun', 'kat-belge', 'kat-tablo', 'kat-video', 'kat-gorsel', 'kat-arsiv'];
 
   const BASLIK = {
@@ -5160,7 +5177,10 @@
   /* =====================================================================
    * 11a) BAŞLIK BİÇİMİ (2611-08b maket CLS son; 2611-08d: tek biçim, bütün sohbetlerde)
    *
-   * DURUM [SAHİP] KOD Ad   ör. TO-DO WIN+MOB Home Admin · TO-DO ALP IMG Gülen Adam. Sürüm, tarih, saat yok.
+   * 2611-16a: DURUM [SAHİP] [KOD] SOHBET-ADI [+KISA-ÖZET]   ör. TO-DO ALP IMG Gülen Adam +yüz ifadesi denemesi.
+   *   DURUM ve SOHBET-ADI zorunlu; SAHİP ve KOD isteğe bağlı. KISA-ÖZET 3–5 kelime, önünde boşluk ve "+".
+   *   SAĞLIK/HUKUK belge tarihi (YYMM-DD) başlığın en sonunda (özetten sonra).
+   * Eski: DURUM [SAHİP] KOD Ad   ör. TO-DO WIN+MOB Home Admin · TO-DO ALP IMG Gülen Adam. Sürüm, tarih, saat yok.
    * SAHİP isteğe bağlı: ALP, GRK, SRP, ZMASH; tek başına da yeter (OK SRP İstanbul 38. Sulh Hukuk).
    * "+" yalnız platformlar arasında (WIN, MOB, SCR, HTML).
    * İstisna (2611-08f): SAĞLIK ve HUKUK (alt kodları dahil) Ad'dan sonra YYMM-DD tarih TAŞIYABİLİR.
@@ -5186,6 +5206,9 @@
   /* Sahip kodu (2611-08j): isteğe bağlı, DURUM'dan sonra asıl koddan önce: TO-DO ALP IMG Gülen Adam ·
      TO-DO SRP HUKUK İstanbul 88/25. Ardından geçerli bir kod gelmezse sahip sayılmaz (OK ZMASH Website: ZMASH kod). */
   const SAHIPLER = ['ALP', 'GRK', 'SRP', 'ZMASH'];
+  // KISA-ÖZET (2611-16a): adın ardında boşluk + "+" ile başlar ("Gülen Adam +yüz ifadesi denemesi"). WIN+MOB gibi boşluksuz "+" özet değildir.
+  const OZET_RE = /\s\+\s*(.*)$/;
+  const OZET_KELIME = [3, 5];
   const SEMA = {
     // Tek kod geçerli mi: listedeki kod ya da alt kodu (HUKUK-RUHSAT).
     tekKod(p) {
@@ -5225,7 +5248,14 @@
       }
       // Tarihli kodda yalnız YYMM-DD belge tarihi adda kalır; başka biçimdeki sürüm/saat yine atılır.
       if (!this.tarihli(kodlar) || !BELGE_TARIHI.test(' ' + r)) r = (' ' + r).replace(TARIH_SON, '').trim();
-      return { durum, sahip, kodlar, ad: r, birlesim };
+      /* 2611-16a: ad = SOHBET-ADI [+KISA-ÖZET] [YYMM-DD] (birleştirmede olduğu gibi kalır).
+         adYalin: yalnız sohbet adı; ozet: "+"dan sonraki kısa özet (yoksa null); tarih: sondaki belge tarihi. */
+      let govde = r, tarih = null;
+      if (this.tarihli(kodlar)) { const m = (' ' + govde).match(BELGE_TARIHI); if (m) { tarih = m[0].trim(); govde = (' ' + govde).replace(BELGE_TARIHI, '').trim(); } }
+      const oz = (' ' + govde).match(OZET_RE);
+      const adYalin = oz ? (' ' + govde).slice(0, oz.index).trim() : govde;
+      const ozet = oz ? oz[1].trim() : null;
+      return { durum, sahip, kodlar, ad: r, birlesim, adYalin, ozet, tarih };
     },
     birlestirA(durum, kodlar, ad, sahip) {
       const sira = k => { const t = k.split('-')[0]; const i = PLATFORM_SIRA.indexOf(t); return i < 0 ? 100 + BASLIK.kodlar().findIndex(x => x.kod === t) + (t === k ? 0 : .5) : i; };
@@ -5245,8 +5275,14 @@
       if (!s) return { uygun: true, eksik };
       const c = this.cozA(s);
       if (!c.durum) eksik.push(_n('durum yok'));
-      if (!c.kodlar.length && !c.sahip) eksik.push(_n('kod yok'));
-      else if (c.birlesim) eksik.push(_n('kod birleşimi'));   // "+" yalnız WIN, MOB, SCR, HTML arasında
+      // 2611-16a: KOD isteğe bağlı; "kod yok" artık eksik sayılmaz.
+      if (c.birlesim) eksik.push(_n('kod birleşimi'));   // "+" yalnız WIN, MOB, SCR, HTML arasında
+      if (c.ozet !== null) {
+        const n = c.ozet.split(/\s+/).filter(Boolean).length;
+        if (!n) eksik.push(_n('özet boş'));
+        else if (n < OZET_KELIME[0] || n > OZET_KELIME[1]) eksik.push(_n('özet 3–5 kelime'));
+        if (!c.adYalin) eksik.push(_n('ad yok'));
+      }
       if (this.tarihli(c.kodlar) && BELGE_TARIHI.test(' ' + c.ad)) {
         // SAĞLIK, HUKUK: sondaki YYMM-DD belge tarihi geçerli; tarih çıkınca ad kalmalı.
         if (!(' ' + c.ad).replace(BELGE_TARIHI, '').trim()) eksik.push(_n('ad yok'));
@@ -5295,7 +5331,7 @@
   define({
     id: 'titleCode',
     label: 'Başlık kodu',
-    desc: 'Sohbet başlığını "DURUM KOD Ad" biçiminde düzenler (TO-DO WIN+MOB Home Admin; tarih yok). SAĞLIK ve HUKUK\'ta sonda belge tarihi olabilir (YYMM-DD). Başlığın yanında durum düğmesi (tıkladıkça TO-DO → OK → QA → LATER → XX → OLD → DEL), Claude süresi ve claude.ai menüsünün komutları ikon olarak.',
+    desc: 'Sohbet başlığını "DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET" biçiminde düzenler (TO-DO ALP IMG Gülen Adam +yüz ifadesi denemesi; SAHİP, KOD ve özet isteğe bağlı; tarih yok). SAĞLIK ve HUKUK\'ta en sonda belge tarihi olabilir (YYMM-DD). Başlığın yanında durum düğmesi (tıkladıkça TO-DO → OK → QA → LATER → XX → OLD → DEL), Claude süresi ve claude.ai menüsünün komutları ikon olarak.',
     group: 'Yazma',
     kisayol: 'baslik',
     health() { return BASLIK._durum || { tamam: true, metin: _('Sohbet sayfasında çalışır') }; },
@@ -5746,7 +5782,7 @@
           const bb = document.createElement('b'); bb.textContent = yeniAd() || '—'; oniz.appendChild(bb);
           const d = SEMA.denetle(yeniAd());
           hata.hidden = d.uygun;
-          hata.textContent = d.uygun ? '' : (SEMA.tarihli([...secili]) ? _('Biçim: DURUM KOD Ad [YYMM-DD belge tarihi].') : _('Biçim: DURUM KOD Ad, tarih yok.')) + ' ' + _('Eksik') + ': ' + d.eksik.map(x => _(x)).join(', ');
+          hata.textContent = d.uygun ? '' : (SEMA.tarihli([...secili]) ? _('Biçim: DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET [YYMM-DD belge tarihi].') : _('Biçim: DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET, tarih yok.')) + ' ' + _('Eksik') + ': ' + d.eksik.map(x => _(x)).join(', ');
           kay.disabled = !d.uygun;   // biçime uymayan başlık kaydedilmez
         }
         adIn.addEventListener('input', onizle);
@@ -6446,7 +6482,10 @@
       return el && el !== document.body && el.tagName !== 'MAIN' ? el : null;
     }
 
-    function menuler() { return [...document.querySelectorAll(MENU_SEC)].filter(gorunur); }
+    /* 2611-15a: claude.ai menüleri artık Base UI; kapanan menü DOM'da kalabiliyor (data-closed, pointer-events:none).
+       Kapalı menü açık sayılmasın. */
+    const menuAcikMi = m => gorunur(m) && !m.hasAttribute('data-closed') && getComputedStyle(m).pointerEvents !== 'none';
+    function menuler() { return [...document.querySelectorAll(MENU_SEC)].filter(menuAcikMi); }
     function satiri(o) {
       const t = typeof o.innerText === 'string' ? o.innerText : (o.firstChild ? o.firstChild.textContent : '');
       return ((t || '').trim().split('\n')[0] || '').trim();
@@ -6603,7 +6642,11 @@
 
     async function menuAc(btn) {
       const once = new Set(menuler());
-      const modelMenusu = () => menuler().find(m => !once.has(m) && m.querySelector(OGE_SEC));
+      // Düğmenin denetlediği menü (aria-controls) açıldıysa önce o alınır; kapalıyken DOM'da kalan aynı menü
+      // "önceden vardı" diye atlanmasın (2611-15a: Fable 5.2 menüde bulunamıyordu).
+      const bagli = () => { const id = btn.getAttribute('aria-controls'); const m = id && document.getElementById(id);
+        return m && acikMi(btn) && menuAcikMi(m) && m.querySelector(OGE_SEC) ? m : null; };
+      const modelMenusu = () => bagli() || menuler().find(m => !once.has(m) && m.querySelector(OGE_SEC));
       bas(btn, false);
       let menu = await bekleBul(modelMenusu, 500);
       if (!menu && !acikMi(btn)) { bas(btn, true); menu = await bekleBul(modelMenusu, 500); }
@@ -6629,7 +6672,13 @@
         if (!menu) return (sonuc = { ok: false, metin: _('Model menüsü açılmadı') });
         acilan.push(menu);
         const hedef = modelNormal(hedefAd).toLowerCase();
-        const uyar = o => { const t = modelNormal(satiri(o)).toLowerCase(); return t === hedef || t.startsWith(hedef + ' '); };
+        /* 2611-14b: claude.ai satırı "Fable 5.2For your toughest challenges" diye bitişik veriyor (ad ve açıklama
+           ayrı span, arada boşluk yok); "Fable 5.2 " aranınca bulunmuyordu. Ad her yaprak öğede de aranır,
+           sonrasında rakam ya da nokta gelmemeli ("Fable 5" ≠ "Fable 5.1"). */
+        const kacir = x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const adRe = new RegExp('^' + kacir(hedef) + '(?![\\d.])');
+        const uyar = o => [satiri(o), ...[...o.querySelectorAll('span,div,p')].filter(e => !e.children.length).map(e => e.textContent)]
+          .some(x => adRe.test(modelNormal(x).toLowerCase()));
         const bul = liste => { for (const m of liste) for (const o of m.querySelectorAll(OGE_SEC)) if (gorunur(o) && uyar(o)) return o; return null; };
         let oge = bul([menu]);
         if (!oge) {
@@ -6951,7 +7000,9 @@
             return;
           }
           if (document.hidden || EFOR.mesgul()) return;
-          if (document.querySelector('[role="menu"], [data-radix-popper-content-wrapper]')) return;   // kullanıcının açık menüsü
+          // Kullanıcının açık menüsü varsa bekle. Base UI kapanan menüyü DOM'da bırakabiliyor (data-closed); o sayılmaz (2611-15a).
+          if ([...document.querySelectorAll('[role="menu"], [data-radix-popper-content-wrapper]')].some(m => m.getClientRects().length &&
+            !m.hasAttribute('data-closed') && getComputedStyle(m).pointerEvents !== 'none')) return;
           if (anahtar === gorulen) return;
           const yeniCevap = yazdi || cevapSayisi() > tabanSayi;
           gorulen = anahtar;
@@ -7645,7 +7696,7 @@
     id: 'titleSchemaSidebar',
     parent: 'titleCode',
     label: 'Kenar çubuğunda durum ve biçim',
-    desc: 'Sohbet listelerinde yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; XX, OLD ve DEL sönük görünür. Biçime (DURUM KOD Ad) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Kenarda durum süzgeci ve XX gizle var. Sohbetler sayfasında DEL satırında Sil düğmesi.',
+    desc: 'Sohbet listelerinde yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; XX, OLD ve DEL sönük görünür. Biçime (DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Kenarda durum süzgeci ve XX gizle var. Sohbetler sayfasında DEL satırında Sil düğmesi.',
     group: 'Yazma',
     health() {
       const d = document.querySelectorAll('[data-cls-durum]').length;
@@ -7721,10 +7772,10 @@
           return durumIsle(e, null);
         }
         const m = n ? n.nodeValue.match(DURUM_SOY) : null;
-        // Baştaki OK/XX yalnız ardından geçerli bir kod gelirse durumdur ("OK Google ayarları" değil).
+        /* 2611-16a: KOD isteğe bağlı, DURUM zorunlu → baştaki durum kelimesi ardından ad geldikçe durumdur
+           ("QA Kahve makinesi farkı"). Önceden ardından geçerli kod aranıyordu. */
         const geri = m ? n.nodeValue.slice(m[0].length).trim() : '';
-        const gk = geri.split(/\s+/);
-        if (m && geri && (SEMA.kodGecerli(gk[0]) || SEMA.yanlisBirlesim(gk[0]) || (SEMA.sahipler().includes(gk[0]) && gk[1]))) {
+        if (m && geri) {
           n.nodeValue = n.nodeValue.slice(m[0].length);
           soyulan.set(n, n.nodeValue);
           e.setAttribute(DUR, m[1]);
@@ -8010,6 +8061,9 @@
   const DEGISIKLIK = (function () {
     const VERI = [
     // @@CHG-BASLA
+    {"s": "2611-16a", "t": "2026-11-16", "m": [{"k": "degisti", "tr": "Başlık biçimi ~~DURUM KOD Ad~~ → ==DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET==. DURUM ve sohbet adı zorunlu; SAHİP ve KOD isteğe bağlı, \"kod yok\" artık işaretlenmez. Örnek: TO-DO ALP IMG Gülen Adam +yüz ifadesi denemesi.", "en": "Title format ~~STATUS CODE Name~~ → ==STATUS OWNER CODE CHAT-NAME +SHORT-SUMMARY==. Status and chat name are required; owner and code are optional, \"no code\" is no longer marked. Example: TO-DO ALP IMG Gülen Adam +yüz ifadesi denemesi."}, {"k": "yeni", "tr": "Kısa özet tanınır: adın ardında boşluk ve \"+\" ile başlar, 3–5 kelime olmalı; dışındaysa rozet yazar. SAĞLIK ve HUKUK belge tarihi başlığın en sonunda, özetten sonra.", "en": "The short summary is recognised: it starts with a space and \"+\" after the name and should be 3–5 words; otherwise the badge says so. The SAĞLIK and HUKUK document date goes at the very end, after the summary."}, {"k": "degisti", "tr": "Kod listesinde CAI → ==COCO== (uygulamanın yeni adı). Kayıtlı listende CAI bir kez COCO'ya çevrilir.", "en": "Code list: CAI → ==COCO== (the app's new name). CAI in your saved list is changed to COCO once."}]},
+    {"s": "2611-15a", "t": "2026-11-15", "m": [{"k": "duzeldi", "tr": "Önerilen model (ör. Fable 5.2) hâlâ seçilemiyordu.", "n": "claude.ai'nin yeni menüsü kapandıktan sonra sayfada gizli kalıyor. Betik bu menüyü önceden açık sanıp yeni menü bekliyordu. Artık model düğmesinin bağlı olduğu menü doğrudan alınıyor, kapalı menüler sayılmıyor.", "en": "The suggested model (e.g. Fable 5.2) still could not be selected.", "w": "claude.ai's new menu stays hidden on the page after closing. The script took it as already open and waited for a new one. It now takes the menu the model button controls and ignores closed menus."}]},
+    {"s": "2611-14b", "t": "2026-11-14", "m": [{"k": "duzeldi", "tr": "Öneri satırında Fable 5.2 yazınca model menüsünde bulunamıyordu.", "n": "claude.ai model adını ve açıklamasını boşluksuz yan yana veriyor (\"Fable 5.2For your toughest challenges\"); betik adın ardında boşluk arıyordu. Artık ad kendi öğesinde de aranır.", "en": "When the suggestion line said Fable 5.2, the model was not found in the model menu.", "w": "claude.ai gives the model name and its description side by side without a space (\"Fable 5.2For your toughest challenges\"); the script expected a space after the name. The name is now also looked up in its own element."}]},
     {"s": "2611-14a", "t": "2026-11-14", "m": [{"k": "degisti", "tr": "Sohbetler sayfasında proje etiketi sağdan ==sola== geldi: Proje · DURUM · Ad. Etiket sabit genişlikte, alt alta hizalı; tıklayınca proje açılır.", "en": "On the Chats page the project tag moved from the right ==to the left==: Project · STATUS · Name. The tag has a fixed width and lines up; clicking it opens the project."}, {"k": "yeni", "tr": "Dört yeni durum: ==QA== soru cevap, ==LATER== sonra bakılacak, ==DEL== silinecek, ==OLD== devredildi. XX artık yalnız terk edildi. Her durum kendi renginde; XX, OLD ve DEL satırları sönük.", "en": "Four new statuses: ==QA== question and answer, ==LATER== look at later, ==DEL== to delete, ==OLD== handed off. XX now means abandoned only. Each status has its own colour; XX, OLD and DEL rows are dimmed."}, {"k": "degisti", "tr": "Durum düğmesi tıkladıkça yedi durumu sırayla gezer: TO-DO → OK → QA → LATER → XX → OLD → DEL. Sağ tık listesi her durumun anlamını yazar. Kenar süzgecinde yedi durum da düğme.", "en": "Each click on the status button steps through all seven: TO-DO → OK → QA → LATER → XX → OLD → DEL. The right-click list shows what each status means. The sidebar filter has a button for each of the seven."}, {"k": "yeni", "tr": "Sohbetler sayfasında DEL satırının üstüne gelince ==Sil== düğmesi. claude.ai'nin silme onayı sorulur.", "en": "On the Chats page a ==Delete== button appears on DEL rows on hover. claude.ai's delete confirmation is asked."}]},
     {"s": "2611-11b", "t": "2026-11-11", "m": [{"k": "duzeldi", "tr": "Efor şeridi projenin \"Context\" dosya penceresinin üstünde kalıp dosya adlarını kapatıyordu.", "n": "Şerit yalnız \"açık\" işareti taşıyan pencerelerde gizleniyordu; bu pencerede o işaret yok. Artık görünür her büyük pencere açıkken şerit gizlenir, kapanınca geri gelir.", "en": "The effort strip stayed on top of the project's \"Context\" file window and covered file names.", "w": "The strip hid only for windows carrying an \"open\" marker; this window has none. It now hides while any visible large window is open and returns when it closes."}]},
     {"s": "2611-11a", "t": "2026-11-11", "m": [{"k": "duzeldi", "tr": "Üst şeritteki proje ikonu projesi olmayan sohbette çalışmıyordu.", "n": "claude.ai bu sohbetlerde menüye \"Change project\" değil \"Add to project\" yazıyor; ikon yalnız ilkini arıyordu. Artık ikisini de buluyor ve proje listesini açıyor.", "en": "The project icon on the top strip did not work in chats without a project.", "w": "In those chats claude.ai's menu says \"Add to project\", not \"Change project\"; the icon only looked for the latter. It now finds both and opens the project list."}]},
