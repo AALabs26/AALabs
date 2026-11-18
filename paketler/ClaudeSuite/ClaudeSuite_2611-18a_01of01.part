@@ -3,7 +3,7 @@
 // @name:tr      Claude Suite
 // @name:en      Claude Suite
 // @namespace    aalabs.claude-suite
-// @version      26.11.16.1
+// @version      26.11.18.1
 // @description  claude.ai için AALabs araç takımı: kullanım göstergesi, proje etiketleri ve filtresi, başlık kodu, mesaj saatleri, şablonlar, komut paleti. Türkçe ve İngilizce; her özellik Ayarlar'dan ayrı açılıp kapanır.
 // @author       AALabs
 // @match        https://claude.ai/*
@@ -47,7 +47,7 @@
 
   const UYGULAMA_ADI = 'Claude Suite';
   const UYGULAMA_ID = 'AALabs.ClaudeSuite';
-  const SURUM = '2611-16a';   // görünen sürüm YYMM-DDx; @version aynı sürümün YY.A.G.N karşılığı
+  const SURUM = '2611-18a';   // görünen sürüm YYMM-DDx; @version aynı sürümün YY.A.G.N karşılığı
   const TEMA_SURUM = '1.8.0';
   const IKON_KODU = 'CLS';
   // Tampermonkey / Violentmonkey betik başlığındaki @version (yoksa null).
@@ -907,6 +907,10 @@
     "Biçim: DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET, tarih yok.": "Format: STATUS OWNER CODE CHAT-NAME +SHORT-SUMMARY, no date.",
     "özet boş": "summary empty",
     "özet 3–5 kelime": "summary 3–5 words",
+    "Önerilen modele kendiliğinden geç": "Switch to the suggested model automatically",
+    "Yeni bir cevap bittiğinde önerdiği model kullanılandan farklıysa claude.ai menüsünden onu seçer (\"Model: Fable 5.2 · Effort: high\" satırındaki model). Efor kendiliğinden değişmez; öneri şeritte görünür, seçimi sen yaparsın. Sayfa açılırken görülen eski cevaplara dokunmaz.": "When a new reply finishes and the model it suggests differs from the one in use, picks it from claude.ai's menu (the model in the \"Model: Fable 5.2 · Effort: high\" line). Effort is never changed automatically; the suggestion shows on the strip and you pick it. Older replies seen when the page opens are left alone.",
+    "Sohbetler sayfasında durum ve biçim": "Status and format on the Chats page",
+    "Sohbetler sayfasında (claude.ai/chats) yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; kenar çubuğuna dokunmaz; XX, OLD ve DEL sönük görünür. Biçime (DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Listenin üstünde durum süzgeci ve XX gizle var. DEL satırında Sil düğmesi.": "On the Chats page (claude.ai/chats) the seven statuses (TO-DO, OK, QA, LATER, XX, OLD, DEL) become coloured chips; the sidebar is left alone; XX, OLD and DEL rows are dimmed. Titles that do not fit the format (STATUS OWNER CODE CHAT-NAME +SHORT-SUMMARY) show what is missing; clicking the badge opens the title grid. Above the list: a status filter and Hide XX. DEL rows get a Delete button.",
     "TO-DO yap": "Make TO-DO",
     "OK yap": "Make OK",
     "XX yap": "Make XX",
@@ -3240,358 +3244,7 @@
    * 8) WIDGET'I YÜZDÜR
    * ===================================================================== */
 
-  define({
-    id: 'widgetFloat',
-    label: 'Widget\'ı yüzdür',
-    desc: 'Three.js viewer, artifact, visualize gibi iframe widget\'larına "float" butonu koyar; sürükle-bırak yüzen pencereye alır. Esc ile geri koyar.',
-    group: 'Araçlar',
-    keys: 'Esc',
-    on(ctx) {
-      const CFG = { minIframeW: 180, minIframeH: 140, minW: 260, minH: 200, scanMs: 300, z: 2147483647, storeKey: 'cwf:v1' };
-      const CAN_POPOVER = typeof HTMLElement.prototype.showPopover === 'function';
-
-      function toTopLayer(node) {
-        if (!CAN_POPOVER) return false;
-        try {
-          if (node.getAttribute('popover') !== 'manual') node.setAttribute('popover', 'manual');
-          let open = false;
-          try { open = node.matches(':popover-open'); } catch (e) { open = false; }
-          if (!open) node.showPopover();
-          return true;
-        } catch (e) { return false; }
-      }
-
-      function unTop(node) {
-        try { node.hidePopover(); } catch (e) {}
-        node.removeAttribute('popover');
-      }
-
-      ctx.css(
-        '[popover].cwf::backdrop{background:transparent!important;pointer-events:none!important}' +
-        '[popover].cwf{inset:auto!important;border:none!important;padding:0!important;' +
-        'margin:0!important;overflow:hidden!important;color:inherit}');
-
-      function makesStackingContext(cs) {
-        if (cs.position !== 'static' && cs.zIndex !== 'auto') return true;
-        if (parseFloat(cs.opacity) < 1) return true;
-        if (cs.isolation === 'isolate') return true;
-        if (cs.mixBlendMode && cs.mixBlendMode !== 'normal') return true;
-        if (cs.transform && cs.transform !== 'none') return true;
-        if (cs.filter && cs.filter !== 'none') return true;
-        if (cs.backdropFilter && cs.backdropFilter !== 'none') return true;
-        if (cs.perspective && cs.perspective !== 'none') return true;
-        if (cs.willChange && /transform|opacity|filter/.test(cs.willChange)) return true;
-        if (cs.contain && /paint|layout|strict|content/.test(cs.contain)) return true;
-        return false;
-      }
-
-      function liftAncestors(node) {
-        const touched = [];
-        let p = node.parentElement;
-        while (p && p !== document.documentElement) {
-          const cs = getComputedStyle(p);
-          const needLift = makesStackingContext(cs);
-          const needFlat = (cs.transform !== 'none') || (cs.filter !== 'none') ||
-                           (cs.perspective !== 'none') || (cs.contain && cs.contain !== 'none');
-          if (needLift || needFlat) {
-            touched.push({ node: p, css: p.getAttribute('style') });
-            if (cs.position === 'static') p.style.setProperty('position', 'relative', 'important');
-            p.style.setProperty('z-index', String(CFG.z), 'important');
-            p.style.setProperty('transform', 'none', 'important');
-            p.style.setProperty('filter', 'none', 'important');
-            p.style.setProperty('backdrop-filter', 'none', 'important');
-            p.style.setProperty('perspective', 'none', 'important');
-            p.style.setProperty('contain', 'none', 'important');
-            p.style.setProperty('will-change', 'auto', 'important');
-            p.style.setProperty('isolation', 'auto', 'important');
-            p.style.setProperty('overflow', 'visible', 'important');
-            if (parseFloat(cs.opacity) < 1) p.style.setProperty('opacity', '1', 'important');
-            if (cs.mixBlendMode !== 'normal') p.style.setProperty('mix-blend-mode', 'normal', 'important');
-          }
-          p = p.parentElement;
-        }
-        return touched;
-      }
-
-      function restoreAncestors(touched) {
-        for (const t of touched) {
-          if (t.css != null) t.node.setAttribute('style', t.css);
-          else t.node.removeAttribute('style');
-        }
-      }
-
-      let layer = null;
-      function ensureLayer() {
-        if (layer && document.body && document.body.contains(layer)) return layer;
-        layer = document.createElement('div');
-        layer.id = 'cwf-layer';
-        layer.className = 'cwf';
-        Object.assign(layer.style, {
-          position: 'fixed', left: '0', top: '0', width: '100vw', height: '100vh',
-          pointerEvents: 'none', zIndex: String(CFG.z), background: 'transparent'
-        });
-        (document.body || document.documentElement).appendChild(layer);
-        toTopLayer(layer);
-        return layer;
-      }
-      ctx.undo(() => { if (layer) layer.remove(); layer = null; });
-
-      function raiseLayer() {
-        const L = ensureLayer();
-        if (!CAN_POPOVER) return;
-        try { L.hidePopover(); } catch (e) {}
-        toTopLayer(L);
-      }
-
-      function el(tag, style, text) {
-        const n = document.createElement(tag);
-        n.className = 'cwf';
-        if (style) Object.assign(n.style, style);
-        if (text != null) n.textContent = text;
-        return n;
-      }
-
-      // AALabs görünümü: düz renk, ince kenar, keskin köşe; bulanıklık ve gölge yok.
-      const TV = () => TEMA.vars();
-      const btnStyle = {
-        pointerEvents: 'auto', cursor: 'pointer', border: '1px solid ' + TV().ana,
-        background: TV().ana, color: '#fff', font: '600 12px/1 "Open Sans","Segoe UI",sans-serif',
-        padding: '5px 8px', borderRadius: '2px', userSelect: 'none'
-      };
-
-      function measureOrigin(node) {
-        const prev = node.getAttribute('style');
-        node.style.setProperty('position', 'fixed', 'important');
-        node.style.setProperty('left', '0px', 'important');
-        node.style.setProperty('top', '0px', 'important');
-        node.style.setProperty('right', 'auto', 'important');
-        node.style.setProperty('bottom', 'auto', 'important');
-        node.style.setProperty('margin', '0', 'important');
-        const r = node.getBoundingClientRect();
-        if (prev != null) node.setAttribute('style', prev); else node.removeAttribute('style');
-        return { x: r.left, y: r.top };
-      }
-
-      const floats = new Map();
-      const pins = new Map();
-
-      const loadState = () => { try { return JSON.parse(localStorage.getItem(CFG.storeKey)); } catch (e) { return null; } };
-      const saveState = s => { try { localStorage.setItem(CFG.storeKey, JSON.stringify(s)); } catch (e) {} };
-      const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-
-      function isCandidate(f) {
-        if (!f.isConnected) return false;
-        const r = f.getBoundingClientRect();
-        return r.width >= CFG.minIframeW && r.height >= CFG.minIframeH;
-      }
-
-      function float(frame) {
-        if (floats.has(frame)) return;
-
-        const startRect = frame.getBoundingClientRect();
-        const parent = frame.parentElement;
-        const saved = {
-          frameCss: frame.getAttribute('style'),
-          frameClass: frame.className,
-          parentMinH: parent ? (parent.style.minHeight || '') : ''
-        };
-
-        if (parent) parent.style.minHeight = Math.round(startRect.height) + 'px';
-
-        frame.classList.add('cwf');
-        const promoted = toTopLayer(frame);
-        const touched = promoted ? [] : liftAncestors(frame);
-        const origin = measureOrigin(frame);
-
-        const prev = loadState();
-        const st = {
-          x: prev ? prev.x : clamp(startRect.left, 12, Math.max(12, window.innerWidth - startRect.width - 24)),
-          y: prev ? prev.y : Math.max(56, startRect.top),
-          w: prev ? prev.w : startRect.width,
-          h: prev ? prev.h : startRect.height
-        };
-        st.w = clamp(st.w, CFG.minW, window.innerWidth - 24);
-        st.h = clamp(st.h, CFG.minH, window.innerHeight - 80);
-        st.x = clamp(st.x, 0, window.innerWidth - st.w);
-        st.y = clamp(st.y, 36, window.innerHeight - 60);
-
-        const L = ensureLayer();
-        const chrome = el('div', { position: 'fixed', pointerEvents: 'none', boxSizing: 'border-box' });
-        const bar = el('div', {
-          position: 'absolute', left: '0', top: '-30px', width: '100%', height: '30px',
-          pointerEvents: 'auto', cursor: 'move', display: 'flex', alignItems: 'center',
-          gap: '6px', padding: '0 8px', boxSizing: 'border-box',
-          background: TV().yuzey, color: TV().metin, borderRadius: '6px 6px 0 0',
-          border: '1px solid ' + TV().kenar, borderBottom: 'none',
-          font: '600 12px/1 "Open Sans","Segoe UI",sans-serif'
-        });
-        const title = el('span', { flex: '1', color: TV()['metin-ikincil'], overflow: 'hidden', whiteSpace: 'nowrap' }, 'Widget');
-        const bMax = el('button', Object.assign({}, btnStyle, { background: 'transparent', border: 'none', color: TV().metin, padding: '4px 6px' }), '⤢');
-        const bClose = el('button', Object.assign({}, btnStyle, { background: 'transparent', border: 'none', color: TV().metin, padding: '4px 6px' }), '✕');
-        bMax.setAttribute('aria-label', _('Büyüt'));
-        bClose.setAttribute('aria-label', _('Yerine koy'));
-        bMax.title = _('Büyüt / eski boyut (başlıkta çift tık)');
-        bClose.title = _('Yerine geri koy (Esc)');
-        bar.append(title, bMax, bClose);
-
-        const grip = el('div', {
-          position: 'absolute', right: '-2px', bottom: '-2px', width: '18px', height: '18px',
-          pointerEvents: 'auto', cursor: 'nwse-resize',
-          borderRight: '3px solid ' + TV().kenar, borderBottom: '3px solid ' + TV().kenar, boxSizing: 'border-box'
-        });
-        chrome.append(bar, grip);
-        L.appendChild(chrome);
-        raiseLayer();
-
-        const rec = { frame, parent, saved, touched, origin, st, chrome, bar, grip, max: null, promoted };
-        floats.set(frame, rec);
-        apply(rec);
-
-        let drag = null;
-        bar.addEventListener('pointerdown', e => {
-          if (e.target === bMax || e.target === bClose) return;
-          drag = { dx: e.clientX - rec.st.x, dy: e.clientY - rec.st.y };
-          bar.setPointerCapture(e.pointerId);
-          shield(true); e.preventDefault();
-        });
-        bar.addEventListener('pointermove', e => {
-          if (!drag) return;
-          rec.st.x = clamp(e.clientX - drag.dx, -rec.st.w + 80, window.innerWidth - 80);
-          rec.st.y = clamp(e.clientY - drag.dy, 32, window.innerHeight - 40);
-          apply(rec);
-        });
-        const endDrag = () => { if (drag) { drag = null; shield(false); saveState(rec.st); } };
-        bar.addEventListener('pointerup', endDrag);
-        bar.addEventListener('pointercancel', endDrag);
-
-        let rez = null;
-        grip.addEventListener('pointerdown', e => {
-          rez = { x: e.clientX, y: e.clientY, w: rec.st.w, h: rec.st.h };
-          grip.setPointerCapture(e.pointerId);
-          shield(true); e.preventDefault();
-        });
-        grip.addEventListener('pointermove', e => {
-          if (!rez) return;
-          rec.st.w = Math.max(CFG.minW, rez.w + (e.clientX - rez.x));
-          rec.st.h = Math.max(CFG.minH, rez.h + (e.clientY - rez.y));
-          apply(rec);
-        });
-        const endRez = () => { if (rez) { rez = null; shield(false); saveState(rec.st); } };
-        grip.addEventListener('pointerup', endRez);
-        grip.addEventListener('pointercancel', endRez);
-
-        const toggleMax = () => {
-          if (rec.max) { rec.st = rec.max; rec.max = null; }
-          else {
-            rec.max = Object.assign({}, rec.st);
-            rec.st = { x: 12, y: 44, w: window.innerWidth - 24, h: window.innerHeight - 60 };
-          }
-          apply(rec);
-          saveState(rec.max ? rec.max : rec.st);
-        };
-        bMax.addEventListener('click', toggleMax);
-        bar.addEventListener('dblclick', toggleMax);
-        bClose.addEventListener('click', () => unfloat(frame));
-      }
-
-      function apply(rec) {
-        const { frame, st, origin, chrome } = rec;
-        const S = (k, v) => frame.style.setProperty(k, v, 'important');
-        S('position', 'fixed');
-        S('left', (st.x - origin.x) + 'px');
-        S('top', (st.y - origin.y) + 'px');
-        S('right', 'auto'); S('bottom', 'auto'); S('inset', 'auto');
-        S('left', (st.x - origin.x) + 'px'); S('top', (st.y - origin.y) + 'px');
-        S('width', st.w + 'px'); S('height', st.h + 'px');
-        S('min-width', '0'); S('min-height', '0');
-        S('max-width', 'none'); S('max-height', 'none');
-        S('margin', '0'); S('padding', '0'); S('border', 'none');
-        S('z-index', String(CFG.z));
-        S('border-radius', '0 0 6px 6px');
-        S('box-shadow', 'none');
-        S('outline', '1px solid ' + TV().kenar);
-        S('background', TV().yuzey);
-        S('display', 'block');
-        S('visibility', 'visible');
-        S('opacity', '1');
-        chrome.style.left = st.x + 'px';
-        chrome.style.top = st.y + 'px';
-        chrome.style.width = st.w + 'px';
-        chrome.style.height = st.h + 'px';
-      }
-
-      function unfloat(frame) {
-        const rec = floats.get(frame);
-        if (!rec) return;
-        floats.delete(frame);
-        rec.chrome.remove();
-        if (rec.promoted) unTop(frame);
-        frame.className = rec.saved.frameClass;
-        if (rec.saved.frameCss != null) frame.setAttribute('style', rec.saved.frameCss);
-        else frame.removeAttribute('style');
-        if (rec.parent) rec.parent.style.minHeight = rec.saved.parentMinH;
-        restoreAncestors(rec.touched);
-      }
-      ctx.undo(() => { for (const [f] of [...floats]) unfloat(f); });
-
-      let shieldEl = null;
-      function shield(on) {
-        if (on) {
-          if (shieldEl) return;
-          shieldEl = el('div', {
-            position: 'fixed', left: '0', top: '0', width: '100vw', height: '100vh',
-            pointerEvents: 'auto', cursor: 'grabbing', background: 'transparent'
-          });
-          ensureLayer().appendChild(shieldEl);
-        } else if (shieldEl) { shieldEl.remove(); shieldEl = null; }
-      }
-
-      function pinFor(frame) {
-        let b = pins.get(frame);
-        if (!b) {
-          b = el('button', Object.assign({}, btnStyle, { position: 'fixed', opacity: '.55' }), '⇱ ' + _('Yüzdür'));
-          b.title = _('Yüzen pencereye al');
-          b.addEventListener('mouseenter', () => { b.style.opacity = '1'; });
-          b.addEventListener('mouseleave', () => { b.style.opacity = '.55'; });
-          b.addEventListener('click', () => float(frame));
-          ensureLayer().appendChild(b);
-          pins.set(frame, b);
-        }
-        return b;
-      }
-      ctx.undo(() => { for (const [, b] of pins) b.remove(); pins.clear(); });
-
-      function tick() {
-        if (!document.body) return;
-        ensureLayer();
-        const seen = new Set();
-        for (const f of document.querySelectorAll('iframe')) {
-          if (floats.has(f)) { seen.add(f); continue; }
-          if (!isCandidate(f)) continue;
-          seen.add(f);
-          const r = f.getBoundingClientRect();
-          const b = pinFor(f);
-          const vis = r.bottom > 0 && r.top < window.innerHeight;
-          b.style.display = vis ? 'block' : 'none';
-          b.style.left = Math.round(r.right - 74) + 'px';
-          b.style.top = Math.round(r.top + 8) + 'px';
-        }
-        for (const [f, b] of pins) if (!seen.has(f) || floats.has(f)) { b.remove(); pins.delete(f); }
-        for (const [f, rec] of floats) if (!f.isConnected) { rec.chrome.remove(); floats.delete(f); }
-      }
-
-      ctx.on(document, 'keydown', e => {
-        if (e.key === 'Escape' && floats.size) {
-          for (const [f] of [...floats]) unfloat(f);
-          e.stopPropagation();
-        }
-      }, true);
-
-      ctx.on(window, 'resize', () => { for (const [, rec] of floats) apply(rec); });
-      ctx.every(tick, CFG.scanMs);
-      tick();
-    }
-  });
+  /* widgetFloat: kaldırıldı (2611-18a, kullanıcı kararı) */
 
   /* =====================================================================
    * 9) PROJE ETİKETLERİ, FİLTRE, SAYI, BAŞLIKTA ARAMA
@@ -5092,13 +4745,14 @@
    * ===================================================================== */
 
   // 2611-08d kod listesi: ZKC = ZMASH Kuruçeşme (ZMASH'in alt kodu). IMG, VID, CAI, MODEL, TOOL, TEXT yeni.
+  /* 2611-16b kod listesi (kullanıcı kararı 2026-11-16): her satır bir grup, kodlar alfabetik.
+     Parantez içi açıklama ızgarada ipucu olur: "MOB (cep telefonu ile alakalı her şey)". */
   const KOD_VARSAYILAN = [
-    'İş: ZMASH, ZKC, HUKUK, SHOP',
-    'Yazılım: WIN, MOB, SCR, HTML, TECH, TOOL',
-    'Claude: CLAUDE, SKILL, COCO, MODEL',
-    'Üretim: IMG, VID, TEXT',
-    'Kişisel: GRK, FOOD, SAĞLIK, 3DP',
-    'Oyun: GAME, BG3, Hercules'
+    'Genel: 3DP, FOOD, HUKUK, SAĞLIK, SHOP, TOOL',
+    'Yazılım: FF (firefox add-on), HTML, MOB (cep telefonu ile alakalı her şey), SCR (script)',
+    'Claude: AI, CLAUDE, COCO, LUCAS, SKILL',
+    'Teknoloji ve oyun: BG3, GAME, TECH',
+    'Üretim: DOC, IMG, TEXT, VID'
   ].join('\n');
   /* 2611-01 kod listesi eski bütün kodların yerini alır (kullanıcı kararı 2026-11-01).
      Kayıtlı liste ne olursa olsun bir kez yenisiyle değiştirilir; sonra Ayarlar'dan düzenlenebilir.
@@ -5135,6 +4789,9 @@
   }
   kodGoc('kodGocu2611-08d', ['IMG', 'VID', 'CAI', 'MODEL', 'TOOL', 'TEXT']);
   kodGoc('kodGocu2611-09a', ['GAME', 'BG3', 'Hercules']);
+  /* 2611-16b: kod listesi kullanıcının yeni listesiyle bir kez değiştirilir (ZMASH, GRK artık yalnız sahip;
+     WIN, ZKC, MODEL, Hercules çıktı; FF, AI, LUCAS, DOC eklendi). Sonra Ayarlar'dan düzenlenebilir. */
+  try { if (!ayarOku('kodGocu2611-16b', false)) { ayarYaz('baslikKodlari', KOD_VARSAYILAN); ayarYaz('kodGocu2611-16a', true); ayarYaz('kodGocu2611-16b', true); } } catch (e) {}
   /* 2611-16a: CAI uygulamasının adı COCO oldu; kayıtlı listede CAI bir kez COCO'ya çevrilir (CAI yoksa COCO eklenir). */
   (function kodGocu16a() {
     try {
@@ -5155,8 +4812,15 @@
       String(metin).split('\n').forEach(satir => {
         const m = satir.match(/^\s*([^:]+):\s*(.+)$/);
         if (!m) return;
-        const kodlar = m[2].split(',').map(x => x.trim()).filter(Boolean);
-        if (kodlar.length) gr.push({ ad: m[1].trim(), renk: GRUP_RENK[gr.length % GRUP_RENK.length], kodlar });
+        // 2611-16b: "KOD (açıklama)" → kod + açıklama (ızgarada ipucu).
+        const aciklama = {};
+        const kodlar = m[2].split(',').map(x => x.trim()).filter(Boolean).map(x => {
+          const a = x.match(/^(\S+)\s*\((.*)\)\s*$/);
+          if (!a) return x;
+          aciklama[a[1]] = a[2].trim();
+          return a[1];
+        });
+        if (kodlar.length) gr.push({ ad: m[1].trim(), renk: GRUP_RENK[gr.length % GRUP_RENK.length], kodlar, aciklama });
       });
       return gr;
     },
@@ -5738,7 +5402,7 @@
         for (const k of BASLIK.kodlar()) {
           const b = document.createElement('button');
           b.type = 'button'; b.className = 'kod'; b.textContent = k.kod;
-          b.title = k.grup.ad + ' · ' + k.kod;
+          b.title = k.grup.ad + ' · ' + k.kod + (k.grup.aciklama && k.grup.aciklama[k.kod] ? ' — ' + k.grup.aciklama[k.kod] : '');
           b.style.background = v[k.grup.renk];
           b.addEventListener('click', () => {
             const var_ = [...secili].filter(x => x === k.kod || x.startsWith(k.kod + '-'));
@@ -6839,30 +6503,8 @@
         dugmeler[s] = b;
         serit.appendChild(b);
       }
-      // 2611-09f: varsayılana tek tık (Opus 5.5 · medium). Öneri dışı bir şey yazınca göndermeden önce basılır.
-      const VARSAYILAN = { model: 'Opus 5.5', efor: 'medium' };
-      const ayrac = document.createElement('i'); ayrac.className = 'ayrac';
-      const vars = document.createElement('button');
-      vars.type = 'button'; vars.className = 'vars';
-      vars.textContent = VARSAYILAN.model + ' · ' + VARSAYILAN.efor;
-      vars.addEventListener('click', varsayilana);
-      serit.append(ayrac, vars);
+      // 2611-18a: varsayılan (Opus 5.5 · medium) düğmesi kaldırıldı (kullanıcı kararı).
       k.kok.appendChild(serit);
-
-      async function varsayilana() {
-        if (EFOR.mesgul()) return;
-        serit.classList.add('mesgul');
-        let rm = null, r = null;
-        try {
-          rm = await EFOR.modelSec(VARSAYILAN.model, gizle);
-          await new Promise(x => setTimeout(x, 150));
-          if (EFOR.kullanilan() !== VARSAYILAN.efor) r = await EFOR.sec(VARSAYILAN.efor, gizle);
-        } catch (e) { r = { ok: false, metin: e.message }; }
-        finally { serit.classList.remove('mesgul'); }
-        if (rm && !rm.ok) bildir(_f('Model değiştirilemedi: {0}', rm.metin), 'hata');
-        else if (r && !r.ok) bildir(_f('Efor değiştirilemedi: {0}. Tanı ayrıntıyı yazar.', r.metin), 'hata');
-        ciz();
-      }
 
       // Arka planda açılan claude.ai menüsü görünmesin (titreme olmasın).
       const gizliCss = ctx.css('');
@@ -6920,10 +6562,6 @@
           const ad = AD[s] || s;
           b.title = not.length ? ad + ' · ' + not.join(' · ') : _f('{0} seç', ad);
         }
-        const varsSecili = EFOR.ayniModel(EFOR.modelAdi(btn), VARSAYILAN.model) && kul === VARSAYILAN.efor;
-        vars.classList.toggle('secili', varsSecili);
-        vars.setAttribute('aria-pressed', varsSecili ? 'true' : 'false');
-        vars.title = varsSecili ? _('Varsayılan seçili: Opus 5.5 · medium') : _('Bu mesaj için varsayılana dön: Opus 5.5 · medium');
         serit.style.setProperty('--efor-kirmizi', isDark() ? '#FF7B72' : '#C4453C');
         serit.style.setProperty('--efor-yesil', isDark() ? '#3FB950' : '#1A7F37');
         serit.classList.add('acik');
@@ -6962,88 +6600,7 @@
   /* Öneriye kendiliğinden geç (2611-01b): yeni bir cevap bitince önerdiği efor kullanılandan
      farklıysa şerit o seviyeyi seçer. Açılışta görülen eski cevaplara dokunulmaz; yalnız bu
      sayfada sonradan gelen cevaplar sayılır. */
-  define({
-    id: 'eforOtomatik',
-    parent: 'eforSeridi',
-    label: 'Öneriye kendiliğinden geç',
-    desc: 'Yeni bir cevap bittiğinde önerdiği model ve efor kullanılandan farklıysa claude.ai menüsünden onları seçer ("Model: Opus 5.5 · Effort: medium"; Model yoksa yalnız efor). Sayfa açılırken görülen eski cevaplara dokunmaz.',
-    group: 'Yazma',
-    health() {
-      const s = EFOR.durum.otomatik;
-      return { tamam: true, metin: s ? _f('Son geçiş: {0} → {1}', s.once || '?', s.sonra || s.once || '?') + (s.model ? ' · ' + _f('model: {0}', s.model) : '') + (s.uyari ? ' · ' + s.uyari : '') : _('Henüz geçiş yok') };
-    },
-    on(ctx) {
-      /* Yeni cevap ölçütü: öneri anahtarı değişti VE (bu sayfada bir cevabın yazıldığı görüldü
-         YA DA cevap sayısı tabandan arttı). Dal gezinme (< 2/3 >) cevap sayısını artırmaz.
-         Taban: sayfa/sohbet açılınca anahtar 3 sn değişmeyene dek yenilenir. */
-      const AI_SEC = '[data-testid="assistant-message"], .font-claude-response, .font-claude-message, [data-is-streaming]';
-      const cevapSayisi = () => document.querySelectorAll(AI_SEC).length;
-      let gorulen = '', tabanSayi = 0, sohbet = null, sabitSon = 0, oncekiAnahtar = null, tabanHazir = false;
-      let yazdi = false, mesgul = false, kapali = false;
-      ctx.undo(() => { kapali = true; });
-      function tabanSifirla() { tabanHazir = false; sabitSon = 0; oncekiAnahtar = null; yazdi = false; }
-      ctx.every(async () => {
-        if (kapali || mesgul) return;
-        try {
-          if (suankiSohbet() !== sohbet) {
-            const yeniSohbet = !sohbet;          // /new'den ilk mesajla sohbet oluştu: taban yeniden alınmaz
-            sohbet = suankiSohbet();
-            if (!yeniSohbet) tabanSifirla();
-          }
-          if (EFOR.yaziyor()) { yazdi = true; return; }
-          EFOR.oneri();
-          const anahtar = EFOR.oneriAnahtar() || '';
-          if (!tabanHazir) {
-            if (anahtar !== oncekiAnahtar) { oncekiAnahtar = anahtar; sabitSon = Date.now(); return; }
-            if (Date.now() - sabitSon < 3000) return;
-            gorulen = anahtar; tabanSayi = cevapSayisi(); tabanHazir = true;
-            return;
-          }
-          if (document.hidden || EFOR.mesgul()) return;
-          // Kullanıcının açık menüsü varsa bekle. Base UI kapanan menüyü DOM'da bırakabiliyor (data-closed); o sayılmaz (2611-15a).
-          if ([...document.querySelectorAll('[role="menu"], [data-radix-popper-content-wrapper]')].some(m => m.getClientRects().length &&
-            !m.hasAttribute('data-closed') && getComputedStyle(m).pointerEvents !== 'none')) return;
-          if (anahtar === gorulen) return;
-          const yeniCevap = yazdi || cevapSayisi() > tabanSayi;
-          gorulen = anahtar;
-          tabanSayi = Math.max(tabanSayi, cevapSayisi());
-          yazdi = false;
-          if (!yeniCevap) return;
-          const on = EFOR.oneri();
-          const om = EFOR.oneriModel();          // eski satırda yok → model değişmez
-          const modelFark = !!om && !EFOR.ayniModel(om, EFOR.modelAdi());
-          let kul = EFOR.kullanilan();
-          if (!modelFark && (!on || !kul || kul === on)) return;
-          mesgul = true;
-          const gizliCss = document.createElement('style');
-          (document.head || document.documentElement).appendChild(gizliCss);
-          const gizle = acik => { gizliCss.textContent = acik ? '[data-radix-popper-content-wrapper],[role="menu"]{opacity:0!important}' : ''; };
-          let r = null, rm = null, uyari = '';
-          try {
-            if (modelFark) {
-              rm = await EFOR.modelSec(om, gizle);
-              if (!rm.ok) {
-                uyari = rm.bilinmeyen ? _f('Önerilen model "{0}" menüde yok; model değişmedi.', om) : _f('Model değiştirilemedi: {0}', rm.metin);
-                if (!kapali) bildir(uyari, 'uyari');
-              }
-              await new Promise(x => setTimeout(x, 150));
-              kul = EFOR.kullanilan();
-            }
-            if (on && kul && kul !== on) r = await EFOR.sec(on, gizle);
-          } catch (e) { r = { ok: false, metin: e.message }; }
-          finally { setTimeout(() => gizliCss.remove(), 250); mesgul = false; }
-          const modelOk = rm && rm.ok && !rm.ayni;
-          if (((r && r.ok) || modelOk) && !kapali) {
-            EFOR.durum.otomatik = { once: r && r.ok ? kul : null, sonra: r && r.ok ? on : null, model: modelOk ? om : null, uyari, at: Date.now() };
-            const parca = [];
-            if (modelOk) parca.push(om);
-            if (r && r.ok) parca.push(on === 'xhigh' ? 'extra' : on);
-            bildir(_f('Öneriye geçildi: {0}', parca.join(' · ')), 'bilgi');
-          } else if (uyari && !kapali) EFOR.durum.otomatik = { once: kul, sonra: null, model: null, uyari, at: Date.now() };
-        } catch (e) { mesgul = false; gunluk('eforOtomatik', e.message); }
-      }, 1000);
-    }
-  });
+  /* eforOtomatik: kaldırıldı (2611-18a, kullanıcı kararı) */
 
   /* =====================================================================
    * KENAR ÇUBUĞUNDA CHATS (2.2.1)
@@ -7072,170 +6629,7 @@
     }
   };
 
-  define({
-    id: 'chatsLink',
-    label: 'Kenar çubuğunda Chats',
-    desc: 'Sol menüde New\'in altına claude.ai/chats bağlantısı ekler.',
-    group: 'Gezinme',
-    health() {
-      const el = document.querySelector('[data-cls-chats]');
-      if (el && el.isConnected) return { tamam: true, metin: _('New\'in altında') };
-      if (KENAR.asil()) return { tamam: true, metin: _('claude.ai\'nin kendi Chats bağlantısı var') };
-      // Bulunamazsa Tanı soldaki bağlantı ve düğmeleri yazar.
-      const aday = [...document.querySelectorAll('a, button, [role="button"], [role="link"]')].filter(x => {
-        const r = x.getBoundingClientRect(); return r.width > 0 && r.left < 450 && r.width < 450;
-      }).slice(0, 12).map(x => x.tagName.toLowerCase() + (x.getAttribute('href') ? ' href="' + x.getAttribute('href') + '"' : '') +
-        (x.getAttribute('aria-label') ? ' aria-label="' + x.getAttribute('aria-label') + '"' : '') + ' | ' +
-        JSON.stringify((typeof x.innerText === 'string' ? x.innerText : x.textContent || '').trim().slice(0, 40)));
-      const chats = [...document.querySelectorAll('a[href*="chats"]')].slice(0, 6).map(x => 'chats-bağlantısı href="' + x.getAttribute('href') + '" | ' + JSON.stringify(KENAR.ilkSatir(x).slice(0, 30)));
-      const yeniVar = [...document.querySelectorAll('a, button')].some(KENAR.yeniMi);
-      // Tanı: /new bağlantılarının ilk satırı karakter kodlarıyla (görünmez karakter var mı?).
-      for (const x of document.querySelectorAll('a[href="/new"]')) {
-        const t = typeof x.innerText === 'string' ? x.innerText : x.textContent || '';
-        aday.push('/new kodları: ' + [...t.slice(0, 8)].map(c => c.charCodeAt(0)).join(' ') + ' · ilk satır ' + JSON.stringify(KENAR.ilkSatir(x)) + ' · rects ' + x.getClientRects().length);
-      }
-      return { tamam: false, metin: yeniVar ? _('"New" bulundu ama Chats eklenemedi') : _('"New" satırı bulunamadı'), ayrinti: aday.concat(chats) };
-    },
-    on(ctx) {
-      const IKON = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5h12a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H9l-4 3v-3H4a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1z"/><path d="M6.5 8h7M6.5 10.5h4.5"/></svg>';
-      let kopya = null;
-
-      // Sol menü: ekranın solunda dar bir şerit. "New" bir bağlantı (a[href=/new]) ya da düğme olabilir.
-      // Yazısı tam olarak "New" olan öğe aranır; claude.ai logosu da /new'e gider ama yazısı "Claude"dur.
-      function yeniBaglanti() {
-        // İlk satır yeter: satırda gizli bir kısayol ipucu (ör. "Ctrl+Shift+O") da olabilir.
-        const l = [...document.querySelectorAll('a, button, [role="button"], [role="link"]')].filter(x =>
-          !x.closest('[data-cls-chats]') && KENAR.yeniMi(x));
-        return l.find(x => /\/new$/.test(x.getAttribute('href') || '')) || l[0] || null;
-      }
-      // Yalnız tek çocuklu sarmalayıcılar boyunca, en çok 3 kat çıkılır (yükleme sırasında bütün menü kopyalanmaz).
-      function satiri(a) {
-        let el = a;
-        for (let i = 0; i < 3 && el.parentElement && el.parentElement.children.length === 1 &&
-          !/^(NAV|ASIDE|UL|OL)$/.test(el.parentElement.tagName); i++) el = el.parentElement;
-        return el;
-      }
-      function git(e) {
-        if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;   // yeni sekme serbest
-        e.preventDefault();
-        e.stopPropagation();
-        try {
-          const r = window.next && window.next.router;
-          if (r && typeof r.push === 'function') { Promise.resolve(r.push('/chats')).catch(() => location.assign('/chats')); return; }
-        } catch (er) { gunluk('chatsLink', er.message); }
-        location.assign('/chats');
-      }
-      function kur() {
-        const a = yeniBaglanti();
-        // claude.ai kendi bağlantısını eklediyse kopyaya gerek yok.
-        const asil = KENAR.asil();
-        if (!a || asil) { if (kopya) { kopya.remove(); kopya = null; } return; }
-        for (const x of document.querySelectorAll('[data-cls-chats]')) if (x !== kopya) x.remove();
-        const satir = satiri(a);
-        // New satırı yerinde değişirse (menü daraltma, sayfa değişimi) kopya yeniden yapılır.
-        const imza = satir.className + '|' + satir.childElementCount + '|' + Math.round(satir.getBoundingClientRect().width) + '|' + (location.pathname === '/new');
-        if (kopya && kopya.isConnected && kopya.parentElement === satir.parentElement &&
-          (satir.compareDocumentPosition(kopya) & Node.DOCUMENT_POSITION_FOLLOWING) && kopya.dataset.imza === imza) {
-          kopya.classList.toggle('cls-chats-aktif', location.pathname === '/chats');
-          return;
-        }
-        if (kopya) kopya.remove();
-        kopya = satir.cloneNode(true);
-        kopya.dataset.imza = imza;
-        // /new'deyken New satırı seçili görünür; kopya seçili olmayan bir komşu satırın sınıflarını alır.
-        if (location.pathname === '/new') {
-          const komsu = [...satir.parentElement.children].find(x => x !== satir && !x.hasAttribute('data-cls-chats') && x.querySelector && (x.tagName === 'A' || x.querySelector('a')));
-          if (komsu && komsu.tagName === satir.tagName) {
-            kopya.className = komsu.className;
-            const ka = komsu.tagName === 'A' ? komsu : komsu.querySelector('a');
-            const ya = kopya.tagName === 'A' ? kopya : kopya.querySelector('a');
-            if (ka && ya && ka !== komsu) ya.className = ka.className;
-          }
-        }
-        kopya.setAttribute('data-cls-chats', '');
-        kopya.removeAttribute('id');
-        for (const x of [kopya, ...kopya.querySelectorAll('*')]) {
-          x.removeAttribute('id');
-          x.removeAttribute('aria-current');
-          if (x.getAttribute('data-state') === 'active') x.removeAttribute('data-state');
-          x.removeAttribute('aria-describedby');
-          for (const at of [...x.attributes]) if (/^data-radix/.test(at.name)) x.removeAttribute(at.name);
-          if (x.hasAttribute('data-testid')) x.setAttribute('data-testid', 'cls-chats');
-        }
-        let link = kopya.tagName === 'A' ? kopya : kopya.querySelector('a');
-        if (!link) {
-          // "New" bir düğmeyse kopyadaki düğme aynı görünüşte bir bağlantıya çevrilir.
-          const b = /^(BUTTON)$/.test(kopya.tagName) || kopya.getAttribute('role') === 'button' ? kopya : kopya.querySelector('button,[role="button"]');
-          link = document.createElement('a');
-          if (b) {
-            for (const at of [...b.attributes]) if (!/^(type|disabled|role|aria-haspopup|aria-expanded)$/.test(at.name)) link.setAttribute(at.name, at.value);
-            while (b.firstChild) link.appendChild(b.firstChild);
-            if (b === kopya) kopya = link; else b.replaceWith(link);
-          } else { while (kopya.firstChild) link.appendChild(kopya.firstChild); kopya.appendChild(link); }
-          link.setAttribute('data-cls-chats', '');
-          if (kopya !== link) kopya.setAttribute('data-cls-chats', '');
-          kopya.dataset.imza = imza;
-          link.style.textDecoration = 'none';
-          link.style.color = 'inherit';
-        }
-        link.setAttribute('href', '/chats');
-        link.setAttribute('aria-label', 'Chats');
-        link.addEventListener('click', git);
-        // Yazı: "New" / "New chat" / "Yeni sohbet" → "Chats".
-        const yz = document.createTreeWalker(kopya, NodeFilter.SHOW_TEXT);
-        let degisti = false;
-        for (let n = yz.nextNode(); n; n = yz.nextNode()) {
-          if (n.parentElement && n.parentElement.closest('svg')) continue;
-          if (/^\s*(new( chat)?|yeni( sohbet)?)\s*$/i.test(n.textContent)) { n.textContent = 'Chats'; degisti = true; }
-        }
-        if (!degisti) {
-          const etiket = (typeof a.innerText === 'string' ? a.innerText : a.textContent || '').trim().split('\n')[0];
-          const t = [...kopya.querySelectorAll('span,div')].find(x => !x.children.length && (x.textContent || '').trim() === etiket) ||
-            [...kopya.querySelectorAll('span,div')].find(x => !x.children.length && (x.textContent || '').trim());
-          if (t) t.textContent = 'Chats';
-        }
-        // New'in kısayol ipucu (Ctrl + Shift + O) kopyada kalmaz.
-        for (const k of [...kopya.querySelectorAll('kbd')]) {
-          const kap = k.parentElement;
-          if (kap && kap !== kopya && kap !== link && [...kap.children].every(c => c.tagName === 'KBD' || /^\s*\+?\s*$/.test(c.textContent))) kap.remove();
-          else k.remove();
-        }
-        // Simge yazı tipi karakteri (ör. U+E001 "+") varsa sohbet balonu SVG'si konur.
-        if (!kopya.querySelector('svg')) {
-          const yz2 = document.createTreeWalker(kopya, NodeFilter.SHOW_TEXT);
-          for (let n = yz2.nextNode(); n; n = yz2.nextNode()) {
-            if (/^\s*[\uE000-\uF8FF]\s*$/.test(n.textContent)) {
-              const k = document.createElement('span');
-              k.innerHTML = IKON;
-              const sv = k.firstChild;
-              sv.setAttribute('width', '1em'); sv.setAttribute('height', '1em');
-              sv.style.fill = 'none'; sv.style.stroke = 'currentColor'; sv.style.verticalAlign = '-0.125em';
-              n.replaceWith(sv);
-              break;
-            }
-          }
-        }
-        // Simge: ilk SVG sohbet balonuyla değişir; boyutu ve sınıfı korunur.
-        const eski = kopya.querySelector('svg');
-        if (eski) {
-          const k = document.createElement('div');
-          k.innerHTML = IKON;
-          const yeni = k.firstChild;
-          for (const at of ['class', 'width', 'height', 'style']) if (eski.getAttribute(at) != null) yeni.setAttribute(at, eski.getAttribute(at));
-          if (!yeni.getAttribute('width')) { yeni.setAttribute('width', '20'); yeni.setAttribute('height', '20'); }
-          yeni.style.fill = 'none';
-          yeni.style.stroke = 'currentColor';
-          eski.replaceWith(yeni);
-        }
-        satir.after(kopya);
-        kopya.classList.toggle('cls-chats-aktif', location.pathname === '/chats');
-      }
-      ctx.css('[data-cls-chats].cls-chats-aktif, .cls-chats-aktif a{font-weight:600}');
-      ctx.undo(() => { if (kopya) kopya.remove(); kopya = null; });
-      ctx.every(kur, 1000);
-      kur();
-    }
-  });
+  /* chatsLink: kaldırıldı (2611-18a, kullanıcı kararı) */
 
   /* =====================================================================
    * EKLER (2611-01b): sayfayı sadeleştir · başlık önerisini tek tıkla uygula ·
@@ -7695,8 +7089,8 @@
   define({
     id: 'titleSchemaSidebar',
     parent: 'titleCode',
-    label: 'Kenar çubuğunda durum ve biçim',
-    desc: 'Sohbet listelerinde yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; XX, OLD ve DEL sönük görünür. Biçime (DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Kenarda durum süzgeci ve XX gizle var. Sohbetler sayfasında DEL satırında Sil düğmesi.',
+    label: 'Sohbetler sayfasında durum ve biçim',
+    desc: 'Sohbetler sayfasında (claude.ai/chats) yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; kenar çubuğuna dokunmaz; XX, OLD ve DEL sönük görünür. Biçime (DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Listenin üstünde durum süzgeci ve XX gizle var. DEL satırında Sil düğmesi.',
     group: 'Yazma',
     health() {
       const d = document.querySelectorAll('[data-cls-durum]').length;
@@ -7817,6 +7211,15 @@
           if (a.closest('#claude-usage-hud, .cls-kenar-suz')) continue;
           const id = CHATDOM.idOf(a);
           const kap = kapOf(a), listede = kap !== a;
+          /* 2611-18a: kenar çubuğunda durum ve biçim kaldırıldı (kullanıcı kararı); yalnız Sohbetler sayfası işlenir.
+             Önceki sürümden kalan çip, rozet ve sönüklük temizlenir. */
+          if (!listede) {
+            for (const x of [a, ...a.querySelectorAll('[' + DUR + ']')]) if (x.hasAttribute(DUR)) geriKoy(x);
+            if (a.hasAttribute(EKS)) a.removeAttribute(EKS);
+            if (a.hasAttribute(XX)) a.removeAttribute(XX);
+            satirGizle(a, false);
+            continue;
+          }
           const e = yaziOgesi(kap, adlar[id]);
           if (!e) continue;
           const kenarda = !listede && !!(a.closest('nav, aside') || KENAR.solda(a));
@@ -7849,6 +7252,7 @@
       /* Süzgeç şeridi: kullanım göstergesinin hemen altında, betiğin kendi düğümü. */
       // Şerit yalnız kenar çubuğuna oturmuş göstergenin altında durur (yüzen göstergede yok).
       function seritYeri() {
+        return null;   // 2611-18a: kenar çubuğu süzgeç şeridi kaldırıldı (kullanıcı kararı); süzgeç yalnız Sohbetler sayfasında.
         const hud = document.getElementById('claude-usage-hud');
         return hud && hud.parentElement && hud.parentElement !== document.body ? hud : null;
       }
@@ -8061,6 +7465,9 @@
   const DEGISIKLIK = (function () {
     const VERI = [
     // @@CHG-BASLA
+    {"s": "2611-18a", "t": "2026-11-18", "m": [{"k": "kaldirildi", "tr": "Kaldırıldı: kenar çubuğundaki durum çipleri, rozetler ve süzgeç (Sohbetler sayfasında kalıyor) · Önerilen modele kendiliğinden geç · tek tuşla Opus 5.5 · medium düğmesi · Kenar çubuğunda Chats · Widget'ı yüzdür.", "en": "Removed: status chips, badges and filter in the sidebar (they stay on the Chats page) · Switch to the suggested model automatically · one-click Opus 5.5 · medium button · Chats in the sidebar · Float widget."}]},
+    {"s": "2611-17a", "t": "2026-11-17", "m": [{"k": "degisti", "tr": "Efor artık ==elle== seçilir. Cevaptaki öneri şeritte görünür ama kendiliğinden seçilmez; senin seçimin gönderdikten sonra da kalır. Önerilen model yine kendiliğinden seçilir.", "en": "Effort is now picked ==by hand==. The suggestion in the reply shows on the strip but is not applied; your pick stays after sending. The suggested model is still picked automatically."}]},
+    {"s": "2611-16b", "t": "2026-11-16", "m": [{"k": "degisti", "tr": "Kod listesi yenilendi; her satır bir grup, kodlar alfabetik: 3DP, FOOD, HUKUK, SAĞLIK, SHOP, TOOL · FF, HTML, MOB, SCR · AI, CLAUDE, COCO, LUCAS, SKILL · BG3, GAME, TECH · DOC, IMG, TEXT, VID. Kayıtlı listen bir kez bununla değişir.", "en": "New code list; each line a group, codes in alphabetical order: 3DP, FOOD, HUKUK, SAĞLIK, SHOP, TOOL · FF, HTML, MOB, SCR · AI, CLAUDE, COCO, LUCAS, SKILL · BG3, GAME, TECH · DOC, IMG, TEXT, VID. Your saved list is replaced once."}, {"k": "yeni", "tr": "Kod listesinde parantez içi açıklama yazılabilir: \"MOB (cep telefonu ile alakalı her şey)\". Açıklama ızgarada kodun üstüne gelince görünür.", "en": "A description in brackets can follow a code: \"MOB (cep telefonu ile alakalı her şey)\". It shows when you hover the code in the grid."}]},
     {"s": "2611-16a", "t": "2026-11-16", "m": [{"k": "degisti", "tr": "Başlık biçimi ~~DURUM KOD Ad~~ → ==DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET==. DURUM ve sohbet adı zorunlu; SAHİP ve KOD isteğe bağlı, \"kod yok\" artık işaretlenmez. Örnek: TO-DO ALP IMG Gülen Adam +yüz ifadesi denemesi.", "en": "Title format ~~STATUS CODE Name~~ → ==STATUS OWNER CODE CHAT-NAME +SHORT-SUMMARY==. Status and chat name are required; owner and code are optional, \"no code\" is no longer marked. Example: TO-DO ALP IMG Gülen Adam +yüz ifadesi denemesi."}, {"k": "yeni", "tr": "Kısa özet tanınır: adın ardında boşluk ve \"+\" ile başlar, 3–5 kelime olmalı; dışındaysa rozet yazar. SAĞLIK ve HUKUK belge tarihi başlığın en sonunda, özetten sonra.", "en": "The short summary is recognised: it starts with a space and \"+\" after the name and should be 3–5 words; otherwise the badge says so. The SAĞLIK and HUKUK document date goes at the very end, after the summary."}, {"k": "degisti", "tr": "Kod listesinde CAI → ==COCO== (uygulamanın yeni adı). Kayıtlı listende CAI bir kez COCO'ya çevrilir.", "en": "Code list: CAI → ==COCO== (the app's new name). CAI in your saved list is changed to COCO once."}]},
     {"s": "2611-15a", "t": "2026-11-15", "m": [{"k": "duzeldi", "tr": "Önerilen model (ör. Fable 5.2) hâlâ seçilemiyordu.", "n": "claude.ai'nin yeni menüsü kapandıktan sonra sayfada gizli kalıyor. Betik bu menüyü önceden açık sanıp yeni menü bekliyordu. Artık model düğmesinin bağlı olduğu menü doğrudan alınıyor, kapalı menüler sayılmıyor.", "en": "The suggested model (e.g. Fable 5.2) still could not be selected.", "w": "claude.ai's new menu stays hidden on the page after closing. The script took it as already open and waited for a new one. It now takes the menu the model button controls and ignores closed menus."}]},
     {"s": "2611-14b", "t": "2026-11-14", "m": [{"k": "duzeldi", "tr": "Öneri satırında Fable 5.2 yazınca model menüsünde bulunamıyordu.", "n": "claude.ai model adını ve açıklamasını boşluksuz yan yana veriyor (\"Fable 5.2For your toughest challenges\"); betik adın ardında boşluk arıyordu. Artık ad kendi öğesinde de aranır.", "en": "When the suggestion line said Fable 5.2, the model was not found in the model menu.", "w": "claude.ai gives the model name and its description side by side without a space (\"Fable 5.2For your toughest challenges\"); the script expected a space after the name. The name is now also looked up in its own element."}]},
@@ -9633,7 +9040,7 @@
           const d = document.createElement('div');
           d.className = 'kod';
           d.textContent = k.kod;
-          d.title = k.grup.ad + ' · ' + k.kod;
+          d.title = k.grup.ad + ' · ' + k.kod + (k.grup.aciklama && k.grup.aciklama[k.kod] ? ' — ' + k.grup.aciklama[k.kod] : '');
           d.style.background = v[k.grup.renk];
           izg.appendChild(d);
         }
