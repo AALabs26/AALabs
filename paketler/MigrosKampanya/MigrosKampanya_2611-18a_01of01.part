@@ -3,9 +3,12 @@
 // @name:tr      AALabs Online Market
 // @name:en      AALabs Online Market
 // @namespace    aalabs
-// @version      26.11.14.9
-// @description  Migros'ta çoklu alım kampanyalarında ürün başı ve toplam fiyatı yazar; ürün, marka ve grup gizler; Claude'a sorma, üretici, fiyat geçmişi, en ucuz birim fiyat ve sepet özeti ekler.
+// @version      26.11.18.1
+// @description  Online marketlerde (Migros, CarrefourSA, A101, Sarıyer Market) kampanyalı ürün başı ve toplam fiyat; ürün, marka, terim gizleme; Claude'a sorma, sıralama, toplu seçim.
 // @match        https://www.migros.com.tr/*
+// @match        https://www.carrefoursa.com/*
+// @match        https://www.a101.com.tr/*
+// @match        https://www.sariyermarket.com/*
 // @icon         data:image/png;base64,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
 // @updateURL    http://127.0.0.1:47815/u/AALabs.MigrosKampanya.user.js
 // @downloadURL  http://127.0.0.1:47815/u/AALabs.MigrosKampanya.user.js
@@ -25,6 +28,10 @@
 
 /* AALabs Online Market (MRK; eski adı Migros Kampanya / MGK) — app-lab · 2611-02c
  * Kayıt anahtarı @name "AALabs Migros Kampanya" değişmez: değişirse Tampermonkey yeni betik sayar, ayarlar ve gizlenenler kaybolur.
+ * 2611-18a: CarrefourSA, A101 ve Sarıyer Market'te de çalışır. Site başına kart, kimlik, ürün verisi kuralı (SITE);
+ *   kimlikler site önekli (csa-, a101-, sm-); "100 TL ve üzeri %60" türü sepet indirimi; ₺ önekli ve bölünmüş fiyat okuma.
+ * 2611-14k: gizli şerit düğmeleri kart genişliğine sığar (alt satıra geçer); sondaki satırda Hepsini geri getir (iki adımlı onay).
+ * 2611-14j: favori (kalbi dolu) ürün hiçbir kuralla gizlenmez (kullanıcı kuralı).
  * 2611-14i: kartlarda seçim kutusu + seçim çubuğu (seçilenleri gizle, Claude'a sor); gizli üründe Göster (geçici), sonda Hepsini göster.
  *   Tasarım kapısı (2026-11-14): tasarım onay · MRK son · Seçim A · Ekle yok · Çıkar yok
  * 2611-14g: Gizlenenler'e elle marka, terim (hariç sözcüklerle), ürün ve istisna ekleme; şeritte "Yalnız bunu göster";
@@ -56,7 +63,7 @@
 (function () {
   'use strict';
 
-  const SURUM = '2611-14i';
+  const SURUM = '2611-18a';
   const KOD = 'MRK';
   const ONEK = 'aalabs-mrk';
   const UYGULAMA = 'AALabs.MigrosKampanya';
@@ -94,13 +101,13 @@
       kutuEtiket: (n, t, u) => `Kampanya hesabı: ${n} adet toplam ${t} TL, ürün başı ${u} TL`,
       tSite: 'Sayfa', tRozet: 'Kampanya rozeti', tKart: 'Çözülen kart', tFiyat: 'Fiyatı bulunamayan', tBirim: 'Birim fiyat', tAdet: 'Sepet adedi',
       tGorsel: 'İndirim yüzdesi', tSirala: 'Sıralama', tTanimsiz: 'Tanınmayan rozet', tOrnek: 'Örnek', tAcik: 'açık', tKapali: 'kapalı', tBekliyor: 'bekliyor (sayfada kampanya yok)',
-      tSiralaYok: 'liste kabı flex/grid değil', tHata: 'Son hata', o_gizle: 'Ürün gizleme (fiyatın altında Gizle düğmesi)', o_ai: 'Migros yapay zekâ asistanını (Maya) gizle', gizleUrun: 'Bu ürünü gizle', gizleMarka: (a) => `Markayı gizle: ${a}`, gizleGrup: (a) => `Ürün grubunu gizle: ${a}`, bilgiYok: 'Marka ve grup bilgisi yükleniyor. Biraz sonra yeniden dene.', gizlendiMarka: (mk, a) => `Gizlendi (marka: ${mk}): ${a}`, gizlendiGrup: (gr, a) => `Gizlendi (grup: ${gr}): ${a}`, markayiGetir: 'Markayı geri getir', grubuGetir: 'Grubu geri getir', tMarkalar: 'Markalar', tGruplar: 'Ürün grupları', tUrunler: 'Ürünler', tAd: 'Ad', tBilgi: 'Marka/grup bilgisi', tAi: 'Yapay zekâ asistanı', gizleDug: 'Gizle', gizlendi: (a) => `Gizlendi: ${a}`, geriGetir: 'Geri getir', bGizli: 'Gizlenenler', gizliYok: 'Gizlenen ürün, marka ya da grup yok.', gizliSayac: (n) => `${n} ürün gizli`, gizleEtiket: (a) => `${a} ürününü gizle`, tUrun: 'Ürün', tTarih: 'Tarih', tGizli: 'Gizli ürün sayfada / gizleme kuralı', hepsiniGetir: 'Hepsini geri getir', moneyIle: '(Money ile)', sepetteIle: '(sepette)', gizlendiTerim: (tm, a) => `Gizlendi (terim: ${tm}): ${a}`, terimiGetir: 'Terimi kaldır', yalnizBunu: 'Yalnız bunu göster', tTerimler: 'Terimler', tIstisnalar: 'İstisnalar · hiç gizlenmez', istisnaNot: 'Marka, terim ya da grup kuralına uysa da görünür. Ürün adı, linki ya da terim yazılabilir.', tTerim: 'Terim', tHaric: 'Hariç (bu da geçerse görünür)', haricEkle: 'hariç ekle', ekleDug: 'Ekle', kaldir: 'Kaldır', phMarka: 'Marka adı ekle', phTerim: 'Terim ekle (virgülle birden çok; -sözcük: hariç)', phUrun: 'Ürün adı ya da linki ekle', phIstisna: 'Ürün adı, linki ya da terim ekle', eslesen: (n) => `Bu sayfada ${n} ürün eşleşiyor`, temizle: (n) => `Gereksiz ürün kayıtlarını kaldır (${n})`, temizlendi: (n) => `${n} ürün kaydı başka bir kuralla zaten gizliydi; kaldırıldı.`, gDisa: 'Dışa aktar', gIce: 'İçe aktar', gIceTamam: 'Gizlenenler içe aktarıldı.', gIceHata: 'Dosya okunamadı. Online Market gizlenenler dosyası mı?', terimOner: "Claude'dan terim öner", tMoney: 'Money / sepette fiyatı',
+      tSiralaYok: 'liste kabı flex/grid değil', tHata: 'Son hata', o_gizle: 'Ürün gizleme (fiyatın altında Gizle düğmesi)', o_ai: 'Migros yapay zekâ asistanını (Maya) gizle', gizleUrun: 'Bu ürünü gizle', gizleMarka: (a) => `Markayı gizle: ${a}`, gizleGrup: (a) => `Ürün grubunu gizle: ${a}`, bilgiYok: 'Marka ve grup bilgisi yükleniyor. Biraz sonra yeniden dene.', gizlendiMarka: (mk, a) => `Gizlendi (marka: ${mk}): ${a}`, gizlendiGrup: (gr, a) => `Gizlendi (grup: ${gr}): ${a}`, markayiGetir: 'Markayı geri getir', grubuGetir: 'Grubu geri getir', tMarkalar: 'Markalar', tGruplar: 'Ürün grupları', tUrunler: 'Ürünler', tAd: 'Ad', tBilgi: 'Marka/grup bilgisi', tAi: 'Yapay zekâ asistanı', gizleDug: 'Gizle', gizlendi: (a) => `Gizlendi: ${a}`, geriGetir: 'Geri getir', bGizli: 'Gizlenenler', gizliYok: 'Gizlenen ürün, marka ya da grup yok.', gizliSayac: (n) => `${n} ürün gizli`, gizleEtiket: (a) => `${a} ürününü gizle`, tUrun: 'Ürün', tTarih: 'Tarih', tGizli: 'Gizli ürün sayfada / gizleme kuralı', hepsiniGetir: 'Hepsini geri getir', moneyIle: '(Money ile)', sepetteIle: '(sepette)', esikIle: (t) => `(${t} TL ve üzeri sepette)`, gizlendiTerim: (tm, a) => `Gizlendi (terim: ${tm}): ${a}`, terimiGetir: 'Terimi kaldır', yalnizBunu: 'Yalnız bunu göster', tTerimler: 'Terimler', tIstisnalar: 'İstisnalar · hiç gizlenmez', istisnaNot: 'Marka, terim ya da grup kuralına uysa da görünür. Ürün adı, linki ya da terim yazılabilir.', tTerim: 'Terim', tHaric: 'Hariç (bu da geçerse görünür)', haricEkle: 'hariç ekle', ekleDug: 'Ekle', kaldir: 'Kaldır', phMarka: 'Marka adı ekle', phTerim: 'Terim ekle (virgülle birden çok; -sözcük: hariç)', phUrun: 'Ürün adı ya da linki ekle', phIstisna: 'Ürün adı, linki ya da terim ekle', eslesen: (n) => `Bu sayfada ${n} ürün eşleşiyor`, temizle: (n) => `Gereksiz ürün kayıtlarını kaldır (${n})`, temizlendi: (n) => `${n} ürün kaydı başka bir kuralla zaten gizliydi; kaldırıldı.`, gDisa: 'Dışa aktar', gIce: 'İçe aktar', gIceTamam: 'Gizlenenler içe aktarıldı.', gIceHata: 'Dosya okunamadı. Online Market gizlenenler dosyası mı?', terimOner: "Claude'dan terim öner", tMoney: 'Money / sepette fiyatı',
       o_uretici: 'Market markalı üründe üretici firma', o_sor: "Claude'a sor düğmeleri (kartta ve sağ altta)", o_baska: 'Diğer marketlerde ara düğmesi', o_gecmis: 'Fiyat geçmişi (30 günün en düşüğü)', o_enucuz: 'En ucuz birim fiyat rozeti', o_ozet: 'Sepet özeti (sağ altta)',
       sorDug: "Claude'a sor", sayfaSor: "Bu sayfayı Claude'a sor", sorAcildi: "İstek panoya da kopyalandı. Claude açılıyor.", sorUzun: "İstek uzun: panoya kopyalandı. Claude'da Ctrl+V ile yapıştır.", sorEtiket: (a) => `${a} ürününü Claude'a sor`,
       baskaDug: 'Diğer marketlerde', baskaEtiket: (a) => `${a} ürününü diğer marketlerde ara`, uretici: (a) => `Üretici: ${a}`,
       gecmisEnDusuk: (t) => `30 günün en düşüğü: ${t} TL`, gecmisSimdi: '30 günün en düşüğü: şimdi', enUcuz: 'En ucuz birim fiyat',
       ozetBaslik: 'Sepet özeti', ozetSatir: (a, q, k, kamp, kaz) => `${a} × ${q} → ${k} adet daha eklersen ${kamp} tamamlanır (+${kaz} TL kazanç)`, ozetKapat: 'Özeti kapat',
-      katli: (n, acik) => acik ? `${n} gizli ürün (sonda)` : `${n} gizli ürün sonda`, katliAc: 'Şeritleri aç', katliKapa: 'Şeritleri kapat', gosterDug: 'Göster', geciciGoster: 'Gizli · geçici gösteriliyor', tekrarGizle: 'Tekrar gizle', hepsiniGoster: 'Hepsini göster', hepsiniGizle: 'Hepsini gizle', seciliSayi: (n) => `${n} ürün seçili`, seciliGizle: 'Seçilenleri gizle', seciliSor: "Seçilenleri Claude'a sor", secimTemizle: 'Seçimi temizle', secEtiket: (a) => `Seç: ${a}`,
+      katli: (n, acik) => acik ? `${n} gizli ürün (sonda)` : `${n} gizli ürün sonda`, katliAc: 'Şeritleri aç', katliKapa: 'Şeritleri kapat', gosterDug: 'Göster', geciciGoster: 'Gizli · geçici gösteriliyor', tekrarGizle: 'Tekrar gizle', hepsiniGoster: 'Hepsini göster', hepsiniGizle: 'Hepsini gizle', hepsiniGeriGetir: 'Hepsini geri getir', geriGetirOnay: (n) => `Emin misin? ${n} kural kalkar`, kuralKalkti: (n) => `${n} gizleme kuralı kaldırıldı.`, seciliSayi: (n) => `${n} ürün seçili`, seciliGizle: 'Seçilenleri gizle', seciliSor: "Seçilenleri Claude'a sor", secimTemizle: 'Seçimi temizle', secEtiket: (a) => `Seç: ${a}`,
       menuSayfaSor: "Bu sayfayı Claude'a sor (C)", menuMarka: 'Markaya göre sırala (M)', siralaYok: 'Sırala', siralaMarkaAcik: 'Sıralama: marka ✓', siraSite: 'Sitenin sırası', siraFiyat: 'Ürün başı fiyat (ucuzdan pahalıya)', siraMarka: 'Marka (aynı marka bir arada, içinde ucuzdan pahalıya)', tUretici: 'Üretici', tGecmis: 'Fiyat geçmişi', tEnUcuz: 'En ucuz birim', tOzet: 'Sepet özeti', tKayitli: 'ürün kayıtlı'
     },
     en: {
@@ -131,13 +138,13 @@
       kutuEtiket: (n, t, u) => `Deal: ${n} pcs total ${t} TL, ${u} TL per item`,
       tSite: 'Page', tRozet: 'Deal badge', tKart: 'Card read', tFiyat: 'Price not found', tBirim: 'Unit price', tAdet: 'Cart quantity',
       tGorsel: 'Discount percent', tSirala: 'Sorting', tTanimsiz: 'Unknown badge', tOrnek: 'Sample', tAcik: 'on', tKapali: 'off', tBekliyor: 'waiting (no deal on the page)',
-      tSiralaYok: 'list container is not flex/grid', tHata: 'Last error', o_gizle: 'Hide products (Hide button under the price)', o_ai: 'Hide the Migros AI assistant (Maya)', gizleUrun: 'Hide this product', gizleMarka: (a) => `Hide brand: ${a}`, gizleGrup: (a) => `Hide product group: ${a}`, bilgiYok: 'Brand and group info is loading. Try again shortly.', gizlendiMarka: (mk, a) => `Hidden (brand: ${mk}): ${a}`, gizlendiGrup: (gr, a) => `Hidden (group: ${gr}): ${a}`, markayiGetir: 'Restore brand', grubuGetir: 'Restore group', tMarkalar: 'Brands', tGruplar: 'Product groups', tUrunler: 'Products', tAd: 'Name', tBilgi: 'Brand/group info', tAi: 'AI assistant', gizleDug: 'Hide', gizlendi: (a) => `Hidden: ${a}`, geriGetir: 'Restore', bGizli: 'Hidden', gizliYok: 'No hidden products, brands or groups.', gizliSayac: (n) => `${n} hidden`, gizleEtiket: (a) => `Hide ${a}`, tUrun: 'Product', tTarih: 'Date', tGizli: 'Hidden on page / hide rules', hepsiniGetir: 'Restore all', moneyIle: '(with Money)', sepetteIle: '(in cart)', gizlendiTerim: (tm, a) => `Hidden (term: ${tm}): ${a}`, terimiGetir: 'Remove term', yalnizBunu: 'Show only this', tTerimler: 'Terms', tIstisnalar: 'Exceptions · never hidden', istisnaNot: 'Shown even if a brand, term or group rule matches. Type a product name, link or term.', tTerim: 'Term', tHaric: 'Except (shown if this also appears)', haricEkle: 'add exception', ekleDug: 'Add', kaldir: 'Remove', phMarka: 'Add brand name', phTerim: 'Add term (comma for several; -word: except)', phUrun: 'Add product name or link', phIstisna: 'Add product name, link or term', eslesen: (n) => `${n} products on this page match`, temizle: (n) => `Remove redundant product entries (${n})`, temizlendi: (n) => `${n} product entries were already hidden by another rule; removed.`, gDisa: 'Export', gIce: 'Import', gIceTamam: 'Hidden list imported.', gIceHata: 'Could not read the file. Is it an Online Market hidden list?', terimOner: 'Ask Claude for terms', tMoney: 'Money / in-cart price',
+      tSiralaYok: 'list container is not flex/grid', tHata: 'Last error', o_gizle: 'Hide products (Hide button under the price)', o_ai: 'Hide the Migros AI assistant (Maya)', gizleUrun: 'Hide this product', gizleMarka: (a) => `Hide brand: ${a}`, gizleGrup: (a) => `Hide product group: ${a}`, bilgiYok: 'Brand and group info is loading. Try again shortly.', gizlendiMarka: (mk, a) => `Hidden (brand: ${mk}): ${a}`, gizlendiGrup: (gr, a) => `Hidden (group: ${gr}): ${a}`, markayiGetir: 'Restore brand', grubuGetir: 'Restore group', tMarkalar: 'Brands', tGruplar: 'Product groups', tUrunler: 'Products', tAd: 'Name', tBilgi: 'Brand/group info', tAi: 'AI assistant', gizleDug: 'Hide', gizlendi: (a) => `Hidden: ${a}`, geriGetir: 'Restore', bGizli: 'Hidden', gizliYok: 'No hidden products, brands or groups.', gizliSayac: (n) => `${n} hidden`, gizleEtiket: (a) => `Hide ${a}`, tUrun: 'Product', tTarih: 'Date', tGizli: 'Hidden on page / hide rules', hepsiniGetir: 'Restore all', moneyIle: '(with Money)', sepetteIle: '(in cart)', esikIle: (t) => `(cart ${t} TL or more)`, gizlendiTerim: (tm, a) => `Hidden (term: ${tm}): ${a}`, terimiGetir: 'Remove term', yalnizBunu: 'Show only this', tTerimler: 'Terms', tIstisnalar: 'Exceptions · never hidden', istisnaNot: 'Shown even if a brand, term or group rule matches. Type a product name, link or term.', tTerim: 'Term', tHaric: 'Except (shown if this also appears)', haricEkle: 'add exception', ekleDug: 'Add', kaldir: 'Remove', phMarka: 'Add brand name', phTerim: 'Add term (comma for several; -word: except)', phUrun: 'Add product name or link', phIstisna: 'Add product name, link or term', eslesen: (n) => `${n} products on this page match`, temizle: (n) => `Remove redundant product entries (${n})`, temizlendi: (n) => `${n} product entries were already hidden by another rule; removed.`, gDisa: 'Export', gIce: 'Import', gIceTamam: 'Hidden list imported.', gIceHata: 'Could not read the file. Is it an Online Market hidden list?', terimOner: 'Ask Claude for terms', tMoney: 'Money / in-cart price',
       o_uretici: 'Maker of store-brand products', o_sor: 'Ask Claude buttons (on cards and bottom right)', o_baska: 'Search other stores button', o_gecmis: 'Price history (lowest in 30 days)', o_enucuz: 'Cheapest unit price badge', o_ozet: 'Cart summary (bottom right)',
       sorDug: 'Ask Claude', sayfaSor: 'Ask Claude about this page', sorAcildi: 'Request also copied. Opening Claude.', sorUzun: 'Long request: copied. Paste it in Claude with Ctrl+V.', sorEtiket: (a) => `Ask Claude about ${a}`,
       baskaDug: 'Other stores', baskaEtiket: (a) => `Search ${a} in other stores`, uretici: (a) => `Maker: ${a}`,
       gecmisEnDusuk: (t) => `Lowest in 30 days: ${t} TL`, gecmisSimdi: 'Lowest in 30 days: now', enUcuz: 'Cheapest unit price',
       ozetBaslik: 'Cart summary', ozetSatir: (a, q, k, kamp, kaz) => `${a} × ${q} → add ${k} more to complete ${kamp} (+${kaz} TL saved)`, ozetKapat: 'Close summary',
-      katli: (n, acik) => acik ? `${n} hidden products (at the end)` : `${n} hidden products at the end`, katliAc: 'Open strips', katliKapa: 'Close strips', gosterDug: 'Show', geciciGoster: 'Hidden · shown for now', tekrarGizle: 'Hide again', hepsiniGoster: 'Show all', hepsiniGizle: 'Hide all', seciliSayi: (n) => `${n} selected`, seciliGizle: 'Hide selected', seciliSor: 'Ask Claude about selected', secimTemizle: 'Clear selection', secEtiket: (a) => `Select: ${a}`,
+      katli: (n, acik) => acik ? `${n} hidden products (at the end)` : `${n} hidden products at the end`, katliAc: 'Open strips', katliKapa: 'Close strips', gosterDug: 'Show', geciciGoster: 'Hidden · shown for now', tekrarGizle: 'Hide again', hepsiniGoster: 'Show all', hepsiniGizle: 'Hide all', hepsiniGeriGetir: 'Restore all', geriGetirOnay: (n) => `Sure? ${n} rules will be removed`, kuralKalkti: (n) => `${n} hide rules removed.`, seciliSayi: (n) => `${n} selected`, seciliGizle: 'Hide selected', seciliSor: 'Ask Claude about selected', secimTemizle: 'Clear selection', secEtiket: (a) => `Select: ${a}`,
       menuSayfaSor: 'Ask Claude about this page (C)', menuMarka: 'Sort by brand (B)', siralaYok: 'Sort', siralaMarkaAcik: 'Sorted: brand ✓', siraSite: 'Site order', siraFiyat: 'Per-item price (low to high)', siraMarka: 'Brand (grouped, low to high within)', tUretici: 'Maker', tGecmis: 'Price history', tEnUcuz: 'Cheapest unit', tOzet: 'Cart summary', tKayitli: 'products saved'
     }
   };
@@ -261,7 +268,7 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
   border:1px dashed ${c.kenar} !important;border-radius:6px !important;background:${c.yuzey} !important;color:${c.metin2} !important;font:400 12px/1.4 ${yazi} !important}
 .${ONEK}-serit{flex-wrap:wrap !important}
 .${ONEK}-serit > span:first-child{all:unset;flex:1 1 160px;min-width:0;overflow-wrap:anywhere}
-.${ONEK}-serit .${ONEK}-serit-dug{display:inline-flex !important;gap:6px;flex-wrap:wrap;flex:none}
+.${ONEK}-serit .${ONEK}-serit-dug{display:flex !important;gap:6px;flex-wrap:wrap;flex:1 1 100%;min-width:0}
 .${ONEK}-serit button[hidden]{display:none !important}
 .${ONEK}-serit button{all:initial;flex:none;padding:0 8px !important;min-height:24px;display:inline-flex !important;align-items:center;border:1px solid ${c.kenar} !important;
   border-radius:4px !important;background:${c.yuzey} !important;color:${c.metin} !important;font:600 12px ${yazi} !important;cursor:pointer}
@@ -294,7 +301,8 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
   border:1px dashed ${c.kenar} !important;border-radius:6px !important;background:${c.yuzey} !important;color:${c.metin2} !important;font:400 12px/1.4 ${yazi} !important}
 .${ONEK}-katli span{all:unset}
 .${ONEK}-katli button{all:initial;flex:none;padding:0 8px !important;min-height:24px;display:inline-flex !important;align-items:center;border:1px solid ${c.kenar} !important;
-  border-radius:4px !important;background:${c.yuzey} !important;color:${c.metin} !important;font:600 12px ${yazi} !important;cursor:pointer}
+  border-radius:4px !important;background:${c.yuzey} !important;color:${c.metin} !important;font:600 12px/1.3 ${yazi} !important;cursor:pointer;max-width:100% !important;white-space:normal !important;text-align:left;box-sizing:border-box !important}
+.${ONEK}-serit > span:first-child{flex:1 1 100% !important}
 .${ONEK}-birim{all:unset;font-weight:600 !important;color:${c.basari} !important;font-variant-numeric:tabular-nums;white-space:normal}
 .${ONEK}-yuzde{all:initial;position:absolute !important;left:6px !important;bottom:6px !important;z-index:2 !important;pointer-events:none;
   padding:0 6px !important;min-height:20px;display:inline-flex !important;align-items:center;border-radius:4px !important;
@@ -359,11 +367,14 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
     const sonuc = [];
     const w = document.createTreeWalker(kart, NodeFilter.SHOW_TEXT);
     for (let n = w.nextNode(); n; n = w.nextNode()) {
-      const v = sade(n.nodeValue);
+      let v = sade(n.nodeValue);
       if (!v || v.length > 20) continue;
-      const r = /^((?:\d{1,3}(?:\.\d{3})+|\d+),\d{2})(?:\s*(?:TL|₺))?$/.exec(v);
+      // CarrefourSA: "74," + <span>"95 TL"</span> → iki metin birleşir
+      if (/^(?:\d{1,3}(?:\.\d{3})+|\d+),$/.test(v)) { const s2 = w.nextNode(); if (!s2) break; v = v + sade(s2.nodeValue); n = s2; }
+      const r = /^(?:₺\s*)?((?:\d{1,3}(?:\.\d{3})+|\d+),\d{2})(?:\s*(?:TL|₺))?$/.exec(v);
       if (!r) continue;
-      const p = n.parentElement;
+      let p = n.parentElement;
+      if (p && /^(?:\d{1,3}(?:\.\d{3})+|\d+),/.test(sade(p.textContent)) === false && p.parentElement && /^(?:\d{1,3}(?:\.\d{3})+|\d+),\d{2}/.test(sade(p.parentElement.textContent))) p = p.parentElement; // bölünmüş fiyat: kapsayan öğe
       if (!p || p.closest(BIZIM) || (rozet && rozet.contains(p)) || !gorunurMu(p)) continue;
       const kurus = tlKurus(r[1]);
       if (!Number.isFinite(kurus) || kurus <= 0) continue;
@@ -383,7 +394,7 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
   function birimBul(kart) {
     const w = document.createTreeWalker(kart, NodeFilter.SHOW_TEXT);
     for (let n = w.nextNode(); n; n = w.nextNode()) {
-      if (!/TL\s*\//.test(n.nodeValue || '')) continue;
+      if (!/TL\s*\/|^\s*\/\s*[A-Za-zÇĞİÖŞÜçğıöşü]/.test(n.nodeValue || '')) continue;
       let e = n.parentElement;
       for (let i = 0; e && i < 3 && e !== kart; i++, e = e.parentElement) {
         if (e.closest(BIZIM)) break;
@@ -410,6 +421,7 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
   }
   // Sepet adedi: artı/eksi düğmeleri arasındaki sayı ya da sayı kutusu (ürün sepette değilse yok)
   function adetBul(kart, haric) {
+    if (!SITE.adet) return 0; // bu sitede adet kutusu sepete eklemeden önce de görünür: sepet adedi sayılmaz
     const inp = [...kart.querySelectorAll('input')].find(i => /^\d{1,3}$/.test(String(i.value || '').trim()) && gorunurMu(i) && dugmeArasindaMi(i, kart));
     if (inp) return Number(inp.value);
     const w = document.createTreeWalker(kart, NodeFilter.SHOW_TEXT);
@@ -452,18 +464,21 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
 
   // "Money ile" etiketi + yanındaki fiyat: indirimli fiyat sayılır (tek ürün, kampanya n = 1)
   const MONEY_RE = /^MONEY\s+İLE\s+((?:\d{1,3}(?:\.\d{3})+|\d+),\d{2})\s*(?:TL|₺)?$/;
+  const ESIK_RE = /^(\d{1,5})\s*(?:TL|₺)\s*VE\s*ÜZER[İI]\s*%\s*(\d{1,2})(?:\s*İNDİRİM)?$/;
   const SEPET_RE = /^(\d{1,5})\s*(?:TL|₺)\s*SEPETTE\s*(\d{1,3}(?:\.\d{3})*,\d{2}|\d+[.,]\d{2})\s*(?:TL|₺)?$/;
   function moneyleriBul(kok) {
     const bulunan = new Set();
     const w = document.createTreeWalker(kok, NodeFilter.SHOW_TEXT);
     for (let n = w.nextNode(); n; n = w.nextNode()) {
-      if (!/money|sepette/i.test(n.nodeValue || '') || (n.nodeValue || '').length > 40) continue;
+      if (!/money|sepette|üzeri|uzeri/i.test(n.nodeValue || '') || (n.nodeValue || '').length > 40) continue;
       for (let e = n.parentElement, i = 0; e && i < 5; i++, e = e.parentElement) {
         if (e.closest(BIZIM)) break;
         const t = buyuk(metinBosluklu(e));
         if (t.length > 40) break;
         const r = MONEY_RE.exec(t);
         if (r) { if (gorunurMu(e)) bulunan.add({ el: e, kurus: tlKurus(r[1]), tur: 'money' }); break; }
+        const es = ESIK_RE.exec(t); // "100 TL ve Üzeri % 60" (CarrefourSA): sepet tutarı eşiği aşınca yüzde indirim
+        if (es) { if (gorunurMu(e)) bulunan.add({ el: e, kurus: 0, tur: 'esik', esik: Number(es[1]), yuzde: Number(es[2]) }); break; }
         const sp = SEPET_RE.exec(t); // "50 TL SEPETTE 229.95 TL": sepette ödenen fiyat
         if (sp) { if (gorunurMu(e)) bulunan.add({ el: e, kurus: tlKurus(/,/.test(sp[2]) ? sp[2] : sp[2].replace('.', ',')), tur: 'sepet', esik: Number(sp[1]) }); break; }
       }
@@ -499,12 +514,13 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
     const moneyler = moneyleriBul(document.body);
     const moneyEl = moneyler.map(x => x.el);
     sayac.money = moneyler.length;
-    moneyler.forEach(({ el: rozet, kurus, tur, esik }) => {
+    moneyler.forEach(({ el: rozet, kurus, tur, esik, yuzde }) => {
       const kart = kartBul(rozet, moneyEl);
       if (!kart || kampanyali.has(kart)) return;
       const fiyat = anaFiyat(fiyatlariBul(kart, rozet));
+      if (fiyat && tur === 'esik') kurus = Math.round(fiyat.kurus * (100 - yuzde) / 100);
       if (!fiyat || !(kurus > 0) || kurus >= fiyat.kurus) return;
-      const kamp = tur === 'sepet' ? { tur: 'money', alt: 'sepet', esik, n: 1, fiyat: kurus, metin: `${esik} TL sepette` } : { tur: 'money', n: 1, fiyat: kurus, metin: 'Money' };
+      const kamp = tur === 'sepet' ? { tur: 'money', alt: 'sepet', esik, n: 1, fiyat: kurus, metin: `${esik} TL sepette` } : tur === 'esik' ? { tur: 'money', alt: 'esik', esik, n: 1, fiyat: kurus, metin: `${esik} TL ve üzeri %${yuzde}` } : { tur: 'money', n: 1, fiyat: kurus, metin: 'Money' };
       kampanyali.add(kart);
       const h = hesapla(kamp, fiyat.kurus);
       const adet = adetBul(kart, [rozet, fiyat.el]);
@@ -560,7 +576,7 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
           f.append(y, r);
           k.fiyat.el.after(f);
         }
-        const yt = m('urunBasi')(tlYaz(k.h.urunBasi)), rt = k.kamp.tur === 'money' ? (k.kamp.alt === 'sepet' ? m('sepetteIle') : m('moneyIle')) : m('toplam')(k.kamp.n, tlYaz(k.h.toplam));
+        const yt = m('urunBasi')(tlYaz(k.h.urunBasi)), rt = k.kamp.tur === 'money' ? (k.kamp.alt === 'sepet' ? m('sepetteIle') : k.kamp.alt === 'esik' ? m('esikIle')(k.kamp.esik) : m('moneyIle')) : m('toplam')(k.kamp.n, tlYaz(k.h.toplam));
         if (f.firstChild.textContent !== yt) f.firstChild.textContent = yt;
         if (f.lastChild.textContent !== rt) f.lastChild.textContent = rt;
         f.setAttribute('aria-label', m('kutuEtiket')(k.kamp.n, tlYaz(k.h.toplam), tlYaz(k.h.urunBasi)));
@@ -625,6 +641,7 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
   }
   // Favori (kalp dolu) ürün sıralamada en başa: kalp öğesinin sınıfı/etiketinden okunur
   function favoriMi(oge) {
+    if (SITE.favori) return SITE.favori(oge);
     const e = oge.querySelector('[class*="favourite"],[class*="favorite"],[aria-label*="avori" i]');
     if (!e) return 0;
     const sinif = String(e.className && e.className.baseVal !== undefined ? e.className.baseVal : e.className || '');
@@ -666,7 +683,63 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
   // ---------- Ürün gizleme: ürün, marka, ürün grubu ----------
   // Ürün, bağlantı adresindeki koduyla tanınır (/uzman-kasap-dana-kiyma-400-g-p-17deed0 → 17deed0).
   // Marka ve grup (kategori) sayfada yazmaz: Migros'un kendi liste isteğinin (/rest/search/screens/…) yanıtından okunur.
-  const KART_SECICI = 'fe-product-card';
+  // ---------- Siteler: kart, kimlik ve ürün verisi kuralı ----------
+  const SITE = (function () {
+    const h = location.hostname.replace(/^www\./, '');
+    const ilkLink = (kart, re, onek) => { for (const a of kart.querySelectorAll('a[href]')) { const r = re.exec(a.getAttribute('href') || ''); if (r) return onek + r[1].toLowerCase(); } return null; };
+    const sade2 = (x) => String(x || '').replace(/\s+/g, ' ').trim();
+    if (/(^|\.)carrefoursa\.com$/.test(h)) return {
+      ad: 'carrefoursa', adet: false, rest: false,
+      kartlar: () => document.querySelectorAll('li.product-listing-item'),
+      kimlik: (k) => ilkLink(k, /-p-(\d+)/i, 'csa-'),
+      // Kartın içindeki veri kutusu: ad, marka, kategori
+      veri: (k) => { const d = k.querySelector('.dataLayerItemData'); if (!d) return null; const ds = d.dataset; return { a: sade2(ds.item_name), m: sade2(ds.item_brand), k: sade2(ds.item_category3 || ds.item_category2 || ds.item_category) }; },
+      favori: () => 0
+    };
+    if (/(^|\.)a101\.com\.tr$/.test(h)) return {
+      ad: 'a101', adet: false, rest: false,
+      // Sınıf adları karışık (CSS modül): ürün bağlantısından yukarı, ızgaranın çocuğu olan öğe
+      kartlar: () => {
+        const l = new Set();
+        document.querySelectorAll('a[href*="_p-"]').forEach(a => {
+          let e = a;
+          for (let i = 0; e && e.parentElement && i < 8; i++, e = e.parentElement) { if (/grid|flex/.test(getComputedStyle(e.parentElement).display) && e.parentElement.children.length > 2 && e.querySelector('img')) { l.add(e); return; } }
+        });
+        return [...l].filter(e => ![...l].some(b => b !== e && b.contains(e)));
+      },
+      kimlik: (k) => ilkLink(k, /_p-(\d+)/i, 'a101-'),
+      veri: (k) => { const a = k.querySelector('a[title]'); return a ? { a: sade2(a.getAttribute('title')) } : null; },
+      favori: () => 0
+    };
+    if (/(^|\.)sariyermarket\.com$/.test(h)) return {
+      ad: 'sariyer', adet: false, rest: false,
+      kartlar: () => document.querySelectorAll('.item-box'),
+      kimlik: (k) => { const p = k.querySelector('[data-productid]'); return p ? 'sm-' + p.getAttribute('data-productid') : null; },
+      veri: (k) => { const t = k.querySelector('.product-title'); return t ? { a: sade2(t.textContent) } : null; },
+      favori: () => 0
+    };
+    return {
+      ad: 'migros', adet: true, rest: true,
+      kartlar: () => document.querySelectorAll('fe-product-card'),
+      kimlik: (k) => ilkLink(k, /-p-([0-9a-z]+)(?:[/?#]|$)/i, ''),
+      veri: null, favori: null
+    };
+  })();
+  // Kartlar her taramada işaretlenir; kodun geri kalanı yalnız bu işareti tanır
+  const KART_SECICI = `[data-${ONEK}-kart]`;
+  function kartlariIsaretle() {
+    const simdi = new Set(SITE.kartlar());
+    document.querySelectorAll(KART_SECICI).forEach(k => { if (!simdi.has(k)) k.removeAttribute(`data-${ONEK}-kart`); });
+    simdi.forEach(k => {
+      if (!k.hasAttribute(`data-${ONEK}-kart`)) k.setAttribute(`data-${ONEK}-kart`, '');
+      if (!SITE.veri) return;
+      const ki = SITE.kimlik(k), v = ki && SITE.veri(k);
+      if (!v) return;
+      const b = bilgi[ki] || {};
+      bilgi[ki] = { m: v.m ? [SITE.ad + ':' + katla(v.m), v.m] : (b.m || ['', '']), k: v.k ? [SITE.ad + ':' + katla(v.k), v.k] : (b.k || ['', '']), i: '', a: v.a || b.a || '' };
+      if (!v.m && !b.m) bilgi[ki].yok = 1; // markasız: marka kuralı ada göre
+    });
+  }
   const SAYFA = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window;
   function gizliOku() {
     let g = oku('gizli', {});
@@ -687,14 +760,15 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
       return terim.length >= 2 ? { terim, ad: sade(s.filter(x => !x.startsWith('-')).join(' ')), haric } : null;
     }).filter(Boolean);
   }
-  function linktenKimlik(metin) { const r = /-p-([0-9a-z]+)(?:[/?#\s]|$)/i.exec(String(metin || '')); return r ? r[1].toLowerCase() : null; }
-  function urunKimligi(kart) {
-    for (const a of kart.querySelectorAll('a[href]')) {
-      const r = /-p-([0-9a-z]+)(?:[/?#]|$)/i.exec(a.getAttribute('href') || '');
-      if (r) return r[1].toLowerCase();
-    }
+  function linktenKimlik(metin) {
+    const t = String(metin || '');
+    let r;
+    if (/carrefoursa\.com/i.test(t) && (r = /-p-(\d+)/i.exec(t))) return 'csa-' + r[1];
+    if (/a101\.com\.tr/i.test(t) && (r = /_p-(\d+)/i.exec(t))) return 'a101-' + r[1];
+    if ((r = /-p-([0-9a-z]+)(?:[/?#\s]|$)/i.exec(t))) return (/migros/i.test(t) || SITE.ad === 'migros' ? '' : SITE.ad === 'carrefoursa' ? 'csa-' : '') + r[1].toLowerCase();
     return null;
   }
+  function urunKimligi(kart) { return SITE.kimlik(kart); }
   // Bağlantının kendi metni (bizim eklediğimiz rozet, fiyat, şerit metni hariç)
   function kendiMetni(e) {
     const parca = [];
@@ -751,7 +825,7 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
     }
   }
   let bilgiZaman = 0;
-  function bilgiIsteGecikmeli() { clearTimeout(bilgiZaman); bilgiZaman = setTimeout(() => { bilgiIste(); }, 600); }
+  function bilgiIsteGecikmeli() { if (!SITE.rest) return; clearTimeout(bilgiZaman); bilgiZaman = setTimeout(() => { bilgiIste(); }, 600); }
 
   // Eski sürümün yanlış kaydettiği adlar (ör. "-%25"): ürün verisinden onarılır
   function gizliAd(tur, kimlik, ad) {
@@ -775,10 +849,10 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
     if (adK) for (const k of Object.keys(g.istisna)) if (k.startsWith('t:') && adK.includes(k.slice(2))) return null;
     if (g.urun[kimlik]) return ['urun', kimlik];
     if (adK && g.urunAd[adK]) return ['urunAd', adK, g.urunAd[adK].ad];
-    if (b && g.marka[b.m[0]]) return ['marka', b.m[0], b.m[1]];
+    if (b && b.m[0] && g.marka[b.m[0]]) return ['marka', b.m[0], b.m[1]];
     if (b && b.m[1] && g.markaAd[katla(b.m[1])]) return ['markaAd', katla(b.m[1]), b.m[1]];
-    if (!b && adK) for (const k of Object.keys(g.markaAd)) if (adK.startsWith(k + ' ')) return ['markaAd', k, g.markaAd[k].ad];
-    if (b && g.kategori[b.k[0]]) return ['kategori', b.k[0], b.k[1]];
+    if ((!b || b.yok || !b.m[1]) && adK) for (const k of Object.keys(g.markaAd)) if (adK.startsWith(k + ' ')) return ['markaAd', k, g.markaAd[k].ad];
+    if (b && b.k[0] && g.kategori[b.k[0]]) return ['kategori', b.k[0], b.k[1]];
     if (adK) for (const [k, v] of Object.entries(g.terim)) if (adK.includes(k) && !(v.haric || []).some(h => adK.includes(h))) return ['terim', k, v.ad];
     return null;
   }
@@ -928,7 +1002,7 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
   }
   function veriSatiri(v) {
     let s = `${v.ad} · ${tlYaz(v.fiyat)} TL`;
-    if (v.k) s += v.k.kamp.tur === 'money' ? ` · ${v.k.kamp.alt === 'sepet' ? 'sepette (' + v.k.kamp.metin + ')' : 'Money ile'} ${tlYaz(v.k.h.urunBasi)} TL` : ` · ${v.k.kamp.metin} → ürün başı ${tlYaz(v.k.h.urunBasi)} TL (${v.k.kamp.n} adet: ${tlYaz(v.k.h.toplam)} TL)`;
+    if (v.k) s += v.k.kamp.tur === 'money' ? ` · ${v.k.kamp.alt ? 'sepette (' + v.k.kamp.metin + ')' : 'Money ile'} ${tlYaz(v.k.h.urunBasi)} TL` : ` · ${v.k.kamp.metin} → ürün başı ${tlYaz(v.k.h.urunBasi)} TL (${v.k.kamp.n} adet: ${tlYaz(v.k.h.toplam)} TL)`;
     if (v.birim && v.birim.kurus > 0) s += ` · ${tlYaz(v.birim.kurus)} TL/${v.birim.olcu}`;
     if (v.marka) s += ` · marka: ${v.marka}`;
     if (v.uretici) s += ` · üretici: ${v.uretici}`;
@@ -1114,7 +1188,7 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
       if (!kimlik) return;
       sayac.kartSayisi++;
       if (bilgi[kimlik]) sayac.bilgiKart++;
-      const neden = ayar.gizle ? gizlilikNedeni(g, kimlik, urunAdi(kart)) : null;
+      const neden = ayar.gizle && !favoriMi(kart) ? gizlilikNedeni(g, kimlik, urunAdi(kart)) : null; // favori asla gizlenmez
       if (neden && gosterilen.has(kimlik)) {
         // Göster: kural durur, ürün geçici görünür; üstte "Tekrar gizle" bandı; sırası sonda kalır
         sayac.gizliSayfa++;
@@ -1213,7 +1287,7 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
     veri.forEach(({ kart, kimlik, etkin }) => {
       if (ayar.gecmis && etkin > 0) gecmisEkle(kimlik, etkin);
       // Üretici satırı: ürün adının altında
-      if (ayar.uretici) ureticiIste(kimlik);
+      if (ayar.uretici && SITE.rest) ureticiIste(kimlik);
       const ur = ayar.uretici && ureticiler[kimlik];
       if (ur) {
         const adEl = [...kart.querySelectorAll('a[href]')].find(x => sade(x.textContent) && !x.querySelector('img') && !x.closest(BIZIM));
@@ -1275,12 +1349,22 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
         });
         const b = document.createElement('button'); b.type = 'button';
         b.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); gizliAcik = !gizliAcik; tara(); });
-        dk.append(ha, b); r.append(y, dk); kap.appendChild(r);
+        const gg = document.createElement('button'); gg.type = 'button';
+        gg.addEventListener('click', (e) => {
+          e.preventDefault(); e.stopPropagation();
+          // İki adım: ilk tık sorar, 4 sn içinde ikinci tık bu listedeki gizlemeleri kaldırır
+          const g2 = gizliOku(), nedenler = [];
+          [...kap.querySelectorAll(KART_SECICI)].forEach(k => { const ki = urunKimligi(k); const n2 = ki && gizlilikNedeni(g2, ki, urunAdi(k)); if (n2 && !nedenler.some(x => x[0] === n2[0] && x[1] === n2[1])) nedenler.push(n2); });
+          if (gg.dataset.onay !== '1') { gg.dataset.onay = '1'; gg.textContent = m('geriGetirOnay')(nedenler.length); setTimeout(() => { if (gg.isConnected) { gg.dataset.onay = ''; gg.textContent = m('hepsiniGeriGetir'); } }, 4000); return; }
+          gg.dataset.onay = ''; nedenler.forEach(([t, k2]) => delete g2[t][k2]); yaz('gizli', g2); tara(); panelYenile(); tost(m('kuralKalkti')(nedenler.length));
+        });
+        dk.append(ha, gg, b); r.append(y, dk); kap.appendChild(r);
       }
       if (r.style.order !== '99999') r.style.order = '99999';
       const yt = m('katli')(n, gizliAcik), bt = gizliAcik ? m('katliKapa') : m('katliAc');
       if (r.firstChild.textContent !== yt) r.firstChild.textContent = yt;
-      const [ha, b] = r.lastChild.children;
+      const [ha, gg, b] = r.lastChild.children;
+      if (gg.dataset.onay !== '1' && gg.textContent !== m('hepsiniGeriGetir')) gg.textContent = m('hepsiniGeriGetir');
       const hepsiAcik = [...kap.querySelectorAll(KART_SECICI)].some(k => gosterilen.has(urunKimligi(k)));
       const ht = hepsiAcik ? m('hepsiniGizle') : m('hepsiniGoster');
       if (ha.textContent !== ht) ha.textContent = ht;
@@ -1338,6 +1422,7 @@ ${ayar.ai ? '#m1-chatbot-iframe,iframe[src*="/maya-chat"],sm-chatbot-iframe{disp
     try {
       sayfaStiliEkle();
       if (UI && !UI.host.isConnected) document.body.appendChild(UI.host); // site kökü sildiyse geri tak
+      kartlariIsaretle();
       const kararlar = okumaEvresi();
       yazmaEvresi(kararlar);
       siralaUygula(kararlar);
@@ -1819,6 +1904,7 @@ input[type=radio],input[type=checkbox]{accent-color:${c.ana};margin:0}
       `· ${m('tGizli')}: ${sayac.gizliSayfa} / ${sayac.gizliToplam}`,
       `${bilgiHata ? '✗' : (sayac.kartSayisi && sayac.bilgiKart === 0 ? '…' : '✓')} ${m('tBilgi')}: ${sayac.bilgiKart}/${sayac.kartSayisi} · istek ${bilgiIstek}${bilgiHata ? ' · ' + bilgiHata : ''}`,
       `· ${m('tAi')}: ${ayar.ai ? m('tKapali') : m('tAcik')} (${document.querySelectorAll('#m1-chatbot-iframe,iframe[src*="maya-chat"]').length})`,
+      `· Site: ${SITE.ad} · ürün kartı ${document.querySelectorAll(KART_SECICI).length}`,
       `· ${m('tMoney')}: ${sayac.moneyKart}/${sayac.money}`,
       `${ureticiHata ? '✗' : '·'} ${m('tUretici')}: ${sayac.uretici} · istek ${ureticiIstek}${ureticiHata ? ' · ' + ureticiHata : ''}`,
       `· ${m('tGecmis')}: ${sayac.gecmis} · ${Object.keys(gecmis).length} ${m('tKayitli')}`,
