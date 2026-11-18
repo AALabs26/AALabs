@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         AALabs Twitch Drops Library
-// @name:tr      AALabs Twitch Drops Library
-// @name:en      AALabs Twitch Drops Library
+// @name:tr      AALabs Twitch Drops
+// @name:en      AALabs Twitch Drops
 // @namespace    aalabs
-// @version      26.11.1.3
+// @version      26.11.18.1
 // @description  Twitch Drops kampanyalarında Steam / Epic / GOG kütüphanendeki oyunları rozetler ve süzer.
 // @description:en  Badges and filters Twitch Drops campaigns for games in your Steam / Epic / GOG library.
 // @match        https://www.twitch.tv/*
@@ -31,7 +31,7 @@
 (function () {
   'use strict';
 
-  const SURUM = 'v26-11-01-c';
+  const SURUM = '2611-18a';
   const ONEK = 'aalabs-twd';
   const SAAT = 3600 * 1000;
   const GUN = 24 * SAAT;
@@ -39,7 +39,7 @@
   // ---------- Metinler (TR/EN aynı anahtarlar) ----------
   const METIN = {
     tr: {
-      ad: 'AALabs Twitch Drops Library', hepsi: 'Hepsi', sahip: 'Sahip olduklarım', olmayan: 'Olmayanlar',
+      ad: 'AALabs Twitch Drops', hepsi: 'Hepsi', sahip: 'Sahip olduklarım', olmayan: 'Olmayanlar',
       istek: 'İstek listem', favoriler: 'Favoriler', ara: 'Oyun ara', yenile: 'Kütüphaneyi yenile',
       ayarlar: 'Ayarlar (A)', dil: 'Dili değiştir', tema: 'Temayı değiştir', gorunum: 'Görünüm',
       sayilar: 'Steam {s} · Epic {e} · GOG {g} oyun', eslesen: '{n} kampanyanın {m}\'i sende',
@@ -71,7 +71,7 @@
       tAlinan: 'Alınan işaretleri', tEnvanter: 'Inventory okuma'
     },
     en: {
-      ad: 'AALabs Twitch Drops Library', hepsi: 'All', sahip: 'Owned', olmayan: 'Not owned',
+      ad: 'AALabs Twitch Drops', hepsi: 'All', sahip: 'Owned', olmayan: 'Not owned',
       istek: 'My wishlist', favoriler: 'Favourites', ara: 'Search games', yenile: 'Refresh library',
       ayarlar: 'Settings (S)', dil: 'Change language', tema: 'Change theme', gorunum: 'View',
       sayilar: 'Steam {s} · Epic {e} · GOG {g} games', eslesen: 'You own {m} of {n} campaigns',
@@ -175,14 +175,13 @@
 
   // Ad normalleştirme ve eşleştirme
   function norm(s) {
-    return String(s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase()
-      .replace(/[™®©]/g, '').replace(/&/g, ' and ').replace(/['’`]/g, '')
+    return String(s || '').replace(/[™®©]/g, '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/&/g, ' and ').replace(/['’`]/g, '')
       .replace(/[^a-z0-9]+/g, ' ').trim().replace(/^(tom clancys|sid meiers) /, '').replace(/^the /, '')
       .replace(/(^| )(ii|iii|iv|v|vi|vii|viii|ix|x)(?= |$)/g, (m, b, r) => b + ROMA[r]);
   }
   const ROMA = { ii: '2', iii: '3', iv: '4', v: '5', vi: '6', vii: '7', viii: '8', ix: '9', x: '10' };
   // "classic" bilerek yok: World of Warcraft Classic ayrı üründür
-  const EKLER = /^((premium|gold|special|collectors|digital deluxe|deluxe|launch|standard|ultimate|complete|definitive|anniversary|goty|game of the year|enhanced)( edition)?|legacy( edition)?|remastered|directors cut|edition)$/;
+  const EKLER = /^((premium|gold|special|collectors|digital deluxe|deluxe|launch|standard|ultimate|complete|definitive|anniversary|goty|game of the year|enhanced)( edition)?|legacy( edition)?|remastered|directors cut|edition|[a-z0-9]+ edition)$/;
   const ON_EKLER = /^(marvels|disney|lego|warhammer 40000)$/;
   function adEslesir(twitchAd, magazaAd) {
     const a = norm(twitchAd), b = norm(magazaAd);
@@ -192,6 +191,8 @@
     if (b.endsWith(' ' + a) && a.indexOf(' ') > 0) return ON_EKLER.test(b.slice(0, b.length - a.length - 1));
     return false;
   }
+  // Başka oyunun içinde gelen oyunlar (norm Twitch adı → kapsayan oyun adı): kapsayana sahipsen buna da sahipsin
+  const ICINDE = { 'battlefield redsec': 'Battlefield 6' };
   // Mağazada adı değişmiş oyunlar (norm ad → Steam appid)
   const STEAM_EK = { 'grand theft auto 5': [271590, 3240220], 'rainbow six siege': [359550], 'hunt showdown': [594650], 'hunt showdown 1896': [594650] };
 
@@ -430,6 +431,12 @@
     if (AYAR.gog && KUT.gog.some((x) => adEslesir(ad, x))) magazalar.push('GOG');
     const e = ELLE.get(k);
     if (e) for (const x of e) if (!magazalar.includes(x)) magazalar.push(x);
+    if (ICINDE[k]) {
+      const ana = eslesme(ICINDE[k]);
+      for (const x of ana.magazalar) if (!magazalar.includes(x)) magazalar.push(x);
+      if (ana.istek) istekte = true;
+      if (!ESLESME.has(norm(ICINDE[k]))) kesin = false;
+    }
     const sonuc = { magazalar, istek: istekte && !magazalar.length };
     if (kesin) ESLESME.set(k, sonuc);
     return sonuc;
