@@ -1,12 +1,16 @@
 // ==UserScript==
 // @name         AALabs Google Maps Review Scraper
+// @name:tr      GMaps Review Scraper
+// @name:en      GMaps Review Scraper
 // @namespace    aalabs
-// @version      3.1.0
+// @version      26.11.18.1
 // @description  Google Maps işletme yorumlarını en yeniden eskiye scrape eder. Özgün ve çeviri metni, medya, sahip yanıtı ve yıldız toplamlarını JSON olarak indirir.
 // @author       AALabs
 // @match        https://www.google.com/maps/*
 // @match        https://www.google.com.tr/maps/*
-// @icon         data:image/png;base64,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
+// @icon         data:image/png;base64,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
+// @updateURL    http://127.0.0.1:47815/u/AALabs.GoogleMapsReviewScraper.user.js
+// @downloadURL  http://127.0.0.1:47815/u/AALabs.GoogleMapsReviewScraper.user.js
 // @run-at       document-idle
 // @noframes
 // @grant        GM_getValue
@@ -16,7 +20,7 @@
 // @grant        GM_setClipboard
 // @grant        GM_notification
 // @grant        GM_info
-// @aalabs-ikon  GMR
+// @aalabs-ikon  GMRS
 // ==/UserScript==
 
 /*
@@ -28,7 +32,8 @@
  * Seçiciler (2026-10-21, gerçek Maps sayfasında ölçüldü)
  *   Yorum kartı      div.jftiEf[data-review-id]  (aynı kimlik iç düğmelerde de var; en dış öğe alınır)
  *   Metin            .MyEned .wiI7pd (lang özniteliği dil kodunu verir)
- *   Çeviri düğmesi   button[role=switch][jsaction*=showReviewInOriginal]  aria-checked="true" = çeviri görünüyor
+ *   Çeviri düğmesi   button[role=switch][jsaction*=showReviewIn…]  aria-checked="true" + …InOriginal = çeviri görünüyor;
+ *                    basınca aria-checked="false" + …InTranslation olur (3.1.1 bunu bilmiyordu: 0 / 313)
  *   Sahip yanıtı     .CDe7pd > div.wiI7pd (metin) + .DZSIDd (tarih)   — 3.0.0 span ve .rsqaWe arıyordu: 0 buluyordu
  *   Medya            button.Tya61d: arka plan resmi. aria-label "Video" + .e5A3N süre → video.
  *                    Video dosyası = resim adresi + "=m22" (mp4). Fotoğraf aslı = "=s0". "+ N more photos" → gizli medya.
@@ -41,10 +46,10 @@
 (function () {
   'use strict';
 
-  const SURUM = '3.1.0';
+  const SURUM = '2611-18a';
   const ID = 'GoogleMapsReviewScraper';
-  const KOD = 'GMR';
-  const AD = 'AALabs Google Maps Review Scraper';
+  const KOD = 'GMRS';
+  const AD = 'GMaps Review Scraper';   // görünen ad; @name kayıt anahtarı olarak eski kaldı (GM deposu korunur)
   const KISA_AD = 'Review Scraper';
 
   // ---------------------------------------------------------------- test kancası (yalnız sahte sayfada)
@@ -63,7 +68,7 @@
   const METIN = {
     tr: {
       ayarlar: 'Ayarlar', ara: 'Ayarlarda ara', sonucYok: 'Sonuç yok. Başka bir kelime dene.', ortak: 'ORTAK',
-      kapat: 'Kapat (Esc)', kucult: 'Küçült', ac: 'GMR panelini aç', bildirimKapat: 'Bildirimi kapat',
+      kapat: 'Kapat (Esc)', kucult: 'Küçült', ac: 'GMRS panelini aç', bildirimKapat: 'Bildirimi kapat',
       varsayilan: 'Varsayılana dön', sifirlandi: 'Bu bölüm varsayılana döndü',
       b_scrape: 'Scrape', b_metinMedya: 'Metin ve medya', b_dosya: 'Dosya',
       b_genel: 'Genel', b_kisayol: 'Klavye kısayolları', b_tani: 'Tanı', b_hakkinda: 'Hakkında', b_kabul: 'Kabul testi',
@@ -94,7 +99,7 @@
       aHd: 'Fotoğrafları en büyük boyutta bağla', aHdA: 'Küçük önizleme yerine asıl dosyanın adresi kaydedilir.',
       aBildir: 'Bitince bildir', aBildirA: 'Sekme arkadaysa Windows bildirimi gösterir ve sekme başlığına sonucu yazar.',
       dil: 'Dil', dil_tr: 'Türkçe', dil_en: 'English', dil_tarayici: 'Tarayıcı dili', algilanan: 'Algılanan dil: {dil}',
-      tema: 'Tema', temaA: 'Sayfayı izle: Maps koyuysa GMR de koyu.', tema_sayfa: 'Sayfayı izle', tema_acik: 'Açık', tema_koyu: 'Koyu',
+      tema: 'Tema', temaA: 'Sayfayı izle: Maps koyuysa GMRS de koyu.', tema_sayfa: 'Sayfayı izle', tema_acik: 'Açık', tema_koyu: 'Koyu',
       olcek: 'Ölçek', olcekA: 'Kart ve pencere yazı boyutu.',
       kisayolNot: 'Tuş kutusuna tıkla, yeni tuşa bas. Vazgeçmek için Esc. Tarayıcı ya da Maps kısayoluyla çakışan tuş kabul edilmez.',
       k_ayarlar: 'Ayarları aç', k_scrape: 'Scrape başlat / durdur', k_panel: 'Paneli küçült / aç',
@@ -129,13 +134,13 @@
       sonYedek: 'Son yedek: {t}', sonYedekYok: 'Son yedek: henüz yok',
       yedekAc: 'Yedek, bu betiğin ayarlarını tek bir JSON dosyasına yazar. Geri yükleyince ayarlar hemen uygulanır.',
       yedeklendi: 'Ayarlar dosyaya yazıldı', geriYuklendi: 'Ayarlar geri yüklendi',
-      yedekHata: 'Dosya okunamadı. AALabs Google Maps Review Scraper yedeği (.json) seç.',
+      yedekHata: 'Dosya okunamadı. GMaps Review Scraper yedeği (.json) seç.',
       menuAyarlar: 'Ayarlar (A)', menuScrape: 'Scrape (S)', menuIpucu: 'Tampermonkey menüsü: Ayarlar (A) · Scrape (S)',
       penAlt: 'Değişiklik hemen uygulanır.',
     },
     en: {
       ayarlar: 'Settings', ara: 'Search settings', sonucYok: 'No results. Try another word.', ortak: 'SHARED',
-      kapat: 'Close (Esc)', kucult: 'Minimise', ac: 'Open the GMR panel', bildirimKapat: 'Close notification',
+      kapat: 'Close (Esc)', kucult: 'Minimise', ac: 'Open the GMRS panel', bildirimKapat: 'Close notification',
       varsayilan: 'Reset to default', sifirlandi: 'This section was reset',
       b_scrape: 'Scrape', b_metinMedya: 'Text and media', b_dosya: 'File',
       b_genel: 'General', b_kisayol: 'Keyboard shortcuts', b_tani: 'Diagnostics', b_hakkinda: 'About', b_kabul: 'Acceptance test',
@@ -166,7 +171,7 @@
       aHd: 'Link photos at full size', aHdA: 'Saves the address of the real file instead of the small preview.',
       aBildir: 'Notify when done', aBildirA: 'Shows a Windows notification when the tab is in the background and puts the result in the tab title.',
       dil: 'Language', dil_tr: 'Türkçe', dil_en: 'English', dil_tarayici: 'Browser language', algilanan: 'Detected language: {dil}',
-      tema: 'Theme', temaA: 'Follow page: if Maps is dark, GMR is dark too.', tema_sayfa: 'Follow page', tema_acik: 'Light', tema_koyu: 'Dark',
+      tema: 'Theme', temaA: 'Follow page: if Maps is dark, GMRS is dark too.', tema_sayfa: 'Follow page', tema_acik: 'Light', tema_koyu: 'Dark',
       olcek: 'Scale', olcekA: 'Text size of the card and the window.',
       kisayolNot: 'Click a key box, then press the new keys. Esc cancels. Keys used by the browser or Maps are refused.',
       k_ayarlar: 'Open settings', k_scrape: 'Start / stop scrape', k_panel: 'Minimise / open panel',
@@ -201,7 +206,7 @@
       sonYedek: 'Last backup: {t}', sonYedekYok: 'Last backup: none yet',
       yedekAc: "The backup writes this script's settings to one JSON file. Restoring applies them at once.",
       yedeklendi: 'Settings written to a file', geriYuklendi: 'Settings restored',
-      yedekHata: "Couldn't read the file. Pick an AALabs Google Maps Review Scraper backup (.json).",
+      yedekHata: "Couldn't read the file. Pick a GMaps Review Scraper backup (.json).",
       menuAyarlar: 'Settings (A)', menuScrape: 'Scrape (S)', menuIpucu: 'Tampermonkey menu: Settings (A) · Scrape (S)',
       penAlt: 'Changes apply right away.',
     },
@@ -351,7 +356,7 @@
     sirala: 'button[aria-label="Sort reviews"], button[data-value="Sort"], button[aria-label="Yorumları sırala"], button[data-value="Sırala"]',
     menuOge: '[role="menuitemradio"], [role="menuitem"]',
     devam: 'button.w8nwRe.kyuRq, button[jsaction*="expandReview"], button[jsaction*="expandOwnerResponse"]',
-    ceviri: 'button[role="switch"][jsaction*="showReviewInOriginal"]',
+    ceviri: 'button[role="switch"][jsaction*="showReviewInOriginal"], button[role="switch"][jsaction*="showReviewInTranslation"]',   // Maps basınca jsaction'ı değiştirir
     yanit: '.CDe7pd',
     medya: 'button.Tya61d, [data-photo-index]',
     histogram: 'tr.BHOKXe',
@@ -534,7 +539,7 @@
     const ceviri = !!anahtar && !yanittaMi(anahtar);
     const ozgunGorunuyor = ceviri && anahtar.getAttribute('aria-checked') === 'false';   // kullanıcı elle özgüne çevirmiş
     let dilAdi = '';
-    if (ceviri) { const m = /\(([^)]+)\)\s*$/.exec(anahtar.textContent.trim()); if (m) dilAdi = m[1].trim(); }
+    if (ceviri && !ozgunGorunuyor) { const m = /\(([^)]+)\)\s*$/.exec(anahtar.textContent.trim()); if (m) dilAdi = m[1].trim(); }   // "See original (Turkish)"
     return {
       index: sira + 1, review_id: id, reviewer_name: ad, reviewer_profile_url: profil,
       reviewer_photo_url: av ? av.getAttribute('src') || '' : '', is_local_guide: rehber,
@@ -624,7 +629,7 @@
         if (durum.durdur) break;
         if (!b.isConnected || b.getAttribute('aria-expanded') === 'true') continue;
         try { b.click(); n++; } catch (_) { /* yok */ }
-        if (n % 10 === 0) await bekle(20);
+        if (n % 25 === 0) await bekle(20);
         if (n % 40 === 0) durumYaz({ yazi: _('d_genislet', { n: sayi(n) }) });
       }
       await bekle(500);
@@ -632,46 +637,60 @@
     tani.kesik = acilmamislar().length;
   }
 
-  /** Çevrili yorumda "Orijinali göster"e basar, metin değişene dek bekler (en çok 4 sn), özgün metni okur. */
+  /** Çevrili yorumların özgün metnini okur. Toplu çalışır: 40'lık gruptaki bütün "Orijinali göster" düğmelerine
+   *  birden basar, hepsinin dönmesini tek beklemede (en çok 4 sn) bekler, kısaltılmış özgünlerin "Daha fazla"sına
+   *  birden basar, sonra okur. Sekme arkadayken tarayıcı zamanlayıcıları ~1 sn'ye yavaşlatır; yorum başına
+   *  bekleme olursa 313 yorum dakikalar sürer (3.1.0 ilk sürüm). Grup başına birkaç bekleme bunu önler. */
   async function ozgunOku(sonuclar, kartHaritasi) {
     const hedef = sonuclar.filter((r) => r.is_translated && !r.original_text);
     tani.ozgunToplam = hedef.length;
     tani.ozgunOkunan = 0;
     const basilan = [];
-    let i = 0;
-    for (const r of hedef) {
-      if (durum.durdur) break;
-      i++;
-      let kart = kartHaritasi.get(r.review_id);
-      if (!kart || !kart.isConnected) kart = kartlar().find((k) => k.getAttribute('data-review-id') === r.review_id) || null;   // Maps kartı yeniden çizdiyse
-      const anahtar = kart && kart.querySelector(SEC.ceviri);
-      if (!anahtar) { r.original_not_read = true; continue; }
-      if (anahtar.getAttribute('aria-checked') === 'true') { anahtar.click(); basilan.push(r.review_id); }
-      // kabul: düğme gerçekten özgüne döndü ve metin çeviriden farklı
-      const ozgunMu = () => {
-        const a2 = kart.isConnected ? kart.querySelector(SEC.ceviri) : null;
-        if (!a2 || a2.getAttribute('aria-checked') !== 'false') return null;
-        const g = govdeMetni(kart);
-        return g.metin && g.metin !== r.translated_text ? g : null;
-      };
-      let sonra = await bekleKosul(ozgunMu, 4000, 80);
-      // özgün metin yeniden kısaltılmış gelebilir: kartın kendi "Daha fazla"sına bas
-      const kutu = sonra && ilkDis(kart, '.MyEned');
-      const devam = kutu && [...kutu.querySelectorAll(SEC.devam)].find((b) => b.getAttribute('aria-expanded') !== 'true');
-      if (devam) {
-        const uzunluk = sonra.metin.length;
-        try { devam.click(); } catch (_) { /* yok */ }
-        const tam = await bekleKosul(() => { const g = ozgunMu(); return g && g.metin.length > uzunluk ? g : null; }, 2000, 80);
-        if (tam) sonra = tam;
+    const GRUP = 40;
+    const kartBul = (r) => {
+      let k = kartHaritasi.get(r.review_id);
+      if (!k || !k.isConnected) { k = kartlar().find((x) => x.getAttribute('data-review-id') === r.review_id) || null; if (k) kartHaritasi.set(r.review_id, k); }
+      return k;
+    };
+    // kabul: düğme gerçekten özgüne döndü ve metin çeviriden farklı
+    const ozgunMu = (r) => {
+      const kart = kartBul(r);
+      const a = kart && kart.querySelector(SEC.ceviri);
+      if (!a || a.getAttribute('aria-checked') !== 'false') return null;
+      const g = govdeMetni(kart);
+      return g.metin && g.metin !== r.translated_text ? g : null;
+    };
+    for (let bas = 0; bas < hedef.length && !durum.durdur; bas += GRUP) {
+      const grup = hedef.slice(bas, bas + GRUP);
+      for (const r of grup) {
+        const kart = kartBul(r);
+        const a = kart && kart.querySelector(SEC.ceviri);
+        if (a && a.getAttribute('aria-checked') === 'true') { try { a.click(); basilan.push(r.review_id); } catch (_) { /* yok */ } }
       }
-      if (sonra) {
-        r.original_text = sonra.metin;
-        r.original_language_code = sonra.dil;
-        tani.ozgunOkunan++;
-      } else {
-        r.original_not_read = true;
+      const okunan = new Map();
+      await bekleKosul(() => { for (const r of grup) if (!okunan.has(r.review_id)) { const g = ozgunMu(r); if (g) okunan.set(r.review_id, g); } return okunan.size === grup.length; }, 4000, 120);
+      // özgün metin yeniden kısaltılmış gelebilir: kartın kendi "Daha fazla"sına bas (hepsine birden)
+      const uzayan = [];
+      for (const r of grup) {
+        const g = okunan.get(r.review_id);
+        const kart = g && kartBul(r);
+        const kutu = kart && ilkDis(kart, '.MyEned');
+        const devam = kutu && [...kutu.querySelectorAll(SEC.devam)].find((b) => b.getAttribute('aria-expanded') !== 'true');
+        if (devam) { try { devam.click(); uzayan.push(r); } catch (_) { /* yok */ } }
       }
-      if (i % 5 === 0 || i === hedef.length) durumYaz({ yazi: _('d_ozgun', { n: sayi(i), t: sayi(hedef.length) }), oran: i / Math.max(1, hedef.length) });
+      if (uzayan.length) {
+        await bekleKosul(() => {
+          let hepsi = true;
+          for (const r of uzayan) { const g = ozgunMu(r); if (g && g.metin.length > okunan.get(r.review_id).metin.length) okunan.set(r.review_id, g); else hepsi = false; }
+          return hepsi;
+        }, 2000, 120);
+      }
+      for (const r of grup) {
+        const g = okunan.get(r.review_id);
+        if (g) { r.original_text = g.metin; r.original_language_code = g.dil; tani.ozgunOkunan++; } else r.original_not_read = true;
+      }
+      const n = Math.min(bas + GRUP, hedef.length);
+      durumYaz({ yazi: _('d_ozgun', { n: sayi(n), t: sayi(hedef.length) }), oran: n / Math.max(1, hedef.length) });
     }
     // sayfayı eski hâline getir (çeviri görünsün); beklemeden. Düğme yeniden çizildiyse kimlikle bulunur.
     for (const id of basilan) {
