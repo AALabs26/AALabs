@@ -3,7 +3,7 @@
 // @name:tr      Claude Suite
 // @name:en      Claude Suite
 // @namespace    aalabs.claude-suite
-// @version      26.11.19.2
+// @version      26.11.19.5
 // @description  claude.ai için AALabs araç takımı: kullanım göstergesi, proje etiketleri ve filtresi, başlık kodu, mesaj saatleri, şablonlar, komut paleti. Türkçe ve İngilizce; her özellik Ayarlar'dan ayrı açılıp kapanır.
 // @author       AALabs
 // @match        https://claude.ai/*
@@ -47,7 +47,7 @@
 
   const UYGULAMA_ADI = 'Claude Suite';
   const UYGULAMA_ID = 'AALabs.ClaudeSuite';
-  const SURUM = '2611-19b';   // görünen sürüm YYMM-DDx; @version aynı sürümün YY.A.G.N karşılığı
+  const SURUM = '2611-19e';   // görünen sürüm YYMM-DDx; @version aynı sürümün YY.A.G.N karşılığı
   const TEMA_SURUM = '1.8.0';
   const IKON_KODU = 'CLS';
   // Tampermonkey / Violentmonkey betik başlığındaki @version (yoksa null).
@@ -921,7 +921,7 @@
     "Yeni sohbete taşı": "Move to new chat",
     "Şeritteki düğme bütün sohbeti .md dosyası olarak yeni bir sohbete ekler. Sohbet bir projedeyse yeni sohbet de o projede açılır. Gönder'e sen basarsın.": "The strip button attaches the whole chat as an .md file to a new chat. If the chat is in a project, the new chat opens there too. You press Send.",
     "Mesajları katla": "Fold messages",
-    "Uzun cevapların sağ üstünde Katla düğmesi. Katlanınca ilk satırlar ve satır sayısı kalır. Şeritteki Tümünü katla son cevap dışındakileri katlar.": "A Fold button at the top right of long replies. Folded, the first lines and the line count remain. Fold all on the strip folds all but the last reply.",
+    "Uzun cevapların sağ üstünde Katla düğmesi. Katlanınca ilk satırlar ve satır sayısı kalır. Şeritteki Tümünü katla bütün uzun cevapları katlar.": "A Fold button at the top right of long replies. Folded, the first lines and the line count remain. Fold all on the strip folds all long replies.",
     "Tümünü katla / aç": "Fold / unfold all",
     "Yer imi": "Bookmarks",
     "Kendi mesajlarının solunda yıldız: tıklayınca yer imi olur. Yer imleri Ana hat panelinde listelenir. Alt+↑ ve Alt+↓ kendi mesajların arasında atlar.": "A star left of your messages: click to bookmark. Bookmarks are listed in the Outline panel. Alt+↑ and Alt+↓ jump between your messages.",
@@ -964,7 +964,7 @@
     "{0} satır · Aç ▾": "{0} lines · Open ▾",
     "Katlanacak uzun cevap yok": "No long replies to fold",
     "Tümünü katla": "Fold all",
-    "Son cevap dışındaki uzun cevapları katlar; yeniden basınca açar": "Folds long replies except the last; press again to unfold",
+    "Bütün uzun cevapları katlar; yeniden basınca açar": "Folds all long replies; press again to unfold",
     "Sonraki mesajın yok": "No next message",
     "Önceki mesajın yok": "No previous message",
     "Bu sohbette {0} yer imi": "{0} bookmarks in this chat",
@@ -994,6 +994,10 @@
     "~%{0} · ~{1} bin token (tahmin)": "~{0}% · ~{1}k tokens (estimate)",
     "Sohbet doluluğu (tahmin): ~{0} bin / {1} bin token. Yalnız metin ve eklerin metni sayılır; araç çıktıları ve görseller sayılmaz.": "Chat fullness (estimate): ~{0}k / {1}k tokens. Only text and attachment text count; tool outputs and images don't.",
     "Yeni sohbete taşımak iyi olur.": "Moving to a new chat is a good idea.",
+    "Fable payını doldurur, Fable'ın haftalıktan yediğini geri verir. Haftayı sıfırlamaz.": "Refills your Fable allowance and gives back what Fable used of the week. Does not reset the week.",
+    "Bütün haftalık limiti sıfırlar (Fable dahil).": "Resets the whole weekly limit (Fable included).",
+    "{0} cevap katlandı": "{0} replies folded",
+    "{0} cevap açıldı": "{0} replies unfolded",
     "TO-DO yap": "Make TO-DO",
     "OK yap": "Make OK",
     "XX yap": "Make XX",
@@ -1857,6 +1861,10 @@
     let resets = LS.get('resets', null);
     const SIFIR_TUR = { full: _n('Fable sıfırlama'), weekly: _n('Haftalık sıfırlama') };
     const GUN_MS = 86400000;
+    const SIFIR_ACIKLAMA = {
+      full: _n('Fable payını doldurur, Fable\'ın haftalıktan yediğini geri verir. Haftayı sıfırlamaz.'),
+      weekly: _n('Bütün haftalık limiti sıfırlar (Fable dahil).')
+    };
     function ingestResets(j) {
       const ce = j && j.cedar_ember;
       if (!ce || !Array.isArray(ce.grants)) return false;
@@ -1904,7 +1912,9 @@
       const r = document.createElement('span');
       r.className = 'rozet';
       const yakin = resets.liste.map(x => x.son).filter(yakinMi).sort((a, b) => a - b)[0];
-      r.textContent = '↺ ' + resets.toplam + (yakin ? ' · ' + _f('{0} gün', Math.max(1, Math.ceil((yakin - Date.now()) / GUN_MS))) : '');
+      // Rozet B (maket CLS_SIFIRLAMA-ROZETI-SON_2611-19-1654): türler ayrı, "↺ F3 · H1".
+      const harf = t => (t === 'full' ? 'F' : t === 'weekly' ? (DIL.aktif() === 'en' ? 'W' : 'H') : String(t).charAt(0).toUpperCase());
+      r.textContent = '↺ ' + resets.liste.map(x => harf(x.tur) + x.adet).join(' · ') + (yakin ? ' · ' + _f('{0} gün', Math.max(1, Math.ceil((yakin - Date.now()) / GUN_MS))) : '');
       if (yakin) r.classList.add('sari');
       r.title = _('Sıfırlama hakları') + '\n' + resets.liste.map(x => _(x.ad) + ' × ' + x.adet + (x.son ? ' · ' + _('son') + ': ' + sonYaz(x.son) : '')).join('\n');
       r.setAttribute('role', 'button');
@@ -1926,6 +1936,8 @@
         const s = document.createElement('span'); s.className = 'rsag' + (yakinMi(x.son) ? ' sari' : '');
         s.textContent = x.son ? _('son') + ': ' + sonYaz(x.son) : '';
         row.append(l, s); b.append(row);
+        // Açıklama A: türün ne yaptığı, satırın altında.
+        if (SIFIR_ACIKLAMA[x.tur]) { const a = document.createElement('div'); a.className = 'sacik'; a.textContent = _(SIFIR_ACIKLAMA[x.tur]); b.append(a); }
       }
       const btn = document.createElement('button');
       btn.type = 'button'; btn.className = 'usage-btn';
@@ -2092,6 +2104,19 @@
               break;
             }
           }
+        }
+      }
+
+      /* 2611-19c: claude.ai'nin yeni biçimi. Fable limiti "limits" dizisinde: kind weekly_scoped,
+         scope.model.display_name "Fable". Tüm modeller: kind weekly_all. Bu açık alanlar
+         genel eşleştirmeden önce gelir (eskiden F yanlış kovadan %0 okunuyordu). */
+      if (json && Array.isArray(json.limits)) {
+        for (const l of json.limits) {
+          if (!l || typeof l.percent !== 'number') continue;
+          const model = (l.scope && l.scope.model && l.scope.model.display_name) || '';
+          const kova = { pct: l.percent, resetAt: Date.parse(l.resets_at) || null, idx: 0 };
+          if (/fable|mythos/i.test(model)) { picked.fable = Object.assign(kova, { label: 'limits.' + model }); usedLabels.add(kova.label); }
+          else if (l.kind === 'weekly_all') { picked.weekly = Object.assign(kova, { label: 'limits.weekly_all' }); usedLabels.add(kova.label); }
         }
       }
 
@@ -2397,6 +2422,7 @@
     .srow{display:flex;justify-content:space-between;gap:12px;padding:3px 0}
     .rsag{color:var(--metin-ikincil);white-space:nowrap}
     .rsag.sari{color:var(--uyari)}
+    .sacik{color:var(--metin-ikincil);font-size:11px;line-height:1.4;padding-bottom:4px}
     .usage-btn{all:unset;box-sizing:border-box;margin-top:8px;display:inline-flex;align-items:center;height:26px;padding:0 10px;
       border:1px solid var(--ayirici);border-radius:var(--kose-m);font-weight:600;cursor:pointer;color:var(--metin)}
     .usage-btn:hover{background:rgba(127,127,127,.12)}
@@ -6305,7 +6331,7 @@
   define({
     id: 'mesajKatla',
     label: 'Mesajları katla',
-    desc: 'Uzun cevapların sağ üstünde Katla düğmesi. Katlanınca ilk satırlar ve satır sayısı kalır. Şeritteki Tümünü katla son cevap dışındakileri katlar.',
+    desc: 'Uzun cevapların sağ üstünde Katla düğmesi. Katlanınca ilk satırlar ve satır sayısı kalır. Şeritteki Tümünü katla bütün uzun cevapları katlar.',
     group: 'Araçlar',
     health() { return { tamam: true, metin: _f('{0} cevapta düğme', document.querySelectorAll('.cls-katla').length) }; },
     on(ctx) {
@@ -6315,7 +6341,7 @@
         border:1px solid rgba(127,127,127,.35);background:var(--cls-yuzey,transparent);font:600 11px/20px "Open Sans","Segoe UI",system-ui,sans-serif;
         color:var(--cls-ikincil,#6b6862);cursor:pointer;opacity:.55}
       [data-cls-katlanir]:hover > .cls-katla,.cls-katla:focus-visible{opacity:1}
-      [data-cls-katli] .standard-markdown,[data-cls-katli] .prose{max-height:4.8em;overflow:hidden;
+      [data-cls-katli] [data-cls-govde]{max-height:4.8em;overflow:hidden;
         -webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
       .cls-katli-alt{all:unset;display:none;box-sizing:border-box;margin-top:4px;font:400 12px/1.4 "Open Sans","Segoe UI",system-ui,sans-serif;
         color:var(--cls-ikincil,#6b6862);cursor:pointer}
@@ -6327,42 +6353,51 @@
         if (katli) m.setAttribute('data-cls-katli', ''); else m.removeAttribute('data-cls-katli');
         const b = m.querySelector(':scope > .cls-katla'); if (b) b.textContent = etiket(m);
       }
-      function tara() {
-        for (const m of document.querySelectorAll(SA_AI)) {
-          if (m.hasAttribute('data-cls-katlanir') || saYayin(m)) continue;
-          const govde = m.querySelector('.standard-markdown, .prose');
-          if (!govde) continue;
-          const n = (govde.innerText || '').split('\n').filter(x => x.trim()).length;
-          if (n < KATLA_SATIR) continue;
-          m.setAttribute('data-cls-katlanir', String(n));
-          const b = document.createElement('button');
-          b.type = 'button'; b.className = 'cls-katla'; b.textContent = etiket(m);
-          b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); ayarla(m, !m.hasAttribute('data-cls-katli')); });
-          const alt = document.createElement('button');
-          alt.type = 'button'; alt.className = 'cls-katli-alt';
-          alt.textContent = _f('{0} satır · Aç ▾', n);
-          alt.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); ayarla(m, false); });
-          m.appendChild(b);
-          govde.insertAdjacentElement('afterend', alt);
-        }
+      /* 2611-19e: cevabın gövdesi = ilk DIV çocuk (eylem çubuğunu içermeyen). Araç kartlı cevaplarda
+         .standard-markdown birden çok ya da hiç olmayabiliyor; satır sayısı bütün gövdeden. */
+      function govdesi(m) {
+        return [...m.children].find(c => c.tagName === 'DIV' && !c.matches('[data-testid="message-actions"]') &&
+          !c.querySelector('[data-testid="message-actions"]') && !c.classList.contains('cls-katli-alt')) || null;
       }
+      function satirSay(el) { return (el.innerText || el.textContent || '').split('\n').filter(x => x.trim()).length; }
+      function hazirla(m, esik) {
+        if (m.hasAttribute('data-cls-katlanir')) return true;
+        if (saYayin(m)) return false;
+        const govde = govdesi(m);
+        if (!govde) return false;
+        const n = satirSay(govde);
+        if (n < esik) return false;
+        govde.setAttribute('data-cls-govde', '');
+        m.setAttribute('data-cls-katlanir', String(n));
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'cls-katla'; b.textContent = etiket(m);
+        b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); ayarla(m, !m.hasAttribute('data-cls-katli')); });
+        const alt = document.createElement('button');
+        alt.type = 'button'; alt.className = 'cls-katli-alt';
+        alt.textContent = _f('{0} satır · Aç ▾', n);
+        alt.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); ayarla(m, false); });
+        m.appendChild(b);
+        govde.insertAdjacentElement('afterend', alt);
+        return true;
+      }
+      function tara() { for (const m of document.querySelectorAll(SA_AI)) hazirla(m, KATLA_SATIR); }
+      /* Tümünü katla: 4 satırdan uzun bütün cevaplar (son cevap dahil). Hepsi katlıysa açar. */
       function hepsi() {
-        const l = [...document.querySelectorAll(SA_AI + '[data-cls-katlanir]')];
+        const l = [...document.querySelectorAll(SA_AI)].filter(m => hazirla(m, 4));
         if (!l.length) { bildir(_('Katlanacak uzun cevap yok'), 'uyari'); return; }
-        const katlanacak = l.slice(0, -1);
-        const acik = katlanacak.some(m => !m.hasAttribute('data-cls-katli'));
-        katlanacak.forEach(m => ayarla(m, acik));
-        if (!acik) ayarla(l[l.length - 1], false);
+        const katla = l.some(m => !m.hasAttribute('data-cls-katli'));
+        l.forEach(m => ayarla(m, katla));
+        bildir(katla ? _f('{0} cevap katlandı', l.length) : _f('{0} cevap açıldı', l.length), 'basari');
       }
       tara();
       ctx.every(tara, 1500);
       ctx.action({ id: 'katla-hepsi', ad: 'Tümünü katla / aç', grup: 'Araçlar', calistir: hepsi });
-      SOHBET_SERIT.ekle({ id: 'katla', sira: 40, yap: () => saYazi(_('Tümünü katla'), _('Son cevap dışındaki uzun cevapları katlar; yeniden basınca açar'), hepsi) });
+      SOHBET_SERIT.ekle({ id: 'katla', sira: 40, yap: () => saYazi(_('Tümünü katla'), _('Bütün uzun cevapları katlar; yeniden basınca açar'), hepsi) });
       ctx.undo(() => {
         SOHBET_SERIT.cikar('katla');
         document.querySelectorAll('.cls-katla, .cls-katli-alt').forEach(n => n.remove());
-        document.querySelectorAll('[data-cls-katlanir], [data-cls-katli]').forEach(n => {
-          n.removeAttribute('data-cls-katlanir'); n.removeAttribute('data-cls-katli');
+        document.querySelectorAll('[data-cls-katlanir], [data-cls-katli], [data-cls-govde]').forEach(n => {
+          n.removeAttribute('data-cls-katlanir'); n.removeAttribute('data-cls-katli'); n.removeAttribute('data-cls-govde');
         });
       });
     }
@@ -8602,6 +8637,9 @@
   const DEGISIKLIK = (function () {
     const VERI = [
     // @@CHG-BASLA
+    {"s": "2611-19e", "t": "2026-11-19", "m": [{"k": "duzeldi", "tr": "Tümünü katla çalışmıyordu: tek uzun cevap varken hiçbir şey yapmıyor, araç kartlı cevapları bulamıyordu. Artık bütün uzun cevapları (son cevap dahil) katlar, yeniden basınca açar.", "en": "Fold all did nothing with a single long reply and missed replies with tool cards. It now folds all long replies (last one included) and unfolds on a second press."}]},
+    {"s": "2611-19d", "t": "2026-11-19", "m": [{"k": "degisti", "tr": "Sıfırlama rozeti ~~↺ 4~~ → ==↺ F3 · H1==: Fable ve haftalık sıfırlama ayrı. Kartta her türün altında ne işe yaradığı yazar.", "en": "Reset badge ~~↺ 4~~ → ==↺ F3 · W1==: Fable and weekly resets apart. The card says what each kind does."}]},
+    {"s": "2611-19c", "t": "2026-11-19", "m": [{"k": "duzeldi", "tr": "Göstergede Fable ~~%0~~ → ==gerçek yüzde==. claude.ai Fable limitini yeni bir alanda veriyor.", "en": "Fable on the meter ~~0%~~ → ==the real percent==. claude.ai now sends the Fable limit in a new field."}]},
     {"s": "2611-19b", "t": "2026-11-19", "m": [{"k": "yeni", "tr": "Kullanım göstergesinde ==sıfırlama hakları==: ↺ rozeti (7 günden az kaldıysa sarı ve gün sayısı), kartta tür, adet, son tarih ve Usage sayfasını açan düğme.", "en": "==Limit resets== on the usage meter: ↺ badge (yellow with day count when under 7 days left); the card lists kind, count, expiry and a button that opens the Usage page."}, {"k": "yeni", "tr": "Limit eşiği uyarısı: haftalık ya da Fable limiti %80 ve %95'i geçince sayfada uyarı.", "en": "Limit threshold alert: an in-page alert when the weekly or Fable limit passes 80% and 95%."}, {"k": "degisti", "tr": "Dışa aktarma artık Share'in solunda ikon. Sol tık .md indirir, sağ tık HTML ya da JSON. Yeni kısayol Ctrl+Shift+E.", "en": "Export is now an icon left of Share. Left click downloads .md, right click offers HTML or JSON. New shortcut Ctrl+Shift+E."}, {"k": "yeni", "tr": "Başlık şeridinde: sohbet doluluğu (tahmin; %70 sarı, %90 kırmızı), sohbette ara (Ctrl+Shift+F), ana hat paneli, Tümünü katla ve Yeni sohbete taşı.", "en": "On the title strip: chat fullness (estimate; yellow at 70%, red at 90%), search in chat (Ctrl+Shift+F), outline panel, Fold all and Move to new chat."}, {"k": "yeni", "tr": "Mesajlarda: uzun cevaplarda Katla düğmesi, kendi mesajında yer imi yıldızı (Alt+↑/↓ ile atla), Copy'nin yanında Biçimli kopyala.", "en": "On messages: Fold button on long replies, bookmark star on your messages (jump with Alt+↑/↓), Copy formatted next to Copy."}]},
     {"s":"2611-19a","t":"2026-11-19","m":[{"k":"duzeldi","tr":"Sol menüdeki Chats bağlantısı geri geldi.","en":"The Chats link in the left menu is back."}]},
     {"s": "2611-18a", "t": "2026-11-18", "m": [{"k": "kaldirildi", "tr": "Kaldırıldı: kenar çubuğundaki durum çipleri, rozetler ve süzgeç (Sohbetler sayfasında kalıyor) · Önerilen modele kendiliğinden geç · tek tuşla Opus 5.5 · medium düğmesi · Kenar çubuğunda Chats · Widget'ı yüzdür.", "en": "Removed: status chips, badges and filter in the sidebar (they stay on the Chats page) · Switch to the suggested model automatically · one-click Opus 5.5 · medium button · Chats in the sidebar · Float widget."}]},
