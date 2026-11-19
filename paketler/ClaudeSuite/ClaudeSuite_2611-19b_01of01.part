@@ -3,7 +3,7 @@
 // @name:tr      Claude Suite
 // @name:en      Claude Suite
 // @namespace    aalabs.claude-suite
-// @version      26.11.17.1
+// @version      26.11.19.2
 // @description  claude.ai için AALabs araç takımı: kullanım göstergesi, proje etiketleri ve filtresi, başlık kodu, mesaj saatleri, şablonlar, komut paleti. Türkçe ve İngilizce; her özellik Ayarlar'dan ayrı açılıp kapanır.
 // @author       AALabs
 // @match        https://claude.ai/*
@@ -47,7 +47,7 @@
 
   const UYGULAMA_ADI = 'Claude Suite';
   const UYGULAMA_ID = 'AALabs.ClaudeSuite';
-  const SURUM = '2611-17a';   // görünen sürüm YYMM-DDx; @version aynı sürümün YY.A.G.N karşılığı
+  const SURUM = '2611-19b';   // görünen sürüm YYMM-DDx; @version aynı sürümün YY.A.G.N karşılığı
   const TEMA_SURUM = '1.8.0';
   const IKON_KODU = 'CLS';
   // Tampermonkey / Violentmonkey betik başlığındaki @version (yoksa null).
@@ -909,6 +909,91 @@
     "özet 3–5 kelime": "summary 3–5 words",
     "Önerilen modele kendiliğinden geç": "Switch to the suggested model automatically",
     "Yeni bir cevap bittiğinde önerdiği model kullanılandan farklıysa claude.ai menüsünden onu seçer (\"Model: Fable 5.2 · Effort: high\" satırındaki model). Efor kendiliğinden değişmez; öneri şeritte görünür, seçimi sen yaparsın. Sayfa açılırken görülen eski cevaplara dokunmaz.": "When a new reply finishes and the model it suggests differs from the one in use, picks it from claude.ai's menu (the model in the \"Model: Fable 5.2 · Effort: high\" line). Effort is never changed automatically; the suggestion shows on the strip and you pick it. Older replies seen when the page opens are left alone.",
+    "Sohbetler sayfasında durum ve biçim": "Status and format on the Chats page",
+    "Sohbetler sayfasında (claude.ai/chats) yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; kenar çubuğuna dokunmaz; XX, OLD ve DEL sönük görünür. Biçime (DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Listenin üstünde durum süzgeci ve XX gizle var. DEL satırında Sil düğmesi.": "On the Chats page (claude.ai/chats) the seven statuses (TO-DO, OK, QA, LATER, XX, OLD, DEL) become coloured chips; the sidebar is left alone; XX, OLD and DEL rows are dimmed. Titles that do not fit the format (STATUS OWNER CODE CHAT-NAME +SHORT-SUMMARY) show what is missing; clicking the badge opens the title grid. Above the list: a status filter and Hide XX. DEL rows get a Delete button.",
+    "Açık sohbeti saatleriyle birlikte .md dosyası olarak indirir. Share'in solundaki ikonla, kısayolla ya da komut paletinden. İkona sağ tıkla: HTML ya da JSON.": "Downloads the open chat with its times as an .md file. From the icon left of Share, a shortcut or the command palette. Right-click the icon: HTML or JSON.",
+    "Sohbeti HTML olarak indir": "Download chat as HTML",
+    "Sohbeti JSON olarak indir": "Download chat as JSON",
+    "Markdown indir": "Download Markdown",
+    "HTML indir": "Download HTML",
+    "JSON indir": "Download JSON",
+    "Markdown indir (ikinci tuş)": "Download Markdown (second key)",
+    "Yeni sohbete taşı": "Move to new chat",
+    "Şeritteki düğme bütün sohbeti .md dosyası olarak yeni bir sohbete ekler. Sohbet bir projedeyse yeni sohbet de o projede açılır. Gönder'e sen basarsın.": "The strip button attaches the whole chat as an .md file to a new chat. If the chat is in a project, the new chat opens there too. You press Send.",
+    "Mesajları katla": "Fold messages",
+    "Uzun cevapların sağ üstünde Katla düğmesi. Katlanınca ilk satırlar ve satır sayısı kalır. Şeritteki Tümünü katla son cevap dışındakileri katlar.": "A Fold button at the top right of long replies. Folded, the first lines and the line count remain. Fold all on the strip folds all but the last reply.",
+    "Tümünü katla / aç": "Fold / unfold all",
+    "Yer imi": "Bookmarks",
+    "Kendi mesajlarının solunda yıldız: tıklayınca yer imi olur. Yer imleri Ana hat panelinde listelenir. Alt+↑ ve Alt+↓ kendi mesajların arasında atlar.": "A star left of your messages: click to bookmark. Bookmarks are listed in the Outline panel. Alt+↑ and Alt+↓ jump between your messages.",
+    "Önceki mesajıma atla": "Jump to my previous message",
+    "Sonraki mesajıma atla": "Jump to my next message",
+    "Biçimli kopyala": "Copy formatted",
+    "Cevabın altındaki Copy düğmesinin yanında \"Biçimli kopyala\": başlık, kalın, liste ve tablo Mail ya da Docs'a biçimiyle yapışır.": "\"Copy formatted\" next to the reply's Copy button: headings, bold, lists and tables paste into Mail or Docs with their formatting.",
+    "Sohbette ara": "Search in chat",
+    "Şeritteki büyüteç ya da kısayol arama kutusunu açar. Enter sonraki, Shift+Enter önceki, Esc kapatır. Yalnız sayfada yüklü mesajlarda arar.": "The strip magnifier or the shortcut opens the search box. Enter next, Shift+Enter previous, Esc closes. Searches only messages loaded on the page.",
+    "Ana hat paneli": "Outline panel",
+    "Şeritteki ikon sağda bir panel açar: kendi mesajların numaralı, altında cevap başlıkları ve yer imleri. Tıklayınca oraya gider.": "The strip icon opens a panel on the right: your messages numbered, reply headings below them, and bookmarks. Click to jump there.",
+    "Sohbet doluluğu": "Chat fullness",
+    "Başlık şeridinde ince çubuk ve yüzde: sohbetin bağlam sınırının ne kadarını doldurduğu (tahmin). %70'te sarı, %90'da kırmızı.": "A thin bar and percent on the title strip: how much of the context limit the chat fills (estimate). Yellow at 70%, red at 90%.",
+    "Sıfırlama hakları": "Limit resets",
+    "Göstergede ↺ rozeti (kalan sıfırlama hakkı; 7 günden az kaldıysa sarı ve gün sayısı). Kartta tür, adet, son tarih ve Usage sayfasını açan düğme.": "A ↺ badge on the meter (resets left; yellow with day count when under 7 days remain). The card shows kind, count, expiry and a button that opens the Usage page.",
+    "Limit eşiği uyarısı": "Limit threshold alert",
+    "Haftalık ya da Fable limiti %80 ve %95'i geçince sayfada uyarı. Her dönemde her eşik bir kez.": "An in-page alert when the weekly or Fable limit passes 80% and 95%. Each threshold once per period.",
+    "Fable sıfırlama": "Fable reset",
+    "Haftalık sıfırlama": "Weekly reset",
+    "{0} gün": "{0} days",
+    "son": "until",
+    "Sıfırlama hakları · {0}": "Limit resets · {0}",
+    "Kullanılabilir sıfırlama hakkın yok": "No resets available",
+    "Usage sayfasını aç": "Open Usage page",
+    "Sıfırlamayı Usage sayfasında sen yaparsın": "You do the reset on the Usage page",
+    "Sıfırlama verisi henüz gelmedi; Usage sayfasını bir kez aç": "No reset data yet; open the Usage page once",
+    "Haftalık limit": "Weekly limit",
+    "Fable limiti": "Fable limit",
+    "{0} %{1}": "{0} {1}%",
+    "Dışa aktarma ikonu yerinde": "Export icon in place",
+    "Share düğmesi bulunamadı; ikon yerleşmedi": "Share button not found; icon not placed",
+    "Sağ tık: HTML ya da JSON": "Right-click: HTML or JSON",
+    "Başlık şeridinde": "On the title strip",
+    "Başlık şeridi yok; \"Başlık kodu\" açık olmalı": "No title strip; \"Title code\" must be on",
+    "Sohbet çok büyük; taşınamadı. Markdown'a aktarıp kendin ekle.": "Chat too large to move. Export to Markdown and attach it yourself.",
+    "Bütün sohbet .md dosyası olarak yeni sohbete eklenir": "The whole chat is attached to a new chat as an .md file",
+    "Yeni sohbet açıldı · {0} eklendi": "New chat opened · {0} attached",
+    "{0} cevapta düğme": "Button on {0} replies",
+    "Katla": "Fold",
+    "{0} satır · Aç ▾": "{0} lines · Open ▾",
+    "Katlanacak uzun cevap yok": "No long replies to fold",
+    "Tümünü katla": "Fold all",
+    "Son cevap dışındaki uzun cevapları katlar; yeniden basınca açar": "Folds long replies except the last; press again to unfold",
+    "Sonraki mesajın yok": "No next message",
+    "Önceki mesajın yok": "No previous message",
+    "Bu sohbette {0} yer imi": "{0} bookmarks in this chat",
+    "Yer imi eklendi": "Bookmark added",
+    "Yer imi kaldırıldı": "Bookmark removed",
+    "Yer imini kaldır": "Remove bookmark",
+    "Yer imi ekle": "Add bookmark",
+    "Cevap metni bulunamadı": "Reply text not found",
+    "Biçimli kopyalandı; Mail ya da Docs'a yapıştır": "Copied with formatting; paste into Mail or Docs",
+    "HTML ve düz metin birlikte kopyalanır": "Copies HTML and plain text together",
+    "en az 2 harf": "at least 2 letters",
+    "{0}/{1} sonuç · ↑ ↓": "{0}/{1} results · ↑ ↓",
+    "sonuç yok": "no results",
+    "Arama sohbet sayfasında çalışır": "Search works on a chat page",
+    "Ara": "Search",
+    "Yalnız sayfada yüklü mesajlarda arar": "Searches only messages loaded on the page",
+    "Önceki (Shift+Enter)": "Previous (Shift+Enter)",
+    "Sonraki (Enter)": "Next (Enter)",
+    "Sohbette ara ({0})": "Search in chat ({0})",
+    "Mesaj sayfada bulunamadı": "Message not found on the page",
+    "Ana hat": "Outline",
+    "Sayfada mesaj yok": "No messages on the page",
+    "Yer imleri": "Bookmarks",
+    "Yer imi yok · mesajındaki ☆ ile ekle": "No bookmarks · add with ☆ on your message",
+    "Ana hat sohbet sayfasında çalışır": "Outline works on a chat page",
+    "Sohbet okunamadı": "Chat could not be read",
+    "~%{0} · ~{1} bin token (tahmin)": "~{0}% · ~{1}k tokens (estimate)",
+    "Sohbet doluluğu (tahmin): ~{0} bin / {1} bin token. Yalnız metin ve eklerin metni sayılır; araç çıktıları ve görseller sayılmaz.": "Chat fullness (estimate): ~{0}k / {1}k tokens. Only text and attachment text count; tool outputs and images don't.",
+    "Yeni sohbete taşımak iyi olur.": "Moving to a new chat is a good idea.",
     "TO-DO yap": "Make TO-DO",
     "OK yap": "Make OK",
     "XX yap": "Make XX",
@@ -1154,6 +1239,10 @@
       { id: 'sablonYonet', ad: _n('Şablon yöneticisi'), varsayilan: 'Alt+Shift+T' },
       { id: 'baslik', ad: _n('Başlığı düzenle'), varsayilan: 'Alt+B' },
       { id: 'markdown', ad: _n('Markdown\'a aktar'), varsayilan: 'Alt+M' },
+      { id: 'markdownHizli', ad: _n('Markdown indir (ikinci tuş)'), varsayilan: 'Ctrl+Shift+E' },
+      { id: 'sohbetAra', ad: _n('Sohbette ara'), varsayilan: 'Ctrl+Shift+F' },
+      { id: 'mesajOnceki', ad: _n('Önceki mesajıma atla'), varsayilan: 'Alt+Up' },
+      { id: 'mesajSonraki', ad: _n('Sonraki mesajıma atla'), varsayilan: 'Alt+Down' },
       { id: 'solaSabitle', ad: _n('Sola sabitle aç/kapa'), varsayilan: 'Alt+L' },
       { id: 'solaYeniden', ad: _n('Sola sabitlemeyi yeniden hesapla'), varsayilan: 'Alt+R' },
       { id: 'dil', ad: _n('Dil değiştir (TR/EN)'), varsayilan: 'Alt+Shift+L' }
@@ -1761,6 +1850,115 @@
 
     let slotData = LS.get('slots', {}) || {};
     let credits = LS.get('credits', null);
+
+    /* 2611-19b (onaylı maket CLS_SIFIRLAMA-EXPORT-OZELLIKLER-SON_2611-19-1545): sıfırlama hakları.
+       Kaynak claude.ai'nin Usage verisi: /usage?cedar_ember=1 → cedar_ember.grants[]
+       (type weekly | full, resets_left, ends_at, usable_now). Fable hakları "full" türünde. */
+    let resets = LS.get('resets', null);
+    const SIFIR_TUR = { full: _n('Fable sıfırlama'), weekly: _n('Haftalık sıfırlama') };
+    const GUN_MS = 86400000;
+    function ingestResets(j) {
+      const ce = j && j.cedar_ember;
+      if (!ce || !Array.isArray(ce.grants)) return false;
+      const gruplar = {};
+      for (const g of ce.grants) {
+        const n = Number(g && g.resets_left) || 0;
+        if (n <= 0 || g.paused) continue;
+        const tur = SIFIR_TUR[g.type] ? g.type : String(g.type || 'diger');
+        const son = Date.parse(g.ends_at) || null;
+        const x = gruplar[tur] || (gruplar[tur] = { tur, ad: SIFIR_TUR[tur] || g.label || tur, adet: 0, son: null });
+        x.adet += n;
+        if (son && (!x.son || son < x.son)) x.son = son;
+      }
+      const sira = t => (t === 'full' ? 0 : t === 'weekly' ? 1 : 2);
+      const liste = Object.values(gruplar).sort((a, b) => sira(a.tur) - sira(b.tur));
+      resets = { at: Date.now(), liste, toplam: liste.reduce((s, x) => s + x.adet, 0) };
+      LS.set('resets', resets);
+      return true;
+    }
+    let resetSorgu = 0;
+    async function pollResets() {
+      if (!origFetch || !effective('sifirlamaHaklari') || Date.now() - resetSorgu < 30000) return;
+      resetSorgu = Date.now();
+      const sabit = LS.get('resetOrg', null);
+      const ep = String(LS.get('endpoint', '') || '').match(/organizations\/([^/]+)\//);
+      let orgs = sabit ? [sabit] : ep ? [ep[1]] : [];
+      if (!orgs.length) { try { orgs = await orgUuid(); } catch (e) { return; } }
+      for (const o of orgs) {
+        try {
+          const r = await origFetch(`${location.origin}/api/organizations/${o}/usage?cedar_ember=1&skip_spend=1`,
+            { credentials: 'include', headers: { accept: 'application/json' } });
+          if (!r.ok) continue;
+          if (ingestResets(await r.json())) { LS.set('resetOrg', o); render(); return; }
+        } catch (e) { gunluk('sifirlamaHaklari', e.message); }
+      }
+    }
+    // "son: 9 Mar 2027" (başka yıl) · "son: 11 Ara 01:00" (bu yıl).
+    function sonYaz(ts) {
+      if (!ts) return '';
+      return tarihKisa(ts) + ' ' + (new Date(ts).getFullYear() !== new Date().getFullYear() ? new Date(ts).getFullYear() : saatYaz(ts));
+    }
+    // E1: hakkın süresi 7 günden az kaldıysa.
+    const yakinMi = ts => !!ts && ts > Date.now() && ts - Date.now() < 7 * GUN_MS;
+    function rozetYap() {
+      const r = document.createElement('span');
+      r.className = 'rozet';
+      const yakin = resets.liste.map(x => x.son).filter(yakinMi).sort((a, b) => a - b)[0];
+      r.textContent = '↺ ' + resets.toplam + (yakin ? ' · ' + _f('{0} gün', Math.max(1, Math.ceil((yakin - Date.now()) / GUN_MS))) : '');
+      if (yakin) r.classList.add('sari');
+      r.title = _('Sıfırlama hakları') + '\n' + resets.liste.map(x => _(x.ad) + ' × ' + x.adet + (x.son ? ' · ' + _('son') + ': ' + sonYaz(x.son) : '')).join('\n');
+      r.setAttribute('role', 'button');
+      return r;
+    }
+    function sifirBolumu() {
+      const b = document.createElement('div');
+      b.className = 'sif';
+      const h = document.createElement('div');
+      h.className = 'sif-bas';
+      h.textContent = _f('Sıfırlama hakları · {0}', resets ? resets.toplam : 0);
+      b.append(h);
+      if (!resets || !resets.liste.length) {
+        const y = document.createElement('div'); y.className = 'rsub'; y.textContent = resets ? _('Kullanılabilir sıfırlama hakkın yok') : _('Veri yok');
+        b.append(y);
+      } else for (const x of resets.liste) {
+        const row = document.createElement('div'); row.className = 'srow';
+        const l = document.createElement('span'); l.textContent = _(x.ad) + ' × ' + x.adet;
+        const s = document.createElement('span'); s.className = 'rsag' + (yakinMi(x.son) ? ' sari' : '');
+        s.textContent = x.son ? _('son') + ': ' + sonYaz(x.son) : '';
+        row.append(l, s); b.append(row);
+      }
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'usage-btn';
+      btn.textContent = _('Usage sayfasını aç') + ' ↗';
+      btn.title = _('Sıfırlamayı Usage sayfasında sen yaparsın');
+      btn.addEventListener('click', e => { e.stopPropagation(); closeCard(); location.assign('/settings/usage'); });
+      b.append(btn);
+      return b;
+    }
+
+    /* 2611-19b: limit eşiği (Eşik A). %80 ve %95 geçilince sayfada uyarı; her dönemde her eşik bir kez. */
+    const ESIK_AD = { weekly: _n('Haftalık limit'), fable: _n('Fable limiti') };
+    function esikDenetle(rows) {
+      if (!effective('limitEsigi')) return;
+      const kayit = LS.get('esik', {}) || {};
+      const mesaj = [];
+      let degisti = false, enYuksek = 0;
+      for (const r of rows) {
+        if (r.key === 'credits' || typeof r.pct !== 'number' || r.faded) continue;
+        const donem = String(msZaman(r.resetAt) || '');
+        const k = kayit[r.key] && kayit[r.key].d === donem ? kayit[r.key] : { d: donem, s: 0 };
+        const esik = r.pct >= 95 ? 95 : r.pct >= 80 ? 80 : 0;
+        if (esik > k.s) {
+          k.s = esik;
+          enYuksek = Math.max(enYuksek, esik);
+          mesaj.push(_f('{0} %{1}', _(ESIK_AD[r.key] || r.full), Math.round(r.pct)) + (r.resetAt ? ' · ' + fmtReset(r.resetAt) : ''));
+        }
+        if (kayit[r.key] !== k) { kayit[r.key] = k; degisti = true; }
+        if (esik > 0) degisti = true;
+      }
+      if (degisti) LS.set('esik', kayit);
+      if (mesaj.length) bildir(mesaj.join(' · '), enYuksek >= 95 ? 'hata' : 'uyari');
+    }
     let collapsed = LS.get('collapsed', false);
     let labelMode = LS.get('labelMode', 'full');
     let dock = LS.get('dock', 'sidebar');   // 'sidebar' | 'float'
@@ -2054,6 +2252,7 @@
         // /usage hem limitleri hem (muhtemelen) harcama bilgisini taşıyor.
         if (USAGE_RE.test(url)) { ingest(json, url); ingestCredits(json, url); }
         if (CREDIT_URL_RE.test(url)) ingestCredits(json, url);
+        if (json && json.cedar_ember && ingestResets(json)) render();
       });
     }
 
@@ -2105,6 +2304,7 @@
       if (polling || !origFetch) return;
       polling = true;
       pollCredits();
+      pollResets();
       try {
         for (const u of await candidates()) {
           try {
@@ -2189,6 +2389,18 @@
     .rsub{display:block;margin-top:4px;color:var(--muted);font-size:11px}
     .foot{margin-top:8px;padding-top:8px;border-top:0.5px solid var(--hair);color:var(--muted);font-size:11px}
     .msg{white-space:nowrap;color:var(--muted)}
+    .rozet{align-self:center;flex:none;padding:2px 6px;border-radius:999px;background:rgba(127,127,127,.16);color:var(--tx);
+      font-size:11px;font-weight:600;white-space:nowrap;cursor:pointer}
+    .rozet.sari{color:var(--warn);background:color-mix(in srgb,var(--warn) 20%,transparent)}
+    .sif{margin-top:8px;padding-top:8px;border-top:0.5px solid var(--ayirici)}
+    .sif-bas{font-weight:600;margin-bottom:4px}
+    .srow{display:flex;justify-content:space-between;gap:12px;padding:3px 0}
+    .rsag{color:var(--metin-ikincil);white-space:nowrap}
+    .rsag.sari{color:var(--uyari)}
+    .usage-btn{all:unset;box-sizing:border-box;margin-top:8px;display:inline-flex;align-items:center;height:26px;padding:0 10px;
+      border:1px solid var(--ayirici);border-radius:var(--kose-m);font-weight:600;cursor:pointer;color:var(--metin)}
+    .usage-btn:hover{background:rgba(127,127,127,.12)}
+    .usage-btn:focus-visible{outline:2px solid var(--vurgu);outline-offset:2px}
     @media (prefers-reduced-motion: reduce){.fill{transition:none}.btn.spin svg{animation:none}}
     `;
 
@@ -2400,6 +2612,7 @@
       const t = applyTokens();
       const rows = view();
       const has = rows.some(r => r.pct !== null);
+      try { esikDenetle(rows); } catch (e) { gunluk('limitEsigi', e.message); }
       hud.innerHTML = '';
       hud.classList.toggle('tight', labelMode === 'tight');
 
@@ -2415,6 +2628,8 @@
         rows.forEach(r => hud.append(cell(r, t)));
       }
 
+      const rz = has && effective('sifirlamaHaklari') && resets && resets.toplam > 0 ? rozetYap() : null;
+      if (rz) hud.append(rz);
       const ctl = document.createElement('div');
       ctl.className = 'ctl';
       const refresh = document.createElement('span');
@@ -2474,6 +2689,7 @@
         row.append(l, v);
         card.append(row);
       });
+      if (effective('sifirlamaHaklari')) card.append(sifirBolumu());
       const foot = document.createElement('div');
       foot.className = 'foot';
       foot.textContent = fmtAgo(Math.max(0, ...rows.map(r => r.at)));
@@ -2488,6 +2704,7 @@
         more.textContent = cardOpen ? '⌃' : '⌄';
         if (cardOpen) positionCard();
       });
+      if (rz) rz.addEventListener('click', e => { e.stopPropagation(); more.click(); });
     }
 
     /* ---------------- Yerleşim ----------------
@@ -2767,6 +2984,12 @@
         return { tamam: v.some(r => r.pct !== null), metin: veri + ' · ' + yer + (tazelik ? ' · ' + fmtAgo(tazelik).toLowerCase() : '') };
       },
       yenile() { return poll(); },
+      ciz() { render(); },
+      sifirYenile() { resetSorgu = 0; return pollResets(); },
+      sifirDurum() {
+        if (!resets) return { tamam: false, metin: _('Sıfırlama verisi henüz gelmedi; Usage sayfasını bir kez aç') };
+        return { tamam: true, metin: resets.liste.map(x => _(x.ad) + ' × ' + x.adet).join(' · ') || _('Kullanılabilir sıfırlama hakkın yok') };
+      },
       off() {
         if (cardHost) { UI_HOSTS.delete(cardHost); cardHost.remove(); }
         cardHost = null; cardNode = null; cardOpen = false;
@@ -3242,358 +3465,7 @@
    * 8) WIDGET'I YÜZDÜR
    * ===================================================================== */
 
-  define({
-    id: 'widgetFloat',
-    label: 'Widget\'ı yüzdür',
-    desc: 'Three.js viewer, artifact, visualize gibi iframe widget\'larına "float" butonu koyar; sürükle-bırak yüzen pencereye alır. Esc ile geri koyar.',
-    group: 'Araçlar',
-    keys: 'Esc',
-    on(ctx) {
-      const CFG = { minIframeW: 180, minIframeH: 140, minW: 260, minH: 200, scanMs: 300, z: 2147483647, storeKey: 'cwf:v1' };
-      const CAN_POPOVER = typeof HTMLElement.prototype.showPopover === 'function';
-
-      function toTopLayer(node) {
-        if (!CAN_POPOVER) return false;
-        try {
-          if (node.getAttribute('popover') !== 'manual') node.setAttribute('popover', 'manual');
-          let open = false;
-          try { open = node.matches(':popover-open'); } catch (e) { open = false; }
-          if (!open) node.showPopover();
-          return true;
-        } catch (e) { return false; }
-      }
-
-      function unTop(node) {
-        try { node.hidePopover(); } catch (e) {}
-        node.removeAttribute('popover');
-      }
-
-      ctx.css(
-        '[popover].cwf::backdrop{background:transparent!important;pointer-events:none!important}' +
-        '[popover].cwf{inset:auto!important;border:none!important;padding:0!important;' +
-        'margin:0!important;overflow:hidden!important;color:inherit}');
-
-      function makesStackingContext(cs) {
-        if (cs.position !== 'static' && cs.zIndex !== 'auto') return true;
-        if (parseFloat(cs.opacity) < 1) return true;
-        if (cs.isolation === 'isolate') return true;
-        if (cs.mixBlendMode && cs.mixBlendMode !== 'normal') return true;
-        if (cs.transform && cs.transform !== 'none') return true;
-        if (cs.filter && cs.filter !== 'none') return true;
-        if (cs.backdropFilter && cs.backdropFilter !== 'none') return true;
-        if (cs.perspective && cs.perspective !== 'none') return true;
-        if (cs.willChange && /transform|opacity|filter/.test(cs.willChange)) return true;
-        if (cs.contain && /paint|layout|strict|content/.test(cs.contain)) return true;
-        return false;
-      }
-
-      function liftAncestors(node) {
-        const touched = [];
-        let p = node.parentElement;
-        while (p && p !== document.documentElement) {
-          const cs = getComputedStyle(p);
-          const needLift = makesStackingContext(cs);
-          const needFlat = (cs.transform !== 'none') || (cs.filter !== 'none') ||
-                           (cs.perspective !== 'none') || (cs.contain && cs.contain !== 'none');
-          if (needLift || needFlat) {
-            touched.push({ node: p, css: p.getAttribute('style') });
-            if (cs.position === 'static') p.style.setProperty('position', 'relative', 'important');
-            p.style.setProperty('z-index', String(CFG.z), 'important');
-            p.style.setProperty('transform', 'none', 'important');
-            p.style.setProperty('filter', 'none', 'important');
-            p.style.setProperty('backdrop-filter', 'none', 'important');
-            p.style.setProperty('perspective', 'none', 'important');
-            p.style.setProperty('contain', 'none', 'important');
-            p.style.setProperty('will-change', 'auto', 'important');
-            p.style.setProperty('isolation', 'auto', 'important');
-            p.style.setProperty('overflow', 'visible', 'important');
-            if (parseFloat(cs.opacity) < 1) p.style.setProperty('opacity', '1', 'important');
-            if (cs.mixBlendMode !== 'normal') p.style.setProperty('mix-blend-mode', 'normal', 'important');
-          }
-          p = p.parentElement;
-        }
-        return touched;
-      }
-
-      function restoreAncestors(touched) {
-        for (const t of touched) {
-          if (t.css != null) t.node.setAttribute('style', t.css);
-          else t.node.removeAttribute('style');
-        }
-      }
-
-      let layer = null;
-      function ensureLayer() {
-        if (layer && document.body && document.body.contains(layer)) return layer;
-        layer = document.createElement('div');
-        layer.id = 'cwf-layer';
-        layer.className = 'cwf';
-        Object.assign(layer.style, {
-          position: 'fixed', left: '0', top: '0', width: '100vw', height: '100vh',
-          pointerEvents: 'none', zIndex: String(CFG.z), background: 'transparent'
-        });
-        (document.body || document.documentElement).appendChild(layer);
-        toTopLayer(layer);
-        return layer;
-      }
-      ctx.undo(() => { if (layer) layer.remove(); layer = null; });
-
-      function raiseLayer() {
-        const L = ensureLayer();
-        if (!CAN_POPOVER) return;
-        try { L.hidePopover(); } catch (e) {}
-        toTopLayer(L);
-      }
-
-      function el(tag, style, text) {
-        const n = document.createElement(tag);
-        n.className = 'cwf';
-        if (style) Object.assign(n.style, style);
-        if (text != null) n.textContent = text;
-        return n;
-      }
-
-      // AALabs görünümü: düz renk, ince kenar, keskin köşe; bulanıklık ve gölge yok.
-      const TV = () => TEMA.vars();
-      const btnStyle = {
-        pointerEvents: 'auto', cursor: 'pointer', border: '1px solid ' + TV().ana,
-        background: TV().ana, color: '#fff', font: '600 12px/1 "Open Sans","Segoe UI",sans-serif',
-        padding: '5px 8px', borderRadius: '2px', userSelect: 'none'
-      };
-
-      function measureOrigin(node) {
-        const prev = node.getAttribute('style');
-        node.style.setProperty('position', 'fixed', 'important');
-        node.style.setProperty('left', '0px', 'important');
-        node.style.setProperty('top', '0px', 'important');
-        node.style.setProperty('right', 'auto', 'important');
-        node.style.setProperty('bottom', 'auto', 'important');
-        node.style.setProperty('margin', '0', 'important');
-        const r = node.getBoundingClientRect();
-        if (prev != null) node.setAttribute('style', prev); else node.removeAttribute('style');
-        return { x: r.left, y: r.top };
-      }
-
-      const floats = new Map();
-      const pins = new Map();
-
-      const loadState = () => { try { return JSON.parse(localStorage.getItem(CFG.storeKey)); } catch (e) { return null; } };
-      const saveState = s => { try { localStorage.setItem(CFG.storeKey, JSON.stringify(s)); } catch (e) {} };
-      const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-
-      function isCandidate(f) {
-        if (!f.isConnected) return false;
-        const r = f.getBoundingClientRect();
-        return r.width >= CFG.minIframeW && r.height >= CFG.minIframeH;
-      }
-
-      function float(frame) {
-        if (floats.has(frame)) return;
-
-        const startRect = frame.getBoundingClientRect();
-        const parent = frame.parentElement;
-        const saved = {
-          frameCss: frame.getAttribute('style'),
-          frameClass: frame.className,
-          parentMinH: parent ? (parent.style.minHeight || '') : ''
-        };
-
-        if (parent) parent.style.minHeight = Math.round(startRect.height) + 'px';
-
-        frame.classList.add('cwf');
-        const promoted = toTopLayer(frame);
-        const touched = promoted ? [] : liftAncestors(frame);
-        const origin = measureOrigin(frame);
-
-        const prev = loadState();
-        const st = {
-          x: prev ? prev.x : clamp(startRect.left, 12, Math.max(12, window.innerWidth - startRect.width - 24)),
-          y: prev ? prev.y : Math.max(56, startRect.top),
-          w: prev ? prev.w : startRect.width,
-          h: prev ? prev.h : startRect.height
-        };
-        st.w = clamp(st.w, CFG.minW, window.innerWidth - 24);
-        st.h = clamp(st.h, CFG.minH, window.innerHeight - 80);
-        st.x = clamp(st.x, 0, window.innerWidth - st.w);
-        st.y = clamp(st.y, 36, window.innerHeight - 60);
-
-        const L = ensureLayer();
-        const chrome = el('div', { position: 'fixed', pointerEvents: 'none', boxSizing: 'border-box' });
-        const bar = el('div', {
-          position: 'absolute', left: '0', top: '-30px', width: '100%', height: '30px',
-          pointerEvents: 'auto', cursor: 'move', display: 'flex', alignItems: 'center',
-          gap: '6px', padding: '0 8px', boxSizing: 'border-box',
-          background: TV().yuzey, color: TV().metin, borderRadius: '6px 6px 0 0',
-          border: '1px solid ' + TV().kenar, borderBottom: 'none',
-          font: '600 12px/1 "Open Sans","Segoe UI",sans-serif'
-        });
-        const title = el('span', { flex: '1', color: TV()['metin-ikincil'], overflow: 'hidden', whiteSpace: 'nowrap' }, 'Widget');
-        const bMax = el('button', Object.assign({}, btnStyle, { background: 'transparent', border: 'none', color: TV().metin, padding: '4px 6px' }), '⤢');
-        const bClose = el('button', Object.assign({}, btnStyle, { background: 'transparent', border: 'none', color: TV().metin, padding: '4px 6px' }), '✕');
-        bMax.setAttribute('aria-label', _('Büyüt'));
-        bClose.setAttribute('aria-label', _('Yerine koy'));
-        bMax.title = _('Büyüt / eski boyut (başlıkta çift tık)');
-        bClose.title = _('Yerine geri koy (Esc)');
-        bar.append(title, bMax, bClose);
-
-        const grip = el('div', {
-          position: 'absolute', right: '-2px', bottom: '-2px', width: '18px', height: '18px',
-          pointerEvents: 'auto', cursor: 'nwse-resize',
-          borderRight: '3px solid ' + TV().kenar, borderBottom: '3px solid ' + TV().kenar, boxSizing: 'border-box'
-        });
-        chrome.append(bar, grip);
-        L.appendChild(chrome);
-        raiseLayer();
-
-        const rec = { frame, parent, saved, touched, origin, st, chrome, bar, grip, max: null, promoted };
-        floats.set(frame, rec);
-        apply(rec);
-
-        let drag = null;
-        bar.addEventListener('pointerdown', e => {
-          if (e.target === bMax || e.target === bClose) return;
-          drag = { dx: e.clientX - rec.st.x, dy: e.clientY - rec.st.y };
-          bar.setPointerCapture(e.pointerId);
-          shield(true); e.preventDefault();
-        });
-        bar.addEventListener('pointermove', e => {
-          if (!drag) return;
-          rec.st.x = clamp(e.clientX - drag.dx, -rec.st.w + 80, window.innerWidth - 80);
-          rec.st.y = clamp(e.clientY - drag.dy, 32, window.innerHeight - 40);
-          apply(rec);
-        });
-        const endDrag = () => { if (drag) { drag = null; shield(false); saveState(rec.st); } };
-        bar.addEventListener('pointerup', endDrag);
-        bar.addEventListener('pointercancel', endDrag);
-
-        let rez = null;
-        grip.addEventListener('pointerdown', e => {
-          rez = { x: e.clientX, y: e.clientY, w: rec.st.w, h: rec.st.h };
-          grip.setPointerCapture(e.pointerId);
-          shield(true); e.preventDefault();
-        });
-        grip.addEventListener('pointermove', e => {
-          if (!rez) return;
-          rec.st.w = Math.max(CFG.minW, rez.w + (e.clientX - rez.x));
-          rec.st.h = Math.max(CFG.minH, rez.h + (e.clientY - rez.y));
-          apply(rec);
-        });
-        const endRez = () => { if (rez) { rez = null; shield(false); saveState(rec.st); } };
-        grip.addEventListener('pointerup', endRez);
-        grip.addEventListener('pointercancel', endRez);
-
-        const toggleMax = () => {
-          if (rec.max) { rec.st = rec.max; rec.max = null; }
-          else {
-            rec.max = Object.assign({}, rec.st);
-            rec.st = { x: 12, y: 44, w: window.innerWidth - 24, h: window.innerHeight - 60 };
-          }
-          apply(rec);
-          saveState(rec.max ? rec.max : rec.st);
-        };
-        bMax.addEventListener('click', toggleMax);
-        bar.addEventListener('dblclick', toggleMax);
-        bClose.addEventListener('click', () => unfloat(frame));
-      }
-
-      function apply(rec) {
-        const { frame, st, origin, chrome } = rec;
-        const S = (k, v) => frame.style.setProperty(k, v, 'important');
-        S('position', 'fixed');
-        S('left', (st.x - origin.x) + 'px');
-        S('top', (st.y - origin.y) + 'px');
-        S('right', 'auto'); S('bottom', 'auto'); S('inset', 'auto');
-        S('left', (st.x - origin.x) + 'px'); S('top', (st.y - origin.y) + 'px');
-        S('width', st.w + 'px'); S('height', st.h + 'px');
-        S('min-width', '0'); S('min-height', '0');
-        S('max-width', 'none'); S('max-height', 'none');
-        S('margin', '0'); S('padding', '0'); S('border', 'none');
-        S('z-index', String(CFG.z));
-        S('border-radius', '0 0 6px 6px');
-        S('box-shadow', 'none');
-        S('outline', '1px solid ' + TV().kenar);
-        S('background', TV().yuzey);
-        S('display', 'block');
-        S('visibility', 'visible');
-        S('opacity', '1');
-        chrome.style.left = st.x + 'px';
-        chrome.style.top = st.y + 'px';
-        chrome.style.width = st.w + 'px';
-        chrome.style.height = st.h + 'px';
-      }
-
-      function unfloat(frame) {
-        const rec = floats.get(frame);
-        if (!rec) return;
-        floats.delete(frame);
-        rec.chrome.remove();
-        if (rec.promoted) unTop(frame);
-        frame.className = rec.saved.frameClass;
-        if (rec.saved.frameCss != null) frame.setAttribute('style', rec.saved.frameCss);
-        else frame.removeAttribute('style');
-        if (rec.parent) rec.parent.style.minHeight = rec.saved.parentMinH;
-        restoreAncestors(rec.touched);
-      }
-      ctx.undo(() => { for (const [f] of [...floats]) unfloat(f); });
-
-      let shieldEl = null;
-      function shield(on) {
-        if (on) {
-          if (shieldEl) return;
-          shieldEl = el('div', {
-            position: 'fixed', left: '0', top: '0', width: '100vw', height: '100vh',
-            pointerEvents: 'auto', cursor: 'grabbing', background: 'transparent'
-          });
-          ensureLayer().appendChild(shieldEl);
-        } else if (shieldEl) { shieldEl.remove(); shieldEl = null; }
-      }
-
-      function pinFor(frame) {
-        let b = pins.get(frame);
-        if (!b) {
-          b = el('button', Object.assign({}, btnStyle, { position: 'fixed', opacity: '.55' }), '⇱ ' + _('Yüzdür'));
-          b.title = _('Yüzen pencereye al');
-          b.addEventListener('mouseenter', () => { b.style.opacity = '1'; });
-          b.addEventListener('mouseleave', () => { b.style.opacity = '.55'; });
-          b.addEventListener('click', () => float(frame));
-          ensureLayer().appendChild(b);
-          pins.set(frame, b);
-        }
-        return b;
-      }
-      ctx.undo(() => { for (const [, b] of pins) b.remove(); pins.clear(); });
-
-      function tick() {
-        if (!document.body) return;
-        ensureLayer();
-        const seen = new Set();
-        for (const f of document.querySelectorAll('iframe')) {
-          if (floats.has(f)) { seen.add(f); continue; }
-          if (!isCandidate(f)) continue;
-          seen.add(f);
-          const r = f.getBoundingClientRect();
-          const b = pinFor(f);
-          const vis = r.bottom > 0 && r.top < window.innerHeight;
-          b.style.display = vis ? 'block' : 'none';
-          b.style.left = Math.round(r.right - 74) + 'px';
-          b.style.top = Math.round(r.top + 8) + 'px';
-        }
-        for (const [f, b] of pins) if (!seen.has(f) || floats.has(f)) { b.remove(); pins.delete(f); }
-        for (const [f, rec] of floats) if (!f.isConnected) { rec.chrome.remove(); floats.delete(f); }
-      }
-
-      ctx.on(document, 'keydown', e => {
-        if (e.key === 'Escape' && floats.size) {
-          for (const [f] of [...floats]) unfloat(f);
-          e.stopPropagation();
-        }
-      }, true);
-
-      ctx.on(window, 'resize', () => { for (const [, rec] of floats) apply(rec); });
-      ctx.every(tick, CFG.scanMs);
-      tick();
-    }
-  });
+  /* widgetFloat: kaldırıldı (2611-18a, kullanıcı kararı) */
 
   /* =====================================================================
    * 9) PROJE ETİKETLERİ, FİLTRE, SAYI, BAŞLIKTA ARAMA
@@ -6103,46 +5975,799 @@
   });
 
   /* =====================================================================
-   * 13) MARKDOWN'A AKTAR
-   * Açık sohbetin görünen dalını .md dosyası yapar. Kişi adı yazılmaz:
+   * 13) MARKDOWN'A AKTAR (+ HTML ve JSON, 2611-19b)
+   * Açık sohbetin görünen dalını dosya yapar. Kişi adı yazılmaz:
    * konuşmacılar "Kullanıcı" ve "Claude".
    * ===================================================================== */
 
-  async function markdownAktar() {
+  const uzunTarih = ts => tarihKisa(ts) + ' ' + new Date(ts).getFullYear() + ' ' + saatYaz(ts);
+
+  async function sohbetVerisi() {
     const id = suankiSohbet();
-    if (!id) { bildir(_('Önce bir sohbet aç. Aktarma sohbet sayfasında çalışır.'), 'uyari'); return; }
+    if (!id) { bildir(_('Önce bir sohbet aç. Aktarma sohbet sayfasında çalışır.'), 'uyari'); return null; }
     let v;
     try { v = await sohbetAgaci(id, true); }
-    catch (e) { bildir(_f('Sohbet okunamadı ({0}). Sayfayı yenileyip yeniden dene.', e.message), 'hata'); return; }
+    catch (e) { bildir(_f('Sohbet okunamadı ({0}). Sayfayı yenileyip yeniden dene.', e.message), 'hata'); return null; }
     const ad = (v.sohbet && v.sohbet.name) || _('Sohbet');
-    const uzun = ts => tarihKisa(ts) + ' ' + new Date(ts).getFullYear() + ' ' + saatYaz(ts);
+    const kok = ad.replace(/[\\/:*?"<>|]+/g, '-').replace(/\s+/g, ' ').trim().slice(0, 120) || 'sohbet';
+    return { id, v, ad, kok };
+  }
+
+  const mesajEkleri = m => [...(m.attachments || []), ...(m.files || []), ...(m.files_v2 || [])]
+    .map(f => f && (f.file_name || f.name)).filter(Boolean);
+
+  function markdownMetni(s) {
+    const { id, v, ad } = s;
     const satir = [];
     satir.push('# ' + ad, '');
     satir.push('- ' + _('Sohbet') + ': https://claude.ai/chat/' + id);
-    if (v.dal.length) satir.push('- ' + _('Aralık') + ': ' + uzun(Date.parse(v.dal[0].created_at)) + ' → ' + uzun(Date.parse(v.dal[v.dal.length - 1].created_at)));
-    satir.push('- ' + _('Mesaj') + ': ' + v.dal.length, '- ' + _('Dışa aktarıldı') + ': ' + uzun(Date.now()) + ' · ' + UYGULAMA_ADI + ' ' + SURUM, '', '---', '');
+    if (v.dal.length) satir.push('- ' + _('Aralık') + ': ' + uzunTarih(Date.parse(v.dal[0].created_at)) + ' → ' + uzunTarih(Date.parse(v.dal[v.dal.length - 1].created_at)));
+    satir.push('- ' + _('Mesaj') + ': ' + v.dal.length, '- ' + _('Dışa aktarıldı') + ': ' + uzunTarih(Date.now()) + ' · ' + UYGULAMA_ADI + ' ' + SURUM, '', '---', '');
     for (const m of v.dal) {
-      satir.push('## ' + (insanMi(m) ? _('Kullanıcı') : 'Claude') + ' · ' + (m.created_at ? uzun(Date.parse(m.created_at)) : ''), '');
-      const ekler = [...(m.attachments || []), ...(m.files || []), ...(m.files_v2 || [])]
-        .map(f => f && (f.file_name || f.name)).filter(Boolean);
+      satir.push('## ' + (insanMi(m) ? _('Kullanıcı') : 'Claude') + ' · ' + (m.created_at ? uzunTarih(Date.parse(m.created_at)) : ''), '');
+      const ekler = mesajEkleri(m);
       if (ekler.length) satir.push(ekler.map(e => '> ' + _('Ek') + ': ' + e).join('\n'), '');
       satir.push(mesajMetni(m).trim() || '_(' + _('metin yok') + ')_', '');
     }
-    const dosya = ad.replace(/[\\/:*?"<>|]+/g, '-').replace(/\s+/g, ' ').trim().slice(0, 120) + '.md';
-    indir(dosya, satir.join('\n'), 'text/markdown;charset=utf-8');
+    return satir.join('\n');
+  }
+
+  async function markdownAktar() {
+    const s = await sohbetVerisi();
+    if (!s) return;
+    const dosya = s.kok + '.md';
+    indir(dosya, markdownMetni(s), 'text/markdown;charset=utf-8');
+    bildir(_f('{0} mesaj aktarıldı: {1}', s.v.dal.length, dosya), 'basari');
+  }
+
+  const htmlKac = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  async function htmlAktar() {
+    const s = await sohbetVerisi();
+    if (!s) return;
+    const { id, v, ad } = s;
+    const parca = [];
+    parca.push('<!doctype html><html lang="' + DIL.aktif() + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<title>' + htmlKac(ad) + '</title><style>' +
+      'body{font:15px/1.6 "Open Sans","Segoe UI",system-ui,sans-serif;max-width:860px;margin:24px auto;padding:0 16px;color:#1f1e1d;background:#fff}' +
+      'h1{font-size:22px;line-height:1.3}.ust{font-size:13px;color:#666}.m{border:1px solid #ddd;border-radius:8px;padding:12px 14px;margin:12px 0}' +
+      '.m.k{background:#eef4fb}.b{font-size:12px;font-weight:600;color:#666;margin-bottom:6px}.e{font-size:12px;color:#666}' +
+      '.t{white-space:pre-wrap;overflow-wrap:anywhere}a{color:#0067a3}' +
+      '@media (prefers-color-scheme:dark){body{background:#1f1e1d;color:#eee}.m{border-color:#444}.m.k{background:#22303d}.b,.e,.ust{color:#aaa}a{color:#5ab4e6}}' +
+      '</style></head><body>');
+    parca.push('<h1>' + htmlKac(ad) + '</h1>');
+    const ust = [_('Sohbet') + ': <a href="https://claude.ai/chat/' + htmlKac(id) + '">claude.ai/chat/' + htmlKac(id) + '</a>'];
+    if (v.dal.length) ust.push(_('Aralık') + ': ' + htmlKac(uzunTarih(Date.parse(v.dal[0].created_at)) + ' → ' + uzunTarih(Date.parse(v.dal[v.dal.length - 1].created_at))));
+    ust.push(_('Mesaj') + ': ' + v.dal.length, _('Dışa aktarıldı') + ': ' + htmlKac(uzunTarih(Date.now()) + ' · ' + UYGULAMA_ADI + ' ' + SURUM));
+    parca.push('<p class="ust">' + ust.join('<br>') + '</p>');
+    for (const m of v.dal) {
+      const k = insanMi(m);
+      parca.push('<div class="m' + (k ? ' k' : '') + '"><div class="b">' + htmlKac((k ? _('Kullanıcı') : 'Claude') + (m.created_at ? ' · ' + uzunTarih(Date.parse(m.created_at)) : '')) + '</div>');
+      const ekler = mesajEkleri(m);
+      if (ekler.length) parca.push('<div class="e">' + ekler.map(e => htmlKac(_('Ek') + ': ' + e)).join('<br>') + '</div>');
+      parca.push('<div class="t">' + htmlKac(mesajMetni(m).trim() || '(' + _('metin yok') + ')') + '</div></div>');
+    }
+    parca.push('</body></html>');
+    const dosya = s.kok + '.html';
+    indir(dosya, parca.join('\n'), 'text/html;charset=utf-8');
     bildir(_f('{0} mesaj aktarıldı: {1}', v.dal.length, dosya), 'basari');
   }
+
+  async function jsonAktar() {
+    const s = await sohbetVerisi();
+    if (!s) return;
+    const { id, v, ad } = s;
+    const govde = {
+      ad, sohbet: 'https://claude.ai/chat/' + id, disaAktarildi: new Date().toISOString(), uygulama: UYGULAMA_ADI + ' ' + SURUM,
+      mesajlar: v.dal.map(m => ({ rol: insanMi(m) ? 'kullanici' : 'claude', zaman: m.created_at || null, ekler: mesajEkleri(m), metin: mesajMetni(m) }))
+    };
+    const dosya = s.kok + '.json';
+    indir(dosya, JSON.stringify(govde, null, 2), 'application/json;charset=utf-8');
+    bildir(_f('{0} mesaj aktarıldı: {1}', v.dal.length, dosya), 'basari');
+  }
+
+  /* Dışa aktarma ikonu (İkon B, Tık A, Biçim A): claude.ai'nin Share düğmesinin solunda.
+     Sol tık .md indirir; sağ tık Markdown · HTML · JSON menüsü. */
+  const MD_IKON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 20h14"/></svg>';
 
   define({
     id: 'exportMarkdown',
     label: 'Markdown\'a aktar',
-    desc: 'Açık sohbeti saatleriyle birlikte .md dosyası olarak indirir. Ayarlardan, komut paletinden ya da kısayolla.',
+    desc: 'Açık sohbeti saatleriyle birlikte .md dosyası olarak indirir. Share\'in solundaki ikonla, kısayolla ya da komut paletinden. İkona sağ tıkla: HTML ya da JSON.',
     group: 'Araçlar',
     kisayol: 'markdown',
-    health() { return { tamam: true, metin: suankiSohbet() ? _('Bu sohbet aktarılabilir') : _('Sohbet sayfasında çalışır') }; },
+    health() {
+      if (!suankiSohbet()) return { tamam: true, metin: _('Sohbet sayfasında çalışır') };
+      const b = document.querySelector('.cls-md-ikon');
+      return b ? { tamam: true, metin: _('Dışa aktarma ikonu yerinde') } : { tamam: false, metin: _('Share düğmesi bulunamadı; ikon yerleşmedi') };
+    },
     on(ctx) {
       ctx.action({ id: 'md', ad: 'Sohbeti Markdown\'a aktar', grup: 'Araçlar', kisayol: 'markdown', calistir: markdownAktar });
+      ctx.action({ id: 'html', ad: 'Sohbeti HTML olarak indir', grup: 'Araçlar', calistir: htmlAktar });
+      ctx.action({ id: 'json', ad: 'Sohbeti JSON olarak indir', grup: 'Araçlar', calistir: jsonAktar });
+      ctx.css(`
+      .cls-md-ikon{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;
+        margin-right:4px;border-radius:6px;color:inherit;opacity:.8;cursor:pointer;flex:none}
+      .cls-md-ikon:hover{opacity:1;background:rgba(127,127,127,.15)}
+      .cls-md-ikon:focus-visible{outline:2px solid var(--cls-ana,#2c84db);outline-offset:2px}
+      .cls-md-ikon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+      .cls-md-menu{position:fixed;z-index:2147483000;display:grid;min-width:160px;padding:4px;border-radius:6px;
+        background:var(--cls-yuzey,#fff);color:var(--cls-metin,#1f1e1d);border:1px solid var(--cls-ayirici,rgba(127,127,127,.35));
+        box-shadow:0 4px 14px rgba(0,0,0,.18);font:400 13px/1 "Open Sans","Segoe UI",system-ui,sans-serif}
+      .cls-md-menu button{all:unset;box-sizing:border-box;padding:8px 10px;border-radius:4px;cursor:pointer}
+      .cls-md-menu button:hover,.cls-md-menu button:focus-visible{background:rgba(127,127,127,.15)}`);
+
+      function menu(x, y) {
+        document.querySelectorAll('.cls-md-menu').forEach(n => n.remove());
+        const m = document.createElement('div');
+        m.className = 'cls-md-menu'; m.setAttribute('role', 'menu');
+        for (const [ad, fn] of [['Markdown indir', markdownAktar], ['HTML indir', htmlAktar], ['JSON indir', jsonAktar]]) {
+          const b = document.createElement('button');
+          b.type = 'button'; b.setAttribute('role', 'menuitem'); b.textContent = _(ad);
+          b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); kapat(); fn(); });
+          m.appendChild(b);
+        }
+        const kapat = () => { m.remove(); removeEventListener('pointerdown', dis, true); removeEventListener('keydown', esc, true); };
+        const dis = e => { if (!m.contains(e.target)) kapat(); };
+        const esc = e => { if (e.key === 'Escape') { e.stopPropagation(); kapat(); } };
+        addEventListener('pointerdown', dis, true); addEventListener('keydown', esc, true);
+        document.body.appendChild(m);
+        m.style.left = Math.max(8, Math.min(x - m.offsetWidth + 32, innerWidth - m.offsetWidth - 8)) + 'px';
+        m.style.top = y + 'px';
+        m.querySelector('button').focus();
+      }
+
+      function yerlestir() {
+        const var_ = document.querySelector('.cls-md-ikon');
+        if (!suankiSohbet()) { if (var_) var_.remove(); return; }
+        const pay = [...document.querySelectorAll('[data-testid="wiggle-controls-actions-share"], [data-testid*="share"][data-testid*="actions"]')]
+          .find(b => { const r = b.getBoundingClientRect(); return r.width && r.top < 140 && !b.closest('[data-testid="assistant-message"]'); });
+        const hedef = pay || document.querySelector('.cls-baslik-arac .ikonlar');
+        if (!hedef) { if (var_) var_.remove(); return; }
+        if (var_ && (pay ? var_.nextElementSibling === pay : var_.parentElement === hedef)) {
+          const t = _('Markdown\'a aktar') + ' (' + [KISAYOL.tus('markdownHizli'), KISAYOL.tus('markdown')].filter(Boolean).join(' · ') + ') · ' + _('Sağ tık: HTML ya da JSON');
+          if (var_.title !== t) { var_.title = t; var_.setAttribute('aria-label', t); }
+          return;
+        }
+        if (var_) var_.remove();
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'cls-md-ikon'; b.innerHTML = MD_IKON;
+        b.title = _('Markdown\'a aktar') + ' (' + [KISAYOL.tus('markdownHizli'), KISAYOL.tus('markdown')].filter(Boolean).join(' · ') + ') · ' + _('Sağ tık: HTML ya da JSON');
+        b.setAttribute('aria-label', b.title);
+        b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); markdownAktar(); });
+        b.addEventListener('contextmenu', e => { e.preventDefault(); e.stopPropagation(); const r = b.getBoundingClientRect(); menu(r.left, r.bottom + 4); });
+        if (pay) pay.insertAdjacentElement('beforebegin', b); else hedef.appendChild(b);
+      }
+      yerlestir();
+      ctx.every(yerlestir, 1000);
+      ctx.undo(() => document.querySelectorAll('.cls-md-ikon, .cls-md-menu').forEach(n => n.remove()));
     }
+  });
+
+  /* =====================================================================
+   * 13b) SOHBET ARAÇLARI (2611-19b, onaylı maket CLS_SIFIRLAMA-EXPORT-OZELLIKLER-SON_2611-19-1545)
+   * Yeni sohbete taşı · mesajları katla · yer imi · biçimli kopyala · sohbette ara ·
+   * ana hat · sohbet doluluğu. Şerit öğeleri başlık şeridine (.cls-baslik-arac) girer.
+   * ===================================================================== */
+
+  const SA_USER = '[data-testid="user-message"]';
+  const SA_AI = '[data-testid="assistant-message"]';
+  const saYayin = el => !!(el && el.closest('[data-is-streaming="true"]'));
+  const saMetin = el => (el ? (typeof el.innerText === 'string' ? el.innerText : el.textContent || '') : '').replace(/\s+/g, ' ').trim();
+  function saGit(yol) {
+    try {
+      const r = window.next && window.next.router;
+      if (r && typeof r.push === 'function') { Promise.resolve(r.push(yol)).catch(() => location.assign(yol)); return; }
+    } catch (e) {}
+    location.assign(yol);
+  }
+  // Yazı alanındayken (sohbet kutusu, form) gezinme kısayolları çalışmaz.
+  const saYaziyor = e => { const t = e.target; return !!(t && t.closest && t.closest('textarea, input, [contenteditable="true"], .ProseMirror')); };
+
+  const SA_CSS_DEGISKEN = () => {
+    const v = TEMA.vars(), st = document.documentElement.style;
+    for (const [a, b] of [['ana', 'ana'], ['ikincil', 'metin-ikincil'], ['ayirici', 'ayirici'], ['yuzey', 'yuzey'], ['metin', 'metin'],
+                          ['uyari', 'uyari'], ['uyari-bg', 'uyari-bg'], ['hata', 'hata'], ['vurgu', 'vurgu'], ['ana-acik', 'ana-acik']]) {
+      if (!st.getPropertyValue('--cls-' + a)) st.setProperty('--cls-' + a, v[b]);
+    }
+  };
+
+  /* Başlık şeridindeki ortak kap: öğeler sırayla, durum düğmesinden sonra, claude.ai ikonlarından önce. */
+  const SOHBET_SERIT = (function () {
+    const ogeler = new Map();
+    let saat = null, stil = null;
+    function kur() {
+      const arac = document.querySelector('.cls-baslik-arac');
+      let kap = document.querySelector('.cls-sohbet-arac');
+      if (!arac || !ogeler.size || !suankiSohbet()) { if (kap) kap.remove(); return; }
+      const sirali = [...ogeler.values()].sort((a, b) => a.sira - b.sira);
+      const imza = sirali.map(o => o.id).join(',') + '|' + DIL.aktif();
+      if (kap && kap.parentElement === arac && kap.dataset.imza === imza) {
+        for (const o of sirali) if (o.tazele) { const el = kap.querySelector('[data-oge="' + o.id + '"]'); if (el) o.tazele(el); }
+        return;
+      }
+      if (kap) kap.remove();
+      kap = document.createElement('span');
+      kap.className = 'cls-sohbet-arac';
+      kap.dataset.imza = imza;
+      for (const o of sirali) {
+        const el = o.yap();
+        el.dataset.oge = o.id;
+        kap.appendChild(el);
+        if (o.tazele) o.tazele(el);
+      }
+      const ay = document.createElement('i'); ay.className = 'ayrac'; kap.appendChild(ay);
+      arac.insertBefore(kap, arac.querySelector('.ikonlar'));
+    }
+    return {
+      ekle(o) {
+        if (!stil) {
+          SA_CSS_DEGISKEN();
+          stil = document.createElement('style');
+          stil.textContent = `
+          .cls-sohbet-arac{display:inline-flex;align-items:center;gap:4px}
+          .cls-sohbet-arac .yazi{padding:0 8px;height:24px;border:1px solid var(--cls-ayirici,rgba(127,127,127,.35));font-size:12px;font-weight:600}
+          .cls-sohbet-arac .yazi:hover{background:rgba(127,127,127,.12)}
+          .cls-sohbet-arac .ikon[aria-pressed="true"]{color:var(--cls-ana);background:rgba(127,127,127,.12)}
+          .cls-dolu{display:inline-flex;align-items:center;gap:5px;font:400 11px/1 "Open Sans","Segoe UI",system-ui,sans-serif;color:var(--cls-ikincil);cursor:default}
+          .cls-dolu .cubuk{width:54px;height:5px;border-radius:3px;background:rgba(127,127,127,.25);overflow:hidden}
+          .cls-dolu .cubuk i{display:block;height:100%;background:var(--cls-ana);transition:width .3s ease}
+          .cls-dolu.sari .cubuk i{background:var(--cls-uyari)} .cls-dolu.sari{color:var(--cls-uyari)}
+          .cls-dolu.kirmizi .cubuk i{background:var(--cls-hata)} .cls-dolu.kirmizi{color:var(--cls-hata);font-weight:600}`;
+          (document.head || document.documentElement).appendChild(stil);
+        }
+        ogeler.set(o.id, o);
+        if (!saat) saat = setInterval(kur, 800);
+        kur();
+      },
+      cikar(id) {
+        ogeler.delete(id);
+        document.querySelectorAll('.cls-sohbet-arac').forEach(n => n.remove());
+        if (!ogeler.size) { clearInterval(saat); saat = null; if (stil) { stil.remove(); stil = null; } }
+        else kur();
+      },
+      durum() {
+        if (!suankiSohbet()) return { tamam: true, metin: _('Sohbet sayfasında çalışır') };
+        return document.querySelector('.cls-sohbet-arac')
+          ? { tamam: true, metin: _('Başlık şeridinde') }
+          : { tamam: false, metin: _('Başlık şeridi yok; "Başlık kodu" açık olmalı') };
+      }
+    };
+  })();
+
+  function saIkon(yol, baslik, tikla) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'ikon';
+    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + yol + '</svg>';
+    b.title = baslik; b.setAttribute('aria-label', baslik);
+    b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); tikla(b); });
+    return b;
+  }
+  function saYazi(metin, baslik, tikla) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'yazi';
+    b.textContent = metin; b.title = baslik || metin;
+    b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); tikla(b); });
+    return b;
+  }
+
+  /* ---- 1 · Yeni sohbete taşı (Taşı A): bütün sohbet .md dosyası olarak yeni sohbete eklenir. ---- */
+  const TASI_ANAHTAR = 'claude-suite:tasi';
+  function tasiDosyaEkle(bekleyen) {
+    const inp = document.querySelector('#chat-input-file-upload-bottom') ||
+      [...document.querySelectorAll('input[type="file"]')].find(i => i.multiple) || document.querySelector('input[type="file"]');
+    if (!inp || typeof DataTransfer !== 'function') return false;
+    try {
+      const dt = new DataTransfer();
+      dt.items.add(new File([bekleyen.metin], bekleyen.dosya, { type: 'text/markdown' }));
+      inp.files = dt.files;
+      inp.dispatchEvent(new Event('input', { bubbles: true }));
+      inp.dispatchEvent(new Event('change', { bubbles: true }));
+      return true;
+    } catch (e) { gunluk('sohbetiTasi', e.message); return false; }
+  }
+  async function sohbetiTasi() {
+    const s = await sohbetVerisi();
+    if (!s) return;
+    const bekleyen = { t: Date.now(), dosya: s.kok + '.md', metin: markdownMetni(s) };
+    try { sessionStorage.setItem(TASI_ANAHTAR, JSON.stringify(bekleyen)); }
+    catch (e) { bildir(_('Sohbet çok büyük; taşınamadı. Markdown\'a aktarıp kendin ekle.'), 'hata'); return; }
+    const proje = s.v.sohbet && (s.v.sohbet.project_uuid || (s.v.sohbet.project && s.v.sohbet.project.uuid));
+    saGit(proje ? '/project/' + proje : '/new');
+  }
+
+  define({
+    id: 'sohbetiTasi',
+    label: 'Yeni sohbete taşı',
+    desc: 'Şeritteki düğme bütün sohbeti .md dosyası olarak yeni bir sohbete ekler. Sohbet bir projedeyse yeni sohbet de o projede açılır. Gönder\'e sen basarsın.',
+    group: 'Araçlar',
+    health() { return SOHBET_SERIT.durum(); },
+    on(ctx) {
+      ctx.action({ id: 'tasi', ad: 'Yeni sohbete taşı', grup: 'Araçlar', calistir: sohbetiTasi });
+      SOHBET_SERIT.ekle({ id: 'tasi', sira: 50, yap: () => saYazi(_('Yeni sohbete taşı'), _('Bütün sohbet .md dosyası olarak yeni sohbete eklenir'), sohbetiTasi) });
+      ctx.undo(() => SOHBET_SERIT.cikar('tasi'));
+      ctx.every(() => {
+        let b = null;
+        try { b = JSON.parse(sessionStorage.getItem(TASI_ANAHTAR) || 'null'); } catch (e) {}
+        if (!b) return;
+        if (Date.now() - b.t > 90000) { try { sessionStorage.removeItem(TASI_ANAHTAR); } catch (e) {} return; }
+        if (suankiSohbet() || !/^\/(new|project\/)/.test(location.pathname)) return;
+        if (tasiDosyaEkle(b)) {
+          try { sessionStorage.removeItem(TASI_ANAHTAR); } catch (e) {}
+          bildir(_f('Yeni sohbet açıldı · {0} eklendi', b.dosya), 'basari');
+        }
+      }, 700);
+    }
+  });
+
+  /* ---- 3 · Mesajları katla (Katla B + E5): hepsi açık; uzun cevapta Katla düğmesi; şeritte Tümünü katla. ---- */
+  const KATLA_SATIR = 12;
+  define({
+    id: 'mesajKatla',
+    label: 'Mesajları katla',
+    desc: 'Uzun cevapların sağ üstünde Katla düğmesi. Katlanınca ilk satırlar ve satır sayısı kalır. Şeritteki Tümünü katla son cevap dışındakileri katlar.',
+    group: 'Araçlar',
+    health() { return { tamam: true, metin: _f('{0} cevapta düğme', document.querySelectorAll('.cls-katla').length) }; },
+    on(ctx) {
+      ctx.css(`
+      [data-cls-katlanir]{position:relative}
+      .cls-katla{all:unset;box-sizing:border-box;position:absolute;top:0;right:0;z-index:2;height:22px;padding:0 8px;border-radius:4px;
+        border:1px solid rgba(127,127,127,.35);background:var(--cls-yuzey,transparent);font:600 11px/20px "Open Sans","Segoe UI",system-ui,sans-serif;
+        color:var(--cls-ikincil,#6b6862);cursor:pointer;opacity:.55}
+      [data-cls-katlanir]:hover > .cls-katla,.cls-katla:focus-visible{opacity:1}
+      [data-cls-katli] .standard-markdown,[data-cls-katli] .prose{max-height:4.8em;overflow:hidden;
+        -webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+      .cls-katli-alt{all:unset;display:none;box-sizing:border-box;margin-top:4px;font:400 12px/1.4 "Open Sans","Segoe UI",system-ui,sans-serif;
+        color:var(--cls-ikincil,#6b6862);cursor:pointer}
+      [data-cls-katli] .cls-katli-alt{display:block}
+      .cls-katli-alt:hover{text-decoration:underline}`);
+      SA_CSS_DEGISKEN();
+      const etiket = el => el.hasAttribute('data-cls-katli') ? _('Aç') + ' ▾' : _('Katla') + ' ▴';
+      function ayarla(m, katli) {
+        if (katli) m.setAttribute('data-cls-katli', ''); else m.removeAttribute('data-cls-katli');
+        const b = m.querySelector(':scope > .cls-katla'); if (b) b.textContent = etiket(m);
+      }
+      function tara() {
+        for (const m of document.querySelectorAll(SA_AI)) {
+          if (m.hasAttribute('data-cls-katlanir') || saYayin(m)) continue;
+          const govde = m.querySelector('.standard-markdown, .prose');
+          if (!govde) continue;
+          const n = (govde.innerText || '').split('\n').filter(x => x.trim()).length;
+          if (n < KATLA_SATIR) continue;
+          m.setAttribute('data-cls-katlanir', String(n));
+          const b = document.createElement('button');
+          b.type = 'button'; b.className = 'cls-katla'; b.textContent = etiket(m);
+          b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); ayarla(m, !m.hasAttribute('data-cls-katli')); });
+          const alt = document.createElement('button');
+          alt.type = 'button'; alt.className = 'cls-katli-alt';
+          alt.textContent = _f('{0} satır · Aç ▾', n);
+          alt.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); ayarla(m, false); });
+          m.appendChild(b);
+          govde.insertAdjacentElement('afterend', alt);
+        }
+      }
+      function hepsi() {
+        const l = [...document.querySelectorAll(SA_AI + '[data-cls-katlanir]')];
+        if (!l.length) { bildir(_('Katlanacak uzun cevap yok'), 'uyari'); return; }
+        const katlanacak = l.slice(0, -1);
+        const acik = katlanacak.some(m => !m.hasAttribute('data-cls-katli'));
+        katlanacak.forEach(m => ayarla(m, acik));
+        if (!acik) ayarla(l[l.length - 1], false);
+      }
+      tara();
+      ctx.every(tara, 1500);
+      ctx.action({ id: 'katla-hepsi', ad: 'Tümünü katla / aç', grup: 'Araçlar', calistir: hepsi });
+      SOHBET_SERIT.ekle({ id: 'katla', sira: 40, yap: () => saYazi(_('Tümünü katla'), _('Son cevap dışındaki uzun cevapları katlar; yeniden basınca açar'), hepsi) });
+      ctx.undo(() => {
+        SOHBET_SERIT.cikar('katla');
+        document.querySelectorAll('.cls-katla, .cls-katli-alt').forEach(n => n.remove());
+        document.querySelectorAll('[data-cls-katlanir], [data-cls-katli]').forEach(n => {
+          n.removeAttribute('data-cls-katlanir'); n.removeAttribute('data-cls-katli');
+        });
+      });
+    }
+  });
+
+  /* ---- 4 · Yer imi (Yer imi A): kendi mesajında yıldız; liste Ana hat panelinde; Alt+↑/↓ kendi mesajlarına atlar. ---- */
+  const YERIMI = {
+    anahtar: el => saMetin(el).slice(0, 160),
+    liste(id) { const o = ayarOku('yerimleri', {}); return (o && Array.isArray(o[id])) ? o[id] : []; },
+    var(id, k) { return YERIMI.liste(id).some(x => x.k === k); },
+    degistir(id, k) {
+      const o = Object.assign({}, ayarOku('yerimleri', {}));
+      const l = Array.isArray(o[id]) ? o[id].slice() : [];
+      const i = l.findIndex(x => x.k === k);
+      if (i >= 0) l.splice(i, 1); else l.push({ k, t: Date.now() });
+      if (l.length) o[id] = l; else delete o[id];
+      ayarYaz('yerimleri', o);
+      ANAHAT.tazele && ANAHAT.tazele();
+      return i < 0;
+    },
+    bul(k) { return [...document.querySelectorAll(SA_USER)].find(el => YERIMI.anahtar(el) === k) || null; }
+  };
+  function saAtla(yon) {
+    const l = [...document.querySelectorAll(SA_USER)];
+    if (!l.length) return;
+    const ust = 90;
+    let hedef;
+    if (yon > 0) hedef = l.find(el => el.getBoundingClientRect().top > ust + 8);
+    else hedef = l.slice().reverse().find(el => el.getBoundingClientRect().top < ust - 8);
+    if (hedef) hedef.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    else bildir(yon > 0 ? _('Sonraki mesajın yok') : _('Önceki mesajın yok'), 'uyari');
+  }
+  define({
+    id: 'yerImi',
+    label: 'Yer imi',
+    desc: 'Kendi mesajlarının solunda yıldız: tıklayınca yer imi olur. Yer imleri Ana hat panelinde listelenir. Alt+↑ ve Alt+↓ kendi mesajların arasında atlar.',
+    group: 'Gezinme',
+    health() { const id = suankiSohbet(); return { tamam: true, metin: id ? _f('Bu sohbette {0} yer imi', YERIMI.liste(id).length) : _('Sohbet sayfasında çalışır') }; },
+    on(ctx) {
+      ctx.css(`
+      [data-cls-yildizli]{position:relative}
+      .cls-yildiz{all:unset;box-sizing:border-box;position:absolute;left:-30px;top:6px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+        border-radius:4px;font-size:15px;line-height:1;color:var(--cls-ikincil,#6b6862);cursor:pointer;opacity:0}
+      [data-cls-yildizli]:hover > .cls-yildiz,.cls-yildiz:focus-visible,.cls-yildiz.dolu{opacity:1}
+      .cls-yildiz.dolu{color:#b8860b}
+      .cls-yildiz:hover{background:rgba(127,127,127,.15)}`);
+      SA_CSS_DEGISKEN();
+      function tara() {
+        const id = suankiSohbet();
+        if (!id) return;
+        const isaretli = new Set(YERIMI.liste(id).map(x => x.k));
+        for (const el of document.querySelectorAll(SA_USER)) {
+          const kap = el.closest('[class*="group/bubble"]') || el;
+          let y = kap.querySelector(':scope > .cls-yildiz');
+          const k = YERIMI.anahtar(el);
+          if (!k) continue;
+          if (!y) {
+            kap.setAttribute('data-cls-yildizli', '');
+            y = document.createElement('button');
+            y.type = 'button'; y.className = 'cls-yildiz';
+            y.addEventListener('click', e => {
+              e.preventDefault(); e.stopPropagation();
+              const sid = suankiSohbet(); if (!sid) return;
+              const eklendi = YERIMI.degistir(sid, YERIMI.anahtar(el));
+              bildir(eklendi ? _('Yer imi eklendi') : _('Yer imi kaldırıldı'), 'basari');
+              tara();
+            });
+            kap.appendChild(y);
+          }
+          const dolu = isaretli.has(k);
+          if (y.classList.contains('dolu') !== dolu || !y.textContent) {
+            y.classList.toggle('dolu', dolu);
+            y.textContent = dolu ? '★' : '☆';
+            y.title = dolu ? _('Yer imini kaldır') : _('Yer imi ekle');
+            y.setAttribute('aria-label', y.title);
+            y.setAttribute('aria-pressed', dolu ? 'true' : 'false');
+          }
+        }
+      }
+      tara();
+      ctx.every(tara, 1500);
+      ctx.action({ id: 'yerimi-onceki', ad: 'Önceki mesajıma atla', grup: 'Gezinme', kisayol: 'mesajOnceki', calistir: () => saAtla(-1) });
+      ctx.action({ id: 'yerimi-sonraki', ad: 'Sonraki mesajıma atla', grup: 'Gezinme', kisayol: 'mesajSonraki', calistir: () => saAtla(1) });
+      ctx.undo(() => {
+        document.querySelectorAll('.cls-yildiz').forEach(n => n.remove());
+        document.querySelectorAll('[data-cls-yildizli]').forEach(n => n.removeAttribute('data-cls-yildizli'));
+      });
+    }
+  });
+
+  /* ---- 5 · Biçimli kopyala (Kopya A): Copy'nin yanında ikinci düğme; HTML + düz metin birlikte. ---- */
+  async function bicimliKopyala(m) {
+    const govde = m.querySelector('.standard-markdown, .prose');
+    if (!govde) { bildir(_('Cevap metni bulunamadı'), 'hata'); return; }
+    const kopya = govde.cloneNode(true);
+    kopya.querySelectorAll('button, [data-testid="code-block-copy"], .cls-katli-alt, svg').forEach(n => n.remove());
+    const html = '<meta charset="utf-8">' + kopya.innerHTML;
+    const duz = govde.innerText || govde.textContent || '';
+    try {
+      if (navigator.clipboard && typeof ClipboardItem === 'function') {
+        await navigator.clipboard.write([new ClipboardItem({
+          'text/html': new Blob([html], { type: 'text/html' }),
+          'text/plain': new Blob([duz], { type: 'text/plain' })
+        })]);
+        bildir(_('Biçimli kopyalandı; Mail ya da Docs\'a yapıştır'), 'basari');
+        return;
+      }
+    } catch (e) { gunluk('bicimliKopya', e.message); }
+    // Yedek: seçim + copy komutu (tarayıcı biçimi kendisi taşır).
+    try {
+      const sec = getSelection(), r = document.createRange();
+      r.selectNodeContents(govde); sec.removeAllRanges(); sec.addRange(r);
+      const ok = document.execCommand('copy');
+      sec.removeAllRanges();
+      bildir(ok ? _('Biçimli kopyalandı; Mail ya da Docs\'a yapıştır') : _('Kopyalanamadı'), ok ? 'basari' : 'hata');
+    } catch (e) { bildir(_('Kopyalanamadı'), 'hata'); }
+  }
+  define({
+    id: 'bicimliKopya',
+    label: 'Biçimli kopyala',
+    desc: 'Cevabın altındaki Copy düğmesinin yanında "Biçimli kopyala": başlık, kalın, liste ve tablo Mail ya da Docs\'a biçimiyle yapışır.',
+    group: 'Araçlar',
+    health() { return { tamam: true, metin: _f('{0} cevapta düğme', document.querySelectorAll('.cls-bkopya').length) }; },
+    on(ctx) {
+      ctx.css(`
+      .cls-bkopya{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;height:28px;padding:0 8px;border-radius:6px;
+        font:500 12px/1 "Open Sans","Segoe UI",system-ui,sans-serif;color:inherit;opacity:.75;cursor:pointer;white-space:nowrap}
+      .cls-bkopya:hover{opacity:1;background:rgba(127,127,127,.15)}
+      .cls-bkopya:focus-visible{outline:2px solid var(--cls-ana,#2c84db);outline-offset:1px}`);
+      function tara() {
+        for (const m of document.querySelectorAll(SA_AI)) {
+          const bar = m.querySelector('[data-testid="message-actions"]');
+          if (!bar || bar.querySelector('.cls-bkopya')) continue;
+          const kopyala = [...bar.querySelectorAll('button')].find(b => /^(copy|kopyala)$/i.test(b.getAttribute('aria-label') || ''));
+          const b = document.createElement('button');
+          b.type = 'button'; b.className = 'cls-bkopya'; b.textContent = _('Biçimli kopyala');
+          b.title = _('HTML ve düz metin birlikte kopyalanır');
+          b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); bicimliKopyala(m); });
+          if (kopyala) kopyala.insertAdjacentElement('afterend', b); else bar.appendChild(b);
+        }
+      }
+      tara();
+      ctx.every(tara, 1500);
+      ctx.undo(() => document.querySelectorAll('.cls-bkopya').forEach(n => n.remove()));
+    }
+  });
+
+  /* ---- 6 · Sohbet içi arama (Ara B): şeritte büyüteç · Ctrl+Shift+F. Yalnız sayfada yüklü mesajlarda arar. ---- */
+  const ARA = { ac: null };
+  define({
+    id: 'sohbetAra',
+    label: 'Sohbette ara',
+    desc: 'Şeritteki büyüteç ya da kısayol arama kutusunu açar. Enter sonraki, Shift+Enter önceki, Esc kapatır. Yalnız sayfada yüklü mesajlarda arar.',
+    group: 'Gezinme',
+    kisayol: 'sohbetAra',
+    health() { return SOHBET_SERIT.durum(); },
+    on(ctx) {
+      let k = null, kutu = null, sayac = null, bulunan = [], su = -1;
+      const VURGU = typeof Highlight === 'function' && typeof CSS !== 'undefined' && CSS.highlights;
+      const stil = ctx.css(`::highlight(cls-ara){background:#ffe066;color:#1f1e1d}::highlight(cls-ara-su){background:#ff9f1c;color:#1f1e1d}`);
+      void stil;
+      function temizle() {
+        bulunan = []; su = -1;
+        if (VURGU) { CSS.highlights.delete('cls-ara'); CSS.highlights.delete('cls-ara-su'); }
+      }
+      function ara(q) {
+        temizle();
+        q = (q || '').trim().toLocaleLowerCase('tr');
+        if (q.length < 2) { yaz(); return; }
+        for (const kap of document.querySelectorAll(SA_USER + ', ' + SA_AI)) {
+          const w = document.createTreeWalker(kap, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement && n.parentElement.closest('button, .cls-katli-alt, .cls-yildiz') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+          for (let n = w.nextNode(); n; n = w.nextNode()) {
+            const t = n.nodeValue.toLocaleLowerCase('tr');
+            for (let i = t.indexOf(q); i >= 0; i = t.indexOf(q, i + q.length)) {
+              const r = document.createRange(); r.setStart(n, i); r.setEnd(n, i + q.length); bulunan.push(r);
+            }
+          }
+        }
+        if (VURGU && bulunan.length) CSS.highlights.set('cls-ara', new Highlight(...bulunan));
+        git(bulunan.length ? 0 : -1);
+      }
+      function git(i) {
+        if (!bulunan.length) { su = -1; yaz(); return; }
+        su = (i + bulunan.length) % bulunan.length;
+        const r = bulunan[su];
+        const m = r.startContainer.parentElement && r.startContainer.parentElement.closest('[data-cls-katli]');
+        if (m) m.removeAttribute('data-cls-katli');
+        if (VURGU) CSS.highlights.set('cls-ara-su', new Highlight(r));
+        const el = r.startContainer.parentElement;
+        if (el) el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        yaz();
+      }
+      function yaz() {
+        if (!sayac) return;
+        const q = kutu ? kutu.value.trim() : '';
+        sayac.textContent = q.length < 2 ? _('en az 2 harf') : bulunan.length ? _f('{0}/{1} sonuç · ↑ ↓', su + 1, bulunan.length) : _('sonuç yok');
+      }
+      function kapat() { temizle(); if (k) { k.kaldir(); k = null; kutu = null; sayac = null; } }
+      function ac() {
+        if (!suankiSohbet()) { bildir(_('Arama sohbet sayfasında çalışır'), 'uyari'); return; }
+        if (k) { kutu.focus(); kutu.select(); return; }
+        k = kabuk('aalabs-cls-ara', `
+          .ara{position:fixed;top:64px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;pointer-events:auto;
+            padding:6px 8px;border:1px solid var(--ana);border-radius:var(--kose-m);background:var(--yuzey);color:var(--metin);
+            box-shadow:0 4px 14px rgba(0,0,0,.18);font:400 13px/1 var(--yazi);max-width:calc(100vw - 32px)}
+          .ara b{font-weight:600;white-space:nowrap}
+          .ara input{all:unset;box-sizing:border-box;width:220px;max-width:40vw;height:26px;padding:0 8px;border:1px solid var(--ayirici);border-radius:4px;background:var(--zemin)}
+          .ara input:focus-visible{outline:2px solid var(--vurgu);outline-offset:1px}
+          .ara .say{color:var(--metin-ikincil);font-size:12px;white-space:nowrap}
+          .ara button{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:4px;cursor:pointer}
+          .ara button:hover{background:rgba(127,127,127,.15)}`, 2147483001);
+        const d = document.createElement('div');
+        d.className = 'ara'; d.setAttribute('role', 'search');
+        const et = document.createElement('b'); et.textContent = KISAYOL.tus('sohbetAra') || _('Ara');
+        kutu = document.createElement('input'); kutu.type = 'search'; kutu.placeholder = _('Sohbette ara'); kutu.setAttribute('aria-label', _('Sohbette ara'));
+        sayac = document.createElement('span'); sayac.className = 'say'; sayac.title = _('Yalnız sayfada yüklü mesajlarda arar');
+        const yuk = document.createElement('button'); yuk.type = 'button'; yuk.textContent = '↑'; yuk.title = _('Önceki (Shift+Enter)');
+        const as = document.createElement('button'); as.type = 'button'; as.textContent = '↓'; as.title = _('Sonraki (Enter)');
+        const x = document.createElement('button'); x.type = 'button'; x.textContent = '✕'; x.title = _('Kapat (Esc)');
+        yuk.addEventListener('click', () => git(su - 1)); as.addEventListener('click', () => git(su + 1)); x.addEventListener('click', kapat);
+        let zam = null;
+        kutu.addEventListener('input', () => { clearTimeout(zam); zam = setTimeout(() => ara(kutu.value), 180); });
+        kutu.addEventListener('keydown', e => {
+          e.stopPropagation();
+          if (e.key === 'Enter' || e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); git(su + (e.shiftKey || e.key === 'ArrowUp' ? -1 : 1)); }
+          else if (e.key === 'Escape') { e.preventDefault(); kapat(); }
+        });
+        d.append(et, kutu, sayac, yuk, as, x);
+        k.kok.appendChild(d);
+        yaz();
+        kutu.focus();
+      }
+      ARA.ac = ac;
+      let sonId = suankiSohbet();
+      ctx.every(() => { const id = suankiSohbet(); if (id !== sonId) { sonId = id; kapat(); } }, 1000);
+      ctx.action({ id: 'ara', ad: 'Sohbette ara', grup: 'Gezinme', kisayol: 'sohbetAra', calistir: ac });
+      SOHBET_SERIT.ekle({ id: 'ara', sira: 20, yap: () => saIkon('<circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/>', _f('Sohbette ara ({0})', KISAYOL.tus('sohbetAra')), ac) });
+      ctx.undo(() => { SOHBET_SERIT.cikar('ara'); kapat(); ARA.ac = null; });
+    }
+  });
+
+  /* ---- 7 · Ana hat paneli (Ana hat B): şeritteki ikonla açılır; mesajlar, cevap başlıkları ve yer imleri. ---- */
+  const ANAHAT = { tazele: null, ac: null };
+  define({
+    id: 'anaHat',
+    label: 'Ana hat paneli',
+    desc: 'Şeritteki ikon sağda bir panel açar: kendi mesajların numaralı, altında cevap başlıkları ve yer imleri. Tıklayınca oraya gider.',
+    group: 'Gezinme',
+    health() { return SOHBET_SERIT.durum(); },
+    on(ctx) {
+      let k = null, govde = null;
+      function kapat() { if (k) { k.kaldir(); k = null; govde = null; } dugmeYaz(); }
+      function dugmeYaz() { document.querySelectorAll('.cls-sohbet-arac [data-oge="hat"]').forEach(b => b.setAttribute('aria-pressed', k ? 'true' : 'false')); }
+      function oge(metin, sinif, hedef) {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'oge ' + (sinif || ''); b.textContent = metin; b.title = metin;
+        b.addEventListener('click', () => { const h = typeof hedef === 'function' ? hedef() : hedef; if (h) h.scrollIntoView({ block: 'start', behavior: 'smooth' }); else bildir(_('Mesaj sayfada bulunamadı'), 'uyari'); });
+        return b;
+      }
+      function tazele() {
+        if (!govde) return;
+        const id = suankiSohbet();
+        const parca = [];
+        const bas = document.createElement('h4'); bas.textContent = _('Ana hat'); parca.push(bas);
+        let n = 0;
+        for (const el of document.querySelectorAll(SA_USER + ', ' + SA_AI + ' h1, ' + SA_AI + ' h2, ' + SA_AI + ' h3')) {
+          if (el.matches(SA_USER)) { n++; parca.push(oge(n + ' · ' + saMetin(el).slice(0, 48), 'u', el)); }
+          else parca.push(oge(saMetin(el).slice(0, 48), 'h', el));
+        }
+        if (!n) { const y = document.createElement('p'); y.className = 'bos'; y.textContent = _('Sayfada mesaj yok'); parca.push(y); }
+        if (effective('yerImi') && id) {
+          const yb = document.createElement('h4'); yb.className = 'ikinci'; yb.textContent = _('Yer imleri'); parca.push(yb);
+          const l = YERIMI.liste(id);
+          if (!l.length) { const y = document.createElement('p'); y.className = 'bos'; y.textContent = _('Yer imi yok · mesajındaki ☆ ile ekle'); parca.push(y); }
+          for (const x of l) parca.push(oge('★ ' + x.k.slice(0, 44), 'y', () => YERIMI.bul(x.k)));
+        }
+        const imza = parca.map(p => p.className + p.textContent).join('|');
+        if (govde.dataset.imza !== imza) { govde.replaceChildren(...parca); govde.dataset.imza = imza; }
+      }
+      function ac() {
+        if (k) { kapat(); return; }
+        if (!suankiSohbet()) { bildir(_('Ana hat sohbet sayfasında çalışır'), 'uyari'); return; }
+        k = kabuk('aalabs-cls-anahat', `
+          .panel{position:fixed;top:64px;right:16px;width:250px;max-height:calc(100vh - 140px);overflow:auto;pointer-events:auto;
+            padding:8px;border:1px solid var(--kenar);border-radius:var(--kose-m);background:var(--yuzey);color:var(--metin);
+            box-shadow:0 4px 14px rgba(0,0,0,.16);font:400 12px/1.35 var(--yazi)}
+          .ust{display:flex;justify-content:flex-end}
+          .ust button{all:unset;box-sizing:border-box;width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:4px;cursor:pointer}
+          .ust button:hover{background:rgba(127,127,127,.15)}
+          h4{margin:0 0 4px;font-size:12px;font-weight:600}
+          h4.ikinci{margin-top:8px;padding-top:8px;border-top:1px solid var(--ayirici)}
+          .oge{all:unset;box-sizing:border-box;display:block;width:100%;padding:3px 4px;border-radius:4px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+          .oge:hover,.oge:focus-visible{background:rgba(127,127,127,.15)}
+          .oge.h{padding-left:16px;color:var(--metin-ikincil)}
+          .bos{margin:2px 4px;color:var(--metin-ikincil)}
+          @media (max-width:700px){.panel{left:16px;right:16px;width:auto}}`, 2147483000);
+        const p = document.createElement('aside');
+        p.className = 'panel'; p.setAttribute('aria-label', _('Ana hat'));
+        const ust = document.createElement('div'); ust.className = 'ust';
+        const x = document.createElement('button'); x.type = 'button'; x.textContent = '✕'; x.title = _('Kapat (Esc)'); x.addEventListener('click', kapat);
+        ust.appendChild(x);
+        govde = document.createElement('div');
+        p.append(ust, govde);
+        k.kok.appendChild(p);
+        tazele();
+        dugmeYaz();
+      }
+      ANAHAT.tazele = tazele; ANAHAT.ac = ac;
+      let sonId = suankiSohbet();
+      ctx.every(() => { const id = suankiSohbet(); if (id !== sonId) { sonId = id; kapat(); } else if (k) tazele(); }, 2000);
+      ctx.on(window, 'keydown', e => { if (k && e.key === 'Escape' && !saYaziyor(e)) kapat(); });
+      ctx.action({ id: 'anahat', ad: 'Ana hat paneli', grup: 'Gezinme', calistir: ac });
+      SOHBET_SERIT.ekle({ id: 'hat', sira: 30, yap: () => saIkon('<path d="M5 6h14M8 12h11M11 18h8"/>', _('Ana hat'), ac) });
+      ctx.undo(() => { SOHBET_SERIT.cikar('hat'); kapat(); ANAHAT.tazele = null; ANAHAT.ac = null; });
+    }
+  });
+
+  /* ---- 8 · Sohbet doluluğu (Doluluk A + E4): şeritte ince çubuk + yüzde; %70 sarı, %90 kırmızı.
+     Tahmin: görünen dalın metni ve eklerin çıkarılmış metni ≈ 3,5 harf/token; sınır 200 bin token. ---- */
+  const DOLU = { yuzde: null, token: 0, id: null, at: 0 };
+  const DOLU_SINIR = 200000;
+  function doluHesapla(v) {
+    let harf = 0;
+    for (const m of v.dal) {
+      harf += mesajMetni(m).length;
+      for (const f of [...(m.attachments || []), ...(m.files || []), ...(m.files_v2 || [])]) {
+        if (f && typeof f.extracted_content === 'string') harf += f.extracted_content.length;
+      }
+    }
+    const token = Math.round(harf / 3.5);
+    return { token, yuzde: Math.min(100, token / DOLU_SINIR * 100) };
+  }
+  define({
+    id: 'sohbetDolulugu',
+    label: 'Sohbet doluluğu',
+    desc: 'Başlık şeridinde ince çubuk ve yüzde: sohbetin bağlam sınırının ne kadarını doldurduğu (tahmin). %70\'te sarı, %90\'da kırmızı.',
+    group: 'Bilgi',
+    health() {
+      if (!suankiSohbet()) return { tamam: true, metin: _('Sohbet sayfasında çalışır') };
+      return DOLU.yuzde === null ? { tamam: false, metin: _('Sohbet okunamadı') }
+        : { tamam: true, metin: _f('~%{0} · ~{1} bin token (tahmin)', Math.round(DOLU.yuzde), Math.round(DOLU.token / 1000)) };
+    },
+    on(ctx) {
+      let yolda = false;
+      async function guncelle(taze) {
+        const id = suankiSohbet();
+        if (!id) { DOLU.yuzde = null; DOLU.id = null; return; }
+        if (yolda || (!taze && DOLU.id === id && Date.now() - DOLU.at < 60000)) return;
+        yolda = true;
+        try {
+          const v = await sohbetAgaci(id, taze);
+          if (suankiSohbet() !== id) return;
+          Object.assign(DOLU, doluHesapla(v), { id, at: Date.now() });
+        } catch (e) { gunluk('sohbetDolulugu', e.message); Object.assign(DOLU, { id, at: Date.now(), yuzde: null }); }
+        finally { yolda = false; }
+      }
+      function tazele(el) {
+        const id = suankiSohbet();
+        if (DOLU.id !== id) { guncelle(true); el.hidden = true; return; }
+        if (Date.now() - DOLU.at > 60000) guncelle(true);
+        if (DOLU.yuzde === null) { el.hidden = true; return; }
+        el.hidden = false;
+        const y = Math.round(DOLU.yuzde);
+        el.classList.toggle('sari', y >= 70 && y < 90);
+        el.classList.toggle('kirmizi', y >= 90);
+        el.querySelector('i').style.width = Math.max(2, y) + '%';
+        el.querySelector('b').textContent = '~%' + y;
+        el.title = _f('Sohbet doluluğu (tahmin): ~{0} bin / {1} bin token. Yalnız metin ve eklerin metni sayılır; araç çıktıları ve görseller sayılmaz.', Math.round(DOLU.token / 1000), DOLU_SINIR / 1000) +
+          (y >= 70 ? '\n' + _('Yeni sohbete taşımak iyi olur.') : '');
+      }
+      SOHBET_SERIT.ekle({
+        id: 'dolu', sira: 10,
+        yap: () => {
+          const s = document.createElement('span');
+          s.className = 'cls-dolu';
+          s.innerHTML = '<span class="cubuk"><i></i></span><b style="font-weight:inherit"></b>';
+          s.hidden = true;
+          return s;
+        },
+        tazele
+      });
+      guncelle(true);
+      ctx.undo(() => { SOHBET_SERIT.cikar('dolu'); DOLU.yuzde = null; DOLU.id = null; });
+    }
+  });
+
+  /* Kullanım göstergesinin alt özellikleri (2611-19b). */
+  define({
+    id: 'sifirlamaHaklari',
+    parent: 'usageHud',
+    label: 'Sıfırlama hakları',
+    desc: 'Göstergede ↺ rozeti (kalan sıfırlama hakkı; 7 günden az kaldıysa sarı ve gün sayısı). Kartta tür, adet, son tarih ve Usage sayfasını açan düğme.',
+    group: 'Bilgi',
+    health() { return HUD.sifirDurum(); },
+    on(ctx) { HUD.sifirYenile(); ctx.after(() => HUD.ciz(), 0); ctx.every(() => HUD.sifirYenile(), 10 * 60000); },
+    off() { setTimeout(() => HUD.ciz(), 0); }
+  });
+
+  define({
+    id: 'limitEsigi',
+    parent: 'usageHud',
+    label: 'Limit eşiği uyarısı',
+    desc: 'Haftalık ya da Fable limiti %80 ve %95\'i geçince sayfada uyarı. Her dönemde her eşik bir kez.',
+    group: 'Bilgi',
+    on() {}
   });
 
   /* =====================================================================
@@ -6852,30 +7477,8 @@
         dugmeler[s] = b;
         serit.appendChild(b);
       }
-      // 2611-09f: varsayılana tek tık (Opus 5.5 · medium). Öneri dışı bir şey yazınca göndermeden önce basılır.
-      const VARSAYILAN = { model: 'Opus 5.5', efor: 'medium' };
-      const ayrac = document.createElement('i'); ayrac.className = 'ayrac';
-      const vars = document.createElement('button');
-      vars.type = 'button'; vars.className = 'vars';
-      vars.textContent = VARSAYILAN.model + ' · ' + VARSAYILAN.efor;
-      vars.addEventListener('click', varsayilana);
-      serit.append(ayrac, vars);
+      // 2611-18a: varsayılan (Opus 5.5 · medium) düğmesi kaldırıldı (kullanıcı kararı).
       k.kok.appendChild(serit);
-
-      async function varsayilana() {
-        if (EFOR.mesgul()) return;
-        serit.classList.add('mesgul');
-        let rm = null, r = null;
-        try {
-          rm = await EFOR.modelSec(VARSAYILAN.model, gizle);
-          await new Promise(x => setTimeout(x, 150));
-          if (EFOR.kullanilan() !== VARSAYILAN.efor) r = await EFOR.sec(VARSAYILAN.efor, gizle);
-        } catch (e) { r = { ok: false, metin: e.message }; }
-        finally { serit.classList.remove('mesgul'); }
-        if (rm && !rm.ok) bildir(_f('Model değiştirilemedi: {0}', rm.metin), 'hata');
-        else if (r && !r.ok) bildir(_f('Efor değiştirilemedi: {0}. Tanı ayrıntıyı yazar.', r.metin), 'hata');
-        ciz();
-      }
 
       // Arka planda açılan claude.ai menüsü görünmesin (titreme olmasın).
       const gizliCss = ctx.css('');
@@ -6933,10 +7536,6 @@
           const ad = AD[s] || s;
           b.title = not.length ? ad + ' · ' + not.join(' · ') : _f('{0} seç', ad);
         }
-        const varsSecili = EFOR.ayniModel(EFOR.modelAdi(btn), VARSAYILAN.model) && kul === VARSAYILAN.efor;
-        vars.classList.toggle('secili', varsSecili);
-        vars.setAttribute('aria-pressed', varsSecili ? 'true' : 'false');
-        vars.title = varsSecili ? _('Varsayılan seçili: Opus 5.5 · medium') : _('Bu mesaj için varsayılana dön: Opus 5.5 · medium');
         serit.style.setProperty('--efor-kirmizi', isDark() ? '#FF7B72' : '#C4453C');
         serit.style.setProperty('--efor-yesil', isDark() ? '#3FB950' : '#1A7F37');
         serit.classList.add('acik');
@@ -6975,88 +7574,7 @@
   /* Öneriye kendiliğinden geç (2611-01b): yeni bir cevap bitince önerdiği efor kullanılandan
      farklıysa şerit o seviyeyi seçer. Açılışta görülen eski cevaplara dokunulmaz; yalnız bu
      sayfada sonradan gelen cevaplar sayılır. */
-  define({
-    id: 'eforOtomatik',
-    parent: 'eforSeridi',
-    label: 'Önerilen modele kendiliğinden geç',
-    desc: 'Yeni bir cevap bittiğinde önerdiği model kullanılandan farklıysa claude.ai menüsünden onu seçer ("Model: Fable 5.2 · Effort: high" satırındaki model). Efor kendiliğinden değişmez; öneri şeritte görünür, seçimi sen yaparsın. Sayfa açılırken görülen eski cevaplara dokunmaz.',
-    group: 'Yazma',
-    health() {
-      const s = EFOR.durum.otomatik;
-      return { tamam: true, metin: s ? _f('Son geçiş: {0} → {1}', s.once || '?', s.sonra || s.once || '?') + (s.model ? ' · ' + _f('model: {0}', s.model) : '') + (s.uyari ? ' · ' + s.uyari : '') : _('Henüz geçiş yok') };
-    },
-    on(ctx) {
-      /* Yeni cevap ölçütü: öneri anahtarı değişti VE (bu sayfada bir cevabın yazıldığı görüldü
-         YA DA cevap sayısı tabandan arttı). Dal gezinme (< 2/3 >) cevap sayısını artırmaz.
-         Taban: sayfa/sohbet açılınca anahtar 3 sn değişmeyene dek yenilenir. */
-      const AI_SEC = '[data-testid="assistant-message"], .font-claude-response, .font-claude-message, [data-is-streaming]';
-      const cevapSayisi = () => document.querySelectorAll(AI_SEC).length;
-      let gorulen = '', tabanSayi = 0, sohbet = null, sabitSon = 0, oncekiAnahtar = null, tabanHazir = false;
-      let yazdi = false, mesgul = false, kapali = false;
-      ctx.undo(() => { kapali = true; });
-      function tabanSifirla() { tabanHazir = false; sabitSon = 0; oncekiAnahtar = null; yazdi = false; }
-      ctx.every(async () => {
-        if (kapali || mesgul) return;
-        try {
-          if (suankiSohbet() !== sohbet) {
-            const yeniSohbet = !sohbet;          // /new'den ilk mesajla sohbet oluştu: taban yeniden alınmaz
-            sohbet = suankiSohbet();
-            if (!yeniSohbet) tabanSifirla();
-          }
-          if (EFOR.yaziyor()) { yazdi = true; return; }
-          EFOR.oneri();
-          const anahtar = EFOR.oneriAnahtar() || '';
-          if (!tabanHazir) {
-            if (anahtar !== oncekiAnahtar) { oncekiAnahtar = anahtar; sabitSon = Date.now(); return; }
-            if (Date.now() - sabitSon < 3000) return;
-            gorulen = anahtar; tabanSayi = cevapSayisi(); tabanHazir = true;
-            return;
-          }
-          if (document.hidden || EFOR.mesgul()) return;
-          // Kullanıcının açık menüsü varsa bekle. Base UI kapanan menüyü DOM'da bırakabiliyor (data-closed); o sayılmaz (2611-15a).
-          if ([...document.querySelectorAll('[role="menu"], [data-radix-popper-content-wrapper]')].some(m => m.getClientRects().length &&
-            !m.hasAttribute('data-closed') && getComputedStyle(m).pointerEvents !== 'none')) return;
-          if (anahtar === gorulen) return;
-          const yeniCevap = yazdi || cevapSayisi() > tabanSayi;
-          gorulen = anahtar;
-          tabanSayi = Math.max(tabanSayi, cevapSayisi());
-          yazdi = false;
-          if (!yeniCevap) return;
-          const on = EFOR.oneri();
-          const om = EFOR.oneriModel();          // eski satırda yok → model değişmez
-          const modelFark = !!om && !EFOR.ayniModel(om, EFOR.modelAdi());
-          let kul = EFOR.kullanilan();
-          // 2611-17a: efor elle seçilir (kullanıcı kararı); yalnız model kendiliğinden değişir.
-          if (!modelFark) return;
-          mesgul = true;
-          const gizliCss = document.createElement('style');
-          (document.head || document.documentElement).appendChild(gizliCss);
-          const gizle = acik => { gizliCss.textContent = acik ? '[data-radix-popper-content-wrapper],[role="menu"]{opacity:0!important}' : ''; };
-          let r = null, rm = null, uyari = '';
-          try {
-            if (modelFark) {
-              rm = await EFOR.modelSec(om, gizle);
-              if (!rm.ok) {
-                uyari = rm.bilinmeyen ? _f('Önerilen model "{0}" menüde yok; model değişmedi.', om) : _f('Model değiştirilemedi: {0}', rm.metin);
-                if (!kapali) bildir(uyari, 'uyari');
-              }
-              await new Promise(x => setTimeout(x, 150));
-              kul = EFOR.kullanilan();
-            }
-          } catch (e) { r = { ok: false, metin: e.message }; }
-          finally { setTimeout(() => gizliCss.remove(), 250); mesgul = false; }
-          const modelOk = rm && rm.ok && !rm.ayni;
-          if (((r && r.ok) || modelOk) && !kapali) {
-            EFOR.durum.otomatik = { once: r && r.ok ? kul : null, sonra: r && r.ok ? on : null, model: modelOk ? om : null, uyari, at: Date.now() };
-            const parca = [];
-            if (modelOk) parca.push(om);
-            if (r && r.ok) parca.push(on === 'xhigh' ? 'extra' : on);
-            bildir(_f('Öneriye geçildi: {0}', parca.join(' · ')), 'bilgi');
-          } else if (uyari && !kapali) EFOR.durum.otomatik = { once: kul, sonra: null, model: null, uyari, at: Date.now() };
-        } catch (e) { mesgul = false; gunluk('eforOtomatik', e.message); }
-      }, 1000);
-    }
-  });
+  /* eforOtomatik: kaldırıldı (2611-18a, kullanıcı kararı) */
 
   /* =====================================================================
    * KENAR ÇUBUĞUNDA CHATS (2.2.1)
@@ -7708,8 +8226,8 @@
   define({
     id: 'titleSchemaSidebar',
     parent: 'titleCode',
-    label: 'Kenar çubuğunda durum ve biçim',
-    desc: 'Sohbet listelerinde yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; XX, OLD ve DEL sönük görünür. Biçime (DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Kenarda durum süzgeci ve XX gizle var. Sohbetler sayfasında DEL satırında Sil düğmesi.',
+    label: 'Sohbetler sayfasında durum ve biçim',
+    desc: 'Sohbetler sayfasında (claude.ai/chats) yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; kenar çubuğuna dokunmaz; XX, OLD ve DEL sönük görünür. Biçime (DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Listenin üstünde durum süzgeci ve XX gizle var. DEL satırında Sil düğmesi.',
     group: 'Yazma',
     health() {
       const d = document.querySelectorAll('[data-cls-durum]').length;
@@ -7830,6 +8348,15 @@
           if (a.closest('#claude-usage-hud, .cls-kenar-suz')) continue;
           const id = CHATDOM.idOf(a);
           const kap = kapOf(a), listede = kap !== a;
+          /* 2611-18a: kenar çubuğunda durum ve biçim kaldırıldı (kullanıcı kararı); yalnız Sohbetler sayfası işlenir.
+             Önceki sürümden kalan çip, rozet ve sönüklük temizlenir. */
+          if (!listede) {
+            for (const x of [a, ...a.querySelectorAll('[' + DUR + ']')]) if (x.hasAttribute(DUR)) geriKoy(x);
+            if (a.hasAttribute(EKS)) a.removeAttribute(EKS);
+            if (a.hasAttribute(XX)) a.removeAttribute(XX);
+            satirGizle(a, false);
+            continue;
+          }
           const e = yaziOgesi(kap, adlar[id]);
           if (!e) continue;
           const kenarda = !listede && !!(a.closest('nav, aside') || KENAR.solda(a));
@@ -7862,6 +8389,7 @@
       /* Süzgeç şeridi: kullanım göstergesinin hemen altında, betiğin kendi düğümü. */
       // Şerit yalnız kenar çubuğuna oturmuş göstergenin altında durur (yüzen göstergede yok).
       function seritYeri() {
+        return null;   // 2611-18a: kenar çubuğu süzgeç şeridi kaldırıldı (kullanıcı kararı); süzgeç yalnız Sohbetler sayfasında.
         const hud = document.getElementById('claude-usage-hud');
         return hud && hud.parentElement && hud.parentElement !== document.body ? hud : null;
       }
@@ -8074,6 +8602,9 @@
   const DEGISIKLIK = (function () {
     const VERI = [
     // @@CHG-BASLA
+    {"s": "2611-19b", "t": "2026-11-19", "m": [{"k": "yeni", "tr": "Kullanım göstergesinde ==sıfırlama hakları==: ↺ rozeti (7 günden az kaldıysa sarı ve gün sayısı), kartta tür, adet, son tarih ve Usage sayfasını açan düğme.", "en": "==Limit resets== on the usage meter: ↺ badge (yellow with day count when under 7 days left); the card lists kind, count, expiry and a button that opens the Usage page."}, {"k": "yeni", "tr": "Limit eşiği uyarısı: haftalık ya da Fable limiti %80 ve %95'i geçince sayfada uyarı.", "en": "Limit threshold alert: an in-page alert when the weekly or Fable limit passes 80% and 95%."}, {"k": "degisti", "tr": "Dışa aktarma artık Share'in solunda ikon. Sol tık .md indirir, sağ tık HTML ya da JSON. Yeni kısayol Ctrl+Shift+E.", "en": "Export is now an icon left of Share. Left click downloads .md, right click offers HTML or JSON. New shortcut Ctrl+Shift+E."}, {"k": "yeni", "tr": "Başlık şeridinde: sohbet doluluğu (tahmin; %70 sarı, %90 kırmızı), sohbette ara (Ctrl+Shift+F), ana hat paneli, Tümünü katla ve Yeni sohbete taşı.", "en": "On the title strip: chat fullness (estimate; yellow at 70%, red at 90%), search in chat (Ctrl+Shift+F), outline panel, Fold all and Move to new chat."}, {"k": "yeni", "tr": "Mesajlarda: uzun cevaplarda Katla düğmesi, kendi mesajında yer imi yıldızı (Alt+↑/↓ ile atla), Copy'nin yanında Biçimli kopyala.", "en": "On messages: Fold button on long replies, bookmark star on your messages (jump with Alt+↑/↓), Copy formatted next to Copy."}]},
+    {"s":"2611-19a","t":"2026-11-19","m":[{"k":"duzeldi","tr":"Sol menüdeki Chats bağlantısı geri geldi.","en":"The Chats link in the left menu is back."}]},
+    {"s": "2611-18a", "t": "2026-11-18", "m": [{"k": "kaldirildi", "tr": "Kaldırıldı: kenar çubuğundaki durum çipleri, rozetler ve süzgeç (Sohbetler sayfasında kalıyor) · Önerilen modele kendiliğinden geç · tek tuşla Opus 5.5 · medium düğmesi · Kenar çubuğunda Chats · Widget'ı yüzdür.", "en": "Removed: status chips, badges and filter in the sidebar (they stay on the Chats page) · Switch to the suggested model automatically · one-click Opus 5.5 · medium button · Chats in the sidebar · Float widget."}]},
     {"s": "2611-17a", "t": "2026-11-17", "m": [{"k": "degisti", "tr": "Efor artık ==elle== seçilir. Cevaptaki öneri şeritte görünür ama kendiliğinden seçilmez; senin seçimin gönderdikten sonra da kalır. Önerilen model yine kendiliğinden seçilir.", "en": "Effort is now picked ==by hand==. The suggestion in the reply shows on the strip but is not applied; your pick stays after sending. The suggested model is still picked automatically."}]},
     {"s": "2611-16b", "t": "2026-11-16", "m": [{"k": "degisti", "tr": "Kod listesi yenilendi; her satır bir grup, kodlar alfabetik: 3DP, FOOD, HUKUK, SAĞLIK, SHOP, TOOL · FF, HTML, MOB, SCR · AI, CLAUDE, COCO, LUCAS, SKILL · BG3, GAME, TECH · DOC, IMG, TEXT, VID. Kayıtlı listen bir kez bununla değişir.", "en": "New code list; each line a group, codes in alphabetical order: 3DP, FOOD, HUKUK, SAĞLIK, SHOP, TOOL · FF, HTML, MOB, SCR · AI, CLAUDE, COCO, LUCAS, SKILL · BG3, GAME, TECH · DOC, IMG, TEXT, VID. Your saved list is replaced once."}, {"k": "yeni", "tr": "Kod listesinde parantez içi açıklama yazılabilir: \"MOB (cep telefonu ile alakalı her şey)\". Açıklama ızgarada kodun üstüne gelince görünür.", "en": "A description in brackets can follow a code: \"MOB (cep telefonu ile alakalı her şey)\". It shows when you hover the code in the grid."}]},
     {"s": "2611-16a", "t": "2026-11-16", "m": [{"k": "degisti", "tr": "Başlık biçimi ~~DURUM KOD Ad~~ → ==DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET==. DURUM ve sohbet adı zorunlu; SAHİP ve KOD isteğe bağlı, \"kod yok\" artık işaretlenmez. Örnek: TO-DO ALP IMG Gülen Adam +yüz ifadesi denemesi.", "en": "Title format ~~STATUS CODE Name~~ → ==STATUS OWNER CODE CHAT-NAME +SHORT-SUMMARY==. Status and chat name are required; owner and code are optional, \"no code\" is no longer marked. Example: TO-DO ALP IMG Gülen Adam +yüz ifadesi denemesi."}, {"k": "yeni", "tr": "Kısa özet tanınır: adın ardında boşluk ve \"+\" ile başlar, 3–5 kelime olmalı; dışındaysa rozet yazar. SAĞLIK ve HUKUK belge tarihi başlığın en sonunda, özetten sonra.", "en": "The short summary is recognised: it starts with a space and \"+\" after the name and should be 3–5 words; otherwise the badge says so. The SAĞLIK and HUKUK document date goes at the very end, after the summary."}, {"k": "degisti", "tr": "Kod listesinde CAI → ==COCO== (uygulamanın yeni adı). Kayıtlı listende CAI bir kez COCO'ya çevrilir.", "en": "Code list: CAI → ==COCO== (the app's new name). CAI in your saved list is changed to COCO once."}]},
@@ -10123,7 +10654,9 @@
       bildir(_(byId.get('stickLeft').label) + ' ' + (pref('stickLeft') ? _('açıldı') : _('kapatıldı')), 'basari');
     });
     if (id === 'baslik' && BASLIKUI.ac) return yap(BASLIKUI.ac);
-    if (id === 'markdown' && effective('exportMarkdown')) return yap(markdownAktar);
+    if ((id === 'markdown' || id === 'markdownHizli') && effective('exportMarkdown')) return yap(markdownAktar);
+    if (id === 'sohbetAra' && ARA.ac && suankiSohbet()) return yap(ARA.ac);
+    if ((id === 'mesajOnceki' || id === 'mesajSonraki') && effective('yerImi') && suankiSohbet() && !saYaziyor(e)) return yap(() => saAtla(id === 'mesajOnceki' ? -1 : 1));
     if (id === 'sablon' && TPLUI.palet) return yap(() => TPLUI.palet());
     if (id === 'sablonYonet' && TPLUI.yonetici) return yap(() => TPLUI.yonetici());
   }, true);
