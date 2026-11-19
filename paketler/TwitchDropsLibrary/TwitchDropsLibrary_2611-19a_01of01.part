@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         AALabs Twitch Drops Library
-// @name:tr      AALabs Twitch Drops Library
-// @name:en      AALabs Twitch Drops Library
+// @name:tr      AALabs Twitch Drops
+// @name:en      AALabs Twitch Drops
 // @namespace    aalabs
-// @version      26.11.1.4
-// @description  Twitch Drops kampanyalarında Steam / Epic / GOG kütüphanendeki oyunları rozetler ve süzer.
-// @description:en  Badges and filters Twitch Drops campaigns for games in your Steam / Epic / GOG library.
+// @version      26.11.19.1
+// @description  Twitch Drops kampanyalarında Steam / Epic / GOG / EA kütüphanendeki oyunları rozetler ve süzer; Live Player'la birlikte çalışır.
+// @description:en  Badges and filters Twitch Drops campaigns for games in your Steam / Epic / GOG / EA library; works together with Live Player.
 // @match        https://www.twitch.tv/*
 // @icon         data:image/png;base64,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
 // @updateURL    http://127.0.0.1:47815/u/AALabs.TwitchDropsLibrary.user.js
@@ -23,6 +23,10 @@
 // @connect      www.gog.com
 // @connect      www.epicgames.com
 // @connect      accounts.epicgames.com
+// @connect      accounts.ea.com
+// @connect      service-aggregation-layer.juno.ea.com
+// @connect      127.0.0.1
+// @connect      localhost
 // @run-at       document-start
 // @noframes
 // @aalabs-ikon  TWD
@@ -31,7 +35,7 @@
 (function () {
   'use strict';
 
-  const SURUM = '2611-01d';
+  const SURUM = '2611-19a';
   const ONEK = 'aalabs-twd';
   const SAAT = 3600 * 1000;
   const GUN = 24 * SAAT;
@@ -39,27 +43,27 @@
   // ---------- Metinler (TR/EN aynı anahtarlar) ----------
   const METIN = {
     tr: {
-      ad: 'AALabs Twitch Drops Library', hepsi: 'Hepsi', sahip: 'Sahip olduklarım', olmayan: 'Olmayanlar',
+      ad: 'AALabs Twitch Drops', hepsi: 'Hepsi', sahip: 'Sahip olduklarım', olmayan: 'Olmayanlar',
       istek: 'İstek listem', favoriler: 'Favoriler', ara: 'Oyun ara', yenile: 'Kütüphaneyi yenile',
       ayarlar: 'Ayarlar (A)', dil: 'Dili değiştir', tema: 'Temayı değiştir', gorunum: 'Görünüm',
-      sayilar: 'Steam {s} · Epic {e} · GOG {g} oyun', eslesen: '{n} kampanyanın {m}\'i sende',
+      sayilar: 'Steam {s} · Epic {e} · GOG {g} · EA {a} oyun', eslesen: '{n} kampanyanın {m}\'i sende',
       tazelik: '{t} önce yenilendi', hic: 'henüz okunmadı', yukleniyor: 'Kütüphane okunuyor… {y}',
       gizlendi: '{n} kampanya gizlendi · Hepsi\'ne basınca geri gelir',
       saKaldi: '{n} sa kaldı', gunKaldi: '{n} gün kaldı', dkKaldi: '{n} dk kaldı', bitti: 'Bitti',
       bagli: 'Hesap bağlı', bagla: 'Hesabı bağla', favoriEkle: 'Favorilere ekle', favoriCikar: 'Favoriden çıkar',
       gizle: 'Bu oyunu gizle', yeniDrop: 'Yeni drop: {ad}', yeniDropMetin: 'Sahip olduğun bir oyuna yeni kampanya geldi.',
       steamHata: 'Steam okunamadı, store.steampowered.com\'da giriş yap', gogHata: 'GOG okunamadı, gog.com\'da giriş yap',
-      epicHata: 'Epic okunamadı: accounts.epicgames.com\'u bir kez açıp giriş yap', kapat: 'Kapat', kaydet: 'Kaydet',
+      epicHata: 'Epic okunamadı: accounts.epicgames.com\'u bir kez açıp giriş yap', eaHata: 'EA okunamadı: ea.com\'da giriş yap', kapat: 'Kapat', kaydet: 'Kaydet',
       bMagaza: 'Mağazalar', bOnbellek: 'Önbellek', bElle: 'Elle eşleştirme', bGizli: 'Gizlenen oyunlar',
       bBildirim: 'Bildirim', bGenel: 'Genel', bKisayol: 'Klavye kısayolları', bTani: 'Tanı', bHakkinda: 'Hakkında',
-      onbellekSure: 'Kütüphane yenileme aralığı', saat: '{n} saat', elleAciklama: 'Her satır: Twitch\'teki ad | STEAM EPIC GOG. Mağaza yazmazsan ELLE rozeti çıkar. Örnek: Grand Theft Auto V | EPIC',
+      onbellekSure: 'Kütüphane yenileme aralığı', saat: '{n} saat', elleAciklama: 'Her satır: Twitch\'teki ad | STEAM EPIC GOG EA. Mağaza yazmazsan ELLE rozeti çıkar. Örnek: Grand Theft Auto V | EPIC',
       gizliYok: 'Gizlenen oyun yok.', goster: 'Göster', bildirimAc: 'Sahip olduğum oyuna yeni drop gelince haber ver',
       bildirimNot: 'Yalnız bir Twitch sekmesi açıkken çalışır.', temaSec: 'Tema', temaOto: 'Twitch\'i izle',
       temaAcik: 'Açık', temaKoyu: 'Koyu', dilSec: 'Dil', kisayolAyar: 'Ayarları aç', kisayolBas: 'Yeni kısayola bas…',
       kisayolGecersiz: 'Bu kısayol kullanılamaz', raporKopyala: 'Raporu kopyala', kopyalandi: 'Kopyalandı',
       kopyaYedek: 'Pano kullanılamadı. Metin seçildi: Ctrl+C ile kopyala.', taniBaslik: 'Bulunan parçalar',
       tBaslik: 'Kampanya başlıkları', tSerit: 'Süzgeç şeridi', tSteam: 'Steam kütüphanesi', tGog: 'GOG kütüphanesi',
-      tEpic: 'Epic kütüphanesi', tGql: 'Twitch hesap bağlantı verisi', tEsles: 'Eşleşen kampanya', bekliyor: 'bekliyor',
+      tEpic: 'Epic kütüphanesi', tEa: 'EA kütüphanesi', tGql: 'Twitch hesap bağlantı verisi', tEsles: 'Eşleşen kampanya', bekliyor: 'bekliyor',
       kapali: 'kapalı', magazaAcik: '{m} kütüphanesini oku', simdiYenile: 'Şimdi yenile', surum: 'Sürüm',
       hakkindaMetin: 'Twitch Drops sayfasında sahip olduğun oyunları rozetler. Kütüphaneler mağazalardaki kendi oturumunla okunur; hiçbir yere gönderilmez.',
       ara2: 'Ayarlarda ara', elle: 'ELLE',
@@ -68,30 +72,39 @@
       odulDurum: 'Ödüller: elle işaretli {e} kampanya · satırdaki ✓ ile işaretle', odulEnv: 'Inventory\'den {n} kampanya kendiliğinden işaretlendi',
       odulTemiz: 'Süresi biten {n} işaret silindi', isaretlendi: '{ad} alındı olarak işaretlendi', geriAl: 'Geri al (Ctrl+Z)',
       yeniOdulBaslik: 'Yeni ödül: {ad}', yeniOdulMetin: 'Ödüllerini aldığın oyuna yeni ödüllü kampanya geldi.',
-      tAlinan: 'Alınan işaretleri', tEnvanter: 'Inventory okuma'
+      tAlinan: 'Alınan işaretleri', tEnvanter: 'Inventory okuma',
+      takipte: 'Takipte', lvpDugme: 'Live Player\'da takip et', lvpCikar: 'Live Player takibinden çıkar',
+      lvpIzliyor: 'LVP İZLİYOR %{y}', lvpTakipte: 'LVP TAKİPTE', lvpOzet: 'Live Player: {ad} izliyor %{y} · {n} oyun takipte',
+      lvpBosta: 'Live Player: izlemiyor · {n} oyun takipte', lvpPaylas: 'kütüphane ve alınan işaretleri Live Player\'la paylaşılıyor',
+      lvpAlinan: 'Live Player ödülleri alınca ✓ kendiliğinden konur ({n} kampanya)', lvpYok: 'Live Player bağlı değil',
+      lvpSira: 'Live Player kapalıyken takipler sıraya alınır ({n} sırada)', lvpTakipB: 'Live Player: {ad} takipte',
+      lvpTakipM: 'Drops başlayınca Live Player izlemeye başlar. Başlayınca ayrıca haber verilir.', lvpSiraM: 'Live Player kapalı; açılınca gönderilir.',
+      lvpCikarB: 'Live Player: {ad} takipten çıktı', lvpBasladiB: 'Live Player izlemeye başladı: {ad}', lvpBasladiM: 'Drops ilerlemesi Live Player\'da sayılıyor.',
+      lvpRedB: 'Live Player: {ad} için istek kabul edilmedi', lvpRed: 'Live Player bu sürümde bu isteği tanımıyor.',
+      bLvp: 'Live Player', lvpAc: 'Live Player ile birlikte çalış', lvpAdres: 'Adres: {a} · Live Player açıkken kendiliğinden bağlanır.', tLvp: 'Live Player bağlantısı'
     },
     en: {
-      ad: 'AALabs Twitch Drops Library', hepsi: 'All', sahip: 'Owned', olmayan: 'Not owned',
+      ad: 'AALabs Twitch Drops', hepsi: 'All', sahip: 'Owned', olmayan: 'Not owned',
       istek: 'My wishlist', favoriler: 'Favourites', ara: 'Search games', yenile: 'Refresh library',
       ayarlar: 'Settings (S)', dil: 'Change language', tema: 'Change theme', gorunum: 'View',
-      sayilar: 'Steam {s} · Epic {e} · GOG {g} games', eslesen: 'You own {m} of {n} campaigns',
+      sayilar: 'Steam {s} · Epic {e} · GOG {g} · EA {a} games', eslesen: 'You own {m} of {n} campaigns',
       tazelik: 'Refreshed {t} ago', hic: 'not read yet', yukleniyor: 'Reading library… {y}',
       gizlendi: '{n} campaigns hidden · press All to show them',
       saKaldi: '{n} h left', gunKaldi: '{n} days left', dkKaldi: '{n} min left', bitti: 'Ended',
       bagli: 'Account linked', bagla: 'Link account', favoriEkle: 'Add to favourites', favoriCikar: 'Remove from favourites',
       gizle: 'Hide this game', yeniDrop: 'New drop: {ad}', yeniDropMetin: 'A game you own has a new campaign.',
       steamHata: 'Steam could not be read; sign in at store.steampowered.com', gogHata: 'GOG could not be read; sign in at gog.com',
-      epicHata: 'Epic could not be read; open accounts.epicgames.com once and sign in', kapat: 'Close', kaydet: 'Save',
+      epicHata: 'Epic could not be read; open accounts.epicgames.com once and sign in', eaHata: 'EA could not be read; sign in at ea.com', kapat: 'Close', kaydet: 'Save',
       bMagaza: 'Stores', bOnbellek: 'Cache', bElle: 'Manual matching', bGizli: 'Hidden games',
       bBildirim: 'Notification', bGenel: 'General', bKisayol: 'Keyboard shortcuts', bTani: 'Diagnostics', bHakkinda: 'About',
-      onbellekSure: 'Library refresh interval', saat: '{n} hours', elleAciklama: 'One per line: name on Twitch | STEAM EPIC GOG. Without a store you get a MANUAL badge. Example: Grand Theft Auto V | EPIC',
+      onbellekSure: 'Library refresh interval', saat: '{n} hours', elleAciklama: 'One per line: name on Twitch | STEAM EPIC GOG EA. Without a store you get a MANUAL badge. Example: Grand Theft Auto V | EPIC',
       gizliYok: 'No hidden games.', goster: 'Show', bildirimAc: 'Notify me when a game I own gets a new drop',
       bildirimNot: 'Works only while a Twitch tab is open.', temaSec: 'Theme', temaOto: 'Follow Twitch',
       temaAcik: 'Light', temaKoyu: 'Dark', dilSec: 'Language', kisayolAyar: 'Open settings', kisayolBas: 'Press the new shortcut…',
       kisayolGecersiz: 'This shortcut cannot be used', raporKopyala: 'Copy report', kopyalandi: 'Copied',
       kopyaYedek: 'Clipboard unavailable. Text selected: copy with Ctrl+C.', taniBaslik: 'Parts found',
       tBaslik: 'Campaign headers', tSerit: 'Filter strip', tSteam: 'Steam library', tGog: 'GOG library',
-      tEpic: 'Epic library', tGql: 'Twitch account-link data', tEsles: 'Matched campaigns', bekliyor: 'waiting',
+      tEpic: 'Epic library', tEa: 'EA library', tGql: 'Twitch account-link data', tEsles: 'Matched campaigns', bekliyor: 'waiting',
       kapali: 'off', magazaAcik: 'Read the {m} library', simdiYenile: 'Refresh now', surum: 'Version',
       hakkindaMetin: 'Badges the games you own on the Twitch Drops page. Libraries are read with your own store sessions and sent nowhere.',
       ara2: 'Search settings', elle: 'MANUAL',
@@ -100,17 +113,26 @@
       odulDurum: 'Rewards: {e} campaigns ticked by hand · tick with ✓ on the row', odulEnv: '{n} campaigns ticked from Inventory',
       odulTemiz: '{n} ticks of ended campaigns cleared', isaretlendi: '{ad} marked as claimed', geriAl: 'Undo (Ctrl+Z)',
       yeniOdulBaslik: 'New reward: {ad}', yeniOdulMetin: 'A game you claimed from has a new campaign with rewards.',
-      tAlinan: 'Claimed marks', tEnvanter: 'Inventory read'
+      tAlinan: 'Claimed marks', tEnvanter: 'Inventory read',
+      takipte: 'Following', lvpDugme: 'Follow in Live Player', lvpCikar: 'Stop following in Live Player',
+      lvpIzliyor: 'LVP WATCHING {y}%', lvpTakipte: 'LVP FOLLOWING', lvpOzet: 'Live Player: watching {ad} {y}% · {n} games followed',
+      lvpBosta: 'Live Player: not watching · {n} games followed', lvpPaylas: 'library and claimed marks shared with Live Player',
+      lvpAlinan: 'auto ✓ when Live Player claims the rewards ({n} campaigns)', lvpYok: 'Live Player not connected',
+      lvpSira: 'follows queue while Live Player is closed ({n} queued)', lvpTakipB: 'Live Player: following {ad}',
+      lvpTakipM: 'Live Player starts watching when Drops begin. You are also told when it starts.', lvpSiraM: 'Live Player is closed; sent when it opens.',
+      lvpCikarB: 'Live Player: stopped following {ad}', lvpBasladiB: 'Live Player started watching: {ad}', lvpBasladiM: 'Drops progress is counted in Live Player.',
+      lvpRedB: 'Live Player did not accept the request for {ad}', lvpRed: 'This Live Player version does not know this request.',
+      bLvp: 'Live Player', lvpAc: 'Work together with Live Player', lvpAdres: 'Address: {a} · connects by itself while Live Player runs.', tLvp: 'Live Player connection'
     }
   };
 
   // ---------- Ayar (TDZ: yükleme dosyanın sonunda) ----------
   let AYAR = null;
   const VARSAYILAN = {
-    dil: 'tr', tema: 'oto', gorunum: 'sahip', steam: true, gog: true, epic: true, onbellekSaat: 24,
+    dil: 'tr', tema: 'oto', gorunum: 'sahip', steam: true, gog: true, epic: true, ea: true, lvp: true, onbellekSaat: 24,
     elle: '', gizli: [], favori: [], bildirim: true, kisayol: 'Ctrl+,', alinanGoster: false
   };
-  const GOR_GECERLI = ['hepsi', 'sahip', 'olmayan', 'istek', 'favoriler'];
+  const GOR_GECERLI = ['hepsi', 'sahip', 'olmayan', 'istek', 'takipte', 'favoriler'];
   function gmOku(k, v) { try { return typeof GM_getValue === 'function' ? GM_getValue(k, v) : v; } catch (_h) { return v; } }
   function gmYaz(k, v) { try { if (typeof GM_setValue === 'function') GM_setValue(k, v); } catch (_h) { /* bellekte kalır */ } }
   function ayarYukle() {
@@ -118,7 +140,7 @@
     const a = Object.assign({}, VARSAYILAN, ham && typeof ham === 'object' ? ham : {});
     if (!['tr', 'en'].includes(a.dil)) a.dil = 'tr';
     if (!['oto', 'acik', 'koyu'].includes(a.tema)) a.tema = 'oto';
-    if (!GOR_GECERLI.includes(a.gorunum)) a.gorunum = 'sahip';
+    if (!GOR_GECERLI.includes(a.gorunum) || (a.gorunum === 'takipte' && a.lvp === false)) a.gorunum = 'sahip';
     if (![6, 12, 24, 72].includes(Number(a.onbellekSaat))) a.onbellekSaat = 24;
     if (!Array.isArray(a.gizli)) a.gizli = [];
     if (!Array.isArray(a.favori)) a.favori = [];
@@ -175,14 +197,13 @@
 
   // Ad normalleştirme ve eşleştirme
   function norm(s) {
-    return String(s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase()
-      .replace(/[™®©]/g, '').replace(/&/g, ' and ').replace(/['’`]/g, '')
+    return String(s || '').replace(/[™®©]/g, '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/&/g, ' and ').replace(/['’`]/g, '')
       .replace(/[^a-z0-9]+/g, ' ').trim().replace(/^(tom clancys|sid meiers) /, '').replace(/^the /, '')
       .replace(/(^| )(ii|iii|iv|v|vi|vii|viii|ix|x)(?= |$)/g, (m, b, r) => b + ROMA[r]);
   }
   const ROMA = { ii: '2', iii: '3', iv: '4', v: '5', vi: '6', vii: '7', viii: '8', ix: '9', x: '10' };
   // "classic" bilerek yok: World of Warcraft Classic ayrı üründür
-  const EKLER = /^((premium|gold|special|collectors|digital deluxe|deluxe|launch|standard|ultimate|complete|definitive|anniversary|goty|game of the year|enhanced)( edition)?|legacy( edition)?|remastered|directors cut|edition)$/;
+  const EKLER = /^((premium|gold|special|collectors|digital deluxe|deluxe|launch|standard|ultimate|complete|definitive|anniversary|goty|game of the year|enhanced)( edition)?|legacy( edition)?|remastered|directors cut|edition|[a-z0-9]+ edition)$/;
   const ON_EKLER = /^(marvels|disney|lego|warhammer 40000)$/;
   function adEslesir(twitchAd, magazaAd) {
     const a = norm(twitchAd), b = norm(magazaAd);
@@ -192,23 +213,29 @@
     if (b.endsWith(' ' + a) && a.indexOf(' ') > 0) return ON_EKLER.test(b.slice(0, b.length - a.length - 1));
     return false;
   }
+  // Başka oyunun içinde gelen oyunlar (norm Twitch adı → kapsayan oyun adı): kapsayana sahipsen buna da sahipsin
+  const ICINDE = { 'battlefield redsec': 'Battlefield 6' };
   // Mağazada adı değişmiş oyunlar (norm ad → Steam appid)
   const STEAM_EK = { 'grand theft auto 5': [271590, 3240220], 'rainbow six siege': [359550], 'hunt showdown': [594650], 'hunt showdown 1896': [594650] };
 
   // ---------- Ağ ----------
-  function istek(url) {
+  // s: {method, headers, data, sure (ms), sessiz: hata günlüğe yazılmaz}
+  function istek(url, s) {
+    const o = s || {};
+    const sure = o.sure || 20000;
     return new Promise((coz, red) => {
       if (typeof GM_xmlhttpRequest !== 'function') { red(new Error('GM_xmlhttpRequest yok')); return; }
       let bitti = false;
       const son = (f, x) => { if (bitti) return; bitti = true; clearTimeout(yedek); f(x); };
       let tutamak = null;
-      const yedek = setTimeout(() => { try { if (tutamak && tutamak.abort) tutamak.abort(); } catch (_h) { /* yok */ } son(red, new Error('zaman aşımı')); }, 25000);
+      const yedek = setTimeout(() => { try { if (tutamak && tutamak.abort) tutamak.abort(); } catch (_h) { /* yok */ } son(red, new Error('zaman aşımı')); }, sure + 5000);
       try {
         tutamak = GM_xmlhttpRequest({
-          method: 'GET', url, timeout: 20000, headers: { Accept: 'application/json' },
+          method: o.method || 'GET', url, timeout: sure, headers: o.headers || { Accept: 'application/json' }, data: o.data,
           onload: (r) => son(coz, { durum: r.status, metin: r.responseText || '', son: r.finalUrl || url }),
           onerror: (r) => {
-            TANI.son.push(`ağ hatası ${url.replace(/\?.*$/, '')}${r && r.finalUrl && r.finalUrl !== url ? ' → ' + String(r.finalUrl).replace(/\?.*$/, '') : ''}`);
+            if (o.sessiz) { son(red, new Error('ağ hatası')); return; }
+            TANI.son.push(`ağ hatası ${url.replace(/[?#].*$/, '')}${r && r.finalUrl && r.finalUrl !== url ? ' → ' + String(r.finalUrl).replace(/[?#].*$/, '') : ''}`);
             if (TANI.son.length > 12) TANI.son.shift();
             son(red, new Error('ağ hatası'));
           },
@@ -232,20 +259,20 @@
   }
 
   // ---------- Kütüphane ----------
-  const KUT = { steamSahip: new Set(), steamIstek: new Set(), gog: [], epic: [], zaman: 0, hata: {}, yukleniyor: false, adim: '' };
+  const KUT = { steamSahip: new Set(), steamIstek: new Set(), gog: [], epic: [], ea: [], zaman: 0, hata: {}, yukleniyor: false, adim: '' };
   const SS = { onbellek: {} }; // Steam arama önbelleği: norm ad → {t, idler: [[id, ad]]}
 
   function kutuphaneOnbellekYukle() {
     const k = gmOku('twd_kut', null);
     if (k && typeof k === 'object') {
       KUT.steamSahip = new Set(k.steamSahip || []); KUT.steamIstek = new Set(k.steamIstek || []);
-      KUT.gog = k.gog || []; KUT.epic = k.epic || []; KUT.zaman = k.zaman || 0; KUT.hata = k.hata || {};
+      KUT.gog = k.gog || []; KUT.epic = k.epic || []; KUT.ea = Array.isArray(k.ea) ? k.ea : []; KUT.zaman = k.zaman || 0; KUT.hata = k.hata || {};
     }
     const s = gmOku('twd_ss', null);
     if (s && typeof s === 'object') SS.onbellek = s;
   }
   function kutuphaneKaydet() {
-    gmYaz('twd_kut', { steamSahip: [...KUT.steamSahip], steamIstek: [...KUT.steamIstek], gog: KUT.gog, epic: KUT.epic, zaman: KUT.zaman, hata: KUT.hata });
+    gmYaz('twd_kut', { steamSahip: [...KUT.steamSahip], steamIstek: [...KUT.steamIstek], gog: KUT.gog, epic: KUT.epic, ea: KUT.ea, zaman: KUT.zaman, hata: KUT.hata });
   }
 
   async function steamOku() {
@@ -331,6 +358,48 @@
     KUT.epic = [...adlar];
     if (jeton && tur >= 300) throw new Error('kısmi okundu');
   }
+  // EA: ea.com oturum çereziyle EA'nın kendi web istemcisinin (ORIGIN_JS_SDK) jetonu alınır; jeton yalnız bellekte kalır.
+  // Sahip olunan oyunlar EA uygulamasının kullandığı GraphQL ucundan okunur (yalnız EA mağazası).
+  const EA_JETON = 'https://accounts.ea.com/connect/auth?client_id=ORIGIN_JS_SDK&response_type=token&redirect_uri=nucleus:rest&prompt=none';
+  const EA_SAL = 'https://service-aggregation-layer.juno.ea.com/graphql';
+  const EA_SORGU = 'query{me{ownedGameProducts(storefronts:[EA] locale:"DEFAULT" paging:{limit:9999,next:null} productFound:true ownershipMethod:[PURCHASE,REDEMPTION,ENTITLEMENT_GRANT] downloadableOnly:false entitlementEnabled:true platforms:[PC]){items{product{name baseItem(availabilities:[VISIBLE]){title gameType}}}}}}';
+  function eaJetonu(r) {
+    let j = null;
+    try { j = JSON.parse(r.metin); } catch (_h) { j = null; }
+    let t = j && j.access_token ? String(j.access_token) : '';
+    if (!t) { const f = /[#&?]access_token=([^&]+)/.exec(r.son || ''); if (f) { try { t = decodeURIComponent(f[1]); } catch (_h) { t = ''; } } }
+    return /^[\w.~+/=-]{16,4000}$/.test(t) ? t : '';
+  }
+  async function eaOku() {
+    const r = await istek(EA_JETON, { sessiz: true }).catch(() => { throw new Error('ağ hatası'); });
+    const jeton = eaJetonu(r);
+    TANI.son.push(`${r.durum} https://accounts.ea.com/connect/auth${jeton ? '' : ' → giriş'}`);
+    if (TANI.son.length > 12) TANI.son.shift();
+    if (!jeton) throw new Error('giriş gerekli');
+    const s = await istek(EA_SAL + '?query=' + encodeURIComponent(EA_SORGU), { headers: { Accept: 'application/json', Authorization: 'Bearer ' + jeton } });
+    TANI.son.push(`${s.durum} ${EA_SAL}`);
+    if (TANI.son.length > 12) TANI.son.shift();
+    if (s.durum === 401 || s.durum === 403) throw new Error('jeton kabul edilmedi (' + s.durum + ')');
+    if (s.durum === 429) throw new Error('çok istek (429)');
+    if (s.durum !== 200) throw new Error('HTTP ' + s.durum);
+    let j = null;
+    try { j = JSON.parse(s.metin); } catch (_h) { throw new Error('yanıt okunamadı'); }
+    const ogeler = j && j.data && j.data.me && j.data.me.ownedGameProducts && j.data.me.ownedGameProducts.items;
+    if (!Array.isArray(ogeler)) {
+      const hata = j && Array.isArray(j.errors) && j.errors[0] && j.errors[0].message ? String(j.errors[0].message).slice(0, 80) : 'liste yok';
+      throw new Error(/auth|token|unauthor/i.test(hata) ? 'jeton kabul edilmedi' : 'EA: ' + hata);
+    }
+    const adlar = new Set();
+    for (const it of ogeler) {
+      const p = it && it.product;
+      if (!p) continue;
+      const tur = p.baseItem && p.baseItem.gameType ? String(p.baseItem.gameType) : '';
+      if (tur && !/BASE_GAME/i.test(tur)) continue;
+      if (p.baseItem && p.baseItem.title) adlar.add(String(p.baseItem.title));
+      if (p.name) adlar.add(String(p.name));
+    }
+    KUT.ea = [...adlar];
+  }
   async function kutuphaneYenile(zorla) {
     if (KUT.yukleniyor) return;
     if (!zorla && KUT.zaman && Date.now() - KUT.zaman < AYAR.onbellekSaat * SAAT) return;
@@ -338,7 +407,7 @@
     let basari = 0;
     try {
       seritCiz();
-      const isler = [['steam', steamOku], ['gog', gogOku], ['epic', epicOku]];
+      const isler = [['steam', steamOku], ['gog', gogOku], ['epic', epicOku], ['ea', eaOku]];
       for (const [ad, fn] of isler) {
         if (!AYAR[ad]) { delete KUT.hata[ad]; continue; }
         KUT.adim = ad.toUpperCase(); seritCiz();
@@ -406,7 +475,7 @@
     for (const satir of String(AYAR.elle || '').split(/\r?\n/)) {
       const [ad, mag] = satir.split('|');
       if (!ad || !ad.trim() || !norm(ad)) continue;
-      const magazalar = String(mag || '').toUpperCase().split(/[\s,]+/).filter((x) => ['STEAM', 'EPIC', 'GOG'].includes(x));
+      const magazalar = String(mag || '').toUpperCase().split(/[\s,]+/).filter((x) => ['STEAM', 'EPIC', 'GOG', 'EA'].includes(x));
       t.set(norm(ad), magazalar.length ? magazalar : ['ELLE']);
     }
     return t;
@@ -428,8 +497,15 @@
     }
     if (AYAR.epic && KUT.epic.some((x) => adEslesir(ad, x))) magazalar.push('EPIC');
     if (AYAR.gog && KUT.gog.some((x) => adEslesir(ad, x))) magazalar.push('GOG');
+    if (AYAR.ea && KUT.ea.some((x) => adEslesir(ad, x))) magazalar.push('EA');
     const e = ELLE.get(k);
     if (e) for (const x of e) if (!magazalar.includes(x)) magazalar.push(x);
+    if (ICINDE[k]) {
+      const ana = eslesme(ICINDE[k]);
+      for (const x of ana.magazalar) if (!magazalar.includes(x)) magazalar.push(x);
+      if (ana.istek) istekte = true;
+      if (!ESLESME.has(norm(ICINDE[k]))) kesin = false;
+    }
     const sonuc = { magazalar, istek: istekte && !magazalar.length };
     if (kesin) ESLESME.set(k, sonuc);
     return sonuc;
@@ -488,7 +564,7 @@
   // k: kampanya kimliği → {o: oyun (norm), b: bitiş ms, t: işaret zamanı, k: 'elle' | 'env'}
   // oyun: bütün kampanyaları alınmış oyun → zaman (E3) · ilk: kampanya kimliğinin ilk görülüşü → {t, b}
   const KAMP = new Map(); // norm oyun adı → [{id, ad, b}]
-  const ALN = { k: {}, oyun: {}, ilk: {}, bildirilen: [], envZaman: 0, temiz: 0 };
+  const ALN = { k: {}, oyun: {}, ilk: {}, bildirilen: [], envZaman: 0, temiz: 0, lvpRet: [] };
   const ALN_SURE = 60 * GUN; // bitişi bilinmeyen işaret en çok bu kadar tutulur
   function alinanYukle() {
     const a = gmOku('twd_alinan', null);
@@ -496,10 +572,11 @@
     if (a && typeof a === 'object') {
       ALN.k = nesne(a.k); ALN.oyun = nesne(a.oyun); ALN.ilk = nesne(a.ilk);
       ALN.bildirilen = Array.isArray(a.bildirilen) ? a.bildirilen : []; ALN.envZaman = Number(a.envZaman) || 0;
+      ALN.lvpRet = Array.isArray(a.lvpRet) ? a.lvpRet : [];
     }
   }
   function alinanKaydet() {
-    gmYaz('twd_alinan', { k: ALN.k, oyun: ALN.oyun, ilk: ALN.ilk, bildirilen: ALN.bildirilen.slice(-500), envZaman: ALN.envZaman });
+    gmYaz('twd_alinan', { k: ALN.k, oyun: ALN.oyun, ilk: ALN.ilk, bildirilen: ALN.bildirilen.slice(-500), envZaman: ALN.envZaman, lvpRet: ALN.lvpRet.slice(-500) });
   }
   function kampBul(id) {
     for (const l of KAMP.values()) { const c = l.find((x) => x.id === id); if (c) return c; }
@@ -543,7 +620,10 @@
   function alindiDegistir(s) {
     const d = alinanDurum(s);
     if (d.alindi) {
-      for (const id of d.ids) delete ALN.k[id];
+      for (const id of d.ids) {
+        if (ALN.k[id] && ALN.k[id].k === 'lvp' && !ALN.lvpRet.includes(id)) ALN.lvpRet.push(id); // Live Player yeniden ✓ koymasın
+        delete ALN.k[id];
+      }
     } else {
       const once = d.ids.map((id) => [id, ALN.k[id]]);
       const oyunOnce = ALN.oyun[s.n];
@@ -632,6 +712,172 @@
     if (!ENV.okundu) setTimeout(planla, 1600);
   }
 
+  // ---------- Live Player (LVP) ile birlikte çalışma ----------
+  // LVP aynı bilgisayarda yerel uçta dinler (sözleşme: Drive skill-kuyruk/lvp-kuyruk). Uç yoksa "bağlı değil" görünür; sayfa etkilenmez.
+  // Paylaşılan: sahip olunan kampanya oyunları + alınan işaretleri + takip. Gelen: izlenen oyun, takip listesi, LVP'nin aldığı kampanyalar.
+  const LVP_KOK = 'http://127.0.0.1:47816/twd';
+  const LVP = { bagli: false, surum: '', izliyor: null, takip: [], sira: [], hata: '', son: 0, calisiyor: false, payImza: '', izlenen: '', bos: 0, yeniden: false, takipSet: new Set() };
+  function lvpYukle() {
+    const s = gmOku('twd_lvp_sira', []);
+    LVP.sira = Array.isArray(s) ? s.filter((x) => x && typeof x.oyun === 'string' && x.oyun.trim()).map((x) => ({ oyun: x.oyun, takip: x.takip !== false })) : [];
+    const a = gmOku('twd_lvp', null);
+    if (a && typeof a === 'object') {
+      LVP.takip = Array.isArray(a.takip) ? a.takip.filter((t) => t && typeof t.oyun === 'string') : [];
+      LVP.izlenen = String(a.izlenen || '');
+    }
+    lvpSetKur();
+  }
+  function lvpKaydet() { gmYaz('twd_lvp_sira', LVP.sira.slice(-200)); gmYaz('twd_lvp', { takip: LVP.takip.slice(0, 500), izlenen: LVP.izlenen }); }
+  function lvpSetKur() {
+    const k = new Set();
+    for (const t of LVP.takip) if (t && t.oyun) k.add(norm(t.oyun));
+    for (const x of LVP.sira) { const n = norm(x.oyun); if (x.takip) k.add(n); else k.delete(n); }
+    LVP.takipSet = k;
+  }
+  function lvpTakipte(n) { return LVP.takipSet.has(n); }
+  function lvpSatirDurumu(s) {
+    if (!AYAR.lvp) return { takipte: false, izliyor: false, yuzde: 0 };
+    const iz = !!(LVP.bagli && LVP.izliyor && norm(LVP.izliyor.oyun) === s.n);
+    return { takipte: lvpTakipte(s.n), izliyor: iz, yuzde: iz ? LVP.izliyor.yuzde : 0 };
+  }
+  function lvpAlinanSay() { let n = 0; for (const x of Object.values(ALN.k)) if (x && x.k === 'lvp') n++; return n; }
+  function lvpImza() { return [LVP.bagli, LVP.izliyor ? LVP.izliyor.oyun + '%' + LVP.izliyor.yuzde : '', LVP.takipSet.size, LVP.sira.length, lvpAlinanSay()].join(','); }
+  function lvpDurumMetni() {
+    if (!LVP.bagli) return [m('lvpYok'), m('lvpSira', { n: LVP.sira.length })].join(' · ');
+    const n = LVP.takipSet.size;
+    const a = lvpAlinanSay();
+    return [LVP.izliyor ? m('lvpOzet', { ad: LVP.izliyor.oyun, y: LVP.izliyor.yuzde, n }) : m('lvpBosta', { n }), m('lvpPaylas'),
+      m('lvpSira', { n: LVP.sira.length }), m('lvpAlinan', { n: a })].join(' · ');
+  }
+  function lvpIstek(yol, govde) {
+    return istek(LVP_KOK + yol, { method: govde ? 'POST' : 'GET', sure: 3000, sessiz: true,
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json', 'X-AALabs': 'TWD' }, data: govde ? JSON.stringify(govde) : undefined });
+  }
+  function lvpJson(r) { try { const j = JSON.parse(r.metin); return j && typeof j === 'object' ? j : null; } catch (_h) { return null; } }
+  function lvpBildirim(baslik, metin, sistem) {
+    try { if (sistem && typeof GM_notification === 'function') GM_notification({ title: baslik, text: metin || ' ', timeout: 10000 }); } catch (_h) { /* yok */ }
+    if (!UI.sar) return;
+    if (UI.bildirimEl) UI.bildirimEl.remove();
+    const b = el('div', { sinif: 'bildirim', role: 'status' }, el('b', null, baslik), metin ? el('span', null, metin) : null);
+    UI.bildirimEl = b;
+    (acikModal() || UI.sar).append(b);
+    setTimeout(() => { b.remove(); if (UI.bildirimEl === b) UI.bildirimEl = null; }, 10000);
+  }
+  // LVP yanıtı: {surum, izliyor: {oyun, yuzde} | null, takip: [{oyun, izle}], alinan: [kampanya kimliği]}
+  function lvpDurumIsle(j) {
+    if (!j || typeof j !== 'object') return false;
+    if (j.surum != null) LVP.surum = String(j.surum).slice(0, 20);
+    if ('izliyor' in j) {
+      LVP.izliyor = j.izliyor && typeof j.izliyor === 'object' && j.izliyor.oyun
+        ? { oyun: String(j.izliyor.oyun).slice(0, 120), yuzde: Math.max(0, Math.min(100, Math.round(Number(j.izliyor.yuzde) || 0))) } : null;
+    }
+    if (Array.isArray(j.takip)) LVP.takip = j.takip.filter((t) => t && typeof t.oyun === 'string' && t.oyun.trim()).slice(0, 500).map((t) => ({ oyun: t.oyun.slice(0, 120), izle: t.izle !== false }));
+    // E4: Live Player'ın bütün ödüllerini aldığı kampanyalar ✓ olur
+    let yeni = 0;
+    if (Array.isArray(j.alinan)) {
+      for (const id0 of j.alinan.slice(0, 2000)) {
+        const id = String(id0 == null ? '' : id0);
+        if (!/^[\w-]{6,80}$/.test(id) || ALN.k[id] || ALN.lvpRet.includes(id)) continue;
+        const c = kampBul(id);
+        if (!c) continue; // yalnız sayfadaki kampanyalar
+        ALN.k[id] = { o: '', b: c ? c.b : 0, t: Date.now(), k: 'lvp' };
+        yeni++;
+      }
+    }
+    if (yeni) alinanKaydet();
+    // E3: izlemeye başlayınca bir kez haber verilir
+    // başka sekme bildirdiyse tekrar edilmez; kısa "izlemiyor" aralığı (kanal değişimi) sıfırlamaz
+    const kayitli = gmOku('twd_lvp', null);
+    if (kayitli && typeof kayitli === 'object') LVP.izlenen = String(kayitli.izlenen || '');
+    if (LVP.izliyor) LVP.bos = 0;
+    if (LVP.izliyor && norm(LVP.izliyor.oyun) !== norm(LVP.izlenen)) {
+      LVP.izlenen = LVP.izliyor.oyun;
+      lvpBildirim(m('lvpBasladiB', { ad: LVP.izliyor.oyun }), m('lvpBasladiM'), AYAR.bildirim);
+    } else if ('izliyor' in j && !LVP.izliyor && ++LVP.bos >= 4) LVP.izlenen = '';
+    lvpSetKur(); lvpKaydet();
+    return true;
+  }
+  // E1: Live Player kapalıyken takipler sırada bekler, bağlanınca sırayla gider
+  // Dönüş: Live Player'ın reddettiği (4xx) öğeler
+  async function lvpSiraGonder() {
+    const red = [];
+    const gonderilen = new Set();
+    for (;;) {
+      const x = LVP.sira.find((y) => !gonderilen.has(y));
+      if (!x) break;
+      gonderilen.add(x);
+      const r = await lvpIstek('/takip', { oyun: x.oyun, takip: x.takip });
+      if (r.durum >= 500 || r.durum === 0) throw new Error('takip HTTP ' + r.durum);
+      // istek sürerken sıra değişmiş olabilir: yalnız gönderilen öğe silinir
+      const i = LVP.sira.indexOf(x);
+      if (i >= 0) LVP.sira.splice(i, 1);
+      if (r.durum !== 200) red.push(x);
+      if (r.durum === 200) {
+        const n = norm(x.oyun);
+        LVP.takip = LVP.takip.filter((t) => norm(t.oyun) !== n);
+        if (x.takip) LVP.takip.push({ oyun: x.oyun, izle: true });
+        const j = lvpJson(r);
+        if (j) lvpDurumIsle(j);
+      }
+      lvpSetKur(); lvpKaydet();
+    }
+    return red;
+  }
+  async function lvpPaylas() {
+    if (!SATIRLAR.length) return;
+    const sahip = SATIRLAR.filter((x) => x.e.magazalar.length).map((x) => ({ oyun: x.ad, magazalar: x.e.magazalar.slice() }));
+    const alinan = Object.keys(ALN.k).filter((id) => !/^n:/.test(id) && ALN.k[id] && ALN.k[id].k !== 'lvp');
+    const govde = { sahip, alinan };
+    const imza = JSON.stringify(govde);
+    if (imza === LVP.payImza) return;
+    const r = await lvpIstek('/paylas', govde);
+    if (r.durum === 200) LVP.payImza = imza;
+  }
+  async function lvpYokla(zorla) {
+    if (!AYAR.lvp || LVP.calisiyor) return;
+    if (!zorla && (document.hidden || Date.now() - LVP.son < 25000)) return; // gizli sekme yoklamaz
+    LVP.calisiyor = true; LVP.son = Date.now(); LVP.yeniden = false;
+    const onceki = LVP.bagli;
+    try {
+      lvpYukle(); // başka sekmenin sıraya eklediği takip kaybolmasın
+      try {
+        const r = await lvpIstek('/durum');
+        if (r.durum !== 200) throw new Error(r.durum === 404 ? 'uç yok' : 'HTTP ' + r.durum);
+        if (!lvpDurumIsle(lvpJson(r))) throw new Error('yanıt okunamadı');
+        LVP.bagli = true; LVP.hata = '';
+      } catch (h) {
+        LVP.bagli = false; LVP.izliyor = null; LVP.hata = String(h && h.message || h);
+      }
+      // takip ya da paylaşım hatası bağlantıyı koparmaz; sıra sonraki yoklamada yeniden denenir
+      if (LVP.bagli) {
+        try { await lvpSiraGonder(); } catch (h) { LVP.hata = String(h && h.message || h); }
+        try { await lvpPaylas(); } catch (_h) { /* sonraki yoklamada */ }
+      }
+    } finally {
+      LVP.calisiyor = false;
+      if (LVP.yeniden && LVP.bagli) setTimeout(() => lvpYokla(true), 0); // yoklama sürerken basılan takip
+      if (onceki !== LVP.bagli) { TANI.son.push(`LVP ${LVP.bagli ? 'bağlandı' : 'bağlı değil: ' + LVP.hata}`); if (TANI.son.length > 12) TANI.son.shift(); }
+      planla();
+    }
+  }
+  async function lvpTakipDegistir(s) {
+    if (!LVP.calisiyor) lvpYukle();
+    const yeni = !lvpTakipte(s.n);
+    LVP.sira = LVP.sira.filter((x) => norm(x.oyun) !== s.n); // aynı oyunun bekleyen eski isteği yenisiyle değişir
+    const oge = { oyun: s.ad, takip: yeni };
+    LVP.sira.push(oge);
+    lvpSetKur(); lvpKaydet(); planla();
+    let durum = LVP.bagli ? 'bekliyor' : 'sira';
+    if (LVP.bagli && LVP.calisiyor) LVP.yeniden = true; // süren yoklama bitince gider
+    else if (LVP.bagli) {
+      LVP.calisiyor = true;
+      try { const red = await lvpSiraGonder(); durum = red.includes(oge) ? 'red' : 'gitti'; } catch (h) { durum = 'sira'; LVP.hata = String(h && h.message || h); } finally { LVP.calisiyor = false; }
+    }
+    const metin = durum === 'red' ? m('lvpRed') : durum === 'sira' ? m('lvpSiraM') : yeni ? m('lvpTakipM') : '';
+    lvpBildirim(m(durum === 'red' ? 'lvpRedB' : yeni ? 'lvpTakipB' : 'lvpCikarB', { ad: s.ad }), metin, false);
+    planla();
+  }
+
   // ---------- Kalan süre (satırdaki tarih metninden) ----------
   const AYLAR = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
   function bitisTarihi(metin) {
@@ -667,10 +913,13 @@
   .${ONEK}-rozet { display: inline-flex; align-items: center; min-height: 18px; padding: 0 6px; border-radius: 4px;
     font: 700 11px/18px "Open Sans", "Segoe UI", Roboto, sans-serif; letter-spacing: .02em; color: var(--${ONEK}-beyaz); }
   .${ONEK}-r-steam { background: var(--${ONEK}-steam); } .${ONEK}-r-epic { background: var(--${ONEK}-epic); } .${ONEK}-r-gog { background: var(--${ONEK}-gog); }
+  .${ONEK}-r-ea { background: var(--${ONEK}-ea); } .${ONEK}-r-lvp { background: var(--${ONEK}-lvp); }
   .${ONEK}-r-elle { background: var(--${ONEK}-elle); } .${ONEK}-r-istek { background: var(--${ONEK}-istek); }
   .${ONEK}-r-alindi { background: var(--${ONEK}-alindi); } .${ONEK}-r-yeni { background: var(--${ONEK}-odak); }
   .${ONEK}-alindi > .accordion-header { opacity: .55; }
   .${ONEK}-mini.${ONEK}-tik[aria-pressed="true"] { color: var(--${ONEK}-yesil); }
+  .${ONEK}-mini.${ONEK}-lvp { width: auto; padding: 0 6px; font: 700 11px/26px "Open Sans", "Segoe UI", Roboto, sans-serif; border-color: var(--${ONEK}-ikincil); }
+  .${ONEK}-mini.${ONEK}-lvp[aria-pressed="true"] { color: var(--${ONEK}-beyaz); background: var(--${ONEK}-lvp); border-color: var(--${ONEK}-lvp); }
   .${ONEK}-tik svg { fill: none !important; }
   .${ONEK}-sag { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 4px 6px; padding: 4px 8px 6px; }
   .${ONEK}-etiket { display: inline-flex; align-items: center; min-height: 20px; padding: 0 6px; border-radius: 4px;
@@ -688,7 +937,7 @@
   /* TOKEN-BASLA */
   html { --${ONEK}-yesil: #18763F; --${ONEK}-yesil-bg: #E4F5E8; --${ONEK}-hata: #C4313B; --${ONEK}-hata-bg: #FDE8E8;
     --${ONEK}-uyari: #9A5B00; --${ONEK}-uyari-bg: #FDF6D8; --${ONEK}-ikincil: #4E6269;
-    --${ONEK}-beyaz: #FFFFFF; --${ONEK}-steam: #2453C7; --${ONEK}-epic: #5C4400; --${ONEK}-gog: #6237C8; --${ONEK}-elle: #0B6E78; --${ONEK}-istek: #A34400; --${ONEK}-odak: #2456D6; --${ONEK}-alindi: #4E6269; }
+    --${ONEK}-beyaz: #FFFFFF; --${ONEK}-steam: #2453C7; --${ONEK}-epic: #5C4400; --${ONEK}-gog: #6237C8; --${ONEK}-elle: #0B6E78; --${ONEK}-istek: #A34400; --${ONEK}-odak: #2456D6; --${ONEK}-alindi: #4E6269; --${ONEK}-ea: #B4232B; --${ONEK}-lvp: #0B6E78; }
   html.tw-root--theme-dark { --${ONEK}-yesil: #4CC38A; --${ONEK}-yesil-bg: #13301F; --${ONEK}-hata: #FF8189; --${ONEK}-hata-bg: #3A161A;
     --${ONEK}-uyari: #E8AC45; --${ONEK}-uyari-bg: #33270F; --${ONEK}-ikincil: #9AA8BC; }
   /* TOKEN-BITIR */
@@ -710,7 +959,7 @@
   /* TOKEN-BASLA */
   .kok { --ana: #2456D6; --ana-acik: #E5EBFA; --ana-hover: #F2F5FD; --ana-uzeri: #FFFFFF; --zemin: #F6F9FC; --yuzey: #FFFFFF;
     --metin: #17252E; --metin-ikincil: #4E6269; --kenar: #7A9199; --ayirici: #D3DEE6; --basari: #18763F; --hata: #C4313B;
-    --hata-bg: #FDE8E8; --uyari: #9A5B00; --uyari-bg: #FDF6D8; --steam: #2453C7; --epic: #5C4400; --gog: #6237C8; --odak: #2456D6; --perde: rgba(0, 0, 0, .4); --beyaz: #FFFFFF; --kod: #2456D6; color-scheme: light; }
+    --hata-bg: #FDE8E8; --uyari: #9A5B00; --uyari-bg: #FDF6D8; --steam: #2453C7; --epic: #5C4400; --gog: #6237C8; --ea: #B4232B; --odak: #2456D6; --perde: rgba(0, 0, 0, .4); --beyaz: #FFFFFF; --kod: #2456D6; color-scheme: light; }
   .kok.koyu { --ana-acik: #1D2C4F; --ana-hover: #1B2434; --zemin: #0F1520; --yuzey: #161E2B; --metin: #E6ECF5;
     --metin-ikincil: #9AA8BC; --kenar: #6A7B93; --ayirici: #263142; --basari: #4CC38A; --hata: #FF8189; --hata-bg: #3A161A;
     --uyari: #E8AC45; --uyari-bg: #33270F; --odak: #86A8FF; --kod: #86A8FF; color-scheme: dark; }
@@ -726,7 +975,7 @@
   .kutu { display: inline-flex; align-items: center; gap: 4px; min-height: 32px; cursor: pointer; }
   .rozet { display: inline-flex; align-items: center; min-height: 20px; padding: 0 6px; border-radius: 4px;
     font-size: 11px; font-weight: 700; letter-spacing: .02em; color: var(--beyaz); }
-  .r-steam { background: var(--steam); } .r-epic { background: var(--epic); } .r-gog { background: var(--gog); }
+  .r-steam { background: var(--steam); } .r-epic { background: var(--epic); } .r-gog { background: var(--gog); } .r-ea { background: var(--ea); }
   .ara { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 8px; flex: 1 1 140px;
     min-width: 0; max-width: 220px; color: var(--metin-ikincil); border: 1px solid var(--kenar); border-radius: 2px; background: var(--yuzey); }
   .ara input { border: 0; outline: 0; background: transparent; color: var(--metin); font: inherit; width: 100%; min-width: 0; }
@@ -746,7 +995,7 @@
     padding: 8px 10px; background: var(--yuzey); border: 1px solid var(--kenar); border-left: 4px solid var(--ana); border-radius: 4px; }
   .bildirim span { font-size: 12px; color: var(--metin-ikincil); }
   .bildirim button.btn { margin-top: 4px; }
-  .durum .odul { flex-basis: 100%; }
+  .durum .odul, .durum .lvp { flex-basis: 100%; }
   dialog { width: min(720px, calc(100vw - 32px)); max-height: calc(100vh - 64px); padding: 0; border: 1px solid var(--kenar);
     border-radius: 6px; background: var(--zemin); color: var(--metin); }
   dialog::backdrop { background: var(--perde); }
@@ -823,12 +1072,12 @@
     // elle: işaretlenen satır (oyun) sayısı, bilgi satırıyla aynı birim · env: Inventory'den gelen kampanya sayısı
     const elleOyun = new Set();
     const isaret = { elle: 0, env: 0 };
-    for (const x of Object.values(ALN.k)) if (x && x.k === 'env') isaret.env++; else if (x) elleOyun.add(x.o || '?');
+    for (const x of Object.values(ALN.k)) if (x && x.k === 'env') isaret.env++; else if (x && x.k !== 'lvp') elleOyun.add(x.o || '?');
     isaret.elle = elleOyun.size;
     const say0 = sayilariHesapla();
     const imza = [AYAR.dil, AYAR.gorunum, AYAR.steam, AYAR.epic, AYAR.gog, AYAR.kisayol, koyuMu(), UI.arama, say0.toplam, say0.sahip, gizliSay0,
       KUT.yukleniyor, KUT.adim, KUT.zaman ? sureMetni(Date.now() - KUT.zaman) : '', JSON.stringify(KUT.hata), KUT.steamSahip.size, KUT.epic.length, KUT.gog.length, sorunVar(),
-      AYAR.alinanGoster, alinanSay0, isaret.elle, isaret.env, ALN.temiz].join('|');
+      AYAR.alinanGoster, alinanSay0, isaret.elle, isaret.env, ALN.temiz, AYAR.ea, KUT.ea.length, AYAR.lvp, lvpImza()].join('|');
     if (UI.serit && UI.serit.isConnected && imza === seritImza) return;
     if (UI.besteleme) return; // IME yazımı sürerken kutu yeniden kurulmaz
     seritImza = imza;
@@ -847,20 +1096,21 @@
     const hatalar = Object.entries(KUT.hata).filter(([k]) => AYAR[k]).map(([k]) => el('span', { sinif: 'hata' }, m(k + 'Hata')));
     const durum = el('div', { sinif: 'durum', role: 'status' },
       KUT.yukleniyor ? el('span', null, m('yukleniyor', { y: KUT.adim })) : null,
-      el('span', null, m('sayilar', { s: KUT.steamSahip.size, e: KUT.epic.length, g: KUT.gog.length })),
+      el('span', null, m('sayilar', { s: KUT.steamSahip.size, e: KUT.epic.length, g: KUT.gog.length, a: KUT.ea.length })),
       el('span', null, m('eslesen', { n: say.toplam, m: say.sahip })),
       el('span', null, KUT.zaman ? m('tazelik', { t: sureMetni(Date.now() - KUT.zaman) }) : m('hic')),
       hatalar,
       el('span', { sinif: 'odul' }, [m('odulDurum', { e: isaret.elle }),
         isaret.env ? m('odulEnv', { n: isaret.env }) : null,
-        ALN.temiz ? m('odulTemiz', { n: ALN.temiz }) : null].filter(Boolean).join(' · ')));
+        ALN.temiz ? m('odulTemiz', { n: ALN.temiz }) : null].filter(Boolean).join(' · ')),
+      AYAR.lvp ? el('span', { sinif: 'lvp' }, lvpDurumMetni()) : null);
     const ayarDugme = el('button', { type: 'button', sinif: 'btn ikon', 'aria-label': m('ayarlar'), title: m('ayarlar') + ' · ' + AYAR.kisayol, 'data-k': 'ayar', onclick: () => ayarlarAc() },
       ikon('ayar'), sorunVar() ? el('span', { sinif: 'nokta', 'aria-hidden': 'true' }) : null);
     const serit = el('div', { sinif: 'serit', role: 'region', 'aria-label': 'TWD' },
       el('span', { sinif: 'kod' }, 'TWD'),
       el('div', { sinif: 'segment', role: 'radiogroup', 'aria-label': m('gorunum') },
-        gor('hepsi', 'hepsi'), gor('sahip', 'sahip'), gor('olmayan', 'olmayan'), gor('istek', 'istek'), gor('favoriler', 'favoriler')),
-      kutu('steam', 'r-steam'), kutu('epic', 'r-epic'), kutu('gog', 'r-gog'),
+        gor('hepsi', 'hepsi'), gor('sahip', 'sahip'), gor('olmayan', 'olmayan'), gor('istek', 'istek'), AYAR.lvp ? gor('takipte', 'takipte') : null, gor('favoriler', 'favoriler')),
+      kutu('steam', 'r-steam'), kutu('epic', 'r-epic'), kutu('gog', 'r-gog'), kutu('ea', 'r-ea'),
       el('label', { sinif: 'kutu' },
         el('input', { type: 'checkbox', checked: AYAR.alinanGoster ? true : null, 'data-k': 'k-alinan',
           onchange: (e) => { AYAR.alinanGoster = e.target.checked; ayarKaydet(); uygula(); } }),
@@ -955,6 +1205,7 @@
       case 'sahip': return s.e.magazalar.length > 0;
       case 'olmayan': return s.e.magazalar.length === 0;
       case 'istek': return s.e.istek;
+      case 'takipte': return !AYAR.lvp || lvpTakipte(s.n);
       case 'favoriler': return AYAR.favori.includes(s.n);
       default: return true;
     }
@@ -963,6 +1214,9 @@
     const r = el('span', { sinif: `${ONEK}-rozetler` });
     for (const mg of s.e.magazalar) r.append(el('span', { sinif: `${ONEK}-rozet ${ONEK}-r-${mg.toLowerCase()}` }, mg === 'ELLE' ? m('elle') : mg));
     if (s.e.istek) r.append(el('span', { sinif: `${ONEK}-rozet ${ONEK}-r-istek` }, m('istek').toUpperCase()));
+    const lv = lvpSatirDurumu(s);
+    if (lv.izliyor) r.append(el('span', { sinif: `${ONEK}-rozet ${ONEK}-r-lvp` }, m('lvpIzliyor', { y: lv.yuzde })));
+    else if (lv.takipte) r.append(el('span', { sinif: `${ONEK}-rozet ${ONEK}-r-lvp` }, m('lvpTakipte')));
     if (s.a && s.a.alindi) r.append(el('span', { sinif: `${ONEK}-rozet ${ONEK}-r-alindi` }, m('alindi')));
     else if (s.a && s.a.yeniler.length) r.append(el('span', { sinif: `${ONEK}-rozet ${ONEK}-r-yeni` }, m('yeniOdul')));
     return r;
@@ -982,6 +1236,11 @@
     }
     const fav = AYAR.favori.includes(s.n);
     const alindi = !!(s.a && s.a.alindi);
+    if (AYAR.lvp) {
+      const tk = lvpTakipte(s.n);
+      kap.append(el('button', { type: 'button', sinif: `${ONEK}-mini ${ONEK}-lvp`, 'aria-pressed': tk ? 'true' : 'false', 'aria-label': m(tk ? 'lvpCikar' : 'lvpDugme'), title: m(tk ? 'lvpCikar' : 'lvpDugme'),
+        onclick: (e) => { e.stopPropagation(); e.preventDefault(); lvpTakipDegistir(s); } }, 'LVP'));
+    }
     kap.append(
       el('button', { type: 'button', sinif: `${ONEK}-mini ${ONEK}-tik`, 'aria-pressed': alindi ? 'true' : 'false', 'aria-label': m(alindi ? 'aldimKaldir' : 'aldim'), title: m(alindi ? 'aldimKaldir' : 'aldim'),
         onclick: (e) => { e.stopPropagation(); e.preventDefault(); alindiDegistir(s); } }, ikon('tik')),
@@ -1003,7 +1262,8 @@
     const k = t != null ? kalanMetin(t).metin : '';
     const b = BAG.get(s.n);
     const a = s.a || { alindi: false, yeniler: [] };
-    return [AYAR.dil, s.e.magazalar.join(','), s.e.istek, k, b ? (b.bagli ? 1 : 0) : '-', AYAR.favori.includes(s.n), a.alindi, a.yeniler.length].join('|');
+    const lv = lvpSatirDurumu(s);
+    return [AYAR.dil, s.e.magazalar.join(','), s.e.istek, k, b ? (b.bagli ? 1 : 0) : '-', AYAR.favori.includes(s.n), a.alindi, a.yeniler.length, AYAR.lvp, lv.takipte, lv.izliyor ? lv.yuzde : '-'].join('|');
   }
   function uygula() {
     let gizliSay = 0;
@@ -1092,7 +1352,7 @@
   // ---------- Ayarlar penceresi ----------
   function acikModal() { return UI.dialog && UI.dialog.open ? UI.dialog : null; }
   const BOLUMLER = [
-    ['TWD', [['magaza', 'bMagaza'], ['onbellek', 'bOnbellek'], ['elle', 'bElle'], ['gizli', 'bGizli'], ['bildirim', 'bBildirim']]],
+    ['TWD', [['magaza', 'bMagaza'], ['onbellek', 'bOnbellek'], ['elle', 'bElle'], ['gizli', 'bGizli'], ['bildirim', 'bBildirim'], ['lvp', 'bLvp']]],
     ['ORTAK', [['genel', 'bGenel'], ['kisayol', 'bKisayol'], ['tani', 'bTani'], ['hakkinda', 'bHakkinda']]]
   ];
   let oncekiOdak = null;
@@ -1180,7 +1440,7 @@
   function bolumIcerik(id) {
     const f = document.createDocumentFragment();
     if (id === 'magaza') {
-      for (const ad of ['steam', 'epic', 'gog']) {
+      for (const ad of ['steam', 'epic', 'gog', 'ea']) {
         const hata = KUT.hata[ad] && AYAR[ad] ? el('span', { sinif: 'yok' }, m(ad + 'Hata')) : null;
         const say = ad === 'steam' ? KUT.steamSahip.size : KUT[ad].length;
         f.append(el('div', { sinif: 'satir' },
@@ -1189,6 +1449,10 @@
             m('magazaAcik', { m: ad.toUpperCase() })), el('span', { sinif: 'bek' }, String(say)), hata));
       }
       f.append(el('div', { sinif: 'satir' }, el('button', { type: 'button', sinif: 'btn ana', onclick: () => kutuphaneYenile(true).then(() => { if (acikModal()) ayarlarCiz(); }) }, m('simdiYenile'))));
+    } else if (id === 'lvp') {
+      f.append(el('label', { sinif: 'kutu' }, el('input', { type: 'checkbox', checked: AYAR.lvp ? true : null,
+        onchange: (e) => { AYAR.lvp = e.target.checked; ayarKaydet(); if (!AYAR.lvp && AYAR.gorunum === 'takipte') AYAR.gorunum = 'sahip'; yazilanSil(); planla(); if (AYAR.lvp) lvpYokla(true); } }), m('lvpAc')),
+        el('p', null, lvpDurumMetni()), el('p', null, m('lvpAdres', { a: LVP_KOK.replace(/^http:\/\//, '') })));
     } else if (id === 'onbellek') {
       f.append(el('div', { sinif: 'satir' }, el('span', null, m('onbellekSure')),
         secim(AYAR.onbellekSaat, [6, 12, 24, 72].map((n) => [n, m('saat', { n })]), (v) => { AYAR.onbellekSaat = Number(v); ayarKaydet(); })));
@@ -1236,6 +1500,8 @@
       [m('tSteam'), ...durum(!KUT.hata.steam && KUT.steamSahip.size > 0, `${KUT.steamSahip.size} · ${KUT.hata.steam || ''} · arama önbelleği ${Object.keys(SS.onbellek).length}`, !AYAR.steam)],
       [m('tEpic'), ...durum(!KUT.hata.epic && KUT.epic.length > 0, `${KUT.epic.length} · ${KUT.hata.epic || ''}`, !AYAR.epic)],
       [m('tGog'), ...durum(!KUT.hata.gog && KUT.gog.length > 0, `${KUT.gog.length} · ${KUT.hata.gog || ''}`, !AYAR.gog)],
+      [m('tEa'), ...durum(!KUT.hata.ea && KUT.ea.length > 0, `${KUT.ea.length} · ${KUT.hata.ea || ''}`, !AYAR.ea)],
+      [m('tLvp'), ...(!AYAR.lvp ? ['bek', m('kapali'), ''] : LVP.bagli ? ['ok', '✓', `${LVP.surum || '?'} · ${LVP.takip.length} takip · ${LVP.sira.length} sırada · ${lvpAlinanSay()} ✓`] : ['bek', m('bekliyor'), `${LVP.hata || '—'} · ${LVP.sira.length} sırada`])],
       [m('tGql'), ...(TANI.gql ? ['ok', '✓', `${BAG.size} oyun`] : ['bek', m('bekliyor'), TANI.bagHata || 'React campaigns'])],
       [m('tEsles'), 'bek', '', `${say.sahip}/${say.toplam}`],
       [m('tAlinan'), 'bek', '', `${Object.keys(ALN.k).length} işaret · ${Object.keys(ALN.oyun).length} oyun · kampanya kimliği ${KAMP.size} oyun · silinen ${ALN.temiz}`],
@@ -1372,6 +1638,7 @@
     sayfaStiliEkle();
     if (!kokKur()) return;
     satirlariTopla();
+    if (AYAR.lvp) lvpYokla();
     uygula();
     yeniDropBak();
     yeniOdulBak();
@@ -1412,20 +1679,22 @@
     kutuphaneYenile(false);
     setInterval(() => { yazilanSil(); planla(); }, 60000); // kalan süre dakikada bir güncellenir
     // başka sekmede (Inventory) yazılan işaretler bu sekmeye dönünce okunur
-    document.addEventListener('visibilitychange', () => { if (!document.hidden) { alinanYukle(); yazilanSil(); planla(); } });
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) { alinanYukle(); lvpYukle(); yazilanSil(); planla(); } });
+    setInterval(() => { if (/^\/drops\/campaigns/.test(location.pathname)) lvpYokla(); }, 30000);
   }
 
   // ---------- Başlat ----------
   AYAR = ayarYukle();
   kutuphaneOnbellekYukle();
   alinanYukle();
+  lvpYukle();
   menuKur();
   sayfaStiliEkle();
 
   let testMi = false;
   try { testMi = typeof GM_info === 'object' && GM_info && GM_info.scriptHandler === 'Test'; } catch (_h) { testMi = false; }
   if (testMi && window.__AALABS_TEST__ && typeof window.__AALABS_TEST__ === 'object') {
-    window.__AALABS_TEST__.twd = { ayar: () => AYAR, tani: taniSatirlari, adEslesir, bitisTarihi, kut: KUT, ss: SS, bag: BAG, calis, kok2: () => UI, satirlar: () => SATIRLAR, alinan: () => ALN, kamp: KAMP, envanterOku, alindiDegistir, geri: () => GERI, taniNesne: TANI, ayarlarAc, kok: () => UI.kok, metin: METIN };
+    window.__AALABS_TEST__.twd = { ayar: () => AYAR, tani: taniSatirlari, adEslesir, bitisTarihi, kut: KUT, ss: SS, bag: BAG, calis, kok2: () => UI, satirlar: () => SATIRLAR, alinan: () => ALN, kamp: KAMP, envanterOku, alindiDegistir, geri: () => GERI, taniNesne: TANI, ayarlarAc, kok: () => UI.kok, metin: METIN, lvp: LVP, lvpDurumIsle, lvpYokla, lvpTakipDegistir, eaOku, eslesme, esles: ESLESME };
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', domHazir, { once: true });
