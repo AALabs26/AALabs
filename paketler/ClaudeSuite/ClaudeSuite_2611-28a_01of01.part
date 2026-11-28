@@ -3,7 +3,7 @@
 // @name:tr      Claude Suite
 // @name:en      Claude Suite
 // @namespace    aalabs.claude-suite
-// @version      26.11.19.3
+// @version      26.11.28.1
 // @description  claude.ai için AALabs araç takımı: kullanım göstergesi, proje etiketleri ve filtresi, başlık kodu, mesaj saatleri, şablonlar, komut paleti. Türkçe ve İngilizce; her özellik Ayarlar'dan ayrı açılıp kapanır.
 // @author       AALabs
 // @match        https://claude.ai/*
@@ -47,7 +47,7 @@
 
   const UYGULAMA_ADI = 'Claude Suite';
   const UYGULAMA_ID = 'AALabs.ClaudeSuite';
-  const SURUM = '2611-19c';   // görünen sürüm YYMM-DDx; @version aynı sürümün YY.A.G.N karşılığı
+  const SURUM = '2611-28a';   // görünen sürüm YYMM-DDx; @version aynı sürümün YY.A.G.N karşılığı
   const TEMA_SURUM = '1.8.0';
   const IKON_KODU = 'CLS';
   // Tampermonkey / Violentmonkey betik başlığındaki @version (yoksa null).
@@ -910,7 +910,7 @@
     "Önerilen modele kendiliğinden geç": "Switch to the suggested model automatically",
     "Yeni bir cevap bittiğinde önerdiği model kullanılandan farklıysa claude.ai menüsünden onu seçer (\"Model: Fable 5.2 · Effort: high\" satırındaki model). Efor kendiliğinden değişmez; öneri şeritte görünür, seçimi sen yaparsın. Sayfa açılırken görülen eski cevaplara dokunmaz.": "When a new reply finishes and the model it suggests differs from the one in use, picks it from claude.ai's menu (the model in the \"Model: Fable 5.2 · Effort: high\" line). Effort is never changed automatically; the suggestion shows on the strip and you pick it. Older replies seen when the page opens are left alone.",
     "Sohbetler sayfasında durum ve biçim": "Status and format on the Chats page",
-    "Sohbetler sayfasında (claude.ai/chats) yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; kenar çubuğuna dokunmaz; XX, OLD ve DEL sönük görünür. Biçime (DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Listenin üstünde durum süzgeci ve XX gizle var. DEL satırında Sil düğmesi.": "On the Chats page (claude.ai/chats) the seven statuses (TO-DO, OK, QA, LATER, XX, OLD, DEL) become coloured chips; the sidebar is left alone; XX, OLD and DEL rows are dimmed. Titles that do not fit the format (STATUS OWNER CODE CHAT-NAME +SHORT-SUMMARY) show what is missing; clicking the badge opens the title grid. Above the list: a status filter and Hide XX. DEL rows get a Delete button.",
+    "Sohbetler sayfasında (claude.ai/chats) ve proje sayfasında yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; kenar çubuğuna dokunmaz; XX, OLD ve DEL sönük görünür. Biçime (DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Listenin üstünde durum süzgeci ve XX gizle var. DEL satırında Sil düğmesi.": "On the Chats page (claude.ai/chats) and project pages the seven statuses (TO-DO, OK, QA, LATER, XX, OLD, DEL) become coloured chips; the sidebar is left alone; XX, OLD and DEL rows are dimmed. Titles that do not fit the format (STATUS OWNER CODE CHAT-NAME +SHORT-SUMMARY) show what is missing; clicking the badge opens the title grid. Above the list: a status filter and Hide XX. DEL rows get a Delete button.",
     "Açık sohbeti saatleriyle birlikte .md dosyası olarak indirir. Share'in solundaki ikonla, kısayolla ya da komut paletinden. İkona sağ tıkla: HTML ya da JSON.": "Downloads the open chat with its times as an .md file. From the icon left of Share, a shortcut or the command palette. Right-click the icon: HTML or JSON.",
     "Sohbeti HTML olarak indir": "Download chat as HTML",
     "Sohbeti JSON olarak indir": "Download chat as JSON",
@@ -921,7 +921,7 @@
     "Yeni sohbete taşı": "Move to new chat",
     "Şeritteki düğme bütün sohbeti .md dosyası olarak yeni bir sohbete ekler. Sohbet bir projedeyse yeni sohbet de o projede açılır. Gönder'e sen basarsın.": "The strip button attaches the whole chat as an .md file to a new chat. If the chat is in a project, the new chat opens there too. You press Send.",
     "Mesajları katla": "Fold messages",
-    "Uzun cevapların sağ üstünde Katla düğmesi. Katlanınca ilk satırlar ve satır sayısı kalır. Şeritteki Tümünü katla son cevap dışındakileri katlar.": "A Fold button at the top right of long replies. Folded, the first lines and the line count remain. Fold all on the strip folds all but the last reply.",
+    "Uzun cevapların sağ üstünde Katla düğmesi. Katlanınca ilk satırlar ve satır sayısı kalır. Şeritteki Tümünü katla bütün uzun cevapları katlar.": "A Fold button at the top right of long replies. Folded, the first lines and the line count remain. Fold all on the strip folds all long replies.",
     "Tümünü katla / aç": "Fold / unfold all",
     "Yer imi": "Bookmarks",
     "Kendi mesajlarının solunda yıldız: tıklayınca yer imi olur. Yer imleri Ana hat panelinde listelenir. Alt+↑ ve Alt+↓ kendi mesajların arasında atlar.": "A star left of your messages: click to bookmark. Bookmarks are listed in the Outline panel. Alt+↑ and Alt+↓ jump between your messages.",
@@ -964,7 +964,7 @@
     "{0} satır · Aç ▾": "{0} lines · Open ▾",
     "Katlanacak uzun cevap yok": "No long replies to fold",
     "Tümünü katla": "Fold all",
-    "Son cevap dışındaki uzun cevapları katlar; yeniden basınca açar": "Folds long replies except the last; press again to unfold",
+    "Bütün uzun cevapları katlar; yeniden basınca açar": "Folds all long replies; press again to unfold",
     "Sonraki mesajın yok": "No next message",
     "Önceki mesajın yok": "No previous message",
     "Bu sohbette {0} yer imi": "{0} bookmarks in this chat",
@@ -994,6 +994,10 @@
     "~%{0} · ~{1} bin token (tahmin)": "~{0}% · ~{1}k tokens (estimate)",
     "Sohbet doluluğu (tahmin): ~{0} bin / {1} bin token. Yalnız metin ve eklerin metni sayılır; araç çıktıları ve görseller sayılmaz.": "Chat fullness (estimate): ~{0}k / {1}k tokens. Only text and attachment text count; tool outputs and images don't.",
     "Yeni sohbete taşımak iyi olur.": "Moving to a new chat is a good idea.",
+    "Fable payını doldurur, Fable'ın haftalıktan yediğini geri verir. Haftayı sıfırlamaz.": "Refills your Fable allowance and gives back what Fable used of the week. Does not reset the week.",
+    "Bütün haftalık limiti sıfırlar (Fable dahil).": "Resets the whole weekly limit (Fable included).",
+    "{0} cevap katlandı": "{0} replies folded",
+    "{0} cevap açıldı": "{0} replies unfolded",
     "TO-DO yap": "Make TO-DO",
     "OK yap": "Make OK",
     "XX yap": "Make XX",
@@ -1857,6 +1861,10 @@
     let resets = LS.get('resets', null);
     const SIFIR_TUR = { full: _n('Fable sıfırlama'), weekly: _n('Haftalık sıfırlama') };
     const GUN_MS = 86400000;
+    const SIFIR_ACIKLAMA = {
+      full: _n('Fable payını doldurur, Fable\'ın haftalıktan yediğini geri verir. Haftayı sıfırlamaz.'),
+      weekly: _n('Bütün haftalık limiti sıfırlar (Fable dahil).')
+    };
     function ingestResets(j) {
       const ce = j && j.cedar_ember;
       if (!ce || !Array.isArray(ce.grants)) return false;
@@ -1904,7 +1912,9 @@
       const r = document.createElement('span');
       r.className = 'rozet';
       const yakin = resets.liste.map(x => x.son).filter(yakinMi).sort((a, b) => a - b)[0];
-      r.textContent = '↺ ' + resets.toplam + (yakin ? ' · ' + _f('{0} gün', Math.max(1, Math.ceil((yakin - Date.now()) / GUN_MS))) : '');
+      // Rozet B (maket CLS_SIFIRLAMA-ROZETI-SON_2611-19-1654): türler ayrı, "↺ F3 · H1".
+      const harf = t => (t === 'full' ? 'F' : t === 'weekly' ? (DIL.aktif() === 'en' ? 'W' : 'H') : String(t).charAt(0).toUpperCase());
+      r.textContent = '↺ ' + resets.liste.map(x => harf(x.tur) + x.adet).join(' · ') + (yakin ? ' · ' + _f('{0} gün', Math.max(1, Math.ceil((yakin - Date.now()) / GUN_MS))) : '');
       if (yakin) r.classList.add('sari');
       r.title = _('Sıfırlama hakları') + '\n' + resets.liste.map(x => _(x.ad) + ' × ' + x.adet + (x.son ? ' · ' + _('son') + ': ' + sonYaz(x.son) : '')).join('\n');
       r.setAttribute('role', 'button');
@@ -1926,6 +1936,8 @@
         const s = document.createElement('span'); s.className = 'rsag' + (yakinMi(x.son) ? ' sari' : '');
         s.textContent = x.son ? _('son') + ': ' + sonYaz(x.son) : '';
         row.append(l, s); b.append(row);
+        // Açıklama A: türün ne yaptığı, satırın altında.
+        if (SIFIR_ACIKLAMA[x.tur]) { const a = document.createElement('div'); a.className = 'sacik'; a.textContent = _(SIFIR_ACIKLAMA[x.tur]); b.append(a); }
       }
       const btn = document.createElement('button');
       btn.type = 'button'; btn.className = 'usage-btn';
@@ -2410,6 +2422,7 @@
     .srow{display:flex;justify-content:space-between;gap:12px;padding:3px 0}
     .rsag{color:var(--metin-ikincil);white-space:nowrap}
     .rsag.sari{color:var(--uyari)}
+    .sacik{color:var(--metin-ikincil);font-size:11px;line-height:1.4;padding-bottom:4px}
     .usage-btn{all:unset;box-sizing:border-box;margin-top:8px;display:inline-flex;align-items:center;height:26px;padding:0 10px;
       border:1px solid var(--ayirici);border-radius:var(--kose-m);font-weight:600;cursor:pointer;color:var(--metin)}
     .usage-btn:hover{background:rgba(127,127,127,.12)}
@@ -6318,7 +6331,7 @@
   define({
     id: 'mesajKatla',
     label: 'Mesajları katla',
-    desc: 'Uzun cevapların sağ üstünde Katla düğmesi. Katlanınca ilk satırlar ve satır sayısı kalır. Şeritteki Tümünü katla son cevap dışındakileri katlar.',
+    desc: 'Uzun cevapların sağ üstünde Katla düğmesi. Katlanınca ilk satırlar ve satır sayısı kalır. Şeritteki Tümünü katla bütün uzun cevapları katlar.',
     group: 'Araçlar',
     health() { return { tamam: true, metin: _f('{0} cevapta düğme', document.querySelectorAll('.cls-katla').length) }; },
     on(ctx) {
@@ -6328,7 +6341,7 @@
         border:1px solid rgba(127,127,127,.35);background:var(--cls-yuzey,transparent);font:600 11px/20px "Open Sans","Segoe UI",system-ui,sans-serif;
         color:var(--cls-ikincil,#6b6862);cursor:pointer;opacity:.55}
       [data-cls-katlanir]:hover > .cls-katla,.cls-katla:focus-visible{opacity:1}
-      [data-cls-katli] .standard-markdown,[data-cls-katli] .prose{max-height:4.8em;overflow:hidden;
+      [data-cls-katli] [data-cls-govde]{max-height:4.8em;overflow:hidden;
         -webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
       .cls-katli-alt{all:unset;display:none;box-sizing:border-box;margin-top:4px;font:400 12px/1.4 "Open Sans","Segoe UI",system-ui,sans-serif;
         color:var(--cls-ikincil,#6b6862);cursor:pointer}
@@ -6340,42 +6353,51 @@
         if (katli) m.setAttribute('data-cls-katli', ''); else m.removeAttribute('data-cls-katli');
         const b = m.querySelector(':scope > .cls-katla'); if (b) b.textContent = etiket(m);
       }
-      function tara() {
-        for (const m of document.querySelectorAll(SA_AI)) {
-          if (m.hasAttribute('data-cls-katlanir') || saYayin(m)) continue;
-          const govde = m.querySelector('.standard-markdown, .prose');
-          if (!govde) continue;
-          const n = (govde.innerText || '').split('\n').filter(x => x.trim()).length;
-          if (n < KATLA_SATIR) continue;
-          m.setAttribute('data-cls-katlanir', String(n));
-          const b = document.createElement('button');
-          b.type = 'button'; b.className = 'cls-katla'; b.textContent = etiket(m);
-          b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); ayarla(m, !m.hasAttribute('data-cls-katli')); });
-          const alt = document.createElement('button');
-          alt.type = 'button'; alt.className = 'cls-katli-alt';
-          alt.textContent = _f('{0} satır · Aç ▾', n);
-          alt.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); ayarla(m, false); });
-          m.appendChild(b);
-          govde.insertAdjacentElement('afterend', alt);
-        }
+      /* 2611-19e: cevabın gövdesi = ilk DIV çocuk (eylem çubuğunu içermeyen). Araç kartlı cevaplarda
+         .standard-markdown birden çok ya da hiç olmayabiliyor; satır sayısı bütün gövdeden. */
+      function govdesi(m) {
+        return [...m.children].find(c => c.tagName === 'DIV' && !c.matches('[data-testid="message-actions"]') &&
+          !c.querySelector('[data-testid="message-actions"]') && !c.classList.contains('cls-katli-alt')) || null;
       }
+      function satirSay(el) { return (el.innerText || el.textContent || '').split('\n').filter(x => x.trim()).length; }
+      function hazirla(m, esik) {
+        if (m.hasAttribute('data-cls-katlanir')) return true;
+        if (saYayin(m)) return false;
+        const govde = govdesi(m);
+        if (!govde) return false;
+        const n = satirSay(govde);
+        if (n < esik) return false;
+        govde.setAttribute('data-cls-govde', '');
+        m.setAttribute('data-cls-katlanir', String(n));
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'cls-katla'; b.textContent = etiket(m);
+        b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); ayarla(m, !m.hasAttribute('data-cls-katli')); });
+        const alt = document.createElement('button');
+        alt.type = 'button'; alt.className = 'cls-katli-alt';
+        alt.textContent = _f('{0} satır · Aç ▾', n);
+        alt.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); ayarla(m, false); });
+        m.appendChild(b);
+        govde.insertAdjacentElement('afterend', alt);
+        return true;
+      }
+      function tara() { for (const m of document.querySelectorAll(SA_AI)) hazirla(m, KATLA_SATIR); }
+      /* Tümünü katla: 4 satırdan uzun bütün cevaplar (son cevap dahil). Hepsi katlıysa açar. */
       function hepsi() {
-        const l = [...document.querySelectorAll(SA_AI + '[data-cls-katlanir]')];
+        const l = [...document.querySelectorAll(SA_AI)].filter(m => hazirla(m, 4));
         if (!l.length) { bildir(_('Katlanacak uzun cevap yok'), 'uyari'); return; }
-        const katlanacak = l.slice(0, -1);
-        const acik = katlanacak.some(m => !m.hasAttribute('data-cls-katli'));
-        katlanacak.forEach(m => ayarla(m, acik));
-        if (!acik) ayarla(l[l.length - 1], false);
+        const katla = l.some(m => !m.hasAttribute('data-cls-katli'));
+        l.forEach(m => ayarla(m, katla));
+        bildir(katla ? _f('{0} cevap katlandı', l.length) : _f('{0} cevap açıldı', l.length), 'basari');
       }
       tara();
       ctx.every(tara, 1500);
       ctx.action({ id: 'katla-hepsi', ad: 'Tümünü katla / aç', grup: 'Araçlar', calistir: hepsi });
-      SOHBET_SERIT.ekle({ id: 'katla', sira: 40, yap: () => saYazi(_('Tümünü katla'), _('Son cevap dışındaki uzun cevapları katlar; yeniden basınca açar'), hepsi) });
+      SOHBET_SERIT.ekle({ id: 'katla', sira: 40, yap: () => saYazi(_('Tümünü katla'), _('Bütün uzun cevapları katlar; yeniden basınca açar'), hepsi) });
       ctx.undo(() => {
         SOHBET_SERIT.cikar('katla');
         document.querySelectorAll('.cls-katla, .cls-katli-alt').forEach(n => n.remove());
-        document.querySelectorAll('[data-cls-katlanir], [data-cls-katli]').forEach(n => {
-          n.removeAttribute('data-cls-katlanir'); n.removeAttribute('data-cls-katli');
+        document.querySelectorAll('[data-cls-katlanir], [data-cls-katli], [data-cls-govde]').forEach(n => {
+          n.removeAttribute('data-cls-katlanir'); n.removeAttribute('data-cls-katli'); n.removeAttribute('data-cls-govde');
         });
       });
     }
@@ -8240,7 +8262,7 @@
     id: 'titleSchemaSidebar',
     parent: 'titleCode',
     label: 'Sohbetler sayfasında durum ve biçim',
-    desc: 'Sohbetler sayfasında (claude.ai/chats) yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; kenar çubuğuna dokunmaz; XX, OLD ve DEL sönük görünür. Biçime (DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Listenin üstünde durum süzgeci ve XX gizle var. DEL satırında Sil düğmesi.',
+    desc: 'Sohbetler sayfasında (claude.ai/chats) ve proje sayfasında yedi durum (TO-DO, OK, QA, LATER, XX, OLD, DEL) renkli çip olur; kenar çubuğuna dokunmaz; XX, OLD ve DEL sönük görünür. Biçime (DURUM SAHİP KOD SOHBET-ADI +KISA-ÖZET) uymayan başlığın sonunda ne eksik olduğu yazar; rozete tıklayınca başlık ızgarası açılır. Listenin üstünde durum süzgeci ve XX gizle var. DEL satırında Sil düğmesi.',
     group: 'Yazma',
     health() {
       const d = document.querySelectorAll('[data-cls-durum]').length;
@@ -8261,12 +8283,12 @@
       [${DUR}="DEL"]::before{color:var(--cls-hata);background:var(--cls-hata-bg)}
       [${DUR}="OLD"]::before{color:var(--cls-ikincil);border-style:dashed}
       .cls-liste-arac button.sil{color:var(--cls-hata);border-color:var(--cls-hata)}
-      a[${XX}],tr[${XX}]{opacity:.55}
-      span[${EKS}]::after{content:attr(${EKS});display:inline-block;margin-left:6px;padding:0 4px;white-space:nowrap;vertical-align:1px;
+      a[${XX}],tr[${XX}],[data-cls-satir][${XX}]{opacity:.55}
+      :not(a)[${EKS}]::after{content:attr(${EKS});display:inline-block;margin-left:6px;padding:0 4px;white-space:nowrap;vertical-align:1px;
         border:1px solid var(--cls-hata);border-radius:3px;color:var(--cls-hata);background:var(--cls-hata-bg);
         font:400 10px/15px "Open Sans","Segoe UI",system-ui,sans-serif}
       .cls-liste-arac{position:relative;z-index:2;display:inline-flex;gap:4px;margin-left:8px;opacity:0;flex:none}
-      tr:hover .cls-liste-arac,.cls-liste-arac:focus-within{opacity:1}
+      tr:hover .cls-liste-arac,[data-cls-satir]:hover .cls-liste-arac,.cls-liste-arac:focus-within{opacity:1}
       .cls-liste-arac button{all:unset;box-sizing:border-box;cursor:pointer;height:22px;padding:0 7px;display:inline-flex;align-items:center;
         border:1px solid var(--cls-kenar);border-radius:3px;font:400 11px/1 "Open Sans","Segoe UI",system-ui,sans-serif;color:var(--cls-metin);background:var(--cls-yuzey)}
       .cls-liste-arac button:hover{background:var(--cls-ana-hover)}
@@ -8284,6 +8306,16 @@
       // Satırın yazısını taşıyan kapsayıcı: kenar çubuğunda bağlantının kendisi; liste sayfasında bağlantı
       // boş bir örtüdür (data-primary), yazı aynı hücrededir.
       const kapOf = a => (a.textContent.trim() ? a : (a.parentElement || a));
+      /* 2611-19f: proje sayfasındaki sohbet listesi de liste sayılır (bağlantı yazıyı kendisi taşır). */
+      const projeSatiri = a => CHATDOM.onProjectPage() && !a.closest('nav, aside, [role="navigation"]');
+      function projeListeKabi() {
+        if (!CHATDOM.onProjectPage()) return null;
+        const l = CHATDOM.listeLinkleri();
+        if (!l.length) return null;
+        let k = CHATDOM.rowOf(l[0]).parentElement;
+        while (k && k !== document.body && !k.contains(l[l.length - 1])) k = k.parentElement;
+        return k && k !== document.body ? k : null;
+      }
 
       /* Satırın başlık yazısını taşıyan en iç öğe. Önce bilinen sohbet adıyla eşleşen yaprak,
          yoksa truncate sınıflı yaprak, yoksa yazısı en uzun yaprak. */
@@ -8351,7 +8383,7 @@
         const serit = !!seritYeri();
         const sz = serit ? suzgec() : 'hepsi', xg = serit && xxGizli();
         // Liste sayfasında süzgeç tablonun üstündeki kendi şeridinden gelir; şerit kurulamazsa uygulanmaz.
-        const listeVar = CHATDOM.onListPage() && !!listeTablosu();
+        const listeVar = (CHATDOM.hasList() && !!listeTablosu()) || !!projeListeKabi();
         const szL = l => l ? (listeVar ? suzgec() : 'hepsi') : sz;
         const xgL = l => l ? (listeVar && xxGizli()) : xg;
         const acik = suankiSohbet();
@@ -8360,7 +8392,7 @@
         for (const a of CHATDOM.links()) {
           if (a.closest('#claude-usage-hud, .cls-kenar-suz')) continue;
           const id = CHATDOM.idOf(a);
-          const kap = kapOf(a), listede = kap !== a;
+          const kap = kapOf(a), listede = kap !== a || projeSatiri(a);
           /* 2611-18a: kenar çubuğunda durum ve biçim kaldırıldı (kullanıcı kararı); yalnız Sohbetler sayfası işlenir.
              Önceki sürümden kalan çip, rozet ve sönüklük temizlenir. */
           if (!listede) {
@@ -8374,8 +8406,9 @@
           if (!e) continue;
           const kenarda = !listede && !!(a.closest('nav, aside') || KENAR.solda(a));
           const isaret = listede ? e : a, satir = listede ? (CHATDOM.rowOf(a) || a) : a;
+          if (listede && kap === a && !satir.hasAttribute('data-cls-satir')) satir.setAttribute('data-cls-satir', '');
           const soyMu = () => { const n = ilkYazi(e); return !!n && soyulan.get(n) === n.nodeValue; };
-          const imza = [e.textContent, e.getAttribute(DUR), soyMu(), adlar[id], kodImza, sz, xg, id === acik, kenarda, listede, DIL.aktif()].join('|');
+          const imza = [e.textContent, e.getAttribute(DUR), soyMu(), adlar[id], kodImza, szL(listede), xgL(listede), id === acik, kenarda, listede, DIL.aktif()].join('|');
           if (onbellek.get(a) === imza) continue;
           // claude.ai yazıyı yeni bir iç öğeye taşıyınca eski öğede kalan çip ikinci kez çizilmesin (2611-10b).
           if (kap !== e && kap.hasAttribute(DUR)) kap.removeAttribute(DUR);
@@ -8393,7 +8426,7 @@
           const szx = szL(listede);
           const suzDisi = szx === 'duzelt' ? den.uygun : (szx !== 'hepsi' && d !== szx);
           satirGizle(a, (kenarda || listede) && id !== acik && (suzDisi || (xgL(listede) && d === 'XX' && szx !== 'XX')));
-          onbellek.set(a, [e.textContent, e.getAttribute(DUR), soyMu(), adlar[id], kodImza, sz, xg, id === acik, kenarda, listede, DIL.aktif()].join('|'));
+          onbellek.set(a, [e.textContent, e.getAttribute(DUR), soyMu(), adlar[id], kodImza, szL(listede), xgL(listede), id === acik, kenarda, listede, DIL.aktif()].join('|'));
         }
         seritYerlestir();
         listeSeridi();
@@ -8422,12 +8455,12 @@
       }
       // Liste sayfasının tablosu: boş örtü bağlantılarının (data-primary) bulunduğu tablo.
       function listeTablosu() {
-        const a = document.querySelector('main a[data-primary][href*="/chat/"], table a[data-primary][href*="/chat/"]');
+        const a = document.querySelector('main a[data-primary][href*="/chat/"], table a[data-primary][href*="/chat/"], table a[data-row-link][href*="/chat/"]');   // 2611-28a: proje sayfası data-row-link
         return a ? a.closest('table') : null;
       }
       function listeSeridi() {
         let s = document.querySelector('.cls-kenar-suz.liste');
-        const t = CHATDOM.onListPage() ? listeTablosu() : null;
+        const t = CHATDOM.hasList() ? (listeTablosu() || projeListeKabi()) : null;
         if (!t) { if (s) s.remove(); return; }
         const imza = suzgec() + '|' + xxGizli() + '|' + DIL.aktif();
         if (s && s.dataset.imza === imza) { if (s.nextElementSibling !== t) t.insertAdjacentElement('beforebegin', s); return; }
@@ -8545,6 +8578,7 @@
         if (!a) return null;
         let isaret = a.hasAttribute(EKS) ? a : null;
         if (!isaret && !a.textContent.trim() && a.parentElement) isaret = a.parentElement.querySelector('[' + EKS + ']');
+        if (!isaret && projeSatiri(a)) isaret = a.querySelector('[' + EKS + ']');
         if (!isaret) return null;
         const gen = parseFloat(getComputedStyle(isaret, '::after').width) || 0;
         if (!gen) return null;
@@ -8615,6 +8649,10 @@
   const DEGISIKLIK = (function () {
     const VERI = [
     // @@CHG-BASLA
+    {"s": "2611-28a", "t": "2026-11-28", "m": [{"k": "duzeldi", "tr": "Sohbetler sayfasında durum süzgeci düğmeleri satırları gizlemiyordu. Proje sayfasında süzgeç şeridi hiç çıkmıyordu (claude.ai satır bağlantısını değiştirmiş). İkisi de çalışıyor.", "en": "The status filter on the Chats page did not hide rows, and the filter strip never appeared on project pages (claude.ai changed the row link). Both work now."}]},
+    {"s": "2611-19f", "t": "2026-11-19", "m": [{"k": "yeni", "tr": "Proje sayfasındaki sohbet listesinde de durum çipleri, durum süzgeci (Tümü / TO-DO / OK …), XX gizle ve satır düğmeleri var.", "en": "Project pages now get status chips, the status filter (All / TO-DO / OK …), Hide XX and row buttons in their chat list too."}]},
+    {"s": "2611-19e", "t": "2026-11-19", "m": [{"k": "duzeldi", "tr": "Tümünü katla çalışmıyordu: tek uzun cevap varken hiçbir şey yapmıyor, araç kartlı cevapları bulamıyordu. Artık bütün uzun cevapları (son cevap dahil) katlar, yeniden basınca açar.", "en": "Fold all did nothing with a single long reply and missed replies with tool cards. It now folds all long replies (last one included) and unfolds on a second press."}]},
+    {"s": "2611-19d", "t": "2026-11-19", "m": [{"k": "degisti", "tr": "Sıfırlama rozeti ~~↺ 4~~ → ==↺ F3 · H1==: Fable ve haftalık sıfırlama ayrı. Kartta her türün altında ne işe yaradığı yazar.", "en": "Reset badge ~~↺ 4~~ → ==↺ F3 · W1==: Fable and weekly resets apart. The card says what each kind does."}]},
     {"s": "2611-19c", "t": "2026-11-19", "m": [{"k": "duzeldi", "tr": "Göstergede Fable ~~%0~~ → ==gerçek yüzde==. claude.ai Fable limitini yeni bir alanda veriyor.", "en": "Fable on the meter ~~0%~~ → ==the real percent==. claude.ai now sends the Fable limit in a new field."}]},
     {"s": "2611-19b", "t": "2026-11-19", "m": [{"k": "yeni", "tr": "Kullanım göstergesinde ==sıfırlama hakları==: ↺ rozeti (7 günden az kaldıysa sarı ve gün sayısı), kartta tür, adet, son tarih ve Usage sayfasını açan düğme.", "en": "==Limit resets== on the usage meter: ↺ badge (yellow with day count when under 7 days left); the card lists kind, count, expiry and a button that opens the Usage page."}, {"k": "yeni", "tr": "Limit eşiği uyarısı: haftalık ya da Fable limiti %80 ve %95'i geçince sayfada uyarı.", "en": "Limit threshold alert: an in-page alert when the weekly or Fable limit passes 80% and 95%."}, {"k": "degisti", "tr": "Dışa aktarma artık Share'in solunda ikon. Sol tık .md indirir, sağ tık HTML ya da JSON. Yeni kısayol Ctrl+Shift+E.", "en": "Export is now an icon left of Share. Left click downloads .md, right click offers HTML or JSON. New shortcut Ctrl+Shift+E."}, {"k": "yeni", "tr": "Başlık şeridinde: sohbet doluluğu (tahmin; %70 sarı, %90 kırmızı), sohbette ara (Ctrl+Shift+F), ana hat paneli, Tümünü katla ve Yeni sohbete taşı.", "en": "On the title strip: chat fullness (estimate; yellow at 70%, red at 90%), search in chat (Ctrl+Shift+F), outline panel, Fold all and Move to new chat."}, {"k": "yeni", "tr": "Mesajlarda: uzun cevaplarda Katla düğmesi, kendi mesajında yer imi yıldızı (Alt+↑/↓ ile atla), Copy'nin yanında Biçimli kopyala.", "en": "On messages: Fold button on long replies, bookmark star on your messages (jump with Alt+↑/↓), Copy formatted next to Copy."}]},
     {"s":"2611-19a","t":"2026-11-19","m":[{"k":"duzeldi","tr":"Sol menüdeki Chats bağlantısı geri geldi.","en":"The Chats link in the left menu is back."}]},
